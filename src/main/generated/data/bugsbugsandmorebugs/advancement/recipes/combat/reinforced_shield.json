@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_exoskeleton": {
+      "conditions": {
+        "items": [
+          {
+            "items": "bugsbugsandmorebugs:exoskeleton"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "bugsbugsandmorebugs:reinforced_shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_exoskeleton"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bugsbugsandmorebugs:reinforced_shield"
+    ]
+  }
+}

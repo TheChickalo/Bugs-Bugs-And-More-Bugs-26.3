@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "combat",
+  "key": {
+    "R": "bugsbugsandmorebugs:exoskeleton",
+    "S": "minecraft:shield"
+  },
+  "pattern": [
+    "RRR",
+    "RSR",
+    " R "
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:reinforced_shield"
+  }
+}
