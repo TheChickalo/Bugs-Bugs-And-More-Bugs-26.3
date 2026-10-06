@@ -15,6 +15,5 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
     @Override
     public void generate() {
 
-        dropSelf(ModBlocks.INFESTED_DIRT);
     }
 }
