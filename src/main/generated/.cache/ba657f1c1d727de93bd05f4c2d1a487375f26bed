@@ -1,0 +1,6 @@
+// 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Model Definitions
+19a91ed3998501143ce58c332fb75078920eb22d assets/bugsbugsandmorebugs/blockstates/infested_dirt.json
+0f9ca0db7592f5b1aa378a33511eab34865be5dc assets/bugsbugsandmorebugs/items/exoskeleton.json
+005531def6efd237af6807b2776d0be6b4a4ded6 assets/bugsbugsandmorebugs/items/infested_dirt.json
+61298965cefaf9419e7c09377efe7a2be023e764 assets/bugsbugsandmorebugs/models/block/infested_dirt.json
+49eff293cb851354483dad000bbfdc371513dad1 assets/bugsbugsandmorebugs/models/item/exoskeleton.json
