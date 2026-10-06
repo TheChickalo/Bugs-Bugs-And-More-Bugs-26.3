@@ -18,11 +18,13 @@
 		"main": [
 			"net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs"
 		],
+		"client": [
+			"net.chickalo.bugsbugsandmorebugs.entity.client.BugsBugsandMoreBugsClient"
+		],
 		"fabric-datagen": [
 			"net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugsDataGenerator"
 		]
-	},
-	"mixins": [
+	},	"mixins": [
 		"bugsbugsandmorebugs.mixins.json"
 	],
 	"depends": {

@@ -1,5 +1,10 @@
 {
   "item.bugsbugsandmorebugs.exoskeleton": "Exoskeleton",
+  "item.bugsbugsandmorebugs.reinforced_shield": "Reinforced Shield",
+  "item.bugsbugsandmorebugs.antworker_spawn_egg": "Worker Ant Spawn Egg",
+
   "block.bugsbugsandmorebugs.infested_dirt": "Infested Dirt",
-  "item.bugsbugsandmorebugs.reinforced_shield": "Reinforced Shield"
+
+
+  "entity.bugsbugsandmorebugs.antworker": "Worker Ant"
 }
