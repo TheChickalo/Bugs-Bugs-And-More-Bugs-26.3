@@ -1,7 +1,9 @@
 package net.chickalo.bugsbugsandmorebugs.datagen;
 
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -26,6 +28,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialBlock(ModBlocks.MAPLE_LEAVES, TexturedModel.LEAVES);
 
         blockModelGenerators.createCropBlock(ModBlocks.DAIKON_CROP, DaikonCropBlock.AGE, 0, 1, 2, 3);
+        blockModelGenerators.createCrossBlock(ModBlocks.HASKAP_BERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, HaskapBerryBushBlock.AGE,0, 1, 2, 3);
+        blockModelGenerators.createCrossBlock(ModBlocks.BARBERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, BarberryBushBlock.AGE,0, 1, 2, 3);
+
 
 
     }

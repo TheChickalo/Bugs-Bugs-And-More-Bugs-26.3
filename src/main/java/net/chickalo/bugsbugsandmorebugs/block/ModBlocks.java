@@ -1,7 +1,9 @@
 package net.chickalo.bugsbugsandmorebugs.block;
 
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
+import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -53,6 +55,16 @@ public class ModBlocks {
             properties -> new DaikonCropBlock(properties.noCollision().randomTicks().instabreak().sound(SoundType.CROP)
                     .pushReaction(PushReaction.POPPED)));
 
+    public static final Block HASKAP_BERRY_BUSH = registerBlockWithoutBlockItem("haskap_berry_bush",
+            properties -> new HaskapBerryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.POPPED)));
+
+    public static final Block BARBERRY_BUSH = registerBlockWithoutBlockItem("barberry_bush",
+            properties -> new BarberryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.POPPED)));
+
+
+
 
     public static ResourceKey<Block> getRK(Block block) {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();
@@ -68,6 +80,8 @@ public class ModBlocks {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name))));;
         return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name), toRegister);
     }
+
+
 
     private static void registerBlockItem(String name, Block block) {
         Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name),

@@ -1,5 +1,7 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Block Loot Tables
+e6b67c02bcd8654d73ab9cfb6dcf9c6849853c4c data/bugsbugsandmorebugs/loot_table/blocks/barberry_bush.json
 980bb3d05c92cd7721a16ac6d7ff3847f2ce6b74 data/bugsbugsandmorebugs/loot_table/blocks/daikon_crop.json
+470dbb742b475c071506580dc554a417d4f3bb91 data/bugsbugsandmorebugs/loot_table/blocks/haskap_berry_bush.json
 e7d7f40d2405e86c41a1633b1faf04929ce7cd7d data/bugsbugsandmorebugs/loot_table/blocks/maple_leaves.json
 e64ad57a4f245265b6db7b6a4877d04eeb25f86c data/bugsbugsandmorebugs/loot_table/blocks/maple_log.json
 7297049c0cac47fc1b83b6b6a7af54d7b456cf20 data/bugsbugsandmorebugs/loot_table/blocks/maple_planks.json
