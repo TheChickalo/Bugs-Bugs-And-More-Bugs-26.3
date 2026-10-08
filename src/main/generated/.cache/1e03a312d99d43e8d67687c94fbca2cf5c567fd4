@@ -1,1 +1,8 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Block Loot Tables
+980bb3d05c92cd7721a16ac6d7ff3847f2ce6b74 data/bugsbugsandmorebugs/loot_table/blocks/daikon_crop.json
+e7d7f40d2405e86c41a1633b1faf04929ce7cd7d data/bugsbugsandmorebugs/loot_table/blocks/maple_leaves.json
+e64ad57a4f245265b6db7b6a4877d04eeb25f86c data/bugsbugsandmorebugs/loot_table/blocks/maple_log.json
+7297049c0cac47fc1b83b6b6a7af54d7b456cf20 data/bugsbugsandmorebugs/loot_table/blocks/maple_planks.json
+bb10205291786351b337ccbc8e652c96eca0a9ca data/bugsbugsandmorebugs/loot_table/blocks/maple_wood.json
+56b5482ba59eeca2901e8cc836aab35ea2d93494 data/bugsbugsandmorebugs/loot_table/blocks/stripped_maple_log.json
+3ea9ff8457db3d53a1924ae92716cb30612389f4 data/bugsbugsandmorebugs/loot_table/blocks/stripped_maple_wood.json

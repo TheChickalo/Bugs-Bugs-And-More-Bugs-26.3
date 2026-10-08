@@ -1,3 +1,9 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Bugs, Bugs, and More Bugs! recipes
+5dfc0bea5f89d4e7d5ac5a2a57e195dc4b212a95 data/bugsbugsandmorebugs/advancement/recipes/building_blocks/maple_planks.json
+34877e17ef8f2eb4ca69831f1df1e8a0b1468ecd data/bugsbugsandmorebugs/advancement/recipes/building_blocks/maple_wood.json
+f8ec046857ced587b1766f323cace6312a2688d4 data/bugsbugsandmorebugs/advancement/recipes/building_blocks/stripped_maple_wood.json
 b5054ce996e3cefd4c8fe11834a1df4c87502072 data/bugsbugsandmorebugs/advancement/recipes/combat/reinforced_shield.json
+d42d02d389b50a3313acf32f8cb682ab4f6316f5 data/bugsbugsandmorebugs/recipe/maple_planks.json
+cd8cdb550511af77c5ff2dfbcda39d5485eb21f4 data/bugsbugsandmorebugs/recipe/maple_wood.json
 c6a47cebe8a68cc2b78834db12aa3c9405c7f73d data/bugsbugsandmorebugs/recipe/reinforced_shield.json
+b69b938aca1a23da615d23b128fe7ee13c5db90d data/bugsbugsandmorebugs/recipe/stripped_maple_wood.json

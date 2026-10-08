@@ -4,7 +4,11 @@ import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.entity.ModEntities;
 import net.chickalo.bugsbugsandmorebugs.entity.custom.AntWorkerEntity;
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
+import net.chickalo.bugsbugsandmorebugs.registries.ModFlammableBlocks;
+import net.chickalo.bugsbugsandmorebugs.registries.ModStrippableBlocks;
+import net.chickalo.bugsbugsandmorebugs.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
+
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.resources.Identifier;
@@ -21,7 +25,12 @@ public class BugsBugsAndMoreBugs implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 
+		ModSounds.registerSound();
+
 		ModEntities.registerModEntities();
+
+		ModFlammableBlocks.registerFlammableBlocks();
+		ModStrippableBlocks.registerStrippableBlocks();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.ANTWORKER, AntWorkerEntity.createAttributes());
 	}

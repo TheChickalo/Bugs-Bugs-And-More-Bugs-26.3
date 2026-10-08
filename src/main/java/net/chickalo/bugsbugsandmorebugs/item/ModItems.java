@@ -1,7 +1,10 @@
 package net.chickalo.bugsbugsandmorebugs.item;
 
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.chickalo.bugsbugsandmorebugs.datagen.ModJukeboxSongs;
 import net.chickalo.bugsbugsandmorebugs.entity.ModEntities;
+import net.chickalo.bugsbugsandmorebugs.food.ModFoods;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.core.Registry;
@@ -9,14 +12,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.*;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +26,12 @@ import java.util.function.Function;
 
 public class ModItems {
     public static final Item EXOSKELETON = registerItem("exoskeleton", Item::new);
+    public static final Item AMEISENHAUFEN_MUSIC_DISC = registerItem("ameisenhaufen_music_disc", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSongs.AMEISENHAUFEN_KEY).stacksTo(1).rarity(Rarity.RARE)));
     public static final Item ANTWORKER_SPAWN_EGG = registerItem("antworker_spawn_egg",
             properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.ANTWORKER)));
+    public static final Item DAIKON = registerItem("daikon", properties -> new Item(properties.food(ModFoods.DAIKON, ModFoods.DAIKON_CONSUMABLE)));
+    public static final Item DAIKON_SEEDS = registerItem("daikon_seeds",
+            properties -> new BlockItem(ModBlocks.DAIKON_CROP, properties.useItemDescriptionPrefix()));
     public static final Item REINFORCED_SHIELD =
             registerItem("reinforced_shield", properties ->
                     new ShieldItem(
@@ -70,6 +75,10 @@ public class ModItems {
                 function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name)))));
     }
 
+    public static ResourceKey<Item> getRK(Item item) {
+        return BuiltInRegistries.ITEM.getResourceKey(item).get();
+    }
+
     public static void registerModItems() {
         BugsBugsAndMoreBugs.LOGGER.info("Registering Mod Items for " + BugsBugsAndMoreBugs.MOD_ID);
 
@@ -84,6 +93,38 @@ public class ModItems {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(REINFORCED_SHIELD);
         });
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(output -> {
+            output.accept(AMEISENHAUFEN_MUSIC_DISC);
+        });
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.MAPLE_LOG);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.MAPLE_WOOD);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.STRIPPED_MAPLE_LOG);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.STRIPPED_MAPLE_WOOD);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.MAPLE_PLANKS);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.MAPLE_LEAVES);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
+            output.accept(ModItems.DAIKON_SEEDS);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
+            output.accept(ModItems.DAIKON);
+        });
+
+
+
 
     }
 

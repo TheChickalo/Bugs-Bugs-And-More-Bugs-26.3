@@ -5,6 +5,21 @@
 
   "block.bugsbugsandmorebugs.infested_dirt": "Infested Dirt",
 
+  "item.bugsbugsandmorebugs.daikon": "Daikon",
+  "item.bugsbugsandmorebugs.daikon_seeds": "Daikon Seeds",
+  "block.bugsbugsandmorebugs.daikon_crop": "Daikon Crop",
+
+  "block.bugs.bugsandmorebugs.maple_log": "Maple Log",
+  "block.bugs.bugsandmorebugs.maple_wood": "Maple Wood",
+  "block.bugs.bugsandmorebugs.stripped_maple_log": "Stripped Maple Log",
+  "block.bugs.bugsandmorebugs.stripped_maple_wood": "Stripped Maple Wood",
+  "block.bugs.bugsandmorebugs.maple_planks": "Maple Planks",
+  "block.bugs.bugsandmorebugs.maple_leaves": "Maple Leaves",
+
+
+  "item.bugsbugsandmorebugs.ameisenhaufen_music_disc": "Music Disc",
+  "jukebox_song.bugsbugsandmorebugs.ameisenhaufen": "Haneul Kim - Ameisenhaufen",
+
 
   "entity.bugsbugsandmorebugs.antworker": "Worker Ant"
 }

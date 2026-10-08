@@ -1,6 +1,8 @@
 package net.chickalo.bugsbugsandmorebugs.datagen;
 
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
+import net.chickalo.bugsbugsandmorebugs.tags.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.Advancement;
@@ -43,8 +45,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         )
                         .group("combat")
                         .save(output);
+
+                woodFromLogs(ModBlocks.MAPLE_WOOD, ModBlocks.MAPLE_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_MAPLE_WOOD, ModBlocks.STRIPPED_MAPLE_LOG);
+                planksFromLogs(ModBlocks.MAPLE_PLANKS, ModTags.Items.MAPLE_LOGS, 4);
+
             }
         };
+
     }
 
     @Override
