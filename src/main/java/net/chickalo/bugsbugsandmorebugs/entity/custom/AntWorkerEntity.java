@@ -29,7 +29,7 @@ public class AntWorkerEntity extends PathfinderMob {
 
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1f, true));
 
-        // vvv eventually replace this with code for eating honey & such and bringing it back to nest
+        // vvv eventually replace this with code for eating honey & such and bringing it back to nest structure
         this.goalSelector.addGoal(3, new MoveToBlockGoal(this, 1.2f, 10) {
             @Override
             protected boolean isValidTarget(LevelReader level, BlockPos pos) {

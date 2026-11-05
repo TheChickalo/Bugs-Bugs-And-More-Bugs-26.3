@@ -4,6 +4,7 @@ import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
 import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
+import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeGrowers;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -50,6 +51,15 @@ public class ModBlocks {
                     .mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.POPLAR_LEAVES)
                     .noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never)
                     .ignitedByLava().pushReaction(PushReaction.POPPED).isRedstoneConductor(Blocks::never)));
+
+    public static final Block MAPLE_SAPLING = registerBlock("maple_sapling",
+            properties -> new SaplingBlock(ModTreeGrowers.MAPLE, properties
+                    .mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak()
+                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block POTTED_MAPLE_SAPLING = registerBlockWithoutBlockItem("potted_maple_sapling",
+            properties -> new FlowerPotBlock(MAPLE_SAPLING, properties
+                    .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
 
     public static final Block DAIKON_CROP = registerBlockWithoutBlockItem("daikon_crop",
             properties -> new DaikonCropBlock(properties.noCollision().randomTicks().instabreak().sound(SoundType.CROP)

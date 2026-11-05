@@ -34,6 +34,9 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.LEAVES)
                 .add(ModBlocks.getRK(ModBlocks.MAPLE_LEAVES));
 
+        tag(BlockTags.SAPLINGS)
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_SAPLING));
+
         tag(BlockTags.CROPS)
                 .add(ModBlocks.getRK(ModBlocks.DAIKON_CROP));
 

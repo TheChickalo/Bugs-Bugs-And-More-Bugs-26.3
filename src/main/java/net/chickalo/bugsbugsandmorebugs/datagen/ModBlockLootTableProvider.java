@@ -40,12 +40,13 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_MAPLE_LOG);
         dropSelf(ModBlocks.STRIPPED_MAPLE_WOOD);
         dropSelf(ModBlocks.MAPLE_PLANKS);
+        dropSelf(ModBlocks.MAPLE_SAPLING);
+        add(ModBlocks.POTTED_MAPLE_SAPLING, block -> createPotFlowerItemTable(ModBlocks.MAPLE_SAPLING));
 
-        // vv will drop saplings later
         add(ModBlocks.MAPLE_LEAVES,
                 block -> createLeavesDrops(
                         block,
-                        ModBlocks.MAPLE_LEAVES,
+                        ModBlocks.MAPLE_SAPLING,
                         NORMAL_LEAVES_SAPLING_CHANCES
                 ));
 

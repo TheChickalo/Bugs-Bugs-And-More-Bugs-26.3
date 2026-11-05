@@ -3,8 +3,6 @@
   "item.bugsbugsandmorebugs.reinforced_shield": "Reinforced Shield",
   "item.bugsbugsandmorebugs.antworker_spawn_egg": "Worker Ant Spawn Egg",
 
-  "block.bugsbugsandmorebugs.infested_dirt": "Infested Dirt",
-
   "item.bugsbugsandmorebugs.daikon": "Daikon",
   "item.bugsbugsandmorebugs.daikon_seeds": "Daikon Seeds",
   "block.bugsbugsandmorebugs.daikon_crop": "Daikon Crop",
@@ -13,13 +11,15 @@
   "block.bugsbugsandmorebugs.haskap_berry_bush": "Haskap Bush",
   "block.bugsbugsandmorebugs.barberry_bush": "Barberry Bush",
 
-
-  "block.bugs.bugsandmorebugs.maple_log": "Maple Log",
-  "block.bugs.bugsandmorebugs.maple_wood": "Maple Wood",
-  "block.bugs.bugsandmorebugs.stripped_maple_log": "Stripped Maple Log",
-  "block.bugs.bugsandmorebugs.stripped_maple_wood": "Stripped Maple Wood",
-  "block.bugs.bugsandmorebugs.maple_planks": "Maple Planks",
-  "block.bugs.bugsandmorebugs.maple_leaves": "Maple Leaves",
+  "block.bugsbugsandmorebugs.infested_dirt": "Infested Dirt",
+  "block.bugsbugsandmorebugs.maple_log": "Maple Log",
+  "block.bugsbugsandmorebugs.maple_wood": "Maple Wood",
+  "block.bugsbugsandmorebugs.stripped_maple_log": "Stripped Maple Log",
+  "block.bugsbugsandmorebugs.stripped_maple_wood": "Stripped Maple Wood",
+  "block.bugsbugsandmorebugs.maple_planks": "Maple Planks",
+  "block.bugsbugsandmorebugs.maple_leaves": "Maple Leaves",
+  "block.bugsbugsandmorebugs.maple_sapling": "Maple Sapling",
+  "block.bugsbugsandmorebugs.potted_maple_sapling": "Potted Maple Sapling",
 
 
   "item.bugsbugsandmorebugs.ameisenhaufen_music_disc": "Music Disc",

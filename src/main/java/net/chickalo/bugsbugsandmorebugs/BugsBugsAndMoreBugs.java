@@ -7,11 +7,10 @@ import net.chickalo.bugsbugsandmorebugs.item.ModItems;
 import net.chickalo.bugsbugsandmorebugs.registries.ModFlammableBlocks;
 import net.chickalo.bugsbugsandmorebugs.registries.ModStrippableBlocks;
 import net.chickalo.bugsbugsandmorebugs.sound.ModSounds;
+import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModFoliagePlacerTypes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTrunkPlacerTypes;
 import net.fabricmc.api.ModInitializer;
-
-
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,7 @@ public class BugsBugsAndMoreBugs implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 
@@ -32,6 +32,12 @@ public class BugsBugsAndMoreBugs implements ModInitializer {
 		ModFlammableBlocks.registerFlammableBlocks();
 		ModStrippableBlocks.registerStrippableBlocks();
 
-		FabricDefaultAttributeRegistry.register(ModEntities.ANTWORKER, AntWorkerEntity.createAttributes());
+		ModTrunkPlacerTypes.registerModTrunkPlacerTypes();
+		ModFoliagePlacerTypes.registerModFoliagePlacerTypes();
+
+		FabricDefaultAttributeRegistry.register(
+				ModEntities.ANTWORKER,
+				AntWorkerEntity.createAttributes()
+		);
 	}
 }

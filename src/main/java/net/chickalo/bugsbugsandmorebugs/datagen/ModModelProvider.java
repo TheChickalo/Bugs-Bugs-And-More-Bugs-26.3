@@ -27,6 +27,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialCube(ModBlocks.MAPLE_PLANKS);
         blockModelGenerators.createTrivialBlock(ModBlocks.MAPLE_LEAVES, TexturedModel.LEAVES);
 
+        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.MAPLE_SAPLING, ModBlocks.POTTED_MAPLE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+
         blockModelGenerators.createCropBlock(ModBlocks.DAIKON_CROP, DaikonCropBlock.AGE, 0, 1, 2, 3);
         blockModelGenerators.createCrossBlock(ModBlocks.HASKAP_BERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, HaskapBerryBushBlock.AGE,0, 1, 2, 3);
         blockModelGenerators.createCrossBlock(ModBlocks.BARBERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, BarberryBushBlock.AGE,0, 1, 2, 3);
