@@ -13,6 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -38,8 +39,14 @@ public class ModFeatures {
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.MAPLE_LOG),
-                new MapleTrunkPlacer(3, 3, 4),
+                new MapleTrunkPlacer(
+                        7, 5, 4,
 
+                        UniformInt.of(2, 3),
+                        UniformInt.of(2, 4),
+                        UniformInt.of(-4, -2),
+                        UniformInt.of(-2, 1)
+                ),
                 BlockStateProvider.of(ModBlocks.MAPLE_LEAVES),
                 new MapleFoliagePlacer(ConstantInt.of(1), ConstantInt.of(1), 3),
 

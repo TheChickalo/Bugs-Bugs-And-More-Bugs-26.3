@@ -4,6 +4,7 @@ import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
 import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.MapleLeavesBlock;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeGrowers;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -47,15 +49,48 @@ public class ModBlocks {
                     .strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
 
     public static final Block MAPLE_LEAVES = registerBlock("maple_leaves",
-            properties -> new UntintedParticleLeavesBlock(0.01f, ParticleTypes.CHERRY_LEAVES, AmbientLeavesBlockSoundPlayer.noAmbientSound(), properties
-                    .mapColor(MapColor.PLANT).strength(0.2F).randomTicks().sound(SoundType.POPLAR_LEAVES)
-                    .noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never)
-                    .ignitedByLava().pushReaction(PushReaction.POPPED).isRedstoneConductor(Blocks::never)));
-
+            properties -> new MapleLeavesBlock(
+                    0.01f,
+                    ParticleTypes.CHERRY_LEAVES,
+                    AmbientLeavesBlockSoundPlayer.noAmbientSound(),
+                    properties
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.POPLAR_LEAVES)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::ocelotOrParrot)
+                            .isSuffocating(Blocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.POPPED)
+                            .isRedstoneConductor(Blocks::never)
+            ));
     public static final Block MAPLE_SAPLING = registerBlock("maple_sapling",
             properties -> new SaplingBlock(ModTreeGrowers.MAPLE, properties
                     .mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak()
                     .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block MAPLE_STAIRS = registerBlock("maple_stairs",
+            properties -> new StairBlock(ModBlocks.MAPLE_PLANKS.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block MAPLE_SLAB = registerBlock("maple_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+
+
+
+
+    public static final Block MAPLE_DOOR = registerBlock("maple_door",
+            properties -> new DoorBlock(BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
+
+    public static final Block MAPLE_TRAPDOOR = registerBlock("maple_trapdoor",
+            properties -> new TrapDoorBlock(BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
+
+    public static final Block MAPLE_BUTTON = registerBlock("maple_button",
+            properties -> new ButtonBlock(BlockSetType.CHERRY, 15, properties.strength(3f).noCollision()));
+    public static final Block MAPLE_PRESSURE_PLATE = registerBlock("maple_pressure_plate",
+            properties -> new PressurePlateBlock(BlockSetType.CHERRY, properties.mapColor(MapColor.COLOR_ORANGE).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(3f).noCollision().ignitedByLava().pushReaction(PushReaction.POPPED)));
+
 
     public static final Block POTTED_MAPLE_SAPLING = registerBlockWithoutBlockItem("potted_maple_sapling",
             properties -> new FlowerPotBlock(MAPLE_SAPLING, properties

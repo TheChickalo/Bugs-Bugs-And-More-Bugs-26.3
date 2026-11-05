@@ -41,6 +41,14 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_MAPLE_WOOD);
         dropSelf(ModBlocks.MAPLE_PLANKS);
         dropSelf(ModBlocks.MAPLE_SAPLING);
+        dropSelf(ModBlocks.MAPLE_TRAPDOOR);
+        dropSelf(ModBlocks.MAPLE_STAIRS);
+        add(ModBlocks.MAPLE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.MAPLE_BUTTON);
+        dropSelf(ModBlocks.MAPLE_BUTTON);
+
+        add(ModBlocks.MAPLE_DOOR, this::createDoorTable);
+
         add(ModBlocks.POTTED_MAPLE_SAPLING, block -> createPotFlowerItemTable(ModBlocks.MAPLE_SAPLING));
 
         add(ModBlocks.MAPLE_LEAVES,

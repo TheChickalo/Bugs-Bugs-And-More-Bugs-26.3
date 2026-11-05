@@ -1,6 +1,8 @@
 package net.chickalo.bugsbugsandmorebugs;
 
 import net.chickalo.bugsbugsandmorebugs.datagen.*;
+import net.chickalo.bugsbugsandmorebugs.worldgen.ModFeatures;
+import net.chickalo.bugsbugsandmorebugs.worldgen.ModPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
@@ -25,5 +27,7 @@ public class BugsBugsAndMoreBugsDataGenerator implements DataGeneratorEntrypoint
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
 		registryBuilder.add(Registries.JUKEBOX_SONG, ModJukeboxSongs::bootstrap);
+		registryBuilder.add(Registries.FEATURE, ModFeatures::bootstrap);
+		registryBuilder.add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 	}
 }

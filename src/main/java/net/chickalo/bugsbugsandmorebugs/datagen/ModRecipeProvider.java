@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.concurrent.CompletableFuture;
@@ -49,6 +50,30 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 woodFromLogs(ModBlocks.MAPLE_WOOD, ModBlocks.MAPLE_LOG);
                 woodFromLogs(ModBlocks.STRIPPED_MAPLE_WOOD, ModBlocks.STRIPPED_MAPLE_LOG);
                 planksFromLogs(ModBlocks.MAPLE_PLANKS, ModTags.Items.MAPLE_LOGS, 4);
+
+                doorBuilder(ModBlocks.MAPLE_DOOR, Ingredient.of(ModBlocks.MAPLE_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.MAPLE_PLANKS), has(ModBlocks.MAPLE_PLANKS))
+                        .group("maple")
+                        .save(output);
+
+                trapdoorBuilder(ModBlocks.MAPLE_TRAPDOOR, Ingredient.of(ModBlocks.MAPLE_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.MAPLE_PLANKS), has(ModBlocks.MAPLE_PLANKS))
+                        .group("maple")
+                        .save(output);
+
+                stairBuilder(ModBlocks.MAPLE_STAIRS, Ingredient.of(ModBlocks.MAPLE_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.MAPLE_PLANKS), has(ModBlocks.MAPLE_PLANKS))
+                        .group("maple")
+                        .save(output);
+
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAPLE_SLAB, ModBlocks.MAPLE_PLANKS);
+
+                buttonBuilder(ModBlocks.MAPLE_BUTTON, Ingredient.of(ModBlocks.MAPLE_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.MAPLE_PLANKS), has(ModBlocks.MAPLE_PLANKS))
+                        .group("maple")
+                        .save(output);
+
+                pressurePlate(ModBlocks.MAPLE_PRESSURE_PLATE, ModBlocks.MAPLE_PLANKS);
 
             }
         };

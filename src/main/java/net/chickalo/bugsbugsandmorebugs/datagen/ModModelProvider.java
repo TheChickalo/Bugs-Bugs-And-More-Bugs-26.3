@@ -24,8 +24,16 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.woodProvider(ModBlocks.MAPLE_LOG).log(ModBlocks.MAPLE_LOG).wood(ModBlocks.MAPLE_WOOD);
         blockModelGenerators.woodProvider(ModBlocks.STRIPPED_MAPLE_LOG).log(ModBlocks.STRIPPED_MAPLE_LOG).wood(ModBlocks.STRIPPED_MAPLE_WOOD);
 
-        blockModelGenerators.createTrivialCube(ModBlocks.MAPLE_PLANKS);
+//        blockModelGenerators.createTrivialCube(ModBlocks.MAPLE_PLANKS);
         blockModelGenerators.createTrivialBlock(ModBlocks.MAPLE_LEAVES, TexturedModel.LEAVES);
+
+        blockModelGenerators.createDoor(ModBlocks.MAPLE_DOOR);
+        blockModelGenerators.createTrapdoor(ModBlocks.MAPLE_TRAPDOOR);
+        blockModelGenerators.family(ModBlocks.MAPLE_PLANKS)
+                        .stairs(ModBlocks.MAPLE_STAIRS)
+                        .slab(ModBlocks.MAPLE_SLAB)
+                        .button(ModBlocks.MAPLE_BUTTON)
+                        .pressurePlate(ModBlocks.MAPLE_PRESSURE_PLATE);
 
         blockModelGenerators.createPlantWithDefaultItem(ModBlocks.MAPLE_SAPLING, ModBlocks.POTTED_MAPLE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
 
