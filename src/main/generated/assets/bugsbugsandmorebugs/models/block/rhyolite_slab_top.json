@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/rhyolite",
+    "side": "bugsbugsandmorebugs:block/rhyolite",
+    "top": "bugsbugsandmorebugs:block/rhyolite"
+  }
+}

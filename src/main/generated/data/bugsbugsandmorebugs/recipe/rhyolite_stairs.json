@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "rhyolite",
+  "key": {
+    "#": "bugsbugsandmorebugs:rhyolite"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "bugsbugsandmorebugs:rhyolite_stairs"
+  }
+}

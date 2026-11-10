@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "bugsbugsandmorebugs:block/cobbled_rhyolite"
+  }
+}

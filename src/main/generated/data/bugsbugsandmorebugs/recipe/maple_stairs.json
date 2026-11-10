@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "maple",
+  "key": {
+    "#": "bugsbugsandmorebugs:maple_planks"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "bugsbugsandmorebugs:maple_stairs"
+  }
+}

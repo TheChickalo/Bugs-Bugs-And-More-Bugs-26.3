@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "rhyolite",
+  "key": {
+    "#": "bugsbugsandmorebugs:cobbled_rhyolite"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "bugsbugsandmorebugs:cobblbed_rhyolite_wall"
+  }
+}

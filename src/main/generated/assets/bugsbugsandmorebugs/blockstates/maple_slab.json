@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/maple_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/maple_planks"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/maple_slab_top"
+    }
+  }
+}

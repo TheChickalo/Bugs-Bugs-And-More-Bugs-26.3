@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/cobbled_rhyolite_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/cobbled_rhyolite"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/cobbled_rhyolite_slab_top"
+    }
+  }
+}

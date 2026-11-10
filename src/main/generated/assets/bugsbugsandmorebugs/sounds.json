@@ -1,0 +1,11 @@
+{
+  "ameisenhaufen": {
+    "sounds": [
+      {
+        "name": "bugsbugsandmorebugs:ameisenhaufen",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.bugsbugsandmorebugs.ameisenhaufen"
+  }
+}

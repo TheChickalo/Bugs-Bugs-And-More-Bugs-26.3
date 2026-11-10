@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_silk_touch",
+              "name": "bugsbugsandmorebugs:rhyolite"
+            },
+            {
+              "type": "minecraft:item",
+              "condition": {
+                "type": "minecraft:survives_explosion"
+              },
+              "name": "bugsbugsandmorebugs:cobbled_rhyolite"
+            }
+          ]
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "maple",
+  "key": {
+    "#": "minecraft:stick",
+    "W": "bugsbugsandmorebugs:maple_planks"
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:maple_fence_gate"
+  }
+}

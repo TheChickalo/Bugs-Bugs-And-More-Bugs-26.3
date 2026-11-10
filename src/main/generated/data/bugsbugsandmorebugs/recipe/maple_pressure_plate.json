@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "bugsbugsandmorebugs:maple_planks"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:maple_pressure_plate"
+  }
+}

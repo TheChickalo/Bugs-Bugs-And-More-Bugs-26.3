@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "maple",
+  "ingredients": [
+    "bugsbugsandmorebugs:maple_planks"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:maple_button"
+  }
+}
