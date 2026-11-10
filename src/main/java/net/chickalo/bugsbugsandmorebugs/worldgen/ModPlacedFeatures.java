@@ -5,7 +5,6 @@ import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
@@ -54,7 +53,7 @@ public class ModPlacedFeatures {
         // Bamboo keeps vanilla's growth configuration and noise distribution,
         // but appears in occasional groves rather than throughout every chunk.
         register(context, MAPLE_BAMBOO_PLACED_KEY,
-                configuredFeatures.getOrThrow(VegetationFeatures.BAMBOO_SOME_PODZOL),
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_BAMBOO_KEY),
                 List.of(
                         RarityFilter.onAverageOnceEvery(4),
                         NoiseBasedCountPlacement.of(160, 80.0, 0.3),
@@ -71,7 +70,7 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(96),
+                        CountPlacement.of(128),
                         OffsetPlacement.ofTriangle(5, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
@@ -89,7 +88,7 @@ public class ModPlacedFeatures {
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
-        // Tall grass and ferns fill gaps between the low ground cover.
+        // Tall grass and large ferns form a dense, bonemeal-like understory.
         register(context, MAPLE_TALL_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
                 List.of(
@@ -97,7 +96,7 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(80),
+                        CountPlacement.of(160),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
@@ -121,7 +120,7 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome(),
-                        CountPlacement.of(24),
+                        CountPlacement.of(40),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
