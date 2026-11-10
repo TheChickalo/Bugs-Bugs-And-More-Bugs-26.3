@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_LAKE_PLACED_KEY = registerKey("maple_lake_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BAMBOO_PLACED_KEY = registerKey("maple_bamboo_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BUSH_PLACED_KEY = registerKey("maple_bush_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_SHORT_GRASS_PLACED_KEY = registerKey("maple_short_grass_placed");
@@ -40,6 +41,15 @@ public class ModPlacedFeatures {
         register(context, MAPLE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1f, 3),
                         ModBlocks.MAPLE_SAPLING));
+
+        // Occasional surface lakes with a mixed rocky and sandy shoreline.
+        register(context, MAPLE_LAKE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_LAKE_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(10),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
 
         // Bamboo keeps vanilla's growth configuration and noise distribution,
         // but appears in occasional groves rather than throughout every chunk.
