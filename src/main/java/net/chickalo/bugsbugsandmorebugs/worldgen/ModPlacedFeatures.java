@@ -42,7 +42,7 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1f, 3),
                         ModBlocks.MAPLE_SAPLING));
 
-        // Occasional surface lakes with a mixed rocky and sandy shoreline.
+        // Occasional surface lakes with a mixed gravel, andesite, and stone shoreline.
         register(context, MAPLE_LAKE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_LAKE_KEY),
                 List.of(
                         RarityFilter.onAverageOnceEvery(10),
@@ -71,7 +71,7 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(64),
+                        CountPlacement.of(96),
                         OffsetPlacement.ofTriangle(5, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
