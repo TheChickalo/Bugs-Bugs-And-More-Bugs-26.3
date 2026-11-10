@@ -86,21 +86,28 @@ public record ProtectedBambooFeature(float probability) implements Feature {
             bambooPos.move(Direction.UP);
         }
 
-        // Vanilla writes these three blocks even when bamboo stopped at a log.
-        // Only add the leafy top when all three target positions are empty.
-        if (placedHeight >= 3
-                && level.isEmptyBlock(bambooPos)
-                && level.isEmptyBlock(bambooPos.above())
-                && level.isEmptyBlock(bambooPos.above(2))) {
-            level.setBlock(bambooPos, BAMBOO_FINAL_LARGE, 2);
-            level.setBlock(bambooPos.above(), BAMBOO_TOP_LARGE, 2);
-            level.setBlock(bambooPos.above(2), BAMBOO_TOP_SMALL, 2);
-        } else if (placedHeight >= 3) {
-            BlockPos top = origin.above(placedHeight - 1);
-            if (level.getBlockState(top).is(Blocks.BAMBOO)) {
-                BlockState state = level.getBlockState(top);
-                level.setBlock(top, state.setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE)
-                        .setValue(BambooStalkBlock.STAGE, 1), 2);
+        // Vanilla writes the decorative top at the first empty position,
+        // then decorates the two highest stalk blocks. Never write through an
+        // obstruction (which may be a maple branch).
+        if (placedHeight >= 3) {
+            BlockPos below = bambooPos.below();
+            BlockPos belowTwo = bambooPos.below(2);
+
+            if (level.isEmptyBlock(bambooPos)
+                    && level.getBlockState(below).is(Blocks.BAMBOO)
+                    && level.getBlockState(belowTwo).is(Blocks.BAMBOO)) {
+                level.setBlock(bambooPos, BAMBOO_FINAL_LARGE, 2);
+                level.setBlock(below, BAMBOO_TOP_LARGE, 2);
+                level.setBlock(belowTwo, BAMBOO_TOP_SMALL, 2);
+            } else {
+                BlockPos top = origin.above(placedHeight - 1);
+                BlockState topState = level.getBlockState(top);
+                if (topState.is(Blocks.BAMBOO)) {
+                    level.setBlock(top,
+                            topState.setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE)
+                                    .setValue(BambooStalkBlock.STAGE, 1),
+                            2);
+                }
             }
         }
 
