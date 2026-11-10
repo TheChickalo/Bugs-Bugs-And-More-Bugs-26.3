@@ -19,7 +19,7 @@ public record MapleLakeFeature() implements Feature {
     public static final MapCodec<MapleLakeFeature> CODEC =
             MapCodec.unit(new MapleLakeFeature());
 
-    private static final int SIZE = 32;
+    private static final int SIZE = 24;
     private static final int HEIGHT = 8;
     private static final int SHORE_WIDTH = 3;
 
@@ -40,11 +40,11 @@ public record MapleLakeFeature() implements Feature {
         BlockPos start = origin.offset(-SIZE / 2, -4, -SIZE / 2);
         boolean[] basin = new boolean[SIZE * SIZE * HEIGHT];
 
-        int lobes = 5 + random.nextInt(4);
+        int lobes = 4 + random.nextInt(4);
         for (int i = 0; i < lobes; i++) {
-            double rx = 4.5 + random.nextDouble() * 4.0;
-            double ry = 2.0 + random.nextDouble() * 1.8;
-            double rz = 4.5 + random.nextDouble() * 4.0;
+            double rx = 3.0 + random.nextDouble() * 6.0;
+            double ry = 2.0 + random.nextDouble() * 4.0;
+            double rz = 3.0 + random.nextDouble() * 6.0;
             double cx = 2.0 + rx / 2.0 + random.nextDouble() * (SIZE - rx - 4.0);
             double cy = 2.0 + ry / 2.0 + random.nextDouble() * (HEIGHT - ry - 2.0);
             double cz = 2.0 + rz / 2.0 + random.nextDouble() * (SIZE - rz - 4.0);
