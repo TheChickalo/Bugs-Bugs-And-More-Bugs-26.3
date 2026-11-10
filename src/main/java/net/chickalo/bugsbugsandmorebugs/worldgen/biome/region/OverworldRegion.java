@@ -23,13 +23,13 @@ public class OverworldRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
 
-        // Give Maple Forest a broader climate footprint. The old narrow,
-        // dry-only humidity band made its transitions look abrupt beside
-        // neighboring cold biomes and restricted where it could appear.
+        // Temperature presets are ordered from coldest to warmest numerically.
+        // FROZEN -> COOL creates a real interval; COOL -> FROZEN collapses to
+        // the shared boundary at -0.45 and makes the biome extremely restricted.
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(ParameterUtils.Temperature.span(
-                        ParameterUtils.Temperature.COOL,
-                        ParameterUtils.Temperature.FROZEN))
+                        ParameterUtils.Temperature.FROZEN,
+                        ParameterUtils.Temperature.COOL))
                 .humidity(ParameterUtils.Humidity.span(
                         ParameterUtils.Humidity.ARID,
                         ParameterUtils.Humidity.HUMID))
