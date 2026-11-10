@@ -35,6 +35,20 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
     @Override
     public void generate() {
 
+        dropSelf(ModBlocks.COBBLED_RHYOLITE);
+        add(
+                ModBlocks.RHYOLITE,
+                createSingleItemTableWithSilkTouch(
+                        ModBlocks.RHYOLITE,
+                        ModBlocks.COBBLED_RHYOLITE
+                )
+        );
+        dropSelf(ModBlocks.RHYOLITE_WALL);
+        dropSelf(ModBlocks.RHYOLITE_STAIRS);
+        add(ModBlocks.RHYOLITE_SLAB, this::createSlabItemTable);
+
+
+
         dropSelf(ModBlocks.MAPLE_LOG);
         dropSelf(ModBlocks.MAPLE_WOOD);
         dropSelf(ModBlocks.STRIPPED_MAPLE_LOG);
@@ -45,7 +59,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.MAPLE_STAIRS);
         add(ModBlocks.MAPLE_SLAB, this::createSlabItemTable);
         dropSelf(ModBlocks.MAPLE_BUTTON);
-        dropSelf(ModBlocks.MAPLE_BUTTON);
+        dropSelf(ModBlocks.MAPLE_PRESSURE_PLATE);
+        dropSelf(ModBlocks.MAPLE_FENCE);
+        dropSelf(ModBlocks.MAPLE_FENCE_GATE);
 
         add(ModBlocks.MAPLE_DOOR, this::createDoorTable);
 

@@ -7,11 +7,21 @@
   "item.bugsbugsandmorebugs.daikon_seeds": "Daikon Seeds",
   "block.bugsbugsandmorebugs.daikon_crop": "Daikon Crop",
   "item.bugsbugsandmorebugs.haskap_berries": "Haskap Berries",
-  "item.bugsbugsandmorebugs.barberry": "Barberries",
+  "item.bugsbugsandmorebugs.barberries": "Barberries",
   "block.bugsbugsandmorebugs.haskap_berry_bush": "Haskap Bush",
   "block.bugsbugsandmorebugs.barberry_bush": "Barberry Bush",
 
   "block.bugsbugsandmorebugs.infested_dirt": "Infested Dirt",
+
+  "block.bugsbugsandmorebugs.rhyolite": "Rhyolite",
+  "block.bugsbugsandmorebugs.rhyolite_stairs": "Rhyolite  Stairs",
+  "block.bugsbugsandmorebugs.rhyolite_slab": "Rhyolite Slab",
+  "block.bugsbugsandmorebugs.rhyolite_wall": "Rhyolite Wall",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite": "Cobbled Rhyolite",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite_stairs": "Cobbled Rhyolite Stairs",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite_slab": "Cobbled Rhyolite Slab",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite_wall": "Cobbled Rhyolite Wall",
+
   "block.bugsbugsandmorebugs.maple_log": "Maple Log",
   "block.bugsbugsandmorebugs.maple_wood": "Maple Wood",
   "block.bugsbugsandmorebugs.stripped_maple_log": "Stripped Maple Log",
@@ -26,6 +36,8 @@
   "block.bugsbugsandmorebugs.maple_slab": "Maple Slab",
   "block.bugsbugsandmorebugs.maple_button": "Maple Button",
   "block.bugsbugsandmorebugs.maple_pressure_plate": "Maple Pressure Plate",
+  "block.bugsbugsandmorebugs.maple_fence": "Maple Fence",
+  "block.bugsbugsandmorebugs.maple_fence_gate": "Maple Fence Gate",
 
 
 

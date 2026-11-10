@@ -7,15 +7,22 @@ import net.chickalo.bugsbugsandmorebugs.item.ModItems;
 import net.chickalo.bugsbugsandmorebugs.registries.ModFlammableBlocks;
 import net.chickalo.bugsbugsandmorebugs.registries.ModStrippableBlocks;
 import net.chickalo.bugsbugsandmorebugs.sound.ModSounds;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModMaterialRules;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModFoliagePlacerTypes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTrunkPlacerTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import terrablender.api.MaterialRuleManager;
+import terrablender.api.TerraBlenderApi;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import terrablender.api.MaterialRuleManager;
+import terrablender.api.TerraBlenderApi;
 
-public class BugsBugsAndMoreBugs implements ModInitializer {
+public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
 	public static final String MOD_ID = "bugsbugsandmorebugs";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
@@ -39,5 +46,12 @@ public class BugsBugsAndMoreBugs implements ModInitializer {
 				ModEntities.ANTWORKER,
 				AntWorkerEntity.createAttributes()
 		);
+	}
+
+	@Override
+	public void onTerraBlenderInitialized() {
+		ModBiomes.registerBiomes();
+
+		MaterialRuleManager.addRules(MaterialRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModMaterialRules::makeModOverworldRules);
 	}
 }

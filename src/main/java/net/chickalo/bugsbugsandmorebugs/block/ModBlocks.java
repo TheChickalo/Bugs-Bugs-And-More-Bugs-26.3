@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -30,6 +31,32 @@ public class ModBlocks {
     public static final Block INFESTED_DIRT = registerBlock("infested_dirt",
             properties -> new Block(properties.strength(0.25F)
                     .sound(SoundType.GRAVEL)));
+
+    public static final Block RHYOLITE = registerBlock("rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block COBBLED_RHYOLITE = registerBlock("cobbled_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block RHYOLITE_STAIRS = registerBlock("rhyolite_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_SLAB = registerBlock("rhyolite_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_WALL = registerBlock("rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block COBBLED_RHYOLITE_STAIRS = registerBlock("cobbled_rhyolite_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block COBBLED_RHYOLITE_SLAB = registerBlock("cobbled_rhyolite_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block COBBLED_RHYOLITE_WALL = registerBlock("cobblbed_rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+
 
     public static final Block MAPLE_LOG = registerBlock("maple_log",
             properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
@@ -43,11 +70,9 @@ public class ModBlocks {
     public static final Block STRIPPED_MAPLE_WOOD = registerBlock("stripped_maple_wood",
             properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
                     .sound(SoundType.WOOD).ignitedByLava()));
-
     public static final Block MAPLE_PLANKS = registerBlock("maple_planks",
             properties -> new Block(properties.mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS)
                     .strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
-
     public static final Block MAPLE_LEAVES = registerBlock("maple_leaves",
             properties -> new MapleLeavesBlock(
                     0.01f,
@@ -90,6 +115,11 @@ public class ModBlocks {
             properties -> new ButtonBlock(BlockSetType.CHERRY, 15, properties.strength(3f).noCollision()));
     public static final Block MAPLE_PRESSURE_PLATE = registerBlock("maple_pressure_plate",
             properties -> new PressurePlateBlock(BlockSetType.CHERRY, properties.mapColor(MapColor.COLOR_ORANGE).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(3f).noCollision().ignitedByLava().pushReaction(PushReaction.POPPED)));
+
+    public static final Block MAPLE_FENCE = registerBlock("maple_fence",
+            properties -> new FenceBlock(properties.strength(2f)));
+    public static final Block MAPLE_FENCE_GATE = registerBlock("maple_fence_gate",
+            properties -> new FenceGateBlock(WoodType.CHERRY, properties.strength(2f)));
 
 
     public static final Block POTTED_MAPLE_SAPLING = registerBlockWithoutBlockItem("potted_maple_sapling",

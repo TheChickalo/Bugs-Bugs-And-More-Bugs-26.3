@@ -20,20 +20,28 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
         blockModelGenerators.createTrivialCube(ModBlocks.INFESTED_DIRT);
+        blockModelGenerators.family(ModBlocks.COBBLED_RHYOLITE)
+                .stairs(ModBlocks.COBBLED_RHYOLITE_STAIRS)
+                .slab(ModBlocks.COBBLED_RHYOLITE_SLAB)
+                .wall(ModBlocks.COBBLED_RHYOLITE_WALL);
+        blockModelGenerators.family(ModBlocks.RHYOLITE)
+                .stairs(ModBlocks.RHYOLITE_STAIRS)
+                .slab(ModBlocks.RHYOLITE_SLAB)
+                .wall(ModBlocks.RHYOLITE_WALL);
+
 
         blockModelGenerators.woodProvider(ModBlocks.MAPLE_LOG).log(ModBlocks.MAPLE_LOG).wood(ModBlocks.MAPLE_WOOD);
         blockModelGenerators.woodProvider(ModBlocks.STRIPPED_MAPLE_LOG).log(ModBlocks.STRIPPED_MAPLE_LOG).wood(ModBlocks.STRIPPED_MAPLE_WOOD);
-
-//        blockModelGenerators.createTrivialCube(ModBlocks.MAPLE_PLANKS);
-        blockModelGenerators.createTrivialBlock(ModBlocks.MAPLE_LEAVES, TexturedModel.LEAVES);
-
         blockModelGenerators.createDoor(ModBlocks.MAPLE_DOOR);
         blockModelGenerators.createTrapdoor(ModBlocks.MAPLE_TRAPDOOR);
         blockModelGenerators.family(ModBlocks.MAPLE_PLANKS)
                         .stairs(ModBlocks.MAPLE_STAIRS)
                         .slab(ModBlocks.MAPLE_SLAB)
                         .button(ModBlocks.MAPLE_BUTTON)
-                        .pressurePlate(ModBlocks.MAPLE_PRESSURE_PLATE);
+                        .pressurePlate(ModBlocks.MAPLE_PRESSURE_PLATE)
+                        .fence(ModBlocks.MAPLE_FENCE)
+                        .fenceGate(ModBlocks.MAPLE_FENCE_GATE);
+        blockModelGenerators.createTrivialCube(ModBlocks.MAPLE_LEAVES);
 
         blockModelGenerators.createPlantWithDefaultItem(ModBlocks.MAPLE_SAPLING, ModBlocks.POTTED_MAPLE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
 

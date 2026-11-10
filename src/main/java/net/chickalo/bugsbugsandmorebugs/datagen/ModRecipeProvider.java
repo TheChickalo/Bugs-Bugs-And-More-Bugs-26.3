@@ -75,6 +75,42 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                 pressurePlate(ModBlocks.MAPLE_PRESSURE_PLATE, ModBlocks.MAPLE_PLANKS);
 
+                fenceBuilder(ModBlocks.MAPLE_FENCE, Ingredient.of(ModBlocks.MAPLE_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.MAPLE_PLANKS), has(ModBlocks.MAPLE_PLANKS))
+                        .group("maple")
+                        .save(output);
+
+                fenceGateBuilder(ModBlocks.MAPLE_FENCE_GATE, Ingredient.of(ModBlocks.MAPLE_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.MAPLE_PLANKS), has(ModBlocks.MAPLE_PLANKS))
+                        .group("maple")
+                        .save(output);
+
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_WALL, Ingredient.of(ModBlocks.RHYOLITE))
+                        .unlockedBy(getHasName(ModBlocks.RHYOLITE), has(ModBlocks.RHYOLITE))
+                        .group("rhyolite")
+                        .save(output);
+
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_RHYOLITE_WALL, Ingredient.of(ModBlocks.COBBLED_RHYOLITE))
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_RHYOLITE), has(ModBlocks.COBBLED_RHYOLITE))
+                        .group("rhyolite")
+                        .save(output);
+
+                stairBuilder(ModBlocks.RHYOLITE_STAIRS, Ingredient.of(ModBlocks.RHYOLITE))
+                        .unlockedBy(getHasName(ModBlocks.RHYOLITE), has(ModBlocks.RHYOLITE))
+                        .group("rhyolite")
+                        .save(output);
+
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_SLAB, ModBlocks.RHYOLITE);
+
+                stairBuilder(ModBlocks.COBBLED_RHYOLITE_STAIRS, Ingredient.of(ModBlocks.COBBLED_RHYOLITE))
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_RHYOLITE), has(ModBlocks.COBBLED_RHYOLITE))
+                        .group("rhyolite")
+                        .save(output);
+
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_RHYOLITE_SLAB, ModBlocks.COBBLED_RHYOLITE);
+
+
+
             }
         };
 

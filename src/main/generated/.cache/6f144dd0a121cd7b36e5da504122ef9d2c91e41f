@@ -1,7 +1,14 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Tags for minecraft:block
 31df20ba97b14742234224e0ae0bfef856004d67 data/bugsbugsandmorebugs/tags/block/maple_logs.json
 962c80c1c8c84dd7bd2f79f08c9ddb544da22590 data/minecraft/tags/block/crops.json
+c7ce6a07f6a919e002784a7504cc013187b292ff data/minecraft/tags/block/fence_gates.json
 9a8a6dc07277641d624adb9ad505ee8ba51386f1 data/minecraft/tags/block/leaves.json
 f958c554df9cbb222e6235c6626eff83476cc9e6 data/minecraft/tags/block/logs.json
+2d31b20120e9de2df656544a36d5686a9114f15c data/minecraft/tags/block/mineable/pickaxe.json
 85373b183b43ad53d59c0b67210d462045bbee6c data/minecraft/tags/block/planks.json
 ba696ffa0d43d290e083b53b09f6e8708e907c15 data/minecraft/tags/block/saplings.json
+0f57c74174fe0e8e635d98fc9ab180285f1a8ea9 data/minecraft/tags/block/walls.json
+dcfddf6493e74b990b3a6712002cb560f54cc071 data/minecraft/tags/block/wooden_buttons.json
+083210ab51d6d4c842d1b874dab2a7a6f27e510f data/minecraft/tags/block/wooden_doors.json
+65e1a7d9e8842e67a7fec7282b7a0942db2ede50 data/minecraft/tags/block/wooden_fences.json
+9f2a5a973c422076abb5d09e3a1d5ea0f32a5382 data/minecraft/tags/block/wooden_trapdoors.json

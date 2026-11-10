@@ -64,6 +64,13 @@ public class ModItems {
             output.accept(EXOSKELETON);
         });
 
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.RHYOLITE);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(ModBlocks.COBBLED_RHYOLITE);
+        });
+
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> {
             output.accept(ANTWORKER_SPAWN_EGG);
         });
@@ -78,6 +85,9 @@ public class ModItems {
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
             output.accept(ModBlocks.MAPLE_LOG);
+        });
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register(output -> {
+            output.accept(ModBlocks.MAPLE_PLANKS);
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
             output.accept(ModBlocks.MAPLE_WOOD);
