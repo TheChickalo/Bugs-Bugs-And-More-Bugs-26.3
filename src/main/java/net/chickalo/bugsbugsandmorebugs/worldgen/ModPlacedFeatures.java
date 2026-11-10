@@ -5,6 +5,7 @@ import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
@@ -32,6 +33,8 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_TALL_GRASS_PLACED_KEY = registerKey("maple_tall_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_LARGE_FERN_PLACED_KEY = registerKey("maple_large_fern_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_RED_SHRUB_PLACED_KEY = registerKey("maple_red_shrub_placed");
+    public static final ResourceKey<PlacedFeature> HASKAP_BUSH_PLACED_KEY = registerKey("haskap_bush_placed");
+    public static final ResourceKey<PlacedFeature> BARBERRY_BUSH_PLACED_KEY = registerKey("barberry_bush_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
@@ -73,6 +76,25 @@ public class ModPlacedFeatures {
                         CountPlacement.of(128),
                         OffsetPlacement.ofTriangle(5, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        // Haskap and barberry grow in distinct natural clusters throughout the understory.
+        register(context, HASKAP_BUSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HASKAP_BUSH_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(6),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, BARBERRY_BUSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.BARBERRY_BUSH_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(6),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
                 ));
 
         // Grass is the continuous base layer; the larger count creates near-continuous patches.
