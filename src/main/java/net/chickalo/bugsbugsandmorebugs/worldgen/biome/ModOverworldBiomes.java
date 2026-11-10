@@ -1,7 +1,6 @@
 package net.chickalo.bugsbugsandmorebugs.worldgen.biome;
 
 import net.chickalo.bugsbugsandmorebugs.worldgen.ModPlacedFeatures;
-import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeVegetation;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
