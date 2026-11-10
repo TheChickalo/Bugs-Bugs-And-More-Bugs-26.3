@@ -7,27 +7,33 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 /**
  * Reusable groups of mod vegetation that can be added to any biome.
  *
- * To give another biome the same naturally clustered Haskap and Barberry
- * bushes, call addBerryBushes(builder) while constructing that biome's
- * BiomeGenerationSettings.
+ * Call one or more of these methods while building a biome's generation
+ * settings. The placed features are shared, so biomes do not need duplicate
+ * configured-feature or placed-feature registrations.
  */
 public final class ModBiomeVegetation {
     private ModBiomeVegetation() {
     }
 
-    /**
-     * Adds both berry-bush species as part of the biome's vegetal decoration.
-     * The configured and placed features are shared, so each biome can use
-     * the same generation behavior without registering duplicate features.
-     */
-    public static void addBerryBushes(BiomeGenerationSettings.Builder builder) {
+    /** Adds naturally clustered Haskap bushes to a biome. */
+    public static void addHaskapBushes(BiomeGenerationSettings.Builder builder) {
         builder.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HASKAP_BUSH_PLACED_KEY
         );
+    }
+
+    /** Adds naturally clustered Barberry bushes to a biome. */
+    public static void addBarberryBushes(BiomeGenerationSettings.Builder builder) {
         builder.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.BARBERRY_BUSH_PLACED_KEY
         );
+    }
+
+    /** Adds both berry-bush species to a biome. */
+    public static void addBerryBushes(BiomeGenerationSettings.Builder builder) {
+        addHaskapBushes(builder);
+        addBarberryBushes(builder);
     }
 }
