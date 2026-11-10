@@ -23,17 +23,24 @@ public class OverworldRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
 
+        // Give Maple Forest a broader climate footprint. The old narrow,
+        // dry-only humidity band made its transitions look abrupt beside
+        // neighboring cold biomes and restricted where it could appear.
         new ParameterUtils.ParameterPointListBuilder()
-                .temperature(ParameterUtils.Temperature.span(ParameterUtils.Temperature.COOL, ParameterUtils.Temperature.FROZEN))
-                .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.ARID, ParameterUtils.Humidity.DRY))
+                .temperature(ParameterUtils.Temperature.span(
+                        ParameterUtils.Temperature.COOL,
+                        ParameterUtils.Temperature.FROZEN))
+                .humidity(ParameterUtils.Humidity.span(
+                        ParameterUtils.Humidity.ARID,
+                        ParameterUtils.Humidity.HUMID))
                 .continentalness(ParameterUtils.Continentalness.INLAND)
-                .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
+                .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_2)
                 .depth(ParameterUtils.Depth.SURFACE, ParameterUtils.Depth.FLOOR)
-                .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
+                .weirdness(ParameterUtils.Weirdness.FULL_RANGE)
                 .offset(0f)
-                .build().forEach(parameterPoint -> builder.add(parameterPoint, ModBiomes.MAPLE_FOREST));
+                .build()
+                .forEach(parameterPoint -> builder.add(parameterPoint, ModBiomes.MAPLE_FOREST));
 
         builder.build().forEach(mapper);
     }
-
 }
