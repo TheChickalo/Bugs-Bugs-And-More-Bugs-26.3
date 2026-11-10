@@ -90,6 +90,7 @@ public record MapleLakeFeature() implements Feature {
                         hasWater = true;
                     } else {
                         level.setBlock(pos, Blocks.CAVE_AIR.defaultBlockState(), 2);
+                        level.scheduleTick(pos, Blocks.CAVE_AIR, 0);
                         markAboveForPostProcessing(level, pos);
                     }
                 }
