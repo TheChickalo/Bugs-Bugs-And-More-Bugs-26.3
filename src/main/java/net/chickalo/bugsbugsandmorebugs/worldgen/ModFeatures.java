@@ -41,14 +41,13 @@ public class ModFeatures {
 
         // LakeFeature is deprecated in 26.3 but remains available as the
         // vanilla lake-shaping feature. The random barrier provider mixes
-        // stone, andesite, gravel, and sand for a natural rocky shoreline.
+        // stone, andesite, and gravel for a natural rocky shoreline.
         context.register(MAPLE_LAKE_KEY, new LakeFeature(
                 BlockStateProvider.holderOf(Blocks.WATER),
                 Holder.direct(new RandomBlockProvider(HolderSet.direct(
                         Blocks.STONE.builtInRegistryHolder(),
                         Blocks.ANDESITE.builtInRegistryHolder(),
-                        Blocks.GRAVEL.builtInRegistryHolder(),
-                        Blocks.SAND.builtInRegistryHolder()
+                        Blocks.GRAVEL.builtInRegistryHolder()
                 ))),
                 BlockPredicate.alwaysTrue(),
                 BlockPredicate.anyOf(
