@@ -19,24 +19,26 @@ import java.util.List;
 /**
  * Placed-feature registrations for the mod's biomes.
  *
- * Each biome-facing placement has its own ResourceKey. In particular, Maple
- * Forest does not directly reference the vanilla BAMBOO placed-feature key.
- * It registers a mod-owned placed feature that points to vanilla's bamboo
- * configured feature, avoiding reuse of the same placed-feature graph node.
+ * Each biome-facing placement has its own ResourceKey. This is important for
+ * features such as bamboo: Maple Forest gets a mod-owned placed-feature key
+ * that points to the vanilla configured feature, rather than sharing the
+ * vanilla Bamboo Jungle placed-feature graph node.
  */
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BAMBOO_PLACED_KEY = registerKey("maple_bamboo_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BUSH_PLACED_KEY = registerKey("maple_bush_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_SHORT_GRASS_PLACED_KEY = registerKey("maple_short_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_TALL_GRASS_PLACED_KEY = registerKey("maple_tall_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_LARGE_FERN_PLACED_KEY = registerKey("maple_large_fern_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_RED_SHRUB_PLACED_KEY = registerKey("maple_red_shrub_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
 
-        // Main canopy: slightly denser than the previous 3-attempt baseline.
+        // A dense canopy: roughly three times the previous baseline attempt count.
         register(context, MAPLE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1f, 2),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1f, 3),
                         ModBlocks.MAPLE_SAPLING));
 
         // Bamboo keeps vanilla's growth configuration and noise distribution,
@@ -51,27 +53,41 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome()
                 ));
 
-        // These placements follow vanilla's patch placement patterns.
+        // Low bushes form a scattered understory below the maple canopy.
         register(context, MAPLE_BUSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.BUSH),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(4),
+                        RarityFilter.onAverageOnceEvery(3),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(24),
+                        CountPlacement.of(36),
                         OffsetPlacement.ofTriangle(5, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
+        // Short grass is the continuous base layer of the forest floor.
+        register(context, MAPLE_SHORT_GRASS_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.GRASS),
+                List.of(
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(32),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        // Taller plants are more clustered and less uniformly distributed.
         register(context, MAPLE_TALL_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(5),
+                        RarityFilter.onAverageOnceEvery(2),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(96),
+                        CountPlacement.of(48),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
@@ -79,11 +95,23 @@ public class ModPlacedFeatures {
         register(context, MAPLE_LARGE_FERN_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(5),
+                        RarityFilter.onAverageOnceEvery(3),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(96),
+                        CountPlacement.of(64),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        // Minecraft 26.3's native red shrub makes a fitting accent under red maples.
+        register(context, MAPLE_RED_SHRUB_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.RED_SHRUB),
+                List.of(
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(12),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
