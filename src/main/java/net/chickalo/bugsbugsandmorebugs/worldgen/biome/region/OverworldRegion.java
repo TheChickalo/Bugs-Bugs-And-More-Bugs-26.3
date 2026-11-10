@@ -31,7 +31,7 @@ public class OverworldRegion extends Region {
                         ParameterUtils.Temperature.FROZEN,
                         ParameterUtils.Temperature.COOL))
                 .humidity(ParameterUtils.Humidity.span(
-                        ParameterUtils.Humidity.ARID,
+                        ParameterUtils.Humidity.NORMAL,
                         ParameterUtils.Humidity.HUMID))
                 .continentalness(ParameterUtils.Continentalness.INLAND)
                 .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_2)
