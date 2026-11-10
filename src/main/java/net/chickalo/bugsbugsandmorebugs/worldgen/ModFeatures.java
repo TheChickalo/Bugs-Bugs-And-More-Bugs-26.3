@@ -45,10 +45,10 @@ public class ModFeatures {
         context.register(MAPLE_LAKE_KEY, new LakeFeature(
                 BlockStateProvider.holderOf(Blocks.WATER),
                 Holder.direct(new RandomBlockProvider(HolderSet.direct(
-                        Holder.direct(Blocks.STONE),
-                        Holder.direct(Blocks.ANDESITE),
-                        Holder.direct(Blocks.GRAVEL),
-                        Holder.direct(Blocks.SAND)
+                        Blocks.STONE.builtInRegistryHolder(),
+                        Blocks.ANDESITE.builtInRegistryHolder(),
+                        Blocks.GRAVEL.builtInRegistryHolder(),
+                        Blocks.SAND.builtInRegistryHolder()
                 ))),
                 BlockPredicate.alwaysTrue(),
                 BlockPredicate.anyOf(
