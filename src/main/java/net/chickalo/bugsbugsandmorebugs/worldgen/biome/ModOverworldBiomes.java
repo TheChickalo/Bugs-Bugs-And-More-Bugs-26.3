@@ -36,6 +36,9 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
 
+        // A dedicated surface lake feature with a rocky, andesite-rich shoreline.
+        biomeBuilder.addFeature(GenerationStep.Decoration.LAKES, ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY);
+
         // Aquatic vegetation and the Maple Forest's dedicated vegetation set.
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
