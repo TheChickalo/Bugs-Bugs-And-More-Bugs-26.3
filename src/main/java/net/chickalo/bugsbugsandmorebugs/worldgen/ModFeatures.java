@@ -50,7 +50,7 @@ public class ModFeatures {
                         Holder.direct(Blocks.GRAVEL),
                         Holder.direct(Blocks.SAND)
                 ))),
-                BlockPredicate.solid(),
+                BlockPredicate.alwaysTrue(),
                 BlockPredicate.anyOf(
                         BlockPredicate.solid(),
                         BlockPredicate.replaceable(),
