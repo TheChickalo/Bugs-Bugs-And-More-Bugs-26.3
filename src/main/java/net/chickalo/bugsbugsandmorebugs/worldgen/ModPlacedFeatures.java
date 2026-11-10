@@ -35,6 +35,10 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_RED_SHRUB_PLACED_KEY = registerKey("maple_red_shrub_placed");
     public static final ResourceKey<PlacedFeature> HASKAP_BUSH_PLACED_KEY = registerKey("haskap_bush_placed");
     public static final ResourceKey<PlacedFeature> BARBERRY_BUSH_PLACED_KEY = registerKey("barberry_bush_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_BARBERRY_PLACED_KEY = registerKey("maple_barberry_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_HASKAP_PLACED_KEY = registerKey("maple_haskap_placed");
+
+
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
@@ -114,11 +118,11 @@ public class ModPlacedFeatures {
         register(context, MAPLE_TALL_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(2),
+                        RarityFilter.onAverageOnceEvery(5),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(160),
+                        CountPlacement.of(230),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
@@ -126,11 +130,11 @@ public class ModPlacedFeatures {
         register(context, MAPLE_LARGE_FERN_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(2),
+                        RarityFilter.onAverageOnceEvery(4),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(80),
+                        CountPlacement.of(120),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
@@ -138,6 +142,17 @@ public class ModPlacedFeatures {
         // Red shrubs become a visible accent rather than an occasional rarity.
         register(context, MAPLE_RED_SHRUB_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.RED_SHRUB),
+                List.of(
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(40),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        register(context, MAPLE_BARBERRY_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.BARBERRY),
                 List.of(
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,

@@ -119,7 +119,8 @@
         "probability": 0.002
       }
     ],
-    "minecraft:visual/fog_color": "#c6d8c0"
+    "minecraft:visual/fog_color": "#c6d8c0",
+    "minecraft:visual/sky_color": "#83d6de"
   },
   "carvers": [
     "minecraft:cave",
@@ -134,7 +135,8 @@
     [],
     [
       "minecraft:lake_lava_underground",
-      "minecraft:lake_lava_surface"
+      "minecraft:lake_lava_surface",
+      "bugsbugsandmorebugs:maple_lake_placed"
     ],
     [
       "minecraft:amethyst_geode"
@@ -180,7 +182,13 @@
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "minecraft:seagrass_river",
-      "bugsbugsandmorebugs:maple_placed"
+      "bugsbugsandmorebugs:maple_placed",
+      "bugsbugsandmorebugs:maple_bamboo_placed",
+      "bugsbugsandmorebugs:maple_bush_placed",
+      "bugsbugsandmorebugs:maple_short_grass_placed",
+      "bugsbugsandmorebugs:maple_tall_grass_placed",
+      "bugsbugsandmorebugs:maple_large_fern_placed",
+      "bugsbugsandmorebugs:maple_red_shrub_placed"
     ]
   ],
   "has_precipitation": true,
