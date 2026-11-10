@@ -36,6 +36,9 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
 
+        // A dedicated surface lake feature with a rocky, andesite-rich shoreline.
+        biomeBuilder.addFeature(GenerationStep.Decoration.LAKES, ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY);
+
         // Aquatic vegetation and the Maple Forest's dedicated vegetation set.
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
@@ -50,6 +53,7 @@ public class ModOverworldBiomes {
                 .hasPrecipitation(true).temperature(0.7F).downfall(0.8F)
                 .specialEffects(new BiomeSpecialEffects.Builder().waterColor(0x4B8F70).build())
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x83D6DE))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xC6D8C0))
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_FOREST))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.CHERRY_LEAVES, 0.002F))
