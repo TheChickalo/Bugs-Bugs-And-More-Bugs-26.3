@@ -53,33 +53,33 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome()
                 ));
 
-        // Low bushes form a scattered understory below the maple canopy.
+        // Frequent low shrubs create a dense understory.
         register(context, MAPLE_BUSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.BUSH),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(3),
+                        RarityFilter.onAverageOnceEvery(2),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(36),
+                        CountPlacement.of(64),
                         OffsetPlacement.ofTriangle(5, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
-        // Short grass is the continuous base layer of the forest floor.
+        // Grass is the continuous base layer; the larger count creates near-continuous patches.
         register(context, MAPLE_SHORT_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.GRASS),
                 List.of(
-                        CountPlacement.of(2),
+                        CountPlacement.of(3),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome(),
-                        CountPlacement.of(32),
+                        CountPlacement.of(48),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
-        // Taller plants are more clustered and less uniformly distributed.
+        // Tall grass and ferns fill gaps between the low ground cover.
         register(context, MAPLE_TALL_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
                 List.of(
@@ -87,7 +87,7 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(48),
+                        CountPlacement.of(80),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
@@ -95,23 +95,23 @@ public class ModPlacedFeatures {
         register(context, MAPLE_LARGE_FERN_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(3),
+                        RarityFilter.onAverageOnceEvery(2),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
                         BiomeFilter.biome(),
-                        CountPlacement.of(64),
+                        CountPlacement.of(80),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
-        // Minecraft 26.3's native red shrub makes a fitting accent under red maples.
+        // Red shrubs become a visible accent rather than an occasional rarity.
         register(context, MAPLE_RED_SHRUB_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.RED_SHRUB),
                 List.of(
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome(),
-                        CountPlacement.of(12),
+                        CountPlacement.of(24),
                         OffsetPlacement.ofTriangle(7, 3),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
