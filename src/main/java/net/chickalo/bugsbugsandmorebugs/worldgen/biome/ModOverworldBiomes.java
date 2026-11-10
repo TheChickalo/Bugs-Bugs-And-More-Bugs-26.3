@@ -1,6 +1,7 @@
 package net.chickalo.bugsbugsandmorebugs.worldgen.biome;
 
 import net.chickalo.bugsbugsandmorebugs.worldgen.ModPlacedFeatures;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeVegetation;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -48,8 +49,7 @@ public class ModOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_TALL_GRASS_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_LARGE_FERN_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_RED_SHRUB_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.HASKAP_BUSH_PLACED_KEY);
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.BARBERRY_BUSH_PLACED_KEY);
+        ModBiomeVegetation.addBerryBushes(biomeBuilder);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.7F).downfall(0.8F)
