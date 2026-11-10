@@ -5,7 +5,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -26,8 +25,8 @@ public class ModOverworldBiomes {
     public static Biome mapleForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<WorldCarver> carverGetter) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
-        spawnBuilder.addSpawn(EntityTypes.FOX, 20, UniformInt.of(2,3));
-        spawnBuilder.addSpawn(EntityTypes.RABBIT, 20, UniformInt.of(2,3));
+        spawnBuilder.addSpawn(EntityTypes.FOX, 20, UniformInt.of(2, 3));
+        spawnBuilder.addSpawn(EntityTypes.RABBIT, 20, UniformInt.of(2, 3));
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
@@ -36,8 +35,14 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
+
+        // Aquatic vegetation and the Maple Forest's own vegetation placements.
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BAMBOO_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BUSH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_TALL_GRASS_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_LARGE_FERN_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.7F).downfall(0.8F)
@@ -47,20 +52,18 @@ public class ModOverworldBiomes {
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_FOREST))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.CHERRY_LEAVES, 0.002F))
                 .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
-                                Optional.empty(),
-
-                                Optional.of(new AmbientMoodSettings(
-                                        SoundEvents.AMBIENT_CAVE,
-                                        60000,
-                                        8,
-                                        2.0D
-                                )),
-                                List.of(new AmbientAdditionsSettings(
-                                        SoundEvents.AMBIENT_BASALT_DELTAS_MOOD,
-                                        0.001F
-                                ))
+                        Optional.empty(),
+                        Optional.of(new AmbientMoodSettings(
+                                SoundEvents.AMBIENT_CAVE,
+                                60000,
+                                8,
+                                2.0D
+                        )),
+                        List.of(new AmbientAdditionsSettings(
+                                SoundEvents.AMBIENT_BASALT_DELTAS_MOOD,
+                                0.001F
                         ))
+                ))
                 .build();
-
     }
 }
