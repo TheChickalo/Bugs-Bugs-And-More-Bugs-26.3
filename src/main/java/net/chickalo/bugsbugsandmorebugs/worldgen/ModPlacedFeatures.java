@@ -10,6 +10,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.*;
 
@@ -38,27 +39,54 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1f, 2),
                         ModBlocks.MAPLE_SAPLING));
 
-        // Vanilla bamboo configuration with a mod-owned placed-feature identity.
+        // Bamboo keeps vanilla's growth configuration and noise distribution,
+        // but appears in occasional groves rather than throughout every chunk.
         register(context, MAPLE_BAMBOO_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.BAMBOO_SOME_PODZOL),
                 List.of(
+                        RarityFilter.onAverageOnceEvery(4),
                         NoiseBasedCountPlacement.of(160, 80.0, 0.3),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
                 ));
 
+        // These placements follow vanilla's patch placement patterns.
         register(context, MAPLE_BUSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.BUSH),
-                VegetationPlacements.worldSurfaceSquaredWithCount(5));
+                List.of(
+                        RarityFilter.onAverageOnceEvery(4),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(24),
+                        OffsetPlacement.ofTriangle(5, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
 
         register(context, MAPLE_TALL_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
-                VegetationPlacements.worldSurfaceSquaredWithCount(12));
+                List.of(
+                        RarityFilter.onAverageOnceEvery(5),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(96),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
 
         register(context, MAPLE_LARGE_FERN_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
-                VegetationPlacements.worldSurfaceSquaredWithCount(5));
+                List.of(
+                        RarityFilter.onAverageOnceEvery(5),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(96),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
