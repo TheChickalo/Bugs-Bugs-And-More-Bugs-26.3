@@ -2,10 +2,10 @@ package net.chickalo.bugsbugsandmorebugs.worldgen;
 
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleLakeFeature;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.ProtectedBambooFeature;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.MapleFoliagePlacer;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.MapleTrunkPlacer;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
@@ -13,15 +13,15 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.*;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.RandomBlockProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 
 public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
     public static final ResourceKey<Feature> MAPLE_LAKE_KEY = registerKey("maple_lake");
+    public static final ResourceKey<Feature> MAPLE_BAMBOO_KEY = registerKey("maple_bamboo");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
@@ -39,24 +39,8 @@ public class ModFeatures {
                 BlockStateProvider.holderOf(Blocks.DIRT)
         ).build());
 
-        // LakeFeature is deprecated in 26.3 but remains available as the
-        // vanilla lake-shaping feature. The random barrier provider mixes
-        // stone, andesite, and gravel for a natural rocky shoreline.
-        context.register(MAPLE_LAKE_KEY, new LakeFeature(
-                BlockStateProvider.holderOf(Blocks.WATER),
-                Holder.direct(new RandomBlockProvider(HolderSet.direct(
-                        Blocks.STONE.builtInRegistryHolder(),
-                        Blocks.ANDESITE.builtInRegistryHolder(),
-                        Blocks.GRAVEL.builtInRegistryHolder()
-                ))),
-                BlockPredicate.alwaysTrue(),
-                BlockPredicate.anyOf(
-                        BlockPredicate.solid(),
-                        BlockPredicate.replaceable(),
-                        BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE
-                ),
-                BlockPredicate.solid()
-        ));
+        context.register(MAPLE_LAKE_KEY, new MapleLakeFeature());
+        context.register(MAPLE_BAMBOO_KEY, new ProtectedBambooFeature(0.2F));
     }
 
     public static ResourceKey<Feature> registerKey(String name) {
