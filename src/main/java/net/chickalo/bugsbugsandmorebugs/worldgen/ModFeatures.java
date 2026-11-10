@@ -18,10 +18,15 @@ import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 
+
 public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
     public static final ResourceKey<Feature> MAPLE_LAKE_KEY = registerKey("maple_lake");
     public static final ResourceKey<Feature> MAPLE_BAMBOO_KEY = registerKey("maple_bamboo");
+    public static final ResourceKey<Feature> BARBERRY_KEY = registerKey("barberry");
+    public static final ResourceKey<Feature> HASKAP_KEY = registerKey("haskap");
+
+
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
@@ -39,9 +44,14 @@ public class ModFeatures {
                 BlockStateProvider.holderOf(Blocks.DIRT)
         ).build());
 
+
         context.register(MAPLE_LAKE_KEY, new MapleLakeFeature());
         context.register(MAPLE_BAMBOO_KEY, new ProtectedBambooFeature(0.2F));
+
+
     }
+
+}
 
     public static ResourceKey<Feature> registerKey(String name) {
         return ResourceKey.create(Registries.FEATURE,

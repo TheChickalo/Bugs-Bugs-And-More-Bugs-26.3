@@ -57,19 +57,6 @@ public class ModOverworldBiomes {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xC6D8C0))
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_FOREST))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.CHERRY_LEAVES, 0.002F))
-                .setAttribute(EnvironmentAttributes.AMBIENT_SOUNDS, new AmbientSounds(
-                        Optional.empty(),
-                        Optional.of(new AmbientMoodSettings(
-                                SoundEvents.AMBIENT_CAVE,
-                                60000,
-                                8,
-                                2.0D
-                        )),
-                        List.of(new AmbientAdditionsSettings(
-                                SoundEvents.AMBIENT_BASALT_DELTAS_MOOD,
-                                0.001F
-                        ))
-                ))
                 .build();
     }
 }

@@ -28,12 +28,12 @@ public class OverworldRegion extends Region {
         // the shared boundary at -0.45 and makes the biome extremely restricted.
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(ParameterUtils.Temperature.span(
-                        ParameterUtils.Temperature.FROZEN,
+                        ParameterUtils.Temperature.COOL,
                         ParameterUtils.Temperature.COOL))
                 .humidity(ParameterUtils.Humidity.span(
-                        ParameterUtils.Humidity.NORMAL,
+                        ParameterUtils.Humidity.NEUTRAL,
                         ParameterUtils.Humidity.HUMID))
-                .continentalness(ParameterUtils.Continentalness.INLAND)
+                .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
                 .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_2)
                 .depth(ParameterUtils.Depth.SURFACE, ParameterUtils.Depth.FLOOR)
                 .weirdness(ParameterUtils.Weirdness.FULL_RANGE)
