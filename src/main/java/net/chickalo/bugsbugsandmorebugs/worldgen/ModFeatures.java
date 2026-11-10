@@ -2,6 +2,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen;
 
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.BerryBushPatchFeature;
 import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleLakeFeature;
 import net.chickalo.bugsbugsandmorebugs.worldgen.feature.ProtectedBambooFeature;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.MapleFoliagePlacer;
@@ -23,6 +24,8 @@ public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
     public static final ResourceKey<Feature> MAPLE_LAKE_KEY = registerKey("maple_lake");
     public static final ResourceKey<Feature> MAPLE_BAMBOO_KEY = registerKey("maple_bamboo");
+    public static final ResourceKey<Feature> HASKAP_BUSH_PATCH_KEY = registerKey("haskap_bush_patch");
+    public static final ResourceKey<Feature> BARBERRY_BUSH_PATCH_KEY = registerKey("barberry_bush_patch");
     public static final ResourceKey<Feature> BARBERRY_KEY = registerKey("barberry");
     public static final ResourceKey<Feature> HASKAP_KEY = registerKey("haskap");
 
@@ -47,6 +50,8 @@ public class ModFeatures {
 
         context.register(MAPLE_LAKE_KEY, new MapleLakeFeature());
         context.register(MAPLE_BAMBOO_KEY, new ProtectedBambooFeature(0.2F));
+        context.register(HASKAP_BUSH_PATCH_KEY, new BerryBushPatchFeature(ModBlocks.HASKAP_BERRY_BUSH));
+        context.register(BARBERRY_BUSH_PATCH_KEY, new BerryBushPatchFeature(ModBlocks.BARBERRY_BUSH));
 
 
     }
