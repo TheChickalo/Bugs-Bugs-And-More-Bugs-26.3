@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * Placed-feature registrations for the mod's biomes.
  *
- * Each biome-facing placement has its own ResourceKey. In particular, do not
- * add the vanilla BAMBOO placed-feature key directly to Maple Forest: using a
- * mod-owned key lets this biome place the vanilla bamboo configured feature
- * without sharing the same placed-feature node with Bamboo Jungle.
+ * Each biome-facing placement has its own ResourceKey. In particular, Maple
+ * Forest does not directly reference the vanilla BAMBOO placed-feature key.
+ * It registers a mod-owned placed feature that points to vanilla's bamboo
+ * configured feature, avoiding reuse of the same placed-feature graph node.
  */
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
@@ -38,11 +38,11 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1f, 2),
                         ModBlocks.MAPLE_SAPLING));
 
-        // Reuse vanilla configured features, but give each placement a unique key.
+        // Vanilla bamboo configuration with a mod-owned placed-feature identity.
         register(context, MAPLE_BAMBOO_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.BAMBOO_SOME_PODZOL),
                 List.of(
-                        NoiseBasedCountPlacement.of(32, 80.0, 0.3),
+                        NoiseBasedCountPlacement.of(160, 80.0, 0.3),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
@@ -54,7 +54,7 @@ public class ModPlacedFeatures {
 
         register(context, MAPLE_TALL_GRASS_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
-                VegetationPlacements.worldSurfaceSquaredWithCount(24));
+                VegetationPlacements.worldSurfaceSquaredWithCount(12));
 
         register(context, MAPLE_LARGE_FERN_PLACED_KEY,
                 configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
