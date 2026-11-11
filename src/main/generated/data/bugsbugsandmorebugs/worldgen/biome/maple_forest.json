@@ -1,17 +1,5 @@
 {
   "attributes": {
-    "minecraft:audio/ambient_sounds": {
-      "additions": {
-        "sound": "minecraft:ambient.basalt_deltas.mood",
-        "tick_chance": 0.0010000000474974513
-      },
-      "mood": {
-        "block_search_extent": 8,
-        "offset": 2.0,
-        "sound": "minecraft:ambient.cave",
-        "tick_delay": 60000
-      }
-    },
     "minecraft:audio/background_music": {
       "default": {
         "max_delay": 24000,
@@ -188,7 +176,9 @@
       "bugsbugsandmorebugs:maple_short_grass_placed",
       "bugsbugsandmorebugs:maple_tall_grass_placed",
       "bugsbugsandmorebugs:maple_large_fern_placed",
-      "bugsbugsandmorebugs:maple_red_shrub_placed"
+      "bugsbugsandmorebugs:maple_red_shrub_placed",
+      "bugsbugsandmorebugs:haskap_bush_placed",
+      "bugsbugsandmorebugs:barberry_bush_placed"
     ]
   ],
   "has_precipitation": true,

@@ -1,3 +1,4 @@
+
 package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 
 import com.mojang.serialization.MapCodec;
@@ -7,23 +8,33 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 
-/**
- * A broad, irregular lake with a multi-block rocky shoreline.
- *
- * The water basin uses overlapping ellipsoids. The shoreline is then
- * expanded horizontally, with a fresh material choice for every block.
- */
 public record MapleLakeFeature() implements Feature {
+
     public static final MapCodec<MapleLakeFeature> CODEC =
             MapCodec.unit(new MapleLakeFeature());
 
-    private static final int SIZE = 24;
-    private static final int HEIGHT = 8;
-    private static final int SHORE_WIDTH = 3;
+    private static final int SIZE = 32;
 
-    private static final BlockState WATER = Blocks.WATER.defaultBlockState();
+    private static final int MIN_WIDTH = 5;
+    private static final int MAX_WIDTH = 20;
+
+    private static final int MIN_DEPTH = 1;
+    private static final int MAX_DEPTH = 3;
+
+    private static final int MAX_HEIGHT_VARIATION = 2;
+
+    private static final int BASIN_THICKNESS = 3;
+    private static final int WALL_THICKNESS = 3;
+
+    // Erosion only affects exposed outer wall sections.
+    private static final float EDGE_EROSION_CHANCE = 0.65F;
+    private static final int MAX_EROSION_DEPTH = 2;
+
+    private static final BlockState WATER =
+            Blocks.WATER.defaultBlockState();
 
     @Override
     public MapCodec<MapleLakeFeature> codec() {
@@ -31,98 +42,421 @@ public record MapleLakeFeature() implements Feature {
     }
 
     @Override
-    public boolean place(WorldGenLevel level, ChunkGenerator generator,
-                         RandomSource random, BlockPos origin) {
-        if (origin.getY() <= level.getMinY() + 5) {
+    public boolean place(WorldGenLevel level,
+                         ChunkGenerator generator,
+                         RandomSource random,
+                         BlockPos origin) {
+
+        int baseX = origin.getX() - SIZE / 2;
+        int baseZ = origin.getZ() - SIZE / 2;
+
+        boolean[] basin = new boolean[SIZE * SIZE];
+        int[] wallDistance = new int[SIZE * SIZE];
+
+        int[] groundHeights = new int[SIZE * SIZE];
+        int[] surfaceHeights = new int[SIZE * SIZE];
+
+        int[] wallTops = new int[SIZE * SIZE];
+
+        double centerX = SIZE / 2.0;
+        double centerZ = SIZE / 2.0;
+
+        int width = MIN_WIDTH
+                + random.nextInt(MAX_WIDTH - MIN_WIDTH + 1);
+
+        int length = MIN_WIDTH
+                + random.nextInt(MAX_WIDTH - MIN_WIDTH + 1);
+
+        double radiusX = width / 2.0;
+        double radiusZ = length / 2.0;
+
+        double phase1 = random.nextDouble() * Math.PI * 2.0;
+        double phase2 = random.nextDouble() * Math.PI * 2.0;
+
+        // ------------------------------------------------------------
+        // 1. Generate an irregular elliptical basin.
+        // ------------------------------------------------------------
+
+        for (int x = 1; x < SIZE - 1; x++) {
+            for (int z = 1; z < SIZE - 1; z++) {
+
+                double dx = (x - centerX) / radiusX;
+                double dz = (z - centerZ) / radiusZ;
+
+                double distance = Math.sqrt(dx * dx + dz * dz);
+                double angle = Math.atan2(dz, dx);
+
+                double outline =
+                        1.0
+                                + Math.sin(angle * 3.0 + phase1) * 0.035
+                                + Math.sin(angle * 5.0 + phase2) * 0.025;
+
+                if (distance <= outline) {
+                    basin[index(x, z)] = true;
+                }
+            }
+        }
+
+        // ------------------------------------------------------------
+        // 2. Sample terrain and validate the basin.
+        // ------------------------------------------------------------
+
+        int lowestHeight = Integer.MAX_VALUE;
+        int highestHeight = Integer.MIN_VALUE;
+
+        int heightTotal = 0;
+        int basinColumns = 0;
+
+        for (int x = 0; x < SIZE; x++) {
+            for (int z = 0; z < SIZE; z++) {
+
+                int worldX = baseX + x;
+                int worldZ = baseZ + z;
+
+                int groundY = level.getHeight(
+                        Heightmap.Types.OCEAN_FLOOR_WG,
+                        worldX,
+                        worldZ
+                ) - 1;
+
+                int surfaceY = level.getHeight(
+                        Heightmap.Types.WORLD_SURFACE_WG,
+                        worldX,
+                        worldZ
+                ) - 1;
+
+                groundHeights[index(x, z)] = groundY;
+                surfaceHeights[index(x, z)] = surfaceY;
+
+                if (!basin[index(x, z)]) {
+                    continue;
+                }
+
+                lowestHeight = Math.min(lowestHeight, groundY);
+                highestHeight = Math.max(highestHeight, groundY);
+
+                heightTotal += groundY;
+                basinColumns++;
+
+                if (surfaceY - groundY > 5) {
+                    return false;
+                }
+            }
+        }
+
+        if (basinColumns == 0
+                || highestHeight - lowestHeight > MAX_HEIGHT_VARIATION) {
             return false;
         }
 
-        BlockPos start = origin.offset(-SIZE / 2, -4, -SIZE / 2);
-        boolean[] basin = new boolean[SIZE * SIZE * HEIGHT];
+        int waterLevel = Math.round(
+                (float) heightTotal / basinColumns
+        );
 
-        int lobes = 4 + random.nextInt(4);
-        for (int i = 0; i < lobes; i++) {
-            double rx = 3.0 + random.nextDouble() * 6.0;
-            double ry = 2.0 + random.nextDouble() * 4.0;
-            double rz = 3.0 + random.nextDouble() * 6.0;
-            double cx = 2.0 + rx / 2.0 + random.nextDouble() * (SIZE - rx - 4.0);
-            double cy = 2.0 + ry / 2.0 + random.nextDouble() * (HEIGHT - ry - 2.0);
-            double cz = 2.0 + rz / 2.0 + random.nextDouble() * (SIZE - rz - 4.0);
+        if (waterLevel < level.getMinY() + MAX_DEPTH + 3
+                || waterLevel >= level.getMaxY() - 2) {
+            return false;
+        }
 
-            for (int x = 1; x < SIZE - 1; x++) {
-                for (int z = 1; z < SIZE - 1; z++) {
-                    for (int y = 1; y < HEIGHT - 1; y++) {
-                        double dx = (x - cx) / (rx / 2.0);
-                        double dy = (y - cy) / (ry / 2.0);
-                        double dz = (z - cz) / (rz / 2.0);
-                        if (dx * dx + dy * dy + dz * dz < 1.0) {
-                            basin[index(x, z, y)] = true;
+        // ------------------------------------------------------------
+        // 3. Calculate the distance of every wall column from the basin.
+        //
+        // 1 = inner wall
+        // 2 = middle wall
+        // 3 = outer wall
+        // ------------------------------------------------------------
+
+        for (int x = 0; x < SIZE; x++) {
+            for (int z = 0; z < SIZE; z++) {
+
+                if (basin[index(x, z)]) {
+                    continue;
+                }
+
+                int nearestDistance = WALL_THICKNESS + 1;
+
+                for (int dx = -WALL_THICKNESS;
+                     dx <= WALL_THICKNESS;
+                     dx++) {
+
+                    for (int dz = -WALL_THICKNESS;
+                         dz <= WALL_THICKNESS;
+                         dz++) {
+
+                        int distance = Math.abs(dx) + Math.abs(dz);
+
+                        if (distance == 0
+                                || distance > WALL_THICKNESS) {
+                            continue;
+                        }
+
+                        int nx = x + dx;
+                        int nz = z + dz;
+
+                        if (nx < 0 || nx >= SIZE
+                                || nz < 0 || nz >= SIZE) {
+                            continue;
+                        }
+
+                        if (basin[index(nx, nz)]) {
+                            nearestDistance = Math.min(
+                                    nearestDistance,
+                                    distance
+                            );
                         }
                     }
                 }
-            }
-        }
 
-        boolean hasWater = false;
-        for (int x = 0; x < SIZE; x++) {
-            for (int z = 0; z < SIZE; z++) {
-                for (int y = 0; y < HEIGHT; y++) {
-                    if (!basin[index(x, z, y)]) continue;
-
-                    BlockPos pos = start.offset(x, y, z);
-                    BlockState existing = level.getBlockState(pos);
-
-                    // Reject lakes that cut into existing bodies of water or caves.
-                    if (y >= 4 && existing.liquid()) return false;
-                    if (y < 4 && !existing.isSolid() && !existing.is(WATER.getBlock())) return false;
+                if (nearestDistance <= WALL_THICKNESS) {
+                    wallDistance[index(x, z)] = nearestDistance;
                 }
             }
         }
 
-        // Fill the basin. The upper half is air, as in vanilla's lake feature.
+        int wallBottom = waterLevel - MAX_DEPTH - 2;
+
+        // ------------------------------------------------------------
+        // 4. Prevalidate all retaining wall columns.
+        // ------------------------------------------------------------
+
         for (int x = 0; x < SIZE; x++) {
             for (int z = 0; z < SIZE; z++) {
-                for (int y = 0; y < HEIGHT; y++) {
-                    if (!basin[index(x, z, y)]) continue;
-                    BlockPos pos = start.offset(x, y, z);
-                    if (y < 4) {
-                        level.setBlock(pos, WATER, 2);
-                        hasWater = true;
-                    } else {
-                        level.setBlock(pos, Blocks.CAVE_AIR.defaultBlockState(), 2);
-                        level.scheduleTick(pos, Blocks.CAVE_AIR, 0);
-                        markAboveForPostProcessing(level, pos);
-                    }
+
+                if (wallDistance[index(x, z)] == 0) {
+                    continue;
+                }
+
+                int groundY = groundHeights[index(x, z)];
+                int surfaceY = surfaceHeights[index(x, z)];
+
+                if (surfaceY - groundY > 5
+                        || groundY < level.getMinY()
+                        || surfaceY >= level.getMaxY()) {
+                    return false;
                 }
             }
         }
 
-        if (!hasWater) return false;
+// ------------------------------------------------------------
+// 5. Build the wall height map.
+//
+// The inner wall is always intact.
+// The middle wall is always intact.
+// Only the outermost wall can erode, and only when exposed
+// to air on one of its horizontal sides.
+// ------------------------------------------------------------
 
-        // Expand the shoreline outward by up to three blocks horizontally.
-        // Every individual block gets its own random material selection.
-        for (int x = 1; x < SIZE - 1; x++) {
-            for (int z = 1; z < SIZE - 1; z++) {
-                for (int y = 0; y < 4; y++) {
-                    if (basin[index(x, z, y)]) continue;
+        for (int x = 0; x < SIZE; x++) {
+            for (int z = 0; z < SIZE; z++) {
 
-                    int distance = horizontalDistanceToBasin(basin, x, z, y);
-                    if (distance < 1 || distance > SHORE_WIDTH) continue;
+                int distance = wallDistance[index(x, z)];
 
-                    BlockPos pos = start.offset(x, y, z);
-                    BlockState existing = level.getBlockState(pos);
+                if (distance == 0) {
+                    continue;
+                }
 
-                    if (existing.is(Blocks.GRASS_BLOCK)
-                            || existing.is(Blocks.DIRT)
-                            || existing.is(Blocks.COARSE_DIRT)
-                            || existing.is(Blocks.ROOTED_DIRT)
-                            || existing.is(Blocks.MUD)
-                            || existing.is(Blocks.STONE)
-                            || existing.is(Blocks.ANDESITE)
-                            || existing.is(Blocks.GRAVEL)) {
-                        level.setBlock(pos, randomShoreBlock(random), 2);
-                        markAboveForPostProcessing(level, pos);
-                    }
+                int wallTop = waterLevel;
+
+                // Only erode the outermost layer.
+                if (distance == WALL_THICKNESS
+                        && hasExposedAirSide(
+                        level,
+                        baseX,
+                        baseZ,
+                        x,
+                        z,
+                        waterLevel,
+                        wallDistance,
+                        basin
+                )
+                        && random.nextFloat() < EDGE_EROSION_CHANCE) {
+
+                    int erosionDepth = 1
+                            + random.nextInt(MAX_EROSION_DEPTH);
+
+                    wallTop -= erosionDepth;
+                }
+
+                wallTops[index(x, z)] = wallTop;
+            }
+        }
+
+        // ------------------------------------------------------------
+        // 6. Construct the retaining walls.
+        // ------------------------------------------------------------
+
+        for (int x = 0; x < SIZE; x++) {
+            for (int z = 0; z < SIZE; z++) {
+
+                if (wallDistance[index(x, z)] == 0) {
+                    continue;
+                }
+
+                int worldX = baseX + x;
+                int worldZ = baseZ + z;
+
+                int wallTop = wallTops[index(x, z)];
+
+                for (int y = wallBottom; y <= wallTop; y++) {
+
+                    level.setBlock(
+                            new BlockPos(worldX, y, worldZ),
+                            randomLakebedBlock(random),
+                            2
+                    );
+                }
+            }
+        }
+
+        // ------------------------------------------------------------
+        // 7. Carve the lake basin and create the lakebed.
+        // ------------------------------------------------------------
+
+        for (int x = 0; x < SIZE; x++) {
+            for (int z = 0; z < SIZE; z++) {
+
+                if (!basin[index(x, z)]) {
+                    continue;
+                }
+
+                int worldX = baseX + x;
+                int worldZ = baseZ + z;
+
+                int groundY = groundHeights[index(x, z)];
+                int surfaceY = surfaceHeights[index(x, z)];
+
+                double dx = (x - centerX) / radiusX;
+                double dz = (z - centerZ) / radiusZ;
+
+                double distance = Math.sqrt(dx * dx + dz * dz);
+
+                double centerFactor = Math.max(
+                        0.0,
+                        Math.min(1.0, 1.0 - distance)
+                );
+
+                int depth = MIN_DEPTH + (int) Math.round(
+                        centerFactor * (MAX_DEPTH - MIN_DEPTH)
+                );
+
+                int floorY = waterLevel - depth;
+
+                int bottomY = floorY - BASIN_THICKNESS + 1;
+
+                int fillBottom = Math.min(
+                        bottomY,
+                        groundY + 1
+                );
+
+                if (fillBottom < level.getMinY()) {
+                    continue;
+                }
+
+                // Remove terrain and vegetation from the basin.
+                for (int y = fillBottom; y <= surfaceY; y++) {
+
+                    level.setBlock(
+                            new BlockPos(worldX, y, worldZ),
+                            Blocks.AIR.defaultBlockState(),
+                            2
+                    );
+                }
+
+                // Three-block-thick lakebed.
+                for (int y = fillBottom; y <= floorY; y++) {
+
+                    level.setBlock(
+                            new BlockPos(worldX, y, worldZ),
+                            randomLakebedBlock(random),
+                            2
+                    );
+                }
+
+                // Fill with water.
+                for (int y = floorY + 1; y <= waterLevel; y++) {
+
+                    level.setBlock(
+                            new BlockPos(worldX, y, worldZ),
+                            WATER,
+                            2
+                    );
+                }
+
+                // --------------------------------------------------------
+                // 7b. CLEAR VEGETATION ABOVE THE WATER.
+                //
+                // This intentionally clears the entire vertical column
+                // within the basin footprint up through the old terrain
+                // surface, plus a small margin.
+                //
+                // Trees or foliage hanging over the lake are removed
+                // instead of being left floating.
+                // --------------------------------------------------------
+
+                int cleanupTop = Math.min(
+                        level.getMaxY() - 1,
+                        Math.max(surfaceY + 8, waterLevel + 8)
+                );
+
+                for (int y = waterLevel + 1; y <= cleanupTop; y++) {
+
+                    level.setBlock(
+                            new BlockPos(worldX, y, worldZ),
+                            Blocks.AIR.defaultBlockState(),
+                            2
+                    );
+                }
+            }
+        }
+
+        // ------------------------------------------------------------
+        // 8. Add submerged seagrass.
+        // ------------------------------------------------------------
+
+        for (int x = 0; x < SIZE; x++) {
+            for (int z = 0; z < SIZE; z++) {
+
+                if (!basin[index(x, z)]) {
+                    continue;
+                }
+
+                int worldX = baseX + x;
+                int worldZ = baseZ + z;
+
+                double dx = (x - centerX) / radiusX;
+                double dz = (z - centerZ) / radiusZ;
+
+                double distance = Math.sqrt(dx * dx + dz * dz);
+
+                double centerFactor = Math.max(
+                        0.0,
+                        Math.min(1.0, 1.0 - distance)
+                );
+
+                int depth = MIN_DEPTH + (int) Math.round(
+                        centerFactor * (MAX_DEPTH - MIN_DEPTH)
+                );
+
+                if (depth < 2 || random.nextFloat() >= 0.25F) {
+                    continue;
+                }
+
+                int floorY = waterLevel - depth;
+
+                BlockPos plantPos = new BlockPos(
+                        worldX,
+                        floorY + 1,
+                        worldZ
+                );
+
+                if (level.getBlockState(plantPos).is(Blocks.WATER)
+                        && level.getBlockState(plantPos.above()).is(Blocks.WATER)) {
+
+                    level.setBlock(
+                            plantPos,
+                            Blocks.SEAGRASS.defaultBlockState(),
+                            2
+                    );
                 }
             }
         }
@@ -130,32 +464,62 @@ public record MapleLakeFeature() implements Feature {
         return true;
     }
 
-    private static int index(int x, int z, int y) {
-        return (x * SIZE + z) * HEIGHT + y;
-    }
+    private static boolean hasExposedAirSide(
+            WorldGenLevel level,
+            int baseX,
+            int baseZ,
+            int x,
+            int z,
+            int waterLevel,
+            int[] wallDistance,
+            boolean[] basin) {
 
-    private static int horizontalDistanceToBasin(boolean[] basin, int x, int z, int y) {
-        for (int distance = 1; distance <= SHORE_WIDTH; distance++) {
-            for (int dx = -distance; dx <= distance; dx++) {
-                for (int dz = -distance; dz <= distance; dz++) {
-                    if (Math.max(Math.abs(dx), Math.abs(dz)) != distance) continue;
-                    int nx = x + dx;
-                    int nz = z + dz;
-                    if (nx >= 0 && nx < SIZE && nz >= 0 && nz < SIZE
-                            && basin[index(nx, nz, y)]) {
-                        return distance;
-                    }
-                }
+        int[][] directions = {
+                { 1, 0 },
+                { -1, 0 },
+                { 0, 1 },
+                { 0, -1 }
+        };
+
+        for (int[] direction : directions) {
+
+            int nx = x + direction[0];
+            int nz = z + direction[1];
+
+            if (nx < 0 || nx >= SIZE
+                    || nz < 0 || nz >= SIZE) {
+                continue;
+            }
+
+            // Ignore neighboring lake and retaining-wall columns.
+            if (basin[index(nx, nz)]
+                    || wallDistance[index(nx, nz)] != 0) {
+                continue;
+            }
+
+            BlockPos neighbor = new BlockPos(
+                    baseX + nx,
+                    waterLevel,
+                    baseZ + nz
+            );
+
+            if (level.getBlockState(neighbor).isAir()) {
+                return true;
             }
         }
-        return -1;
+
+        return false;
     }
 
-    private static BlockState randomShoreBlock(RandomSource random) {
+    private static int index(int x, int z) {
+        return x * SIZE + z;
+    }
+
+    private static BlockState randomLakebedBlock(RandomSource random) {
         return switch (random.nextInt(3)) {
             case 0 -> Blocks.GRAVEL.defaultBlockState();
-            case 1 -> Blocks.ANDESITE.defaultBlockState();
-            default -> Blocks.STONE.defaultBlockState();
+            case 1 -> Blocks.STONE.defaultBlockState();
+            default -> Blocks.ANDESITE.defaultBlockState();
         };
     }
 }

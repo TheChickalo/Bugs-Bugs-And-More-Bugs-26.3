@@ -28,18 +28,23 @@ public class ModOverworldBiomes {
         spawnBuilder.addSpawn(EntityTypes.FOX, 20, UniformInt.of(2, 3));
         spawnBuilder.addSpawn(EntityTypes.RABBIT, 20, UniformInt.of(2, 3));
 
-        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
+
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+
+// Lakes
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY
+        );
+
         BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
         BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
 
-        // A dedicated surface lake feature with a rocky, andesite-rich shoreline.
-        biomeBuilder.addFeature(GenerationStep.Decoration.LAKES, ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY);
-
-        // Aquatic vegetation and the Maple Forest's dedicated vegetation set.
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BAMBOO_PLACED_KEY);
@@ -48,6 +53,7 @@ public class ModOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_TALL_GRASS_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_LARGE_FERN_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_RED_SHRUB_PLACED_KEY);
+
         ModBiomeVegetation.addBerryBushes(biomeBuilder);
 
         return new Biome.BiomeBuilder()
