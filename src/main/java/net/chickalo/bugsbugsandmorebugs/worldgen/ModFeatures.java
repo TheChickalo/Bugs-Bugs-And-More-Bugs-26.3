@@ -30,7 +30,6 @@ public class ModFeatures {
     public static final ResourceKey<Feature> HUGE_GLOWSHROOM_KEY = registerKey("huge_glowshroom");
     public static final ResourceKey<Feature> GLOWSHROOM_PATCH_KEY = registerKey("glowshroom_patch");
 
-
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.MAPLE_LOG),

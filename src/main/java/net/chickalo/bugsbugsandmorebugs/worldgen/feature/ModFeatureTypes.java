@@ -30,5 +30,14 @@ public final class ModFeatureTypes {
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "berry_bush_patch"),
                 BerryBushPatchFeature.CODEC
         );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(
+                        BugsBugsAndMoreBugs.MOD_ID,
+                        "glowshroom_patch"
+                ),
+                GlowshroomPatchFeature.CODEC
+        );
     }
 }

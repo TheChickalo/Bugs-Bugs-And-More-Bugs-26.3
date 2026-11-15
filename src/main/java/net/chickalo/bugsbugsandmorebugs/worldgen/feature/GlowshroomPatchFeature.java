@@ -30,100 +30,56 @@ public record GlowshroomPatchFeature(Block mushroom)
         return CODEC;
     }
 
+
     @Override
     public boolean place(WorldGenLevel level,
                          ChunkGenerator generator,
                          RandomSource random,
                          BlockPos origin) {
 
-        // Choose the ring's size.
-        double radius = 2.0 + random.nextDouble() * 2.5;
-
-        // Number of possible mushroom positions.
-        int attempts = 18 + random.nextInt(9);
-
-        // Randomly rotate each ring.
-        double rotation = random.nextDouble() * Math.PI * 2;
-
-        // Leave one randomly positioned opening.
-        double gapCenter = random.nextDouble() * Math.PI * 2;
-        double gapWidth = 0.25 + random.nextDouble() * 0.3;
-
-        int centerY = level.getHeight(
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                origin.getX(), origin.getZ()
-        );
-
         BlockState mushroomState = mushroom.defaultBlockState();
+
         int placed = 0;
 
-        for (int i = 0; i < attempts; i++) {
+        for (int dx = -4; dx <= 4; dx++) {
+            for (int dz = -4; dz <= 4; dz++) {
 
-            // Evenly spaced angles with some randomness.
-            double angle = rotation
-                    + (2 * Math.PI * (i
-                    + (random.nextDouble() - 0.5) * 0.8)
-                    / attempts);
+                int x = origin.getX() + dx;
+                int z = origin.getZ() + dz;
 
-            // Measure angular distance from the missing section.
-            double distanceFromGap = Math.atan2(
-                    Math.sin(angle - gapCenter),
-                    Math.cos(angle - gapCenter)
-            );
+                int y = level.getHeight(
+                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        x, z
+                );
 
-            if (Math.abs(distanceFromGap) < gapWidth) {
-                continue;
+                BlockPos pos = new BlockPos(x, y, z);
+
+                if (!level.isEmptyBlock(pos)) {
+                    continue;
+                }
+
+                BlockState ground = level.getBlockState(pos.below());
+
+                if (!ground.is(BlockTags.DIRT)
+                        && !ground.is(Blocks.MOSS_BLOCK)) {
+                    continue;
+                }
+
+                if (!mushroomState.canSurvive(level, pos)) {
+                    System.out.println(
+                            "Glowshroom rejected by canSurvive at " + pos
+                    );
+                    continue;
+                }
+
+                level.setBlock(pos, mushroomState, 2);
+                placed++;
             }
-
-            // Additional random gaps.
-            if (random.nextFloat() > 0.77f) {
-                continue;
-            }
-
-            // Give each mushroom a slightly different radius.
-            double distance = radius
-                    + (random.nextDouble() - 0.5) * 1.6;
-
-            int dx = (int) Math.round(Math.cos(angle) * distance);
-            int dz = (int) Math.round(Math.sin(angle) * distance);
-
-            int x = origin.getX() + dx;
-            int z = origin.getZ() + dz;
-
-            // Find the ground beneath each candidate.
-            int y = level.getHeight(
-                    Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                    x, z
-            );
-
-            // Avoid rings climbing steep terrain.
-            if (Math.abs(y - centerY) > 3) {
-                continue;
-            }
-
-            BlockPos pos = new BlockPos(x, y, z);
-
-            if (!level.isEmptyBlock(pos)) {
-                continue;
-            }
-
-            BlockState ground = level.getBlockState(pos.below());
-
-            // Grow on natural forest-floor blocks.
-            if (!ground.is(BlockTags.DIRT)
-                    && !ground.is(Blocks.MOSS_BLOCK)) {
-                continue;
-            }
-
-            // Respect the mushroom's normal survival rules.
-            if (!mushroomState.canSurvive(level, pos)) {
-                continue;
-            }
-
-            level.setBlock(pos, mushroomState, 2);
-            placed++;
         }
+
+        System.out.println("Glowshrooms placed: " + placed);
 
         return placed > 0;
     }
+
 }

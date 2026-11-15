@@ -153,6 +153,15 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome()
                 ));
 
+        register(context, GLOWSHROOM_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GLOWSHROOM_PATCH_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(7),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
