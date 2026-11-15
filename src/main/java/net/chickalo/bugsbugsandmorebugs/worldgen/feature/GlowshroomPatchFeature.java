@@ -54,7 +54,7 @@ public record GlowshroomPatchFeature(Block mushroom)
 
                 BlockPos pos = new BlockPos(x, y, z);
 
-                if (!level.isEmptyBlock(pos)) {
+                if (!level.getBlockState(pos).canBeReplaced()) {
                     continue;
                 }
 

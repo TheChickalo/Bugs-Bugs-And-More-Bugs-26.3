@@ -4,8 +4,11 @@ package net.chickalo.bugsbugsandmorebugs.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,6 +21,16 @@ public class GlowshroomBlock extends MushroomBlock {
         super(feature, properties);
     }
 
+    @Override
+    protected boolean canSurvive(BlockState state,
+                                 LevelReader level,
+                                 BlockPos pos) {
+
+        BlockState ground = level.getBlockState(pos.below());
+
+        return ground.is(BlockTags.DIRT)
+                || ground.is(Blocks.MOSS_BLOCK);
+    }
 
     @Override
     public void animateTick(BlockState state, Level level,
