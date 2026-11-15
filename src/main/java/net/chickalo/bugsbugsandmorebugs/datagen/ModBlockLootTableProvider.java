@@ -67,6 +67,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
         add(ModBlocks.POTTED_MAPLE_SAPLING, block -> createPotFlowerItemTable(ModBlocks.MAPLE_SAPLING));
 
+        dropSelf(ModBlocks.GLOWSHROOM);
+
         add(ModBlocks.MAPLE_LEAVES,
                 block -> createLeavesDrops(
                         block,

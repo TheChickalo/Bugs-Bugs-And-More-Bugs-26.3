@@ -38,7 +38,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_RED_SHRUB_PLACED_KEY = registerKey("maple_red_shrub_placed");
     public static final ResourceKey<PlacedFeature> HASKAP_BUSH_PLACED_KEY = registerKey("haskap_bush_placed");
     public static final ResourceKey<PlacedFeature> BARBERRY_BUSH_PLACED_KEY = registerKey("barberry_bush_placed");
-
+    public static final ResourceKey<PlacedFeature> GLOWSHROOM_PATCH_PLACED_KEY = registerKey("glowshroom_patch_placed");
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {

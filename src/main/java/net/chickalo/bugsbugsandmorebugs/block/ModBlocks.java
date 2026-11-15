@@ -1,10 +1,8 @@
 package net.chickalo.bugsbugsandmorebugs.block;
 
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
-import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
-import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
-import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
-import net.chickalo.bugsbugsandmorebugs.block.custom.MapleLeavesBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.*;
+import net.chickalo.bugsbugsandmorebugs.worldgen.ModFeatures;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeGrowers;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
@@ -137,6 +135,41 @@ public class ModBlocks {
     public static final Block BARBERRY_BUSH = registerBlockWithoutBlockItem("barberry_bush",
             properties -> new BarberryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
                     .pushReaction(PushReaction.POPPED)));
+
+
+    public static final Block GLOWSHROOM = registerBlock("glowshroom", properties -> new GlowshroomBlock(
+                    ModFeatures.HUGE_GLOWSHROOM_KEY, properties
+                            .noCollision()
+                            .instabreak()
+                            .randomTicks()
+                            .sound(SoundType.FUNGUS)
+                            .lightLevel(state -> 12)
+            )
+    );
+    public static final Block POTTED_GLOWSHROOM = registerBlockWithoutBlockItem("potted_glowshroom",
+            properties -> new FlowerPotBlock(GLOWSHROOM, properties
+                    .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
+
+
+    public static final Block GLOWSHROOM_BLOCK = registerBlock(
+            "glowshroom_block",
+            properties -> new HugeMushroomBlock(properties
+                    .strength(0.2f)
+                    .sound(SoundType.WOOD)
+                    .lightLevel(state -> 10)
+            )
+    );
+
+    public static final Block GLOWSHROOM_STEM = registerBlock(
+            "lux_coeli_stem",
+            properties -> new Block(properties
+                    .strength(0.2f)
+                    .sound(SoundType.WOOD)
+                    .lightLevel(state -> 4)
+            )
+    );
+
+
 
 
 

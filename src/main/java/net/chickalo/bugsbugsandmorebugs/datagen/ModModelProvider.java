@@ -48,8 +48,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createCropBlock(ModBlocks.DAIKON_CROP, DaikonCropBlock.AGE, 0, 1, 2, 3);
         blockModelGenerators.createCrossBlock(ModBlocks.HASKAP_BERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, HaskapBerryBushBlock.AGE,0, 1, 2, 3);
         blockModelGenerators.createCrossBlock(ModBlocks.BARBERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, BarberryBushBlock.AGE,0, 1, 2, 3);
-
-
+        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.GLOWSHROOM, ModBlocks.POTTED_GLOWSHROOM, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createMushroomBlock(ModBlocks.GLOWSHROOM_BLOCK);
+        blockModelGenerators.createTrivialCube(ModBlocks.GLOWSHROOM_STEM);
 
     }
 
