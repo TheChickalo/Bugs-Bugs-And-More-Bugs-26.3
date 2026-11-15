@@ -53,6 +53,10 @@ public class ModOverworldBiomes {
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.GLOWSHROOM_PATCH_PLACED_KEY
         );
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.GLOWSHROOM_TREE_BASE_PLACED_KEY
+        );
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BUSH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_SHORT_GRASS_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_TALL_GRASS_PLACED_KEY);

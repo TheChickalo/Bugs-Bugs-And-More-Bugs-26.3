@@ -39,7 +39,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HASKAP_BUSH_PLACED_KEY = registerKey("haskap_bush_placed");
     public static final ResourceKey<PlacedFeature> BARBERRY_BUSH_PLACED_KEY = registerKey("barberry_bush_placed");
     public static final ResourceKey<PlacedFeature> GLOWSHROOM_PATCH_PLACED_KEY = registerKey("glowshroom_patch_placed");
-
+    public static final ResourceKey<PlacedFeature> GLOWSHROOM_TREE_BASE_PLACED_KEY = registerKey("glowshroom_tree_base_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
@@ -161,6 +161,21 @@ public class ModPlacedFeatures {
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
                 ));
+
+
+        register(context, GLOWSHROOM_TREE_BASE_PLACED_KEY,
+                configuredFeatures.getOrThrow(
+                        ModFeatures.GLOWSHROOM_TREE_BASE_KEY
+                ),
+                List.of(
+                        CountPlacement.of(12),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+
 
     }
 

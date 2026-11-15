@@ -30,7 +30,6 @@ public record GlowshroomPatchFeature(Block mushroom)
         return CODEC;
     }
 
-
     @Override
     public boolean place(WorldGenLevel level,
                          ChunkGenerator generator,
@@ -39,47 +38,126 @@ public record GlowshroomPatchFeature(Block mushroom)
 
         BlockState mushroomState = mushroom.defaultBlockState();
 
+
+        int surfaceY = level.getHeight(
+                Heightmap.Types.WORLD_SURFACE,
+                origin.getX(),
+                origin.getZ()
+        );
+
+        BlockPos surfacePos = new BlockPos(
+                origin.getX(), surfaceY, origin.getZ()
+        );
+
+        BlockPos groundPos = surfacePos.below();
+
+
+
+        double radius = 2.5 + random.nextDouble() * 2.0;
+        int attempts = 24 + random.nextInt(9);
         int placed = 0;
 
-        for (int dx = -4; dx <= 4; dx++) {
-            for (int dz = -4; dz <= 4; dz++) {
 
-                int x = origin.getX() + dx;
-                int z = origin.getZ() + dz;
+        for (int i = 0; i < attempts; i++) {
 
-                int y = level.getHeight(
-                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                        x, z
-                );
+            // Position around the circumference.
+            double angle = 2 * Math.PI * i / attempts;
+            angle += (random.nextDouble() - 0.5) * 0.25;
 
-                BlockPos pos = new BlockPos(x, y, z);
+            double distance = radius
+                    + (random.nextDouble() - 0.5) * 0.8;
 
-                if (!level.getBlockState(pos).canBeReplaced()) {
-                    continue;
-                }
+            int x = origin.getX()
+                    + (int) Math.round(Math.cos(angle) * distance);
 
-                BlockState ground = level.getBlockState(pos.below());
+            int z = origin.getZ()
+                    + (int) Math.round(Math.sin(angle) * distance);
 
-                if (!ground.is(BlockTags.DIRT)
-                        && !ground.is(Blocks.MOSS_BLOCK)) {
-                    continue;
-                }
+            // Occasional gaps in the ring.
+            if (random.nextFloat() < 0.15F) {
+                continue;
+            }
 
-                if (!mushroomState.canSurvive(level, pos)) {
-                    System.out.println(
-                            "Glowshroom rejected by canSurvive at " + pos
-                    );
-                    continue;
-                }
+            BlockPos pos = findGround(level, x, z);
 
-                level.setBlock(pos, mushroomState, 2);
+            if (pos == null) {
+                continue;
+            }
+
+            if (!mushroomState.canSurvive(level, pos)) {
+                continue;
+            }
+
+            if (level.setBlock(pos, mushroomState, 2)) {
                 placed++;
             }
         }
 
-        System.out.println("Glowshrooms placed: " + placed);
 
         return placed > 0;
+    }
+
+
+
+    private static BlockPos findGround(
+            WorldGenLevel level, int x, int z) {
+
+        int topY = level.getHeight(
+                Heightmap.Types.WORLD_SURFACE,
+                x, z
+        );
+
+        for (int y = topY; y >= level.getMinY() + 1; y--) {
+
+            BlockPos groundPos = new BlockPos(x, y, z);
+            BlockState ground = level.getBlockState(groundPos);
+
+            // Ignore tree canopy, trunks, and bamboo while
+            // searching for the actual terrain surface.
+            if (ground.is(BlockTags.LEAVES)
+                    || ground.is(BlockTags.LOGS)
+                    || ground.is(Blocks.BAMBOO)
+                    || ground.is(Blocks.BAMBOO_SAPLING)) {
+                continue;
+            }
+
+
+            // Ignore empty air and small vegetation.
+            if (ground.isAir() || ground.canBeReplaced()) {
+                continue;
+            }
+
+            // We've reached the first solid terrain or obstacle.
+            // Never search below it into a cave.
+
+
+            boolean suitableSoil =
+                    ground.is(Blocks.GRASS_BLOCK)
+                            || ground.is(Blocks.DIRT)
+                            || ground.is(Blocks.COARSE_DIRT)
+                            || ground.is(Blocks.PODZOL)
+                            || ground.is(Blocks.ROOTED_DIRT)
+                            || ground.is(Blocks.MYCELIUM)
+                            || ground.is(Blocks.MOSS_BLOCK);
+
+            if (!suitableSoil) {
+                return null;
+            }
+
+            BlockPos mushroomPos = groundPos.above();
+
+            // Only place in replaceable, non-waterlogged space.
+            if (!level.getBlockState(mushroomPos).canBeReplaced()
+                    || !level.getFluidState(mushroomPos).isEmpty()) {
+                return null;
+            }
+
+            return mushroomPos;
+        }
+
+
+
+        return null;
     }
 
 }

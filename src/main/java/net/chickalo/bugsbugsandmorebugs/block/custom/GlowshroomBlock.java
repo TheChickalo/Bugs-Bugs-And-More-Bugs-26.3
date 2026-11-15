@@ -21,6 +21,8 @@ public class GlowshroomBlock extends MushroomBlock {
         super(feature, properties);
     }
 
+
+
     @Override
     protected boolean canSurvive(BlockState state,
                                  LevelReader level,
@@ -28,22 +30,41 @@ public class GlowshroomBlock extends MushroomBlock {
 
         BlockState ground = level.getBlockState(pos.below());
 
-        return ground.is(BlockTags.DIRT)
+        return ground.is(Blocks.GRASS_BLOCK)
+                || ground.is(Blocks.DIRT)
+                || ground.is(Blocks.COARSE_DIRT)
+                || ground.is(Blocks.PODZOL)
+                || ground.is(Blocks.ROOTED_DIRT)
+                || ground.is(Blocks.MYCELIUM)
                 || ground.is(Blocks.MOSS_BLOCK);
     }
+
+
 
     @Override
     public void animateTick(BlockState state, Level level,
                             BlockPos pos, RandomSource random) {
 
-        double x = pos.getX() + 0.5;
-        double y = pos.getY() + 0.5;
-        double z = pos.getZ() + 0.5;
+        // Roughly one particle every five ticks.
+        if (random.nextInt(5) != 0) {
+            return;
+        }
+
+        // Spawn randomly around the mushroom.
+        double x = pos.getX() + 0.5
+                + (random.nextDouble() - 0.5) * 1.2;
+
+        double y = pos.getY() + 0.3
+                + random.nextDouble() * 0.8;
+
+        double z = pos.getZ() + 0.5
+                + (random.nextDouble() - 0.5) * 1.2;
 
         level.addParticle(
-                ParticleTypes.END_ROD,
+                ParticleTypes.FIREFLY,
                 x, y, z,
-                0.0, 0.02, 0.0
+                0.0, 0.0, 0.0
         );
     }
+
 }

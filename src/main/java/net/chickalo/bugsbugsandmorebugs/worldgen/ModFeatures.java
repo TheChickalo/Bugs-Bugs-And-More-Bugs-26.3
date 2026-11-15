@@ -20,6 +20,7 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.GlowshroomTreeBaseFeature;
 
 public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
@@ -29,6 +30,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> BARBERRY_BUSH_PATCH_KEY = registerKey("barberry_bush_patch");
     public static final ResourceKey<Feature> HUGE_GLOWSHROOM_KEY = registerKey("huge_glowshroom");
     public static final ResourceKey<Feature> GLOWSHROOM_PATCH_KEY = registerKey("glowshroom_patch");
+    public static final ResourceKey<Feature> GLOWSHROOM_TREE_BASE_KEY = registerKey("glowshroom_tree_base");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
@@ -51,6 +53,7 @@ public class ModFeatures {
         context.register(HASKAP_BUSH_PATCH_KEY, new BerryBushPatchFeature(ModBlocks.HASKAP_BERRY_BUSH));
         context.register(BARBERRY_BUSH_PATCH_KEY, new BerryBushPatchFeature(ModBlocks.BARBERRY_BUSH));
         context.register(GLOWSHROOM_PATCH_KEY, new GlowshroomPatchFeature(ModBlocks.GLOWSHROOM));
+        context.register(GLOWSHROOM_TREE_BASE_KEY, new GlowshroomTreeBaseFeature(ModBlocks.GLOWSHROOM, ModBlocks.MAPLE_LOG));
 
         context.register(HUGE_GLOWSHROOM_KEY,
                 new HugeRedMushroomFeature(
