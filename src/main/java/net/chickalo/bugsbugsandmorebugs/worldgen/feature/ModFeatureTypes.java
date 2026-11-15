@@ -39,5 +39,16 @@ public final class ModFeatureTypes {
                 ),
                 GlowshroomPatchFeature.CODEC
         );
+
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(
+                        BugsBugsAndMoreBugs.MOD_ID,
+                        "glowshroom_tree_base"
+                ),
+                GlowshroomTreeBaseFeature.CODEC
+        );
+
     }
 }

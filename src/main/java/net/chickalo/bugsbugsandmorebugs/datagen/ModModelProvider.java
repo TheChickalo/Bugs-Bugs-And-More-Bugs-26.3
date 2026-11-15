@@ -50,8 +50,6 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createCrossBlock(ModBlocks.BARBERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, BarberryBushBlock.AGE,0, 1, 2, 3);
         blockModelGenerators.createPlantWithDefaultItem(ModBlocks.GLOWSHROOM, ModBlocks.POTTED_GLOWSHROOM, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createMushroomBlock(ModBlocks.GLOWSHROOM_BLOCK);
-        blockModelGenerators.createTrivialCube(ModBlocks.GLOWSHROOM_STEM);
-
     }
 
     @Override

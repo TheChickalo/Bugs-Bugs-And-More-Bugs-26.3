@@ -58,7 +58,7 @@ public class ModFeatures {
         context.register(HUGE_GLOWSHROOM_KEY,
                 new HugeRedMushroomFeature(
                         BlockStateProvider.holderOf(ModBlocks.GLOWSHROOM_BLOCK),
-                        BlockStateProvider.holderOf(ModBlocks.GLOWSHROOM_STEM),
+                        BlockStateProvider.holderOf(Blocks.MUSHROOM_STEM),
                         2,
                         BlockPredicate.matchesBlocks(
                                 Blocks.DIRT,

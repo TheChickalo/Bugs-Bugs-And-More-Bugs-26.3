@@ -160,18 +160,6 @@ public class ModBlocks {
             )
     );
 
-    public static final Block GLOWSHROOM_STEM = registerBlock(
-            "lux_coeli_stem",
-            properties -> new Block(properties
-                    .strength(0.2f)
-                    .sound(SoundType.WOOD)
-                    .lightLevel(state -> 4)
-            )
-    );
-
-
-
-
 
 
     public static ResourceKey<Block> getRK(Block block) {
