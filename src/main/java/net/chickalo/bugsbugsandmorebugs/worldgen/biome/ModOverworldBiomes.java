@@ -108,9 +108,14 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
         BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
-        
+
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultFlowers(biomeBuilder);
+
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY
+        );
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
@@ -119,6 +124,8 @@ public class ModOverworldBiomes {
                 .specialEffects(
                         new BiomeSpecialEffects.Builder()
                                 .waterColor(0x4B9A95)
+                                .grassColorOverride(0x85C45F)
+                                .foliageColorOverride(0x78B866)
                                 .build()
                 )
                 .mobSpawnSettings(spawnBuilder.build())

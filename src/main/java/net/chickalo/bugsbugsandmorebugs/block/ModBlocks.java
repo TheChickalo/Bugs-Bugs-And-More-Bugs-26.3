@@ -240,6 +240,21 @@ public class ModBlocks {
                             .sound(SoundType.GRASS)
                             .pushReaction(PushReaction.POPPED)
             ));
+    public static final VariableHeightPlantBlock SILVER_GRASS =
+            (VariableHeightPlantBlock) registerBlock("silver_grass",
+                    properties -> new VariableHeightPlantBlock(2,
+                            properties.noCollision().instabreak().randomTicks()
+                                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final VariableHeightPlantBlock BUSH_CLOVER =
+            (VariableHeightPlantBlock) registerBlock("bush_clover",
+                    properties -> new VariableHeightPlantBlock(2,
+                            properties.noCollision().instabreak().randomTicks()
+                                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final VariableHeightPlantBlock DWARF_BAMBOO =
+            (VariableHeightPlantBlock) registerBlock("dwarf_bamboo",
+                    properties -> new VariableHeightPlantBlock(4,
+                            properties.noCollision().instabreak().randomTicks().sound(SoundType.BAMBOO).pushReaction(PushReaction.POPPED)));
+
 
     public static ResourceKey<Block> getRK(Block block) {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();

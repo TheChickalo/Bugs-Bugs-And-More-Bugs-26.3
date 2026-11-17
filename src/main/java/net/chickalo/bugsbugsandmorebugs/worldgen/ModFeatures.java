@@ -3,10 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen;
 
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.BerryBushPatchFeature;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.GlowshroomPatchFeature;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleLakeFeature;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.ProtectedBambooFeature;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.*;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.MapleFoliagePlacer;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.MapleTrunkPlacer;
 import net.minecraft.core.registries.Registries;
@@ -20,10 +17,6 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.GlowshroomTreeBaseFeature;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.HugeGlowshroomFeature;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleWaterShoreFeature;
-import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleRiverbedMudFeature;
 
 public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
@@ -36,6 +29,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> GLOWSHROOM_TREE_BASE_KEY = registerKey("glowshroom_tree_base");
     public static final ResourceKey<Feature> MAPLE_WATER_SHORE_KEY = registerKey("maple_water_shore");
     public static final ResourceKey<Feature> MAPLE_RIVERBED_MUD_KEY = registerKey("maple_riverbed_mud");
+    public static final ResourceKey<Feature> HIGHLAND_MEADOW_PATCH_KEY = registerKey("highland_meadow_patch");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
@@ -62,6 +56,7 @@ public class ModFeatures {
         context.register(HUGE_GLOWSHROOM_KEY, new HugeGlowshroomFeature(ModBlocks.GLOWSHROOM_BLOCK, Blocks.MUSHROOM_STEM));
         context.register(MAPLE_WATER_SHORE_KEY, new MapleWaterShoreFeature());
         context.register(MAPLE_RIVERBED_MUD_KEY, new MapleRiverbedMudFeature());
+        context.register(HIGHLAND_MEADOW_PATCH_KEY, new HighlandMeadowPatchFeature());
 
     }
 

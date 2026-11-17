@@ -71,5 +71,11 @@ public final class ModFeatureTypes {
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "maple_riverbed_mud"),
                 MapleRiverbedMudFeature.CODEC
         );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "highland_meadow_patch"),
+                HighlandMeadowPatchFeature.CODEC
+        );
     }
 }

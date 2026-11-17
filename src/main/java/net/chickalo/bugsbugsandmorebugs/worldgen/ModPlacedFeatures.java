@@ -36,6 +36,8 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_PLACED_KEY = registerKey("huge_glowshroom_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_WATER_SHORE_PLACED_KEY = registerKey("maple_water_shore_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_RIVERBED_MUD_PLACED_KEY = registerKey("maple_riverbed_mud_placed");
+    public static final ResourceKey<PlacedFeature> HIGHLAND_MEADOW_PATCH_PLACED_KEY = registerKey("highland_meadow_patch_placed");
+
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
@@ -200,6 +202,17 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE
                 ));
+
+        register(context,
+                HIGHLAND_MEADOW_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HIGHLAND_MEADOW_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
 
     }
 
