@@ -57,6 +57,12 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
 
 
+        tag(BlockTags.STONE_ORE_REPLACEABLES)
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE));
+
+
+
+
 
         tag(ModTags.Blocks.MAPLE_LOGS)
                 .add(ModBlocks.getRK(ModBlocks.MAPLE_LOG))

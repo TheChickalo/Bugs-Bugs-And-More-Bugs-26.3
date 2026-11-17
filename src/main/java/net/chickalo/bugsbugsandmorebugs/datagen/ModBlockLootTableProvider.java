@@ -87,9 +87,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.RUBBLED_LIMESTONE_WALL);
 
         dropSelf(ModBlocks.RENDZINA);
-        dropSelf(ModBlocks.LITHOSOl);
-
-
+        dropSelf(ModBlocks.LITHOSOL);
 
         dropSelf(ModBlocks.MAPLE_LOG);
         dropSelf(ModBlocks.MAPLE_WOOD);

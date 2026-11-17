@@ -8,6 +8,8 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.chickalo.bugsbugsandmorebugs.worldgen.dimension.ModDimensions;
+
 
 public class BugsBugsAndMoreBugsDataGenerator implements DataGeneratorEntrypoint {
 	@Override
@@ -32,5 +34,9 @@ public class BugsBugsAndMoreBugsDataGenerator implements DataGeneratorEntrypoint
 		registryBuilder.add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 
 		registryBuilder.add(Registries.BIOME, ModBiomes::bootstrap);
+
+		registryBuilder.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType);
+		registryBuilder.add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem);
+
 	}
 }

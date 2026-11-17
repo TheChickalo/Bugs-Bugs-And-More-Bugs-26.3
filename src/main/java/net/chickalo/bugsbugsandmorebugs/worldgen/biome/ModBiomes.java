@@ -17,7 +17,7 @@ public class ModBiomes {
 
 
     public static void registerBiomes() {
-        Regions.register(new OverworldRegion(Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "bugsbugsandmorebugs_overworld"), 20));
+        // Elsewhere biomes are not injected into the Overworld.
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {

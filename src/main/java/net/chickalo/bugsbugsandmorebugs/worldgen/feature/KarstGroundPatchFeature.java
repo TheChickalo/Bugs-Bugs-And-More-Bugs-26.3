@@ -15,7 +15,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 /**
  * Small, irregular bands of exposed limestone and bare soil in Highland Karst.
  * Occasional compact red-sand pockets add a warm accent to soil-heavy patches.
- * Only changes an existing grass-block surface, never the terrain height.
+ * Replaces exposed grass with natural soil and rock patches and adds shallow
+ * rendzina/lithosol horizons under some soils. Never alters the terrain height.
  * Place this AFTER limestone outcrops and BEFORE grass/flower patches.
  */
 public record KarstGroundPatchFeature() implements Feature {
@@ -119,7 +120,17 @@ public record KarstGroundPatchFeature() implements Feature {
                     }
                 }
 
-                if (level.setBlock(ground, replacement, 2)) changed++;
+                if (level.setBlock(ground, replacement, 2)) {
+                    changed++;
+
+                    // Only soil-like surface patches receive a shallow soil profile.
+                    // The rocky portions stay as exposed limestone.
+                    if (!rocky && (replacement.is(ModBlocks.RENDZINA)
+                            || replacement.is(ModBlocks.LITHOSOL)
+                            || replacement.is(Blocks.RED_SAND))) {
+                        changed += placeSoilHorizon(level, ground, random);
+                    }
+                }
             }
         }
 
@@ -130,17 +141,67 @@ public record KarstGroundPatchFeature() implements Feature {
         return level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
     }
 
+    /**
+     * Add a shallow, game-stylized karst soil profile under exposed soil:
+     * surface -> rendzina -> lithosol -> rendzina -> weathered limestone.
+     * The profile stops immediately at caves, fluids, ores, or other blocks
+     * that shouldn't be modified by a surface decoration feature.
+     */
+    private static int placeSoilHorizon(
+            WorldGenLevel level, BlockPos surface, RandomSource random) {
+        int changed = 0;
+        int depthLimit = 3 + random.nextInt(2); // 3-4 layers below surface
+
+        for (int depth = 1; depth <= depthLimit; depth++) {
+            BlockPos pos = surface.below(depth);
+            if (pos.getY() <= level.getMinY()) break;
+
+            BlockState old = level.getBlockState(pos);
+            if (!isCommonSubsoil(old) || !level.getFluidState(pos).isEmpty()) {
+                break;
+            }
+
+            BlockState next = switch (depth) {
+                case 1 -> ModBlocks.RENDZINA.defaultBlockState();
+                case 2 -> ModBlocks.LITHOSOL.defaultBlockState();
+                case 3 -> ModBlocks.RENDZINA.defaultBlockState();
+                default -> random.nextFloat() < 0.65F
+                        ? ModBlocks.WEATHERED_LIMESTONE.defaultBlockState()
+                        : ModBlocks.LIMESTONE.defaultBlockState();
+            };
+
+            if (!old.equals(next) && level.setBlock(pos, next, 2)) {
+                changed++;
+            }
+        }
+        return changed;
+    }
+
+    private static boolean isCommonSubsoil(BlockState state) {
+        // Never replace ores, caves, water, existing exposed formations,
+        // biome-specific surfaces, or player-created decorative blocks.
+        return state.is(Blocks.DIRT)
+                || state.is(Blocks.COARSE_DIRT)
+                || state.is(Blocks.ROOTED_DIRT)
+                || state.is(Blocks.STONE)
+                || state.is(ModBlocks.RENDZINA)
+                || state.is(ModBlocks.LITHOSOL);
+    }
+
     private static BlockState pickMaterial(RandomSource random, boolean rocky) {
         float p = random.nextFloat();
         if (rocky) {
-            if (p < 0.48F) return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
-            if (p < 0.71F) return ModBlocks.LIMESTONE.defaultBlockState();
-            if (p < 0.88F) return ModBlocks.WEATHERED_LIMESTONE.defaultBlockState();
-            return Blocks.COARSE_DIRT.defaultBlockState();
+            if (p < 0.46F) return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
+            if (p < 0.68F) return ModBlocks.LIMESTONE.defaultBlockState();
+            if (p < 0.85F) return ModBlocks.WEATHERED_LIMESTONE.defaultBlockState();
+            if (p < 0.95F) return ModBlocks.LITHOSOL.defaultBlockState();
+            return ModBlocks.RENDZINA.defaultBlockState();
         }
-        if (p < 0.61F) return Blocks.COARSE_DIRT.defaultBlockState();
-        if (p < 0.80F) return Blocks.ROOTED_DIRT.defaultBlockState();
-        if (p < 0.94F) return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
+        if (p < 0.64F) return ModBlocks.RENDZINA.defaultBlockState();
+        if (p < 0.80F) return ModBlocks.LITHOSOL.defaultBlockState();
+        if (p < 0.88F) return Blocks.COARSE_DIRT.defaultBlockState();
+        if (p < 0.94F) return Blocks.ROOTED_DIRT.defaultBlockState();
+        if (p < 0.98F) return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
         return ModBlocks.WEATHERED_LIMESTONE.defaultBlockState();
     }
 }
