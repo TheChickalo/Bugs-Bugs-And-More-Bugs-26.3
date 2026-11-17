@@ -86,6 +86,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.RUBBLED_LIMESTONE_STAIRS);
         dropSelf(ModBlocks.RUBBLED_LIMESTONE_WALL);
 
+        dropSelf(ModBlocks.RENDZINA);
+        dropSelf(ModBlocks.LITHOSOl);
+
 
 
         dropSelf(ModBlocks.MAPLE_LOG);
@@ -158,6 +161,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         );
 
         dropSelf(ModBlocks.BELLFLOWERS);
+        dropSelf(ModBlocks.DWARF_BAMBOO);
+        dropSelf(ModBlocks.BUSH_CLOVER);
+        // vv change for grass
+        dropSelf(ModBlocks.SILVER_GRASS);
 
     }
 }

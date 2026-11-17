@@ -190,6 +190,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Blocks.MOSS_BLOCK), has(Blocks.MOSS_BLOCK))
                         .save(output, getItemName(ModBlocks.MOSSY_LIMESTONE) + "_from_moss_block");
 
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LITHOSOL, Ingredient.of(ModBlocks.RENDZINA));
+
             }
         };
 

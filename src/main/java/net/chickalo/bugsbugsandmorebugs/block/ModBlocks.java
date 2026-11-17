@@ -148,6 +148,14 @@ public class ModBlocks {
             properties -> new WallBlock(
                     properties.strength(3f)));
 
+    public static final Block RENDZINA = registerBlock("rendzina",
+            properties -> new Block(properties.strength(0.5f)
+                    .sound(SoundType.GRAVEL).instrument(NoteBlockInstrument.SNARE)));
+    public static final Block LITHOSOL = registerBlock("lithosol",
+            properties -> new Block(properties.strength(0.8f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+
+
     // Maple family
     public static final Block MAPLE_LOG = registerBlock("maple_log",
             properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)

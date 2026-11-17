@@ -77,5 +77,25 @@ public final class ModFeatureTypes {
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "highland_meadow_patch"),
                 HighlandMeadowPatchFeature.CODEC
         );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "karst_outcrop"),
+                KarstOutcropFeature.CODEC
+        );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "karst_ground_patch"),
+                KarstGroundPatchFeature.CODEC
+        );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "karst_animal_trail"),
+                KarstAnimalTrailFeature.CODEC
+        );
+
+
     }
 }

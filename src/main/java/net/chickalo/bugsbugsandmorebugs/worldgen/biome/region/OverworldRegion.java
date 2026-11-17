@@ -49,7 +49,10 @@ public class OverworldRegion extends Region {
                 ))
                 .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.DRY, ParameterUtils.Humidity.DRY))
                 .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
-                .erosion(ParameterUtils.Erosion.EROSION_3, ParameterUtils.Erosion.EROSION_5)
+                .erosion(
+                        ParameterUtils.Erosion.EROSION_2,
+                        ParameterUtils.Erosion.EROSION_4
+                )
                 .depth(ParameterUtils.Depth.SURFACE, ParameterUtils.Depth.FLOOR)
                 .weirdness(ParameterUtils.Weirdness.FULL_RANGE)
                 .offset(0f)

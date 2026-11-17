@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "segment=0,tip=true": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_single"
+    },
+    "segment=0,tip=false": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_lower"
+    },
+    "segment=1,tip=true": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_upper"
+    },
+    "segment=1,tip=false": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_middle"
+    },
+    "segment=2,tip=true": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_upper"
+    },
+    "segment=2,tip=false": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_middle"
+    },
+    "segment=3,tip=true": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_upper"
+    },
+    "segment=3,tip=false": {
+      "model": "bugsbugsandmorebugs:block/dwarf_bamboo_middle"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "segment=0,tip=true": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_single"
+    },
+    "segment=0,tip=false": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_lower"
+    },
+    "segment=1,tip=true": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_upper"
+    },
+    "segment=1,tip=false": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_lower"
+    },
+    "segment=2,tip=true": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_upper"
+    },
+    "segment=2,tip=false": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_lower"
+    },
+    "segment=3,tip=true": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_upper"
+    },
+    "segment=3,tip=false": {
+      "model": "bugsbugsandmorebugs:block/silver_grass_lower"
+    }
+  }
+}

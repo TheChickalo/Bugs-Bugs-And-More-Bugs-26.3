@@ -52,7 +52,8 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_WALL))
                 .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_SLAB))
                 .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_STAIRS))
-                .add(ModBlocks.getRK(ModBlocks.MOSSY_LIMESTONE));
+                .add(ModBlocks.getRK(ModBlocks.MOSSY_LIMESTONE))
+                .add(ModBlocks.getRK(ModBlocks.LITHOSOL));
 
 
 

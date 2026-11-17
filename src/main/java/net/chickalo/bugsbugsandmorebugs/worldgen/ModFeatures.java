@@ -30,6 +30,10 @@ public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_WATER_SHORE_KEY = registerKey("maple_water_shore");
     public static final ResourceKey<Feature> MAPLE_RIVERBED_MUD_KEY = registerKey("maple_riverbed_mud");
     public static final ResourceKey<Feature> HIGHLAND_MEADOW_PATCH_KEY = registerKey("highland_meadow_patch");
+    public static final ResourceKey<Feature> KARST_OUTCROP_KEY = registerKey("karst_outcrop");
+    public static final ResourceKey<Feature> KARST_GROUND_PATCH_KEY = registerKey("karst_ground_patch");
+    public static final ResourceKey<Feature> KARST_ANIMAL_TRAIL_KEY = registerKey("karst_animal_trail");
+
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
@@ -57,6 +61,9 @@ public class ModFeatures {
         context.register(MAPLE_WATER_SHORE_KEY, new MapleWaterShoreFeature());
         context.register(MAPLE_RIVERBED_MUD_KEY, new MapleRiverbedMudFeature());
         context.register(HIGHLAND_MEADOW_PATCH_KEY, new HighlandMeadowPatchFeature());
+        context.register(KARST_OUTCROP_KEY, new KarstOutcropFeature(1, 7, 2, 65));
+        context.register(KARST_GROUND_PATCH_KEY, new KarstGroundPatchFeature());
+        context.register(KARST_ANIMAL_TRAIL_KEY, new KarstAnimalTrailFeature());
 
     }
 

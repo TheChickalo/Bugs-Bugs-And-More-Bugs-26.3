@@ -37,6 +37,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_WATER_SHORE_PLACED_KEY = registerKey("maple_water_shore_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_RIVERBED_MUD_PLACED_KEY = registerKey("maple_riverbed_mud_placed");
     public static final ResourceKey<PlacedFeature> HIGHLAND_MEADOW_PATCH_PLACED_KEY = registerKey("highland_meadow_patch_placed");
+    public static final ResourceKey<PlacedFeature> KARST_OUTCROP_PLACED_KEY = registerKey("karst_outcrop_placed");
+    public static final ResourceKey<PlacedFeature> KARST_GROUND_PATCH_PLACED_KEY = registerKey("karst_ground_patch_placed");
+    public static final ResourceKey<PlacedFeature> KARST_ANIMAL_TRAIL_PLACED_KEY = registerKey("karst_animal_trail_placed");
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -212,6 +215,36 @@ public class ModPlacedFeatures {
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
                 )
+        );
+
+        register(context,
+                KARST_OUTCROP_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.KARST_OUTCROP_KEY),
+                List.of(
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        register(context,
+                KARST_GROUND_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.KARST_GROUND_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+
+        register(context,
+                KARST_ANIMAL_TRAIL_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.KARST_ANIMAL_TRAIL_KEY),
+                List.of(CountPlacement.of(1), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE)
         );
 
     }

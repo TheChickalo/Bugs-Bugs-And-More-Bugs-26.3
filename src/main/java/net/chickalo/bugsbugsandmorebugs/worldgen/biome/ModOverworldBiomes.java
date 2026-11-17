@@ -108,6 +108,18 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
         BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
+        );
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.KARST_OUTCROP_PLACED_KEY
+        );
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.KARST_ANIMAL_TRAIL_PLACED_KEY
+        );
 
         BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
         BiomeDefaultFeatures.addDefaultFlowers(biomeBuilder);

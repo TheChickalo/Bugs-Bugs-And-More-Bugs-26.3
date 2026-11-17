@@ -104,7 +104,9 @@
       "minecraft:lake_lava_surface"
     ],
     [
-      "minecraft:amethyst_geode"
+      "minecraft:amethyst_geode",
+      "bugsbugsandmorebugs:karst_outcrop_placed",
+      "bugsbugsandmorebugs:karst_animal_trail_placed"
     ],
     [
       "minecraft:monster_room",
@@ -144,6 +146,7 @@
     [],
     [
       "minecraft:glow_lichen",
+      "bugsbugsandmorebugs:karst_ground_patch_placed",
       "minecraft:patch_tall_grass_2",
       "minecraft:flower_default",
       "bugsbugsandmorebugs:highland_meadow_patch_placed"
