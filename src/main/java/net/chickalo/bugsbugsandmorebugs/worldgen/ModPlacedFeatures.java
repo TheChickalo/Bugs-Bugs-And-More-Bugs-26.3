@@ -19,14 +19,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-/**
- * Placed-feature registrations for the mod's biomes.
- *
- * Each biome-facing placement has its own ResourceKey. This is important for
- * features such as bamboo: Maple Forest gets a mod-owned placed-feature key
- * that points to the vanilla configured feature, rather than sharing the
- * vanilla Bamboo Jungle placed-feature graph node.
- */
+
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_LAKE_PLACED_KEY = registerKey("maple_lake_placed");
@@ -40,6 +33,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> BARBERRY_BUSH_PLACED_KEY = registerKey("barberry_bush_placed");
     public static final ResourceKey<PlacedFeature> GLOWSHROOM_PATCH_PLACED_KEY = registerKey("glowshroom_patch_placed");
     public static final ResourceKey<PlacedFeature> GLOWSHROOM_TREE_BASE_PLACED_KEY = registerKey("glowshroom_tree_base_placed");
+    public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_PLACED_KEY = registerKey("huge_glowshroom_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_WATER_SHORE_PLACED_KEY = registerKey("maple_water_shore_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_RIVERBED_MUD_PLACED_KEY = registerKey("maple_riverbed_mud_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
@@ -176,6 +172,34 @@ public class ModPlacedFeatures {
         );
 
 
+        register(context, HUGE_GLOWSHROOM_PLACED_KEY,
+                configuredFeatures.getOrThrow(
+                        ModFeatures.HUGE_GLOWSHROOM_KEY
+                ),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(24),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        register(context, MAPLE_WATER_SHORE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_WATER_SHORE_KEY),
+                List.of(
+                        CountPlacement.of(8),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, MAPLE_RIVERBED_MUD_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_RIVERBED_MUD_KEY),
+                List.of(
+                        CountPlacement.of(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE
+                ));
 
     }
 

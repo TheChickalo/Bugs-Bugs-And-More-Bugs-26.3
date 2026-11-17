@@ -41,6 +41,26 @@ public class OverworldRegion extends Region {
                 .build()
                 .forEach(parameterPoint -> builder.add(parameterPoint, ModBiomes.MAPLE_FOREST));
 
+
+        new ParameterUtils.ParameterPointListBuilder()
+                .temperature(ParameterUtils.Temperature.span(
+                        ParameterUtils.Temperature.COOL,
+                        ParameterUtils.Temperature.COOL
+                ))
+                .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.DRY, ParameterUtils.Humidity.DRY))
+                .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
+                .erosion(ParameterUtils.Erosion.EROSION_3, ParameterUtils.Erosion.EROSION_5)
+                .depth(ParameterUtils.Depth.SURFACE, ParameterUtils.Depth.FLOOR)
+                .weirdness(ParameterUtils.Weirdness.FULL_RANGE)
+                .offset(0f)
+                .build()
+                .forEach(parameterPoint ->
+                        builder.add(
+                                parameterPoint,
+                                ModBiomes.HIGHLAND_KARST
+                        )
+                );
+
         builder.build().forEach(mapper);
     }
 }

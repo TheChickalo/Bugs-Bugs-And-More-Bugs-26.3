@@ -1,0 +1,62 @@
+
+{
+  "item.bugsbugsandmorebugs.exoskeleton": "Exoesqueleto",
+  "item.bugsbugsandmorebugs.reinforced_shield": "Escudo reforzado",
+  "item.bugsbugsandmorebugs.antworker_spawn_egg": "Huevo generador de hormiga obrera",
+
+  "item.bugsbugsandmorebugs.daikon": "Daikon",
+  "item.bugsbugsandmorebugs.daikon_seeds": "Semillas de daikon",
+  "block.bugsbugsandmorebugs.daikon_crop": "Cultivo de daikon",
+  "item.bugsbugsandmorebugs.haskap_berries": "Bayas de haskap",
+  "item.bugsbugsandmorebugs.barberries": "Bayas de agracejo",
+  "block.bugsbugsandmorebugs.haskap_berry_bush": "Arbusto de haskap",
+  "block.bugsbugsandmorebugs.barberry_bush": "Arbusto de agracejo",
+  "block.bugsbugsandmorebugs.glowshroom": "Seta luminosa",
+  "block.bugsbugsandmorebugs.potted_glowshroom": "Seta luminosa en maceta",
+  "block.bugsbugsandmorebugs.glowshroom_block": "Bloque de setas luminosas",
+
+  "block.bugsbugsandmorebugs.infested_dirt": "Tierra infestada",
+
+  "block.bugsbugsandmorebugs.rhyolite": "Riolita",
+  "block.bugsbugsandmorebugs.chiseled_rhyolite": "Riolita cincelada",
+  "block.bugsbugsandmorebugs.rhyolite_stairs": "Escaleras de riolita",
+  "block.bugsbugsandmorebugs.rhyolite_slab": "Losa de riolita",
+  "block.bugsbugsandmorebugs.rhyolite_wall": "Muro de riolita",
+  "block.bugsbugsandmorebugs.rhyolite_bricks": "Ladrillos de riolita",
+  "block.bugsbugsandmorebugs.cracked_rhyolite_bricks": "Ladrillos de riolita agrietados",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite": "Riolita rocosa",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite_stairs": "Escaleras de riolita rocosa",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite_slab": "Losa de riolita rocosa",
+  "block.bugsbugsandmorebugs.cobbled_rhyolite_wall": "Muro de riolita rocosa",
+  "block.bugsbugsandmorebugs.polished_rhyolite": "Riolita pulida",
+  "block.bugsbugsandmorebugs.polished_rhyolite_stairs": "Escaleras de riolita pulida",
+  "block.bugsbugsandmorebugs.polished_rhyolite_slab": "Losa de riolita pulida",
+  "block.bugsbugsandmorebugs.polished_rhyolite_wall": "Muro de riolita pulida",
+  "block.bugsbugsandmorebugs.rhyolite_brick_stairs": "Escaleras de ladrillos de riolita",
+  "block.bugsbugsandmorebugs.rhyolite_brick_slab": "Losa de ladrillos de riolita",
+  "block.bugsbugsandmorebugs.rhyolite_brick_wall": "Muro de ladrillos de riolita",
+
+  "block.bugsbugsandmorebugs.limestone": "Piedra caliza",
+
+  "block.bugsbugsandmorebugs.maple_log": "Tronco de arce",
+  "block.bugsbugsandmorebugs.maple_wood": "Madera de arce",
+  "block.bugsbugsandmorebugs.stripped_maple_log": "Tronco de arce sin corteza",
+  "block.bugsbugsandmorebugs.stripped_maple_wood": "Madera de arce sin corteza",
+  "block.bugsbugsandmorebugs.maple_planks": "Tablones de arce",
+  "block.bugsbugsandmorebugs.maple_leaves": "Hojas de arce",
+  "block.bugsbugsandmorebugs.maple_sapling": "Brote de arce",
+  "block.bugsbugsandmorebugs.potted_maple_sapling": "Brote de arce en maceta",
+  "block.bugsbugsandmorebugs.maple_door": "Puerta de arce",
+  "block.bugsbugsandmorebugs.maple_trapdoor": "Trampilla de arce",
+  "block.bugsbugsandmorebugs.maple_stairs": "Escaleras de arce",
+  "block.bugsbugsandmorebugs.maple_slab": "Losa de arce",
+  "block.bugsbugsandmorebugs.maple_button": "Botón de arce",
+  "block.bugsbugsandmorebugs.maple_pressure_plate": "Placa de presión de arce",
+  "block.bugsbugsandmorebugs.maple_fence": "Valla de arce",
+  "block.bugsbugsandmorebugs.maple_fence_gate": "Puerta de valla de arce",
+
+  "item.bugsbugsandmorebugs.ameisenhaufen_music_disc": "Disco musical",
+  "jukebox_song.bugsbugsandmorebugs.ameisenhaufen": "Haneul Kim - Ameisenhaufen",
+
+  "entity.bugsbugsandmorebugs.antworker": "Hormiga obrera"
+}

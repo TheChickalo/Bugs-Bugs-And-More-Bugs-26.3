@@ -8,12 +8,12 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -90,6 +90,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .group("rhyolite")
                         .save(output);
 
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_RHYOLITE_WALL, Ingredient.of(ModBlocks.POLISHED_RHYOLITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_RHYOLITE), has(ModBlocks.POLISHED_RHYOLITE))
+                        .group("rhyolite")
+                        .save(output);
+
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_BRICK_WALL, Ingredient.of(ModBlocks.RHYOLITE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.RHYOLITE_BRICKS), has(ModBlocks.RHYOLITE_BRICKS))
+                        .group("rhyolite")
+                        .save(output);
+
                 wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_RHYOLITE_WALL, Ingredient.of(ModBlocks.COBBLED_RHYOLITE))
                         .unlockedBy(getHasName(ModBlocks.COBBLED_RHYOLITE), has(ModBlocks.COBBLED_RHYOLITE))
                         .group("rhyolite")
@@ -100,7 +110,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .group("rhyolite")
                         .save(output);
 
+
+                stairBuilder(ModBlocks.POLISHED_RHYOLITE_STAIRS, Ingredient.of(ModBlocks.POLISHED_RHYOLITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_RHYOLITE), has(ModBlocks.POLISHED_RHYOLITE))
+                        .group("rhyolite")
+                        .save(output);
+
+                stairBuilder(ModBlocks.RHYOLITE_BRICK_STAIRS, Ingredient.of(ModBlocks.RHYOLITE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.RHYOLITE_BRICKS), has(ModBlocks.RHYOLITE_BRICKS))
+                        .group("rhyolite")
+                        .save(output);
+
                 slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_SLAB, ModBlocks.RHYOLITE);
+
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_BRICK_SLAB, ModBlocks.RHYOLITE_BRICKS);
+
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_RHYOLITE_SLAB, ModBlocks.POLISHED_RHYOLITE);
 
                 stairBuilder(ModBlocks.COBBLED_RHYOLITE_STAIRS, Ingredient.of(ModBlocks.COBBLED_RHYOLITE))
                         .unlockedBy(getHasName(ModBlocks.COBBLED_RHYOLITE), has(ModBlocks.COBBLED_RHYOLITE))
@@ -109,7 +134,61 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                 slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_RHYOLITE_SLAB, ModBlocks.COBBLED_RHYOLITE);
 
+                chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RHYOLITE, Ingredient.of(ModBlocks.RHYOLITE));
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_BRICKS, Ingredient.of(ModBlocks.RHYOLITE));
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_RHYOLITE_BRICKS, Ingredient.of(ModBlocks.RHYOLITE));
 
+                // lwk gonna need a custom builder for weathered and other limestone types
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICKS, Ingredient.of(ModBlocks.LIMESTONE));
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_SLAB, ModBlocks.LIMESTONE);
+                stairBuilder(ModBlocks.LIMESTONE_STAIRS, Ingredient.of(ModBlocks.LIMESTONE))
+                        .unlockedBy(getHasName(ModBlocks.LIMESTONE), has(ModBlocks.LIMESTONE))
+                        .group("limestone")
+                        .save(output);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_WALL, Ingredient.of(ModBlocks.LIMESTONE))
+                        .unlockedBy(getHasName(ModBlocks.LIMESTONE), has(ModBlocks.LIMESTONE))
+                        .group("limestone")
+                        .save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE_SLAB, ModBlocks.POLISHED_LIMESTONE);
+                stairBuilder(ModBlocks.POLISHED_LIMESTONE_STAIRS, Ingredient.of(ModBlocks.POLISHED_LIMESTONE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_LIMESTONE), has(ModBlocks.POLISHED_LIMESTONE))
+                        .group("limestone")
+                        .save(output);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_LIMESTONE_WALL, Ingredient.of(ModBlocks.POLISHED_LIMESTONE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_LIMESTONE), has(ModBlocks.POLISHED_LIMESTONE))
+                        .group("limestone")
+                        .save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICK_SLAB, ModBlocks.LIMESTONE_BRICKS);
+                stairBuilder(ModBlocks.LIMESTONE_BRICK_STAIRS, Ingredient.of(ModBlocks.LIMESTONE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.LIMESTONE_BRICKS), has(ModBlocks.LIMESTONE_BRICKS))
+                        .group("limestone")
+                        .save(output);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICK_WALL, Ingredient.of(ModBlocks.LIMESTONE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.LIMESTONE_BRICKS), has(ModBlocks.LIMESTONE_BRICKS))
+                        .group("limestone")
+                        .save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBLED_LIMESTONE_SLAB, ModBlocks.RUBBLED_LIMESTONE);
+                stairBuilder(ModBlocks.RUBBLED_LIMESTONE_STAIRS, Ingredient.of(ModBlocks.RUBBLED_LIMESTONE))
+                        .unlockedBy(getHasName(ModBlocks.RUBBLED_LIMESTONE), has(ModBlocks.RUBBLED_LIMESTONE))
+                        .group("limestone")
+                        .save(output);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBBLED_LIMESTONE_WALL, Ingredient.of(ModBlocks.RUBBLED_LIMESTONE))
+                        .unlockedBy(getHasName(ModBlocks.RUBBLED_LIMESTONE), has(ModBlocks.RUBBLED_LIMESTONE))
+                        .group("limestone")
+                        .save(output);
+                pillarBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_PILLAR, Ingredient.of(ModBlocks.LIMESTONE));
+                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_LIMESTONE)
+                        .requires(ModBlocks.LIMESTONE)
+                        .requires(Blocks.VINE)
+                        .group("limestone")
+                        .unlockedBy(getHasName(Blocks.VINE), has(Blocks.VINE))
+                        .save(output, getItemName(ModBlocks.MOSSY_LIMESTONE) + "_from_vine");
+                shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MOSSY_LIMESTONE)
+                        .requires(ModBlocks.LIMESTONE)
+                        .requires(Blocks.MOSS_BLOCK)
+                        .group("limestone")
+                        .unlockedBy(getHasName(Blocks.MOSS_BLOCK), has(Blocks.MOSS_BLOCK))
+                        .save(output, getItemName(ModBlocks.MOSSY_LIMESTONE) + "_from_moss_block");
 
             }
         };

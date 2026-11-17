@@ -46,6 +46,10 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
 
+        biomeBuilder.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.MAPLE_WATER_SHORE_PLACED_KEY
+        );
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BAMBOO_PLACED_KEY);
@@ -62,6 +66,7 @@ public class ModOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_TALL_GRASS_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_LARGE_FERN_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_RED_SHRUB_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.HUGE_GLOWSHROOM_PLACED_KEY);
 
         ModBiomeVegetation.addBerryBushes(biomeBuilder);
 
@@ -75,4 +80,60 @@ public class ModOverworldBiomes {
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.CHERRY_LEAVES, 0.002F))
                 .build();
     }
+
+
+    public static Biome highlandKarst(
+            HolderGetter<PlacedFeature> placedFeatureGetter,
+            HolderGetter<WorldCarver> carverGetter) {
+
+        MobSpawnSettings.Builder spawnBuilder =
+                new MobSpawnSettings.Builder();
+
+        BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
+
+        spawnBuilder.addSpawn(
+                EntityTypes.RABBIT,
+                12,
+                UniformInt.of(2, 3)
+        );
+
+        BiomeGenerationSettings.Builder biomeBuilder =
+                new BiomeGenerationSettings.Builder(
+                        placedFeatureGetter,
+                        carverGetter
+                );
+
+        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+        
+        BiomeDefaultFeatures.addPlainGrass(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultFlowers(biomeBuilder);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(0.65F)
+                .downfall(0.45F)
+                .specialEffects(
+                        new BiomeSpecialEffects.Builder()
+                                .waterColor(0x4B9A95)
+                                .build()
+                )
+                .mobSpawnSettings(spawnBuilder.build())
+                .generationSettings(biomeBuilder.build())
+
+                .setAttribute(
+                        EnvironmentAttributes.SKY_COLOR,
+                        ARGB.vector3fFromRGB24(0x8ACFEF)
+                )
+
+                .setAttribute(
+                        EnvironmentAttributes.FOG_COLOR,
+                        ARGB.vector3fFromRGB24(0xD5E5DD)
+                )
+                .build();
+    }
+
 }

@@ -11,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -30,10 +31,20 @@ public class ModBlocks {
             properties -> new Block(properties.strength(0.25F)
                     .sound(SoundType.GRAVEL)));
 
+    // Rhyolite family
     public static final Block RHYOLITE = registerBlock("rhyolite",
             properties -> new Block(properties.strength(3f)
                     .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
     public static final Block COBBLED_RHYOLITE = registerBlock("cobbled_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CHISELED_RHYOLITE = registerBlock("chiseled_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block RHYOLITE_BRICKS = registerBlock("rhyolite_bricks",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CRACKED_RHYOLITE_BRICKS = registerBlock("cracked_rhyolite_bricks",
             properties -> new Block(properties.strength(3f)
                     .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
     public static final Block RHYOLITE_STAIRS = registerBlock("rhyolite_stairs",
@@ -51,11 +62,93 @@ public class ModBlocks {
     public static final Block COBBLED_RHYOLITE_SLAB = registerBlock("cobbled_rhyolite_slab",
             properties -> new SlabBlock(
                     properties.strength(3f)));
-    public static final Block COBBLED_RHYOLITE_WALL = registerBlock("cobblbed_rhyolite_wall",
+    public static final Block COBBLED_RHYOLITE_WALL = registerBlock("cobbled_rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block POLISHED_RHYOLITE = registerBlock("polished_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_RHYOLITE_STAIRS = registerBlock("polished_rhyolite_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block POLISHED_RHYOLITE_SLAB = registerBlock("polished_rhyolite_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block POLISHED_RHYOLITE_WALL = registerBlock("polished_rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_BRICK_STAIRS = registerBlock("rhyolite_brick_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_BRICK_SLAB = registerBlock("rhyolite_brick_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_BRICK_WALL = registerBlock("rhyolite_brick_wall",
             properties -> new WallBlock(
                     properties.strength(3f)));
 
+    // eventually the deepslate version of rhyolite will go here
 
+    // Limestone family (maybe inherit more sandstone esque properties in the future idk)
+    public static final Block LIMESTONE = registerBlock("limestone",
+            properties -> new Block(properties.strength(0.8f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block RUBBLED_LIMESTONE = registerBlock("rubbled_limestone",
+            properties -> new Block(properties.strength(0.6f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block MOSSY_LIMESTONE = registerBlock("mossy_limestone",
+            properties -> new Block(properties.strength(0.8f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_LIMESTONE = registerBlock("polished_limestone",
+            properties -> new Block(properties.strength(2f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block WEATHERED_LIMESTONE = registerBlock("weathered_limestone",
+            properties -> new Block(properties.strength(0.6f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block LIMESTONE_PILLAR = registerBlock("limestone_pillar",
+            properties -> new RotatedPillarBlock(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block LIMESTONE_BRICKS = registerBlock("limestone_bricks",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block LIMESTONE_BRICK_STAIRS = registerBlock("limestone_brick_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_BRICK_SLAB = registerBlock("limestone_brick_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_BRICK_WALL = registerBlock("limestone_brick_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_STAIRS = registerBlock("limestone_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_SLAB = registerBlock("limestone_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_WALL = registerBlock("limestone_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block RUBBLED_LIMESTONE_STAIRS = registerBlock("rubbled_limestone_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(0.6f)));
+    public static final Block RUBBLED_LIMESTONE_SLAB = registerBlock("rubbled_limestone_slab",
+            properties -> new SlabBlock(
+                    properties.strength(0.6f)));
+    public static final Block RUBBLED_LIMESTONE_WALL = registerBlock("rubbled_limestone_wall",
+            properties -> new WallBlock(
+                    properties.strength(0.6f)));
+    public static final Block POLISHED_LIMESTONE_STAIRS = registerBlock("polished_limestone_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block POLISHED_LIMESTONE_SLAB = registerBlock("polished_limestone_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block POLISHED_LIMESTONE_WALL = registerBlock("polished_limestone_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+
+    // Maple family
     public static final Block MAPLE_LOG = registerBlock("maple_log",
             properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
                     .sound(SoundType.WOOD).ignitedByLava()));
@@ -99,68 +192,54 @@ public class ModBlocks {
     public static final Block MAPLE_SLAB = registerBlock("maple_slab",
             properties -> new SlabBlock(
                     properties.strength(3f)));
-
-
-
-
     public static final Block MAPLE_DOOR = registerBlock("maple_door",
             properties -> new DoorBlock(BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
-
     public static final Block MAPLE_TRAPDOOR = registerBlock("maple_trapdoor",
             properties -> new TrapDoorBlock(BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
-
     public static final Block MAPLE_BUTTON = registerBlock("maple_button",
             properties -> new ButtonBlock(BlockSetType.CHERRY, 15, properties.strength(3f).noCollision()));
     public static final Block MAPLE_PRESSURE_PLATE = registerBlock("maple_pressure_plate",
             properties -> new PressurePlateBlock(BlockSetType.CHERRY, properties.mapColor(MapColor.COLOR_ORANGE).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(3f).noCollision().ignitedByLava().pushReaction(PushReaction.POPPED)));
-
     public static final Block MAPLE_FENCE = registerBlock("maple_fence",
             properties -> new FenceBlock(properties.strength(2f)));
     public static final Block MAPLE_FENCE_GATE = registerBlock("maple_fence_gate",
             properties -> new FenceGateBlock(WoodType.CHERRY, properties.strength(2f)));
-
-
     public static final Block POTTED_MAPLE_SAPLING = registerBlockWithoutBlockItem("potted_maple_sapling",
             properties -> new FlowerPotBlock(MAPLE_SAPLING, properties
                     .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
 
-    public static final Block DAIKON_CROP = registerBlockWithoutBlockItem("daikon_crop",
-            properties -> new DaikonCropBlock(properties.noCollision().randomTicks().instabreak().sound(SoundType.CROP)
-                    .pushReaction(PushReaction.POPPED)));
+    // eventually ginkgo will go here
 
-    public static final Block HASKAP_BERRY_BUSH = registerBlockWithoutBlockItem("haskap_berry_bush",
-            properties -> new HaskapBerryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
-                    .pushReaction(PushReaction.POPPED)));
-
-    public static final Block BARBERRY_BUSH = registerBlockWithoutBlockItem("barberry_bush",
-            properties -> new BarberryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
-                    .pushReaction(PushReaction.POPPED)));
-
-
+    // Glowshroom Family
     public static final Block GLOWSHROOM = registerBlock("glowshroom", properties -> new GlowshroomBlock(
-                    ModFeatures.HUGE_GLOWSHROOM_KEY, properties
-                            .noCollision()
-                            .instabreak()
-                            .randomTicks()
-                            .sound(SoundType.FUNGUS)
-                            .lightLevel(state -> 12)
-            )
-    );
+            ModFeatures.HUGE_GLOWSHROOM_KEY, properties.noCollision().instabreak().randomTicks()
+            .sound(SoundType.FUNGUS).lightLevel(state -> 12)));
     public static final Block POTTED_GLOWSHROOM = registerBlockWithoutBlockItem("potted_glowshroom",
             properties -> new FlowerPotBlock(GLOWSHROOM, properties
                     .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
-
-
     public static final Block GLOWSHROOM_BLOCK = registerBlock(
             "glowshroom_block",
-            properties -> new HugeMushroomBlock(properties
-                    .strength(0.2f)
-                    .sound(SoundType.WOOD)
-                    .lightLevel(state -> 10)
-            )
-    );
+            properties -> new HugeMushroomBlock(properties.strength(0.2f)
+                    .sound(SoundType.WOOD).lightLevel(state -> 10)));
 
-
+    // Crops & Bushes
+    public static final Block DAIKON_CROP = registerBlockWithoutBlockItem("daikon_crop",
+            properties -> new DaikonCropBlock(properties.noCollision().randomTicks().instabreak().sound(SoundType.CROP)
+                    .pushReaction(PushReaction.POPPED)));
+    public static final Block HASKAP_BERRY_BUSH = registerBlockWithoutBlockItem("haskap_berry_bush",
+            properties -> new HaskapBerryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.POPPED)));
+    public static final Block BARBERRY_BUSH = registerBlockWithoutBlockItem("barberry_bush",
+            properties -> new BarberryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.POPPED)));
+    public static final Block BELLFLOWERS = registerBlock("bellflowers",
+            properties -> new FlowerBlock(
+                    MobEffects.WATER_BREATHING, 5.0F,
+                    properties.noCollision()
+                            .instabreak()
+                            .sound(SoundType.GRASS)
+                            .pushReaction(PushReaction.POPPED)
+            ));
 
     public static ResourceKey<Block> getRK(Block block) {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();
@@ -176,8 +255,6 @@ public class ModBlocks {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name))));;
         return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name), toRegister);
     }
-
-
 
     private static void registerBlockItem(String name, Block block) {
         Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name),

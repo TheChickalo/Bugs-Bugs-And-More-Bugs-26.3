@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.block.BonemealSource;
 
 public class GlowshroomBlock extends MushroomBlock {
 
@@ -20,8 +21,6 @@ public class GlowshroomBlock extends MushroomBlock {
                            BlockBehaviour.Properties properties) {
         super(feature, properties);
     }
-
-
 
     @Override
     protected boolean canSurvive(BlockState state,
@@ -40,26 +39,28 @@ public class GlowshroomBlock extends MushroomBlock {
     }
 
 
+    @Override
+    public boolean isValidBonemealTarget(
+            LevelReader level,
+            BlockPos pos,
+            BlockState state,
+            BonemealSource source) {
+        return level.isInsideBuildHeight(pos.above(16));
+    }
+
 
     @Override
     public void animateTick(BlockState state, Level level,
                             BlockPos pos, RandomSource random) {
-
-        // Roughly one particle every five ticks.
         if (random.nextInt(5) != 0) {
             return;
         }
-
-        // Spawn randomly around the mushroom.
         double x = pos.getX() + 0.5
                 + (random.nextDouble() - 0.5) * 1.2;
-
         double y = pos.getY() + 0.3
                 + random.nextDouble() * 0.8;
-
         double z = pos.getZ() + 0.5
                 + (random.nextDouble() - 0.5) * 1.2;
-
         level.addParticle(
                 ParticleTypes.FIREFLY,
                 x, y, z,

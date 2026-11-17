@@ -2,12 +2,10 @@ package net.chickalo.bugsbugsandmorebugs.datagen;
 
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.tags.ModTags;
-import net.fabricmc.fabric.api.client.rendering.v1.FabricOrderedSubmitNodeCollector;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +18,44 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
     protected void addTags(HolderLookup.Provider registries) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.getRK(ModBlocks.RHYOLITE))
-                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE));
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_RHYOLITE))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_RHYOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_RHYOLITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_RHYOLITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_BRICK_WALL))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_BRICK_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_BRICK_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.CHISELED_RHYOLITE))
+                .add(ModBlocks.getRK(ModBlocks.CRACKED_RHYOLITE_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE))
+                .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE))
+                .add(ModBlocks.getRK(ModBlocks.WEATHERED_LIMESTONE))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_PILLAR))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_BRICK_WALL))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_BRICK_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_BRICK_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.MOSSY_LIMESTONE));
+
+
+
 
         tag(ModTags.Blocks.MAPLE_LOGS)
                 .add(ModBlocks.getRK(ModBlocks.MAPLE_LOG))
@@ -60,8 +95,16 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
         tag(BlockTags.WALLS)
                 .add(ModBlocks.getRK(ModBlocks.RHYOLITE_WALL))
-                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE_WALL));
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_RHYOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.RHYOLITE_BRICK_WALL))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_BRICK_WALL));
 
+        tag(BlockTags.FLOWERS)
+                .add(ModBlocks.getRK(ModBlocks.BELLFLOWERS));
 
 
 

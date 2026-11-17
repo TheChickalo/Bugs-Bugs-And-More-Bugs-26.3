@@ -16,6 +16,11 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import terrablender.api.TerraBlenderApi;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.chickalo.bugsbugsandmorebugs.worldgen.ModPlacedFeatures;
 
 public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
     public static final String MOD_ID = "bugsbugsandmorebugs";
@@ -32,7 +37,11 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
         ModTrunkPlacerTypes.registerModTrunkPlacerTypes();
         ModFoliagePlacerTypes.registerModFoliagePlacerTypes();
         ModFeatureTypes.register();
-
+        BiomeModifications.addFeature(
+                BiomeSelectors.includeByKey(Biomes.RIVER),
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.MAPLE_RIVERBED_MUD_PLACED_KEY
+        );
         FabricDefaultAttributeRegistry.register(
                 ModEntities.ANTWORKER,
                 AntWorkerEntity.createAttributes()

@@ -21,6 +21,9 @@ import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.chickalo.bugsbugsandmorebugs.worldgen.feature.GlowshroomTreeBaseFeature;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.HugeGlowshroomFeature;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleWaterShoreFeature;
+import net.chickalo.bugsbugsandmorebugs.worldgen.feature.MapleRiverbedMudFeature;
 
 public class ModFeatures {
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
@@ -31,6 +34,8 @@ public class ModFeatures {
     public static final ResourceKey<Feature> HUGE_GLOWSHROOM_KEY = registerKey("huge_glowshroom");
     public static final ResourceKey<Feature> GLOWSHROOM_PATCH_KEY = registerKey("glowshroom_patch");
     public static final ResourceKey<Feature> GLOWSHROOM_TREE_BASE_KEY = registerKey("glowshroom_tree_base");
+    public static final ResourceKey<Feature> MAPLE_WATER_SHORE_KEY = registerKey("maple_water_shore");
+    public static final ResourceKey<Feature> MAPLE_RIVERBED_MUD_KEY = registerKey("maple_riverbed_mud");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(MAPLE_KEY, new TreeFeature.Builder(
@@ -54,20 +59,9 @@ public class ModFeatures {
         context.register(BARBERRY_BUSH_PATCH_KEY, new BerryBushPatchFeature(ModBlocks.BARBERRY_BUSH));
         context.register(GLOWSHROOM_PATCH_KEY, new GlowshroomPatchFeature(ModBlocks.GLOWSHROOM));
         context.register(GLOWSHROOM_TREE_BASE_KEY, new GlowshroomTreeBaseFeature(ModBlocks.GLOWSHROOM, ModBlocks.MAPLE_LOG));
-
-        context.register(HUGE_GLOWSHROOM_KEY,
-                new HugeRedMushroomFeature(
-                        BlockStateProvider.holderOf(ModBlocks.GLOWSHROOM_BLOCK),
-                        BlockStateProvider.holderOf(Blocks.MUSHROOM_STEM),
-                        2,
-                        BlockPredicate.matchesBlocks(
-                                Blocks.DIRT,
-                                Blocks.GRASS_BLOCK,
-                                Blocks.PODZOL,
-                                Blocks.MYCELIUM
-                        )
-                )
-        );
+        context.register(HUGE_GLOWSHROOM_KEY, new HugeGlowshroomFeature(ModBlocks.GLOWSHROOM_BLOCK, Blocks.MUSHROOM_STEM));
+        context.register(MAPLE_WATER_SHORE_KEY, new MapleWaterShoreFeature());
+        context.register(MAPLE_RIVERBED_MUD_KEY, new MapleRiverbedMudFeature());
 
     }
 

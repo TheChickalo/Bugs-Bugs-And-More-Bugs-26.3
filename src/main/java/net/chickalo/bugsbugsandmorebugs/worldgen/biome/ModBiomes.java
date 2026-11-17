@@ -13,6 +13,8 @@ import terrablender.api.Regions;
 
 public class ModBiomes {
     public static final ResourceKey<Biome> MAPLE_FOREST = registerBiomeKey("maple_forest");
+    public static final ResourceKey<Biome> HIGHLAND_KARST = registerBiomeKey("highland_karst");
+
 
     public static void registerBiomes() {
         Regions.register(new OverworldRegion(Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "bugsbugsandmorebugs_overworld"), 20));
@@ -23,6 +25,9 @@ public class ModBiomes {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
         register(context, MAPLE_FOREST , ModOverworldBiomes.mapleForest(placedFeatures, carvers));
+        register(context, HIGHLAND_KARST, ModOverworldBiomes.highlandKarst(placedFeatures, carvers)
+        );
+
     }
 
     private static void register(BootstrapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {

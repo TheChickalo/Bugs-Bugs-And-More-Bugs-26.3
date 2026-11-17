@@ -50,5 +50,26 @@ public final class ModFeatureTypes {
                 GlowshroomTreeBaseFeature.CODEC
         );
 
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(
+                        BugsBugsAndMoreBugs.MOD_ID,
+                        "huge_glowshroom"
+                ),
+                HugeGlowshroomFeature.CODEC
+        );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "maple_water_shore"),
+                MapleWaterShoreFeature.CODEC
+        );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "maple_riverbed_mud"),
+                MapleRiverbedMudFeature.CODEC
+        );
     }
 }

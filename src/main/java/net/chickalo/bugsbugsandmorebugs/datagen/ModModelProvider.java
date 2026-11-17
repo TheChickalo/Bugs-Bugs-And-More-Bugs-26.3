@@ -28,7 +28,35 @@ public class ModModelProvider extends FabricModelProvider {
                 .stairs(ModBlocks.RHYOLITE_STAIRS)
                 .slab(ModBlocks.RHYOLITE_SLAB)
                 .wall(ModBlocks.RHYOLITE_WALL);
-
+        blockModelGenerators.family(ModBlocks.POLISHED_RHYOLITE)
+                .stairs(ModBlocks.POLISHED_RHYOLITE_STAIRS)
+                .slab(ModBlocks.POLISHED_RHYOLITE_SLAB)
+                .wall(ModBlocks.POLISHED_RHYOLITE_WALL);
+        blockModelGenerators.family(ModBlocks.RHYOLITE_BRICKS)
+                .stairs(ModBlocks.RHYOLITE_BRICK_STAIRS)
+                .slab(ModBlocks.RHYOLITE_BRICK_SLAB)
+                .wall(ModBlocks.RHYOLITE_BRICK_WALL);
+        blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_RHYOLITE);
+        blockModelGenerators.createTrivialCube(ModBlocks.CRACKED_RHYOLITE_BRICKS);
+        blockModelGenerators.createTrivialCube(ModBlocks.MOSSY_LIMESTONE);
+        blockModelGenerators.family(ModBlocks.RUBBLED_LIMESTONE)
+                .stairs(ModBlocks.RUBBLED_LIMESTONE_STAIRS)
+                .slab(ModBlocks.RUBBLED_LIMESTONE_SLAB)
+                .wall(ModBlocks.RUBBLED_LIMESTONE_WALL);
+        blockModelGenerators.family(ModBlocks.LIMESTONE)
+                .stairs(ModBlocks.LIMESTONE_STAIRS)
+                .slab(ModBlocks.LIMESTONE_SLAB)
+                .wall(ModBlocks.LIMESTONE_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_LIMESTONE)
+                .stairs(ModBlocks.POLISHED_LIMESTONE_STAIRS)
+                .slab(ModBlocks.POLISHED_LIMESTONE_SLAB)
+                .wall(ModBlocks.POLISHED_LIMESTONE_WALL);
+        blockModelGenerators.family(ModBlocks.LIMESTONE_BRICKS)
+                .stairs(ModBlocks.LIMESTONE_BRICK_STAIRS)
+                .slab(ModBlocks.LIMESTONE_BRICK_SLAB)
+                .wall(ModBlocks.LIMESTONE_BRICK_WALL);
+        blockModelGenerators.createTrivialCube(ModBlocks.WEATHERED_LIMESTONE);
+        blockModelGenerators.createRotatedPillarWithHorizontalVariant(ModBlocks.LIMESTONE_PILLAR, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
 
         blockModelGenerators.woodProvider(ModBlocks.MAPLE_LOG).log(ModBlocks.MAPLE_LOG).wood(ModBlocks.MAPLE_WOOD);
         blockModelGenerators.woodProvider(ModBlocks.STRIPPED_MAPLE_LOG).log(ModBlocks.STRIPPED_MAPLE_LOG).wood(ModBlocks.STRIPPED_MAPLE_WOOD);
@@ -50,6 +78,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createCrossBlock(ModBlocks.BARBERRY_BUSH, BlockModelGenerators.PlantType.NOT_TINTED, BarberryBushBlock.AGE,0, 1, 2, 3);
         blockModelGenerators.createPlantWithDefaultItem(ModBlocks.GLOWSHROOM, ModBlocks.POTTED_GLOWSHROOM, BlockModelGenerators.PlantType.NOT_TINTED);
         blockModelGenerators.createMushroomBlock(ModBlocks.GLOWSHROOM_BLOCK);
+
+        blockModelGenerators.createCrossBlock(ModBlocks.BELLFLOWERS, BlockModelGenerators.PlantType.NOT_TINTED);
+
     }
 
     @Override

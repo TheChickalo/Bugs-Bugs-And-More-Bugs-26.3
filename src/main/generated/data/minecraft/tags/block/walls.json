@@ -1,6 +1,12 @@
 {
   "values": [
     "bugsbugsandmorebugs:rhyolite_wall",
-    "bugsbugsandmorebugs:cobblbed_rhyolite_wall"
+    "bugsbugsandmorebugs:cobbled_rhyolite_wall",
+    "bugsbugsandmorebugs:polished_rhyolite_wall",
+    "bugsbugsandmorebugs:rhyolite_brick_wall",
+    "bugsbugsandmorebugs:limestone_wall",
+    "bugsbugsandmorebugs:rubbled_limestone_wall",
+    "bugsbugsandmorebugs:polished_limestone_wall",
+    "bugsbugsandmorebugs:limestone_brick_wall"
   ]
 }

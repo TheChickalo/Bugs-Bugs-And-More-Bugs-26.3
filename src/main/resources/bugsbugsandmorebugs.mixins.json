@@ -5,6 +5,9 @@
 	"mixins": [
 		"ExampleMixin"
 	],
+	"client": [
+		"SplashManagerMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	},

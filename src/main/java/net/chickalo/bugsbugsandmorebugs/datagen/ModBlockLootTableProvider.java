@@ -36,6 +36,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
     public void generate() {
 
         dropSelf(ModBlocks.COBBLED_RHYOLITE);
+        dropSelf(ModBlocks.POLISHED_RHYOLITE);
         add(
                 ModBlocks.RHYOLITE,
                 createSingleItemTableWithSilkTouch(
@@ -43,9 +44,47 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
                         ModBlocks.COBBLED_RHYOLITE
                 )
         );
+        dropSelf(ModBlocks.CHISELED_RHYOLITE);
         dropSelf(ModBlocks.RHYOLITE_WALL);
         dropSelf(ModBlocks.RHYOLITE_STAIRS);
         add(ModBlocks.RHYOLITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.COBBLED_RHYOLITE_WALL);
+        dropSelf(ModBlocks.COBBLED_RHYOLITE_STAIRS);
+        add(ModBlocks.COBBLED_RHYOLITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_RHYOLITE_WALL);
+        dropSelf(ModBlocks.POLISHED_RHYOLITE_STAIRS);
+        add(ModBlocks.POLISHED_RHYOLITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.RHYOLITE_BRICKS);
+        dropSelf(ModBlocks.RHYOLITE_BRICK_STAIRS);
+        dropSelf(ModBlocks.RHYOLITE_BRICK_WALL);
+        add(ModBlocks.RHYOLITE_BRICK_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.CRACKED_RHYOLITE_BRICKS);
+
+        add(
+                ModBlocks.LIMESTONE,
+                createSingleItemTableWithSilkTouch(
+                        ModBlocks.LIMESTONE,
+                        ModBlocks.RUBBLED_LIMESTONE
+                )
+        );
+        dropSelf(ModBlocks.WEATHERED_LIMESTONE);
+        dropSelf(ModBlocks.LIMESTONE_PILLAR);
+        dropSelf(ModBlocks.POLISHED_LIMESTONE);
+        dropSelf(ModBlocks.RUBBLED_LIMESTONE);
+        add(ModBlocks.LIMESTONE_BRICK_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.LIMESTONE_BRICKS);
+        dropSelf(ModBlocks.LIMESTONE_BRICK_STAIRS);
+        dropSelf(ModBlocks.LIMESTONE_BRICK_WALL);
+        add(ModBlocks.LIMESTONE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.LIMESTONE_STAIRS);
+        dropSelf(ModBlocks.MOSSY_LIMESTONE);
+        dropSelf(ModBlocks.LIMESTONE_WALL);
+        add(ModBlocks.POLISHED_LIMESTONE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_LIMESTONE_STAIRS);
+        dropSelf(ModBlocks.POLISHED_LIMESTONE_WALL);
+        add(ModBlocks.RUBBLED_LIMESTONE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.RUBBLED_LIMESTONE_STAIRS);
+        dropSelf(ModBlocks.RUBBLED_LIMESTONE_WALL);
 
 
 
@@ -117,6 +156,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
                         .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 1)))
                         .apply(ApplyBonusCount.addUniformBonusCount(this.enchantments.getOrThrow(Enchantments.FORTUNE)))))
         );
+
+        dropSelf(ModBlocks.BELLFLOWERS);
 
     }
 }
