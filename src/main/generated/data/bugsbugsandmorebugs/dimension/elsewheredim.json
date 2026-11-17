@@ -1,0 +1,36 @@
+{
+  "type": "bugsbugsandmorebugs:elsewheredim_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "bugsbugsandmorebugs:maple_forest",
+          "parameters": {
+            "continentalness": 0.25,
+            "depth": 0.0,
+            "erosion": 0.0,
+            "humidity": 0.2,
+            "offset": 0.0,
+            "temperature": -0.3,
+            "weirdness": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "continentalness": 0.25,
+            "depth": 0.0,
+            "erosion": 0.3,
+            "humidity": -0.35,
+            "offset": 0.0,
+            "temperature": -0.3,
+            "weirdness": 0.0
+          }
+        }
+      ]
+    },
+    "settings": "minecraft:overworld"
+  }
+}
