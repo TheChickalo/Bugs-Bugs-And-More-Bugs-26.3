@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "limestone",
+  "ingredients": [
+    "bugsbugsandmorebugs:limestone",
+    "minecraft:moss_block"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:mossy_limestone"
+  }
+}

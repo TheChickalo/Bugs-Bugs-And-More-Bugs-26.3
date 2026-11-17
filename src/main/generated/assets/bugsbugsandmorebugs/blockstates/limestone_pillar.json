@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "bugsbugsandmorebugs:block/limestone_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "bugsbugsandmorebugs:block/limestone_pillar"
+    },
+    "axis=z": {
+      "model": "bugsbugsandmorebugs:block/limestone_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

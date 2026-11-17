@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rubbled_limestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "bugsbugsandmorebugs:rubbled_limestone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "bugsbugsandmorebugs:rubbled_limestone_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rubbled_limestone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bugsbugsandmorebugs:rubbled_limestone_stairs"
+    ]
+  }
+}

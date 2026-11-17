@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/limestone",
+    "side": "bugsbugsandmorebugs:block/limestone",
+    "top": "bugsbugsandmorebugs:block/limestone"
+  }
+}

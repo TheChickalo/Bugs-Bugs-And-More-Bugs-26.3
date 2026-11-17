@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/rubbled_limestone_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/rubbled_limestone"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/rubbled_limestone_slab_top"
+    }
+  }
+}
