@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "schist",
+  "key": {
+    "#": "bugsbugsandmorebugs:schist"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "bugsbugsandmorebugs:schist_stairs"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "schist",
+  "key": {
+    "#": "bugsbugsandmorebugs:cobbled_schist"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "bugsbugsandmorebugs:cobbled_schist_wall"
+  }
+}

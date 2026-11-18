@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/schist_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/schist"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/schist_slab_top"
+    }
+  }
+}

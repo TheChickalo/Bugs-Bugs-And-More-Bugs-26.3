@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/polished_schist",
+    "side": "bugsbugsandmorebugs:block/polished_schist",
+    "top": "bugsbugsandmorebugs:block/polished_schist"
+  }
+}
