@@ -1,0 +1,36 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/fog_color": "#dad5bb",
+    "minecraft:visual/sky_color": "#a7d6d6"
+  },
+  "carvers": [],
+  "downfall": 0.68,
+  "effects": {
+    "grass_color": "#b5af62",
+    "water_color": "#667f66"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:maple_placed",
+      "bugsbugsandmorebugs:maple_short_grass_placed"
+    ]
+  ],
+  "has_precipitation": true,
+  "temperature": 0.67
+}

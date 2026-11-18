@@ -1,0 +1,7 @@
+{
+  "type": "bugsbugsandmorebugs:karst_outcrop",
+  "cluster_chance": 90,
+  "max_height": 28,
+  "max_radius": 3,
+  "min_height": 10
+}
