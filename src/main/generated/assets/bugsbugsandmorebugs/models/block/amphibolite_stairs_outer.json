@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/amphibolite",
+    "side": "bugsbugsandmorebugs:block/amphibolite",
+    "top": "bugsbugsandmorebugs:block/amphibolite"
+  }
+}

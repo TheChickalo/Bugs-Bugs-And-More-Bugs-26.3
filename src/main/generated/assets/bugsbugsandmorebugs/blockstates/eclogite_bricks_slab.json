@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/eclogite_bricks_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/eclogite_bricks"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/eclogite_bricks_slab_top"
+    }
+  }
+}

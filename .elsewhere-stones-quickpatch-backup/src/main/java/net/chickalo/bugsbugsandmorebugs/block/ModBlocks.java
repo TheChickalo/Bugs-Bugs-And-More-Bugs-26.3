@@ -1,0 +1,393 @@
+package net.chickalo.bugsbugsandmorebugs.block;
+
+import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
+import net.chickalo.bugsbugsandmorebugs.block.custom.*;
+import net.chickalo.bugsbugsandmorebugs.worldgen.ModFeatures;
+import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeGrowers;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+
+import java.util.function.Function;
+
+public class ModBlocks {
+    public static final Block INFESTED_DIRT = registerBlock("infested_dirt",
+            properties -> new Block(properties.strength(0.25F)
+                    .sound(SoundType.GRAVEL)));
+
+    // TEMPORARY PORTAL BLOCK, DELETE LATER
+    public static final Block TEMP_PORTAL = registerBlock("portal",
+            properties -> new TempPortal(properties.strength(3f)));
+
+
+    // Rhyolite family
+    public static final Block RHYOLITE = registerBlock("rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block COBBLED_RHYOLITE = registerBlock("cobbled_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CHISELED_RHYOLITE = registerBlock("chiseled_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block RHYOLITE_BRICKS = registerBlock("rhyolite_bricks",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CRACKED_RHYOLITE_BRICKS = registerBlock("cracked_rhyolite_bricks",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block RHYOLITE_STAIRS = registerBlock("rhyolite_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_SLAB = registerBlock("rhyolite_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_WALL = registerBlock("rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block COBBLED_RHYOLITE_STAIRS = registerBlock("cobbled_rhyolite_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block COBBLED_RHYOLITE_SLAB = registerBlock("cobbled_rhyolite_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block COBBLED_RHYOLITE_WALL = registerBlock("cobbled_rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block POLISHED_RHYOLITE = registerBlock("polished_rhyolite",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_RHYOLITE_STAIRS = registerBlock("polished_rhyolite_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block POLISHED_RHYOLITE_SLAB = registerBlock("polished_rhyolite_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block POLISHED_RHYOLITE_WALL = registerBlock("polished_rhyolite_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_BRICK_STAIRS = registerBlock("rhyolite_brick_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_BRICK_SLAB = registerBlock("rhyolite_brick_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block RHYOLITE_BRICK_WALL = registerBlock("rhyolite_brick_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+
+    // Schist family
+    public static final Block SCHIST = registerBlock("schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block COBBLED_SCHIST = registerBlock("cobbled_schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_SCHIST = registerBlock("polished_schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block SCHIST_BRICKS = registerBlock("schist_bricks",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CHISELED_SCHIST = registerBlock("chiseled_schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CRACKED_SCHIST_BRICKS = registerBlock("cracked_schist_bricks",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block SCHIST_STAIRS = registerBlock("schist_stairs",
+            properties -> new StairBlock(SCHIST.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_SLAB = registerBlock("schist_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_WALL = registerBlock("schist_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_SCHIST_STAIRS = registerBlock("cobbled_schist_stairs",
+            properties -> new StairBlock(COBBLED_SCHIST.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_SCHIST_SLAB = registerBlock("cobbled_schist_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_SCHIST_WALL = registerBlock("cobbled_schist_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SCHIST_STAIRS = registerBlock("polished_schist_stairs",
+            properties -> new StairBlock(POLISHED_SCHIST.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SCHIST_SLAB = registerBlock("polished_schist_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SCHIST_WALL = registerBlock("polished_schist_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_BRICKS_STAIRS = registerBlock("schist_bricks_stairs",
+            properties -> new StairBlock(SCHIST_BRICKS.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_BRICKS_SLAB = registerBlock("schist_bricks_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_BRICKS_WALL = registerBlock("schist_bricks_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    // eventually the deepdeepslate version of rhyolite will go here
+
+    // Eclogite family (Elsewhere deepest stone)
+    public static final Block ECLOGITE = registerBlock("eclogite",
+            properties -> new Block(properties.strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block COBBLED_ECLOGITE = registerBlock("cobbled_eclogite",
+            properties -> new Block(properties.strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_ECLOGITE = registerBlock("polished_eclogite",
+            properties -> new Block(properties.strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block ECLOGITE_BRICKS = registerBlock("eclogite_bricks",
+            properties -> new Block(properties.strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CHISELED_ECLOGITE = registerBlock("chiseled_eclogite",
+            properties -> new Block(properties.strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CRACKED_ECLOGITE_BRICKS = registerBlock("cracked_eclogite_bricks",
+            properties -> new Block(properties.strength(5.0f, 6.0f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block ECLOGITE_STAIRS = registerBlock("eclogite_stairs",
+            properties -> new StairBlock(ECLOGITE.defaultBlockState(), properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block ECLOGITE_SLAB = registerBlock("eclogite_slab",
+            properties -> new SlabBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block ECLOGITE_WALL = registerBlock("eclogite_wall",
+            properties -> new WallBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_ECLOGITE_STAIRS = registerBlock("cobbled_eclogite_stairs",
+            properties -> new StairBlock(COBBLED_ECLOGITE.defaultBlockState(), properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_ECLOGITE_SLAB = registerBlock("cobbled_eclogite_slab",
+            properties -> new SlabBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_ECLOGITE_WALL = registerBlock("cobbled_eclogite_wall",
+            properties -> new WallBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_ECLOGITE_STAIRS = registerBlock("polished_eclogite_stairs",
+            properties -> new StairBlock(POLISHED_ECLOGITE.defaultBlockState(), properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_ECLOGITE_SLAB = registerBlock("polished_eclogite_slab",
+            properties -> new SlabBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_ECLOGITE_WALL = registerBlock("polished_eclogite_wall",
+            properties -> new WallBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block ECLOGITE_BRICKS_STAIRS = registerBlock("eclogite_bricks_stairs",
+            properties -> new StairBlock(ECLOGITE_BRICKS.defaultBlockState(), properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block ECLOGITE_BRICKS_SLAB = registerBlock("eclogite_bricks_slab",
+            properties -> new SlabBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block ECLOGITE_BRICKS_WALL = registerBlock("eclogite_bricks_wall",
+            properties -> new WallBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Block LOAM = registerBlock("loam", properties -> new Block(properties.strength(0.5F).sound(SoundType.GRAVEL).instrument(NoteBlockInstrument.SNARE)));
+    public static final Block GRASSY_LOAM = registerBlock("grassy_loam", properties -> new net.chickalo.bugsbugsandmorebugs.block.custom.GrassyLoamBlock(properties.strength(0.6F).sound(SoundType.GRASS).randomTicks()));
+    public static final Block ASHSTONE = registerBlock("ashstone", properties -> new Block(properties.strength(2.0F, 4.0F).requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block SHATTERSTONE = registerBlock("shatterstone", properties -> new Block(properties.strength(4.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    // Limestone family (maybe inherit more sandstone esque properties in the future idk)
+    public static final Block LIMESTONE = registerBlock("limestone",
+            properties -> new Block(properties.strength(0.8f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block RUBBLED_LIMESTONE = registerBlock("rubbled_limestone",
+            properties -> new Block(properties.strength(0.6f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block MOSSY_LIMESTONE = registerBlock("mossy_limestone",
+            properties -> new Block(properties.strength(0.8f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_LIMESTONE = registerBlock("polished_limestone",
+            properties -> new Block(properties.strength(2f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block WEATHERED_LIMESTONE = registerBlock("weathered_limestone",
+            properties -> new Block(properties.strength(0.6f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block LIMESTONE_PILLAR = registerBlock("limestone_pillar",
+            properties -> new RotatedPillarBlock(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block LIMESTONE_BRICKS = registerBlock("limestone_bricks",
+            properties -> new Block(properties.strength(3f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block LIMESTONE_BRICK_STAIRS = registerBlock("limestone_brick_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_BRICK_SLAB = registerBlock("limestone_brick_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_BRICK_WALL = registerBlock("limestone_brick_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_STAIRS = registerBlock("limestone_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_SLAB = registerBlock("limestone_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block LIMESTONE_WALL = registerBlock("limestone_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+    public static final Block RUBBLED_LIMESTONE_STAIRS = registerBlock("rubbled_limestone_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(0.6f)));
+    public static final Block RUBBLED_LIMESTONE_SLAB = registerBlock("rubbled_limestone_slab",
+            properties -> new SlabBlock(
+                    properties.strength(0.6f)));
+    public static final Block RUBBLED_LIMESTONE_WALL = registerBlock("rubbled_limestone_wall",
+            properties -> new WallBlock(
+                    properties.strength(0.6f)));
+    public static final Block POLISHED_LIMESTONE_STAIRS = registerBlock("polished_limestone_stairs",
+            properties -> new StairBlock(ModBlocks.RHYOLITE.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block POLISHED_LIMESTONE_SLAB = registerBlock("polished_limestone_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block POLISHED_LIMESTONE_WALL = registerBlock("polished_limestone_wall",
+            properties -> new WallBlock(
+                    properties.strength(3f)));
+
+    // Rendzina & Lithosol (possible future updates...?)
+    public static final Block RENDZINA = registerBlock("rendzina",
+            properties -> new Block(properties.strength(0.5f)
+                    .sound(SoundType.GRAVEL).instrument(NoteBlockInstrument.SNARE)));
+    public static final Block LITHOSOL = registerBlock("lithosol",
+            properties -> new Block(properties.strength(0.8f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+
+    // Maple family
+    public static final Block MAPLE_LOG = registerBlock("maple_log",
+            properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
+                    .sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MAPLE_WOOD = registerBlock("maple_wood",
+            properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
+                    .sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_MAPLE_LOG = registerBlock("stripped_maple_log",
+            properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
+                    .sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_MAPLE_WOOD = registerBlock("stripped_maple_wood",
+            properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
+                    .sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MAPLE_PLANKS = registerBlock("maple_planks",
+            properties -> new Block(properties.mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS)
+                    .strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MAPLE_LEAVES = registerBlock("maple_leaves",
+            properties -> new MapleLeavesBlock(
+                    0.01f,
+                    ParticleTypes.CHERRY_LEAVES,
+                    AmbientLeavesBlockSoundPlayer.noAmbientSound(),
+                    properties
+                            .mapColor(MapColor.PLANT)
+                            .strength(0.2F)
+                            .randomTicks()
+                            .sound(SoundType.POPLAR_LEAVES)
+                            .noOcclusion()
+                            .isValidSpawn(Blocks::ocelotOrParrot)
+                            .isSuffocating(Blocks::never)
+                            .ignitedByLava()
+                            .pushReaction(PushReaction.POPPED)
+                            .isRedstoneConductor(Blocks::never)
+            ));
+    public static final Block MAPLE_SAPLING = registerBlock("maple_sapling",
+            properties -> new SaplingBlock(ModTreeGrowers.MAPLE, properties
+                    .mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak()
+                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block MAPLE_STAIRS = registerBlock("maple_stairs",
+            properties -> new StairBlock(ModBlocks.MAPLE_PLANKS.defaultBlockState(),
+                    properties.strength(3f)));
+    public static final Block MAPLE_SLAB = registerBlock("maple_slab",
+            properties -> new SlabBlock(
+                    properties.strength(3f)));
+    public static final Block MAPLE_DOOR = registerBlock("maple_door",
+            properties -> new DoorBlock(BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
+    public static final Block MAPLE_TRAPDOOR = registerBlock("maple_trapdoor",
+            properties -> new TrapDoorBlock(BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
+    public static final Block MAPLE_BUTTON = registerBlock("maple_button",
+            properties -> new ButtonBlock(BlockSetType.CHERRY, 15, properties.strength(3f).noCollision()));
+    public static final Block MAPLE_PRESSURE_PLATE = registerBlock("maple_pressure_plate",
+            properties -> new PressurePlateBlock(BlockSetType.CHERRY, properties.mapColor(MapColor.COLOR_ORANGE).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(3f).noCollision().ignitedByLava().pushReaction(PushReaction.POPPED)));
+    public static final Block MAPLE_FENCE = registerBlock("maple_fence",
+            properties -> new FenceBlock(properties.strength(2f)));
+    public static final Block MAPLE_FENCE_GATE = registerBlock("maple_fence_gate",
+            properties -> new FenceGateBlock(WoodType.CHERRY, properties.strength(2f)));
+    public static final Block POTTED_MAPLE_SAPLING = registerBlockWithoutBlockItem("potted_maple_sapling",
+            properties -> new FlowerPotBlock(MAPLE_SAPLING, properties
+                    .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
+
+    // eventually ginkgo will go here
+
+    // Glowshroom Family
+    public static final Block GLOWSHROOM = registerBlock("glowshroom", properties -> new GlowshroomBlock(
+            ModFeatures.HUGE_GLOWSHROOM_KEY, properties.noCollision().instabreak().randomTicks()
+            .sound(SoundType.FUNGUS).lightLevel(state -> 12)));
+    public static final Block POTTED_GLOWSHROOM = registerBlockWithoutBlockItem("potted_glowshroom",
+            properties -> new FlowerPotBlock(GLOWSHROOM, properties
+                    .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
+    public static final Block GLOWSHROOM_BLOCK = registerBlock(
+            "glowshroom_block",
+            properties -> new HugeMushroomBlock(properties.strength(0.2f)
+                    .sound(SoundType.WOOD).lightLevel(state -> 10)));
+
+    // Crops & Bushes
+    public static final Block DAIKON_CROP = registerBlockWithoutBlockItem("daikon_crop",
+            properties -> new DaikonCropBlock(properties.noCollision().randomTicks().instabreak().sound(SoundType.CROP)
+                    .pushReaction(PushReaction.POPPED)));
+    public static final Block HASKAP_BERRY_BUSH = registerBlockWithoutBlockItem("haskap_berry_bush",
+            properties -> new HaskapBerryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.POPPED)));
+    public static final Block BARBERRY_BUSH = registerBlockWithoutBlockItem("barberry_bush",
+            properties -> new BarberryBushBlock(properties.noCollision().instabreak().sound(SoundType.SWEET_BERRY_BUSH)
+                    .pushReaction(PushReaction.POPPED)));
+    public static final Block BELLFLOWERS = registerBlock("bellflowers",
+            properties -> new FlowerBlock(
+                    MobEffects.WATER_BREATHING, 5.0F,
+                    properties.noCollision()
+                            .instabreak()
+                            .sound(SoundType.GRASS)
+                            .pushReaction(PushReaction.POPPED)
+            ));
+    public static final VariableHeightPlantBlock SILVER_GRASS =
+            (VariableHeightPlantBlock) registerBlock("silver_grass",
+                    properties -> new VariableHeightPlantBlock(2,
+                            properties.noCollision().instabreak().randomTicks()
+                                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final VariableHeightPlantBlock BUSH_CLOVER =
+            (VariableHeightPlantBlock) registerBlock("bush_clover",
+                    properties -> new VariableHeightPlantBlock(2,
+                            properties.noCollision().instabreak().randomTicks()
+                                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final VariableHeightPlantBlock DWARF_BAMBOO =
+            (VariableHeightPlantBlock) registerBlock("dwarf_bamboo",
+                    properties -> new VariableHeightPlantBlock(4,
+                            properties.noCollision().instabreak().randomTicks().sound(SoundType.BAMBOO).pushReaction(PushReaction.POPPED)));
+
+
+    public static ResourceKey<Block> getRK(Block block) {
+        return BuiltInRegistries.BLOCK.getResourceKey(block).get();
+    }
+
+    private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
+        Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name))));
+        registerBlockItem(name, toRegister);
+        return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name), toRegister);
+    }
+
+    private static Block registerBlockWithoutBlockItem(String name, Function<BlockBehaviour.Properties, Block> function) {
+        Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name))));;
+        return Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name), toRegister);
+    }
+
+    private static void registerBlockItem(String name, Block block) {
+        Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name),
+                new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix()
+                        .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name)))));
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
+            output.accept(block);
+        });
+
+    }
+
+    public static void registerModBlocks() {
+        BugsBugsAndMoreBugs.LOGGER.info("Registering Mod Blocks for " + BugsBugsAndMoreBugs.MOD_ID);
+    }
+}

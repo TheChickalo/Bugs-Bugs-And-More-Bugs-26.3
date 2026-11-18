@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "bugsbugsandmorebugs:block/grassy_loam",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 7972956
+      }
+    ]
+  }
+}

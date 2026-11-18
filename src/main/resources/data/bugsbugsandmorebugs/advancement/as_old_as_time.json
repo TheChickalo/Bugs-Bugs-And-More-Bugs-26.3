@@ -1,0 +1,35 @@
+{
+  "parent": "bugsbugsandmorebugs:root",
+  "display": {
+    "icon": {
+      "id": "bugsbugsandmorebugs:ashstone"
+    },
+    "title": {
+      "translate": "advancements.bugsbugsandmorebugs.as_old_as_time.title"
+    },
+    "description": {
+      "translate": "advancements.bugsbugsandmorebugs.as_old_as_time.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "found_sundering": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "bugsbugsandmorebugs:ashstone",
+              "bugsbugsandmorebugs:shatterstone"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "found_sundering"
+    ]
+  ]
+}

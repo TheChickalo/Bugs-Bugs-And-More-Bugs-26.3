@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "eclogite",
+  "key": {
+    "#": "bugsbugsandmorebugs:eclogite_bricks"
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "bugsbugsandmorebugs:eclogite_bricks_wall"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "eclogite",
+  "key": {
+    "#": "bugsbugsandmorebugs:cobbled_eclogite"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "bugsbugsandmorebugs:cobbled_eclogite_stairs"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cobbled_eclogite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "bugsbugsandmorebugs:cobbled_eclogite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "bugsbugsandmorebugs:eclogite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cobbled_eclogite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bugsbugsandmorebugs:eclogite"
+    ]
+  }
+}

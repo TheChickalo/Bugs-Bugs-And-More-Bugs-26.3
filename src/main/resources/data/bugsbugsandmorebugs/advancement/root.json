@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "bugsbugsandmorebugs:rhyolite"
+    },
+    "title": {
+      "translate": "advancements.bugsbugsandmorebugs.root.title"
+    },
+    "description": {
+      "translate": "advancements.bugsbugsandmorebugs.root.description"
+    },
+    "frame": "task",
+    "background": "minecraft:gui/advancements/backgrounds/stone"
+  },
+  "criteria": {
+    "enter_elsewhere": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "bugsbugsandmorebugs:elsewheredim"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "enter_elsewhere"
+    ]
+  ]
+}

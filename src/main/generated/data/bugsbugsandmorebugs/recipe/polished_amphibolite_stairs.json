@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "amphibolite",
+  "key": {
+    "#": "bugsbugsandmorebugs:polished_amphibolite"
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "bugsbugsandmorebugs:polished_amphibolite_stairs"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/amphibolite_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/amphibolite"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/amphibolite_slab_top"
+    }
+  }
+}
