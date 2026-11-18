@@ -17,6 +17,12 @@ public class ModBiomes {
     public static final ResourceKey<Biome> HIGHLAND_KARST = registerBiomeKey("highland_karst");
 
 
+    // New Elsewhere biome families. See README for climate-adjacency limitations.
+    public static final ResourceKey<Biome> STONE_FOREST = registerBiomeKey("stone_forest");
+    public static final ResourceKey<Biome> GINKGO_FOREST = registerBiomeKey("ginkgo_forest");
+    public static final ResourceKey<Biome> HINOKI_HIGHLANDS = registerBiomeKey("hinoki_highlands");
+    public static final ResourceKey<Biome> VOLCANIC_PEAK = registerBiomeKey("volcanic_peak");
+
     public static void registerBiomes() {
         // Elsewhere biomes are not injected into the Overworld.
     }
@@ -25,6 +31,10 @@ public class ModBiomes {
         var carvers = context.lookup(Registries.CARVER);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
+        register(context, STONE_FOREST, ModOverworldBiomes.stoneForest(placedFeatures, carvers));
+        register(context, GINKGO_FOREST, ModOverworldBiomes.ginkgoForest(placedFeatures, carvers));
+        register(context, HINOKI_HIGHLANDS, ModOverworldBiomes.hinokiHighlands(placedFeatures, carvers));
+        register(context, VOLCANIC_PEAK, ModOverworldBiomes.volcanicPeak(placedFeatures, carvers));
         register(context, UNDERHANG, ModOverworldBiomes.underhang(placedFeatures, carvers));
         register(context, MAPLE_FOREST , ModOverworldBiomes.mapleForest(placedFeatures, carvers));
         register(context, HIGHLAND_KARST, ModOverworldBiomes.highlandKarst(placedFeatures, carvers)

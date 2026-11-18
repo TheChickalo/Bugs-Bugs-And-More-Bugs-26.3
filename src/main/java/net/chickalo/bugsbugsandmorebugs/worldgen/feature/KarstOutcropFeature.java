@@ -272,7 +272,8 @@ public record KarstOutcropFeature(
                 || !isNaturalGround(level.getBlockState(ground.below()))
                 || !level.getFluidState(ground).isEmpty()
                 || !level.getFluidState(ground.above()).isEmpty()
-                || !level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)) {
+                || (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)
+                        && !level.getBiome(ground).is(ModBiomes.STONE_FOREST))) {
             return null;
         }
         return ground;

@@ -170,6 +170,23 @@
     {
       "type": "minecraft:condition",
       "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:volcanic_peak"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:above_preliminary_surface"
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": "bugsbugsandmorebugs:rhyolite"
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
         "type": "minecraft:above_preliminary_surface"
       },
       "then_run": {

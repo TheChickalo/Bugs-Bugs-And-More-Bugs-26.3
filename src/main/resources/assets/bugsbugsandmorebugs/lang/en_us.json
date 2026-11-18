@@ -143,5 +143,9 @@
   "block.bugsbugsandmorebugs.amphibolite_brick_stairs": "Amphibolite Brick Stairs",
   "block.bugsbugsandmorebugs.amphibolite_brick_slab": "Amphibolite Brick Slab",
   "block.bugsbugsandmorebugs.amphibolite_brick_wall": "Amphibolite Brick Wall",
-  "block.bugsbugsandmorebugs.lapilli": "Lapilli"
+  "block.bugsbugsandmorebugs.lapilli": "Lapilli",
+  "biome.bugsbugsandmorebugs.stone_forest": "Stone Forest",
+  "biome.bugsbugsandmorebugs.ginkgo_forest": "Ginkgo Forest",
+  "biome.bugsbugsandmorebugs.hinoki_highlands": "Hinoki Highlands",
+  "biome.bugsbugsandmorebugs.volcanic_peak": "Volcanic Peak"
 }

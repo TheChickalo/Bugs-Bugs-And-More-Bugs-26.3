@@ -42,12 +42,23 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> KARST_ANIMAL_TRAIL_PLACED_KEY = registerKey("karst_animal_trail_placed");
 
 
+    public static final ResourceKey<PlacedFeature> STONE_FOREST_SPIRES_PLACED_KEY = registerKey("stone_forest_spires_placed");
     public static final ResourceKey<PlacedFeature> AMPHIBOLITE_DEPOSIT_PLACED_KEY = registerKey("amphibolite_deposit_placed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
 
         // Amphibolite: clusters in metamorphic country rock, like tuff deposits.
+        // Tall Stone Forest pinnacles; intentionally biome-limited.
+        register(context, STONE_FOREST_SPIRES_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.STONE_FOREST_SPIRES_KEY),
+                List.of(
+                        CountPlacement.of(5),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
         register(context, AMPHIBOLITE_DEPOSIT_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.AMPHIBOLITE_DEPOSIT_KEY),
                 List.of(

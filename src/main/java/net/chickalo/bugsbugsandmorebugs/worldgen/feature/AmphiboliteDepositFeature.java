@@ -37,7 +37,7 @@ public record AmphiboliteDepositFeature() implements Feature {
                     if (at.getY() < level.getMinY() || at.getY() >= level.getMaxY()) continue;
                     var state = level.getBlockState(at);
                     // Preserve the solid disaster layer and existing caves.
-                    if (!state.is(ModBlocks.SCHIST) && !state.is(ModBlocks.ECLOGITE)) continue;
+                    if (!state.is(ModBlocks.SCHIST)) continue; // Never replace Eclogite or the Sundering Horizon.
                     placed |= level.setBlock(at, ModBlocks.AMPHIBOLITE.defaultBlockState(), 2);
                 }
             }

@@ -90,7 +90,8 @@ public record KarstGroundPatchFeature() implements Feature {
                 BlockPos ground = top.below();
 
                 // Do not touch caves, water, outcrops, or any other biome.
-                if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)) continue;
+                if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)
+                        && !level.getBiome(ground).is(ModBiomes.STONE_FOREST)) continue;
                 if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(ground), Blocks.GRASS_BLOCK)) continue;
                 if (!level.getFluidState(top).isEmpty()) continue;
                 BlockState above = level.getBlockState(top);

@@ -166,4 +166,84 @@ public class ModOverworldBiomes {
                 .build();
     }
 
+
+    // ================================================================
+    // ELSEWHERE BIOME PROTOTYPES (26.3)
+    // Stone Forest spires ARE real; ginkgo and hinoki temporarily share
+    // Maple's tree feature until their own wood, leaves, and saplings exist.
+    // No vanilla passive or hostile mobs are added in these four biomes.
+    // ================================================================
+    public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
+        generation.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
+        );
+        generation.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY
+        );
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(0.62F).downfall(0.49F)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x4B9A95).grassColorOverride(0x8AAE65).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(generation.build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x8ACFEF))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xD5E5DD))
+                .build();
+    }
+
+    public static Biome ginkgoForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // TODO: Replace with GINKGO_TREE_PLACED_KEY when ginkgo texture and foliage models are ready.
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.MAPLE_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.MAPLE_SHORT_GRASS_PLACED_KEY);
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(0.67F).downfall(0.68F)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x667F66).grassColorOverride(0xB5AF62).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(generation.build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0xA7D6D6))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xDAD5BB))
+                .build();
+    }
+
+    public static Biome hinokiHighlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // TODO: Replace the Maple stand-in with tall Hinoki conifers.
+        // Keep tree features out of volcanicPeak() to establish the treeline.
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.MAPLE_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.MAPLE_SHORT_GRASS_PLACED_KEY);
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(0.3F).downfall(0.65F)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x506C72).grassColorOverride(0x6F966C).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(generation.build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x9AC4D0))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0x9CAFB7))
+                .build();
+    }
+
+    public static Biome volcanicPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        // Treeless by design. The material rule paints the exposed volcanic rock.
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(-0.4F).downfall(0.08F)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x596E7F).grassColorOverride(0x70746D).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(new BiomeGenerationSettings.Builder(features, carvers).build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0xA9C9D9))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xB8C4CF))
+                .build();
+    }
 }
