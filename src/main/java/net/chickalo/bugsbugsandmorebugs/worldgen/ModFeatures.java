@@ -35,7 +35,10 @@ public class ModFeatures {
     public static final ResourceKey<Feature> KARST_ANIMAL_TRAIL_KEY = registerKey("karst_animal_trail");
 
 
+    public static final ResourceKey<Feature> AMPHIBOLITE_DEPOSIT_KEY = registerKey("amphibolite_deposit");
+
     public static void bootstrap(BootstrapContext<Feature> context) {
+        context.register(AMPHIBOLITE_DEPOSIT_KEY, new AmphiboliteDepositFeature());
         context.register(MAPLE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.MAPLE_LOG),
                 new MapleTrunkPlacer(

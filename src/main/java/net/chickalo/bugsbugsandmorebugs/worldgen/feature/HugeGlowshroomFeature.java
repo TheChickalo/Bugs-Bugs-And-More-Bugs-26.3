@@ -324,8 +324,8 @@ public record HugeGlowshroomFeature(Block cap, Block stem) implements Feature {
     }
 
     private boolean isSoil(BlockState state) {
-        return state.is(Blocks.GRASS_BLOCK)
-                || state.is(Blocks.DIRT)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.GRASS_BLOCK)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
                 || state.is(Blocks.COARSE_DIRT)
                 || state.is(Blocks.PODZOL)
                 || state.is(Blocks.ROOTED_DIRT)

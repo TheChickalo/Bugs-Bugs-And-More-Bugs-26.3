@@ -19,6 +19,22 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
+        blockModelGenerators.family(ModBlocks.AMPHIBOLITE)
+                .stairs(ModBlocks.AMPHIBOLITE_STAIRS)
+                .slab(ModBlocks.AMPHIBOLITE_SLAB)
+                .wall(ModBlocks.AMPHIBOLITE_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_AMPHIBOLITE)
+                .stairs(ModBlocks.POLISHED_AMPHIBOLITE_STAIRS)
+                .slab(ModBlocks.POLISHED_AMPHIBOLITE_SLAB)
+                .wall(ModBlocks.POLISHED_AMPHIBOLITE_WALL);
+        blockModelGenerators.family(ModBlocks.AMPHIBOLITE_BRICKS)
+                .stairs(ModBlocks.AMPHIBOLITE_BRICK_STAIRS)
+                .slab(ModBlocks.AMPHIBOLITE_BRICK_SLAB)
+                .wall(ModBlocks.AMPHIBOLITE_BRICK_WALL);
+        blockModelGenerators.createTrivialCube(ModBlocks.MOSSY_RHYOLITE);
+        blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_AMPHIBOLITE);
+        blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_AMPHIBOLITE_BRICKS);
+        blockModelGenerators.createTrivialCube(ModBlocks.LAPILLI);
 
         blockModelGenerators.createTrivialCube(ModBlocks.TEMP_PORTAL);
 
@@ -59,6 +75,27 @@ public class ModModelProvider extends FabricModelProvider {
                 .wall(ModBlocks.SCHIST_BRICKS_WALL);
         blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_SCHIST);
         blockModelGenerators.createTrivialCube(ModBlocks.CRACKED_SCHIST_BRICKS);
+        blockModelGenerators.family(ModBlocks.ECLOGITE)
+                .stairs(ModBlocks.ECLOGITE_STAIRS)
+                .slab(ModBlocks.ECLOGITE_SLAB)
+                .wall(ModBlocks.ECLOGITE_WALL);
+        blockModelGenerators.family(ModBlocks.COBBLED_ECLOGITE)
+                .stairs(ModBlocks.COBBLED_ECLOGITE_STAIRS)
+                .slab(ModBlocks.COBBLED_ECLOGITE_SLAB)
+                .wall(ModBlocks.COBBLED_ECLOGITE_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_ECLOGITE)
+                .stairs(ModBlocks.POLISHED_ECLOGITE_STAIRS)
+                .slab(ModBlocks.POLISHED_ECLOGITE_SLAB)
+                .wall(ModBlocks.POLISHED_ECLOGITE_WALL);
+        blockModelGenerators.family(ModBlocks.ECLOGITE_BRICKS)
+                .stairs(ModBlocks.ECLOGITE_BRICKS_STAIRS)
+                .slab(ModBlocks.ECLOGITE_BRICKS_SLAB)
+                .wall(ModBlocks.ECLOGITE_BRICKS_WALL);
+        blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_ECLOGITE);
+        blockModelGenerators.createTrivialCube(ModBlocks.CRACKED_ECLOGITE_BRICKS);
+        blockModelGenerators.createTrivialCube(ModBlocks.LOAM);
+        blockModelGenerators.createTrivialCube(ModBlocks.ASHSTONE);
+        blockModelGenerators.createTrivialCube(ModBlocks.SHATTERSTONE);
         blockModelGenerators.createTrivialCube(ModBlocks.MOSSY_LIMESTONE);
         blockModelGenerators.family(ModBlocks.RUBBLED_LIMESTONE)
                 .stairs(ModBlocks.RUBBLED_LIMESTONE_STAIRS)

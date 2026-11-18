@@ -16,6 +16,33 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.getRK(ModBlocks.MOSSY_RHYOLITE))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_AMPHIBOLITE))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.CHISELED_AMPHIBOLITE))
+                .add(ModBlocks.getRK(ModBlocks.CHISELED_AMPHIBOLITE_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_AMPHIBOLITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_AMPHIBOLITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_AMPHIBOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_BRICK_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_BRICK_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_BRICK_WALL));
+
+        tag(BlockTags.WALLS)
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_AMPHIBOLITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE_BRICK_WALL));
+
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.getRK(ModBlocks.LAPILLI));
+
+        tag(BlockTags.STONE_ORE_REPLACEABLES).add(ModBlocks.getRK(ModBlocks.AMPHIBOLITE));
+
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.getRK(ModBlocks.RHYOLITE))
                 .add(ModBlocks.getRK(ModBlocks.COBBLED_RHYOLITE))
@@ -86,6 +113,43 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.POLISHED_SCHIST_WALL))
                 .add(ModBlocks.getRK(ModBlocks.SCHIST_BRICKS_WALL));
 
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_ECLOGITE))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_ECLOGITE))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.CHISELED_ECLOGITE))
+                .add(ModBlocks.getRK(ModBlocks.CRACKED_ECLOGITE_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_ECLOGITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_ECLOGITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_ECLOGITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_ECLOGITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_ECLOGITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_ECLOGITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_BRICKS_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_BRICKS_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_BRICKS_WALL));
+
+        tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE));
+
+        tag(BlockTags.WALLS)
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_ECLOGITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_ECLOGITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.ECLOGITE_BRICKS_WALL));
+
+        tag(BlockTags.DIRT)
+                .add(ModBlocks.getRK(ModBlocks.LOAM));
+        tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(ModBlocks.getRK(ModBlocks.LOAM))
+                .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM));
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.getRK(ModBlocks.ASHSTONE))
+                .add(ModBlocks.getRK(ModBlocks.SHATTERSTONE));
         tag(BlockTags.STONE_ORE_REPLACEABLES)
                 .add(ModBlocks.getRK(ModBlocks.RHYOLITE));
 

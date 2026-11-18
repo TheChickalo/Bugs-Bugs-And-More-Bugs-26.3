@@ -29,8 +29,8 @@ public class GlowshroomBlock extends MushroomBlock {
 
         BlockState ground = level.getBlockState(pos.below());
 
-        return ground.is(Blocks.GRASS_BLOCK)
-                || ground.is(Blocks.DIRT)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.GRASS_BLOCK)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.DIRT)
                 || ground.is(Blocks.COARSE_DIRT)
                 || ground.is(Blocks.PODZOL)
                 || ground.is(Blocks.ROOTED_DIRT)

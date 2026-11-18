@@ -81,7 +81,7 @@ public record HighlandMeadowPatchFeature() implements Feature {
 
             if (y <= level.getMinY() || y >= level.getMaxY() - 4) continue;
             if (!level.getBiome(pos).is(ModBiomes.HIGHLAND_KARST)) continue;
-            if (!level.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK)) continue;
+            if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(pos.below()), Blocks.GRASS_BLOCK)) continue;
 
             Block target = choosePlant(patch, random);
             if (target == null) continue;

@@ -36,6 +36,37 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
+                stairBuilder(ModBlocks.AMPHIBOLITE_STAIRS, Ingredient.of(ModBlocks.AMPHIBOLITE))
+                        .unlockedBy(getHasName(ModBlocks.AMPHIBOLITE), has(ModBlocks.AMPHIBOLITE))
+                        .group("amphibolite")
+                        .save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AMPHIBOLITE_SLAB, ModBlocks.AMPHIBOLITE);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AMPHIBOLITE_WALL, Ingredient.of(ModBlocks.AMPHIBOLITE))
+                        .unlockedBy(getHasName(ModBlocks.AMPHIBOLITE), has(ModBlocks.AMPHIBOLITE))
+                        .group("amphibolite")
+                        .save(output);
+                stairBuilder(ModBlocks.POLISHED_AMPHIBOLITE_STAIRS, Ingredient.of(ModBlocks.POLISHED_AMPHIBOLITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_AMPHIBOLITE), has(ModBlocks.POLISHED_AMPHIBOLITE))
+                        .group("amphibolite")
+                        .save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_AMPHIBOLITE_SLAB, ModBlocks.POLISHED_AMPHIBOLITE);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_AMPHIBOLITE_WALL, Ingredient.of(ModBlocks.POLISHED_AMPHIBOLITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_AMPHIBOLITE), has(ModBlocks.POLISHED_AMPHIBOLITE))
+                        .group("amphibolite")
+                        .save(output);
+                stairBuilder(ModBlocks.AMPHIBOLITE_BRICK_STAIRS, Ingredient.of(ModBlocks.AMPHIBOLITE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.AMPHIBOLITE_BRICKS), has(ModBlocks.AMPHIBOLITE_BRICKS))
+                        .group("amphibolite")
+                        .save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AMPHIBOLITE_BRICK_SLAB, ModBlocks.AMPHIBOLITE_BRICKS);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AMPHIBOLITE_BRICK_WALL, Ingredient.of(ModBlocks.AMPHIBOLITE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.AMPHIBOLITE_BRICKS), has(ModBlocks.AMPHIBOLITE_BRICKS))
+                        .group("amphibolite")
+                        .save(output);
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_AMPHIBOLITE, Ingredient.of(ModBlocks.AMPHIBOLITE));
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AMPHIBOLITE_BRICKS, Ingredient.of(ModBlocks.POLISHED_AMPHIBOLITE));
+                chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_AMPHIBOLITE, Ingredient.of(ModBlocks.AMPHIBOLITE_SLAB));
+                chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_AMPHIBOLITE_BRICKS, Ingredient.of(ModBlocks.AMPHIBOLITE_BRICK_SLAB));
                 shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TEMP_PORTAL)
                         .pattern("RRR")
                         .pattern("RRR")
@@ -213,6 +244,56 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCHIST_BRICKS_WALL, Ingredient.of(ModBlocks.SCHIST_BRICKS))
                         .unlockedBy(getHasName(ModBlocks.SCHIST_BRICKS), has(ModBlocks.SCHIST_BRICKS))
                         .group("schist").save(output);
+
+                // Eclogite family
+                // 4 blocks in a square create the polished and brick variants.
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ECLOGITE, 4)
+                        .pattern("##").pattern("##").define('#', ModBlocks.COBBLED_ECLOGITE)
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_ECLOGITE), has(ModBlocks.COBBLED_ECLOGITE)).save(output);
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ECLOGITE_BRICKS, 4)
+                        .pattern("##").pattern("##").define('#', ModBlocks.POLISHED_ECLOGITE)
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_ECLOGITE), has(ModBlocks.POLISHED_ECLOGITE)).save(output);
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_ECLOGITE)
+                        .pattern("#").pattern("#").define('#', ModBlocks.ECLOGITE_BRICKS_SLAB)
+                        .unlockedBy(getHasName(ModBlocks.ECLOGITE_BRICKS_SLAB), has(ModBlocks.ECLOGITE_BRICKS_SLAB)).save(output);
+                SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(ModBlocks.COBBLED_ECLOGITE), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS,
+                        ModBlocks.ECLOGITE, 0.1F, 200)
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_ECLOGITE), has(ModBlocks.COBBLED_ECLOGITE))
+                        .save(output);
+                SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(ModBlocks.ECLOGITE_BRICKS), RecipeCategory.BUILDING_BLOCKS, CookingBookCategory.BLOCKS,
+                        ModBlocks.CRACKED_ECLOGITE_BRICKS, 0.1F, 200)
+                        .unlockedBy(getHasName(ModBlocks.ECLOGITE_BRICKS), has(ModBlocks.ECLOGITE_BRICKS))
+                        .save(output);
+                stairBuilder(ModBlocks.ECLOGITE_STAIRS, Ingredient.of(ModBlocks.ECLOGITE))
+                        .unlockedBy(getHasName(ModBlocks.ECLOGITE), has(ModBlocks.ECLOGITE))
+                        .group("eclogite").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ECLOGITE_SLAB, ModBlocks.ECLOGITE);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ECLOGITE_WALL, Ingredient.of(ModBlocks.ECLOGITE))
+                        .unlockedBy(getHasName(ModBlocks.ECLOGITE), has(ModBlocks.ECLOGITE))
+                        .group("eclogite").save(output);
+                stairBuilder(ModBlocks.COBBLED_ECLOGITE_STAIRS, Ingredient.of(ModBlocks.COBBLED_ECLOGITE))
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_ECLOGITE), has(ModBlocks.COBBLED_ECLOGITE))
+                        .group("eclogite").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_ECLOGITE_SLAB, ModBlocks.COBBLED_ECLOGITE);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_ECLOGITE_WALL, Ingredient.of(ModBlocks.COBBLED_ECLOGITE))
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_ECLOGITE), has(ModBlocks.COBBLED_ECLOGITE))
+                        .group("eclogite").save(output);
+                stairBuilder(ModBlocks.POLISHED_ECLOGITE_STAIRS, Ingredient.of(ModBlocks.POLISHED_ECLOGITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_ECLOGITE), has(ModBlocks.POLISHED_ECLOGITE))
+                        .group("eclogite").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ECLOGITE_SLAB, ModBlocks.POLISHED_ECLOGITE);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_ECLOGITE_WALL, Ingredient.of(ModBlocks.POLISHED_ECLOGITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_ECLOGITE), has(ModBlocks.POLISHED_ECLOGITE))
+                        .group("eclogite").save(output);
+                stairBuilder(ModBlocks.ECLOGITE_BRICKS_STAIRS, Ingredient.of(ModBlocks.ECLOGITE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.ECLOGITE_BRICKS), has(ModBlocks.ECLOGITE_BRICKS))
+                        .group("eclogite").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ECLOGITE_BRICKS_SLAB, ModBlocks.ECLOGITE_BRICKS);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ECLOGITE_BRICKS_WALL, Ingredient.of(ModBlocks.ECLOGITE_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.ECLOGITE_BRICKS), has(ModBlocks.ECLOGITE_BRICKS))
+                        .group("eclogite").save(output);
 
                 // lwk gonna need a custom builder for weathered and other limestone types
                 bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICKS, Ingredient.of(ModBlocks.LIMESTONE));

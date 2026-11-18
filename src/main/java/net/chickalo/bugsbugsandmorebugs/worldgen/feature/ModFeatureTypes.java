@@ -96,6 +96,14 @@ public final class ModFeatureTypes {
                 KarstAnimalTrailFeature.CODEC
         );
 
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(
+                        BugsBugsAndMoreBugs.MOD_ID,
+                        "amphibolite_deposit"),
+                AmphiboliteDepositFeature.CODEC
+        );
+
 
     }
 }

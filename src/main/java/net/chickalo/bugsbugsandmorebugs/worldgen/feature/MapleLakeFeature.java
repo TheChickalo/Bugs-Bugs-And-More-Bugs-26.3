@@ -1,6 +1,7 @@
 
 package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -516,10 +517,12 @@ public record MapleLakeFeature() implements Feature {
     }
 
     private static BlockState randomLakebedBlock(RandomSource random) {
-        return switch (random.nextInt(3)) {
-            case 0 -> Blocks.GRAVEL.defaultBlockState();
-            case 1 -> Blocks.STONE.defaultBlockState();
-            default -> Blocks.ANDESITE.defaultBlockState();
-        };
+        // Elsewhere lakebed: amphibolite rubble, rhyolite and sparse mossy stone.
+        int roll = random.nextInt(100);
+        if (roll < 33) return ModBlocks.AMPHIBOLITE.defaultBlockState();
+        if (roll < 66) return ModBlocks.COBBLED_RHYOLITE.defaultBlockState();
+        if (roll < 81) return ModBlocks.RHYOLITE.defaultBlockState();
+        if (roll < 92) return ModBlocks.MOSSY_RHYOLITE.defaultBlockState();
+        return ModBlocks.LAPILLI.defaultBlockState();
     }
 }

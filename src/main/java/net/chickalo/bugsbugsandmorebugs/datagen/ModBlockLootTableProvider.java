@@ -34,8 +34,28 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
+        dropSelf(ModBlocks.MOSSY_RHYOLITE);
+        dropSelf(ModBlocks.AMPHIBOLITE);
+        dropSelf(ModBlocks.POLISHED_AMPHIBOLITE);
+        dropSelf(ModBlocks.AMPHIBOLITE_BRICKS);
+        dropSelf(ModBlocks.CHISELED_AMPHIBOLITE);
+        dropSelf(ModBlocks.CHISELED_AMPHIBOLITE_BRICKS);
+        dropSelf(ModBlocks.AMPHIBOLITE_STAIRS);
+        add(ModBlocks.AMPHIBOLITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.AMPHIBOLITE_WALL);
+        dropSelf(ModBlocks.POLISHED_AMPHIBOLITE_STAIRS);
+        add(ModBlocks.POLISHED_AMPHIBOLITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_AMPHIBOLITE_WALL);
+        dropSelf(ModBlocks.AMPHIBOLITE_BRICK_STAIRS);
+        add(ModBlocks.AMPHIBOLITE_BRICK_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.AMPHIBOLITE_BRICK_WALL);
+        dropSelf(ModBlocks.LAPILLI);
 
         dropSelf(ModBlocks.TEMP_PORTAL);
+        dropSelf(ModBlocks.LOAM);
+        dropSelf(ModBlocks.ASHSTONE);
+        dropSelf(ModBlocks.SHATTERSTONE);
+        add(ModBlocks.GRASSY_LOAM, createSingleItemTableWithSilkTouch(ModBlocks.GRASSY_LOAM, ModBlocks.LOAM));
         dropSelf(ModBlocks.COBBLED_RHYOLITE);
         dropSelf(ModBlocks.POLISHED_RHYOLITE);
         add(
@@ -80,6 +100,26 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.SCHIST_BRICKS_STAIRS);
         dropSelf(ModBlocks.SCHIST_BRICKS_WALL);
         add(ModBlocks.SCHIST_BRICKS_SLAB, this::createSlabItemTable);
+
+        add(ModBlocks.ECLOGITE,
+                createSingleItemTableWithSilkTouch(ModBlocks.ECLOGITE, ModBlocks.COBBLED_ECLOGITE));
+        dropSelf(ModBlocks.COBBLED_ECLOGITE);
+        dropSelf(ModBlocks.POLISHED_ECLOGITE);
+        dropSelf(ModBlocks.ECLOGITE_BRICKS);
+        dropSelf(ModBlocks.CHISELED_ECLOGITE);
+        dropSelf(ModBlocks.CRACKED_ECLOGITE_BRICKS);
+        dropSelf(ModBlocks.ECLOGITE_STAIRS);
+        dropSelf(ModBlocks.ECLOGITE_WALL);
+        add(ModBlocks.ECLOGITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.COBBLED_ECLOGITE_STAIRS);
+        dropSelf(ModBlocks.COBBLED_ECLOGITE_WALL);
+        add(ModBlocks.COBBLED_ECLOGITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_ECLOGITE_STAIRS);
+        dropSelf(ModBlocks.POLISHED_ECLOGITE_WALL);
+        add(ModBlocks.POLISHED_ECLOGITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.ECLOGITE_BRICKS_STAIRS);
+        dropSelf(ModBlocks.ECLOGITE_BRICKS_WALL);
+        add(ModBlocks.ECLOGITE_BRICKS_SLAB, this::createSlabItemTable);
 
         add(
                 ModBlocks.LIMESTONE,

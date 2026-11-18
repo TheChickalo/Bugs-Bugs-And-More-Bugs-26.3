@@ -91,7 +91,7 @@ public record KarstGroundPatchFeature() implements Feature {
 
                 // Do not touch caves, water, outcrops, or any other biome.
                 if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)) continue;
-                if (!level.getBlockState(ground).is(Blocks.GRASS_BLOCK)) continue;
+                if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(ground), Blocks.GRASS_BLOCK)) continue;
                 if (!level.getFluidState(top).isEmpty()) continue;
                 BlockState above = level.getBlockState(top);
                 if (!(above.isAir() || above.is(Blocks.SHORT_GRASS) || above.is(Blocks.FERN))) {
@@ -180,10 +180,10 @@ public record KarstGroundPatchFeature() implements Feature {
     private static boolean isCommonSubsoil(BlockState state) {
         // Never replace ores, caves, water, existing exposed formations,
         // biome-specific surfaces, or player-created decorative blocks.
-        return state.is(Blocks.DIRT)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
                 || state.is(Blocks.COARSE_DIRT)
                 || state.is(Blocks.ROOTED_DIRT)
-                || state.is(Blocks.STONE)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.STONE)
                 || state.is(ModBlocks.RENDZINA)
                 || state.is(ModBlocks.LITHOSOL);
     }

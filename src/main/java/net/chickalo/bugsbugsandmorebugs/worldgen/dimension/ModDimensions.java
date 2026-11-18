@@ -81,9 +81,9 @@ public class ModDimensions {
                         false, // Ceiling
                         false, // Ender Dragon fight
                         1.0,   // Coordinate scale
-                        -64,   // Minimum Y
-                        384,   // Height
-                        384,   // Logical height
+                        -128,   // Minimum Y
+                        448,   // Height
+                        448,   // Logical height
 
                         blocks.getOrThrow(
                                 BlockTags.INFINIBURN_OVERWORLD

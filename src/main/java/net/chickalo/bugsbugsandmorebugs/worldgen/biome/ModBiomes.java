@@ -12,6 +12,7 @@ import terrablender.api.EndBiomeRegistry;
 import terrablender.api.Regions;
 
 public class ModBiomes {
+    public static final ResourceKey<Biome> UNDERHANG = registerBiomeKey("underhang");
     public static final ResourceKey<Biome> MAPLE_FOREST = registerBiomeKey("maple_forest");
     public static final ResourceKey<Biome> HIGHLAND_KARST = registerBiomeKey("highland_karst");
 
@@ -24,6 +25,7 @@ public class ModBiomes {
         var carvers = context.lookup(Registries.CARVER);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
+        register(context, UNDERHANG, ModOverworldBiomes.underhang(placedFeatures, carvers));
         register(context, MAPLE_FOREST , ModOverworldBiomes.mapleForest(placedFeatures, carvers));
         register(context, HIGHLAND_KARST, ModOverworldBiomes.highlandKarst(placedFeatures, carvers)
         );

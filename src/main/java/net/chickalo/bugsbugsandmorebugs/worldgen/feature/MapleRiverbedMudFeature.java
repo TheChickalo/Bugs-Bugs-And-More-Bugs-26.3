@@ -124,8 +124,8 @@ public record MapleRiverbedMudFeature() implements Feature {
     }
 
     private static boolean isDirt(BlockState state) {
-        return state.is(Blocks.DIRT)
-                || state.is(Blocks.GRASS_BLOCK)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.GRASS_BLOCK)
                 || state.is(Blocks.COARSE_DIRT)
                 || state.is(Blocks.PODZOL)
                 || state.is(Blocks.ROOTED_DIRT);

@@ -42,8 +42,23 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> KARST_ANIMAL_TRAIL_PLACED_KEY = registerKey("karst_animal_trail_placed");
 
 
+    public static final ResourceKey<PlacedFeature> AMPHIBOLITE_DEPOSIT_PLACED_KEY = registerKey("amphibolite_deposit_placed");
+
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
+
+        // Amphibolite: clusters in metamorphic country rock, like tuff deposits.
+        register(context, AMPHIBOLITE_DEPOSIT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.AMPHIBOLITE_DEPOSIT_KEY),
+                List.of(
+                        CountPlacement.of(9),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(
+                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-55),
+                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-5)),
+                        BiomeFilter.biome()
+                ));
+
 
         // A dense canopy: roughly three times the previous baseline attempt count.
         register(context, MAPLE_PLACED_KEY,
@@ -239,12 +254,15 @@ public class ModPlacedFeatures {
                 )
         );
 
-
         register(context,
                 KARST_ANIMAL_TRAIL_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.KARST_ANIMAL_TRAIL_KEY),
-                List.of(CountPlacement.of(1), InSquarePlacement.spread(),
-                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE)
+                List.of(
+                        CountPlacement.of(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
         );
 
     }

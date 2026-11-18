@@ -73,7 +73,7 @@ public record KarstAnimalTrailFeature() implements Feature {
                 BlockPos ground = new BlockPos(x, y - 1, z);
                 BlockPos above = ground.above();
                 if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)) continue;
-                if (!level.getBlockState(ground).is(Blocks.GRASS_BLOCK)) continue;
+                if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(ground), Blocks.GRASS_BLOCK)) continue;
                 if (!level.getFluidState(above).isEmpty()) continue;
                 if (!level.getFluidState(ground).isEmpty()) continue;
 

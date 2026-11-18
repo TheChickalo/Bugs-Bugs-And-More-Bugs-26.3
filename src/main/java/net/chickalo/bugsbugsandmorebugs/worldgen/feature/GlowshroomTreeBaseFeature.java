@@ -150,8 +150,8 @@ public record GlowshroomTreeBaseFeature(
 
             // The first solid terrain must be suitable soil.
             boolean suitable =
-                    ground.is(Blocks.GRASS_BLOCK)
-                            || ground.is(Blocks.DIRT)
+                    net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.GRASS_BLOCK)
+                            || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.DIRT)
                             || ground.is(Blocks.COARSE_DIRT)
                             || ground.is(Blocks.PODZOL)
                             || ground.is(Blocks.ROOTED_DIRT)

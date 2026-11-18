@@ -31,8 +31,9 @@ public class ModOverworldBiomes {
 
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,
+                ModPlacedFeatures.AMPHIBOLITE_DEPOSIT_PLACED_KEY);
 
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
 
 // Lakes
         biomeBuilder.addFeature(
@@ -40,10 +41,7 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY
         );
 
-        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
 
         biomeBuilder.addFeature(
@@ -82,6 +80,20 @@ public class ModOverworldBiomes {
     }
 
 
+    // Underhang is a void biome: no default caves, dungeons, geodes, ores, or vegetation.
+    // Its dark atmosphere is visual only; we will add exclusive bug spawns and vines later.
+    public static Biome underhang(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false).temperature(0.45F).downfall(0.0F)
+                .specialEffects(new BiomeSpecialEffects.Builder().waterColor(0x26373F).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(new BiomeGenerationSettings.Builder(features, carvers).build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x141925))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0x202A36))
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.ASH, 0.045F))
+                .build();
+    }
+
     public static Biome highlandKarst(
             HolderGetter<PlacedFeature> placedFeatureGetter,
             HolderGetter<WorldCarver> carverGetter) {
@@ -102,12 +114,11 @@ public class ModOverworldBiomes {
                         placedFeatureGetter,
                         carverGetter
                 );
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,
+                ModPlacedFeatures.AMPHIBOLITE_DEPOSIT_PLACED_KEY);
 
-        BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultUndergroundVariety(biomeBuilder);
-        BiomeDefaultFeatures.addDefaultOres(biomeBuilder);
+
+
         biomeBuilder.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY

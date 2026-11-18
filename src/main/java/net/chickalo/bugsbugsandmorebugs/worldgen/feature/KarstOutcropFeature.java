@@ -279,10 +279,10 @@ public record KarstOutcropFeature(
     }
 
     private static boolean isNaturalGround(BlockState state) {
-        return state.is(Blocks.GRASS_BLOCK)
-                || state.is(Blocks.DIRT)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.GRASS_BLOCK)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
                 || state.is(Blocks.COARSE_DIRT)
-                || state.is(Blocks.STONE)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.STONE)
                 || state.is(Blocks.ANDESITE)
                 || state.is(ModBlocks.LIMESTONE)
                 || state.is(ModBlocks.WEATHERED_LIMESTONE)
@@ -315,7 +315,7 @@ public record KarstOutcropFeature(
                 if (dist < 2 || dist > 10 || random.nextInt(3) == 0) continue;
                 BlockPos ground = findDryGround(level,
                         center.getX() + dx, center.getZ() + dz);
-                if (ground == null || !level.getBlockState(ground).is(Blocks.GRASS_BLOCK)) {
+                if (ground == null || !net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(ground), Blocks.GRASS_BLOCK)) {
                     continue;
                 }
                 if (!level.getBlockState(ground.above()).isAir()) continue;

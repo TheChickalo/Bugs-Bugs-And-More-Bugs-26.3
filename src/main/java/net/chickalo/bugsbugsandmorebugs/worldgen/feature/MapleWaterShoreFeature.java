@@ -323,9 +323,9 @@ public record MapleWaterShoreFeature() implements Feature {
 
     private static BlockState boulderMaterial(RandomSource random) {
         float roll = random.nextFloat();
-        if (roll < 0.64F) return Blocks.MOSSY_COBBLESTONE.defaultBlockState();
-        if (roll < 0.82F) return Blocks.COBBLESTONE.defaultBlockState();
-        if (roll < 0.94F) return Blocks.ANDESITE.defaultBlockState();
+        if (roll < 0.62F) return ModBlocks.MOSSY_RHYOLITE.defaultBlockState();
+        if (roll < 0.82F) return ModBlocks.COBBLED_RHYOLITE.defaultBlockState();
+        if (roll < 0.94F) return ModBlocks.AMPHIBOLITE.defaultBlockState();
         return Blocks.MOSS_BLOCK.defaultBlockState();
     }
 
@@ -348,11 +348,13 @@ public record MapleWaterShoreFeature() implements Feature {
     }
 
     private static boolean isNaturalGround(BlockState state) {
+        if (state.is(ModBlocks.MOSSY_RHYOLITE) || state.is(ModBlocks.COBBLED_RHYOLITE)
+                || state.is(ModBlocks.RHYOLITE) || state.is(ModBlocks.AMPHIBOLITE)) return true;
         return isSoil(state)
                 || state.is(Blocks.MOSS_BLOCK)
                 || state.is(Blocks.MOSSY_COBBLESTONE)
                 || state.is(Blocks.COBBLESTONE)
-                || state.is(Blocks.STONE)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.STONE)
                 || state.is(Blocks.ANDESITE)
                 || state.is(Blocks.TUFF)
                 || state.is(Blocks.GRAVEL)
@@ -431,8 +433,8 @@ public record MapleWaterShoreFeature() implements Feature {
     }
 
     private static boolean isSoil(BlockState state) {
-        return state.is(Blocks.DIRT)
-                || state.is(Blocks.GRASS_BLOCK)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.GRASS_BLOCK)
                 || state.is(Blocks.COARSE_DIRT)
                 || state.is(Blocks.PODZOL)
                 || state.is(Blocks.ROOTED_DIRT);
@@ -441,10 +443,11 @@ public record MapleWaterShoreFeature() implements Feature {
     private static BlockState randomBankBlock(RandomSource random) {
         float roll = random.nextFloat();
         if (roll < 0.29F) return Blocks.MOSS_BLOCK.defaultBlockState();
-        if (roll < 0.56F) return Blocks.MOSSY_COBBLESTONE.defaultBlockState();
-        if (roll < 0.75F) return Blocks.GRAVEL.defaultBlockState();
-        if (roll < 0.89F) return Blocks.CLAY.defaultBlockState();
+        if (roll < 0.56F) return ModBlocks.MOSSY_RHYOLITE.defaultBlockState();
+        if (roll < 0.75F) return ModBlocks.AMPHIBOLITE.defaultBlockState();
+        if (roll < 0.86F) return ModBlocks.LAPILLI.defaultBlockState();
+        if (roll < 0.94F) return Blocks.CLAY.defaultBlockState();
         if (roll < 0.97F) return Blocks.COARSE_DIRT.defaultBlockState();
-        return Blocks.STONE.defaultBlockState();
+        return ModBlocks.RHYOLITE.defaultBlockState();
     }
 }

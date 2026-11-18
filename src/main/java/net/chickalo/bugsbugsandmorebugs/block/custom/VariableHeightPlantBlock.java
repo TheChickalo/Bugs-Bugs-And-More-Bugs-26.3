@@ -64,8 +64,8 @@ public class VariableHeightPlantBlock extends BushBlock {
             BlockGetter level,
             BlockPos pos
     ) {
-        return ground.is(Blocks.GRASS_BLOCK)
-                || ground.is(Blocks.DIRT)
+        return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.GRASS_BLOCK)
+                || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.DIRT)
                 || ground.is(Blocks.COARSE_DIRT)
                 || ground.is(Blocks.PODZOL)
                 || ground.is(Blocks.ROOTED_DIRT)
