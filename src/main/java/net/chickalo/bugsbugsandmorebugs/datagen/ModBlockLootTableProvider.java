@@ -35,6 +35,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
     @Override
     public void generate() {
 
+        dropSelf(ModBlocks.TEMP_PORTAL);
         dropSelf(ModBlocks.COBBLED_RHYOLITE);
         dropSelf(ModBlocks.POLISHED_RHYOLITE);
         add(
@@ -59,6 +60,26 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.RHYOLITE_BRICK_WALL);
         add(ModBlocks.RHYOLITE_BRICK_SLAB, this::createSlabItemTable);
         dropSelf(ModBlocks.CRACKED_RHYOLITE_BRICKS);
+
+        add(ModBlocks.SCHIST,
+                createSingleItemTableWithSilkTouch(ModBlocks.SCHIST, ModBlocks.COBBLED_SCHIST));
+        dropSelf(ModBlocks.COBBLED_SCHIST);
+        dropSelf(ModBlocks.POLISHED_SCHIST);
+        dropSelf(ModBlocks.SCHIST_BRICKS);
+        dropSelf(ModBlocks.CHISELED_SCHIST);
+        dropSelf(ModBlocks.CRACKED_SCHIST_BRICKS);
+        dropSelf(ModBlocks.SCHIST_STAIRS);
+        dropSelf(ModBlocks.SCHIST_WALL);
+        add(ModBlocks.SCHIST_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.COBBLED_SCHIST_STAIRS);
+        dropSelf(ModBlocks.COBBLED_SCHIST_WALL);
+        add(ModBlocks.COBBLED_SCHIST_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_SCHIST_STAIRS);
+        dropSelf(ModBlocks.POLISHED_SCHIST_WALL);
+        add(ModBlocks.POLISHED_SCHIST_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.SCHIST_BRICKS_STAIRS);
+        dropSelf(ModBlocks.SCHIST_BRICKS_WALL);
+        add(ModBlocks.SCHIST_BRICKS_SLAB, this::createSlabItemTable);
 
         add(
                 ModBlocks.LIMESTONE,

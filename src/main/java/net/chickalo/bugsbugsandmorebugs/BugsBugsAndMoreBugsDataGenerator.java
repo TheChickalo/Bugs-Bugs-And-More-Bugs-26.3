@@ -36,7 +36,5 @@ public class BugsBugsAndMoreBugsDataGenerator implements DataGeneratorEntrypoint
 		registryBuilder.add(Registries.BIOME, ModBiomes::bootstrap);
 
 		registryBuilder.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType);
-		registryBuilder.add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem);
-
 	}
 }

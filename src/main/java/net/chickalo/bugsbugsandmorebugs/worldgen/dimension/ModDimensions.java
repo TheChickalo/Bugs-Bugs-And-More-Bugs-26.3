@@ -55,6 +55,17 @@ public class ModDimensions {
                     )
             );
 
+
+    public static final ResourceKey<NoiseGeneratorSettings> ELSEWHERE_NOISE_SETTINGS_KEY =
+            ResourceKey.create(
+                    Registries.NOISE_SETTINGS,
+                    Identifier.fromNamespaceAndPath(
+                            BugsBugsAndMoreBugs.MOD_ID,
+                            "elsewhere"
+                    )
+            );
+
+
     public static void bootstrapType(
             BootstrapContext<DimensionType> context
     ) {
@@ -157,9 +168,10 @@ public class ModDimensions {
         var generator = new NoiseBasedChunkGenerator(
                 biomeSource,
                 noiseSettings.getOrThrow(
-                        NoiseGeneratorSettings.OVERWORLD
+                        ELSEWHERE_NOISE_SETTINGS_KEY
                 )
         );
+
 
         context.register(
                 ELSEWHEREDIM_KEY,

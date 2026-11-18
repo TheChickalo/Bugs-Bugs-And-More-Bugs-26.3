@@ -31,6 +31,11 @@ public class ModBlocks {
             properties -> new Block(properties.strength(0.25F)
                     .sound(SoundType.GRAVEL)));
 
+    // TEMPORARY PORTAL BLOCK, DELETE LATER
+    public static final Block TEMP_PORTAL = registerBlock("portal",
+            properties -> new TempPortal(properties.strength(3f)));
+
+
     // Rhyolite family
     public static final Block RHYOLITE = registerBlock("rhyolite",
             properties -> new Block(properties.strength(3f)
@@ -87,7 +92,51 @@ public class ModBlocks {
             properties -> new WallBlock(
                     properties.strength(3f)));
 
-    // eventually the deepslate version of rhyolite will go here
+    // Schist family
+    public static final Block SCHIST = registerBlock("schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block COBBLED_SCHIST = registerBlock("cobbled_schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block POLISHED_SCHIST = registerBlock("polished_schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block SCHIST_BRICKS = registerBlock("schist_bricks",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CHISELED_SCHIST = registerBlock("chiseled_schist",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block CRACKED_SCHIST_BRICKS = registerBlock("cracked_schist_bricks",
+            properties -> new Block(properties.strength(3.5f)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
+    public static final Block SCHIST_STAIRS = registerBlock("schist_stairs",
+            properties -> new StairBlock(SCHIST.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_SLAB = registerBlock("schist_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_WALL = registerBlock("schist_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_SCHIST_STAIRS = registerBlock("cobbled_schist_stairs",
+            properties -> new StairBlock(COBBLED_SCHIST.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_SCHIST_SLAB = registerBlock("cobbled_schist_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block COBBLED_SCHIST_WALL = registerBlock("cobbled_schist_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SCHIST_STAIRS = registerBlock("polished_schist_stairs",
+            properties -> new StairBlock(POLISHED_SCHIST.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SCHIST_SLAB = registerBlock("polished_schist_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SCHIST_WALL = registerBlock("polished_schist_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_BRICKS_STAIRS = registerBlock("schist_bricks_stairs",
+            properties -> new StairBlock(SCHIST_BRICKS.defaultBlockState(), properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_BRICKS_SLAB = registerBlock("schist_bricks_slab",
+            properties -> new SlabBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SCHIST_BRICKS_WALL = registerBlock("schist_bricks_wall",
+            properties -> new WallBlock(properties.strength(3.5f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    // eventually the deepdeepslate version of rhyolite will go here
 
     // Limestone family (maybe inherit more sandstone esque properties in the future idk)
     public static final Block LIMESTONE = registerBlock("limestone",
@@ -148,13 +197,13 @@ public class ModBlocks {
             properties -> new WallBlock(
                     properties.strength(3f)));
 
+    // Rendzina & Lithosol (possible future updates...?)
     public static final Block RENDZINA = registerBlock("rendzina",
             properties -> new Block(properties.strength(0.5f)
                     .sound(SoundType.GRAVEL).instrument(NoteBlockInstrument.SNARE)));
     public static final Block LITHOSOL = registerBlock("lithosol",
             properties -> new Block(properties.strength(0.8f)
                     .requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
-
 
     // Maple family
     public static final Block MAPLE_LOG = registerBlock("maple_log",

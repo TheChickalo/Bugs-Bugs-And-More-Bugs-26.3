@@ -9,11 +9,13 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -34,6 +36,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TEMP_PORTAL)
+                        .pattern("RRR")
+                        .pattern("RRR")
+                        .pattern("RRR")
+                        .define('R', Items.DIRT)
+                        .unlockedBy(
+                                getHasName(Items.DIRT),
+                                has(Items.DIRT)
+                        )
+                        .save(output);
+
+
                 shaped(RecipeCategory.COMBAT, ModItems.REINFORCED_SHIELD)
                         .pattern("RRR")
                         .pattern("RSR")
@@ -137,6 +151,68 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_RHYOLITE, Ingredient.of(ModBlocks.RHYOLITE));
                 bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RHYOLITE_BRICKS, Ingredient.of(ModBlocks.RHYOLITE));
                 bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_RHYOLITE_BRICKS, Ingredient.of(ModBlocks.RHYOLITE));
+
+                // Schist family
+                // 4 blocks in a square create the polished and brick variants.
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_SCHIST, Ingredient.of(ModBlocks.SCHIST));
+                bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCHIST_BRICKS, Ingredient.of(ModBlocks.POLISHED_SCHIST));
+                chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_SCHIST, Ingredient.of(ModBlocks.SCHIST_BRICKS_SLAB));
+
+                SimpleCookingRecipeBuilder.smelting(
+                                Ingredient.of(ModBlocks.COBBLED_SCHIST),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                CookingBookCategory.BLOCKS,
+                                ModBlocks.SCHIST,
+                                0.1F,
+                                200
+                        )
+                        .unlockedBy(
+                                getHasName(ModBlocks.COBBLED_SCHIST),
+                                has(ModBlocks.COBBLED_SCHIST)
+                        )
+                        .save(output);
+
+                SimpleCookingRecipeBuilder.smelting(
+                                Ingredient.of(ModBlocks.SCHIST_BRICKS),
+                                RecipeCategory.BUILDING_BLOCKS,
+                                CookingBookCategory.BLOCKS,
+                                ModBlocks.CRACKED_SCHIST_BRICKS,
+                                0.1F,
+                                200
+                        )
+                        .unlockedBy(
+                                getHasName(ModBlocks.SCHIST_BRICKS),
+                                has(ModBlocks.SCHIST_BRICKS)
+                        )
+                        .save(output);
+                stairBuilder(ModBlocks.SCHIST_STAIRS, Ingredient.of(ModBlocks.SCHIST))
+                        .unlockedBy(getHasName(ModBlocks.SCHIST), has(ModBlocks.SCHIST))
+                        .group("schist").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCHIST_SLAB, ModBlocks.SCHIST);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCHIST_WALL, Ingredient.of(ModBlocks.SCHIST))
+                        .unlockedBy(getHasName(ModBlocks.SCHIST), has(ModBlocks.SCHIST))
+                        .group("schist").save(output);
+                stairBuilder(ModBlocks.COBBLED_SCHIST_STAIRS, Ingredient.of(ModBlocks.COBBLED_SCHIST))
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_SCHIST), has(ModBlocks.COBBLED_SCHIST))
+                        .group("schist").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_SCHIST_SLAB, ModBlocks.COBBLED_SCHIST);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COBBLED_SCHIST_WALL, Ingredient.of(ModBlocks.COBBLED_SCHIST))
+                        .unlockedBy(getHasName(ModBlocks.COBBLED_SCHIST), has(ModBlocks.COBBLED_SCHIST))
+                        .group("schist").save(output);
+                stairBuilder(ModBlocks.POLISHED_SCHIST_STAIRS, Ingredient.of(ModBlocks.POLISHED_SCHIST))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_SCHIST), has(ModBlocks.POLISHED_SCHIST))
+                        .group("schist").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_SCHIST_SLAB, ModBlocks.POLISHED_SCHIST);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_SCHIST_WALL, Ingredient.of(ModBlocks.POLISHED_SCHIST))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_SCHIST), has(ModBlocks.POLISHED_SCHIST))
+                        .group("schist").save(output);
+                stairBuilder(ModBlocks.SCHIST_BRICKS_STAIRS, Ingredient.of(ModBlocks.SCHIST_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.SCHIST_BRICKS), has(ModBlocks.SCHIST_BRICKS))
+                        .group("schist").save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCHIST_BRICKS_SLAB, ModBlocks.SCHIST_BRICKS);
+                wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SCHIST_BRICKS_WALL, Ingredient.of(ModBlocks.SCHIST_BRICKS))
+                        .unlockedBy(getHasName(ModBlocks.SCHIST_BRICKS), has(ModBlocks.SCHIST_BRICKS))
+                        .group("schist").save(output);
 
                 // lwk gonna need a custom builder for weathered and other limestone types
                 bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LIMESTONE_BRICKS, Ingredient.of(ModBlocks.LIMESTONE));

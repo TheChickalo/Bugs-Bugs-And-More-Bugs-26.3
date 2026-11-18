@@ -36,6 +36,24 @@
     "bugsbugsandmorebugs:rubbled_limestone_slab",
     "bugsbugsandmorebugs:rubbled_limestone_stairs",
     "bugsbugsandmorebugs:mossy_limestone",
-    "bugsbugsandmorebugs:lithosol"
+    "bugsbugsandmorebugs:lithosol",
+    "bugsbugsandmorebugs:schist",
+    "bugsbugsandmorebugs:cobbled_schist",
+    "bugsbugsandmorebugs:polished_schist",
+    "bugsbugsandmorebugs:schist_bricks",
+    "bugsbugsandmorebugs:chiseled_schist",
+    "bugsbugsandmorebugs:cracked_schist_bricks",
+    "bugsbugsandmorebugs:schist_stairs",
+    "bugsbugsandmorebugs:schist_slab",
+    "bugsbugsandmorebugs:schist_wall",
+    "bugsbugsandmorebugs:cobbled_schist_stairs",
+    "bugsbugsandmorebugs:cobbled_schist_slab",
+    "bugsbugsandmorebugs:cobbled_schist_wall",
+    "bugsbugsandmorebugs:polished_schist_stairs",
+    "bugsbugsandmorebugs:polished_schist_slab",
+    "bugsbugsandmorebugs:polished_schist_wall",
+    "bugsbugsandmorebugs:schist_bricks_stairs",
+    "bugsbugsandmorebugs:schist_bricks_slab",
+    "bugsbugsandmorebugs:schist_bricks_wall"
   ]
 }

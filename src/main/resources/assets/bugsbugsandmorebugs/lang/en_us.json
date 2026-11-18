@@ -1,8 +1,9 @@
 {
+  "block.bugsbugsandmorebugs.portal": "Me When I Enter the Portal of Whimsy and Joy",
+
   "item.bugsbugsandmorebugs.exoskeleton": "Exoskeleton",
   "item.bugsbugsandmorebugs.reinforced_shield": "Reinforced Shield",
   "item.bugsbugsandmorebugs.antworker_spawn_egg": "Worker Ant Spawn Egg",
-
   "item.bugsbugsandmorebugs.daikon": "Daikon",
   "item.bugsbugsandmorebugs.daikon_seeds": "Daikon Seeds",
   "block.bugsbugsandmorebugs.daikon_crop": "Daikon Crop",
@@ -13,11 +14,7 @@
   "block.bugsbugsandmorebugs.glowshroom": "Glowshroom",
   "block.bugsbugsandmorebugs.potted_glowshroom": "Potted Glowshroom",
   "block.bugsbugsandmorebugs.glowshroom_block": "Glowshroom Block",
-
-
-
   "block.bugsbugsandmorebugs.infested_dirt": "Infested Dirt",
-
   "block.bugsbugsandmorebugs.rhyolite": "Rhyolite",
   "block.bugsbugsandmorebugs.chiseled_rhyolite": "Chiseled Rhyolite",
   "block.bugsbugsandmorebugs.rhyolite_stairs": "Rhyolite  Stairs",
@@ -36,7 +33,6 @@
   "block.bugsbugsandmorebugs.rhyolite_brick_stairs": "Rhyolite Brick Stairs",
   "block.bugsbugsandmorebugs.rhyolite_brick_slab": "Rhyolite Brick Slab",
   "block.bugsbugsandmorebugs.rhyolite_brick_wall": "Rhyolite Brick Wall",
-
   "block.bugsbugsandmorebugs.limestone": "Limestone",
   "block.bugsbugsandmorebugs.limestone_stairs": "Limestone Stairs",
   "block.bugsbugsandmorebugs.limestone_slab": "Limestone Slab",
@@ -64,11 +60,8 @@
   "block.bugsbugsandmorebugs.polished_limestone_brick_slab": "Polished Limestone Brick Slab",
   "block.bugsbugsandmorebugs.polished_limestone_brick_wall": "Polished Limestone Brick Wall",
   "block.bugsbugsandmorebugs.weathered_limestone": "Weathered Limestone",
-
   "block.bugsbugsandmorebugs.rendzina": "Rendzina",
   "block.bugsbugsandmorebugs.lithosol": "Lithosol",
-
-
   "block.bugsbugsandmorebugs.maple_log": "Maple Log",
   "block.bugsbugsandmorebugs.maple_wood": "Maple Wood",
   "block.bugsbugsandmorebugs.stripped_maple_log": "Stripped Maple Log",
@@ -85,17 +78,29 @@
   "block.bugsbugsandmorebugs.maple_pressure_plate": "Maple Pressure Plate",
   "block.bugsbugsandmorebugs.maple_fence": "Maple Fence",
   "block.bugsbugsandmorebugs.maple_fence_gate": "Maple Fence Gate",
-
   "block.bugsbugsandmorebugs.bellflowers": "Bellflowers",
   "block.bugsbugsandmorebugs.bush_clover": "Bush Clover",
   "block.bugsbugsandmorebugs.dwarf_bamboo": "Dwarf Bamboo",
   "block.bugsbugsandmorebugs.silver_grass": "Silver Grass",
-
-
-
   "item.bugsbugsandmorebugs.ameisenhaufen_music_disc": "Music Disc",
   "jukebox_song.bugsbugsandmorebugs.ameisenhaufen": "Haneul Kim - Ameisenhaufen",
-
-
-  "entity.bugsbugsandmorebugs.antworker": "Worker Ant"
+  "entity.bugsbugsandmorebugs.antworker": "Worker Ant",
+  "block.bugsbugsandmorebugs.schist": "Schist",
+  "block.bugsbugsandmorebugs.cobbled_schist": "Cobbled Schist",
+  "block.bugsbugsandmorebugs.polished_schist": "Polished Schist",
+  "block.bugsbugsandmorebugs.schist_bricks": "Schist Bricks",
+  "block.bugsbugsandmorebugs.chiseled_schist": "Chiseled Schist",
+  "block.bugsbugsandmorebugs.cracked_schist_bricks": "Cracked Schist Bricks",
+  "block.bugsbugsandmorebugs.schist_stairs": "Schist Stairs",
+  "block.bugsbugsandmorebugs.schist_slab": "Schist Slab",
+  "block.bugsbugsandmorebugs.schist_wall": "Schist Wall",
+  "block.bugsbugsandmorebugs.cobbled_schist_stairs": "Cobbled Schist Stairs",
+  "block.bugsbugsandmorebugs.cobbled_schist_slab": "Cobbled Schist Slab",
+  "block.bugsbugsandmorebugs.cobbled_schist_wall": "Cobbled Schist Wall",
+  "block.bugsbugsandmorebugs.polished_schist_stairs": "Polished Schist Stairs",
+  "block.bugsbugsandmorebugs.polished_schist_slab": "Polished Schist Slab",
+  "block.bugsbugsandmorebugs.polished_schist_wall": "Polished Schist Wall",
+  "block.bugsbugsandmorebugs.schist_bricks_stairs": "Schist Bricks Stairs",
+  "block.bugsbugsandmorebugs.schist_bricks_slab": "Schist Bricks Slab",
+  "block.bugsbugsandmorebugs.schist_bricks_wall": "Schist Bricks Wall"
 }

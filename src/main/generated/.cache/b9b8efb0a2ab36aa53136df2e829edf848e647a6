@@ -1,5 +1,4 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Bugs, Bugs, and More Bugs! Data Provider
-c2756ccba20e6a9e550afdf59550db2c1bd818f7 data/bugsbugsandmorebugs/dimension/elsewheredim.json
 945b844b416cf53cc9bf597a987ca7cb6ab683b4 data/bugsbugsandmorebugs/dimension_type/elsewheredim_type.json
 ef0a94e9017152de16bf90a094f202924f06d364 data/bugsbugsandmorebugs/jukebox_song/ameisenhaufen.json
 be12a444438168767617254d1702771cb77a1c07 data/bugsbugsandmorebugs/worldgen/biome/highland_karst.json

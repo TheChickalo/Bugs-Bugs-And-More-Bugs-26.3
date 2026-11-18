@@ -57,6 +57,35 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
 
 
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.getRK(ModBlocks.SCHIST))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_SCHIST))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SCHIST))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.CHISELED_SCHIST))
+                .add(ModBlocks.getRK(ModBlocks.CRACKED_SCHIST_BRICKS))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_WALL))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_SCHIST_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_SCHIST_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_SCHIST_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SCHIST_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SCHIST_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SCHIST_WALL))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_BRICKS_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_BRICKS_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_BRICKS_WALL));
+
+        tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+                .add(ModBlocks.getRK(ModBlocks.SCHIST));
+
+        tag(BlockTags.WALLS)
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_WALL))
+                .add(ModBlocks.getRK(ModBlocks.COBBLED_SCHIST_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SCHIST_WALL))
+                .add(ModBlocks.getRK(ModBlocks.SCHIST_BRICKS_WALL));
+
         tag(BlockTags.STONE_ORE_REPLACEABLES)
                 .add(ModBlocks.getRK(ModBlocks.RHYOLITE));
 

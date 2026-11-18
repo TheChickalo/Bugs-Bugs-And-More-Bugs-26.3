@@ -19,6 +19,9 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
+
+        blockModelGenerators.createTrivialCube(ModBlocks.TEMP_PORTAL);
+
         blockModelGenerators.createTrivialCube(ModBlocks.INFESTED_DIRT);
         blockModelGenerators.family(ModBlocks.COBBLED_RHYOLITE)
                 .stairs(ModBlocks.COBBLED_RHYOLITE_STAIRS)
@@ -38,6 +41,24 @@ public class ModModelProvider extends FabricModelProvider {
                 .wall(ModBlocks.RHYOLITE_BRICK_WALL);
         blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_RHYOLITE);
         blockModelGenerators.createTrivialCube(ModBlocks.CRACKED_RHYOLITE_BRICKS);
+        blockModelGenerators.family(ModBlocks.SCHIST)
+                .stairs(ModBlocks.SCHIST_STAIRS)
+                .slab(ModBlocks.SCHIST_SLAB)
+                .wall(ModBlocks.SCHIST_WALL);
+        blockModelGenerators.family(ModBlocks.COBBLED_SCHIST)
+                .stairs(ModBlocks.COBBLED_SCHIST_STAIRS)
+                .slab(ModBlocks.COBBLED_SCHIST_SLAB)
+                .wall(ModBlocks.COBBLED_SCHIST_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_SCHIST)
+                .stairs(ModBlocks.POLISHED_SCHIST_STAIRS)
+                .slab(ModBlocks.POLISHED_SCHIST_SLAB)
+                .wall(ModBlocks.POLISHED_SCHIST_WALL);
+        blockModelGenerators.family(ModBlocks.SCHIST_BRICKS)
+                .stairs(ModBlocks.SCHIST_BRICKS_STAIRS)
+                .slab(ModBlocks.SCHIST_BRICKS_SLAB)
+                .wall(ModBlocks.SCHIST_BRICKS_WALL);
+        blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_SCHIST);
+        blockModelGenerators.createTrivialCube(ModBlocks.CRACKED_SCHIST_BRICKS);
         blockModelGenerators.createTrivialCube(ModBlocks.MOSSY_LIMESTONE);
         blockModelGenerators.family(ModBlocks.RUBBLED_LIMESTONE)
                 .stairs(ModBlocks.RUBBLED_LIMESTONE_STAIRS)

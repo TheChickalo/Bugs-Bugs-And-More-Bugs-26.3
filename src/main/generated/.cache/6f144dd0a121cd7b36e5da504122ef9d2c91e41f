@@ -1,15 +1,16 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Tags for minecraft:block
 31df20ba97b14742234224e0ae0bfef856004d67 data/bugsbugsandmorebugs/tags/block/maple_logs.json
 962c80c1c8c84dd7bd2f79f08c9ddb544da22590 data/minecraft/tags/block/crops.json
+80ef291d49a3d9b7b91b80c1f694a0f58fecdaa3 data/minecraft/tags/block/deepslate_ore_replaceables.json
 c7ce6a07f6a919e002784a7504cc013187b292ff data/minecraft/tags/block/fence_gates.json
 05c61f542645d280a64a3e1656edd7e0960306c3 data/minecraft/tags/block/flowers.json
 9a8a6dc07277641d624adb9ad505ee8ba51386f1 data/minecraft/tags/block/leaves.json
 f958c554df9cbb222e6235c6626eff83476cc9e6 data/minecraft/tags/block/logs.json
-97f79187f737e545939fac53f27ffedd484ca862 data/minecraft/tags/block/mineable/pickaxe.json
+436e780ad22309c2ac67b66de6d36a847da9c50f data/minecraft/tags/block/mineable/pickaxe.json
 85373b183b43ad53d59c0b67210d462045bbee6c data/minecraft/tags/block/planks.json
 ba696ffa0d43d290e083b53b09f6e8708e907c15 data/minecraft/tags/block/saplings.json
 6864a5c0988497cb5e90ac9b5ef2535e50863dad data/minecraft/tags/block/stone_ore_replaceables.json
-99c0f140903b806c917976d4656f4399b54cdfc3 data/minecraft/tags/block/walls.json
+03d16f73a2a1040ac3c65ec8694c8843c0365560 data/minecraft/tags/block/walls.json
 dcfddf6493e74b990b3a6712002cb560f54cc071 data/minecraft/tags/block/wooden_buttons.json
 083210ab51d6d4c842d1b874dab2a7a6f27e510f data/minecraft/tags/block/wooden_doors.json
 65e1a7d9e8842e67a7fec7282b7a0942db2ede50 data/minecraft/tags/block/wooden_fences.json
