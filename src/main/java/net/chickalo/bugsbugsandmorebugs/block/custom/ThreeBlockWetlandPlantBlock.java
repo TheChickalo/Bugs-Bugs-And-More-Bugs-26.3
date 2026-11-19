@@ -72,7 +72,7 @@ public class ThreeBlockWetlandPlantBlock extends BushBlock implements SimpleWate
                 if (otherState.is(this) && otherState.getValue(PART) == part) {
                     level.setBlock(otherPos, otherState.getValue(WATERLOGGED)
                             ? Blocks.WATER.defaultBlockState()
-                            : Blocks.AIR.defaultBlockState(), 3);
+                            : Blocks.AIR.defaultBlockState(), 2);
                 }
             }
         }
