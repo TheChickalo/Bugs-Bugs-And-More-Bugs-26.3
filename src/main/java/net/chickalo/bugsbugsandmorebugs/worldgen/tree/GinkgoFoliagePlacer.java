@@ -30,28 +30,26 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
     protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random,
             TreeFeature tree, int treeHeight, FoliageAttachment attachment,
             int foliageHeight, int leafRadius, int offset) {
-        // Tall, upright golden ginkgo fan: narrow lower canopy, widening upper
-        // half, irregular twiggy outline. No floating horizontal cube layers.
-        // Every row intersects the upper trunk so leaves stay supported.
-        int variant = random.nextInt(3);
-        int layers = canopyLayers;
-        for (int layer = 0; layer < layers; layer++) {
-            float t = (float)layer / Math.max(1, layers - 1);
-            float r;
-            if (variant == 0) {          // upright pyramidal young/middle-aged
-                r = 0.28f + 0.66f * t;
-            } else if (variant == 1) {   // fan: upper crown clearly broadest
-                r = 0.18f + 0.86f * (float)Math.sqrt(t);
-            } else {                    // irregular, slightly asymmetrical mature
-                r = 0.42f + 0.52f * t + 0.10f * (float)Math.sin(t * 9);
+        // The ginkgo's fan-shaped crown is a cluster of uneven, separated foliage
+        // lobes, not uniform square layers. Keeps the lower trunk visible.
+        final int lobes = 3 + random.nextInt(2);
+        final double phase = random.nextDouble() * Math.PI * 2.0;
+        for (int layer = 0; layer < canopyLayers; layer++) {
+            float t = (float) layer / Math.max(1, canopyLayers - 1);
+            var row = attachment.pos().below(canopyLayers - 1 - layer);
+            int core = (t < 0.28f || t > 0.85f) ? 1 : 2;
+            placeLeavesRow(level, setter, random, tree, row, core, 0, false);
+            if (t < 0.20f || t > 0.95f) continue;
+            int spread = Math.max(1, Math.round((0.35f + 0.65f * t) * (leafRadius - 1)));
+            for (int i = 0; i < lobes; i++) {
+                if (random.nextInt(7) == 0) continue;
+                double a = phase + i * (Math.PI * 2.0 / lobes) + (random.nextDouble() - 0.5) * 0.30;
+                int dx = Math.round((float)(Math.cos(a) * spread));
+                int dz = Math.round((float)(Math.sin(a) * spread));
+                int radius = t > 0.77f ? 1 + random.nextInt(2) : 2;
+                placeLeavesRow(level, setter, random, tree, row.offset(dx, 0, dz),
+                        radius, 0, false);
             }
-            if (t > 0.85f) r -= 0.13f * ((t - 0.85f)/0.15f);
-            // Airy fan-shaped foliage, not a cube-like layer.
-            if (t < 0.18f) r *= 0.65f;
-            if (t > 0.92f) r *= 0.75f;
-            int radius = Math.max(1, Math.round(leafRadius * r));
-            placeLeavesRow(level,setter,random,tree,
-                attachment.pos().below(layers-1-layer),radius,0,attachment.doubleTrunk());
         }
     }
     @Override public int foliageHeight(RandomSource random, int treeHeight, TreeFeature tree) {

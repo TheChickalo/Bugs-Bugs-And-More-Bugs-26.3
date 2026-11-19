@@ -33,14 +33,13 @@ public record ElsewhereFloraFeature() implements Feature {
             if(peak && y>235)continue;
             if(!level.getFluidState(pos.below()).isEmpty() && level.getFluidState(pos.below()).is(Fluids.WATER)){
                 if(level.isEmptyBlock(pos) && (wet||bamboo)){
-                    Block pad=random.nextFloat()<0.54f?ModBlocks.DUCKWEED:ModBlocks.LOTUS;
+                    // One water-surface block: the flowering lotus model includes the pad
+                    // and blossom. Never place a second flower a full block above it.
+                    Block pad=random.nextFloat()<0.50f?ModBlocks.DUCKWEED:
+                              random.nextFloat()<0.32f?ModBlocks.LOTUS_FLOWER:ModBlocks.LOTUS;
                     var state=pad.defaultBlockState();
                     if(state.canSurvive(level,pos)){
                         level.setBlock(pos,state,2);changed++;
-                        if(pad==ModBlocks.LOTUS && random.nextFloat()<0.25f && level.isEmptyBlock(pos.above())){
-                            var flower=ModBlocks.LOTUS_FLOWER.defaultBlockState();
-                            if(flower.canSurvive(level,pos.above()))level.setBlock(pos.above(),flower,2);
-                        }
                     }
                 }
                 continue;
