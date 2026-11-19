@@ -13,4 +13,7 @@ public class ModTreeGrowers {
     public static final TreeGrower GINKGO = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":ginkgo",
             WeightedList.of(ModFeatures.GINKGO_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
 
+    public static final TreeGrower HINOKI = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":hinoki",
+            WeightedList.of(ModFeatures.HINOKI_KEY), WeightedList.of(), WeightedList.of(), null);
+
 }

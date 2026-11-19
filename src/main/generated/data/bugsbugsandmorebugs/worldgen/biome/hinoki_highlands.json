@@ -27,8 +27,11 @@
     [],
     [],
     [
-      "bugsbugsandmorebugs:maple_placed",
-      "bugsbugsandmorebugs:maple_short_grass_placed"
+      "bugsbugsandmorebugs:hinoki_tree_placed",
+      "bugsbugsandmorebugs:hinoki_fern_placed",
+      "bugsbugsandmorebugs:hinoki_grass_placed",
+      "minecraft:brown_mushroom_normal",
+      "minecraft:red_mushroom_normal"
     ]
   ],
   "has_precipitation": true,

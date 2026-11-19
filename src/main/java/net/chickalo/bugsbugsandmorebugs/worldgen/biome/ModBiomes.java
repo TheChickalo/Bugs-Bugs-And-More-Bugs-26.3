@@ -12,6 +12,7 @@ import terrablender.api.EndBiomeRegistry;
 import terrablender.api.Regions;
 
 public class ModBiomes {
+    public static final ResourceKey<Biome> BAMBOO_LOWLANDS = registerBiomeKey("bamboo_lowlands");
     public static final ResourceKey<Biome> GRASSY_PLAINS = registerBiomeKey("grassy_plains");
     public static final ResourceKey<Biome> OCEAN = registerBiomeKey("ocean");
     public static final ResourceKey<Biome> RIVER = registerBiomeKey("river");
@@ -41,6 +42,7 @@ public class ModBiomes {
         register(context, GINKGO_FOREST, ModOverworldBiomes.ginkgoForest(placedFeatures, carvers));
         register(context, HINOKI_HIGHLANDS, ModOverworldBiomes.hinokiHighlands(placedFeatures, carvers));
         register(context, VOLCANIC_PEAK, ModOverworldBiomes.volcanicPeak(placedFeatures, carvers));
+        register(context, BAMBOO_LOWLANDS, ModOverworldBiomes.bambooLowlands(placedFeatures, carvers));
         register(context, GRASSY_PLAINS, ModOverworldBiomes.grassyPlains(placedFeatures, carvers));
         register(context, OCEAN, ModOverworldBiomes.ocean(placedFeatures, carvers));
         register(context, RIVER, ModOverworldBiomes.river(placedFeatures, carvers));

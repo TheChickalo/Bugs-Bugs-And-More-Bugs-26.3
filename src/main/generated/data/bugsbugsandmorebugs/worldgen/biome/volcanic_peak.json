@@ -16,7 +16,20 @@
     "grass_color": "#70746d",
     "water_color": "#596e7f"
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
+    ]
+  ],
   "has_precipitation": true,
   "temperature": -0.4
 }

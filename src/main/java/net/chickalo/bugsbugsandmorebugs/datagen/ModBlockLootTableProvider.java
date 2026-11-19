@@ -34,6 +34,15 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
+        dropSelf(ModBlocks.ALPINE_GRASS);
+        dropSelf(ModBlocks.HAKONE_GRASS);
+        dropSelf(ModBlocks.IRIS_FLOWER);
+        dropSelf(ModBlocks.GINKGO_FALLEN_LEAVES);
+        dropSelf(ModBlocks.DUCKWEED);
+        dropSelf(ModBlocks.LOTUS);
+        dropSelf(ModBlocks.LOTUS_FLOWER);
+        dropSelf(ModBlocks.CATTAILS);
+        dropSelf(ModBlocks.REEDS);
         // Elsewhere secondary stone drops
         dropSelf(ModBlocks.DACITE);
         dropSelf(ModBlocks.DACITE_STAIRS);
@@ -175,6 +184,26 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
         dropSelf(ModBlocks.RENDZINA);
         dropSelf(ModBlocks.LITHOSOL);
+
+        // Hinoki wood family and foliage drops.
+        dropSelf(ModBlocks.HINOKI_LOG);
+        dropSelf(ModBlocks.HINOKI_WOOD);
+        dropSelf(ModBlocks.STRIPPED_HINOKI_LOG);
+        dropSelf(ModBlocks.STRIPPED_HINOKI_WOOD);
+        dropSelf(ModBlocks.HINOKI_PLANKS);
+        dropSelf(ModBlocks.HINOKI_SAPLING);
+        dropSelf(ModBlocks.HINOKI_TRAPDOOR);
+        dropSelf(ModBlocks.HINOKI_STAIRS);
+        add(ModBlocks.HINOKI_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.HINOKI_BUTTON);
+        dropSelf(ModBlocks.HINOKI_PRESSURE_PLATE);
+        dropSelf(ModBlocks.HINOKI_FENCE);
+        dropSelf(ModBlocks.HINOKI_FENCE_GATE);
+        add(ModBlocks.HINOKI_DOOR, this::createDoorTable);
+        add(ModBlocks.POTTED_HINOKI_SAPLING,
+                block -> createPotFlowerItemTable(ModBlocks.HINOKI_SAPLING));
+        add(ModBlocks.HINOKI_LEAVES,
+                block -> createLeavesDrops(block, ModBlocks.HINOKI_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
 
         // Ginkgo family loot tables (same mechanical conventions as Maple).
         dropSelf(ModBlocks.GINKGO_LOG);

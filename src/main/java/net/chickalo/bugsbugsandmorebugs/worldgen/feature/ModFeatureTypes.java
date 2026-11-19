@@ -105,5 +105,14 @@ public final class ModFeatureTypes {
         );
 
 
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "bamboo_pool"),
+                BambooPoolFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "wetland_reeds"),
+                WetlandReedsFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "elsewhere_flora"),
+                ElsewhereFloraFeature.CODEC);
     }
 }

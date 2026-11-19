@@ -90,66 +90,6 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:river",
-          "parameters": {
-            "temperature": 0.06,
-            "humidity": 0.28,
-            "continentalness": 0.2,
-            "erosion": 0.45,
-            "depth": 0.0,
-            "weirdness": -0.015,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:river",
-          "parameters": {
-            "temperature": -0.38,
-            "humidity": -0.1,
-            "continentalness": 0.28,
-            "erosion": 0.47,
-            "depth": 0.0,
-            "weirdness": 0.015,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:river",
-          "parameters": {
-            "temperature": 0.37,
-            "humidity": 0.4,
-            "continentalness": 0.31,
-            "erosion": 0.51,
-            "depth": 0.0,
-            "weirdness": -0.01,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:lake",
-          "parameters": {
-            "temperature": 0.26,
-            "humidity": 0.55,
-            "continentalness": 0.09,
-            "erosion": 0.54,
-            "depth": 0.0,
-            "weirdness": -0.12,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:lake",
-          "parameters": {
-            "temperature": -0.18,
-            "humidity": 0.48,
-            "continentalness": 0.11,
-            "erosion": 0.53,
-            "depth": 0.0,
-            "weirdness": -0.1,
-            "offset": 0.0
-          }
-        },
-        {
           "biome": "bugsbugsandmorebugs:maple_forest",
           "parameters": {
             "temperature": -0.38,
@@ -362,6 +302,306 @@
             "erosion": -0.6,
             "depth": 0.0,
             "weirdness": -0.6,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:maple_forest",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:maple_forest",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:river",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:maple_forest",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:maple_forest",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ginkgo_forest",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ginkgo_forest",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:river",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ginkgo_forest",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ginkgo_forest",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:grassy_plains",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:grassy_plains",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:river",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:grassy_plains",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:grassy_plains",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 0.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 0.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 0.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:river",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 0.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 0.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 0.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:lake",
+          "parameters": {
+            "temperature": 0.36,
+            "humidity": 0.6,
+            "continentalness": 0.4,
+            "erosion": 0.41,
+            "depth": 0.0,
+            "weirdness": -0.35,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:lake",
+          "parameters": {
+            "temperature": -0.24,
+            "humidity": 0.57,
+            "continentalness": 0.41,
+            "erosion": 0.45,
+            "depth": 0.0,
+            "weirdness": 0.32,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bamboo_lowlands",
+          "parameters": {
+            "temperature": 0.55,
+            "humidity": 0.65,
+            "continentalness": 0.27,
+            "erosion": 0.15,
+            "depth": 0.0,
+            "weirdness": -0.22,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bamboo_lowlands",
+          "parameters": {
+            "temperature": 0.3,
+            "humidity": 0.69,
+            "continentalness": 0.31,
+            "erosion": 0.32,
+            "depth": 0.0,
+            "weirdness": 0.2,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bamboo_lowlands",
+          "parameters": {
+            "temperature": 0.52,
+            "humidity": 0.52,
+            "continentalness": 0.34,
+            "erosion": 0.29,
+            "depth": 0.0,
+            "weirdness": 0.42,
             "offset": 0.0
           }
         },
@@ -452,66 +692,6 @@
         {
           "biome": "bugsbugsandmorebugs:underhang",
           "parameters": {
-            "temperature": 0.06,
-            "humidity": 0.28,
-            "continentalness": 0.2,
-            "erosion": 0.45,
-            "depth": 2.0,
-            "weirdness": -0.015,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:underhang",
-          "parameters": {
-            "temperature": -0.38,
-            "humidity": -0.1,
-            "continentalness": 0.28,
-            "erosion": 0.47,
-            "depth": 2.0,
-            "weirdness": 0.015,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:underhang",
-          "parameters": {
-            "temperature": 0.37,
-            "humidity": 0.4,
-            "continentalness": 0.31,
-            "erosion": 0.51,
-            "depth": 2.0,
-            "weirdness": -0.01,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:underhang",
-          "parameters": {
-            "temperature": 0.26,
-            "humidity": 0.55,
-            "continentalness": 0.09,
-            "erosion": 0.54,
-            "depth": 2.0,
-            "weirdness": -0.12,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:underhang",
-          "parameters": {
-            "temperature": -0.18,
-            "humidity": 0.48,
-            "continentalness": 0.11,
-            "erosion": 0.53,
-            "depth": 2.0,
-            "weirdness": -0.1,
-            "offset": 0.0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:underhang",
-          "parameters": {
             "temperature": -0.38,
             "humidity": 0.2,
             "continentalness": 0.32,
@@ -722,6 +902,306 @@
             "erosion": -0.6,
             "depth": 2.0,
             "weirdness": -0.6,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.38,
+            "humidity": 0.22,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.26,
+            "humidity": 0.42,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.45,
+            "humidity": -0.25,
+            "continentalness": 0.26,
+            "erosion": 0.3,
+            "depth": 2.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 2.0,
+            "weirdness": -0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 2.0,
+            "weirdness": -0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 2.0,
+            "weirdness": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 2.0,
+            "weirdness": 0.075,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.2,
+            "humidity": -0.27,
+            "continentalness": 0.51,
+            "erosion": 0.25,
+            "depth": 2.0,
+            "weirdness": 0.16,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.36,
+            "humidity": 0.6,
+            "continentalness": 0.4,
+            "erosion": 0.41,
+            "depth": 2.0,
+            "weirdness": -0.35,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": -0.24,
+            "humidity": 0.57,
+            "continentalness": 0.41,
+            "erosion": 0.45,
+            "depth": 2.0,
+            "weirdness": 0.32,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.55,
+            "humidity": 0.65,
+            "continentalness": 0.27,
+            "erosion": 0.15,
+            "depth": 2.0,
+            "weirdness": -0.22,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.3,
+            "humidity": 0.69,
+            "continentalness": 0.31,
+            "erosion": 0.32,
+            "depth": 2.0,
+            "weirdness": 0.2,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:underhang",
+          "parameters": {
+            "temperature": 0.52,
+            "humidity": 0.52,
+            "continentalness": 0.34,
+            "erosion": 0.29,
+            "depth": 2.0,
+            "weirdness": 0.42,
             "offset": 0.0
           }
         }

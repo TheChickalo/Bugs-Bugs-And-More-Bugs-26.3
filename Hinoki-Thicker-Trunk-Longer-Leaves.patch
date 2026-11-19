@@ -1,0 +1,182 @@
+diff --git a/src/main/java/net/chickalo/bugsbugsandmorebugs/block/ModBlocks.java b/src/main/java/net/chickalo/bugsbugsandmorebugs/block/ModBlocks.java
+index e606d8a..636e812 100644
+--- a/src/main/java/net/chickalo/bugsbugsandmorebugs/block/ModBlocks.java
++++ b/src/main/java/net/chickalo/bugsbugsandmorebugs/block/ModBlocks.java
+@@ -454,7 +454,7 @@
+             properties -> new Block(properties.mapColor(MapColor.WOOD).strength(2.0F, 3.0F)
+                     .instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).ignitedByLava()));
+     public static final Block HINOKI_LEAVES = registerBlock("hinoki_leaves",
+-            properties -> new MapleLeavesBlock(0.0F, ParticleTypes.CHERRY_LEAVES,
++            properties -> new HinokiLeavesBlock(0.0F, ParticleTypes.CHERRY_LEAVES,
+                     AmbientLeavesBlockSoundPlayer.noAmbientSound(), properties.mapColor(MapColor.PLANT)
+                     .strength(0.2F).randomTicks().sound(SoundType.POPLAR_LEAVES).noOcclusion()
+                     .isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never)
+diff --git a/src/main/java/net/chickalo/bugsbugsandmorebugs/block/custom/HinokiLeavesBlock.java b/src/main/java/net/chickalo/bugsbugsandmorebugs/block/custom/HinokiLeavesBlock.java
+new file mode 100644
+index 0000000..5ed911b
+--- /dev/null
++++ b/src/main/java/net/chickalo/bugsbugsandmorebugs/block/custom/HinokiLeavesBlock.java
+@@ -0,0 +1,111 @@
++package net.chickalo.bugsbugsandmorebugs.block.custom;
++
++import net.minecraft.core.BlockPos;
++import net.minecraft.core.Direction;
++import net.minecraft.core.particles.ParticleOptions;
++import net.minecraft.server.level.ServerLevel;
++import net.minecraft.tags.BlockTags;
++import net.minecraft.util.RandomSource;
++import net.minecraft.world.item.context.BlockPlaceContext;
++import net.minecraft.world.level.LevelAccessor;
++import net.minecraft.world.level.LevelReader;
++import net.minecraft.world.level.ScheduledTickAccess;
++import net.minecraft.world.level.block.Block;
++import net.minecraft.world.level.block.LeavesBlock;
++import net.minecraft.world.level.block.UntintedParticleLeavesBlock;
++import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
++import net.minecraft.world.level.block.state.BlockBehaviour;
++import net.minecraft.world.level.block.state.BlockState;
++import net.minecraft.world.level.block.state.StateDefinition;
++import net.minecraft.world.level.block.state.properties.IntegerProperty;
++import net.minecraft.world.level.material.Fluids;
++
++/** Hinoki-only extended leaf decay. Maple/Ginkgo distance behavior is unchanged. */
++public class HinokiLeavesBlock extends UntintedParticleLeavesBlock {
++    public static final int MAX_HINOKI_DISTANCE = 15;
++    public static final IntegerProperty HINOKI_DISTANCE =
++            IntegerProperty.create("hinoki_distance", 1, MAX_HINOKI_DISTANCE);
++
++    public HinokiLeavesBlock(float leafParticleChance, ParticleOptions leafParticle,
++                             AmbientLeavesBlockSoundPlayer ambientLeavesBlockSoundPlayer,
++                             BlockBehaviour.Properties properties) {
++        super(leafParticleChance, leafParticle, ambientLeavesBlockSoundPlayer, properties);
++        this.registerDefaultState(this.defaultBlockState()
++                .setValue(HINOKI_DISTANCE, MAX_HINOKI_DISTANCE));
++    }
++
++    @Override
++    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
++        super.createBlockStateDefinition(builder);
++        builder.add(HINOKI_DISTANCE);
++    }
++
++    @Override
++    protected boolean isRandomlyTicking(BlockState state) {
++        return state.getValue(HINOKI_DISTANCE) == MAX_HINOKI_DISTANCE
++                && !state.getValue(PERSISTENT);
++    }
++
++    @Override
++    protected boolean decaying(BlockState state) {
++        return !state.getValue(PERSISTENT)
++                && state.getValue(HINOKI_DISTANCE) == MAX_HINOKI_DISTANCE;
++    }
++
++    @Override
++    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
++        BlockState updated = updateHinokiDistance(state, level, pos);
++        if (updated != state) {
++            level.setBlockAndUpdate(pos, updated);
++        }
++    }
++
++    @Override
++    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks,
++            BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos,
++            BlockState neighbourState, RandomSource random) {
++        if (state.getValue(WATERLOGGED)) {
++            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
++        }
++        // Queue a full recalculation when neighbors are placed or removed.
++        ticks.scheduleTick(pos, this, 1);
++        return state;
++    }
++
++    @Override
++    protected void onPlace(BlockState state, net.minecraft.world.level.Level level, BlockPos pos,
++                           BlockState oldState, boolean movedByPiston) {
++        super.onPlace(state, level, pos, oldState, movedByPiston);
++        if (!oldState.is(this)) {
++            level.scheduleTick(pos, this, 1);
++        }
++    }
++
++    private static BlockState updateHinokiDistance(BlockState state, LevelAccessor level, BlockPos pos) {
++        int distance = MAX_HINOKI_DISTANCE;
++        BlockPos.MutableBlockPos neighbor = new BlockPos.MutableBlockPos();
++        for (Direction direction : Direction.values()) {
++            neighbor.setWithOffset(pos, direction);
++            distance = Math.min(distance, distanceAt(level.getBlockState(neighbor)) + 1);
++            if (distance == 1) break;
++        }
++        // Keep vanilla's distance state synchronized (1..7) so nearby vanilla
++        // leaves can still use Hinoki as a normal support neighbor.
++        return state.setValue(HINOKI_DISTANCE, distance)
++                .setValue(DISTANCE, Math.min(distance, DECAY_DISTANCE));
++    }
++
++    private static int distanceAt(BlockState state) {
++        if (state.is(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)) return 0;
++        if (state.getBlock() instanceof HinokiLeavesBlock) {
++            return state.getValue(HINOKI_DISTANCE);
++        }
++        return LeavesBlock.getOptionalDistanceAt(state).orElse(MAX_HINOKI_DISTANCE);
++    }
++
++    @Override
++    public BlockState getStateForPlacement(BlockPlaceContext context) {
++        return updateHinokiDistance(super.getStateForPlacement(context),
++                context.getLevel(), context.getClickedPos());
++    }
++}
+diff --git a/src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/tree/HinokiTrunkPlacer.java b/src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/tree/HinokiTrunkPlacer.java
+index 4a4726c..e8cdcad 100644
+--- a/src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/tree/HinokiTrunkPlacer.java
++++ b/src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/tree/HinokiTrunkPlacer.java
+@@ -35,9 +35,37 @@ public final class HinokiTrunkPlacer extends StraightTrunkPlacer {
+     public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level,
+             BiConsumer<BlockPos, BlockState> trunkSetter, RandomSource random,
+             int treeHeight, BlockPos origin, TreeFeature tree) {
++        // Make sure the extra columns are clear before placing any trunk logs.
++        // Otherwise generation beside terrain or another tree can leave half a trunk.
++        for (int dx = 0; dx <= 1; dx++) {
++            for (int dz = 0; dz <= 1; dz++) {
++                if (dx == 0 && dz == 0) continue;
++                if (level.getBlockState(origin.offset(dx, -1, dz)).isAir()) {
++                    return List.of();
++                }
++                for (int y = 0; y < treeHeight; y++) {
++                    if (!TreeFeature.validTreePos(level, origin.offset(dx, y, dz))) {
++                        return List.of();
++                    }
++                }
++            }
++        }
++
+         var crown = super.placeTrunk(level, trunkSetter, random, treeHeight, origin, tree);
+         if (crown.isEmpty()) return crown;
+ 
++        // Fill the other three columns to make a proper 2 x 2 trunk all the
++        // way to the top (not just a thick lower stump).
++        for (int dx = 0; dx <= 1; dx++) {
++            for (int dz = 0; dz <= 1; dz++) {
++                if (dx == 0 && dz == 0) continue;
++                placeBelowTrunkBlock(level, trunkSetter, random, origin.offset(dx, -1, dz), tree);
++                for (int y = 0; y < treeHeight; y++) {
++                    placeLog(level, trunkSetter, random, origin.offset(dx, y, dz), tree);
++                }
++            }
++        }
++
+         // Full bark on every face: short buttress roots flush with the tree base.
+         for (Direction direction : Direction.Plane.HORIZONTAL) {
+             if (random.nextFloat() >= 0.65F) continue;
+@@ -64,7 +92,8 @@ public final class HinokiTrunkPlacer extends StraightTrunkPlacer {
+                 }
+             }
+         }
+-        return crown;
++        // Double-trunk attachments center foliage over the full 2 x 2 stem.
++        return List.of(new FoliagePlacer.FoliageAttachment(crown.get(0).pos(), 0, true));
+     }
+ 
+     private static void putRoot(WorldGenLevel level,

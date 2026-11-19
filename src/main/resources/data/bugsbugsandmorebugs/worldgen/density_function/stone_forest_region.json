@@ -8,9 +8,9 @@
       "left": {
         "type": "minecraft:add",
         "left": "minecraft:overworld/erosion",
-        "right": 0.23
+        "right": 0.3
       },
-      "right": 4.6
+      "right": 4.2
     },
     "min": 0.0,
     "max": 1.0

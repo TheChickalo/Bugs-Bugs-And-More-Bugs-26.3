@@ -16,6 +16,11 @@ public class ModFoliagePlacerTypes {
                     Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "ginkgo_foliage_placer"),
                     new FoliagePlacerType<>(GinkgoFoliagePlacer.CODEC));
 
+    public static final FoliagePlacerType<HinokiFoliagePlacer> HINOKI_FOLIAGE_PLACER =
+            Registry.register(BuiltInRegistries.FOLIAGE_PLACER_TYPE,
+                    Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "hinoki_foliage_placer"),
+                    new FoliagePlacerType<>(HinokiFoliagePlacer.CODEC));
+
     public static void registerModFoliagePlacerTypes() {
         BugsBugsAndMoreBugs.LOGGER.info("Registering ModFoliagePlacerTypes for " + BugsBugsAndMoreBugs.MOD_ID);
     }

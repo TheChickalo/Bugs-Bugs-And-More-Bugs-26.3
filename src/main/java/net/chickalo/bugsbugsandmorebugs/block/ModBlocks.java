@@ -436,6 +436,61 @@ public class ModBlocks {
             properties -> new FlowerPotBlock(GINKGO_SAPLING, properties.instabreak()
                     .noOcclusion().pushReaction(PushReaction.POPPED)));
 
+
+    // Hinoki cypress: cool evergreen foliage and a full spruce-like wood palette.
+    public static final Block HINOKI_LOG = registerBlock("hinoki_log",
+            properties -> new RotatedPillarBlock(properties.strength(2.0F).sound(SoundType.WOOD)
+                    .instrument(NoteBlockInstrument.BASS).ignitedByLava()));
+    public static final Block HINOKI_WOOD = registerBlock("hinoki_wood",
+            properties -> new RotatedPillarBlock(properties.strength(2.0F).sound(SoundType.WOOD)
+                    .instrument(NoteBlockInstrument.BASS).ignitedByLava()));
+    public static final Block STRIPPED_HINOKI_LOG = registerBlock("stripped_hinoki_log",
+            properties -> new RotatedPillarBlock(properties.strength(2.0F).sound(SoundType.WOOD)
+                    .instrument(NoteBlockInstrument.BASS).ignitedByLava()));
+    public static final Block STRIPPED_HINOKI_WOOD = registerBlock("stripped_hinoki_wood",
+            properties -> new RotatedPillarBlock(properties.strength(2.0F).sound(SoundType.WOOD)
+                    .instrument(NoteBlockInstrument.BASS).ignitedByLava()));
+    public static final Block HINOKI_PLANKS = registerBlock("hinoki_planks",
+            properties -> new Block(properties.mapColor(MapColor.WOOD).strength(2.0F, 3.0F)
+                    .instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_LEAVES = registerBlock("hinoki_leaves",
+            properties -> new HinokiLeavesBlock(0.0F, ParticleTypes.CHERRY_LEAVES,
+                    AmbientLeavesBlockSoundPlayer.noAmbientSound(), properties.mapColor(MapColor.PLANT)
+                    .strength(0.2F).randomTicks().sound(SoundType.POPLAR_LEAVES).noOcclusion()
+                    .isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never)
+                    .ignitedByLava().pushReaction(PushReaction.POPPED)
+                    .isRedstoneConductor(Blocks::never)));
+    public static final Block HINOKI_SAPLING = registerBlock("hinoki_sapling",
+            properties -> new SaplingBlock(ModTreeGrowers.HINOKI,
+                    properties.mapColor(MapColor.PLANT).noCollision().randomTicks()
+                            .instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block POTTED_HINOKI_SAPLING = registerBlockWithoutBlockItem("potted_hinoki_sapling",
+            properties -> new FlowerPotBlock(HINOKI_SAPLING,
+                    properties.instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
+    public static final Block HINOKI_STAIRS = registerBlock("hinoki_stairs",
+            properties -> new StairBlock(HINOKI_PLANKS.defaultBlockState(),
+                    properties.strength(3.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_SLAB = registerBlock("hinoki_slab",
+            properties -> new SlabBlock(properties.strength(3.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_DOOR = registerBlock("hinoki_door",
+            properties -> new DoorBlock(BlockSetType.SPRUCE,
+                    properties.strength(3.0F).noOcclusion().sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_TRAPDOOR = registerBlock("hinoki_trapdoor",
+            properties -> new TrapDoorBlock(BlockSetType.SPRUCE,
+                    properties.strength(3.0F).noOcclusion().sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_BUTTON = registerBlock("hinoki_button",
+            properties -> new ButtonBlock(BlockSetType.SPRUCE, 30,
+                    properties.strength(0.5F).noCollision().sound(SoundType.WOOD)));
+    public static final Block HINOKI_PRESSURE_PLATE = registerBlock("hinoki_pressure_plate",
+            properties -> new PressurePlateBlock(BlockSetType.SPRUCE,
+                    properties.mapColor(MapColor.WOOD).forceSolidOn().strength(0.5F).noCollision()
+                            .sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_FENCE = registerBlock("hinoki_fence",
+            properties -> new FenceBlock(properties.strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HINOKI_FENCE_GATE = registerBlock("hinoki_fence_gate",
+            properties -> new FenceGateBlock(WoodType.SPRUCE,
+                    properties.strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
+
     // Glowshroom Family
     public static final Block GLOWSHROOM = registerBlock("glowshroom", properties -> new GlowshroomBlock(
             ModFeatures.HUGE_GLOWSHROOM_KEY, properties.noCollision().instabreak().randomTicks()
@@ -447,6 +502,33 @@ public class ModBlocks {
             "glowshroom_block",
             properties -> new HugeMushroomBlock(properties.strength(0.2f)
                     .sound(SoundType.WOOD).lightLevel(state -> 10)));
+
+    // Exactly three blocks high: one waterlogged base, two emergent segments.
+    public static final Block CATTAILS = registerBlock("cattails",
+            p -> new ThreeBlockWetlandPlantBlock(p.noCollision().instabreak()
+                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block REEDS = registerBlock("reeds",
+            p -> new ThreeBlockWetlandPlantBlock(p.noCollision().instabreak()
+                    .sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    // Small vegetation from the already supplied 16x16 texture atlas.
+    public static final Block ALPINE_GRASS = registerBlock("alpine_grass",
+            p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F,
+                    p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block HAKONE_GRASS = registerBlock("hakone_grass",
+            p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F,
+                    p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block IRIS_FLOWER = registerBlock("iris_flower",
+            p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F,
+                    p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block GINKGO_FALLEN_LEAVES = registerBlock("ginkgo_fallen_leaves",
+            p -> new CarpetBlock(p.noCollision().strength(0.1f).sound(SoundType.GRASS)));
+    public static final Block DUCKWEED = registerBlock("duckweed",
+            p -> new Block(p.noCollision().instabreak().sound(SoundType.GRASS)));
+    public static final Block LOTUS = registerBlock("lotus",
+            p -> new Block(p.noCollision().instabreak().sound(SoundType.GRASS)));
+    public static final Block LOTUS_FLOWER = registerBlock("lotus_flower",
+            p -> new LotusFlowerBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
 
     // Crops & Bushes
     public static final Block DAIKON_CROP = registerBlockWithoutBlockItem("daikon_crop",

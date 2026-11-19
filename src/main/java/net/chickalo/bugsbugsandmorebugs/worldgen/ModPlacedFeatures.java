@@ -24,6 +24,15 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GINKGO_SMALL_PLACED_KEY = registerKey("ginkgo_small_placed");
     public static final ResourceKey<PlacedFeature> GINKGO_TREE_PLACED_KEY = registerKey("ginkgo_tree_placed");
     public static final ResourceKey<PlacedFeature> GINKGO_OLD_GROWTH_PLACED_KEY = registerKey("ginkgo_old_growth_placed");
+
+    public static final ResourceKey<PlacedFeature> BAMBOO_GROVE_PLACED_KEY = registerKey("bamboo_grove_placed");
+    public static final ResourceKey<PlacedFeature> BAMBOO_FERNS_PLACED_KEY = registerKey("bamboo_ferns_placed");
+    public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_PLACED_KEY = registerKey("bamboo_pools_placed");
+    public static final ResourceKey<PlacedFeature> WETLAND_REEDS_PLACED_KEY = registerKey("wetland_reeds_placed");
+    public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_PLACED_KEY = registerKey("elsewhere_flora_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_TREE_PLACED_KEY = registerKey("hinoki_tree_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_FERN_PLACED_KEY = registerKey("hinoki_fern_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_GRASS_PLACED_KEY = registerKey("hinoki_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_LAKE_PLACED_KEY = registerKey("maple_lake_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BAMBOO_PLACED_KEY = registerKey("maple_bamboo_placed");
@@ -50,6 +59,30 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
+
+
+        register(context, BAMBOO_GROVE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_BAMBOO_KEY),
+                List.of(CountPlacement.of(32), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, BAMBOO_FERNS_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
+                List.of(CountPlacement.of(10), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, BAMBOO_POOLS_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.BAMBOO_POOLS_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, WETLAND_REEDS_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
+
+        register(context, ELSEWHERE_FLORA_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.ELSEWHERE_FLORA_KEY),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         // Amphibolite: clusters in metamorphic country rock, like tuff deposits.
         // Tall Stone Forest pinnacles; intentionally biome-limited.
@@ -85,6 +118,22 @@ public class ModPlacedFeatures {
         register(context, GINKGO_OLD_GROWTH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.GINKGO_OLD_GROWTH_KEY),
                 List.of(RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
+        // Dense evergreen woodland; separate from Maple Forest's tree attempts.
+        register(context, HINOKI_TREE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HINOKI_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(7, 0.2f, 2),
+                        ModBlocks.HINOKI_SAPLING));
+
+        // Small understory clusters instead of Maple's near-solid grass coverage.
+        register(context, HINOKI_FERN_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
+                List.of(CountPlacement.of(5), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, HINOKI_GRASS_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.GRASS),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         // A dense canopy: roughly three times the previous baseline attempt count.

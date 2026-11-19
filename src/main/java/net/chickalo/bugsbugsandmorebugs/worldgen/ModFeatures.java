@@ -27,6 +27,11 @@ public class ModFeatures {
     // Rare old-growth tree: taller bole and a wider, flatter crown.
     public static final ResourceKey<Feature> GINKGO_OLD_GROWTH_KEY = registerKey("ginkgo_old_growth");
 
+
+    public static final ResourceKey<Feature> BAMBOO_POOLS_KEY = registerKey("bamboo_pools");
+    public static final ResourceKey<Feature> WETLAND_REEDS_KEY = registerKey("wetland_reeds");
+    public static final ResourceKey<Feature> ELSEWHERE_FLORA_KEY = registerKey("elsewhere_flora");
+    public static final ResourceKey<Feature> HINOKI_KEY = registerKey("hinoki");
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
     public static final ResourceKey<Feature> MAPLE_LAKE_KEY = registerKey("maple_lake");
     public static final ResourceKey<Feature> MAPLE_BAMBOO_KEY = registerKey("maple_bamboo");
@@ -47,6 +52,9 @@ public class ModFeatures {
     public static final ResourceKey<Feature> AMPHIBOLITE_DEPOSIT_KEY = registerKey("amphibolite_deposit");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
+        context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
+        context.register(BAMBOO_POOLS_KEY, new BambooPoolFeature());
+        context.register(WETLAND_REEDS_KEY, new WetlandReedsFeature());
         context.register(STONE_FOREST_SPIRES_KEY, new KarstOutcropFeature(10, 28, 3, 90));
         context.register(AMPHIBOLITE_DEPOSIT_KEY, new AmphiboliteDepositFeature());
         // Small Ginkgo adds an understory height tier without inventing new textures.
@@ -74,6 +82,18 @@ public class ModFeatures {
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
+        // Tall, wide-based Hinoki cypress with tiered conical foliage. The trunk placer
+        // adds subtle wooden buttress roots and scattered podzol underneath.
+        context.register(HINOKI_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.HINOKI_LOG),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.HinokiTrunkPlacer(16, 5, 6),
+                BlockStateProvider.of(ModBlocks.HINOKI_LEAVES),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.HinokiFoliagePlacer(
+                        ConstantInt.of(5), ConstantInt.of(0), 18),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(Blocks.DIRT)
+        ).build());
+
         context.register(MAPLE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.MAPLE_LOG),
                 new MapleTrunkPlacer(

@@ -32,7 +32,8 @@
       "minecraft:patch_tall_grass_2",
       "minecraft:flower_default",
       "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal"
+      "minecraft:red_mushroom_normal",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ]
   ],
   "has_precipitation": true,

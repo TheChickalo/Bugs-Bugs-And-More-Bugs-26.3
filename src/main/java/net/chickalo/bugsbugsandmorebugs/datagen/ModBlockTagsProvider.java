@@ -178,7 +178,8 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.ECLOGITE_BRICKS_WALL));
 
         tag(BlockTags.DIRT)
-                .add(ModBlocks.getRK(ModBlocks.LOAM));
+                .add(ModBlocks.getRK(ModBlocks.LOAM))
+                .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM));
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.getRK(ModBlocks.LOAM))
                 .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM));

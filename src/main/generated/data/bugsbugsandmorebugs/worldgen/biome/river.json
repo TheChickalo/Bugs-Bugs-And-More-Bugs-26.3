@@ -15,7 +15,20 @@
   "effects": {
     "water_color": "#689f8c"
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:wetland_reeds_placed"
+    ]
+  ],
   "has_precipitation": true,
   "temperature": 0.66
 }

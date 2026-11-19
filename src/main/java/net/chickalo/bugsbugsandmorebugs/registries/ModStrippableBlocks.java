@@ -18,5 +18,7 @@ public class ModStrippableBlocks {
                 ModBlocks.MAPLE_WOOD,
                 ModBlocks.STRIPPED_MAPLE_WOOD
         );
+        BlockTransformerHelper.registerStripping(ModBlocks.HINOKI_LOG, ModBlocks.STRIPPED_HINOKI_LOG);
+        BlockTransformerHelper.registerStripping(ModBlocks.HINOKI_WOOD, ModBlocks.STRIPPED_HINOKI_WOOD);
     }
 }

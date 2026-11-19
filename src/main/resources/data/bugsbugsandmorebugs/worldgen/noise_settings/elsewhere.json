@@ -150,230 +150,102 @@
         "type": "minecraft:gradient",
         "axis": "y",
         "from_coordinate": -128,
-        "from_value": -128.0,
+        "from_value": -128,
         "to_coordinate": 640,
-        "to_value": 640.0
+        "to_value": 640
       },
-      "min_inclusive": 54.0,
+      "min_inclusive": -16.0,
       "max_exclusive": 640.0,
       "when_in_range": {
         "type": "minecraft:lerp",
-        "alpha": "bugsbugsandmorebugs:river_corridor_region",
+        "alpha": "bugsbugsandmorebugs:lake_basin_region",
         "first": {
           "type": "minecraft:lerp",
-          "alpha": "bugsbugsandmorebugs:lake_basin_region",
+          "alpha": "bugsbugsandmorebugs:river_corridor_region",
           "first": {
-            "type": "minecraft:max",
-            "left": {
-              "type": "minecraft:lerp",
-              "alpha": "bugsbugsandmorebugs:stone_forest_region",
-              "first": {
+            "type": "minecraft:lerp",
+            "alpha": "bugsbugsandmorebugs:stone_forest_region",
+            "first": {
+              "type": "minecraft:max",
+              "left": {
                 "type": "minecraft:max",
                 "left": {
                   "type": "minecraft:max",
                   "left": {
-                    "type": "minecraft:range_choice",
-                    "input": {
-                      "type": "minecraft:gradient",
-                      "axis": "y",
-                      "from_coordinate": -128,
-                      "from_value": -128.0,
-                      "to_coordinate": 320,
-                      "to_value": 320.0
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:range_choice",
+                      "input": {
+                        "type": "minecraft:gradient",
+                        "axis": "y",
+                        "from_coordinate": -128,
+                        "from_value": -128,
+                        "to_coordinate": 640,
+                        "to_value": 640
+                      },
+                      "min_inclusive": -128,
+                      "max_exclusive": -40,
+                      "when_in_range": {
+                        "type": "minecraft:min",
+                        "left": "minecraft:overworld/final_density",
+                        "right": "bugsbugsandmorebugs:underhang_underside"
+                      },
+                      "when_out_of_range": "minecraft:overworld/final_density"
                     },
-                    "min_inclusive": -128.0,
-                    "max_exclusive": -40.0,
-                    "when_in_range": {
-                      "type": "minecraft:min",
-                      "left": "minecraft:overworld/final_density",
-                      "right": "bugsbugsandmorebugs:underhang_underside"
-                    },
-                    "when_out_of_range": "minecraft:overworld/final_density"
+                    "right": "bugsbugsandmorebugs:sundering_barrier"
                   },
-                  "right": "bugsbugsandmorebugs:sundering_barrier"
+                  "right": {
+                    "type": "minecraft:sub",
+                    "left": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:clamp",
+                        "input": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:add",
+                            "left": "minecraft:overworld/continents",
+                            "right": 0.07
+                          },
+                          "right": 6.5
+                        },
+                        "min": 0.0,
+                        "max": 1.0
+                      },
+                      "right": {
+                        "type": "minecraft:gradient",
+                        "axis": "y",
+                        "from_coordinate": 51,
+                        "from_value": 2.3,
+                        "to_coordinate": 91,
+                        "to_value": -2.1
+                      }
+                    },
+                    "right": {
+                      "type": "minecraft:mul",
+                      "left": {
+                        "type": "minecraft:sub",
+                        "left": 1.0,
+                        "right": {
+                          "type": "minecraft:clamp",
+                          "input": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": "minecraft:overworld/continents",
+                              "right": 0.07
+                            },
+                            "right": 6.5
+                          },
+                          "min": 0.0,
+                          "max": 1.0
+                        }
+                      },
+                      "right": 4.5
+                    }
+                  }
                 },
                 "right": "bugsbugsandmorebugs:karst_plateau_density"
-              },
-              "second": {
-                "type": "minecraft:min",
-                "left": {
-                  "type": "minecraft:max",
-                  "left": {
-                    "type": "minecraft:max",
-                    "left": {
-                      "type": "minecraft:range_choice",
-                      "input": {
-                        "type": "minecraft:gradient",
-                        "axis": "y",
-                        "from_coordinate": -128,
-                        "from_value": -128.0,
-                        "to_coordinate": 320,
-                        "to_value": 320.0
-                      },
-                      "min_inclusive": -128.0,
-                      "max_exclusive": -40.0,
-                      "when_in_range": {
-                        "type": "minecraft:min",
-                        "left": "minecraft:overworld/final_density",
-                        "right": "bugsbugsandmorebugs:underhang_underside"
-                      },
-                      "when_out_of_range": "minecraft:overworld/final_density"
-                    },
-                    "right": "bugsbugsandmorebugs:sundering_barrier"
-                  },
-                  "right": "bugsbugsandmorebugs:karst_plateau_density"
-                },
-                "right": "bugsbugsandmorebugs:stone_forest_roof"
-              }
-            },
-            "right": "bugsbugsandmorebugs:volcanic_massif_density"
-          },
-          "second": {
-            "type": "minecraft:min",
-            "left": {
-              "type": "minecraft:max",
-              "left": {
-                "type": "minecraft:lerp",
-                "alpha": "bugsbugsandmorebugs:stone_forest_region",
-                "first": {
-                  "type": "minecraft:max",
-                  "left": {
-                    "type": "minecraft:max",
-                    "left": {
-                      "type": "minecraft:range_choice",
-                      "input": {
-                        "type": "minecraft:gradient",
-                        "axis": "y",
-                        "from_coordinate": -128,
-                        "from_value": -128.0,
-                        "to_coordinate": 320,
-                        "to_value": 320.0
-                      },
-                      "min_inclusive": -128.0,
-                      "max_exclusive": -40.0,
-                      "when_in_range": {
-                        "type": "minecraft:min",
-                        "left": "minecraft:overworld/final_density",
-                        "right": "bugsbugsandmorebugs:underhang_underside"
-                      },
-                      "when_out_of_range": "minecraft:overworld/final_density"
-                    },
-                    "right": "bugsbugsandmorebugs:sundering_barrier"
-                  },
-                  "right": "bugsbugsandmorebugs:karst_plateau_density"
-                },
-                "second": {
-                  "type": "minecraft:min",
-                  "left": {
-                    "type": "minecraft:max",
-                    "left": {
-                      "type": "minecraft:max",
-                      "left": {
-                        "type": "minecraft:range_choice",
-                        "input": {
-                          "type": "minecraft:gradient",
-                          "axis": "y",
-                          "from_coordinate": -128,
-                          "from_value": -128.0,
-                          "to_coordinate": 320,
-                          "to_value": 320.0
-                        },
-                        "min_inclusive": -128.0,
-                        "max_exclusive": -40.0,
-                        "when_in_range": {
-                          "type": "minecraft:min",
-                          "left": "minecraft:overworld/final_density",
-                          "right": "bugsbugsandmorebugs:underhang_underside"
-                        },
-                        "when_out_of_range": "minecraft:overworld/final_density"
-                      },
-                      "right": "bugsbugsandmorebugs:sundering_barrier"
-                    },
-                    "right": "bugsbugsandmorebugs:karst_plateau_density"
-                  },
-                  "right": "bugsbugsandmorebugs:stone_forest_roof"
-                }
-              },
-              "right": "bugsbugsandmorebugs:volcanic_massif_density"
-            },
-            "right": {
-              "type": "minecraft:gradient",
-              "axis": "y",
-              "from_coordinate": 43,
-              "from_value": 2.0,
-              "to_coordinate": 57,
-              "to_value": -1.0
-            }
-          }
-        },
-        "second": {
-          "type": "minecraft:min",
-          "left": {
-            "type": "minecraft:lerp",
-            "alpha": "bugsbugsandmorebugs:lake_basin_region",
-            "first": {
-              "type": "minecraft:max",
-              "left": {
-                "type": "minecraft:lerp",
-                "alpha": "bugsbugsandmorebugs:stone_forest_region",
-                "first": {
-                  "type": "minecraft:max",
-                  "left": {
-                    "type": "minecraft:max",
-                    "left": {
-                      "type": "minecraft:range_choice",
-                      "input": {
-                        "type": "minecraft:gradient",
-                        "axis": "y",
-                        "from_coordinate": -128,
-                        "from_value": -128.0,
-                        "to_coordinate": 320,
-                        "to_value": 320.0
-                      },
-                      "min_inclusive": -128.0,
-                      "max_exclusive": -40.0,
-                      "when_in_range": {
-                        "type": "minecraft:min",
-                        "left": "minecraft:overworld/final_density",
-                        "right": "bugsbugsandmorebugs:underhang_underside"
-                      },
-                      "when_out_of_range": "minecraft:overworld/final_density"
-                    },
-                    "right": "bugsbugsandmorebugs:sundering_barrier"
-                  },
-                  "right": "bugsbugsandmorebugs:karst_plateau_density"
-                },
-                "second": {
-                  "type": "minecraft:min",
-                  "left": {
-                    "type": "minecraft:max",
-                    "left": {
-                      "type": "minecraft:max",
-                      "left": {
-                        "type": "minecraft:range_choice",
-                        "input": {
-                          "type": "minecraft:gradient",
-                          "axis": "y",
-                          "from_coordinate": -128,
-                          "from_value": -128.0,
-                          "to_coordinate": 320,
-                          "to_value": 320.0
-                        },
-                        "min_inclusive": -128.0,
-                        "max_exclusive": -40.0,
-                        "when_in_range": {
-                          "type": "minecraft:min",
-                          "left": "minecraft:overworld/final_density",
-                          "right": "bugsbugsandmorebugs:underhang_underside"
-                        },
-                        "when_out_of_range": "minecraft:overworld/final_density"
-                      },
-                      "right": "bugsbugsandmorebugs:sundering_barrier"
-                    },
-                    "right": "bugsbugsandmorebugs:karst_plateau_density"
-                  },
-                  "right": "bugsbugsandmorebugs:stone_forest_roof"
-                }
               },
               "right": "bugsbugsandmorebugs:volcanic_massif_density"
             },
@@ -382,9 +254,8 @@
               "left": {
                 "type": "minecraft:max",
                 "left": {
-                  "type": "minecraft:lerp",
-                  "alpha": "bugsbugsandmorebugs:stone_forest_region",
-                  "first": {
+                  "type": "minecraft:max",
+                  "left": {
                     "type": "minecraft:max",
                     "left": {
                       "type": "minecraft:max",
@@ -394,12 +265,12 @@
                           "type": "minecraft:gradient",
                           "axis": "y",
                           "from_coordinate": -128,
-                          "from_value": -128.0,
-                          "to_coordinate": 320,
-                          "to_value": 320.0
+                          "from_value": -128,
+                          "to_coordinate": 640,
+                          "to_value": 640
                         },
-                        "min_inclusive": -128.0,
-                        "max_exclusive": -40.0,
+                        "min_inclusive": -128,
+                        "max_exclusive": -40,
                         "when_in_range": {
                           "type": "minecraft:min",
                           "left": "minecraft:overworld/final_density",
@@ -409,10 +280,159 @@
                       },
                       "right": "bugsbugsandmorebugs:sundering_barrier"
                     },
-                    "right": "bugsbugsandmorebugs:karst_plateau_density"
+                    "right": {
+                      "type": "minecraft:sub",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": "minecraft:overworld/continents",
+                              "right": 0.07
+                            },
+                            "right": 6.5
+                          },
+                          "min": 0.0,
+                          "max": 1.0
+                        },
+                        "right": {
+                          "type": "minecraft:gradient",
+                          "axis": "y",
+                          "from_coordinate": 51,
+                          "from_value": 2.3,
+                          "to_coordinate": 91,
+                          "to_value": -2.1
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:sub",
+                          "left": 1.0,
+                          "right": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": "minecraft:overworld/continents",
+                                "right": 0.07
+                              },
+                              "right": 6.5
+                            },
+                            "min": 0.0,
+                            "max": 1.0
+                          }
+                        },
+                        "right": 4.5
+                      }
+                    }
                   },
-                  "second": {
-                    "type": "minecraft:min",
+                  "right": "bugsbugsandmorebugs:karst_plateau_density"
+                },
+                "right": "bugsbugsandmorebugs:volcanic_massif_density"
+              },
+              "right": "bugsbugsandmorebugs:stone_forest_roof"
+            }
+          },
+          "second": {
+            "type": "minecraft:min",
+            "left": {
+              "type": "minecraft:lerp",
+              "alpha": "bugsbugsandmorebugs:stone_forest_region",
+              "first": {
+                "type": "minecraft:max",
+                "left": {
+                  "type": "minecraft:max",
+                  "left": {
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:range_choice",
+                        "input": {
+                          "type": "minecraft:gradient",
+                          "axis": "y",
+                          "from_coordinate": -128,
+                          "from_value": -128,
+                          "to_coordinate": 640,
+                          "to_value": 640
+                        },
+                        "min_inclusive": -128,
+                        "max_exclusive": -40,
+                        "when_in_range": {
+                          "type": "minecraft:min",
+                          "left": "minecraft:overworld/final_density",
+                          "right": "bugsbugsandmorebugs:underhang_underside"
+                        },
+                        "when_out_of_range": "minecraft:overworld/final_density"
+                      },
+                      "right": "bugsbugsandmorebugs:sundering_barrier"
+                    },
+                    "right": {
+                      "type": "minecraft:sub",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": "minecraft:overworld/continents",
+                              "right": 0.07
+                            },
+                            "right": 6.5
+                          },
+                          "min": 0.0,
+                          "max": 1.0
+                        },
+                        "right": {
+                          "type": "minecraft:gradient",
+                          "axis": "y",
+                          "from_coordinate": 51,
+                          "from_value": 2.3,
+                          "to_coordinate": 91,
+                          "to_value": -2.1
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:sub",
+                          "left": 1.0,
+                          "right": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": "minecraft:overworld/continents",
+                                "right": 0.07
+                              },
+                              "right": 6.5
+                            },
+                            "min": 0.0,
+                            "max": 1.0
+                          }
+                        },
+                        "right": 4.5
+                      }
+                    }
+                  },
+                  "right": "bugsbugsandmorebugs:karst_plateau_density"
+                },
+                "right": "bugsbugsandmorebugs:volcanic_massif_density"
+              },
+              "second": {
+                "type": "minecraft:min",
+                "left": {
+                  "type": "minecraft:max",
+                  "left": {
+                    "type": "minecraft:max",
                     "left": {
                       "type": "minecraft:max",
                       "left": {
@@ -423,12 +443,12 @@
                             "type": "minecraft:gradient",
                             "axis": "y",
                             "from_coordinate": -128,
-                            "from_value": -128.0,
-                            "to_coordinate": 320,
-                            "to_value": 320.0
+                            "from_value": -128,
+                            "to_coordinate": 640,
+                            "to_value": 640
                           },
-                          "min_inclusive": -128.0,
-                          "max_exclusive": -40.0,
+                          "min_inclusive": -128,
+                          "max_exclusive": -40,
                           "when_in_range": {
                             "type": "minecraft:min",
                             "left": "minecraft:overworld/final_density",
@@ -438,30 +458,450 @@
                         },
                         "right": "bugsbugsandmorebugs:sundering_barrier"
                       },
-                      "right": "bugsbugsandmorebugs:karst_plateau_density"
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": "minecraft:overworld/continents",
+                                "right": 0.07
+                              },
+                              "right": 6.5
+                            },
+                            "min": 0.0,
+                            "max": 1.0
+                          },
+                          "right": {
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": 51,
+                            "from_value": 2.3,
+                            "to_coordinate": 91,
+                            "to_value": -2.1
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:sub",
+                            "left": 1.0,
+                            "right": {
+                              "type": "minecraft:clamp",
+                              "input": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": "minecraft:overworld/continents",
+                                  "right": 0.07
+                                },
+                                "right": 6.5
+                              },
+                              "min": 0.0,
+                              "max": 1.0
+                            }
+                          },
+                          "right": 4.5
+                        }
+                      }
                     },
-                    "right": "bugsbugsandmorebugs:stone_forest_roof"
-                  }
+                    "right": "bugsbugsandmorebugs:karst_plateau_density"
+                  },
+                  "right": "bugsbugsandmorebugs:volcanic_massif_density"
+                },
+                "right": "bugsbugsandmorebugs:stone_forest_roof"
+              }
+            },
+            "right": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": 48,
+              "from_value": 2.2,
+              "to_coordinate": 58,
+              "to_value": -1.6
+            }
+          }
+        },
+        "second": {
+          "type": "minecraft:min",
+          "left": {
+            "type": "minecraft:lerp",
+            "alpha": "bugsbugsandmorebugs:river_corridor_region",
+            "first": {
+              "type": "minecraft:lerp",
+              "alpha": "bugsbugsandmorebugs:stone_forest_region",
+              "first": {
+                "type": "minecraft:max",
+                "left": {
+                  "type": "minecraft:max",
+                  "left": {
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:range_choice",
+                        "input": {
+                          "type": "minecraft:gradient",
+                          "axis": "y",
+                          "from_coordinate": -128,
+                          "from_value": -128,
+                          "to_coordinate": 640,
+                          "to_value": 640
+                        },
+                        "min_inclusive": -128,
+                        "max_exclusive": -40,
+                        "when_in_range": {
+                          "type": "minecraft:min",
+                          "left": "minecraft:overworld/final_density",
+                          "right": "bugsbugsandmorebugs:underhang_underside"
+                        },
+                        "when_out_of_range": "minecraft:overworld/final_density"
+                      },
+                      "right": "bugsbugsandmorebugs:sundering_barrier"
+                    },
+                    "right": {
+                      "type": "minecraft:sub",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:add",
+                              "left": "minecraft:overworld/continents",
+                              "right": 0.07
+                            },
+                            "right": 6.5
+                          },
+                          "min": 0.0,
+                          "max": 1.0
+                        },
+                        "right": {
+                          "type": "minecraft:gradient",
+                          "axis": "y",
+                          "from_coordinate": 51,
+                          "from_value": 2.3,
+                          "to_coordinate": 91,
+                          "to_value": -2.1
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:sub",
+                          "left": 1.0,
+                          "right": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": "minecraft:overworld/continents",
+                                "right": 0.07
+                              },
+                              "right": 6.5
+                            },
+                            "min": 0.0,
+                            "max": 1.0
+                          }
+                        },
+                        "right": 4.5
+                      }
+                    }
+                  },
+                  "right": "bugsbugsandmorebugs:karst_plateau_density"
                 },
                 "right": "bugsbugsandmorebugs:volcanic_massif_density"
+              },
+              "second": {
+                "type": "minecraft:min",
+                "left": {
+                  "type": "minecraft:max",
+                  "left": {
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:max",
+                        "left": {
+                          "type": "minecraft:range_choice",
+                          "input": {
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": -128,
+                            "from_value": -128,
+                            "to_coordinate": 640,
+                            "to_value": 640
+                          },
+                          "min_inclusive": -128,
+                          "max_exclusive": -40,
+                          "when_in_range": {
+                            "type": "minecraft:min",
+                            "left": "minecraft:overworld/final_density",
+                            "right": "bugsbugsandmorebugs:underhang_underside"
+                          },
+                          "when_out_of_range": "minecraft:overworld/final_density"
+                        },
+                        "right": "bugsbugsandmorebugs:sundering_barrier"
+                      },
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": "minecraft:overworld/continents",
+                                "right": 0.07
+                              },
+                              "right": 6.5
+                            },
+                            "min": 0.0,
+                            "max": 1.0
+                          },
+                          "right": {
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": 51,
+                            "from_value": 2.3,
+                            "to_coordinate": 91,
+                            "to_value": -2.1
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:sub",
+                            "left": 1.0,
+                            "right": {
+                              "type": "minecraft:clamp",
+                              "input": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": "minecraft:overworld/continents",
+                                  "right": 0.07
+                                },
+                                "right": 6.5
+                              },
+                              "min": 0.0,
+                              "max": 1.0
+                            }
+                          },
+                          "right": 4.5
+                        }
+                      }
+                    },
+                    "right": "bugsbugsandmorebugs:karst_plateau_density"
+                  },
+                  "right": "bugsbugsandmorebugs:volcanic_massif_density"
+                },
+                "right": "bugsbugsandmorebugs:stone_forest_roof"
+              }
+            },
+            "second": {
+              "type": "minecraft:min",
+              "left": {
+                "type": "minecraft:lerp",
+                "alpha": "bugsbugsandmorebugs:stone_forest_region",
+                "first": {
+                  "type": "minecraft:max",
+                  "left": {
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:max",
+                        "left": {
+                          "type": "minecraft:range_choice",
+                          "input": {
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": -128,
+                            "from_value": -128,
+                            "to_coordinate": 640,
+                            "to_value": 640
+                          },
+                          "min_inclusive": -128,
+                          "max_exclusive": -40,
+                          "when_in_range": {
+                            "type": "minecraft:min",
+                            "left": "minecraft:overworld/final_density",
+                            "right": "bugsbugsandmorebugs:underhang_underside"
+                          },
+                          "when_out_of_range": "minecraft:overworld/final_density"
+                        },
+                        "right": "bugsbugsandmorebugs:sundering_barrier"
+                      },
+                      "right": {
+                        "type": "minecraft:sub",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:add",
+                                "left": "minecraft:overworld/continents",
+                                "right": 0.07
+                              },
+                              "right": 6.5
+                            },
+                            "min": 0.0,
+                            "max": 1.0
+                          },
+                          "right": {
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": 51,
+                            "from_value": 2.3,
+                            "to_coordinate": 91,
+                            "to_value": -2.1
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:sub",
+                            "left": 1.0,
+                            "right": {
+                              "type": "minecraft:clamp",
+                              "input": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": "minecraft:overworld/continents",
+                                  "right": 0.07
+                                },
+                                "right": 6.5
+                              },
+                              "min": 0.0,
+                              "max": 1.0
+                            }
+                          },
+                          "right": 4.5
+                        }
+                      }
+                    },
+                    "right": "bugsbugsandmorebugs:karst_plateau_density"
+                  },
+                  "right": "bugsbugsandmorebugs:volcanic_massif_density"
+                },
+                "second": {
+                  "type": "minecraft:min",
+                  "left": {
+                    "type": "minecraft:max",
+                    "left": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:max",
+                        "left": {
+                          "type": "minecraft:max",
+                          "left": {
+                            "type": "minecraft:range_choice",
+                            "input": {
+                              "type": "minecraft:gradient",
+                              "axis": "y",
+                              "from_coordinate": -128,
+                              "from_value": -128,
+                              "to_coordinate": 640,
+                              "to_value": 640
+                            },
+                            "min_inclusive": -128,
+                            "max_exclusive": -40,
+                            "when_in_range": {
+                              "type": "minecraft:min",
+                              "left": "minecraft:overworld/final_density",
+                              "right": "bugsbugsandmorebugs:underhang_underside"
+                            },
+                            "when_out_of_range": "minecraft:overworld/final_density"
+                          },
+                          "right": "bugsbugsandmorebugs:sundering_barrier"
+                        },
+                        "right": {
+                          "type": "minecraft:sub",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:clamp",
+                              "input": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": "minecraft:overworld/continents",
+                                  "right": 0.07
+                                },
+                                "right": 6.5
+                              },
+                              "min": 0.0,
+                              "max": 1.0
+                            },
+                            "right": {
+                              "type": "minecraft:gradient",
+                              "axis": "y",
+                              "from_coordinate": 51,
+                              "from_value": 2.3,
+                              "to_coordinate": 91,
+                              "to_value": -2.1
+                            }
+                          },
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:sub",
+                              "left": 1.0,
+                              "right": {
+                                "type": "minecraft:clamp",
+                                "input": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:add",
+                                    "left": "minecraft:overworld/continents",
+                                    "right": 0.07
+                                  },
+                                  "right": 6.5
+                                },
+                                "min": 0.0,
+                                "max": 1.0
+                              }
+                            },
+                            "right": 4.5
+                          }
+                        }
+                      },
+                      "right": "bugsbugsandmorebugs:karst_plateau_density"
+                    },
+                    "right": "bugsbugsandmorebugs:volcanic_massif_density"
+                  },
+                  "right": "bugsbugsandmorebugs:stone_forest_roof"
+                }
               },
               "right": {
                 "type": "minecraft:gradient",
                 "axis": "y",
-                "from_coordinate": 43,
-                "from_value": 2.0,
-                "to_coordinate": 57,
-                "to_value": -1.0
+                "from_coordinate": 48,
+                "from_value": 2.2,
+                "to_coordinate": 58,
+                "to_value": -1.6
               }
             }
           },
           "right": {
             "type": "minecraft:gradient",
             "axis": "y",
-            "from_coordinate": 46,
-            "from_value": 2.0,
-            "to_coordinate": 61,
-            "to_value": -1.2
+            "from_coordinate": 49,
+            "from_value": 2.4,
+            "to_coordinate": 57,
+            "to_value": -1.8
           }
         }
       },
@@ -473,12 +913,12 @@
             "type": "minecraft:gradient",
             "axis": "y",
             "from_coordinate": -128,
-            "from_value": -128.0,
-            "to_coordinate": 320,
-            "to_value": 320.0
+            "from_value": -128,
+            "to_coordinate": 640,
+            "to_value": 640
           },
-          "min_inclusive": -128.0,
-          "max_exclusive": -40.0,
+          "min_inclusive": -128,
+          "max_exclusive": -40,
           "when_in_range": {
             "type": "minecraft:min",
             "left": "minecraft:overworld/final_density",

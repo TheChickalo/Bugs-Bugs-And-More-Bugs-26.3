@@ -145,6 +145,20 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createTrivialCube(ModBlocks.RENDZINA);
         blockModelGenerators.createTrivialCube(ModBlocks.LITHOSOL);
 
+        blockModelGenerators.woodProvider(ModBlocks.HINOKI_LOG)
+                .log(ModBlocks.HINOKI_LOG).wood(ModBlocks.HINOKI_WOOD);
+        blockModelGenerators.woodProvider(ModBlocks.STRIPPED_HINOKI_LOG)
+                .log(ModBlocks.STRIPPED_HINOKI_LOG).wood(ModBlocks.STRIPPED_HINOKI_WOOD);
+        blockModelGenerators.family(ModBlocks.HINOKI_PLANKS)
+                .stairs(ModBlocks.HINOKI_STAIRS).slab(ModBlocks.HINOKI_SLAB)
+                .button(ModBlocks.HINOKI_BUTTON).pressurePlate(ModBlocks.HINOKI_PRESSURE_PLATE)
+                .fence(ModBlocks.HINOKI_FENCE).fenceGate(ModBlocks.HINOKI_FENCE_GATE);
+        blockModelGenerators.createDoor(ModBlocks.HINOKI_DOOR);
+        blockModelGenerators.createTrapdoor(ModBlocks.HINOKI_TRAPDOOR);
+        blockModelGenerators.createTrivialCube(ModBlocks.HINOKI_LEAVES);
+        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.HINOKI_SAPLING,
+                ModBlocks.POTTED_HINOKI_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
+
         blockModelGenerators.woodProvider(ModBlocks.GINKGO_LOG).log(ModBlocks.GINKGO_LOG).wood(ModBlocks.GINKGO_WOOD);
         blockModelGenerators.woodProvider(ModBlocks.STRIPPED_GINKGO_LOG).log(ModBlocks.STRIPPED_GINKGO_LOG).wood(ModBlocks.STRIPPED_GINKGO_WOOD);
         blockModelGenerators.createDoor(ModBlocks.GINKGO_DOOR);
@@ -179,6 +193,10 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createMushroomBlock(ModBlocks.GLOWSHROOM_BLOCK);
 
         blockModelGenerators.createCrossBlock(ModBlocks.BELLFLOWERS, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.ALPINE_GRASS, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.HAKONE_GRASS, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.IRIS_FLOWER, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlock(ModBlocks.LOTUS_FLOWER, BlockModelGenerators.PlantType.NOT_TINTED);
 
     }
 

@@ -72,7 +72,8 @@ public record KarstAnimalTrailFeature() implements Feature {
 
                 BlockPos ground = new BlockPos(x, y - 1, z);
                 BlockPos above = ground.above();
-                if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)) continue;
+                if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)
+                        && !level.getBiome(ground).is(ModBiomes.BAMBOO_LOWLANDS)) continue;
                 if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(ground), Blocks.GRASS_BLOCK)) continue;
                 if (!level.getFluidState(above).isEmpty()) continue;
                 if (!level.getFluidState(ground).isEmpty()) continue;
@@ -94,7 +95,7 @@ public record KarstAnimalTrailFeature() implements Feature {
                     continue;
                 }
 
-                BlockState replacement = trailMaterial(x, z);
+                BlockState replacement = trailMaterial(x, z, level.getBiome(ground).is(ModBiomes.BAMBOO_LOWLANDS));
                 if (level.setBlock(ground, replacement, 2)) changed++;
             }
         }
@@ -121,7 +122,13 @@ public record KarstAnimalTrailFeature() implements Feature {
         return 0.65 + 0.75 * strength;
     }
 
-    private static BlockState trailMaterial(int x, int z) {
+    private static BlockState trailMaterial(int x, int z, boolean bamboo) {
+        if (bamboo) {
+            double p = hash01(x, z, 601);
+            if (p < 0.63) return Blocks.COARSE_DIRT.defaultBlockState();
+            if (p < 0.85) return Blocks.PODZOL.defaultBlockState();
+            return Blocks.ROOTED_DIRT.defaultBlockState();
+        }
         // Coherent reddish pockets rather than checkerboard red sand.
         double sandy = noise(x / 11.0, z / 11.0, 600);
         double p = hash01(x, z, 601);

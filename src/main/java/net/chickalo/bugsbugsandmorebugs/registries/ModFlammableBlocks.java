@@ -18,6 +18,16 @@ public class ModFlammableBlocks {
 
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.MAPLE_PLANKS, 5, 20);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.MAPLE_LEAVES, 30, 60);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_HINOKI_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.STRIPPED_HINOKI_WOOD, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_PLANKS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_STAIRS, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_SLAB, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_FENCE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_FENCE_GATE, 5, 20);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HINOKI_LEAVES, 30, 60);
 
 
 

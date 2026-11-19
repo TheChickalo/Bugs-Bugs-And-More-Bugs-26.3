@@ -203,6 +203,8 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultFlowers(generation);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.67F).downfall(0.68F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -216,12 +218,14 @@ public class ModOverworldBiomes {
 
     public static Biome hinokiHighlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        // TODO: Replace the Maple stand-in with tall Hinoki conifers.
-        // Keep tree features out of volcanicPeak() to establish the treeline.
+        // Forest below the volcanic treeline: Hinoki only, no Maple stand-ins.
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.MAPLE_PLACED_KEY);
+                ModPlacedFeatures.HINOKI_TREE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.MAPLE_SHORT_GRASS_PLACED_KEY);
+                ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.HINOKI_GRASS_PLACED_KEY);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.3F).downfall(0.65F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -235,12 +239,15 @@ public class ModOverworldBiomes {
 
     public static Biome volcanicPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         // Treeless by design. The material rule paints the exposed volcanic rock.
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(-0.4F).downfall(0.08F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x596E7F).grassColorOverride(0x70746D).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(new BiomeGenerationSettings.Builder(features, carvers).build())
+                .generationSettings(generation.build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0xA9C9D9))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xB8C4CF))
                 .build();
@@ -252,6 +259,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultFlowers(generation);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return landscapeBiome(generation, 0.72F, 0.44F, 0x78A85D, 0x84BED2, 0xCBDCD3);
     }
 
@@ -260,17 +269,50 @@ public class ModOverworldBiomes {
                 0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
     }
     public static Biome river(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
+        return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
     }
     public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        return landscapeBiome(generation,
                 0.61F, 0.76F, 0x598A79, 0xA0D1DA, 0xC4D4CF);
     }
     public static Biome estuary(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        return landscapeBiome(generation,
                 0.65F, 0.78F, 0x788F7B, 0x9BC9D2, 0xBCC7B5);
     }
+    public static Biome bambooLowlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.BAMBOO_POOLS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.KARST_ANIMAL_TRAIL_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.BAMBOO_GROVE_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.BAMBOO_FERNS_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultFlowers(generation);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        return landscapeBiome(generation, 0.73F, 0.85F,
+                0x5B907C, 0x98CECE, 0xB4D7BD);
+    }
+
     private static Biome landscapeBiome(BiomeGenerationSettings.Builder generation,
                                         float temperature, float downfall,
                                         int water, int sky, int fog) {
