@@ -18,7 +18,7 @@
   "features": [
     [],
     [
-      "bugsbugsandmorebugs:maple_lake_placed"
+      "bugsbugsandmorebugs:lake_pond_placed"
     ],
     [],
     [],
@@ -29,8 +29,7 @@
     [],
     [
       "bugsbugsandmorebugs:wetland_reeds_placed",
-      "bugsbugsandmorebugs:elsewhere_flora_placed",
-      "minecraft:seagrass_river"
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ]
   ],
   "has_precipitation": true,
