@@ -1,0 +1,326 @@
+package net.chickalo.bugsbugsandmorebugs.worldgen;
+
+import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.core.BlockPos;
+import java.util.ArrayList;
+
+import java.util.List;
+
+
+public class ModPlacedFeatures {
+    public static final ResourceKey<PlacedFeature> GINKGO_SMALL_PLACED_KEY = registerKey("ginkgo_small_placed");
+    public static final ResourceKey<PlacedFeature> GINKGO_TREE_PLACED_KEY = registerKey("ginkgo_tree_placed");
+    public static final ResourceKey<PlacedFeature> GINKGO_OLD_GROWTH_PLACED_KEY = registerKey("ginkgo_old_growth_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_LAKE_PLACED_KEY = registerKey("maple_lake_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_BAMBOO_PLACED_KEY = registerKey("maple_bamboo_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_BUSH_PLACED_KEY = registerKey("maple_bush_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_SHORT_GRASS_PLACED_KEY = registerKey("maple_short_grass_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_TALL_GRASS_PLACED_KEY = registerKey("maple_tall_grass_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_LARGE_FERN_PLACED_KEY = registerKey("maple_large_fern_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_RED_SHRUB_PLACED_KEY = registerKey("maple_red_shrub_placed");
+    public static final ResourceKey<PlacedFeature> HASKAP_BUSH_PLACED_KEY = registerKey("haskap_bush_placed");
+    public static final ResourceKey<PlacedFeature> BARBERRY_BUSH_PLACED_KEY = registerKey("barberry_bush_placed");
+    public static final ResourceKey<PlacedFeature> GLOWSHROOM_PATCH_PLACED_KEY = registerKey("glowshroom_patch_placed");
+    public static final ResourceKey<PlacedFeature> GLOWSHROOM_TREE_BASE_PLACED_KEY = registerKey("glowshroom_tree_base_placed");
+    public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_PLACED_KEY = registerKey("huge_glowshroom_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_WATER_SHORE_PLACED_KEY = registerKey("maple_water_shore_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_RIVERBED_MUD_PLACED_KEY = registerKey("maple_riverbed_mud_placed");
+    public static final ResourceKey<PlacedFeature> HIGHLAND_MEADOW_PATCH_PLACED_KEY = registerKey("highland_meadow_patch_placed");
+    public static final ResourceKey<PlacedFeature> KARST_OUTCROP_PLACED_KEY = registerKey("karst_outcrop_placed");
+    public static final ResourceKey<PlacedFeature> KARST_GROUND_PATCH_PLACED_KEY = registerKey("karst_ground_patch_placed");
+    public static final ResourceKey<PlacedFeature> KARST_ANIMAL_TRAIL_PLACED_KEY = registerKey("karst_animal_trail_placed");
+
+
+    public static final ResourceKey<PlacedFeature> STONE_FOREST_SPIRES_PLACED_KEY = registerKey("stone_forest_spires_placed");
+    public static final ResourceKey<PlacedFeature> AMPHIBOLITE_DEPOSIT_PLACED_KEY = registerKey("amphibolite_deposit_placed");
+
+    public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+        var configuredFeatures = context.lookup(Registries.FEATURE);
+
+        // Amphibolite: clusters in metamorphic country rock, like tuff deposits.
+        // Tall Stone Forest pinnacles; intentionally biome-limited.
+        register(context, STONE_FOREST_SPIRES_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.STONE_FOREST_SPIRES_KEY),
+                List.of(
+                        CountPlacement.of(5),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, AMPHIBOLITE_DEPOSIT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.AMPHIBOLITE_DEPOSIT_KEY),
+                List.of(
+                        CountPlacement.of(9),
+                        InSquarePlacement.spread(),
+                        HeightRangePlacement.uniform(
+                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-55),
+                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-5)),
+                        BiomeFilter.biome()
+                ));
+
+
+        // Ginkgo spacing: fewer trees than the Maple canopy so the golden crowns read clearly.
+        register(context, GINKGO_SMALL_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_SMALL_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(3), ModBlocks.GINKGO_SAPLING));
+        register(context, GINKGO_TREE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(5), ModBlocks.GINKGO_SAPLING));
+        // A few monumental specimens per forest, not one in every chunk.
+        register(context, GINKGO_OLD_GROWTH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_OLD_GROWTH_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
+        // A dense canopy: roughly three times the previous baseline attempt count.
+        register(context, MAPLE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_KEY),
+                        VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1f, 3),
+                        ModBlocks.MAPLE_SAPLING));
+
+
+        // Bamboo keeps vanilla's growth configuration and noise distribution,
+        // but appears in occasional groves rather than throughout every chunk.
+        register(context, MAPLE_BAMBOO_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_BAMBOO_KEY),
+                        List.of(
+                        RarityFilter.onAverageOnceEvery(4),
+                        NoiseBasedCountPlacement.of(160, 80.0, 0.3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        // Frequent low shrubs create a dense understory.
+        register(context, MAPLE_BUSH_PLACED_KEY,
+                        configuredFeatures.getOrThrow(VegetationFeatures.BUSH),
+                        List.of(
+                        RarityFilter.onAverageOnceEvery(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(548),
+                        OffsetPlacement.ofTriangle(5, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        // Haskap and barberry grow in distinct natural clusters throughout the understory.
+        register(context, HASKAP_BUSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HASKAP_BUSH_PATCH_KEY),
+                        List.of(
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, BARBERRY_BUSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.BARBERRY_BUSH_PATCH_KEY),
+                        List.of(
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        // Grass is the continuous base layer; the larger count creates near-continuous patches.
+        register(context, MAPLE_SHORT_GRASS_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.GRASS),
+                        List.of(
+                        CountPlacement.of(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(248),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        // Tall grass and large ferns form a dense, bonemeal-like understory.
+        register(context, MAPLE_TALL_GRASS_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.TALL_GRASS),
+                        List.of(
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(170),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                ));
+
+        register(context, MAPLE_LARGE_FERN_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.LARGE_FERN),
+                        List.of(
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(150),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                        ));
+
+        // Red shrubs become a visible accent rather than an occasional rarity.
+        register(context, MAPLE_RED_SHRUB_PLACED_KEY,
+                configuredFeatures.getOrThrow(VegetationFeatures.RED_SHRUB),
+                        List.of(
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome(),
+                        CountPlacement.of(20),
+                        OffsetPlacement.ofTriangle(7, 3),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                        ));
+
+
+        // Occasional surface lakes with a mixed gravel, andesite, and stone shoreline.
+        register(context, MAPLE_LAKE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_LAKE_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(10),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, GLOWSHROOM_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GLOWSHROOM_PATCH_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(7),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+
+        register(context, GLOWSHROOM_TREE_BASE_PLACED_KEY,
+                configuredFeatures.getOrThrow(
+                        ModFeatures.GLOWSHROOM_TREE_BASE_KEY
+                ),
+                List.of(
+                        CountPlacement.of(12),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+
+        register(context, HUGE_GLOWSHROOM_PLACED_KEY,
+                configuredFeatures.getOrThrow(
+                        ModFeatures.HUGE_GLOWSHROOM_KEY
+                ),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(24),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        register(context, MAPLE_WATER_SHORE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_WATER_SHORE_KEY),
+                List.of(
+                        CountPlacement.of(8),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, MAPLE_RIVERBED_MUD_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_RIVERBED_MUD_KEY),
+                List.of(
+                        CountPlacement.of(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE
+                ));
+
+        register(context,
+                HIGHLAND_MEADOW_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HIGHLAND_MEADOW_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        register(context,
+                KARST_OUTCROP_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.KARST_OUTCROP_KEY),
+                List.of(
+                        CountPlacement.of(2),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        register(context,
+                KARST_GROUND_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.KARST_GROUND_PATCH_KEY),
+                List.of(
+                        CountPlacement.of(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        register(context,
+                KARST_ANIMAL_TRAIL_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.KARST_ANIMAL_TRAIL_KEY),
+                List.of(
+                        CountPlacement.of(1),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+    }
+
+    private static ResourceKey<PlacedFeature> registerKey(String name) {
+        return ResourceKey.create(Registries.PLACED_FEATURE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name));
+    }
+
+    private static void register(BootstrapContext<PlacedFeature> context,
+                                 ResourceKey<PlacedFeature> key,
+                                 Holder<Feature> configuration,
+                                 List<PlacementModifier> modifiers) {
+        context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
+    }
+
+    private static List<PlacementModifier> withGroundCheck(
+            List<PlacementModifier> modifiers) {
+
+        List<PlacementModifier> result =
+                new ArrayList<>(modifiers);
+
+        result.add(
+                BlockPredicateFilter.forPredicate(
+                        BlockPredicate.matchesBlocks(
+                                Blocks.STONE,
+                                Blocks.DIRT,
+                                Blocks.GRASS_BLOCK
+                        )                )
+        );
+
+        return List.copyOf(result);
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/hinoki_planks",
+    "side": "bugsbugsandmorebugs:block/hinoki_planks",
+    "top": "bugsbugsandmorebugs:block/hinoki_planks"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "part=0,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/cattails_bottom"
+    },
+    "part=0,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/cattails_bottom"
+    },
+    "part=1,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/cattails_middle"
+    },
+    "part=1,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/cattails_middle"
+    },
+    "part=2,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/cattails_top"
+    },
+    "part=2,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/cattails_top"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/hinoki_door_bottom",
+    "top": "bugsbugsandmorebugs:block/hinoki_door_top"
+  }
+}

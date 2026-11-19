@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:tree",
+  "below_trunk_provider": {
+    "id": "minecraft:dirt"
+  },
+  "decorators": [],
+  "foliage_placer": {
+    "type": "bugsbugsandmorebugs:hinoki_foliage_placer",
+    "layers": 18,
+    "offset": 0,
+    "radius": 5
+  },
+  "foliage_provider": {
+    "id": "bugsbugsandmorebugs:hinoki_leaves",
+    "properties": {
+      "distance": "7",
+      "hinoki_distance": "15",
+      "persistent": "false",
+      "waterlogged": "false"
+    }
+  },
+  "ignore_vines": false,
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "upper_size": 2
+  },
+  "trunk_placer": {
+    "type": "bugsbugsandmorebugs:hinoki_trunk_placer",
+    "base_height": 16,
+    "height_rand_a": 5,
+    "height_rand_b": 6
+  },
+  "trunk_provider": {
+    "id": "bugsbugsandmorebugs:hinoki_log",
+    "properties": {
+      "axis": "y"
+    }
+  }
+}
