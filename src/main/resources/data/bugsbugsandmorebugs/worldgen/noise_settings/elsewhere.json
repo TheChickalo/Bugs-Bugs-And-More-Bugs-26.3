@@ -954,10 +954,10 @@
             "right": {
               "type": "minecraft:gradient",
               "axis": "y",
-              "from_coordinate": 43,
-              "from_value": 3,
-              "to_coordinate": 54,
-              "to_value": -3.5
+              "from_coordinate": 49,
+              "from_value": 2.6,
+              "to_coordinate": 63,
+              "to_value": -4.1
             }
           }
         },
