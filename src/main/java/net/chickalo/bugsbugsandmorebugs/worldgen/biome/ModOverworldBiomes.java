@@ -45,7 +45,6 @@ public class ModOverworldBiomes {
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.MAPLE_WATER_SHORE_PLACED_KEY
         );
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BAMBOO_PLACED_KEY);
         biomeBuilder.addFeature(
@@ -172,8 +171,7 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
-                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
+        // Towers must emerge from eroding the plateau itself, not from placed columns.
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
@@ -288,8 +286,6 @@ public class ModOverworldBiomes {
 
     public static Biome ocean(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
     }
@@ -299,21 +295,17 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
     }
     public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
-                ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY);
+                ModPlacedFeatures.LAKE_POND_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.61F, 0.76F, 0x598A79, 0xA0D1DA, 0xC4D4CF);
     }
@@ -323,8 +315,6 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.65F, 0.78F, 0x788F7B, 0x9BC9D2, 0xBCC7B5);
     }

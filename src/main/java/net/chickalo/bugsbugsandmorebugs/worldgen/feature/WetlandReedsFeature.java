@@ -18,7 +18,7 @@ public record WetlandReedsFeature() implements Feature {
     @Override public MapCodec<WetlandReedsFeature> codec(){ return CODEC; }
     @Override public boolean place(WorldGenLevel level,ChunkGenerator generator,RandomSource random,BlockPos origin){
         int placed=0;
-        for(int attempt=0;attempt<12;attempt++){
+        for(int attempt=0;attempt<5;attempt++){
             int x=origin.getX()+random.nextInt(11)-5;
             int z=origin.getZ()+random.nextInt(11)-5;
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE,x,z)-1;
