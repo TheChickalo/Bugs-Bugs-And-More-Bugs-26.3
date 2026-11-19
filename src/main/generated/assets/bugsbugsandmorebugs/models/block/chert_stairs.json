@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/chert",
+    "side": "bugsbugsandmorebugs:block/chert",
+    "top": "bugsbugsandmorebugs:block/chert"
+  }
+}

@@ -16,6 +16,41 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
+        // Elsewhere secondary rock mining tags
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.getRK(ModBlocks.DACITE))
+                .add(ModBlocks.getRK(ModBlocks.DACITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.DACITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.DACITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_DACITE))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_DACITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_DACITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_DACITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.CHERT))
+                .add(ModBlocks.getRK(ModBlocks.CHERT_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.CHERT_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.CHERT_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_CHERT))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_CHERT_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_CHERT_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_CHERT_WALL))
+                .add(ModBlocks.getRK(ModBlocks.SERPENTINITE))
+                .add(ModBlocks.getRK(ModBlocks.SERPENTINITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.SERPENTINITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.SERPENTINITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SERPENTINITE))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SERPENTINITE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SERPENTINITE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SERPENTINITE_WALL));
+
+        tag(BlockTags.WALLS)
+                .add(ModBlocks.getRK(ModBlocks.DACITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_DACITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.CHERT_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_CHERT_WALL))
+                .add(ModBlocks.getRK(ModBlocks.SERPENTINITE_WALL))
+                .add(ModBlocks.getRK(ModBlocks.POLISHED_SERPENTINITE_WALL));
+
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.getRK(ModBlocks.MOSSY_RHYOLITE))
@@ -156,6 +191,30 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
 
 
+
+        // Custom Ginkgo wood + golden foliage; includes terrain survival for native grass.
+        tag(ModTags.Blocks.GINKGO_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_LOG))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_GINKGO_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_GINKGO_WOOD));
+        tag(BlockTags.LOGS).addTag(ModTags.Blocks.GINKGO_LOGS);
+        tag(BlockTags.PLANKS).add(ModBlocks.getRK(ModBlocks.GINKGO_PLANKS));
+        tag(BlockTags.LEAVES).add(ModBlocks.getRK(ModBlocks.GINKGO_LEAVES));
+        tag(BlockTags.SAPLINGS).add(ModBlocks.getRK(ModBlocks.GINKGO_SAPLING));
+        tag(BlockTags.GRASS_BLOCKS).add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM));
+        tag(BlockTags.WOODEN_FENCES).add(ModBlocks.getRK(ModBlocks.GINKGO_FENCE));
+        tag(BlockTags.FENCE_GATES).add(ModBlocks.getRK(ModBlocks.GINKGO_FENCE_GATE));
+        tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.getRK(ModBlocks.GINKGO_BUTTON));
+        tag(BlockTags.WOODEN_DOORS).add(ModBlocks.getRK(ModBlocks.GINKGO_DOOR));
+        tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.getRK(ModBlocks.GINKGO_TRAPDOOR));
+
+        // Ginkgo trunks must support the golden foliage's distance calculations.
+        tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_LOG))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_GINKGO_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_GINKGO_WOOD));
 
         tag(ModTags.Blocks.MAPLE_LOGS)
                 .add(ModBlocks.getRK(ModBlocks.MAPLE_LOG))

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/ginkgo_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/ginkgo_planks"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/ginkgo_slab_top"
+    }
+  }
+}

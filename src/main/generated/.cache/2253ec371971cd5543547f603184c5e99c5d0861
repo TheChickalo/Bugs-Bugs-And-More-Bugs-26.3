@@ -1,5 +1,6 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Tags for minecraft:item
+c61964da1f768f67c61eb1ec383c2a4aa5214513 data/bugsbugsandmorebugs/tags/item/ginkgo_logs.json
 31df20ba97b14742234224e0ae0bfef856004d67 data/bugsbugsandmorebugs/tags/item/maple_logs.json
-9a8a6dc07277641d624adb9ad505ee8ba51386f1 data/minecraft/tags/item/leaves.json
-f958c554df9cbb222e6235c6626eff83476cc9e6 data/minecraft/tags/item/logs_that_burn.json
-85373b183b43ad53d59c0b67210d462045bbee6c data/minecraft/tags/item/planks.json
+23c50946f1d1c66a00da4fa96ff3a372370a1b3f data/minecraft/tags/item/leaves.json
+487582834cb13bd82478317432be8c9027738616 data/minecraft/tags/item/logs_that_burn.json
+707302201b7ac4bdf2c61a90bb8da97e5f41fc10 data/minecraft/tags/item/planks.json

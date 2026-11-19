@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/polished_chert",
+    "side": "bugsbugsandmorebugs:block/polished_chert",
+    "top": "bugsbugsandmorebugs:block/polished_chert"
+  }
+}

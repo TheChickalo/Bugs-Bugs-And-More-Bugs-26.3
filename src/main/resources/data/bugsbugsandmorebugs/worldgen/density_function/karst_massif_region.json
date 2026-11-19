@@ -1,0 +1,65 @@
+{
+  "type": "minecraft:mul",
+  "left": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": "minecraft:overworld/continents",
+            "right": 0.2
+          },
+          "right": 4.2
+        },
+        "min": 0.0,
+        "max": 1.0
+      },
+      "right": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:add",
+            "left": "minecraft:overworld/temperature",
+            "right": 0.65
+          },
+          "right": 6.0
+        },
+        "min": 0.0,
+        "max": 1.0
+      }
+    },
+    "right": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:sub",
+          "left": -0.06,
+          "right": "minecraft:overworld/temperature"
+        },
+        "right": 6.0
+      },
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "right": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:sub",
+        "left": -0.04,
+        "right": "minecraft:overworld/vegetation"
+      },
+      "right": 4.0
+    },
+    "min": 0.0,
+    "max": 1.0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "#bugsbugsandmorebugs:ginkgo_logs"
+  ],
+  "result": {
+    "count": 4,
+    "id": "bugsbugsandmorebugs:ginkgo_planks"
+  }
+}

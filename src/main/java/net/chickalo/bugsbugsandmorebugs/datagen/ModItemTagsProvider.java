@@ -22,6 +22,15 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider registries) {
 
+        tag(ModTags.Items.GINKGO_LOGS)
+                .add(ModItems.getRK(ModBlocks.GINKGO_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.GINKGO_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_GINKGO_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_GINKGO_LOG.asItem()));
+        tag(ItemTags.LOGS_THAT_BURN).addTag(ModTags.Items.GINKGO_LOGS);
+        tag(ItemTags.PLANKS).add(ModItems.getRK(ModBlocks.GINKGO_PLANKS.asItem()));
+        tag(ItemTags.LEAVES).add(ModItems.getRK(ModBlocks.GINKGO_LEAVES.asItem()));
+
         tag(ModTags.Items.MAPLE_LOGS)
                 .add(ModItems.getRK(ModBlocks.MAPLE_LOG.asItem()))
                 .add(ModItems.getRK(ModBlocks.MAPLE_WOOD.asItem()))

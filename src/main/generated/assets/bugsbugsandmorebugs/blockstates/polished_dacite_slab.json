@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/polished_dacite_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/polished_dacite"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/polished_dacite_slab_top"
+    }
+  }
+}

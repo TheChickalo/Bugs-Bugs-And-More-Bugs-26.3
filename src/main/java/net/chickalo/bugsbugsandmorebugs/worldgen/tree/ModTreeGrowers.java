@@ -10,4 +10,7 @@ import java.util.Optional;
 public class ModTreeGrowers {
     public static final TreeGrower MAPLE = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":maple",
             WeightedList.of(ModFeatures.MAPLE_KEY), WeightedList.of(), WeightedList.of(), null);
+    public static final TreeGrower GINKGO = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":ginkgo",
+            WeightedList.of(ModFeatures.GINKGO_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
+
 }

@@ -1,0 +1,21 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/fog_color": "#bcc7b5",
+    "minecraft:visual/sky_color": "#9bc9d2"
+  },
+  "carvers": [],
+  "downfall": 0.78,
+  "effects": {
+    "water_color": "#788f7b"
+  },
+  "features": [],
+  "has_precipitation": true,
+  "temperature": 0.65
+}

@@ -21,6 +21,9 @@ import java.util.List;
 
 
 public class ModPlacedFeatures {
+    public static final ResourceKey<PlacedFeature> GINKGO_SMALL_PLACED_KEY = registerKey("ginkgo_small_placed");
+    public static final ResourceKey<PlacedFeature> GINKGO_TREE_PLACED_KEY = registerKey("ginkgo_tree_placed");
+    public static final ResourceKey<PlacedFeature> GINKGO_OLD_GROWTH_PLACED_KEY = registerKey("ginkgo_old_growth_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_LAKE_PLACED_KEY = registerKey("maple_lake_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BAMBOO_PLACED_KEY = registerKey("maple_bamboo_placed");
@@ -70,6 +73,19 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome()
                 ));
 
+
+        // Ginkgo spacing: fewer trees than the Maple canopy so the golden crowns read clearly.
+        register(context, GINKGO_SMALL_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_SMALL_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(3), ModBlocks.GINKGO_SAPLING));
+        register(context, GINKGO_TREE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(5), ModBlocks.GINKGO_SAPLING));
+        // A few monumental specimens per forest, not one in every chunk.
+        register(context, GINKGO_OLD_GROWTH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_OLD_GROWTH_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         // A dense canopy: roughly three times the previous baseline attempt count.
         register(context, MAPLE_PLACED_KEY,

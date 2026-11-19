@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bugsbugsandmorebugs:block/polished_serpentinite_slab"
+    },
+    "type=double": {
+      "model": "bugsbugsandmorebugs:block/polished_serpentinite"
+    },
+    "type=top": {
+      "model": "bugsbugsandmorebugs:block/polished_serpentinite_slab_top"
+    }
+  }
+}

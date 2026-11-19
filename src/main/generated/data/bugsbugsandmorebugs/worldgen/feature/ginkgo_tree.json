@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:tree",
+  "below_trunk_provider": {
+    "id": "bugsbugsandmorebugs:loam"
+  },
+  "decorators": [],
+  "foliage_placer": {
+    "type": "bugsbugsandmorebugs:ginkgo_foliage_placer",
+    "canopy_layers": 7,
+    "offset": 0,
+    "radius": 4
+  },
+  "foliage_provider": {
+    "id": "bugsbugsandmorebugs:ginkgo_leaves",
+    "properties": {
+      "distance": "7",
+      "maple_distance": "11",
+      "persistent": "false",
+      "waterlogged": "false"
+    }
+  },
+  "ignore_vines": false,
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "upper_size": 2
+  },
+  "trunk_placer": {
+    "type": "minecraft:straight_trunk_placer",
+    "base_height": 15,
+    "height_rand_a": 4,
+    "height_rand_b": 3
+  },
+  "trunk_provider": {
+    "id": "bugsbugsandmorebugs:ginkgo_log",
+    "properties": {
+      "axis": "y"
+    }
+  }
+}

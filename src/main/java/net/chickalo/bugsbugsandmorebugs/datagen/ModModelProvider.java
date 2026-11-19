@@ -19,6 +19,32 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockModelGenerators) {
+        // Elsewhere secondary stone models
+        blockModelGenerators.family(ModBlocks.DACITE)
+                .stairs(ModBlocks.DACITE_STAIRS)
+                .slab(ModBlocks.DACITE_SLAB)
+                .wall(ModBlocks.DACITE_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_DACITE)
+                .stairs(ModBlocks.POLISHED_DACITE_STAIRS)
+                .slab(ModBlocks.POLISHED_DACITE_SLAB)
+                .wall(ModBlocks.POLISHED_DACITE_WALL);
+        blockModelGenerators.family(ModBlocks.CHERT)
+                .stairs(ModBlocks.CHERT_STAIRS)
+                .slab(ModBlocks.CHERT_SLAB)
+                .wall(ModBlocks.CHERT_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_CHERT)
+                .stairs(ModBlocks.POLISHED_CHERT_STAIRS)
+                .slab(ModBlocks.POLISHED_CHERT_SLAB)
+                .wall(ModBlocks.POLISHED_CHERT_WALL);
+        blockModelGenerators.family(ModBlocks.SERPENTINITE)
+                .stairs(ModBlocks.SERPENTINITE_STAIRS)
+                .slab(ModBlocks.SERPENTINITE_SLAB)
+                .wall(ModBlocks.SERPENTINITE_WALL);
+        blockModelGenerators.family(ModBlocks.POLISHED_SERPENTINITE)
+                .stairs(ModBlocks.POLISHED_SERPENTINITE_STAIRS)
+                .slab(ModBlocks.POLISHED_SERPENTINITE_SLAB)
+                .wall(ModBlocks.POLISHED_SERPENTINITE_WALL);
+
         blockModelGenerators.family(ModBlocks.AMPHIBOLITE)
                 .stairs(ModBlocks.AMPHIBOLITE_STAIRS)
                 .slab(ModBlocks.AMPHIBOLITE_SLAB)
@@ -118,6 +144,18 @@ public class ModModelProvider extends FabricModelProvider {
 
         blockModelGenerators.createTrivialCube(ModBlocks.RENDZINA);
         blockModelGenerators.createTrivialCube(ModBlocks.LITHOSOL);
+
+        blockModelGenerators.woodProvider(ModBlocks.GINKGO_LOG).log(ModBlocks.GINKGO_LOG).wood(ModBlocks.GINKGO_WOOD);
+        blockModelGenerators.woodProvider(ModBlocks.STRIPPED_GINKGO_LOG).log(ModBlocks.STRIPPED_GINKGO_LOG).wood(ModBlocks.STRIPPED_GINKGO_WOOD);
+        blockModelGenerators.createDoor(ModBlocks.GINKGO_DOOR);
+        blockModelGenerators.createTrapdoor(ModBlocks.GINKGO_TRAPDOOR);
+        blockModelGenerators.family(ModBlocks.GINKGO_PLANKS)
+                .stairs(ModBlocks.GINKGO_STAIRS).slab(ModBlocks.GINKGO_SLAB)
+                .button(ModBlocks.GINKGO_BUTTON).pressurePlate(ModBlocks.GINKGO_PRESSURE_PLATE)
+                .fence(ModBlocks.GINKGO_FENCE).fenceGate(ModBlocks.GINKGO_FENCE_GATE);
+        blockModelGenerators.createTrivialCube(ModBlocks.GINKGO_LEAVES);
+        blockModelGenerators.createPlantWithDefaultItem(ModBlocks.GINKGO_SAPLING,
+                ModBlocks.POTTED_GINKGO_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
 
         blockModelGenerators.woodProvider(ModBlocks.MAPLE_LOG).log(ModBlocks.MAPLE_LOG).wood(ModBlocks.MAPLE_WOOD);
         blockModelGenerators.woodProvider(ModBlocks.STRIPPED_MAPLE_LOG).log(ModBlocks.STRIPPED_MAPLE_LOG).wood(ModBlocks.STRIPPED_MAPLE_WOOD);

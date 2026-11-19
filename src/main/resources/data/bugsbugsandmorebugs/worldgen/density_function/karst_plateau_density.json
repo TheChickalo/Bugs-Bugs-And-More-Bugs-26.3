@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:sub",
+  "left": {
+    "type": "minecraft:mul",
+    "left": "bugsbugsandmorebugs:karst_massif_region",
+    "right": {
+      "type": "minecraft:gradient",
+      "axis": "y",
+      "from_coordinate": 54,
+      "from_value": 4.4,
+      "to_coordinate": 310,
+      "to_value": -1.0
+    }
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:sub",
+      "left": 1.0,
+      "right": "bugsbugsandmorebugs:karst_massif_region"
+    },
+    "right": 3.8
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "ginkgo",
+  "key": {
+    "#": "minecraft:stick",
+    "W": "bugsbugsandmorebugs:ginkgo_planks"
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:ginkgo_fence_gate"
+  }
+}

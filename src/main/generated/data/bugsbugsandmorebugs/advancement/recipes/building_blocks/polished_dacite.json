@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dacite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "bugsbugsandmorebugs:dacite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "bugsbugsandmorebugs:polished_dacite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dacite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bugsbugsandmorebugs:polished_dacite"
+    ]
+  }
+}

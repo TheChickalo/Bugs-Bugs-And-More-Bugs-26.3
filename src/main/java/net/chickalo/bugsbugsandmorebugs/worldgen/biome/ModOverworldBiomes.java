@@ -31,9 +31,6 @@ public class ModOverworldBiomes {
 
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,
-                ModPlacedFeatures.AMPHIBOLITE_DEPOSIT_PLACED_KEY);
-
 
 // Lakes
         biomeBuilder.addFeature(
@@ -175,8 +172,6 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
-                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
@@ -199,11 +194,15 @@ public class ModOverworldBiomes {
 
     public static Biome ginkgoForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        // TODO: Replace with GINKGO_TREE_PLACED_KEY when ginkgo texture and foliage models are ready.
+        // Unique Ginkgo trees. Keep them ordered before any shared vegetation features.
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.MAPLE_PLACED_KEY);
+                ModPlacedFeatures.GINKGO_TREE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.MAPLE_SHORT_GRASS_PLACED_KEY);
+                ModPlacedFeatures.GINKGO_OLD_GROWTH_PLACED_KEY);
+        // Far cheaper than the Maple-specific ~744 grass attempts/chunk.
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultFlowers(generation);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.67F).downfall(0.68F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -246,4 +245,43 @@ public class ModOverworldBiomes {
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xB8C4CF))
                 .build();
     }
+    // New Elsewhere landscape biomes. Water presence comes from noise-settings
+    // default_fluid/sea_level, not from a biome label alone.
+    public static Biome grassyPlains(HolderGetter<PlacedFeature> features,
+                                    HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultFlowers(generation);
+        return landscapeBiome(generation, 0.72F, 0.44F, 0x78A85D, 0x84BED2, 0xCBDCD3);
+    }
+
+    public static Biome ocean(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+                0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
+    }
+    public static Biome river(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+                0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
+    }
+    public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+                0.61F, 0.76F, 0x598A79, 0xA0D1DA, 0xC4D4CF);
+    }
+    public static Biome estuary(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+                0.65F, 0.78F, 0x788F7B, 0x9BC9D2, 0xBCC7B5);
+    }
+    private static Biome landscapeBiome(BiomeGenerationSettings.Builder generation,
+                                        float temperature, float downfall,
+                                        int water, int sky, int fog) {
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(temperature).downfall(downfall)
+                .specialEffects(new BiomeSpecialEffects.Builder().waterColor(water).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(generation.build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(sky))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(fog))
+                .build();
+    }
+
 }

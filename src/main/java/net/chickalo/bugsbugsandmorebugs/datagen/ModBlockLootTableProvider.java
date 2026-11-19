@@ -34,6 +34,32 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
+        // Elsewhere secondary stone drops
+        dropSelf(ModBlocks.DACITE);
+        dropSelf(ModBlocks.DACITE_STAIRS);
+        add(ModBlocks.DACITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.DACITE_WALL);
+        dropSelf(ModBlocks.POLISHED_DACITE);
+        dropSelf(ModBlocks.POLISHED_DACITE_STAIRS);
+        add(ModBlocks.POLISHED_DACITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_DACITE_WALL);
+        dropSelf(ModBlocks.CHERT);
+        dropSelf(ModBlocks.CHERT_STAIRS);
+        add(ModBlocks.CHERT_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.CHERT_WALL);
+        dropSelf(ModBlocks.POLISHED_CHERT);
+        dropSelf(ModBlocks.POLISHED_CHERT_STAIRS);
+        add(ModBlocks.POLISHED_CHERT_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_CHERT_WALL);
+        dropSelf(ModBlocks.SERPENTINITE);
+        dropSelf(ModBlocks.SERPENTINITE_STAIRS);
+        add(ModBlocks.SERPENTINITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.SERPENTINITE_WALL);
+        dropSelf(ModBlocks.POLISHED_SERPENTINITE);
+        dropSelf(ModBlocks.POLISHED_SERPENTINITE_STAIRS);
+        add(ModBlocks.POLISHED_SERPENTINITE_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.POLISHED_SERPENTINITE_WALL);
+
         dropSelf(ModBlocks.MOSSY_RHYOLITE);
         dropSelf(ModBlocks.AMPHIBOLITE);
         dropSelf(ModBlocks.POLISHED_AMPHIBOLITE);
@@ -149,6 +175,25 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
         dropSelf(ModBlocks.RENDZINA);
         dropSelf(ModBlocks.LITHOSOL);
+
+        // Ginkgo family loot tables (same mechanical conventions as Maple).
+        dropSelf(ModBlocks.GINKGO_LOG);
+        dropSelf(ModBlocks.GINKGO_WOOD);
+        dropSelf(ModBlocks.STRIPPED_GINKGO_LOG);
+        dropSelf(ModBlocks.STRIPPED_GINKGO_WOOD);
+        dropSelf(ModBlocks.GINKGO_PLANKS);
+        dropSelf(ModBlocks.GINKGO_SAPLING);
+        dropSelf(ModBlocks.GINKGO_TRAPDOOR);
+        dropSelf(ModBlocks.GINKGO_STAIRS);
+        add(ModBlocks.GINKGO_SLAB, this::createSlabItemTable);
+        dropSelf(ModBlocks.GINKGO_BUTTON);
+        dropSelf(ModBlocks.GINKGO_PRESSURE_PLATE);
+        dropSelf(ModBlocks.GINKGO_FENCE);
+        dropSelf(ModBlocks.GINKGO_FENCE_GATE);
+        add(ModBlocks.GINKGO_DOOR, this::createDoorTable);
+        add(ModBlocks.POTTED_GINKGO_SAPLING, block -> createPotFlowerItemTable(ModBlocks.GINKGO_SAPLING));
+        add(ModBlocks.GINKGO_LEAVES,
+                block -> createLeavesDrops(block, ModBlocks.GINKGO_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
 
         dropSelf(ModBlocks.MAPLE_LOG);
         dropSelf(ModBlocks.MAPLE_WOOD);

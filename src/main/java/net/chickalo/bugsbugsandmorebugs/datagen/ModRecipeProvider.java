@@ -36,6 +36,35 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
+                // Elsewhere stone building and polishing recipes
+                stairBuilder(ModBlocks.DACITE_STAIRS, Ingredient.of(ModBlocks.DACITE))
+                        .unlockedBy(getHasName(ModBlocks.DACITE), has(ModBlocks.DACITE)).save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DACITE_SLAB, ModBlocks.DACITE);
+                wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DACITE_WALL, ModBlocks.DACITE);
+                stairBuilder(ModBlocks.POLISHED_DACITE_STAIRS, Ingredient.of(ModBlocks.POLISHED_DACITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_DACITE), has(ModBlocks.POLISHED_DACITE)).save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DACITE_SLAB, ModBlocks.POLISHED_DACITE);
+                wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DACITE_WALL, ModBlocks.POLISHED_DACITE);
+                stairBuilder(ModBlocks.CHERT_STAIRS, Ingredient.of(ModBlocks.CHERT))
+                        .unlockedBy(getHasName(ModBlocks.CHERT), has(ModBlocks.CHERT)).save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHERT_SLAB, ModBlocks.CHERT);
+                wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHERT_WALL, ModBlocks.CHERT);
+                stairBuilder(ModBlocks.POLISHED_CHERT_STAIRS, Ingredient.of(ModBlocks.POLISHED_CHERT))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_CHERT), has(ModBlocks.POLISHED_CHERT)).save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_CHERT_SLAB, ModBlocks.POLISHED_CHERT);
+                wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_CHERT_WALL, ModBlocks.POLISHED_CHERT);
+                stairBuilder(ModBlocks.SERPENTINITE_STAIRS, Ingredient.of(ModBlocks.SERPENTINITE))
+                        .unlockedBy(getHasName(ModBlocks.SERPENTINITE), has(ModBlocks.SERPENTINITE)).save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SERPENTINITE_SLAB, ModBlocks.SERPENTINITE);
+                wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.SERPENTINITE_WALL, ModBlocks.SERPENTINITE);
+                stairBuilder(ModBlocks.POLISHED_SERPENTINITE_STAIRS, Ingredient.of(ModBlocks.POLISHED_SERPENTINITE))
+                        .unlockedBy(getHasName(ModBlocks.POLISHED_SERPENTINITE), has(ModBlocks.POLISHED_SERPENTINITE)).save(output);
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_SERPENTINITE_SLAB, ModBlocks.POLISHED_SERPENTINITE);
+                wall(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_SERPENTINITE_WALL, ModBlocks.POLISHED_SERPENTINITE);
+                polished(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_DACITE, ModBlocks.DACITE);
+                polished(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_CHERT, ModBlocks.CHERT);
+                polished(RecipeCategory.BUILDING_BLOCKS, ModBlocks.POLISHED_SERPENTINITE, ModBlocks.SERPENTINITE);
+
                 stairBuilder(ModBlocks.AMPHIBOLITE_STAIRS, Ingredient.of(ModBlocks.AMPHIBOLITE))
                         .unlockedBy(getHasName(ModBlocks.AMPHIBOLITE), has(ModBlocks.AMPHIBOLITE))
                         .group("amphibolite")
@@ -90,6 +119,44 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                                 has(ModItems.EXOSKELETON)
                         )
                         .group("combat")
+                        .save(output);
+
+                woodFromLogs(ModBlocks.GINKGO_WOOD, ModBlocks.GINKGO_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_GINKGO_WOOD, ModBlocks.STRIPPED_GINKGO_LOG);
+                planksFromLogs(ModBlocks.GINKGO_PLANKS, ModTags.Items.GINKGO_LOGS, 4);
+
+                doorBuilder(ModBlocks.GINKGO_DOOR, Ingredient.of(ModBlocks.GINKGO_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.GINKGO_PLANKS), has(ModBlocks.GINKGO_PLANKS))
+                        .group("ginkgo")
+                        .save(output);
+
+                trapdoorBuilder(ModBlocks.GINKGO_TRAPDOOR, Ingredient.of(ModBlocks.GINKGO_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.GINKGO_PLANKS), has(ModBlocks.GINKGO_PLANKS))
+                        .group("ginkgo")
+                        .save(output);
+
+                stairBuilder(ModBlocks.GINKGO_STAIRS, Ingredient.of(ModBlocks.GINKGO_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.GINKGO_PLANKS), has(ModBlocks.GINKGO_PLANKS))
+                        .group("ginkgo")
+                        .save(output);
+
+                slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GINKGO_SLAB, ModBlocks.GINKGO_PLANKS);
+
+                buttonBuilder(ModBlocks.GINKGO_BUTTON, Ingredient.of(ModBlocks.GINKGO_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.GINKGO_PLANKS), has(ModBlocks.GINKGO_PLANKS))
+                        .group("ginkgo")
+                        .save(output);
+
+                pressurePlate(ModBlocks.GINKGO_PRESSURE_PLATE, ModBlocks.GINKGO_PLANKS);
+
+                fenceBuilder(ModBlocks.GINKGO_FENCE, Ingredient.of(ModBlocks.GINKGO_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.GINKGO_PLANKS), has(ModBlocks.GINKGO_PLANKS))
+                        .group("ginkgo")
+                        .save(output);
+
+                fenceGateBuilder(ModBlocks.GINKGO_FENCE_GATE, Ingredient.of(ModBlocks.GINKGO_PLANKS))
+                        .unlockedBy(getHasName(ModBlocks.GINKGO_PLANKS), has(ModBlocks.GINKGO_PLANKS))
+                        .group("ginkgo")
                         .save(output);
 
                 woodFromLogs(ModBlocks.MAPLE_WOOD, ModBlocks.MAPLE_LOG);

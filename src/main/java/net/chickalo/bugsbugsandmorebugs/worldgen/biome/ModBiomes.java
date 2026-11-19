@@ -12,6 +12,12 @@ import terrablender.api.EndBiomeRegistry;
 import terrablender.api.Regions;
 
 public class ModBiomes {
+    public static final ResourceKey<Biome> GRASSY_PLAINS = registerBiomeKey("grassy_plains");
+    public static final ResourceKey<Biome> OCEAN = registerBiomeKey("ocean");
+    public static final ResourceKey<Biome> RIVER = registerBiomeKey("river");
+    public static final ResourceKey<Biome> LAKE = registerBiomeKey("lake");
+    public static final ResourceKey<Biome> ESTUARY = registerBiomeKey("estuary");
+
     public static final ResourceKey<Biome> UNDERHANG = registerBiomeKey("underhang");
     public static final ResourceKey<Biome> MAPLE_FOREST = registerBiomeKey("maple_forest");
     public static final ResourceKey<Biome> HIGHLAND_KARST = registerBiomeKey("highland_karst");
@@ -35,6 +41,11 @@ public class ModBiomes {
         register(context, GINKGO_FOREST, ModOverworldBiomes.ginkgoForest(placedFeatures, carvers));
         register(context, HINOKI_HIGHLANDS, ModOverworldBiomes.hinokiHighlands(placedFeatures, carvers));
         register(context, VOLCANIC_PEAK, ModOverworldBiomes.volcanicPeak(placedFeatures, carvers));
+        register(context, GRASSY_PLAINS, ModOverworldBiomes.grassyPlains(placedFeatures, carvers));
+        register(context, OCEAN, ModOverworldBiomes.ocean(placedFeatures, carvers));
+        register(context, RIVER, ModOverworldBiomes.river(placedFeatures, carvers));
+        register(context, LAKE, ModOverworldBiomes.lake(placedFeatures, carvers));
+        register(context, ESTUARY, ModOverworldBiomes.estuary(placedFeatures, carvers));
         register(context, UNDERHANG, ModOverworldBiomes.underhang(placedFeatures, carvers));
         register(context, MAPLE_FOREST , ModOverworldBiomes.mapleForest(placedFeatures, carvers));
         register(context, HIGHLAND_KARST, ModOverworldBiomes.highlandKarst(placedFeatures, carvers)

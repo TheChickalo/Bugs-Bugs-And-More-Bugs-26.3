@@ -14,11 +14,19 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 
 public class ModFeatures {
+    // Standard, taller-than-maple Ginkgo with an upward-broadening golden crown.
+    public static final ResourceKey<Feature> GINKGO_SMALL_KEY = registerKey("ginkgo_small");
+    public static final ResourceKey<Feature> GINKGO_TREE_KEY = registerKey("ginkgo_tree");
+    // Rare old-growth tree: taller bole and a wider, flatter crown.
+    public static final ResourceKey<Feature> GINKGO_OLD_GROWTH_KEY = registerKey("ginkgo_old_growth");
+
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
     public static final ResourceKey<Feature> MAPLE_LAKE_KEY = registerKey("maple_lake");
     public static final ResourceKey<Feature> MAPLE_BAMBOO_KEY = registerKey("maple_bamboo");
@@ -41,6 +49,31 @@ public class ModFeatures {
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(STONE_FOREST_SPIRES_KEY, new KarstOutcropFeature(10, 28, 3, 90));
         context.register(AMPHIBOLITE_DEPOSIT_KEY, new AmphiboliteDepositFeature());
+        // Small Ginkgo adds an understory height tier without inventing new textures.
+        context.register(GINKGO_SMALL_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.GINKGO_LOG),
+                new StraightTrunkPlacer(5, 2, 2),
+                BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
+                new GinkgoFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 5),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(ModBlocks.LOAM)
+        ).build());
+        context.register(GINKGO_TREE_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.GINKGO_LOG),
+                new StraightTrunkPlacer(15, 4, 3),
+                BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
+                new GinkgoFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 7),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(ModBlocks.LOAM)
+        ).build());
+        context.register(GINKGO_OLD_GROWTH_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.GINKGO_LOG),
+                new StraightTrunkPlacer(23, 5, 4),
+                BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
+                new GinkgoFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 9),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(ModBlocks.LOAM)
+        ).build());
         context.register(MAPLE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.MAPLE_LOG),
                 new MapleTrunkPlacer(

@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:mul",
+  "left": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": "minecraft:overworld/continents",
+            "right": 0.44
+          },
+          "right": 4.0
+        },
+        "min": 0.0,
+        "max": 1.0
+      },
+      "right": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": -0.18,
+            "right": "minecraft:overworld/erosion"
+          },
+          "right": 3.8
+        },
+        "min": 0.0,
+        "max": 1.0
+      }
+    },
+    "right": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:sub",
+          "left": -0.24,
+          "right": "minecraft:overworld/temperature"
+        },
+        "right": 3.5
+      },
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "right": {
+    "type": "minecraft:add",
+    "left": 0.7,
+    "right": {
+      "type": "minecraft:mul",
+      "left": 0.3,
+      "right": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": 0.2,
+            "right": "minecraft:overworld/ridges"
+          },
+          "right": 2.0
+        },
+        "min": 0.0,
+        "max": 1.0
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "ginkgo",
+  "ingredients": [
+    "bugsbugsandmorebugs:ginkgo_planks"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:ginkgo_button"
+  }
+}

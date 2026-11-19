@@ -303,7 +303,38 @@ public class ModBlocks {
             });
 
 
-    // Maple family
+    // Maple family    // Elsewhere secondary rock families (natural and polished)
+    public static final Block DACITE = registerBlock("dacite", properties -> new Block(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block DACITE_STAIRS = registerBlock("dacite_stairs", properties -> new StairBlock(DACITE.defaultBlockState(), properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block DACITE_SLAB = registerBlock("dacite_slab", properties -> new SlabBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block DACITE_WALL = registerBlock("dacite_wall", properties -> new WallBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Block POLISHED_DACITE = registerBlock("polished_dacite", properties -> new Block(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_DACITE_STAIRS = registerBlock("polished_dacite_stairs", properties -> new StairBlock(POLISHED_DACITE.defaultBlockState(), properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_DACITE_SLAB = registerBlock("polished_dacite_slab", properties -> new SlabBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_DACITE_WALL = registerBlock("polished_dacite_wall", properties -> new WallBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Block CHERT = registerBlock("chert", properties -> new Block(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block CHERT_STAIRS = registerBlock("chert_stairs", properties -> new StairBlock(CHERT.defaultBlockState(), properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block CHERT_SLAB = registerBlock("chert_slab", properties -> new SlabBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block CHERT_WALL = registerBlock("chert_wall", properties -> new WallBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Block POLISHED_CHERT = registerBlock("polished_chert", properties -> new Block(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_CHERT_STAIRS = registerBlock("polished_chert_stairs", properties -> new StairBlock(POLISHED_CHERT.defaultBlockState(), properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_CHERT_SLAB = registerBlock("polished_chert_slab", properties -> new SlabBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_CHERT_WALL = registerBlock("polished_chert_wall", properties -> new WallBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Block SERPENTINITE = registerBlock("serpentinite", properties -> new Block(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SERPENTINITE_STAIRS = registerBlock("serpentinite_stairs", properties -> new StairBlock(SERPENTINITE.defaultBlockState(), properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SERPENTINITE_SLAB = registerBlock("serpentinite_slab", properties -> new SlabBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block SERPENTINITE_WALL = registerBlock("serpentinite_wall", properties -> new WallBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+    public static final Block POLISHED_SERPENTINITE = registerBlock("polished_serpentinite", properties -> new Block(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SERPENTINITE_STAIRS = registerBlock("polished_serpentinite_stairs", properties -> new StairBlock(POLISHED_SERPENTINITE.defaultBlockState(), properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SERPENTINITE_SLAB = registerBlock("polished_serpentinite_slab", properties -> new SlabBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block POLISHED_SERPENTINITE_WALL = registerBlock("polished_serpentinite_wall", properties -> new WallBlock(properties.strength(2.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
+
     public static final Block MAPLE_LOG = registerBlock("maple_log",
             properties -> new RotatedPillarBlock(properties.strength(2f).instrument(NoteBlockInstrument.BASS)
                     .sound(SoundType.WOOD).ignitedByLava()));
@@ -363,7 +394,47 @@ public class ModBlocks {
             properties -> new FlowerPotBlock(MAPLE_SAPLING, properties
                     .instabreak().noOcclusion().pushReaction(PushReaction.POPPED)));
 
-    // eventually ginkgo will go here
+    // Ginkgo family: golden foliage, medium-height stands and occasional old-growth giants.
+    public static final Block GINKGO_LOG = registerBlock("ginkgo_log", properties -> new RotatedPillarBlock(properties
+            .strength(2f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block GINKGO_WOOD = registerBlock("ginkgo_wood", properties -> new RotatedPillarBlock(properties
+            .strength(2f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_GINKGO_LOG = registerBlock("stripped_ginkgo_log", properties -> new RotatedPillarBlock(properties
+            .strength(2f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_GINKGO_WOOD = registerBlock("stripped_ginkgo_wood", properties -> new RotatedPillarBlock(properties
+            .strength(2f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block GINKGO_PLANKS = registerBlock("ginkgo_planks", properties -> new Block(properties
+            .mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.BASS)
+            .strength(2f, 3f).sound(SoundType.WOOD).ignitedByLava()));
+    // Use ordinary leaf decay; the golden pixel art stays untinted.
+    public static final Block GINKGO_LEAVES = registerBlock("ginkgo_leaves", properties -> new MapleLeavesBlock(0.0F, ParticleTypes.CHERRY_LEAVES,
+            AmbientLeavesBlockSoundPlayer.noAmbientSound(), properties.mapColor(MapColor.COLOR_YELLOW)
+            .strength(0.2F).randomTicks().sound(SoundType.POPLAR_LEAVES).noOcclusion()
+            .isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never)
+            .ignitedByLava().pushReaction(PushReaction.POPPED)
+            .isRedstoneConductor(Blocks::never)));
+    public static final Block GINKGO_SAPLING = registerBlock("ginkgo_sapling", properties -> new SaplingBlock(
+            ModTreeGrowers.GINKGO, properties.mapColor(MapColor.PLANT).noCollision().randomTicks()
+            .instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block GINKGO_STAIRS = registerBlock("ginkgo_stairs", properties -> new StairBlock(
+            ModBlocks.GINKGO_PLANKS.defaultBlockState(), properties.strength(3f)));
+    public static final Block GINKGO_SLAB = registerBlock("ginkgo_slab", properties -> new SlabBlock(properties.strength(3f)));
+    public static final Block GINKGO_DOOR = registerBlock("ginkgo_door", properties -> new DoorBlock(
+            BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
+    public static final Block GINKGO_TRAPDOOR = registerBlock("ginkgo_trapdoor", properties -> new TrapDoorBlock(
+            BlockSetType.CHERRY, properties.strength(3f).noOcclusion()));
+    public static final Block GINKGO_BUTTON = registerBlock("ginkgo_button", properties -> new ButtonBlock(
+            BlockSetType.CHERRY, 15, properties.strength(3f).noCollision()));
+    public static final Block GINKGO_PRESSURE_PLATE = registerBlock("ginkgo_pressure_plate", properties -> new PressurePlateBlock(
+            BlockSetType.CHERRY, properties.mapColor(MapColor.COLOR_YELLOW).forceSolidOn()
+            .instrument(NoteBlockInstrument.BASS).strength(3f).noCollision()
+            .ignitedByLava().pushReaction(PushReaction.POPPED)));
+    public static final Block GINKGO_FENCE = registerBlock("ginkgo_fence", properties -> new FenceBlock(properties.strength(2f)));
+    public static final Block GINKGO_FENCE_GATE = registerBlock("ginkgo_fence_gate", properties -> new FenceGateBlock(
+            WoodType.CHERRY, properties.strength(2f)));
+    public static final Block POTTED_GINKGO_SAPLING = registerBlockWithoutBlockItem("potted_ginkgo_sapling",
+            properties -> new FlowerPotBlock(GINKGO_SAPLING, properties.instabreak()
+                    .noOcclusion().pushReaction(PushReaction.POPPED)));
 
     // Glowshroom Family
     public static final Block GLOWSHROOM = registerBlock("glowshroom", properties -> new GlowshroomBlock(

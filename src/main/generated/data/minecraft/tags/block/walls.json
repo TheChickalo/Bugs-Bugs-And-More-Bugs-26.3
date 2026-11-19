@@ -1,5 +1,11 @@
 {
   "values": [
+    "bugsbugsandmorebugs:dacite_wall",
+    "bugsbugsandmorebugs:polished_dacite_wall",
+    "bugsbugsandmorebugs:chert_wall",
+    "bugsbugsandmorebugs:polished_chert_wall",
+    "bugsbugsandmorebugs:serpentinite_wall",
+    "bugsbugsandmorebugs:polished_serpentinite_wall",
     "bugsbugsandmorebugs:amphibolite_wall",
     "bugsbugsandmorebugs:polished_amphibolite_wall",
     "bugsbugsandmorebugs:amphibolite_brick_wall",
