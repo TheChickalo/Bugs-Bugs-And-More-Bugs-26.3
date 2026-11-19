@@ -25,7 +25,10 @@
     [],
     [],
     [],
-    []
+    [],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
+    ]
   ],
   "has_precipitation": true,
   "temperature": 0.56

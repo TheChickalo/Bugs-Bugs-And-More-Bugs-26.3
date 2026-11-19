@@ -36,6 +36,9 @@
       "minecraft:flower_default",
       "bugsbugsandmorebugs:wetland_reeds_placed",
       "bugsbugsandmorebugs:elsewhere_flora_placed"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
     ]
   ],
   "has_precipitation": true,
