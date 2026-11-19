@@ -33,6 +33,9 @@
       "bugsbugsandmorebugs:hinoki_grass_placed",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
     ]
   ],
   "has_precipitation": true,
