@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - fix/elsewhere-landscape-overhaul-20261119
+      - fix/elsewhere-hydrology-eroded-plateau-20261119
   pull_request:
     branches:
       - master
