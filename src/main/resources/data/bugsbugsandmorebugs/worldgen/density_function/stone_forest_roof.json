@@ -14,15 +14,15 @@
               "type": "minecraft:noise",
               "noise": "minecraft:badlands_pillar",
               "xz_scale": 0.28,
-              "y_scale": 0.0
+              "y_scale": 0
             }
           },
           "right": 0.14
         },
         "right": 5.8
       },
-      "min": 0.0,
-      "max": 1.0
+      "min": 0,
+      "max": 1
     },
     "right": {
       "type": "minecraft:mul",
@@ -38,15 +38,15 @@
                 "type": "minecraft:noise",
                 "noise": "minecraft:badlands_surface",
                 "xz_scale": 0.11,
-                "y_scale": 0.0
+                "y_scale": 0
               }
             },
             "right": 0.23
           },
           "right": 3.4
         },
-        "min": 0.0,
-        "max": 1.0
+        "min": 0,
+        "max": 1
       },
       "right": 0.62
     }
@@ -57,7 +57,7 @@
     "from_coordinate": 52,
     "from_value": 1.9,
     "to_coordinate": 76,
-    "to_value": -2.0
+    "to_value": -2
   },
   "second": {
     "type": "minecraft:add",
@@ -65,9 +65,9 @@
       "type": "minecraft:gradient",
       "axis": "y",
       "from_coordinate": 68,
-      "from_value": 4.4,
-      "to_coordinate": 310,
-      "to_value": -0.6
+      "from_value": 3.9,
+      "to_coordinate": 195,
+      "to_value": -0.75
     },
     "right": {
       "type": "minecraft:mul",
@@ -75,7 +75,7 @@
         "type": "minecraft:noise",
         "noise": "minecraft:surface_secondary",
         "xz_scale": 0.15,
-        "y_scale": 0.0
+        "y_scale": 0
       },
       "right": 0.42
     }
