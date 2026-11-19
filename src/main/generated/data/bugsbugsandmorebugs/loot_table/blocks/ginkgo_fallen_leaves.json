@@ -2,16 +2,92 @@
   "type": "minecraft:block",
   "pools": [
     {
+      "rolls": 1,
       "condition": {
-        "type": "minecraft:survives_explosion"
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+        "state": {
+          "segment_amount": "1"
+        }
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bugsbugsandmorebugs:ginkgo_fallen_leaves"
+          "name": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": 1
+            }
+          ]
         }
-      ],
-      "rolls": 1
+      ]
+    },
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+        "state": {
+          "segment_amount": "2"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+        "state": {
+          "segment_amount": "3"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+        "state": {
+          "segment_amount": "4"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:ginkgo_fallen_leaves",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": 4
+            }
+          ]
+        }
+      ]
     }
   ]
 }

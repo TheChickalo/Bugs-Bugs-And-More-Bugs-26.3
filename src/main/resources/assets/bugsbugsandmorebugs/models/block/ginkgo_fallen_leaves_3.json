@@ -1,0 +1,108 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves",
+    "litter": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0.04,
+        1
+      ],
+      "to": [
+        8,
+        0.11,
+        7
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            8,
+            7
+          ],
+          "texture": "#litter"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            8,
+            7
+          ],
+          "texture": "#litter"
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        0.04,
+        9
+      ],
+      "to": [
+        15,
+        0.11,
+        15
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            8,
+            9,
+            15,
+            15
+          ],
+          "texture": "#litter"
+        },
+        "down": {
+          "uv": [
+            8,
+            9,
+            15,
+            15
+          ],
+          "texture": "#litter"
+        }
+      }
+    },
+    {
+      "from": [
+        9,
+        0.04,
+        1
+      ],
+      "to": [
+        15,
+        0.11,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            9,
+            0,
+            15,
+            8
+          ],
+          "texture": "#litter"
+        },
+        "down": {
+          "uv": [
+            9,
+            0,
+            15,
+            8
+          ],
+          "texture": "#litter"
+        }
+      }
+    }
+  ]
+}
