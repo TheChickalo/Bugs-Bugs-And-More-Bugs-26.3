@@ -172,6 +172,8 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
@@ -199,6 +201,8 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.GINKGO_TREE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.GINKGO_OLD_GROWTH_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.GINKGO_SMALL_PLACED_KEY);
         // Far cheaper than the Maple-specific ~744 grass attempts/chunk.
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultFlowers(generation);
@@ -218,7 +222,9 @@ public class ModOverworldBiomes {
 
     public static Biome hinokiHighlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        // Forest below the volcanic treeline: Hinoki only, no Maple stand-ins.
+        // Forest below the volcanic treeline: mixed ages of Hinoki.
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HINOKI_TREE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -254,6 +260,20 @@ public class ModOverworldBiomes {
     }
     // New Elsewhere landscape biomes. Water presence comes from noise-settings
     // default_fluid/sea_level, not from a biome label alone.
+    public static Biome snowyPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        // Highest, open snowfields; separate from volcanic rocky caps.
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(-0.8F).downfall(0.28F)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(0x6F9DB4).grassColorOverride(0xB8C6C5).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(generation.build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x99B8D2))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xC8D4DE))
+                .build();
+    }
+
     public static Biome grassyPlains(HolderGetter<PlacedFeature> features,
                                     HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
@@ -265,13 +285,18 @@ public class ModOverworldBiomes {
     }
 
     public static Biome ocean(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
+        return landscapeBiome(generation,
                 0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
     }
     public static Biome river(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
     }
@@ -281,6 +306,8 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.61F, 0.76F, 0x598A79, 0xA0D1DA, 0xC4D4CF);
     }
@@ -290,6 +317,8 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.65F, 0.78F, 0x788F7B, 0x9BC9D2, 0xBCC7B5);
     }

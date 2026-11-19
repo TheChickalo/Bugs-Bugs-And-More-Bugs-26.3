@@ -3,7 +3,17 @@
   "pools": [
     {
       "condition": {
-        "type": "minecraft:survives_explosion"
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:match_block",
+            "blocks": "bugsbugsandmorebugs:silver_grass",
+            "state": {
+              "segment": "0"
+            }
+          },
+          "minecraft:tool/can_shear"
+        ]
       },
       "entries": [
         {

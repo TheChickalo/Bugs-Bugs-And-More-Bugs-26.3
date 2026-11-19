@@ -1,5 +1,6 @@
 package net.chickalo.bugsbugsandmorebugs.block.custom;
 
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -96,7 +97,11 @@ public class HinokiLeavesBlock extends UntintedParticleLeavesBlock {
     }
 
     private static int distanceAt(BlockState state) {
-        if (state.is(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)) return 0;
+        if (state.is(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
+                || state.is(ModBlocks.HINOKI_LOG)
+                || state.is(ModBlocks.HINOKI_WOOD)
+                || state.is(ModBlocks.STRIPPED_HINOKI_LOG)
+                || state.is(ModBlocks.STRIPPED_HINOKI_WOOD)) return 0;
         if (state.getBlock() instanceof HinokiLeavesBlock) {
             return state.getValue(HINOKI_DISTANCE);
         }

@@ -2,9 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "condition": {
-        "type": "minecraft:survives_explosion"
-      },
+      "condition": "minecraft:tool/can_shear",
       "entries": [
         {
           "type": "minecraft:item",

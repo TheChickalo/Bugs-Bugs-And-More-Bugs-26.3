@@ -3,6 +3,10 @@
     "bugsbugsandmorebugs:ginkgo_log",
     "bugsbugsandmorebugs:ginkgo_wood",
     "bugsbugsandmorebugs:stripped_ginkgo_log",
-    "bugsbugsandmorebugs:stripped_ginkgo_wood"
+    "bugsbugsandmorebugs:stripped_ginkgo_wood",
+    "bugsbugsandmorebugs:hinoki_log",
+    "bugsbugsandmorebugs:hinoki_wood",
+    "bugsbugsandmorebugs:stripped_hinoki_log",
+    "bugsbugsandmorebugs:stripped_hinoki_wood"
   ]
 }

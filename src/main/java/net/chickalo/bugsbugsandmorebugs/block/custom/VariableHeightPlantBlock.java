@@ -2,6 +2,7 @@
 package net.chickalo.bugsbugsandmorebugs.block.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -118,6 +119,20 @@ public class VariableHeightPlantBlock extends BushBlock {
                 state, level, ticks, pos,
                 direction, neighborPos, neighborState, random
         );
+    }
+
+    // Mine any section, harvest one root; other sections lose support.
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide() && state.getValue(SEGMENT) > 0) {
+            BlockPos root = pos.below(state.getValue(SEGMENT));
+            BlockState base = level.getBlockState(root);
+            if (base.is(this) && base.getValue(SEGMENT) == 0) {
+                if (!player.isCreative()) Block.dropResources(base, level, root);
+                level.setBlock(root, Blocks.AIR.defaultBlockState(), 3);
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     private BlockPos findTop(

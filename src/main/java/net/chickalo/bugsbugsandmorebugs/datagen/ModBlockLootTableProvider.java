@@ -4,6 +4,8 @@ import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.ThreeBlockWetlandPlantBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
@@ -34,15 +36,21 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
-        dropSelf(ModBlocks.ALPINE_GRASS);
-        dropSelf(ModBlocks.HAKONE_GRASS);
+        add(ModBlocks.ALPINE_GRASS, this::createShearsOnlyDrop);
+        add(ModBlocks.HAKONE_GRASS, this::createShearsOnlyDrop);
         dropSelf(ModBlocks.IRIS_FLOWER);
         dropSelf(ModBlocks.GINKGO_FALLEN_LEAVES);
         dropSelf(ModBlocks.DUCKWEED);
         dropSelf(ModBlocks.LOTUS);
         dropSelf(ModBlocks.LOTUS_FLOWER);
-        dropSelf(ModBlocks.CATTAILS);
-        dropSelf(ModBlocks.REEDS);
+        add(ModBlocks.CATTAILS, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
+                .add(LootItem.lootTableItem(block))));
+        add(ModBlocks.REEDS, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
+                .add(LootItem.lootTableItem(block))));
         // Elsewhere secondary stone drops
         dropSelf(ModBlocks.DACITE);
         dropSelf(ModBlocks.DACITE_STAIRS);
@@ -294,10 +302,20 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         );
 
         dropSelf(ModBlocks.BELLFLOWERS);
-        dropSelf(ModBlocks.DWARF_BAMBOO);
-        dropSelf(ModBlocks.BUSH_CLOVER);
+        add(ModBlocks.DWARF_BAMBOO, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(VariableHeightPlantBlock.SEGMENT, 0)))
+                .add(LootItem.lootTableItem(block))));
+        add(ModBlocks.BUSH_CLOVER, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(VariableHeightPlantBlock.SEGMENT, 0)))
+                .add(LootItem.lootTableItem(block))));
         // vv change for grass
-        dropSelf(ModBlocks.SILVER_GRASS);
+        add(ModBlocks.SILVER_GRASS, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(VariableHeightPlantBlock.SEGMENT, 0)))
+                .when(this.hasShears())
+                .add(LootItem.lootTableItem(block))));
 
     }
 }

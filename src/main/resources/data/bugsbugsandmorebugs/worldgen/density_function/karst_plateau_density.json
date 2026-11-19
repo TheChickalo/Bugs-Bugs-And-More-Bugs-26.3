@@ -4,19 +4,36 @@
     "type": "minecraft:mul",
     "left": "bugsbugsandmorebugs:karst_massif_region",
     "right": {
-      "type": "minecraft:gradient",
-      "axis": "y",
-      "from_coordinate": 54,
-      "from_value": 4.4,
-      "to_coordinate": 310,
-      "to_value": -1.0
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:gradient",
+        "axis": "y",
+        "from_coordinate": 62,
+        "from_value": 3.6,
+        "to_coordinate": 195,
+        "to_value": -1
+      },
+      "right": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": -0.015,
+            "right": "minecraft:overworld/erosion"
+          },
+          "right": 4.5
+        },
+        "min": 0,
+        "max": 1
+      }
     }
   },
   "right": {
     "type": "minecraft:mul",
     "left": {
       "type": "minecraft:sub",
-      "left": 1.0,
+      "left": 1,
       "right": "bugsbugsandmorebugs:karst_massif_region"
     },
     "right": 3.8

@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -56,6 +57,21 @@ public class ThreeBlockWetlandPlantBlock extends BushBlock implements SimpleWate
         for(int part=1;part<=2;part++)level.setBlock(pos.above(part),
             defaultBlockState().setValue(PART,part).setValue(WATERLOGGED,false),3);
     }
+    // Upper sections do not own loot; harvest the submerged root once.
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide() && state.getValue(PART) > 0) {
+            BlockPos root = pos.below(state.getValue(PART));
+            BlockState base = level.getBlockState(root);
+            if (base.is(this) && base.getValue(PART) == 0) {
+                if (!player.isCreative()) Block.dropResources(base, level, root);
+                level.setBlock(root,
+                        base.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 3);
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
     @Override protected FluidState getFluidState(BlockState state){
         return state.getValue(WATERLOGGED)?Fluids.WATER.getSource(false):super.getFluidState(state);
     }

@@ -3,7 +3,11 @@
   "pools": [
     {
       "condition": {
-        "type": "minecraft:survives_explosion"
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:dwarf_bamboo",
+        "state": {
+          "segment": "0"
+        }
       },
       "entries": [
         {

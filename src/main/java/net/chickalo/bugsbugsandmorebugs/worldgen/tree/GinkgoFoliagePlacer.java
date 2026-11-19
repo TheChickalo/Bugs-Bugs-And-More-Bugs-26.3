@@ -46,7 +46,10 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
                 r = 0.42f + 0.52f * t + 0.10f * (float)Math.sin(t * 9);
             }
             if (t > 0.85f) r -= 0.13f * ((t - 0.85f)/0.15f);
-            int radius = Math.max(1,Math.round(leafRadius*r));
+            // Airy fan-shaped foliage, not a cube-like layer.
+            if (t < 0.18f) r *= 0.65f;
+            if (t > 0.92f) r *= 0.75f;
+            int radius = Math.max(1, Math.round(leafRadius * r));
             placeLeavesRow(level,setter,random,tree,
                 attachment.pos().below(layers-1-layer),radius,0,attachment.doubleTrunk());
         }
@@ -58,7 +61,10 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
     protected boolean shouldSkipLocation(RandomSource random, int dx, int y, int dz,
             int currentRadius, boolean doubleTrunk) {
         int ax=Math.abs(dx), az=Math.abs(dz);
-        return (ax==currentRadius && az==currentRadius)
-                || ((ax==currentRadius || az==currentRadius) && random.nextInt(10)==0);
+        boolean corner = ax == currentRadius && az == currentRadius;
+        boolean edge = ax == currentRadius || az == currentRadius;
+        return corner || (edge && random.nextInt(4) == 0)
+                || (currentRadius > 2 && ax + az > currentRadius * 3 / 2
+                    && random.nextInt(7) == 0);
     }
 }

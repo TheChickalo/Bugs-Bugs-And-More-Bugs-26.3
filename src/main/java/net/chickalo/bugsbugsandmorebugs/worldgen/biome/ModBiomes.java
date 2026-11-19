@@ -29,6 +29,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> GINKGO_FOREST = registerBiomeKey("ginkgo_forest");
     public static final ResourceKey<Biome> HINOKI_HIGHLANDS = registerBiomeKey("hinoki_highlands");
     public static final ResourceKey<Biome> VOLCANIC_PEAK = registerBiomeKey("volcanic_peak");
+    public static final ResourceKey<Biome> SNOWY_PEAK = registerBiomeKey("snowy_peak");
 
     public static void registerBiomes() {
         // Elsewhere biomes are not injected into the Overworld.
@@ -42,6 +43,7 @@ public class ModBiomes {
         register(context, GINKGO_FOREST, ModOverworldBiomes.ginkgoForest(placedFeatures, carvers));
         register(context, HINOKI_HIGHLANDS, ModOverworldBiomes.hinokiHighlands(placedFeatures, carvers));
         register(context, VOLCANIC_PEAK, ModOverworldBiomes.volcanicPeak(placedFeatures, carvers));
+        register(context, SNOWY_PEAK, ModOverworldBiomes.snowyPeak(placedFeatures, carvers));
         register(context, BAMBOO_LOWLANDS, ModOverworldBiomes.bambooLowlands(placedFeatures, carvers));
         register(context, GRASSY_PLAINS, ModOverworldBiomes.grassyPlains(placedFeatures, carvers));
         register(context, OCEAN, ModOverworldBiomes.ocean(placedFeatures, carvers));
