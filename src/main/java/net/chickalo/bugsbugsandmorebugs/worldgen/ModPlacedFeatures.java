@@ -106,11 +106,11 @@ public class ModPlacedFeatures {
         register(context, AMPHIBOLITE_DEPOSIT_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.AMPHIBOLITE_DEPOSIT_KEY),
                 List.of(
-                        CountPlacement.of(9),
+                        CountPlacement.of(3),
                         InSquarePlacement.spread(),
                         HeightRangePlacement.uniform(
                                 net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-55),
-                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-5)),
+                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-18)),
                         BiomeFilter.biome()
                 ));
 
