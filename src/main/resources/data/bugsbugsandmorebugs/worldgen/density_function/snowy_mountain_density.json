@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:sub",
+  "left": {
+    "type": "minecraft:mul",
+    "left": "bugsbugsandmorebugs:snowy_mountain_region",
+    "right": {
+      "type": "minecraft:add",
+      "left": {
+        "type": "minecraft:gradient",
+        "axis": "y",
+        "from_coordinate": 110,
+        "from_value": 12,
+        "to_coordinate": 465,
+        "to_value": -1.9
+      },
+      "right": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:noise",
+          "noise": "minecraft:surface",
+          "xz_scale": 0.5,
+          "y_scale": 0
+        },
+        "right": 0.5
+      }
+    }
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:sub",
+      "left": 1,
+      "right": "bugsbugsandmorebugs:snowy_mountain_region"
+    },
+    "right": 5
+  }
+}

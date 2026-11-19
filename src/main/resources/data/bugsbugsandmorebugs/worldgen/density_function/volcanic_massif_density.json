@@ -8,10 +8,10 @@
       "left": {
         "type": "minecraft:gradient",
         "axis": "y",
-        "from_coordinate": 98,
-        "from_value": 12.8,
-        "to_coordinate": 632,
-        "to_value": -0.6
+        "from_coordinate": 108,
+        "from_value": 10.2,
+        "to_coordinate": 402,
+        "to_value": -1.6
       },
       "right": {
         "type": "minecraft:mul",
@@ -19,7 +19,7 @@
           "type": "minecraft:noise",
           "noise": "minecraft:surface",
           "xz_scale": 0.55,
-          "y_scale": 0.0
+          "y_scale": 0
         },
         "right": 0.38
       }
@@ -29,7 +29,7 @@
     "type": "minecraft:mul",
     "left": {
       "type": "minecraft:sub",
-      "left": 1.0,
+      "left": 1,
       "right": "bugsbugsandmorebugs:volcanic_massif_region"
     },
     "right": 3.3
