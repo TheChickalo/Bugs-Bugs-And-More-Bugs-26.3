@@ -4,6 +4,25 @@
     {
       "type": "minecraft:condition",
       "if_true": {
+        "type": "minecraft:y_above",
+        "anchor": {
+          "absolute": 274
+        },
+        "add_stone_depth": false,
+        "surface_depth_multiplier": 0
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": "minecraft:on_floor",
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": "minecraft:snow_block"
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
         "type": "minecraft:biome",
         "biome_is": "bugsbugsandmorebugs:snowy_peak"
       },
@@ -11,28 +30,8 @@
         "type": "minecraft:condition",
         "if_true": "minecraft:on_floor",
         "then_run": {
-          "type": "minecraft:sequence",
-          "sequence": [
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:y_above",
-                "anchor": {
-                  "absolute": 178
-                },
-                "add_stone_depth": false,
-                "surface_depth_multiplier": 0
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "minecraft:snow_block"
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": "minecraft:stone"
-            }
-          ]
+          "type": "minecraft:block",
+          "result_state": "minecraft:snow_block"
         }
       }
     },
@@ -68,7 +67,7 @@
               "if_true": {
                 "type": "minecraft:y_above",
                 "anchor": {
-                  "absolute": 225
+                  "absolute": 213
                 },
                 "add_stone_depth": false,
                 "surface_depth_multiplier": 0
