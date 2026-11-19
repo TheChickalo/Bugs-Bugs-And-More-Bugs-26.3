@@ -110,7 +110,7 @@ public class ModDimensions {
                                 )
                                 .set(
                                         EnvironmentAttributes.CLOUD_COLOR,
-                                        0xCCFFFFFF
+                                        new org.joml.Vector4f(1.0F, 1.0F, 1.0F, 0.8F)
                                 )
                                 .set(
                                         EnvironmentAttributes.CLOUD_HEIGHT,
