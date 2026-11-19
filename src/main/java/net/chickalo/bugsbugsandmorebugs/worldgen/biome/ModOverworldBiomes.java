@@ -136,6 +136,8 @@ public class ModOverworldBiomes {
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY
         );
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)
@@ -232,6 +234,8 @@ public class ModOverworldBiomes {
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HINOKI_GRASS_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.3F).downfall(0.65F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -288,6 +292,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 AquaticPlacements.SEAGRASS_RIVER);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return landscapeBiome(generation,
                 0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
     }
@@ -297,6 +303,8 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 AquaticPlacements.SEAGRASS_RIVER);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
     }
