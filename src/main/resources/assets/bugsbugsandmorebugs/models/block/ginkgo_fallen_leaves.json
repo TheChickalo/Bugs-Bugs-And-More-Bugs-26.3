@@ -1,6 +1,42 @@
 {
-  "parent": "minecraft:block/carpet",
+  "ambientocclusion": false,
   "textures": {
-    "wool": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves"
-  }
+    "particle": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves",
+    "litter": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0.3,
+        0
+      ],
+      "to": [
+        8,
+        0.5,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        }
+      }
+    }
+  ]
 }

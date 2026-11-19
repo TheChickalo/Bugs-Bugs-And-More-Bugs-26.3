@@ -1,25 +1,59 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "bugsbugsandmorebugs:block/lotus_flower",
-    "cross": "bugsbugsandmorebugs:block/lotus_flower"
+    "particle": "bugsbugsandmorebugs:block/lotus",
+    "pad": "bugsbugsandmorebugs:block/lotus",
+    "flower": "bugsbugsandmorebugs:block/lotus_flower"
   },
   "elements": [
     {
       "from": [
         0,
-        -13,
-        8
+        0,
+        0
       ],
       "to": [
         16,
-        3,
+        0.5,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#pad",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#pad",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        1,
+        8
+      ],
+      "to": [
+        15,
+        14,
         8
       ],
       "rotation": {
         "origin": [
           8,
-          -5,
+          7.5,
           8
         ],
         "axis": "y",
@@ -29,40 +63,40 @@
       "shade": false,
       "faces": {
         "north": {
+          "texture": "#flower",
           "uv": [
             0,
             0,
             16,
             16
-          ],
-          "texture": "#cross"
+          ]
         },
         "south": {
+          "texture": "#flower",
           "uv": [
             0,
             0,
             16,
             16
-          ],
-          "texture": "#cross"
+          ]
         }
       }
     },
     {
       "from": [
-        0,
-        -13,
+        1,
+        1,
         8
       ],
       "to": [
-        16,
-        3,
+        15,
+        14,
         8
       ],
       "rotation": {
         "origin": [
           8,
-          -5,
+          7.5,
           8
         ],
         "axis": "y",
@@ -72,22 +106,22 @@
       "shade": false,
       "faces": {
         "north": {
+          "texture": "#flower",
           "uv": [
             0,
             0,
             16,
             16
-          ],
-          "texture": "#cross"
+          ]
         },
         "south": {
+          "texture": "#flower",
           "uv": [
             0,
             0,
             16,
             16
-          ],
-          "texture": "#cross"
+          ]
         }
       }
     }

@@ -1,7 +1,164 @@
 {
-  "variants": {
-    "": {
-      "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves"
+  "multipart": [
+    {
+      "when": {
+        "facing": "north",
+        "segment_amount": "1"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_1",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "segment_amount": "2"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_2",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "segment_amount": "3"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_3",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "segment_amount": "4"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_4",
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "segment_amount": "1"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "segment_amount": "2"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "segment_amount": "3"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "segment_amount": "4"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_4",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "segment_amount": "1"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "segment_amount": "2"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "segment_amount": "3"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "segment_amount": "4"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_4",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "segment_amount": "1"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "segment_amount": "2"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "segment_amount": "3"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "segment_amount": "4"
+      },
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/ginkgo_fallen_leaves_4",
+        "y": 270
+      }
     }
-  }
+  ]
 }
