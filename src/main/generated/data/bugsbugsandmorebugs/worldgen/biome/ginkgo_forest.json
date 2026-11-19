@@ -29,6 +29,7 @@
     [
       "bugsbugsandmorebugs:ginkgo_tree_placed",
       "bugsbugsandmorebugs:ginkgo_old_growth_placed",
+      "bugsbugsandmorebugs:ginkgo_small_placed",
       "minecraft:patch_tall_grass_2",
       "minecraft:flower_default",
       "minecraft:brown_mushroom_normal",
