@@ -26,7 +26,8 @@
     [],
     [],
     [
-      "minecraft:seagrass_river"
+      "minecraft:seagrass_river",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ]
   ],
   "has_precipitation": true,

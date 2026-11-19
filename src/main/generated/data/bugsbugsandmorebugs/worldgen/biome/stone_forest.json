@@ -30,7 +30,8 @@
     [],
     [
       "bugsbugsandmorebugs:karst_ground_patch_placed",
-      "bugsbugsandmorebugs:highland_meadow_patch_placed"
+      "bugsbugsandmorebugs:highland_meadow_patch_placed",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ]
   ],
   "has_precipitation": true,
