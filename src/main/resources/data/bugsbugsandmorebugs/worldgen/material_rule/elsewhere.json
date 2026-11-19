@@ -481,7 +481,7 @@
         "if_true": {
           "type": "minecraft:y_above",
           "anchor": {
-            "absolute": 54
+            "absolute": 53
           },
           "add_stone_depth": false,
           "surface_depth_multiplier": 0
@@ -493,17 +493,63 @@
               "type": "minecraft:condition",
               "if_true": "minecraft:on_floor",
               "then_run": {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:noise_threshold",
-                  "noise": "minecraft:surface",
-                  "min_threshold": -1,
-                  "max_threshold": -0.45
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:grassy_loam"
-                }
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:y_above",
+                      "anchor": {
+                        "absolute": 95
+                      },
+                      "add_stone_depth": false,
+                      "surface_depth_multiplier": 0
+                    },
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:noise_threshold",
+                        "noise": "minecraft:surface_secondary",
+                        "min_threshold": 0.18,
+                        "max_threshold": 1
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": "bugsbugsandmorebugs:grassy_loam"
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface",
+                      "min_threshold": -1,
+                      "max_threshold": -0.66
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "bugsbugsandmorebugs:mossy_limestone"
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface",
+                      "min_threshold": 0.56,
+                      "max_threshold": 1
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "bugsbugsandmorebugs:weathered_limestone"
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": "bugsbugsandmorebugs:limestone"
+                  }
+                ]
               }
             },
             {
