@@ -79,44 +79,6 @@
         "sequence": [
           {
             "type": "minecraft:condition",
-            "if_true": {
-              "type": "minecraft:y_above",
-              "anchor": {
-                "absolute": 192
-              },
-              "add_stone_depth": false,
-              "surface_depth_multiplier": 0
-            },
-            "then_run": {
-              "type": "minecraft:condition",
-              "if_true": "minecraft:on_floor",
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "minecraft:snow_block"
-              }
-            }
-          },
-          {
-            "type": "minecraft:condition",
-            "if_true": {
-              "type": "minecraft:y_above",
-              "anchor": {
-                "absolute": 166
-              },
-              "add_stone_depth": false,
-              "surface_depth_multiplier": 0
-            },
-            "then_run": {
-              "type": "minecraft:condition",
-              "if_true": "minecraft:on_floor",
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "minecraft:calcite"
-              }
-            }
-          },
-          {
-            "type": "minecraft:condition",
             "if_true": "minecraft:on_floor",
             "then_run": {
               "type": "minecraft:sequence",
@@ -124,10 +86,38 @@
                 {
                   "type": "minecraft:condition",
                   "if_true": {
+                    "type": "minecraft:y_above",
+                    "anchor": {
+                      "absolute": 266
+                    },
+                    "add_stone_depth": false,
+                    "surface_depth_multiplier": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": "minecraft:snow_block"
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:noise_threshold",
+                    "noise": "minecraft:surface_secondary",
+                    "min_threshold": -1,
+                    "max_threshold": -0.65
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": "bugsbugsandmorebugs:lapilli"
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
                     "type": "minecraft:noise_threshold",
                     "noise": "minecraft:surface",
                     "min_threshold": -1,
-                    "max_threshold": -0.35
+                    "max_threshold": -0.22
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -139,19 +129,53 @@
                   "if_true": {
                     "type": "minecraft:noise_threshold",
                     "noise": "minecraft:surface",
-                    "min_threshold": -0.35,
-                    "max_threshold": 0.33
+                    "min_threshold": 0.52,
+                    "max_threshold": 1
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": "bugsbugsandmorebugs:rhyolite"
+                    "result_state": "bugsbugsandmorebugs:ashstone"
                   }
                 },
                 {
                   "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:schist"
+                  "result_state": "bugsbugsandmorebugs:rhyolite"
                 }
               ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": "minecraft:under_floor",
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:noise_threshold",
+                    "noise": "minecraft:surface",
+                    "min_threshold": -1,
+                    "max_threshold": -0.25
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": "bugsbugsandmorebugs:dacite"
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": "bugsbugsandmorebugs:rhyolite"
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": "minecraft:above_preliminary_surface",
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:rhyolite"
             }
           }
         ]
@@ -446,6 +470,60 @@
           {
             "type": "minecraft:condition",
             "if_true": {
+              "type": "minecraft:not",
+              "invert": {
+                "type": "minecraft:y_above",
+                "anchor": {
+                  "absolute": -22
+                },
+                "add_stone_depth": false,
+                "surface_depth_multiplier": 0
+              }
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:schist"
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:noise_threshold",
+              "noise": "minecraft:surface_secondary",
+              "min_threshold": -1,
+              "max_threshold": 0.38
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:amphibolite"
+            }
+          },
+          {
+            "type": "minecraft:block",
+            "result_state": "bugsbugsandmorebugs:schist"
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:not",
+        "invert": {
+          "type": "minecraft:y_above",
+          "anchor": {
+            "absolute": -12
+          },
+          "add_stone_depth": false,
+          "surface_depth_multiplier": 0
+        }
+      },
+      "then_run": {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
               "type": "minecraft:noise_threshold",
               "noise": "minecraft:surface",
               "min_threshold": 0.7,
@@ -574,7 +652,7 @@
           "if_true": "minecraft:on_floor",
           "then_run": {
             "type": "minecraft:block",
-            "result_state": "bugsbugsandmorebugs:schist"
+            "result_state": "bugsbugsandmorebugs:chert"
           }
         }
       }
