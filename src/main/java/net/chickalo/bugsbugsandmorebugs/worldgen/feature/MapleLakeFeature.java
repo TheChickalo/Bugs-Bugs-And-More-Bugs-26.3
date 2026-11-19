@@ -50,7 +50,9 @@ public record MapleLakeFeature() implements Feature {
                 if (!level.getFluidState(gp).isEmpty() || !level.getFluidState(gp.above()).isEmpty()
                         || (!soil.is(Blocks.GRASS_BLOCK) && !soil.is(Blocks.DIRT)
                         && !soil.is(ModBlocks.GRASSY_LOAM) && !soil.is(ModBlocks.LOAM)
-                        && !soil.is(Blocks.PODZOL) && !soil.is(Blocks.COARSE_DIRT))) return false;
+                        && !soil.is(Blocks.PODZOL) && !soil.is(Blocks.COARSE_DIRT)
+                        && !soil.is(Blocks.MUD) && !soil.is(Blocks.CLAY)
+                        && !soil.is(ModBlocks.MOSSY_RHYOLITE) && !soil.is(ModBlocks.RHYOLITE))) return false;
                 top[dx][dz] = ground;
                 inside[dx][dz] = true;
                 min = Math.min(min, ground);
@@ -58,8 +60,8 @@ public record MapleLakeFeature() implements Feature {
                 count++;
             }
         }
-        if (count < 20 || max - min > 5 || min < level.getMinY() + 6
-                || min >= level.getMaxY() - 6 || min < 63) return false;
+        if (count < 20 || max - min > 8 || min < level.getMinY() + 6
+                || min >= level.getMaxY() - 6 || min < 60) return false;
         final int waterY = min;
         // A pond whose rim is lower than its waterline would spill immediately.
         for (int dx = 1; dx < SIZE-1; dx++) for (int dz = 1; dz < SIZE-1; dz++) {

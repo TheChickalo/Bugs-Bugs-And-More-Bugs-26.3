@@ -11,9 +11,8 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 /**
- * Ginkgo crown: narrower lower foliage widening toward the upper layers.
- * The two configured variants use a different maximum radius and layer count.
- * Does not recolor the foliage texture (already golden).
+ * Airy upward-opening ginkgo fans, with lobed outlines rather than
+ * horizontally repeated solid squares. Leaves stay anchored to the bole.
  */
 public final class GinkgoFoliagePlacer extends FoliagePlacer {
     public static final MapCodec<GinkgoFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
@@ -21,50 +20,47 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
                     .forGetter(p -> p.canopyLayers)).apply(instance, GinkgoFoliagePlacer::new));
 
     private final int canopyLayers;
+
     public GinkgoFoliagePlacer(IntProvider radius, IntProvider offset, int canopyLayers) {
         super(radius, offset);
         this.canopyLayers = canopyLayers;
     }
-    @Override protected FoliagePlacerType<?> type() { return ModFoliagePlacerTypes.GINKGO_FOLIAGE_PLACER; }
+
+    @Override protected FoliagePlacerType<?> type() {
+        return ModFoliagePlacerTypes.GINKGO_FOLIAGE_PLACER;
+    }
+
     @Override
     protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random,
             TreeFeature tree, int treeHeight, FoliageAttachment attachment,
             int foliageHeight, int leafRadius, int offset) {
-        // Tall, upright golden ginkgo fan: narrow lower canopy, widening upper
-        // half, irregular twiggy outline. No floating horizontal cube layers.
-        // Every row intersects the upper trunk so leaves stay supported.
-        int variant = random.nextInt(3);
-        int layers = canopyLayers;
-        for (int layer = 0; layer < layers; layer++) {
-            float t = (float)layer / Math.max(1, layers - 1);
-            float r;
-            if (variant == 0) {          // upright pyramidal young/middle-aged
-                r = 0.28f + 0.66f * t;
-            } else if (variant == 1) {   // fan: upper crown clearly broadest
-                r = 0.18f + 0.86f * (float)Math.sqrt(t);
-            } else {                    // irregular, slightly asymmetrical mature
-                r = 0.42f + 0.52f * t + 0.10f * (float)Math.sin(t * 9);
-            }
-            if (t > 0.85f) r -= 0.13f * ((t - 0.85f)/0.15f);
-            // Airy fan-shaped foliage, not a cube-like layer.
-            if (t < 0.18f) r *= 0.65f;
-            if (t > 0.92f) r *= 0.75f;
-            int radius = Math.max(1, Math.round(leafRadius * r));
-            placeLeavesRow(level,setter,random,tree,
-                attachment.pos().below(layers-1-layer),radius,0,attachment.doubleTrunk());
+        int shape = random.nextInt(3);
+        for (int layer = 0; layer < canopyLayers; layer++) {
+            double t = (double) layer / Math.max(1, canopyLayers - 1);
+            double width = shape == 0 ? Math.pow(t, 0.75)
+                    : shape == 1 ? Math.sqrt(t) : 0.18 + 0.82 * t;
+            double factor = 0.18 + 0.85 * width - (t > 0.83 ? (t - 0.83) : 0);
+            // Irregular notches between several rising golden leaf sprays.
+            if (layer > 2 && layer < canopyLayers - 1 && layer % 3 == 0)
+                factor *= 0.84;
+            int r = Math.max(1, Math.round((float) (leafRadius * factor)));
+            placeLeavesRow(level, setter, random, tree,
+                    attachment.pos().below(canopyLayers - 1 - layer),
+                    r, 0, attachment.doubleTrunk());
         }
     }
+
     @Override public int foliageHeight(RandomSource random, int treeHeight, TreeFeature tree) {
         return canopyLayers;
     }
+
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int dx, int y, int dz,
             int currentRadius, boolean doubleTrunk) {
-        int ax=Math.abs(dx), az=Math.abs(dz);
-        boolean corner = ax == currentRadius && az == currentRadius;
-        boolean edge = ax == currentRadius || az == currentRadius;
-        return corner || (edge && random.nextInt(4) == 0)
-                || (currentRadius > 2 && ax + az > currentRadius * 3 / 2
-                    && random.nextInt(7) == 0);
+        if (currentRadius <= 1) return false;
+        double angle = Math.atan2(dz, dx);
+        double lobe = 0.81 + 0.11 * Math.sin(5 * angle) + 0.08 * Math.cos(3 * angle);
+        double distance = Math.sqrt((double) dx * dx + (double) dz * dz) / currentRadius;
+        return distance > lobe || (distance > lobe - 0.12 && random.nextInt(8) == 0);
     }
 }
