@@ -6,6 +6,7 @@ on:
       - fix/elsewhere-hydrology-eroded-plateau-20261119
       - fix/elsewhere-surface-condition-26-3-20261119
       - fix/elsewhere-lakes-relief-volcanic-ginkgo-20261119
+      - fix/elsewhere-clouds-schist-amphibolite-20261119
   pull_request:
     branches:
       - master
@@ -44,6 +45,28 @@ jobs:
               tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
               assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:maple_trunk_placer'
           print('Geology, lake, and Ginkgo registry assertions passed')
+          PY
+      - name: Verify clouds and schist-only amphibolite deposits
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('src/main/generated/data/bugsbugsandmorebugs')
+          dim=json.loads((root/'dimension_type/elsewheredim_type.json').read_text())
+          assert dim['attributes']['minecraft:visual/cloud_color']=='#ccffffff'
+          assert dim['attributes']['minecraft:visual/cloud_height']==184
+          world=Path('src/main/resources/data/bugsbugsandmorebugs/worldgen/material_rule/elsewhere.json')
+          surface=json.loads(world.read_text())
+          assert 'bugsbugsandmorebugs:amphibolite' not in json.dumps(surface), 'Global amphibolite stratum must not exist'
+          ore=Path('src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/feature/AmphiboliteDepositFeature.java').read_text()
+          assert 'countryRock.is(ModBlocks.SCHIST)' in ore
+          assert 'countryRock.is(ModBlocks.RHYOLITE)' not in ore
+          assert 'countryRock.is(ModBlocks.DACITE)' not in ore
+          for biome in (root/'worldgen/biome').glob('*.json'):
+              values=json.loads(biome.read_text())['features']
+              found=any('bugsbugsandmorebugs:amphibolite_deposit_placed' in section for section in values)
+              assert found == (biome.stem != 'underhang'), str(biome)
+          print('Clouds and schist-exclusive amphibolite conditions verified')
           PY
       - name: Generate datapack and compile
         run: |

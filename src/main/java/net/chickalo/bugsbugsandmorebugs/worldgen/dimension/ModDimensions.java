@@ -109,6 +109,14 @@ public class ModDimensions {
                                         ARGB.vector3fFromRGB24(0x83D6DE)
                                 )
                                 .set(
+                                        EnvironmentAttributes.CLOUD_COLOR,
+                                        new org.joml.Vector4f(1.0F, 1.0F, 1.0F, 0.8F)
+                                )
+                                .set(
+                                        EnvironmentAttributes.CLOUD_HEIGHT,
+                                        184.0F
+                                )
+                                .set(
                                         EnvironmentAttributes.BACKGROUND_MUSIC,
                                         BackgroundMusic.OVERWORLD
                                 )

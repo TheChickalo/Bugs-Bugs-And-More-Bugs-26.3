@@ -1,10 +1,10 @@
 {
-  "ambient_light": 0.0,
+  "ambient_light": 0,
   "attributes": {
     "minecraft:audio/ambient_sounds": {
       "mood": {
         "block_search_extent": 8,
-        "offset": 2.0,
+        "offset": 2,
         "sound": "minecraft:ambient.cave",
         "tick_delay": 6000
       }
@@ -22,9 +22,11 @@
       }
     },
     "minecraft:visual/fog_color": "#d5e5dd",
-    "minecraft:visual/sky_color": "#83d6de"
+    "minecraft:visual/sky_color": "#83d6de",
+    "minecraft:visual/cloud_color": "#ccffffff",
+    "minecraft:visual/cloud_height": 184
   },
-  "coordinate_scale": 1.0,
+  "coordinate_scale": 1,
   "default_clock": "minecraft:overworld",
   "has_ceiling": false,
   "has_ender_dragon_fight": false,

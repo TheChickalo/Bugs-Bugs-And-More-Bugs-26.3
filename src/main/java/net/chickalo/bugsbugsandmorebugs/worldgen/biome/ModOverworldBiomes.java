@@ -79,7 +79,7 @@ public class ModOverworldBiomes {
                 .hasPrecipitation(false).temperature(0.45F).downfall(0.0F)
                 .specialEffects(new BiomeSpecialEffects.Builder().waterColor(0x26373F).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(withLavaCleanup(new BiomeGenerationSettings.Builder(features, carvers)).build())
+                .generationSettings(withLavaOnly(new BiomeGenerationSettings.Builder(features, carvers)).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x141925))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0x202A36))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.ASH, 0.045F))
@@ -333,6 +333,14 @@ public class ModOverworldBiomes {
     }
 
     private static BiomeGenerationSettings.Builder withLavaCleanup(BiomeGenerationSettings.Builder generation) {
+        // Small schist-hosted lenses can form underground beneath all surface biomes,
+        // but should never be generated inside the exposed Underhang void.
+        generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,
+                ModPlacedFeatures.AMPHIBOLITE_DEPOSIT_PLACED_KEY);
+        return withLavaOnly(generation);
+    }
+
+    private static BiomeGenerationSettings.Builder withLavaOnly(BiomeGenerationSettings.Builder generation) {
         generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                 ModPlacedFeatures.LAVA_CLEANUP_PLACED_KEY);
         return generation;
