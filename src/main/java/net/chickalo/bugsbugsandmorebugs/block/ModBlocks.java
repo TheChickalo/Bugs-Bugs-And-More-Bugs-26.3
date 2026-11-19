@@ -522,11 +522,11 @@ public class ModBlocks {
             p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F,
                     p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
     public static final Block GINKGO_FALLEN_LEAVES = registerBlock("ginkgo_fallen_leaves",
-            p -> new CarpetBlock(p.noCollision().strength(0.1f).sound(SoundType.GRASS)));
+            p -> new LeafLitterBlock(p.noCollision().strength(0.1f).sound(SoundType.GRASS)));
     public static final Block DUCKWEED = registerBlock("duckweed",
             p -> new Block(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block LOTUS = registerBlock("lotus",
-            p -> new Block(p.noCollision().instabreak().sound(SoundType.GRASS)));
+            p -> new LotusPadBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block LOTUS_FLOWER = registerBlock("lotus_flower",
             p -> new LotusFlowerBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
 
