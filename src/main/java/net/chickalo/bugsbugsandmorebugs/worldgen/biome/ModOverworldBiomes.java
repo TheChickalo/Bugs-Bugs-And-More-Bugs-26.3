@@ -172,6 +172,10 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // The spire feature was registered but never added to this biome.
+        // Highland Karst keeps its separate, much smaller outcrops.
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
