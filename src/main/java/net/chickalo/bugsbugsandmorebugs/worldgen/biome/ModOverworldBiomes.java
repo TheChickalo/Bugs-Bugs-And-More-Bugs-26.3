@@ -174,8 +174,8 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
-                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
+        // Stone towers are created by the large-scale eroded density field,
+        // not decorative spires glued onto a flat surface.
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY

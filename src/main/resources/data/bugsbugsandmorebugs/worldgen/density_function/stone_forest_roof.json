@@ -36,9 +36,9 @@
       "type": "minecraft:gradient",
       "axis": "y",
       "from_coordinate": 96,
-      "from_value": 5.4,
-      "to_coordinate": 260,
-      "to_value": -1.2
+      "from_value": 7.2,
+      "to_coordinate": 280,
+      "to_value": -0.65
     },
     "right": {
       "type": "minecraft:mul",
