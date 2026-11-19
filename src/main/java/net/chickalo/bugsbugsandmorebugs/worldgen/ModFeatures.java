@@ -32,6 +32,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> WETLAND_REEDS_KEY = registerKey("wetland_reeds");
     public static final ResourceKey<Feature> ELSEWHERE_FLORA_KEY = registerKey("elsewhere_flora");
     public static final ResourceKey<Feature> HINOKI_KEY = registerKey("hinoki");
+    public static final ResourceKey<Feature> HINOKI_SMALL_KEY = registerKey("hinoki_small");
     public static final ResourceKey<Feature> MAPLE_KEY = registerKey("maple");
     public static final ResourceKey<Feature> MAPLE_LAKE_KEY = registerKey("maple_lake");
     public static final ResourceKey<Feature> MAPLE_BAMBOO_KEY = registerKey("maple_bamboo");
@@ -81,6 +82,16 @@ public class ModFeatures {
                 new GinkgoFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 9),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
+        ).build());
+        // Short, single-trunk Hinoki adds a natural second canopy height.
+        context.register(HINOKI_SMALL_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.HINOKI_LOG),
+                new StraightTrunkPlacer(13, 2, 2),
+                BlockStateProvider.of(ModBlocks.HINOKI_LEAVES),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.HinokiFoliagePlacer(
+                        ConstantInt.of(3), ConstantInt.of(0), 10),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(Blocks.DIRT)
         ).build());
         // Tall, wide-based Hinoki cypress with tiered conical foliage. The trunk placer
         // adds subtle wooden buttress roots and scattered podzol underneath.
