@@ -182,6 +182,8 @@ public class ModOverworldBiomes {
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY
         );
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.62F).downfall(0.49F)
@@ -296,12 +298,16 @@ public class ModOverworldBiomes {
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
     }
     public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,

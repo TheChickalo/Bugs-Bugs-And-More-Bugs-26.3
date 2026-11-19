@@ -90,7 +90,7 @@ public class ModPlacedFeatures {
         register(context, STONE_FOREST_SPIRES_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.STONE_FOREST_SPIRES_KEY),
                 List.of(
-                        CountPlacement.of(4),
+                        CountPlacement.of(2),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()

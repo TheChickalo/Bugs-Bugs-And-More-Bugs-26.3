@@ -1,7 +1,14 @@
 {
-  "variants": {
-    "": {
-      "model": "bugsbugsandmorebugs:block/lotus_flower"
+  "multipart": [
+    {
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/lotus"
+      }
+    },
+    {
+      "apply": {
+        "model": "bugsbugsandmorebugs:block/lotus_flower"
+      }
     }
-  }
+  ]
 }

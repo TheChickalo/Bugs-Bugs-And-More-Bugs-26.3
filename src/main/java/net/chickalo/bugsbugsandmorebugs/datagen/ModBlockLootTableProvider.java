@@ -14,6 +14,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -39,7 +40,19 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         add(ModBlocks.ALPINE_GRASS, this::createShearsOnlyDrop);
         add(ModBlocks.HAKONE_GRASS, this::createShearsOnlyDrop);
         dropSelf(ModBlocks.IRIS_FLOWER);
-        dropSelf(ModBlocks.GINKGO_FALLEN_LEAVES);
+        add(ModBlocks.GINKGO_FALLEN_LEAVES, block -> {
+            var table = LootTable.lootTable();
+            for (int amount = 1; amount <= 4; amount++) {
+                table.withPool(LootPool.lootPool()
+                        .when(MatchBlock.blockMatches(this.blocks, block,
+                                StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(BlockStateProperties.SEGMENT_AMOUNT, amount)))
+                        .add(LootItem.lootTableItem(block)
+                                .apply(SetItemCountFunction.setCount(
+                                        ContextIntProviders.between(amount, amount)))));
+            }
+            return table;
+        });
         dropSelf(ModBlocks.DUCKWEED);
         dropSelf(ModBlocks.LOTUS);
         dropSelf(ModBlocks.LOTUS_FLOWER);
