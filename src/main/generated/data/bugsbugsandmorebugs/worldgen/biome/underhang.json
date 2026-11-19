@@ -19,11 +19,25 @@
     "minecraft:visual/sky_color": "#141925"
   },
   "carvers": [],
-  "downfall": 0.0,
+  "downfall": 0,
   "effects": {
     "water_color": "#26373f"
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
+    ]
+  ],
   "has_precipitation": false,
   "temperature": 0.45
 }
