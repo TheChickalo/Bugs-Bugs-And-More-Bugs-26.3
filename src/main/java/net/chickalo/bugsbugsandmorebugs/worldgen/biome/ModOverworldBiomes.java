@@ -172,8 +172,7 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
-                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
+        // Stone pillars come from the eroded density function, not added surface spires.
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
