@@ -193,6 +193,21 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
 
 
+        // Hinoki logs must be recognized as leaf-supporting blocks.
+        // Without PREVENTS_NEARBY_LEAF_DECAY, HinokiLeavesBlock never reaches distance 1.
+        tag(BlockTags.LOGS)
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_WOOD));
+        tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_WOOD));
+        tag(BlockTags.LEAVES).add(ModBlocks.getRK(ModBlocks.HINOKI_LEAVES));
+        tag(BlockTags.SAPLINGS).add(ModBlocks.getRK(ModBlocks.HINOKI_SAPLING));
+
         // Custom Ginkgo wood + golden foliage; includes terrain survival for native grass.
         tag(ModTags.Blocks.GINKGO_LOGS)
                 .add(ModBlocks.getRK(ModBlocks.GINKGO_LOG))
