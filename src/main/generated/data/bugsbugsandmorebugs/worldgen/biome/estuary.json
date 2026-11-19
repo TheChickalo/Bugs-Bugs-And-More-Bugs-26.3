@@ -27,7 +27,8 @@
     [],
     [
       "bugsbugsandmorebugs:wetland_reeds_placed",
-      "bugsbugsandmorebugs:elsewhere_flora_placed"
+      "bugsbugsandmorebugs:elsewhere_flora_placed",
+      "minecraft:seagrass_river"
     ]
   ],
   "has_precipitation": true,

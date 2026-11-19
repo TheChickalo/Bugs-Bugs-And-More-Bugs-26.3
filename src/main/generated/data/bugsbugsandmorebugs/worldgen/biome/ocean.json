@@ -15,7 +15,20 @@
   "effects": {
     "water_color": "#558a81"
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:seagrass_river"
+    ]
+  ],
   "has_precipitation": true,
   "temperature": 0.56
 }
