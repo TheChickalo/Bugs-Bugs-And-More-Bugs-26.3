@@ -210,6 +210,20 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.WOODEN_DOORS).add(ModBlocks.getRK(ModBlocks.GINKGO_DOOR));
         tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.getRK(ModBlocks.GINKGO_TRAPDOOR));
 
+        // Register the Hinoki wood family as real leaf-supporting logs.
+        tag(BlockTags.LOGS)
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_WOOD));
+        tag(BlockTags.LEAVES).add(ModBlocks.getRK(ModBlocks.HINOKI_LEAVES));
+        tag(BlockTags.SAPLINGS).add(ModBlocks.getRK(ModBlocks.HINOKI_SAPLING));
+        tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_WOOD));
+
         // Ginkgo trunks must support the golden foliage's distance calculations.
         tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY)
                 .add(ModBlocks.getRK(ModBlocks.GINKGO_LOG))
