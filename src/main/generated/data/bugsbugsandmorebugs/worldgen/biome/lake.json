@@ -17,7 +17,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:maple_lake_placed"
+    ],
     [],
     [],
     [],
