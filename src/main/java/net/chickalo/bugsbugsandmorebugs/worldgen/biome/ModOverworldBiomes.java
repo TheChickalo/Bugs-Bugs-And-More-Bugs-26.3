@@ -45,7 +45,6 @@ public class ModOverworldBiomes {
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.MAPLE_WATER_SHORE_PLACED_KEY
         );
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_RIVER);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_BAMBOO_PLACED_KEY);
         biomeBuilder.addFeature(
@@ -68,7 +67,7 @@ public class ModOverworldBiomes {
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.7F).downfall(0.8F)
                 .specialEffects(new BiomeSpecialEffects.Builder().waterColor(0x4B8F70).build())
-                .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build())
+                .mobSpawnSettings(spawnBuilder.build()).generationSettings(withLavaCleanup(biomeBuilder).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x83D6DE))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xC6D8C0))
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_FOREST))
@@ -84,7 +83,7 @@ public class ModOverworldBiomes {
                 .hasPrecipitation(false).temperature(0.45F).downfall(0.0F)
                 .specialEffects(new BiomeSpecialEffects.Builder().waterColor(0x26373F).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(new BiomeGenerationSettings.Builder(features, carvers).build())
+                .generationSettings(withLavaCleanup(new BiomeGenerationSettings.Builder(features, carvers)).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x141925))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0x202A36))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.ASH, 0.045F))
@@ -149,7 +148,7 @@ public class ModOverworldBiomes {
                                 .build()
                 )
                 .mobSpawnSettings(spawnBuilder.build())
-                .generationSettings(biomeBuilder.build())
+                .generationSettings(withLavaCleanup(biomeBuilder).build())
 
                 .setAttribute(
                         EnvironmentAttributes.SKY_COLOR,
@@ -172,8 +171,7 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
-                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
+        // Towers must emerge from eroding the plateau itself, not from placed columns.
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
@@ -190,7 +188,7 @@ public class ModOverworldBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x4B9A95).grassColorOverride(0x8AAE65).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(generation.build())
+                .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x8ACFEF))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xD5E5DD))
                 .build();
@@ -216,7 +214,7 @@ public class ModOverworldBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x667F66).grassColorOverride(0xB5AF62).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(generation.build())
+                .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0xA7D6D6))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xDAD5BB))
                 .build();
@@ -239,7 +237,7 @@ public class ModOverworldBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x506C72).grassColorOverride(0x6F966C).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(generation.build())
+                .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x9AC4D0))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0x9CAFB7))
                 .build();
@@ -255,7 +253,7 @@ public class ModOverworldBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x596E7F).grassColorOverride(0x70746D).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(generation.build())
+                .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0xA9C9D9))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xB8C4CF))
                 .build();
@@ -270,7 +268,7 @@ public class ModOverworldBiomes {
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x6F9DB4).grassColorOverride(0xB8C6C5).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(generation.build())
+                .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x99B8D2))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xC8D4DE))
                 .build();
@@ -288,8 +286,6 @@ public class ModOverworldBiomes {
 
     public static Biome ocean(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
     }
@@ -299,21 +295,17 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
     }
     public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
-                ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY);
+                ModPlacedFeatures.LAKE_POND_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.61F, 0.76F, 0x598A79, 0xA0D1DA, 0xC4D4CF);
     }
@@ -323,8 +315,6 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                AquaticPlacements.SEAGRASS_RIVER);
         return landscapeBiome(generation,
                 0.65F, 0.78F, 0x788F7B, 0x9BC9D2, 0xBCC7B5);
     }
@@ -348,6 +338,12 @@ public class ModOverworldBiomes {
                 0x5B907C, 0x98CECE, 0xB4D7BD);
     }
 
+    private static BiomeGenerationSettings.Builder withLavaCleanup(BiomeGenerationSettings.Builder generation) {
+        generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                ModPlacedFeatures.LAVA_CLEANUP_PLACED_KEY);
+        return generation;
+    }
+
     private static Biome landscapeBiome(BiomeGenerationSettings.Builder generation,
                                         float temperature, float downfall,
                                         int water, int sky, int fog) {
@@ -355,7 +351,7 @@ public class ModOverworldBiomes {
                 .hasPrecipitation(true).temperature(temperature).downfall(downfall)
                 .specialEffects(new BiomeSpecialEffects.Builder().waterColor(water).build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
-                .generationSettings(generation.build())
+                .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(sky))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(fog))
                 .build();

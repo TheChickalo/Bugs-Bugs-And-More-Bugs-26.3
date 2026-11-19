@@ -25,8 +25,9 @@
     [],
     [],
     [],
+    [],
     [
-      "minecraft:seagrass_river"
+      "bugsbugsandmorebugs:lava_cleanup_placed"
     ]
   ],
   "has_precipitation": true,

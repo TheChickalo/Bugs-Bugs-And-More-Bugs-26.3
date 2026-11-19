@@ -97,7 +97,7 @@
             "continentalness": 0.32,
             "erosion": 0.04,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -109,7 +109,7 @@
             "continentalness": 0.32,
             "erosion": 0.04,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -133,7 +133,7 @@
             "continentalness": 0.26,
             "erosion": -0.1,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -145,7 +145,7 @@
             "continentalness": 0.26,
             "erosion": -0.1,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -169,7 +169,7 @@
             "continentalness": 0.26,
             "erosion": 0.12,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -181,7 +181,7 @@
             "continentalness": 0.26,
             "erosion": 0.12,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -205,7 +205,7 @@
             "continentalness": 0.27,
             "erosion": 0.06,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -217,7 +217,7 @@
             "continentalness": 0.27,
             "erosion": 0.06,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -241,7 +241,7 @@
             "continentalness": 0.27,
             "erosion": 0.04,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -253,7 +253,7 @@
             "continentalness": 0.27,
             "erosion": 0.04,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -277,7 +277,7 @@
             "continentalness": 0.29,
             "erosion": 0.14,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -289,7 +289,7 @@
             "continentalness": 0.29,
             "erosion": 0.14,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -313,7 +313,7 @@
             "continentalness": 0.27,
             "erosion": 0.14,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -325,7 +325,7 @@
             "continentalness": 0.27,
             "erosion": 0.14,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -349,7 +349,7 @@
             "continentalness": 0.27,
             "erosion": 0.21,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -361,7 +361,7 @@
             "continentalness": 0.27,
             "erosion": 0.21,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -385,7 +385,7 @@
             "continentalness": 0.26,
             "erosion": 0.18,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -397,7 +397,7 @@
             "continentalness": 0.26,
             "erosion": 0.18,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -433,19 +433,19 @@
             "continentalness": 0.56,
             "erosion": -0.18,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0,
             "offset": 0
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:river",
+          "biome": "bugsbugsandmorebugs:highland_karst",
           "parameters": {
             "temperature": -0.38,
             "humidity": -0.31,
             "continentalness": 0.56,
             "erosion": -0.18,
             "depth": 0,
-            "weirdness": 0,
+            "weirdness": 0.21,
             "offset": 0
           }
         },
@@ -457,7 +457,7 @@
             "continentalness": 0.52,
             "erosion": -0.12,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -469,7 +469,7 @@
             "continentalness": 0.52,
             "erosion": -0.12,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -505,43 +505,43 @@
             "continentalness": 0.56,
             "erosion": 0.17,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0,
             "offset": 0
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:river",
+          "biome": "bugsbugsandmorebugs:stone_forest",
           "parameters": {
             "temperature": -0.36,
             "humidity": -0.28,
             "continentalness": 0.56,
             "erosion": 0.17,
             "depth": 0,
-            "weirdness": 0,
-            "offset": 0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:stone_forest",
-          "parameters": {
-            "temperature": -0.28,
-            "humidity": -0.4,
-            "continentalness": 0.52,
-            "erosion": 0.29,
-            "depth": 0,
-            "weirdness": -0.21,
-            "offset": 0
-          }
-        },
-        {
-          "biome": "bugsbugsandmorebugs:stone_forest",
-          "parameters": {
-            "temperature": -0.28,
-            "humidity": -0.4,
-            "continentalness": 0.52,
-            "erosion": 0.29,
-            "depth": 0,
             "weirdness": 0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.28,
+            "humidity": -0.4,
+            "continentalness": 0.52,
+            "erosion": 0.29,
+            "depth": 0,
+            "weirdness": -0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.28,
+            "humidity": -0.4,
+            "continentalness": 0.52,
+            "erosion": 0.29,
+            "depth": 0,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -577,19 +577,19 @@
             "continentalness": 0.61,
             "erosion": 0.12,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0,
             "offset": 0
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:river",
+          "biome": "bugsbugsandmorebugs:stone_forest",
           "parameters": {
             "temperature": -0.44,
             "humidity": -0.18,
             "continentalness": 0.61,
             "erosion": 0.12,
             "depth": 0,
-            "weirdness": 0,
+            "weirdness": 0.21,
             "offset": 0
           }
         },
@@ -613,19 +613,19 @@
             "continentalness": 0.65,
             "erosion": -0.27,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0,
             "offset": 0
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:river",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": -0.5,
             "humidity": 0.06,
             "continentalness": 0.65,
             "erosion": -0.27,
             "depth": 0,
-            "weirdness": 0,
+            "weirdness": 0.21,
             "offset": 0
           }
         },
@@ -649,19 +649,19 @@
             "continentalness": 0.65,
             "erosion": -0.36,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0,
             "offset": 0
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:river",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": -0.65,
             "humidity": -0.06,
             "continentalness": 0.65,
             "erosion": -0.36,
             "depth": 0,
-            "weirdness": 0,
+            "weirdness": 0.21,
             "offset": 0
           }
         },
@@ -721,7 +721,7 @@
             "continentalness": 0.26,
             "erosion": 0.3,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -733,7 +733,7 @@
             "continentalness": 0.26,
             "erosion": 0.3,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -757,7 +757,7 @@
             "continentalness": 0.26,
             "erosion": 0.3,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -769,7 +769,7 @@
             "continentalness": 0.26,
             "erosion": 0.3,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -793,7 +793,7 @@
             "continentalness": 0.26,
             "erosion": 0.3,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -805,7 +805,7 @@
             "continentalness": 0.26,
             "erosion": 0.3,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -829,7 +829,7 @@
             "continentalness": 0.51,
             "erosion": 0.25,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -841,7 +841,7 @@
             "continentalness": 0.51,
             "erosion": 0.25,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -889,7 +889,7 @@
             "continentalness": 0.27,
             "erosion": 0.15,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -901,7 +901,7 @@
             "continentalness": 0.27,
             "erosion": 0.15,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -925,7 +925,7 @@
             "continentalness": 0.31,
             "erosion": 0.32,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -937,7 +937,7 @@
             "continentalness": 0.31,
             "erosion": 0.32,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },
@@ -961,7 +961,7 @@
             "continentalness": 0.34,
             "erosion": 0.29,
             "depth": 0,
-            "weirdness": -0.21,
+            "weirdness": -0.09,
             "offset": 0
           }
         },
@@ -973,7 +973,7 @@
             "continentalness": 0.34,
             "erosion": 0.29,
             "depth": 0,
-            "weirdness": 0.21,
+            "weirdness": 0.09,
             "offset": 0
           }
         },

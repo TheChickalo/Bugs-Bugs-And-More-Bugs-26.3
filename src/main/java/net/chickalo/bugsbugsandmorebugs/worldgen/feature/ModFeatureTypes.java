@@ -114,5 +114,8 @@ public final class ModFeatureTypes {
         Registry.register(BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "elsewhere_flora"),
                 ElsewhereFloraFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "lava_cleanup"),
+                ElsewhereLavaCleanupFeature.CODEC);
     }
 }

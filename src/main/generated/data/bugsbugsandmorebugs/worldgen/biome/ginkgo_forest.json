@@ -35,6 +35,9 @@
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
       "bugsbugsandmorebugs:elsewhere_flora_placed"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
     ]
   ],
   "has_precipitation": true,

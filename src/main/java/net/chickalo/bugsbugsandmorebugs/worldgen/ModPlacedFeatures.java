@@ -30,12 +30,14 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_PLACED_KEY = registerKey("bamboo_pools_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_PLACED_KEY = registerKey("wetland_reeds_placed");
     public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_PLACED_KEY = registerKey("elsewhere_flora_placed");
+    public static final ResourceKey<PlacedFeature> LAVA_CLEANUP_PLACED_KEY = registerKey("lava_cleanup_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_TREE_PLACED_KEY = registerKey("hinoki_tree_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_SMALL_PLACED_KEY = registerKey("hinoki_small_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_FERN_PLACED_KEY = registerKey("hinoki_fern_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_GRASS_PLACED_KEY = registerKey("hinoki_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_LAKE_PLACED_KEY = registerKey("maple_lake_placed");
+    public static final ResourceKey<PlacedFeature> LAKE_POND_PLACED_KEY = registerKey("lake_pond_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BAMBOO_PLACED_KEY = registerKey("maple_bamboo_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_BUSH_PLACED_KEY = registerKey("maple_bush_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_SHORT_GRASS_PLACED_KEY = registerKey("maple_short_grass_placed");
@@ -76,13 +78,18 @@ public class ModPlacedFeatures {
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WETLAND_REEDS_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),
-                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                List.of(CountPlacement.of(1), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
 
+        register(context, LAVA_CLEANUP_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.LAVA_CLEANUP_KEY),
+                List.of(CountPlacement.of(1), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
         register(context, ELSEWHERE_FLORA_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.ELSEWHERE_FLORA_KEY),
-                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                List.of(CountPlacement.of(1), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         // Amphibolite: clusters in metamorphic country rock, like tuff deposits.
@@ -243,6 +250,10 @@ public class ModPlacedFeatures {
 
 
         // Occasional surface lakes with a mixed gravel, andesite, and stone shoreline.
+        register(context, LAKE_POND_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_LAKE_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
         register(context, MAPLE_LAKE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_LAKE_KEY),
                 List.of(
                         RarityFilter.onAverageOnceEvery(6),

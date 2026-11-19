@@ -113,6 +113,9 @@
       "minecraft:patch_tall_grass_2",
       "minecraft:flower_default",
       "bugsbugsandmorebugs:highland_meadow_patch_placed"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
     ]
   ],
   "has_precipitation": true,

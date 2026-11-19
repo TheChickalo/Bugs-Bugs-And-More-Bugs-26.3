@@ -20,7 +20,7 @@ public record ElsewhereFloraFeature() implements Feature {
     @Override public MapCodec<ElsewhereFloraFeature> codec(){return CODEC;}
     @Override public boolean place(WorldGenLevel level,ChunkGenerator generator,RandomSource random,BlockPos origin){
         int changed=0;
-        for(int k=0;k<46;k++){
+        for(int k=0;k<9;k++){
             int x=origin.getX()+random.nextInt(13)-6;
             int z=origin.getZ()+random.nextInt(13)-6;
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE,x,z);
@@ -34,7 +34,7 @@ public record ElsewhereFloraFeature() implements Feature {
             if(!ginkgo&&!bamboo&&!peak&&!plains&&!wet&&!limestone)continue;
             if(peak && y>235)continue;
             if(!level.getFluidState(pos.below()).isEmpty() && level.getFluidState(pos.below()).is(Fluids.WATER)){
-                if(level.isEmptyBlock(pos) && (wet||bamboo)){
+                if(level.isEmptyBlock(pos) && (wet||bamboo) && random.nextInt(5)==0){
                     Block pad=random.nextFloat()<0.40f ? ModBlocks.DUCKWEED
                             : random.nextFloat()<0.36f ? ModBlocks.LOTUS_FLOWER : ModBlocks.LOTUS;
                     var state=pad.defaultBlockState();
