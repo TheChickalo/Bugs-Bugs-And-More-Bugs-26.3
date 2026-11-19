@@ -31,6 +31,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_PLACED_KEY = registerKey("wetland_reeds_placed");
     public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_PLACED_KEY = registerKey("elsewhere_flora_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_TREE_PLACED_KEY = registerKey("hinoki_tree_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_SMALL_PLACED_KEY = registerKey("hinoki_small_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_FERN_PLACED_KEY = registerKey("hinoki_fern_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_GRASS_PLACED_KEY = registerKey("hinoki_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
@@ -119,6 +120,11 @@ public class ModPlacedFeatures {
                 configuredFeatures.getOrThrow(ModFeatures.GINKGO_OLD_GROWTH_KEY),
                 List.of(RarityFilter.onAverageOnceEvery(9), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
+        register(context, HINOKI_SMALL_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HINOKI_SMALL_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(3),
+                        ModBlocks.HINOKI_SAPLING));
 
         // Dense evergreen woodland; separate from Maple Forest's tree attempts.
         register(context, HINOKI_TREE_PLACED_KEY,

@@ -34,8 +34,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
-        dropSelf(ModBlocks.ALPINE_GRASS);
-        dropSelf(ModBlocks.HAKONE_GRASS);
+        add(ModBlocks.ALPINE_GRASS, block -> createShearsOnlyDrop(block));
+        add(ModBlocks.HAKONE_GRASS, block -> createShearsOnlyDrop(block));
         dropSelf(ModBlocks.IRIS_FLOWER);
         dropSelf(ModBlocks.GINKGO_FALLEN_LEAVES);
         dropSelf(ModBlocks.DUCKWEED);
@@ -297,7 +297,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.DWARF_BAMBOO);
         dropSelf(ModBlocks.BUSH_CLOVER);
         // vv change for grass
-        dropSelf(ModBlocks.SILVER_GRASS);
+        add(ModBlocks.SILVER_GRASS, block -> createShearsOnlyDrop(block));
 
     }
 }

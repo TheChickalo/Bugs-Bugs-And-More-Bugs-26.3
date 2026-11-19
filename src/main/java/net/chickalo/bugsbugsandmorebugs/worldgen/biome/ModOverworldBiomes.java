@@ -172,6 +172,10 @@ public class ModOverworldBiomes {
     // ================================================================
     public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // The spire feature was registered but never added to this biome.
+        // Highland Karst keeps its separate, much smaller outcrops.
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.STONE_FOREST_SPIRES_PLACED_KEY);
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
@@ -218,6 +222,9 @@ public class ModOverworldBiomes {
 
     public static Biome hinokiHighlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // Mix mature Hinoki with short, single-trunk trees for a layered canopy.
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY);
         // Forest below the volcanic treeline: Hinoki only, no Maple stand-ins.
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HINOKI_TREE_PLACED_KEY);
@@ -265,11 +272,16 @@ public class ModOverworldBiomes {
     }
 
     public static Biome ocean(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        return landscapeBiome(new BiomeGenerationSettings.Builder(features, carvers),
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
+        return landscapeBiome(generation,
                 0.56F, 0.50F, 0x558A81, 0x9BC2CC, 0xA7CBCE);
     }
     public static Biome river(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         return landscapeBiome(generation,
@@ -277,6 +289,8 @@ public class ModOverworldBiomes {
     }
     public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
@@ -286,6 +300,8 @@ public class ModOverworldBiomes {
     }
     public static Biome estuary(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                AquaticPlacements.SEAGRASS_RIVER);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,

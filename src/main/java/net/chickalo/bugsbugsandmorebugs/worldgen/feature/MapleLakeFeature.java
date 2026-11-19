@@ -25,7 +25,7 @@ public record MapleLakeFeature() implements Feature {
     private static final int MIN_DEPTH = 1;
     private static final int MAX_DEPTH = 3;
 
-    private static final int MAX_HEIGHT_VARIATION = 2;
+    private static final int MAX_HEIGHT_VARIATION = 4;
 
     private static final int BASIN_THICKNESS = 3;
     private static final int WALL_THICKNESS = 3;

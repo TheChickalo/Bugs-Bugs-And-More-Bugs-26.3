@@ -7,6 +7,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -56,6 +57,28 @@ public class ThreeBlockWetlandPlantBlock extends BushBlock implements SimpleWate
         for(int part=1;part<=2;part++)level.setBlock(pos.above(part),
             defaultBlockState().setValue(PART,part).setValue(WATERLOGGED,false),3);
     }
+    // Destroy the two other segments without invoking their individual loot
+    // tables. The segment the player actually mined still drops exactly one
+    // item via its ordinary loot table (none in creative).
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide()) {
+            int brokenPart = state.getValue(PART);
+            BlockPos base = pos.below(brokenPart);
+            for (int part = 0; part < 3; part++) {
+                if (part == brokenPart) continue;
+                BlockPos otherPos = base.above(part);
+                BlockState otherState = level.getBlockState(otherPos);
+                if (otherState.is(this) && otherState.getValue(PART) == part) {
+                    level.setBlock(otherPos, otherState.getValue(WATERLOGGED)
+                            ? Blocks.WATER.defaultBlockState()
+                            : Blocks.AIR.defaultBlockState(), 2);
+                }
+            }
+        }
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
     @Override protected FluidState getFluidState(BlockState state){
         return state.getValue(WATERLOGGED)?Fluids.WATER.getSource(false):super.getFluidState(state);
     }
