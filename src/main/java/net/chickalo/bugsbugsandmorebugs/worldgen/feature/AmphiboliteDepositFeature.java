@@ -36,8 +36,11 @@ public record AmphiboliteDepositFeature() implements Feature {
                     BlockPos at = origin.offset(dx, dy, dz);
                     if (at.getY() < level.getMinY() || at.getY() >= level.getMaxY()) continue;
                     var state = level.getBlockState(at);
-                    // Preserve the solid disaster layer and existing caves.
-                    if (!state.is(ModBlocks.SCHIST)) continue; // Never replace Eclogite or the Sundering Horizon.
+                    // Schist is a separate metamorphic stratum, not a host
+                    // for randomly scattered amphibolite fragments.
+                    // This legacy optional feature now affects only the
+                    // rhyolite/dacite country rock, and is not used by any biome.
+                    if (!state.is(ModBlocks.RHYOLITE) && !state.is(ModBlocks.DACITE)) continue;
                     placed |= level.setBlock(at, ModBlocks.AMPHIBOLITE.defaultBlockState(), 2);
                 }
             }

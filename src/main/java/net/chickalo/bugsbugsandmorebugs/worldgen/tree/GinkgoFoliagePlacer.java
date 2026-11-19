@@ -11,13 +11,17 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 /**
- * Airy upward-opening ginkgo fans, with lobed outlines rather than
- * horizontally repeated solid squares. Leaves stay anchored to the bole.
+ * Distinct rising leaf sprays instead of one vertically stacked slab.
+ * Each branch tip produces an asymmetric, outward-opening crown.
+ * Medium and old-growth trees have several real log branches.
  */
 public final class GinkgoFoliagePlacer extends FoliagePlacer {
-    public static final MapCodec<GinkgoFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            foliagePlacerParts(instance).and(Codec.intRange(5, 11).fieldOf("canopy_layers")
-                    .forGetter(p -> p.canopyLayers)).apply(instance, GinkgoFoliagePlacer::new));
+    public static final MapCodec<GinkgoFoliagePlacer> CODEC =
+            RecordCodecBuilder.mapCodec(instance ->
+                    foliagePlacerParts(instance).and(Codec.intRange(5, 11)
+                            .fieldOf("canopy_layers")
+                            .forGetter(p -> p.canopyLayers))
+                            .apply(instance, GinkgoFoliagePlacer::new));
 
     private final int canopyLayers;
 
@@ -34,19 +38,37 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
     protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random,
             TreeFeature tree, int treeHeight, FoliageAttachment attachment,
             int foliageHeight, int leafRadius, int offset) {
-        int shape = random.nextInt(3);
-        for (int layer = 0; layer < canopyLayers; layer++) {
-            double t = (double) layer / Math.max(1, canopyLayers - 1);
-            double width = shape == 0 ? Math.pow(t, 0.75)
-                    : shape == 1 ? Math.sqrt(t) : 0.18 + 0.82 * t;
-            double factor = 0.18 + 0.85 * width - (t > 0.83 ? (t - 0.83) : 0);
-            // Irregular notches between several rising golden leaf sprays.
-            if (layer > 2 && layer < canopyLayers - 1 && layer % 3 == 0)
-                factor *= 0.84;
-            int r = Math.max(1, Math.round((float) (leafRadius * factor)));
+        final int arms = leafRadius >= 4 ? 4 + random.nextInt(2) : 3 + random.nextInt(2);
+        final double rotation = random.nextDouble() * Math.PI * 2;
+        final int spread = Math.max(1, leafRadius - 1);
+
+        // Each spray starts low near its log attachment, rises and opens outward.
+        for (int arm = 0; arm < arms; arm++) {
+            double angle = rotation + arm * Math.PI * 2 / arms
+                    + (random.nextDouble() - 0.5) * 0.34;
+            double ux = Math.cos(angle), uz = Math.sin(angle);
+            int bottomSkip = random.nextInt(3);
+            int topSkip = random.nextInt(2);
+
+            for (int row = bottomSkip; row < canopyLayers - topSkip; row++) {
+                double t = (double) row / Math.max(1, canopyLayers - 1);
+                int reach = Math.max(1, Math.round((float) (0.3 + spread * (0.20 + 0.76 * t))));
+                int dx = (int) Math.round(ux * reach);
+                int dz = (int) Math.round(uz * reach);
+                int radius = t < 0.25 || row >= canopyLayers - 2
+                        ? 1 : Math.min(2, Math.max(1, leafRadius - 1));
+                // Skip select exterior layers to leave visible gaps between sprays.
+                if (t > 0.32 && (arm + row) % 7 == 0) continue;
+                placeLeavesRow(level, setter, random, tree,
+                        attachment.pos().below(canopyLayers - 1 - row).offset(dx, 0, dz),
+                        radius, 0, attachment.doubleTrunk());
+            }
+        }
+
+        // Tie the sprays to the actual trunk and branch tip with a small tuft.
+        for (int y = 0; y < Math.min(3, canopyLayers); y++) {
             placeLeavesRow(level, setter, random, tree,
-                    attachment.pos().below(canopyLayers - 1 - layer),
-                    r, 0, attachment.doubleTrunk());
+                    attachment.pos().below(y), 1, 0, attachment.doubleTrunk());
         }
     }
 
@@ -58,9 +80,9 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
     protected boolean shouldSkipLocation(RandomSource random, int dx, int y, int dz,
             int currentRadius, boolean doubleTrunk) {
         if (currentRadius <= 1) return false;
-        double angle = Math.atan2(dz, dx);
-        double lobe = 0.81 + 0.11 * Math.sin(5 * angle) + 0.08 * Math.cos(3 * angle);
-        double distance = Math.sqrt((double) dx * dx + (double) dz * dz) / currentRadius;
-        return distance > lobe || (distance > lobe - 0.12 && random.nextInt(8) == 0);
+        // Rounded little sprays, never squared-off leaf planes.
+        return (double) dx * dx + (double) dz * dz > currentRadius * currentRadius + 0.1
+                || (Math.abs(dx) + Math.abs(dz) >= currentRadius * 2 - 1
+                    && random.nextInt(6) == 0);
     }
 }

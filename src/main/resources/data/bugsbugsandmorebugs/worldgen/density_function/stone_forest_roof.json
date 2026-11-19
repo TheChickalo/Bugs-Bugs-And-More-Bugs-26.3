@@ -8,18 +8,18 @@
         "type": "minecraft:mul",
         "left": {
           "type": "minecraft:sub",
-          "left": 0.105,
+          "left": 0.17,
           "right": {
             "type": "minecraft:abs",
             "input": {
               "type": "minecraft:noise",
               "noise": "minecraft:badlands_surface",
-              "xz_scale": 0.065,
+              "xz_scale": 0.037,
               "y_scale": 0
             }
           }
         },
-        "right": 12
+        "right": 8
       },
       "min": 0,
       "max": 1
@@ -32,23 +32,23 @@
           "type": "minecraft:mul",
           "left": {
             "type": "minecraft:sub",
-            "left": 0.075,
+            "left": 0.125,
             "right": {
               "type": "minecraft:abs",
               "input": {
                 "type": "minecraft:noise",
                 "noise": "minecraft:badlands_pillar",
-                "xz_scale": 0.045,
+                "xz_scale": 0.031,
                 "y_scale": 0
               }
             }
           },
-          "right": 15
+          "right": 7.6
         },
         "min": 0,
         "max": 1
       },
-      "right": 0.75
+      "right": 0.9
     }
   },
   "first": {
@@ -56,20 +56,33 @@
     "left": {
       "type": "minecraft:gradient",
       "axis": "y",
-      "from_coordinate": 72,
-      "from_value": 4,
-      "to_coordinate": 178,
-      "to_value": -1
+      "from_coordinate": 81,
+      "from_value": 5.6,
+      "to_coordinate": 267,
+      "to_value": -1.4
     },
     "right": {
-      "type": "minecraft:mul",
+      "type": "minecraft:add",
       "left": {
-        "type": "minecraft:noise",
-        "noise": "minecraft:surface_secondary",
-        "xz_scale": 0.065,
-        "y_scale": 0
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:noise",
+          "noise": "minecraft:surface_secondary",
+          "xz_scale": 0.045,
+          "y_scale": 0
+        },
+        "right": 0.6
       },
-      "right": 0.28
+      "right": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:noise",
+          "noise": "minecraft:surface",
+          "xz_scale": 0.095,
+          "y_scale": 0
+        },
+        "right": 0.3
+      }
     }
   },
   "second": {
@@ -77,20 +90,20 @@
     "left": {
       "type": "minecraft:gradient",
       "axis": "y",
-      "from_coordinate": 60,
-      "from_value": 2.8,
-      "to_coordinate": 83,
-      "to_value": -3.6
+      "from_coordinate": 51,
+      "from_value": 3,
+      "to_coordinate": 81,
+      "to_value": -3.5
     },
     "right": {
       "type": "minecraft:mul",
       "left": {
         "type": "minecraft:noise",
-        "noise": "minecraft:surface_secondary",
-        "xz_scale": 0.095,
+        "noise": "minecraft:surface",
+        "xz_scale": 0.07,
         "y_scale": 0
       },
-      "right": 0.18
+      "right": 0.28
     }
   }
 }

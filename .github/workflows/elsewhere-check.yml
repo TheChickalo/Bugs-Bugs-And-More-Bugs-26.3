@@ -5,6 +5,7 @@ on:
       - fix/elsewhere-landscape-overhaul-20261119
       - fix/elsewhere-hydrology-eroded-plateau-20261119
       - fix/elsewhere-surface-condition-26-3-20261119
+      - fix/elsewhere-lakes-relief-volcanic-ginkgo-20261119
   pull_request:
     branches:
       - master
@@ -26,6 +27,24 @@ jobs:
             echo 'Unsupported minecraft:steep surface condition found'
             exit 1
           fi
+      - name: Check landscape worldgen intent
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          world=Path('src/main/resources/data/bugsbugsandmorebugs/worldgen')
+          surface=json.loads((world/'material_rule/elsewhere.json').read_text())
+          volcanic=next(x for x in surface['sequence'] if x.get('if_true',{}).get('biome_is')=='bugsbugsandmorebugs:volcanic_peak' and x['then_run']['type']=='minecraft:sequence')
+          content=json.dumps(volcanic)
+          assert 'minecraft:calcite' not in content
+          assert 'bugsbugsandmorebugs:schist' not in content
+          lake=json.loads(Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/biome/lake.json').read_text())
+          assert all('bugsbugsandmorebugs:lake_pond_placed' not in step for step in lake['features'])
+          for name in ['ginkgo_tree','ginkgo_old_growth']:
+              tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
+              assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:maple_trunk_placer'
+          print('Geology, lake, and Ginkgo registry assertions passed')
+          PY
       - name: Generate datapack and compile
         run: |
           chmod +x ./gradlew

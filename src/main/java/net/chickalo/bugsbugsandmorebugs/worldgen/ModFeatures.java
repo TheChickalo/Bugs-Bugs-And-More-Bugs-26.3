@@ -71,7 +71,11 @@ public class ModFeatures {
         ).build());
         context.register(GINKGO_TREE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new StraightTrunkPlacer(15, 4, 3),
+                new MapleTrunkPlacer(15, 4, 3,
+                        UniformInt.of(2, 3),
+                        UniformInt.of(2, 3),
+                        UniformInt.of(-6, -3),
+                        UniformInt.of(-1, 2)),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
                 new GinkgoFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 7),
                 new TwoLayersFeatureSize(1, 0, 2),
@@ -79,7 +83,11 @@ public class ModFeatures {
         ).build());
         context.register(GINKGO_OLD_GROWTH_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new StraightTrunkPlacer(23, 5, 4),
+                new MapleTrunkPlacer(23, 5, 4,
+                        ConstantInt.of(3),
+                        UniformInt.of(3, 4),
+                        UniformInt.of(-7, -4),
+                        UniformInt.of(-1, 2)),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
                 new GinkgoFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 9),
                 new TwoLayersFeatureSize(1, 0, 2),
