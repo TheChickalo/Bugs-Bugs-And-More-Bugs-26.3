@@ -1,23 +1,6 @@
 {
   "type": "minecraft:mul",
   "left": {
-    "type": "minecraft:clamp",
-    "input": {
-      "type": "minecraft:mul",
-      "left": {
-        "type": "minecraft:sub",
-        "left": 0.085,
-        "right": {
-          "type": "minecraft:abs",
-          "input": "minecraft:overworld/ridges"
-        }
-      },
-      "right": 20.0
-    },
-    "min": 0.0,
-    "max": 1.0
-  },
-  "right": {
     "type": "minecraft:mul",
     "left": {
       "type": "minecraft:clamp",
@@ -25,27 +8,44 @@
         "type": "minecraft:mul",
         "left": {
           "type": "minecraft:sub",
-          "left": "minecraft:overworld/continents",
-          "right": -0.12
+          "left": 0.096,
+          "right": {
+            "type": "minecraft:abs",
+            "input": "minecraft:overworld/ridges"
+          }
         },
-        "right": 5.0
+        "right": 18
       },
-      "min": 0.0,
-      "max": 1.0
+      "min": 0,
+      "max": 1
     },
     "right": {
       "type": "minecraft:clamp",
       "input": {
         "type": "minecraft:mul",
         "left": {
-          "type": "minecraft:sub",
-          "left": 0.5,
-          "right": "minecraft:overworld/continents"
+          "type": "minecraft:add",
+          "left": "minecraft:overworld/continents",
+          "right": 0.12
         },
-        "right": 4.0
+        "right": 5
       },
-      "min": 0.0,
-      "max": 1.0
+      "min": 0,
+      "max": 1
     }
+  },
+  "right": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:sub",
+        "left": 0.73,
+        "right": "minecraft:overworld/continents"
+      },
+      "right": 3.5
+    },
+    "min": 0,
+    "max": 1
   }
 }
