@@ -4,6 +4,7 @@ on:
     branches:
       - fix/elsewhere-landscape-overhaul-20261119
       - fix/elsewhere-hydrology-eroded-plateau-20261119
+      - fix/elsewhere-surface-condition-26-3-20261119
   pull_request:
     branches:
       - master
@@ -19,6 +20,12 @@ jobs:
           distribution: temurin
           java-version: '25'
       - uses: gradle/actions/setup-gradle@v4
+      - name: Reject unsupported 26.3 surface conditions
+        run: |
+          if grep -R -n '"minecraft:steep"' src/main/resources/data/bugsbugsandmorebugs/worldgen; then
+            echo 'Unsupported minecraft:steep surface condition found'
+            exit 1
+          fi
       - name: Generate datapack and compile
         run: |
           chmod +x ./gradlew

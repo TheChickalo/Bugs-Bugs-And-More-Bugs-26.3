@@ -523,7 +523,12 @@
           "sequence": [
             {
               "type": "minecraft:condition",
-              "if_true": "minecraft:steep",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": 0.73,
+                "max_threshold": 1
+              },
               "then_run": {
                 "type": "minecraft:block",
                 "result_state": "bugsbugsandmorebugs:chert"
@@ -558,7 +563,12 @@
       },
       "then_run": {
         "type": "minecraft:condition",
-        "if_true": "minecraft:steep",
+        "if_true": {
+          "type": "minecraft:noise_threshold",
+          "noise": "minecraft:surface_secondary",
+          "min_threshold": 0.8,
+          "max_threshold": 1
+        },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": "minecraft:on_floor",
@@ -577,7 +587,12 @@
       },
       "then_run": {
         "type": "minecraft:condition",
-        "if_true": "minecraft:steep",
+        "if_true": {
+          "type": "minecraft:noise_threshold",
+          "noise": "minecraft:surface_secondary",
+          "min_threshold": 0.77,
+          "max_threshold": 1
+        },
         "then_run": {
           "type": "minecraft:condition",
           "if_true": "minecraft:on_floor",
@@ -633,7 +648,12 @@
                 "sequence": [
                   {
                     "type": "minecraft:condition",
-                    "if_true": "minecraft:steep",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_secondary",
+                      "min_threshold": 0.83,
+                      "max_threshold": 1
+                    },
                     "then_run": {
                       "type": "minecraft:block",
                       "result_state": "bugsbugsandmorebugs:weathered_limestone"
