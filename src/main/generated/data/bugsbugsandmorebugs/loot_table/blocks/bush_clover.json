@@ -3,7 +3,11 @@
   "pools": [
     {
       "condition": {
-        "type": "minecraft:survives_explosion"
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:bush_clover",
+        "state": {
+          "segment": "0"
+        }
       },
       "entries": [
         {
