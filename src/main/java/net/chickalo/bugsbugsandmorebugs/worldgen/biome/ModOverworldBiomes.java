@@ -32,11 +32,7 @@ public class ModOverworldBiomes {
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
 
-// Lakes
-        biomeBuilder.addFeature(
-                GenerationStep.Decoration.LAKES,
-                ModPlacedFeatures.MAPLE_LAKE_PLACED_KEY
-        );
+// Large natural lakes come from density noise, rather than scattered chunk-sized ponds.
 
 
         BiomeDefaultFeatures.addDefaultMushrooms(biomeBuilder);
@@ -110,8 +106,7 @@ public class ModOverworldBiomes {
                         placedFeatureGetter,
                         carverGetter
                 );
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES,
-                ModPlacedFeatures.AMPHIBOLITE_DEPOSIT_PLACED_KEY);
+        // Amphibolite is now a separate lower stratum; do not inject it into schist.
 
 
 
@@ -300,8 +295,7 @@ public class ModOverworldBiomes {
     }
     public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        generation.addFeature(GenerationStep.Decoration.LAKES,
-                ModPlacedFeatures.LAKE_POND_PLACED_KEY);
+        // The large lake basin is cut into base terrain, not assembled from tiny ponds.
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
