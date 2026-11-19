@@ -31,6 +31,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_PLACED_KEY = registerKey("wetland_reeds_placed");
     public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_PLACED_KEY = registerKey("elsewhere_flora_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_TREE_PLACED_KEY = registerKey("hinoki_tree_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_SMALL_PLACED_KEY = registerKey("hinoki_small_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_FERN_PLACED_KEY = registerKey("hinoki_fern_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_GRASS_PLACED_KEY = registerKey("hinoki_grass_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_PLACED_KEY = registerKey("maple_placed");
@@ -89,7 +90,7 @@ public class ModPlacedFeatures {
         register(context, STONE_FOREST_SPIRES_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.STONE_FOREST_SPIRES_KEY),
                 List.of(
-                        CountPlacement.of(5),
+                        CountPlacement.of(4),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
@@ -124,6 +125,11 @@ public class ModPlacedFeatures {
         register(context, HINOKI_TREE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.HINOKI_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(7, 0.2f, 2),
+                        ModBlocks.HINOKI_SAPLING));
+
+        register(context, HINOKI_SMALL_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HINOKI_SMALL_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.25f, 1),
                         ModBlocks.HINOKI_SAPLING));
 
         // Small understory clusters instead of Maple's near-solid grass coverage.
@@ -239,7 +245,7 @@ public class ModPlacedFeatures {
         // Occasional surface lakes with a mixed gravel, andesite, and stone shoreline.
         register(context, MAPLE_LAKE_PLACED_KEY, configuredFeatures.getOrThrow(ModFeatures.MAPLE_LAKE_KEY),
                 List.of(
-                        RarityFilter.onAverageOnceEvery(10),
+                        RarityFilter.onAverageOnceEvery(6),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                         BiomeFilter.biome()
