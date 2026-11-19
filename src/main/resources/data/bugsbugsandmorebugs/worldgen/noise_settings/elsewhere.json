@@ -261,65 +261,50 @@
               "second": {
                 "type": "minecraft:min",
                 "left": {
-                  "type": "minecraft:max",
-                  "left": {
+                  "type": "minecraft:range_choice",
+                  "input": {
+                    "type": "minecraft:gradient",
+                    "axis": "y",
+                    "from_coordinate": -128,
+                    "from_value": -128,
+                    "to_coordinate": 640,
+                    "to_value": 640
+                  },
+                  "min_inclusive": 40,
+                  "max_exclusive": 640,
+                  "when_in_range": "bugsbugsandmorebugs:stone_forest_roof",
+                  "when_out_of_range": {
                     "type": "minecraft:max",
                     "left": {
                       "type": "minecraft:max",
                       "left": {
-                        "type": "minecraft:range_choice",
-                        "input": {
-                          "type": "minecraft:gradient",
-                          "axis": "y",
-                          "from_coordinate": -128,
-                          "from_value": -128,
-                          "to_coordinate": 640,
-                          "to_value": 640
-                        },
-                        "min_inclusive": -128,
-                        "max_exclusive": -40,
-                        "when_in_range": {
-                          "type": "minecraft:min",
-                          "left": "minecraft:overworld/final_density",
-                          "right": "bugsbugsandmorebugs:underhang_underside"
-                        },
-                        "when_out_of_range": "minecraft:overworld/final_density"
-                      },
-                      "right": "bugsbugsandmorebugs:sundering_barrier"
-                    },
-                    "right": {
-                      "type": "minecraft:sub",
-                      "left": {
-                        "type": "minecraft:mul",
+                        "type": "minecraft:max",
                         "left": {
-                          "type": "minecraft:clamp",
+                          "type": "minecraft:range_choice",
                           "input": {
-                            "type": "minecraft:mul",
-                            "left": {
-                              "type": "minecraft:add",
-                              "left": "minecraft:overworld/continents",
-                              "right": 0.07
-                            },
-                            "right": 6.5
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": -128,
+                            "from_value": -128,
+                            "to_coordinate": 640,
+                            "to_value": 640
                           },
-                          "min": 0,
-                          "max": 1
+                          "min_inclusive": -128,
+                          "max_exclusive": -40,
+                          "when_in_range": {
+                            "type": "minecraft:min",
+                            "left": "minecraft:overworld/final_density",
+                            "right": "bugsbugsandmorebugs:underhang_underside"
+                          },
+                          "when_out_of_range": "minecraft:overworld/final_density"
                         },
-                        "right": {
-                          "type": "minecraft:gradient",
-                          "axis": "y",
-                          "from_coordinate": 51,
-                          "from_value": 2.3,
-                          "to_coordinate": 91,
-                          "to_value": -2.1
-                        }
+                        "right": "bugsbugsandmorebugs:sundering_barrier"
                       },
                       "right": {
-                        "type": "minecraft:mul",
+                        "type": "minecraft:sub",
                         "left": {
-                          "type": "minecraft:sub",
-                          "left": 1,
-                          "right": {
+                          "type": "minecraft:mul",
+                          "left": {
                             "type": "minecraft:clamp",
                             "input": {
                               "type": "minecraft:mul",
@@ -332,13 +317,42 @@
                             },
                             "min": 0,
                             "max": 1
+                          },
+                          "right": {
+                            "type": "minecraft:gradient",
+                            "axis": "y",
+                            "from_coordinate": 51,
+                            "from_value": 2.3,
+                            "to_coordinate": 91,
+                            "to_value": -2.1
                           }
                         },
-                        "right": 4.5
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:sub",
+                            "left": 1,
+                            "right": {
+                              "type": "minecraft:clamp",
+                              "input": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:add",
+                                  "left": "minecraft:overworld/continents",
+                                  "right": 0.07
+                                },
+                                "right": 6.5
+                              },
+                              "min": 0,
+                              "max": 1
+                            }
+                          },
+                          "right": 4.5
+                        }
                       }
-                    }
-                  },
-                  "right": "bugsbugsandmorebugs:stone_forest_roof"
+                    },
+                    "right": "bugsbugsandmorebugs:stone_forest_roof"
+                  }
                 },
                 "right": {
                   "type": "minecraft:gradient",
