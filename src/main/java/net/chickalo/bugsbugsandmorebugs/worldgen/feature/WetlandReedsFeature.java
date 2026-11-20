@@ -25,7 +25,8 @@ public record WetlandReedsFeature() implements Feature {
             BlockPos base=new BlockPos(x,y,z);
             if(!level.getBiome(base).is(ModBiomes.RIVER) && !level.getBiome(base).is(ModBiomes.LAKE)
                 && !level.getBiome(base).is(ModBiomes.ESTUARY)
-                && !level.getBiome(base).is(ModBiomes.BAMBOO_LOWLANDS)) continue;
+                && !level.getBiome(base).is(ModBiomes.BAMBOO_LOWLANDS)
+                && !level.getBiome(base).is(ModBiomes.STONE_FOREST)) continue;
             Block target=random.nextFloat()<0.44F?ModBlocks.CATTAILS:ModBlocks.REEDS;
             if(target instanceof ThreeBlockWetlandPlantBlock plant && plant.placeNaturally(level,base))placed++;
         }

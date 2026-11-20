@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.tree;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
@@ -11,20 +12,17 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 /**
- * Distinct rising leaf sprays instead of one vertically stacked slab.
- * Each branch tip produces an asymmetric, outward-opening crown.
- * Medium and old-growth trees have several real log branches.
+ * Rounded, separately shaped ginkgo foliage clusters, not concentric
+ * layers or symmetrical rays. Trunk branches carry compact leaf tufts,
+ * with intentional negative space between them.
  */
 public final class GinkgoFoliagePlacer extends FoliagePlacer {
-    public static final MapCodec<GinkgoFoliagePlacer> CODEC =
-            RecordCodecBuilder.mapCodec(instance ->
-                    foliagePlacerParts(instance).and(Codec.intRange(5, 11)
-                            .fieldOf("canopy_layers")
-                            .forGetter(p -> p.canopyLayers))
-                            .apply(instance, GinkgoFoliagePlacer::new));
+    public static final MapCodec<GinkgoFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            foliagePlacerParts(instance).and(Codec.intRange(5, 11)
+                    .fieldOf("canopy_layers").forGetter(p -> p.canopyLayers))
+                    .apply(instance, GinkgoFoliagePlacer::new));
 
     private final int canopyLayers;
-
     public GinkgoFoliagePlacer(IntProvider radius, IntProvider offset, int canopyLayers) {
         super(radius, offset);
         this.canopyLayers = canopyLayers;
@@ -38,38 +36,40 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
     protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random,
             TreeFeature tree, int treeHeight, FoliageAttachment attachment,
             int foliageHeight, int leafRadius, int offset) {
-        final int arms = leafRadius >= 4 ? 4 + random.nextInt(2) : 3 + random.nextInt(2);
-        final double rotation = random.nextDouble() * Math.PI * 2;
-        final int spread = Math.max(1, leafRadius - 1);
+        // Each attachment represents a woody branch tip. Treat its canopy
+        // as a loose spray of distinct small tufts, offset in height and azimuth.
+        int clumps = leafRadius <= 2 ? 4 + random.nextInt(2) : 3 + random.nextInt(3);
+        double heading = random.nextDouble() * Math.PI * 2.0;
+        int driftX = random.nextInt(3) - 1;
+        int driftZ = random.nextInt(3) - 1;
 
-        // Each spray starts low near its log attachment, rises and opens outward.
-        for (int arm = 0; arm < arms; arm++) {
-            double angle = rotation + arm * Math.PI * 2 / arms
-                    + (random.nextDouble() - 0.5) * 0.34;
-            double ux = Math.cos(angle), uz = Math.sin(angle);
-            int bottomSkip = random.nextInt(3);
-            int topSkip = random.nextInt(2);
+        for (int k = 0; k < clumps; k++) {
+            double angle = heading + (Math.PI * 2.0 * k / clumps)
+                    + (random.nextDouble() - 0.5) * 0.75;
+            int reach = 1 + random.nextInt(Math.max(2, leafRadius));
+            int dx = (int)Math.round(Math.cos(angle) * reach) + driftX;
+            int dz = (int)Math.round(Math.sin(angle) * reach) + driftZ;
+            int down = random.nextInt(Math.max(2, canopyLayers - 2));
+            BlockPos center = attachment.pos().offset(dx, -down, dz);
+            int layers = 2 + random.nextInt(3);
+            int breadth = (leafRadius >= 4 && random.nextInt(3) == 0) ? 3 : 2;
 
-            for (int row = bottomSkip; row < canopyLayers - topSkip; row++) {
-                double t = (double) row / Math.max(1, canopyLayers - 1);
-                int reach = Math.max(1, Math.round((float) (0.3 + spread * (0.20 + 0.76 * t))));
-                int dx = (int) Math.round(ux * reach);
-                int dz = (int) Math.round(uz * reach);
-                int radius = t < 0.25 || row >= canopyLayers - 2
-                        ? 1 : Math.min(2, Math.max(1, leafRadius - 1));
-                // Skip select exterior layers to leave visible gaps between sprays.
-                if (t > 0.32 && (arm + row) % 7 == 0) continue;
+            for (int layer = 0; layer < layers; layer++) {
+                int y = layer - 1;
+                int r = layer == 0 || layer == layers - 1 ? 1 : breadth;
+                if (layers == 4 && layer == 2) r = breadth;
+                // Small asymmetrical edges; avoid mechanically complete canopies.
                 placeLeavesRow(level, setter, random, tree,
-                        attachment.pos().below(canopyLayers - 1 - row).offset(dx, 0, dz),
-                        radius, 0, attachment.doubleTrunk());
+                        center.above(y).offset(layer == 2 ? Integer.signum(dx) : 0,
+                                0, layer == 2 ? Integer.signum(dz) : 0),
+                        r, 0, attachment.doubleTrunk());
             }
         }
 
-        // Tie the sprays to the actual trunk and branch tip with a small tuft.
-        for (int y = 0; y < Math.min(3, canopyLayers); y++) {
-            placeLeavesRow(level, setter, random, tree,
-                    attachment.pos().below(y), 1, 0, attachment.doubleTrunk());
-        }
+        // Tie visible leaves to each branch to keep crowns from looking detached.
+        for (int y = 0; y <= 1; y++)
+            placeLeavesRow(level, setter, random, tree, attachment.pos().below(y),
+                    1, 0, attachment.doubleTrunk());
     }
 
     @Override public int foliageHeight(RandomSource random, int treeHeight, TreeFeature tree) {
@@ -80,9 +80,9 @@ public final class GinkgoFoliagePlacer extends FoliagePlacer {
     protected boolean shouldSkipLocation(RandomSource random, int dx, int y, int dz,
             int currentRadius, boolean doubleTrunk) {
         if (currentRadius <= 1) return false;
-        // Rounded little sprays, never squared-off leaf planes.
-        return (double) dx * dx + (double) dz * dz > currentRadius * currentRadius + 0.1
-                || (Math.abs(dx) + Math.abs(dz) >= currentRadius * 2 - 1
-                    && random.nextInt(6) == 0);
+        double dist = dx * dx + dz * dz;
+        return dist > (currentRadius + 0.18) * (currentRadius + 0.18)
+                || (dist > (currentRadius - 0.42) * (currentRadius - 0.42)
+                    && random.nextInt(5) == 0);
     }
 }

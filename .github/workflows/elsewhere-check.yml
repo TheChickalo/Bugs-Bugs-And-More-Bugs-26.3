@@ -7,6 +7,7 @@ on:
       - fix/elsewhere-surface-condition-26-3-20261119
       - fix/elsewhere-lakes-relief-volcanic-ginkgo-20261119
       - fix/elsewhere-clouds-schist-amphibolite-20261119
+      - fix/elsewhere-valleys-mist-ginkgo-20261119
   pull_request:
     branches:
       - master
@@ -43,7 +44,7 @@ jobs:
           assert all('bugsbugsandmorebugs:lake_pond_placed' not in step for step in lake['features'])
           for name in ['ginkgo_tree','ginkgo_old_growth']:
               tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
-              assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:maple_trunk_placer'
+              assert tree['trunk_placer']['type']=='minecraft:fancy_trunk_placer'
           print('Geology, lake, and Ginkgo registry assertions passed')
           PY
       - name: Verify clouds and schist-only amphibolite deposits
@@ -67,6 +68,27 @@ jobs:
               found=any('bugsbugsandmorebugs:amphibolite_deposit_placed' in section for section in values)
               assert found == (biome.stem != 'underhang'), str(biome)
           print('Clouds and schist-exclusive amphibolite conditions verified')
+          PY
+      - name: Check limestone valley and Ginkgo generation invariants
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('src/main/resources/data/bugsbugsandmorebugs/worldgen')
+          rule=(base/'material_rule/elsewhere.json').read_text()
+          assert 'minecraft:calcite' not in rule, 'Calcite must not appear in the Elsewhere surface material rules'
+          stone=json.loads((base/'density_function/stone_forest_roof.json').read_text())
+          assert stone['type']=='minecraft:lerp' and stone['first']['left']['to_coordinate']<=207
+          assert stone['second']['type']=='minecraft:lerp', 'Gorge floors must contain creek branches'
+          density=json.loads((base/'noise_settings/elsewhere.json').read_text())
+          assert 'minecraft:steep' not in json.dumps(density)
+          feat=Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/feature')
+          for name in ('ginkgo_tree', 'ginkgo_old_growth'):
+              tree=json.loads((feat/f'{name}.json').read_text())
+              assert tree['trunk_placer']['type']=='minecraft:fancy_trunk_placer'
+          stone_biome=json.loads(Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/biome/stone_forest.json').read_text())
+          assert any('bugsbugsandmorebugs:wetland_reeds_placed' in section for section in stone_biome['features'])
+          print('Landscape and foliage invariants passed')
           PY
       - name: Generate datapack and compile
         run: |

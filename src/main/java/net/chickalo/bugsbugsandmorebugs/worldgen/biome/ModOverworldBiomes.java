@@ -177,6 +177,9 @@ public class ModOverworldBiomes {
         );
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        // Sparse shoreline reeds only where the gorge floor is actually flooded.
+        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.62F).downfall(0.49F)
