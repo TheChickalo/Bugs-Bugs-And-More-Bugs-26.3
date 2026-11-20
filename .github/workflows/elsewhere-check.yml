@@ -44,7 +44,7 @@ jobs:
           assert all('bugsbugsandmorebugs:lake_pond_placed' not in step for step in lake['features'])
           for name in ['ginkgo_tree','ginkgo_old_growth']:
               tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
-              assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:maple_trunk_placer'
+              assert tree['trunk_placer']['type']=='minecraft:fancy_trunk_placer'
           print('Geology, lake, and Ginkgo registry assertions passed')
           PY
       - name: Verify clouds and schist-only amphibolite deposits
