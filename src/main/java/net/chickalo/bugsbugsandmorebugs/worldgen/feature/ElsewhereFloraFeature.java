@@ -34,7 +34,7 @@ public record ElsewhereFloraFeature() implements Feature {
             if(!ginkgo&&!bamboo&&!peak&&!plains&&!wet&&!limestone)continue;
             if(peak && y>235)continue;
             if(!level.getFluidState(pos.below()).isEmpty() && level.getFluidState(pos.below()).is(Fluids.WATER)){
-                if(level.isEmptyBlock(pos) && (wet||bamboo) && random.nextInt(5)==0){
+                if(level.isEmptyBlock(pos) && (wet||bamboo||limestone) && random.nextInt(limestone?12:5)==0){
                     Block pad=random.nextFloat()<0.40f ? ModBlocks.DUCKWEED
                             : random.nextFloat()<0.36f ? ModBlocks.LOTUS_FLOWER : ModBlocks.LOTUS;
                     var state=pad.defaultBlockState();
@@ -47,7 +47,8 @@ public record ElsewhereFloraFeature() implements Feature {
             if(peak)plant=ModBlocks.ALPINE_GRASS;
             else if(ginkgo && random.nextInt(3)==0)plant=ModBlocks.GINKGO_FALLEN_LEAVES;
             else if(wet)plant=random.nextInt(4)==0?ModBlocks.HAKONE_GRASS:ModBlocks.IRIS_FLOWER;
-            else if(limestone)plant=random.nextInt(3)==0?ModBlocks.ALPINE_GRASS:ModBlocks.HAKONE_GRASS;
+            else if(limestone)plant=y<=84 && random.nextInt(3)==0 ? ModBlocks.IRIS_FLOWER
+                    : random.nextInt(3)==0 ? ModBlocks.ALPINE_GRASS : ModBlocks.HAKONE_GRASS;
             else if(bamboo)plant=random.nextInt(5)==0?ModBlocks.IRIS_FLOWER:ModBlocks.HAKONE_GRASS;
             else plant=random.nextBoolean()?ModBlocks.HAKONE_GRASS:ModBlocks.ALPINE_GRASS;
             var state=plant.defaultBlockState();

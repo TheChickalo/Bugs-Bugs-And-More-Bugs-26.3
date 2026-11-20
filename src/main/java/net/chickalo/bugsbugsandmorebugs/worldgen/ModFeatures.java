@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -71,11 +72,7 @@ public class ModFeatures {
         ).build());
         context.register(GINKGO_TREE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new MapleTrunkPlacer(15, 4, 3,
-                        UniformInt.of(2, 3),
-                        UniformInt.of(2, 3),
-                        UniformInt.of(-6, -3),
-                        UniformInt.of(-1, 2)),
+                new FancyTrunkPlacer(15, 4, 3),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
                 new GinkgoFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 7),
                 new TwoLayersFeatureSize(1, 0, 2),
@@ -83,11 +80,7 @@ public class ModFeatures {
         ).build());
         context.register(GINKGO_OLD_GROWTH_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new MapleTrunkPlacer(23, 5, 4,
-                        ConstantInt.of(3),
-                        UniformInt.of(3, 4),
-                        UniformInt.of(-7, -4),
-                        UniformInt.of(-1, 2)),
+                new FancyTrunkPlacer(23, 5, 4),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
                 new GinkgoFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 9),
                 new TwoLayersFeatureSize(1, 0, 2),
