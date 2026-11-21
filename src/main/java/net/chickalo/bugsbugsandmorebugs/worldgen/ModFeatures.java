@@ -29,6 +29,7 @@ public class ModFeatures {
 
 
     public static final ResourceKey<Feature> BAMBOO_POOLS_KEY = registerKey("bamboo_pools");
+    public static final ResourceKey<Feature> BAMBOO_MARSH_WETLAND_KEY = registerKey("bamboo_marsh_wetland");
     public static final ResourceKey<Feature> WETLAND_REEDS_KEY = registerKey("wetland_reeds");
     public static final ResourceKey<Feature> ELSEWHERE_FLORA_KEY = registerKey("elsewhere_flora");
     public static final ResourceKey<Feature> LAVA_CLEANUP_KEY = registerKey("lava_cleanup");
@@ -70,6 +71,7 @@ public class ModFeatures {
         context.register(ALPINE_SNOW_KEY, new AlpineSnowFeature());
         context.register(LAVA_CLEANUP_KEY, new ElsewhereLavaCleanupFeature());
         context.register(BAMBOO_POOLS_KEY, new BambooPoolFeature());
+        context.register(BAMBOO_MARSH_WETLAND_KEY, new BambooMarshWetlandFeature());
         context.register(WETLAND_REEDS_KEY, new WetlandReedsFeature());
         context.register(STONE_FOREST_SPIRES_KEY, new KarstOutcropFeature(10, 28, 3, 90));
         context.register(AMPHIBOLITE_DEPOSIT_KEY, new AmphiboliteDepositFeature());

@@ -14,6 +14,9 @@ public final class ModFeatureTypes {
 
     public static void register() {
         Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "bamboo_marsh_wetland"),
+                BambooMarshWetlandFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "hinoki_moss_patch"),
                 HinokiMossPatchFeature.CODEC);
         Registry.register(BuiltInRegistries.FEATURE_TYPE,

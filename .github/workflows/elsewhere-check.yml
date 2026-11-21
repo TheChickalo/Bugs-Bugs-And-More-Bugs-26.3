@@ -97,7 +97,10 @@ jobs:
           assert not any(x['biome']=='bugsbugsandmorebugs:lake' for x in climates)
           assert sum(x['biome']=='bugsbugsandmorebugs:volcanic_peak' for x in climates)>=5
           assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_marsh' for x in climates)>=3
-          assert density['aquifers']['surface_level']=='minecraft:overworld/preliminary_surface_level'
+          aquifer=density['aquifers']['surface_level']
+          assert aquifer['type']=='minecraft:min'
+          assert aquifer['left']=='minecraft:overworld/preliminary_surface_level'
+          assert aquifer['right']==62, 'Cap the mismatch with custom karst terrain'
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
           assert stone['alpha']['type']=='minecraft:max', 'Keep original valleys plus extra pillar paths'
           assert stone['alpha']['right']['type']=='minecraft:max', 'Missing narrow freestanding pillar channels'
@@ -187,6 +190,46 @@ jobs:
           java=Path('src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/biome/ModOverworldBiomes.java').read_text()
           assert '0x579FB9' in java, 'Grassy Plains water tint missing'
           print('Volcanic, alpine snow, bamboo marsh, lowland bias and water-color checks passed')
+          PY
+      - name: Verify repaired volcanos, marsh wetlands and karst aquifers
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          ns='bugsbugsandmorebugs:'
+          world=Path('src/main/resources/data/bugsbugsandmorebugs/worldgen')
+          gen=Path('src/main/generated/data/bugsbugsandmorebugs/worldgen')
+          noise=json.loads((world/'noise_settings/elsewhere.json').read_text())
+          root=noise['noise_router']['final_density']['when_in_range']
+          assert root['type']=='minecraft:lerp'
+          assert root['alpha']==ns+'bamboo_lowland_region'
+          assert root['first']['type']=='minecraft:max'
+          assert root['first']['right']==ns+'volcanic_relief_density'
+          assert root['second']['left']['right']==ns+'volcanic_relief_density'
+          volcanic=json.loads((world/'density_function/volcanic_relief_density.json').read_text())
+          assert volcanic=={'type':'minecraft:max','left':ns+'volcanic_massif_density','right':ns+'volcanic_mountain_density'}
+          bamboo=json.loads((world/'density_function/bamboo_lowland_region.json').read_text())
+          assert bamboo['left']['input']['left']['right']==0.18
+          assert bamboo['right']['right']['right']['right']['input']['left']['right']==-0.06
+          low=root['second']['right']['left']
+          assert low['to_coordinate']==106 and low['from_coordinate']==55
+          b=json.loads((gen/'worldgen/biome/bamboo_marsh.json').read_text()) if False else json.loads((gen/'biome/bamboo_marsh.json').read_text())
+          lakes=b['features'][1]
+          assert ns+'bamboo_pools_marsh_placed' in lakes
+          assert ns+'bamboo_marsh_wetland_placed' in lakes
+          veg=b['features'][9]
+          assert ns+'bamboo_grove_marsh_placed' in veg
+          assert ns+'wetland_reeds_marsh_placed' in veg
+          assert ns+'bamboo_grove_placed' not in veg
+          wet=json.loads((gen/'feature/bamboo_marsh_wetland.json').read_text())
+          assert wet['type']==ns+'bamboo_marsh_wetland'
+          placed=lambda name:json.loads((gen/'placed_feature'/f'{name}_placed.json').read_text())
+          assert placed('bamboo_marsh_wetland')['placement'][0]=={'type':'minecraft:count','count':3}
+          assert placed('bamboo_grove_marsh')['placement'][0]=={'type':'minecraft:count','count':17}
+          assert placed('wetland_reeds_marsh')['placement'][0]=={'type':'minecraft:count','count':7}
+          java=Path('src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/feature/BambooMarshWetlandFeature.java').read_text()
+          assert 'safePoolSite' in java and 'level.getBlockState(site.below()).isAir()' in java
+          print('Volcanic relief, wetland terrain, marsh ecology and aquifer cap verified')
           PY
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py
