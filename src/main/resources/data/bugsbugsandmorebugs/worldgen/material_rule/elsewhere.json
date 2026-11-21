@@ -24,6 +24,54 @@
       "type": "minecraft:condition",
       "if_true": {
         "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:snowy_peak"
+      },
+      "then_run": {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": "minecraft:on_floor",
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:y_above",
+                    "anchor": {
+                      "absolute": 125
+                    },
+                    "add_stone_depth": false,
+                    "surface_depth_multiplier": 0
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": "minecraft:snow_block"
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": "bugsbugsandmorebugs:dacite"
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": "minecraft:under_floor",
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:dacite"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
         "biome_is": "bugsbugsandmorebugs:ashen_foothills"
       },
       "then_run": {
@@ -130,486 +178,6 @@
             "then_run": {
               "type": "minecraft:block",
               "result_state": "bugsbugsandmorebugs:rhyolite"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:bamboo_marsh"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": "minecraft:on_floor",
-        "then_run": {
-          "type": "minecraft:sequence",
-          "sequence": [
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "minecraft:surface_secondary",
-                "min_threshold": 0.42,
-                "max_threshold": 1
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "minecraft:mud"
-              }
-            },
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "minecraft:surface_secondary",
-                "min_threshold": -1,
-                "max_threshold": -0.49
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:loam"
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": "bugsbugsandmorebugs:grassy_loam"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:highland_wildflower_meadow"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": "minecraft:on_floor",
-        "then_run": {
-          "type": "minecraft:sequence",
-          "sequence": [
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "minecraft:surface_secondary",
-                "min_threshold": 0.73,
-                "max_threshold": 1
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:chert"
-              }
-            },
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "minecraft:surface_secondary",
-                "min_threshold": -1,
-                "max_threshold": -0.68
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:weathered_limestone"
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": "bugsbugsandmorebugs:grassy_loam"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:limestone_scrubland"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": "minecraft:on_floor",
-        "then_run": {
-          "type": "minecraft:sequence",
-          "sequence": [
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "minecraft:surface_secondary",
-                "min_threshold": 0.73,
-                "max_threshold": 1
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:chert"
-              }
-            },
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "minecraft:surface_secondary",
-                "min_threshold": -1,
-                "max_threshold": -0.68
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:weathered_limestone"
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": "bugsbugsandmorebugs:grassy_loam"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:old_growth_ginkgo_forest"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:noise_threshold",
-          "noise": "minecraft:surface_secondary",
-          "min_threshold": 0.8,
-          "max_threshold": 1
-        },
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": "minecraft:on_floor",
-          "then_run": {
-            "type": "minecraft:block",
-            "result_state": "bugsbugsandmorebugs:chert"
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:sparse_ginkgo_woodland"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:noise_threshold",
-          "noise": "minecraft:surface_secondary",
-          "min_threshold": 0.8,
-          "max_threshold": 1
-        },
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": "minecraft:on_floor",
-          "then_run": {
-            "type": "minecraft:block",
-            "result_state": "bugsbugsandmorebugs:chert"
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:mossy_hinoki_grove"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": "minecraft:on_floor",
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:noise_threshold",
-            "noise": "minecraft:surface_secondary",
-            "min_threshold": -1,
-            "max_threshold": -0.62
-          },
-          "then_run": {
-            "type": "minecraft:block",
-            "result_state": "minecraft:moss_block"
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:mossy_hinoki_grove"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:noise_threshold",
-          "noise": "minecraft:surface_secondary",
-          "min_threshold": 0.77,
-          "max_threshold": 1
-        },
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": "minecraft:on_floor",
-          "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:noise_threshold",
-                  "noise": "minecraft:surface_secondary",
-                  "min_threshold": -1,
-                  "max_threshold": 0
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:serpentinite"
-                }
-              },
-              {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:dacite"
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:misty_karst_fen"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:y_above",
-          "anchor": {
-            "absolute": 50
-          },
-          "add_stone_depth": false,
-          "surface_depth_multiplier": 0
-        },
-        "then_run": {
-          "type": "minecraft:sequence",
-          "sequence": [
-            {
-              "type": "minecraft:condition",
-              "if_true": "minecraft:on_floor",
-              "then_run": {
-                "type": "minecraft:sequence",
-                "sequence": [
-                  {
-                    "type": "minecraft:condition",
-                    "if_true": {
-                      "type": "minecraft:not",
-                      "invert": {
-                        "type": "minecraft:y_above",
-                        "anchor": {
-                          "absolute": 67
-                        },
-                        "add_stone_depth": false,
-                        "surface_depth_multiplier": 0
-                      }
-                    },
-                    "then_run": {
-                      "type": "minecraft:sequence",
-                      "sequence": [
-                        {
-                          "type": "minecraft:condition",
-                          "if_true": {
-                            "type": "minecraft:noise_threshold",
-                            "noise": "minecraft:surface",
-                            "min_threshold": -1,
-                            "max_threshold": -0.38
-                          },
-                          "then_run": {
-                            "type": "minecraft:block",
-                            "result_state": "minecraft:mud"
-                          }
-                        },
-                        {
-                          "type": "minecraft:condition",
-                          "if_true": {
-                            "type": "minecraft:noise_threshold",
-                            "noise": "minecraft:surface",
-                            "min_threshold": 0.5,
-                            "max_threshold": 1
-                          },
-                          "then_run": {
-                            "type": "minecraft:block",
-                            "result_state": "minecraft:gravel"
-                          }
-                        },
-                        {
-                          "type": "minecraft:block",
-                          "result_state": "bugsbugsandmorebugs:grassy_loam"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "type": "minecraft:condition",
-                    "if_true": {
-                      "type": "minecraft:noise_threshold",
-                      "noise": "minecraft:surface_secondary",
-                      "min_threshold": 0.83,
-                      "max_threshold": 1
-                    },
-                    "then_run": {
-                      "type": "minecraft:block",
-                      "result_state": "bugsbugsandmorebugs:weathered_limestone"
-                    }
-                  },
-                  {
-                    "type": "minecraft:condition",
-                    "if_true": {
-                      "type": "minecraft:noise_threshold",
-                      "noise": "minecraft:surface_secondary",
-                      "min_threshold": -1,
-                      "max_threshold": -0.77
-                    },
-                    "then_run": {
-                      "type": "minecraft:block",
-                      "result_state": "bugsbugsandmorebugs:mossy_limestone"
-                    }
-                  },
-                  {
-                    "type": "minecraft:block",
-                    "result_state": "bugsbugsandmorebugs:grassy_loam"
-                  }
-                ]
-              }
-            },
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:y_above",
-                "anchor": {
-                  "absolute": 76
-                },
-                "add_stone_depth": false,
-                "surface_depth_multiplier": 0
-              },
-              "then_run": {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:noise_threshold",
-                  "noise": "minecraft:surface_secondary",
-                  "min_threshold": 0.54,
-                  "max_threshold": 1
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:chert"
-                }
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": "bugsbugsandmorebugs:limestone"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:glowshroom_grove"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": "minecraft:on_floor",
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:noise_threshold",
-            "noise": "minecraft:surface_secondary",
-            "min_threshold": -1,
-            "max_threshold": -0.73
-          },
-          "then_run": {
-            "type": "minecraft:block",
-            "result_state": "minecraft:moss_block"
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:ashen_foothills"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:above_preliminary_surface"
-        },
-        "then_run": {
-          "type": "minecraft:block",
-          "result_state": "bugsbugsandmorebugs:rhyolite"
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:snowy_peak"
-      },
-      "then_run": {
-        "type": "minecraft:sequence",
-        "sequence": [
-          {
-            "type": "minecraft:condition",
-            "if_true": "minecraft:on_floor",
-            "then_run": {
-              "type": "minecraft:sequence",
-              "sequence": [
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
-                    "type": "minecraft:y_above",
-                    "anchor": {
-                      "absolute": 125
-                    },
-                    "add_stone_depth": false,
-                    "surface_depth_multiplier": 0
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "minecraft:snow_block"
-                  }
-                },
-                {
-                  "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:dacite"
-                }
-              ]
-            }
-          },
-          {
-            "type": "minecraft:condition",
-            "if_true": "minecraft:under_floor",
-            "then_run": {
-              "type": "minecraft:block",
-              "result_state": "bugsbugsandmorebugs:dacite"
             }
           }
         ]
@@ -1034,6 +602,421 @@
             "result_state": "bugsbugsandmorebugs:schist"
           }
         ]
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:bamboo_marsh"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": "minecraft:on_floor",
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": 0.42,
+                "max_threshold": 1
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": "minecraft:mud"
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": -1,
+                "max_threshold": -0.49
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": "bugsbugsandmorebugs:loam"
+              }
+            },
+            {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:grassy_loam"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:highland_wildflower_meadow"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": "minecraft:on_floor",
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": 0.73,
+                "max_threshold": 1
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": "bugsbugsandmorebugs:chert"
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": -1,
+                "max_threshold": -0.68
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": "bugsbugsandmorebugs:weathered_limestone"
+              }
+            },
+            {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:grassy_loam"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:limestone_scrubland"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": "minecraft:on_floor",
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": 0.73,
+                "max_threshold": 1
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": "bugsbugsandmorebugs:chert"
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:noise_threshold",
+                "noise": "minecraft:surface_secondary",
+                "min_threshold": -1,
+                "max_threshold": -0.68
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": "bugsbugsandmorebugs:weathered_limestone"
+              }
+            },
+            {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:grassy_loam"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:old_growth_ginkgo_forest"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:noise_threshold",
+          "noise": "minecraft:surface_secondary",
+          "min_threshold": 0.8,
+          "max_threshold": 1
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": "minecraft:on_floor",
+          "then_run": {
+            "type": "minecraft:block",
+            "result_state": "bugsbugsandmorebugs:chert"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:sparse_ginkgo_woodland"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:noise_threshold",
+          "noise": "minecraft:surface_secondary",
+          "min_threshold": 0.8,
+          "max_threshold": 1
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": "minecraft:on_floor",
+          "then_run": {
+            "type": "minecraft:block",
+            "result_state": "bugsbugsandmorebugs:chert"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:mossy_hinoki_grove"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": "minecraft:on_floor",
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:noise_threshold",
+            "noise": "minecraft:surface_secondary",
+            "min_threshold": -1,
+            "max_threshold": -0.62
+          },
+          "then_run": {
+            "type": "minecraft:block",
+            "result_state": "minecraft:moss_block"
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:mossy_hinoki_grove"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:noise_threshold",
+          "noise": "minecraft:surface_secondary",
+          "min_threshold": 0.77,
+          "max_threshold": 1
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": "minecraft:on_floor",
+          "then_run": {
+            "type": "minecraft:sequence",
+            "sequence": [
+              {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:noise_threshold",
+                  "noise": "minecraft:surface_secondary",
+                  "min_threshold": -1,
+                  "max_threshold": 0
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": "bugsbugsandmorebugs:serpentinite"
+                }
+              },
+              {
+                "type": "minecraft:block",
+                "result_state": "bugsbugsandmorebugs:dacite"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:misty_karst_fen"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:y_above",
+          "anchor": {
+            "absolute": 50
+          },
+          "add_stone_depth": false,
+          "surface_depth_multiplier": 0
+        },
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": "minecraft:on_floor",
+              "then_run": {
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:not",
+                      "invert": {
+                        "type": "minecraft:y_above",
+                        "anchor": {
+                          "absolute": 67
+                        },
+                        "add_stone_depth": false,
+                        "surface_depth_multiplier": 0
+                      }
+                    },
+                    "then_run": {
+                      "type": "minecraft:sequence",
+                      "sequence": [
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:noise_threshold",
+                            "noise": "minecraft:surface",
+                            "min_threshold": -1,
+                            "max_threshold": -0.38
+                          },
+                          "then_run": {
+                            "type": "minecraft:block",
+                            "result_state": "minecraft:mud"
+                          }
+                        },
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:noise_threshold",
+                            "noise": "minecraft:surface",
+                            "min_threshold": 0.5,
+                            "max_threshold": 1
+                          },
+                          "then_run": {
+                            "type": "minecraft:block",
+                            "result_state": "minecraft:gravel"
+                          }
+                        },
+                        {
+                          "type": "minecraft:block",
+                          "result_state": "bugsbugsandmorebugs:grassy_loam"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_secondary",
+                      "min_threshold": 0.83,
+                      "max_threshold": 1
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "bugsbugsandmorebugs:weathered_limestone"
+                    }
+                  },
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "noise": "minecraft:surface_secondary",
+                      "min_threshold": -1,
+                      "max_threshold": -0.77
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": "bugsbugsandmorebugs:mossy_limestone"
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": "bugsbugsandmorebugs:grassy_loam"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:y_above",
+                "anchor": {
+                  "absolute": 76
+                },
+                "add_stone_depth": false,
+                "surface_depth_multiplier": 0
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:noise_threshold",
+                  "noise": "minecraft:surface_secondary",
+                  "min_threshold": 0.54,
+                  "max_threshold": 1
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": "bugsbugsandmorebugs:chert"
+                }
+              }
+            },
+            {
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:limestone"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:glowshroom_grove"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": "minecraft:on_floor",
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:noise_threshold",
+            "noise": "minecraft:surface_secondary",
+            "min_threshold": -1,
+            "max_threshold": -0.73
+          },
+          "then_run": {
+            "type": "minecraft:block",
+            "result_state": "minecraft:moss_block"
+          }
+        }
       }
     },
     {
@@ -1585,6 +1568,23 @@
               }
             ]
           }
+        }
+      }
+    },
+    {
+      "type": "minecraft:condition",
+      "if_true": {
+        "type": "minecraft:biome",
+        "biome_is": "bugsbugsandmorebugs:ashen_foothills"
+      },
+      "then_run": {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:above_preliminary_surface"
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": "bugsbugsandmorebugs:rhyolite"
         }
       }
     },
