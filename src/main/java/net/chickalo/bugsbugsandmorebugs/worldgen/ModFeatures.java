@@ -68,9 +68,9 @@ public class ModFeatures {
         // Small Ginkgo adds an understory height tier without inventing new textures.
         context.register(GINKGO_SMALL_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new StraightTrunkPlacer(5, 2, 2),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoTrunkPlacer(5, 2, 2, false),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -78,7 +78,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoTrunkPlacer(12, 3, 3, false),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 5),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -86,7 +86,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoTrunkPlacer(18, 3, 4, true),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 6),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 7),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
