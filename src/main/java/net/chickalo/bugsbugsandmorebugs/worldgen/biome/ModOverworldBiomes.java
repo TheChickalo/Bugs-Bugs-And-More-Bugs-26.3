@@ -513,11 +513,10 @@ public class ModOverworldBiomes {
                 .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(sky))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(fog));
-        if (cloudHeight > 0) {
-            biome.setAttribute(EnvironmentAttributes.CLOUD_HEIGHT, cloudHeight)
-                    .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
-                            AmbientParticle.of(ParticleTypes.CLOUD, 0.004F));
-        }
+        // A single cloud layer belongs to the dimension, never to individual biomes.
+        if (cloudHeight > 0)
+            biome.setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
+                    AmbientParticle.of(ParticleTypes.CLOUD, 0.004F));
         return biome.build();
     }
 

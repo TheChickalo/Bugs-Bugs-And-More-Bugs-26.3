@@ -44,7 +44,7 @@ jobs:
           assert all('bugsbugsandmorebugs:lake_pond_placed' not in step for step in lake['features'])
           for name in ['ginkgo_tree','ginkgo_old_growth']:
               tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
-              assert tree['trunk_placer']['type']=='minecraft:straight_trunk_placer'
+              assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:ginkgo_trunk_placer'
           print('Geology, lake, and Ginkgo registry assertions passed')
           PY
       - name: Verify clouds and schist-only amphibolite deposits
@@ -85,17 +85,45 @@ jobs:
           feat=Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/feature')
           for name in ('ginkgo_tree', 'ginkgo_old_growth'):
               tree=json.loads((feat/f'{name}.json').read_text())
-              assert tree['trunk_placer']['type']=='minecraft:straight_trunk_placer'
+              assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:ginkgo_trunk_placer'
           stone_biome=json.loads(Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/biome/stone_forest.json').read_text())
           assert any('bugsbugsandmorebugs:wetland_reeds_placed' in section for section in stone_biome['features'])
-          # A lake basin must be carved after all terrain-restoring max() operations.
+          # The removed lake biome must not alter terrain or occupy climate space.
           router=density['noise_router']['final_density']['when_in_range']
-          assert router['type']=='minecraft:lerp'
-          assert router['alpha']=='bugsbugsandmorebugs:lake_basin_region'
-          assert router['second']['type']=='minecraft:min'
+          assert 'bugsbugsandmorebugs:lake_basin_region' not in json.dumps(router)
+          else_dim=json.loads(Path('src/main/resources/data/bugsbugsandmorebugs/dimension/elsewheredim.json').read_text())
+          climates=else_dim['generator']['biome_source']['biomes']
+          assert not any(x['biome']=='bugsbugsandmorebugs:lake' for x in climates)
+          assert sum(x['biome']=='bugsbugsandmorebugs:volcanic_peak' for x in climates)>=5
+          assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_marsh' for x in climates)>=3
           assert density['aquifers']['surface_level']=='minecraft:overworld/preliminary_surface_level'
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
-          print('Landscape, foliage, lake-carving and cloud invariants passed')
+          print('Landscape, foliage, lake-removal and cloud invariants passed')
+          PY
+      - name: Verify ginkgo, moss and unified clouds
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('src/main/generated/data/bugsbugsandmorebugs')
+          trees=root/'worldgen/feature'
+          tree=json.loads((trees/'ginkgo_tree.json').read_text())
+          ancient=json.loads((trees/'ginkgo_old_growth.json').read_text())
+          assert tree['foliage_placer']['radius']==2
+          assert ancient['foliage_placer']['radius']==3
+          assert tree['trunk_placer']['thick'] is False
+          assert ancient['trunk_placer']['thick'] is True
+          material=json.loads(Path('src/main/resources/data/bugsbugsandmorebugs/worldgen/material_rule/elsewhere.json').read_text())
+          moss=[x for x in material['sequence'] if x.get('if_true',{}).get('biome_is')=='bugsbugsandmorebugs:mossy_hinoki_grove']
+          assert any('bugsbugsandmorebugs:mossy_rhyolite' in json.dumps(x) for x in moss)
+          for biome in (root/'worldgen/biome').glob('*.json'):
+              attrs=json.loads(biome.read_text())['attributes']
+              assert 'minecraft:visual/cloud_height' not in attrs, biome
+          dim=json.loads(Path('src/main/resources/data/bugsbugsandmorebugs/dimension/elsewheredim.json').read_text())
+          est=[x['parameters'] for x in dim['generator']['biome_source']['biomes'] if x['biome']=='bugsbugsandmorebugs:estuary']
+          assert len(est)==2
+          assert all(x['continentalness']==[-0.135,-0.075] and x['weirdness']==[-0.025,0.025] for x in est)
+          print('Ginkgo shape, moss ground, unified clouds and narrowed estuary anchors verified')
           PY
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py
