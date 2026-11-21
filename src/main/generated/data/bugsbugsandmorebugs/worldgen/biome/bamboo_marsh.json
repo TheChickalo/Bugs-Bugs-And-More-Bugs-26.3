@@ -1,0 +1,46 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/fog_color": "#b8cfc1",
+    "minecraft:visual/sky_color": "#9bcecf"
+  },
+  "carvers": [],
+  "downfall": 0.94,
+  "effects": {
+    "foliage_color": "#5b8a60",
+    "grass_color": "#609b69",
+    "water_color": "#4c8270"
+  },
+  "features": [
+    [],
+    [
+      "bugsbugsandmorebugs:bamboo_pools_marsh_placed"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:amphibolite_deposit_placed"
+    ],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:bamboo_grove_placed",
+      "bugsbugsandmorebugs:bamboo_ferns_placed",
+      "bugsbugsandmorebugs:wetland_reeds_dense_placed",
+      "bugsbugsandmorebugs:elsewhere_flora_dense_placed"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
+    ]
+  ],
+  "has_precipitation": true,
+  "temperature": 0.77
+}
