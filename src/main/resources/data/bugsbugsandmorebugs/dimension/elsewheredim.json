@@ -2443,6 +2443,66 @@
             "weirdness": 0.18,
             "offset": 0
           }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ashen_foothills",
+          "parameters": {
+            "temperature": -0.6,
+            "humidity": 0.24,
+            "continentalness": 0.79,
+            "erosion": -0.4,
+            "depth": 0,
+            "weirdness": -0.23,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ashen_foothills",
+          "parameters": {
+            "temperature": -0.61,
+            "humidity": 0.1,
+            "continentalness": 0.77,
+            "erosion": -0.34,
+            "depth": 0,
+            "weirdness": 0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ashen_foothills",
+          "parameters": {
+            "temperature": -0.52,
+            "humidity": 0.19,
+            "continentalness": 0.8,
+            "erosion": -0.3,
+            "depth": 0,
+            "weirdness": 0.05,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ashen_foothills",
+          "parameters": {
+            "temperature": -0.53,
+            "humidity": -0.1,
+            "continentalness": 0.77,
+            "erosion": -0.43,
+            "depth": 0,
+            "weirdness": -0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ashen_foothills",
+          "parameters": {
+            "temperature": -0.65,
+            "humidity": 0,
+            "continentalness": 0.78,
+            "erosion": -0.34,
+            "depth": 0,
+            "weirdness": -0.28,
+            "offset": 0
+          }
         }
       ]
     },
