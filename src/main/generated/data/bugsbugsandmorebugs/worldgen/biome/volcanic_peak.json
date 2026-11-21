@@ -20,7 +20,8 @@
     [],
     [],
     [
-      "bugsbugsandmorebugs:volcanic_magma_patch_placed"
+      "bugsbugsandmorebugs:volcanic_magma_patch_placed",
+      "bugsbugsandmorebugs:volcanic_vent_peak_placed"
     ],
     [],
     [],
@@ -34,6 +35,7 @@
       "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
+      "bugsbugsandmorebugs:alpine_snow_placed",
       "bugsbugsandmorebugs:lava_cleanup_placed"
     ]
   ],

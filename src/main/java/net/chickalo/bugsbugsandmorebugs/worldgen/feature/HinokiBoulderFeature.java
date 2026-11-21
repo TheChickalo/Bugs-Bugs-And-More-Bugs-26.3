@@ -12,10 +12,7 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 
-/**
- * A small taiga-style boulder plus a few separate moss accents.
- * Does not blanket the terrain with mossy stone and never builds on water.
- */
+/** Low, irregular, taiga-style rock piles, never freestanding stone columns. */
 public record HinokiBoulderFeature() implements Feature {
     public static final MapCodec<HinokiBoulderFeature> CODEC =
             MapCodec.unit(new HinokiBoulderFeature());
@@ -28,80 +25,77 @@ public record HinokiBoulderFeature() implements Feature {
     @Override
     public boolean place(WorldGenLevel level, ChunkGenerator generator,
                          RandomSource random, BlockPos origin) {
-        int x = origin.getX();
-        int z = origin.getZ();
-        int surface = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z);
-        if (!validGround(level, new BlockPos(x, surface - 1, z))) return false;
+        int x = origin.getX(), z = origin.getZ();
+        int top = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z);
+        BlockPos center = new BlockPos(x, top - 1, z);
+        if (!validGround(level, center)) return false;
 
-        boolean changed = false;
-        int radius = random.nextFloat() < 0.22F ? 2 : 1;
+        // A two-to-four block-wide mound that broadens at ground level.
+        // The top is always smaller than the base, unlike the old stone towers.
+        int rx = 2 + random.nextInt(2);
+        int rz = 2 + random.nextInt(2);
+        double phase = random.nextDouble() * Math.PI * 2.0;
+        // Cache the original terrain heights before changing any blocks;
+        // otherwise later layers would read our new stones as higher ground.
+        int[][] groundY = new int[2*rx+1][2*rz+1];
+        boolean[][] usable = new boolean[2*rx+1][2*rz+1];
+        for (int dx=-rx; dx<=rx; dx++) for (int dz=-rz; dz<=rz; dz++) {
+            int px=x+dx, pz=z+dz;
+            int sy=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, px, pz);
+            BlockPos site=new BlockPos(px, sy-1, pz);
+            groundY[dx+rx][dz+rz]=sy-1;
+            usable[dx+rx][dz+rz]=Math.abs(sy-top)<=1 && validGround(level,site);
+        }
 
-        for (int dx = -radius; dx <= radius; dx++) {
-            for (int dz = -radius; dz <= radius; dz++) {
-                double dist = Math.sqrt(dx * dx + dz * dz);
-                if (dist > radius + (random.nextDouble() - 0.5) * 0.25) continue;
-                if (dist > 0.8 && random.nextFloat() < 0.20F) continue;
+        int changed = 0;
+        for (int layer = 0; layer < 3; layer++) {
+            int radX = layer == 0 ? rx : layer == 1 ? rx - 1 : 1;
+            int radZ = layer == 0 ? rz : layer == 1 ? rz - 1 : 1;
+            if (layer == 2 && random.nextFloat() < 0.92F) break;
+            for (int dx = -radX; dx <= radX; dx++) {
+                for (int dz = -radZ; dz <= radZ; dz++) {
+                    double noise = 0.12 * Math.sin(dx * 2.6 + dz * 1.7 + phase);
+                    double elliptical = (double)(dx * dx) / (radX * radX)
+                            + (double)(dz * dz) / (radZ * radZ);
+                    if (elliptical > 1.05 + noise
+                            || (elliptical > 0.70 && random.nextFloat() < 0.27F)) continue;
 
-                int bx = x + dx, bz = z + dz;
-                int top = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, bx, bz);
-                if (Math.abs(top - surface) > 2) continue;
-                BlockPos ground = new BlockPos(bx, top - 1, bz);
-                if (!validGround(level, ground)) continue;
+                    int px = x + dx, pz = z + dz;
+                    if (!usable[dx+rx][dz+rz]) continue;
+                    BlockPos ground = new BlockPos(px, groundY[dx+rx][dz+rz], pz);
 
-                // Replace the surface block and, on the core, add one or two
-                // rough upper blocks. All upper positions must still be empty.
-                BlockState rock = random.nextFloat() < 0.11F
-                        ? ModBlocks.MOSSY_RHYOLITE.defaultBlockState()
-                        : random.nextFloat() < 0.38F
-                        ? ModBlocks.SERPENTINITE.defaultBlockState()
-                        : ModBlocks.RHYOLITE.defaultBlockState();
-                if (level.setBlock(ground, rock, 2)) changed = true;
-
-                int height = dist < 0.9 ? (radius == 2 ? 2 : 1) : 0;
-                for (int dy = 1; dy <= height; dy++) {
-                    BlockPos above = ground.above(dy);
-                    if (!level.getBlockState(above).isAir()
-                            || !level.getFluidState(above).isEmpty()) break;
-                    level.setBlock(above, rock, 2);
+                    BlockPos at = layer == 0 ? ground : ground.above(layer);
+                    BlockState old = level.getBlockState(at);
+                    if (layer > 0 && !old.isAir()) continue;
+                    if (!level.getFluidState(at).isEmpty()) continue;
+                    BlockState stone = pickRock(random);
+                    if (level.setBlock(at, stone, 2)) changed++;
                 }
             }
         }
+        return changed > 0;
+    }
 
-        // Sparse moss and short carpets are punctuation, not the ground palette.
-        for (int i = 0; i < 6; i++) {
-            int bx = x + random.nextInt(11) - 5;
-            int bz = z + random.nextInt(11) - 5;
-            int top = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, bx, bz);
-            if (Math.abs(top - surface) > 2) continue;
-            BlockPos soil = new BlockPos(bx, top - 1, bz);
-            if (!validGround(level, soil)) continue;
-            if (random.nextFloat() < 0.23F) {
-                // Only common soil is converted; do not repaint boulders or geology.
-                BlockState existing = level.getBlockState(soil);
-                if (existing.is(Blocks.GRASS_BLOCK) || existing.is(Blocks.DIRT)
-                        || existing.is(Blocks.PODZOL)) {
-                    changed |= level.setBlock(soil, Blocks.MOSS_BLOCK.defaultBlockState(), 2);
-                }
-            } else if (random.nextFloat() < 0.33F) {
-                changed |= level.setBlock(soil.above(), Blocks.MOSS_CARPET.defaultBlockState(), 2);
-            }
-        }
-        return changed;
+    private static BlockState pickRock(RandomSource random) {
+        float n = random.nextFloat();
+        if (n < 0.58F) return Blocks.MOSSY_COBBLESTONE.defaultBlockState();
+        if (n < 0.73F) return Blocks.COBBLESTONE.defaultBlockState();
+        if (n < 0.89F) return ModBlocks.RHYOLITE.defaultBlockState();
+        return ModBlocks.MOSSY_RHYOLITE.defaultBlockState();
     }
 
     private static boolean validGround(WorldGenLevel level, BlockPos ground) {
         if (ground.getY() <= level.getMinY() + 2
-                || ground.getY() >= level.getMaxY() - 3
+                || ground.getY() >= level.getMaxY() - 4
                 || !level.getBiome(ground).is(ModBiomes.MOSSY_HINOKI_GROVE)
                 || !level.getFluidState(ground).isEmpty()
                 || !level.getFluidState(ground.above()).isEmpty()
-                || !level.getBlockState(ground.above()).isAir()) return false;
-
-        BlockState state = level.getBlockState(ground);
-        return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.DIRT)
-                || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.PODZOL)
-                || state.is(ModBlocks.GRASSY_LOAM) || state.is(ModBlocks.LOAM)
-                || state.is(ModBlocks.RHYOLITE) || state.is(ModBlocks.DACITE)
-                || state.is(ModBlocks.SERPENTINITE);
+                || !level.getBlockState(ground.above()).isAir()
+                || level.getBlockState(ground.below()).isAir()) return false;
+        BlockState b = level.getBlockState(ground);
+        return b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.DIRT)
+                || b.is(Blocks.COARSE_DIRT) || b.is(Blocks.PODZOL)
+                || b.is(ModBlocks.GRASSY_LOAM) || b.is(ModBlocks.LOAM)
+                || b.is(ModBlocks.RHYOLITE) || b.is(ModBlocks.DACITE);
     }
 }

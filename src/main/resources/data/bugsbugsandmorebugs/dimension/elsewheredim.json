@@ -2746,6 +2746,72 @@
               0.377
             ]
           }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bamboo_marsh",
+          "parameters": {
+            "temperature": [
+              0.46,
+              0.7
+            ],
+            "humidity": [
+              0.63,
+              0.86
+            ],
+            "continentalness": [
+              0.22,
+              0.39
+            ],
+            "erosion": [
+              0.18,
+              0.46
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.4,
+              0.4
+            ],
+            "offset": 0.008
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bamboo_marsh",
+          "parameters": {
+            "temperature": [
+              0.35,
+              0.59
+            ],
+            "humidity": [
+              0.67,
+              0.87
+            ],
+            "continentalness": [
+              0.26,
+              0.41
+            ],
+            "erosion": [
+              0.3,
+              0.54
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.38,
+              0.38
+            ],
+            "offset": 0.008
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bamboo_marsh",
+          "parameters": {
+            "temperature": 0.44,
+            "humidity": 0.78,
+            "continentalness": 0.255,
+            "erosion": 0.31,
+            "depth": 0,
+            "weirdness": 0.27,
+            "offset": 0
+          }
         }
       ]
     },

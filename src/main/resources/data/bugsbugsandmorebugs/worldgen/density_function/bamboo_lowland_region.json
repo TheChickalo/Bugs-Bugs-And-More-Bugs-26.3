@@ -1,0 +1,82 @@
+{
+  "type": "minecraft:mul",
+  "left": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:sub",
+        "left": "minecraft:overworld/temperature",
+        "right": 0.31
+      },
+      "right": 4.6
+    },
+    "min": 0,
+    "max": 1
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:sub",
+          "left": "minecraft:overworld/vegetation",
+          "right": 0.34
+        },
+        "right": 5.6
+      },
+      "min": 0,
+      "max": 1
+    },
+    "right": {
+      "type": "minecraft:mul",
+      "left": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": "minecraft:overworld/continents",
+            "right": 0.19
+          },
+          "right": 10
+        },
+        "min": 0,
+        "max": 1
+      },
+      "right": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:sub",
+              "left": 0.48,
+              "right": "minecraft:overworld/continents"
+            },
+            "right": 9
+          },
+          "min": 0,
+          "max": 1
+        },
+        "right": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:sub",
+              "left": "minecraft:overworld/erosion",
+              "right": 0.12
+            },
+            "right": 6
+          },
+          "min": 0,
+          "max": 1
+        }
+      }
+    }
+  }
+}

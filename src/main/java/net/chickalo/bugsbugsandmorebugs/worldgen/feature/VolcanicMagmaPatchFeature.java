@@ -2,7 +2,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
-import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -33,7 +33,7 @@ public record VolcanicMagmaPatchFeature() implements Feature {
         if (centerY <= 60 || centerY >= level.getMaxY() - 1) return false;
 
         BlockPos center = new BlockPos(origin.getX(), centerY, origin.getZ());
-        if (!level.getBiome(center).is(ModBiomes.VOLCANIC_PEAK)
+        if (!ModBiomeFamilies.volcanic(level.getBiome(center))
                 || !isExposedVolcanicRock(level, center)) return false;
 
         int radius = 1 + random.nextInt(3); // one compact 3-7 block-wide cluster
@@ -51,7 +51,7 @@ public record VolcanicMagmaPatchFeature() implements Feature {
                         || y >= level.getMaxY() - 1) continue;
 
                 BlockPos ground = new BlockPos(x, y, z);
-                if (!level.getBiome(ground).is(ModBiomes.VOLCANIC_PEAK)
+                if (!ModBiomeFamilies.volcanic(level.getBiome(ground))
                         || !isExposedVolcanicRock(level, ground)) continue;
                 if (level.setBlock(ground, Blocks.MAGMA_BLOCK.defaultBlockState(), 2)) changed++;
             }
@@ -71,7 +71,6 @@ public record VolcanicMagmaPatchFeature() implements Feature {
         BlockState state = level.getBlockState(ground);
         return state.is(ModBlocks.RHYOLITE)
                 || state.is(ModBlocks.DACITE)
-                || state.is(ModBlocks.ASHSTONE)
                 || state.is(ModBlocks.LAPILLI);
     }
 }

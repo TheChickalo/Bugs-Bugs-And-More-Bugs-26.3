@@ -51,6 +51,10 @@ public class ModFeatures {
 
 
     public static final ResourceKey<Feature> HINOKI_BOULDER_KEY = registerKey("hinoki_boulder");
+    public static final ResourceKey<Feature> HINOKI_MOSS_PATCH_KEY = registerKey("hinoki_moss_patch");
+    public static final ResourceKey<Feature> VOLCANIC_VENT_PEAK_KEY = registerKey("volcanic_vent_peak");
+    public static final ResourceKey<Feature> VOLCANIC_VENT_FOOTHILLS_KEY = registerKey("volcanic_vent_foothills");
+    public static final ResourceKey<Feature> ALPINE_SNOW_KEY = registerKey("alpine_snow");
     public static final ResourceKey<Feature> VOLCANIC_MAGMA_PATCH_KEY = registerKey("volcanic_magma_patch");
 
     public static final ResourceKey<Feature> STONE_FOREST_SPIRES_KEY = registerKey("stone_forest_spires");
@@ -60,6 +64,10 @@ public class ModFeatures {
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
         context.register(VOLCANIC_MAGMA_PATCH_KEY, new VolcanicMagmaPatchFeature());
         context.register(HINOKI_BOULDER_KEY, new HinokiBoulderFeature());
+        context.register(HINOKI_MOSS_PATCH_KEY, new HinokiMossPatchFeature());
+        context.register(VOLCANIC_VENT_PEAK_KEY, new VolcanicVentFeature(false));
+        context.register(VOLCANIC_VENT_FOOTHILLS_KEY, new VolcanicVentFeature(true));
+        context.register(ALPINE_SNOW_KEY, new AlpineSnowFeature());
         context.register(LAVA_CLEANUP_KEY, new ElsewhereLavaCleanupFeature());
         context.register(BAMBOO_POOLS_KEY, new BambooPoolFeature());
         context.register(WETLAND_REEDS_KEY, new WetlandReedsFeature());

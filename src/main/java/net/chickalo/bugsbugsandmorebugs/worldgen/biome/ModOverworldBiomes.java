@@ -266,6 +266,10 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
                 ModPlacedFeatures.VOLCANIC_MAGMA_PATCH_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.VOLCANIC_VENT_PEAK_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                ModPlacedFeatures.ALPINE_SNOW_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return new Biome.BiomeBuilder()
@@ -283,6 +287,8 @@ public class ModOverworldBiomes {
     public static Biome snowyPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         // Highest, open snowfields; separate from volcanic rocky caps.
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                ModPlacedFeatures.ALPINE_SNOW_PLACED_KEY);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(-0.8F).downfall(0.28F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -301,7 +307,7 @@ public class ModOverworldBiomes {
         BiomeDefaultFeatures.addDefaultFlowers(generation);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        return landscapeBiome(generation, 0.72F, 0.44F, 0x78A85D, 0x84BED2, 0xCBDCD3);
+        return landscapeBiome(generation, 0.72F, 0.44F, 0x579FB9, 0x84BED2, 0xCBDCD3);
     }
 
     public static Biome ocean(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
@@ -394,6 +400,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
                 ModPlacedFeatures.HINOKI_BOULDER_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.HINOKI_MOSS_PATCH_PLACED_KEY);
         addVegetation(generation,
                 ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_TREE_PLACED_KEY,
@@ -465,6 +473,12 @@ public class ModOverworldBiomes {
     public static Biome ashenFoothills(HolderGetter<PlacedFeature> features,
                                        HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.VOLCANIC_MAGMA_PATCH_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.VOLCANIC_VENT_FOOTHILLS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                ModPlacedFeatures.ALPINE_SNOW_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.05F, 0.24F,
                 0x627B7F, 0x84857D, 0x81847F, 0xA6C4D0, 0xB9C1C4, 0);

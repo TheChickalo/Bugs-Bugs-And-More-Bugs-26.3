@@ -33,28 +33,8 @@
             "type": "minecraft:condition",
             "if_true": "minecraft:on_floor",
             "then_run": {
-              "type": "minecraft:sequence",
-              "sequence": [
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
-                    "type": "minecraft:y_above",
-                    "anchor": {
-                      "absolute": 125
-                    },
-                    "add_stone_depth": false,
-                    "surface_depth_multiplier": 0
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "minecraft:snow_block"
-                  }
-                },
-                {
-                  "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:dacite"
-                }
-              ]
+              "type": "minecraft:block",
+              "result_state": "bugsbugsandmorebugs:dacite"
             }
           },
           {
@@ -86,25 +66,10 @@
                 {
                   "type": "minecraft:condition",
                   "if_true": {
-                    "type": "minecraft:y_above",
-                    "anchor": {
-                      "absolute": 245
-                    },
-                    "add_stone_depth": false,
-                    "surface_depth_multiplier": 0
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "minecraft:snow_block"
-                  }
-                },
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
                     "type": "minecraft:noise_threshold",
                     "noise": "minecraft:surface_secondary",
                     "min_threshold": -1,
-                    "max_threshold": -0.76
+                    "max_threshold": -0.4
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -175,25 +140,10 @@
                 {
                   "type": "minecraft:condition",
                   "if_true": {
-                    "type": "minecraft:y_above",
-                    "anchor": {
-                      "absolute": 266
-                    },
-                    "add_stone_depth": false,
-                    "surface_depth_multiplier": 0
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "minecraft:snow_block"
-                  }
-                },
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
                     "type": "minecraft:noise_threshold",
                     "noise": "minecraft:surface_secondary",
                     "min_threshold": -1,
-                    "max_threshold": -0.65
+                    "max_threshold": -0.48
                   },
                   "then_run": {
                     "type": "minecraft:block",
