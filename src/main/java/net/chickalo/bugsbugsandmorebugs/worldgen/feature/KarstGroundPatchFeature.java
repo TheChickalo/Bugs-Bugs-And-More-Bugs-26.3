@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -92,16 +93,22 @@ public record KarstGroundPatchFeature() implements Feature {
                 // Do not touch caves, water, outcrops, or any other biome.
                 if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)
                         && !level.getBiome(ground).is(ModBiomes.STONE_FOREST)) continue;
-                if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(ground), Blocks.GRASS_BLOCK)) continue;
+                BlockState original = level.getBlockState(ground);
+                boolean wetStoneBank = level.getBiome(ground).is(ModBiomes.STONE_FOREST)
+                        && topY <= 76 && touchesShallowWater(level, top);
+                boolean normalTopsoil = net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(original, Blocks.GRASS_BLOCK);
+                if (!normalTopsoil && !(wetStoneBank && canReplaceBankSurface(original))) continue;
                 if (!level.getFluidState(top).isEmpty()) continue;
                 BlockState above = level.getBlockState(top);
                 if (!(above.isAir() || above.is(Blocks.SHORT_GRASS) || above.is(Blocks.FERN))) {
                     continue;
                 }
 
-                BlockState replacement = pickMaterial(random, rocky);
+                BlockState replacement = wetStoneBank
+                        ? pickStoneForestBankMaterial(random)
+                        : pickMaterial(random, rocky);
 
-                if (sandyPocket) {
+                if (sandyPocket && !wetStoneBank) {
                     double du = (u - sandU) / sandRadiusU;
                     double dv = (v - sandV) / sandRadiusV;
                     double sandDistanceSquared = du * du + dv * dv;
@@ -136,6 +143,43 @@ public record KarstGroundPatchFeature() implements Feature {
         }
 
         return changed > 0;
+    }
+
+    private static boolean touchesShallowWater(WorldGenLevel level, BlockPos top) {
+        // Preserve the tall karst pinnacles. Only decorate a true low water edge.
+        for (Direction side : Direction.Plane.HORIZONTAL) {
+            BlockPos neighbor = top.relative(side);
+            for (int dy = -1; dy <= 0; dy++) {
+                BlockPos water = neighbor.offset(0, dy, 0);
+                if (!level.getBlockState(water).is(Blocks.WATER)
+                        || !level.getFluidState(water).isSource()) continue;
+                if (!level.getBlockState(water.below(3)).is(Blocks.WATER)) return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean canReplaceBankSurface(BlockState state) {
+        return state.is(ModBlocks.RENDZINA) || state.is(ModBlocks.LITHOSOL)
+                || state.is(ModBlocks.MOSSY_LIMESTONE)
+                || state.is(ModBlocks.WEATHERED_LIMESTONE)
+                || state.is(ModBlocks.LIMESTONE)
+                || state.is(ModBlocks.RUBBLED_LIMESTONE)
+                || state.is(Blocks.CLAY) || state.is(Blocks.GRAVEL)
+                || state.is(Blocks.MUD) || state.is(Blocks.MOSS_BLOCK);
+    }
+
+    private static BlockState pickStoneForestBankMaterial(RandomSource random) {
+        float f = random.nextFloat();
+        if (f < 0.17F) return ModBlocks.MOSSY_LIMESTONE.defaultBlockState();
+        if (f < 0.31F) return ModBlocks.WEATHERED_LIMESTONE.defaultBlockState();
+        if (f < 0.45F) return ModBlocks.RENDZINA.defaultBlockState();
+        if (f < 0.58F) return ModBlocks.LITHOSOL.defaultBlockState();
+        if (f < 0.69F) return Blocks.CLAY.defaultBlockState();
+        if (f < 0.78F) return Blocks.GRAVEL.defaultBlockState();
+        if (f < 0.88F) return Blocks.MUD.defaultBlockState();
+        if (f < 0.94F) return Blocks.MOSS_BLOCK.defaultBlockState();
+        return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
     }
 
     private static int terrainY(WorldGenLevel level, int x, int z) {

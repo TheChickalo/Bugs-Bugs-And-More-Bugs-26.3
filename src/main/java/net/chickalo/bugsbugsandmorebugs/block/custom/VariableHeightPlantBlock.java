@@ -70,7 +70,10 @@ public class VariableHeightPlantBlock extends BushBlock {
                 || ground.is(Blocks.COARSE_DIRT)
                 || ground.is(Blocks.PODZOL)
                 || ground.is(Blocks.ROOTED_DIRT)
-                || ground.is(Blocks.MOSS_BLOCK);
+                || ground.is(Blocks.MOSS_BLOCK)
+                || ground.is(net.chickalo.bugsbugsandmorebugs.block.ModBlocks.RENDZINA)
+                || ground.is(net.chickalo.bugsbugsandmorebugs.block.ModBlocks.LITHOSOL)
+                || ground.is(net.chickalo.bugsbugsandmorebugs.block.ModBlocks.MOSSY_LIMESTONE);
     }
 
     @Override

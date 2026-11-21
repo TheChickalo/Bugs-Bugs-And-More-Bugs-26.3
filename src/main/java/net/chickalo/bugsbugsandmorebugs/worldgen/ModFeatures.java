@@ -15,7 +15,6 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.*;
@@ -75,7 +74,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new FancyTrunkPlacer(15, 4, 3),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new FancyFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 4),
+                new BlobFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -83,7 +82,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new FancyTrunkPlacer(23, 5, 4),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new FancyFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 5),
+                new BlobFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 6),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
