@@ -458,13 +458,17 @@ public class ModOverworldBiomes {
     public static Biome glowshroomGrove(HolderGetter<PlacedFeature> features,
                                         HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // Keep common mushroom features before the shared Maple glowshroom
+        // features, and Hinoki ferns before mushrooms, globally avoiding
+        // feature ordering cycles with Maple Forest and Hinoki Highlands.
         addVegetation(generation,
                 ModPlacedFeatures.MAPLE_SPARSE_PLACED_KEY,
-                ModPlacedFeatures.GLOWSHROOM_DENSE_PLACED_KEY,
-                ModPlacedFeatures.GLOWSHROOM_TREE_BASE_PLACED_KEY,
-                ModPlacedFeatures.HUGE_GLOWSHROOM_GROVE_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        addVegetation(generation,
+                ModPlacedFeatures.GLOWSHROOM_DENSE_PLACED_KEY,
+                ModPlacedFeatures.GLOWSHROOM_TREE_BASE_PLACED_KEY,
+                ModPlacedFeatures.HUGE_GLOWSHROOM_GROVE_PLACED_KEY);
         return minorBiome(generation, 0.61F, 0.86F,
                 0x4A8473, 0x76A172, 0x719B72, 0x8CC7C4, 0x93B5AD, 0);
     }
