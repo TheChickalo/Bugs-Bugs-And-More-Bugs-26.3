@@ -33,9 +33,9 @@
     [],
     [
       "bugsbugsandmorebugs:karst_ground_patch_placed",
+      "minecraft:patch_tall_grass_2",
       "bugsbugsandmorebugs:highland_meadow_patch_placed",
-      "bugsbugsandmorebugs:elsewhere_flora_placed",
-      "minecraft:patch_tall_grass_2"
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"

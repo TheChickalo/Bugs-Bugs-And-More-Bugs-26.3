@@ -31,12 +31,12 @@
     [],
     [
       "bugsbugsandmorebugs:maple_sparse_placed",
-      "bugsbugsandmorebugs:glowshroom_dense_placed",
-      "bugsbugsandmorebugs:glowshroom_tree_base_placed",
-      "bugsbugsandmorebugs:huge_glowshroom_grove_placed",
       "bugsbugsandmorebugs:hinoki_fern_placed",
       "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal"
+      "minecraft:red_mushroom_normal",
+      "bugsbugsandmorebugs:glowshroom_dense_placed",
+      "bugsbugsandmorebugs:glowshroom_tree_base_placed",
+      "bugsbugsandmorebugs:huge_glowshroom_grove_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"

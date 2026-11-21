@@ -97,6 +97,8 @@ jobs:
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
           print('Landscape, foliage, lake-carving and cloud invariants passed')
           PY
+      - name: Check biome feature-order DAG
+        run: python3 scripts/check_biome_feature_order.py
       - name: Generate datapack and compile
         run: |
           chmod +x ./gradlew
