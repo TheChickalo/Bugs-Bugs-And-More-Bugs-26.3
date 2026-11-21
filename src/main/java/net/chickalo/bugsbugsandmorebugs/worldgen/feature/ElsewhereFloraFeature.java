@@ -46,8 +46,8 @@ public record ElsewhereFloraFeature() implements Feature {
             if(!level.isEmptyBlock(pos)||!level.getFluidState(pos).isEmpty())continue;
             // Short native bamboo grows only on damp, shallow Stone Forest banks.
             if(limestone && y<=84 && random.nextInt(3)==0 && nearWater(level,pos)) {
-                VariableHeightPlantBlock bamboo=ModBlocks.DWARF_BAMBOO;
-                if(bamboo.placeAtHeight(level,pos,1+random.nextInt(3)))changed++;
+                VariableHeightPlantBlock dwarfBamboo = ModBlocks.DWARF_BAMBOO;
+                if (dwarfBamboo.placeAtHeight(level, pos, 1 + random.nextInt(3))) changed++;
                 continue;
             }
             Block plant;
