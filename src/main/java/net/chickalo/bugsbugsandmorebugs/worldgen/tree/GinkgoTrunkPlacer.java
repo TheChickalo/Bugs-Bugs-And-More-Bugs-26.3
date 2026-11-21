@@ -92,11 +92,59 @@ public final class GinkgoTrunkPlacer extends StraightTrunkPlacer {
             }
         }
 
-        if (thick) {
-            return List.of(new FoliagePlacer.FoliageAttachment(
-                    crown.get(0).pos(), 0, true));
+        // Horizontal limbs give the crown a supported, layered silhouette.
+        // Every successful limb tip receives its own rounded leaf attachment.
+        // Place the upper limbs near the crown so no branch ends are bare.
+        List<FoliagePlacer.FoliageAttachment> attachments = new java.util.ArrayList<>();
+        attachments.add(new FoliagePlacer.FoliageAttachment(
+                crown.get(0).pos(), 0, thick));
+
+        int branchCount = treeHeight < 10 ? 3 : thick ? 7 : 5;
+        double rotation = random.nextDouble() * Math.PI * 2;
+        for (int i = 0; i < branchCount; i++) {
+            double angle = rotation + i * Math.PI * 2.0 / branchCount
+                    + (random.nextDouble() - 0.5) * 0.27;
+            int reach = treeHeight < 10 ? 1 + random.nextInt(2)
+                    : thick ? 3 + random.nextInt(2) : 2 + random.nextInt(2);
+            int branchY = treeHeight - 3 - random.nextInt(thick ? 4 : 3);
+            branchY = Math.max(2, branchY);
+
+            int bx = Math.cos(angle) >= 0 ? width - 1 : 0;
+            int bz = Math.sin(angle) >= 0 ? width - 1 : 0;
+            BlockPos previous = origin.offset(bx, branchY, bz);
+            BlockPos tip = previous;
+            int placed = 0;
+            for (int step = 1; step <= reach; step++) {
+                int dx = (int) Math.round(Math.cos(angle) * step);
+                int dz = (int) Math.round(Math.sin(angle) * step);
+                int rise = step >= 3 ? 1 : 0;
+                BlockPos next = previousForBranch(origin, bx + dx,
+                        branchY + rise, bz + dz);
+                if (next.equals(previous)) continue;
+                BlockState there = level.getBlockState(next);
+                if (!there.is(ModBlocks.GINKGO_LOG)
+                        && !TreeFeature.validTreePos(level, next)) break;
+                if (!there.is(ModBlocks.GINKGO_LOG)) {
+                    Direction.Axis axis = Math.abs(next.getX() - previous.getX())
+                            >= Math.abs(next.getZ() - previous.getZ())
+                            ? Direction.Axis.X : Direction.Axis.Z;
+                    BlockState log = ModBlocks.GINKGO_LOG.defaultBlockState()
+                            .setValue(net.minecraft.world.level.block.RotatedPillarBlock.AXIS, axis);
+                    trunkSetter.accept(next, log);
+                }
+                tip = next;
+                previous = next;
+                placed++;
+            }
+            if (placed > 0) {
+                attachments.add(new FoliagePlacer.FoliageAttachment(tip, 0, false));
+            }
         }
-        return crown;
+        return attachments;
+    }
+
+    private static BlockPos previousForBranch(BlockPos origin, int x, int y, int z) {
+        return origin.offset(x, y, z);
     }
 
     private static boolean placeRoot(WorldGenLevel level,

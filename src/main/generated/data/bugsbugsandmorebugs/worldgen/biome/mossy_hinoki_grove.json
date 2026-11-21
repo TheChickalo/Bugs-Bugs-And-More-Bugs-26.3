@@ -8,15 +8,7 @@
       "modifier": "overlay"
     },
     "minecraft:visual/fog_color": "#91adb0",
-    "minecraft:visual/sky_color": "#a1c3cb",
-    "minecraft:visual/ambient_particles": [
-      {
-        "particle": {
-          "type": "minecraft:cloud"
-        },
-        "probability": 0.004
-      }
-    ]
+    "minecraft:visual/sky_color": "#a1c3cb"
   },
   "carvers": [],
   "downfall": 0.88,
@@ -28,7 +20,9 @@
   "features": [
     [],
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:hinoki_boulder_placed"
+    ],
     [],
     [],
     [],

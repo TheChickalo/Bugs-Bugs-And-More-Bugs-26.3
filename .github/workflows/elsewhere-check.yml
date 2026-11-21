@@ -40,8 +40,9 @@ jobs:
           content=json.dumps(volcanic)
           assert 'minecraft:calcite' not in content
           assert 'bugsbugsandmorebugs:schist' not in content
-          lake=json.loads(Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/biome/lake.json').read_text())
-          assert all('bugsbugsandmorebugs:lake_pond_placed' not in step for step in lake['features'])
+          assert not Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/biome/lake.json').exists()
+          biomes=Path('src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/biome/ModBiomes.java').read_text()
+          assert 'registerBiomeKey("lake")' not in biomes
           for name in ['ginkgo_tree','ginkgo_old_growth']:
               tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
               assert tree['trunk_placer']['type']=='bugsbugsandmorebugs:ginkgo_trunk_placer'
@@ -98,6 +99,11 @@ jobs:
           assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_marsh' for x in climates)>=3
           assert density['aquifers']['surface_level']=='minecraft:overworld/preliminary_surface_level'
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
+          assert stone['alpha']['type']=='minecraft:max', 'Keep original valleys plus extra pillar paths'
+          assert stone['alpha']['right']['type']=='minecraft:max', 'Missing narrow freestanding pillar channels'
+          assert sum(x['biome']=='bugsbugsandmorebugs:snowy_peak' for x in climates)>=4
+          assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_lowlands' for x in climates)>=8
+          assert any(isinstance(x['parameters']['temperature'],list) for x in climates if x['biome']=='bugsbugsandmorebugs:snowy_peak')
           print('Landscape, foliage, lake-removal and cloud invariants passed')
           PY
       - name: Verify ginkgo, moss and unified clouds
@@ -115,7 +121,15 @@ jobs:
           assert ancient['trunk_placer']['thick'] is True
           material=json.loads(Path('src/main/resources/data/bugsbugsandmorebugs/worldgen/material_rule/elsewhere.json').read_text())
           moss=[x for x in material['sequence'] if x.get('if_true',{}).get('biome_is')=='bugsbugsandmorebugs:mossy_hinoki_grove']
-          assert any('bugsbugsandmorebugs:mossy_rhyolite' in json.dumps(x) for x in moss)
+          assert not moss, 'Mossy Hinoki must use sparse features, not blanket surface rules'
+          hinoki=json.loads((root/'worldgen/biome/mossy_hinoki_grove.json').read_text())
+          assert 'bugsbugsandmorebugs:hinoki_boulder_placed' in hinoki['features'][2]
+          assert (root/'worldgen/feature/hinoki_boulder.json').exists()
+          for n in ('ginkgo_small','ginkgo_tree','ginkgo_old_growth'):
+              data=json.loads((trees/(n+'.json')).read_text())
+              assert data['trunk_placer']['type']=='bugsbugsandmorebugs:ginkgo_trunk_placer'
+              assert data['foliage_placer']['type']=='bugsbugsandmorebugs:ginkgo_foliage_placer'
+              assert data['foliage_placer']['canopy_layers']>=5
           for biome in (root/'worldgen/biome').glob('*.json'):
               attrs=json.loads(biome.read_text())['attributes']
               assert 'minecraft:visual/cloud_height' not in attrs, biome
@@ -123,7 +137,15 @@ jobs:
           est=[x['parameters'] for x in dim['generator']['biome_source']['biomes'] if x['biome']=='bugsbugsandmorebugs:estuary']
           assert len(est)==2
           assert all(x['continentalness']==[-0.135,-0.075] and x['weirdness']==[-0.025,0.025] for x in est)
-          print('Ginkgo shape, moss ground, unified clouds and narrowed estuary anchors verified')
+          assert all('minecraft:visual/ambient_particles' not in json.loads(f.read_text())['attributes']
+                     for f in (root/'worldgen/biome').glob('*.json') if f.stem in
+                     ('stone_forest','mossy_hinoki_grove','misty_karst_fen'))
+          for biome_name in ('volcanic_peak','ashen_foothills'):
+              conditions=[x for x in material['sequence'] if x.get('if_true',{}).get('biome_is')==
+                  'bugsbugsandmorebugs:'+biome_name]
+              assert 'bugsbugsandmorebugs:ashstone' not in json.dumps(conditions)
+          assert 'bugsbugsandmorebugs:ashstone' in json.dumps(material), 'Keep Sundering Horizon geology'
+          print('Ginkgo branches, sparse moss boulders, quiet fog and Sundering geology verified')
           PY
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py

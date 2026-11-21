@@ -32,6 +32,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HIGHLAND_MEADOW_LUSH_PLACED_KEY = registerKey("highland_meadow_lush_placed");
     public static final ResourceKey<PlacedFeature> GLOWSHROOM_DENSE_PLACED_KEY = registerKey("glowshroom_dense_placed");
     public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_GROVE_PLACED_KEY = registerKey("huge_glowshroom_grove_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_BOULDER_PLACED_KEY = registerKey("hinoki_boulder_placed");
     public static final ResourceKey<PlacedFeature> VOLCANIC_MAGMA_PATCH_PLACED_KEY = registerKey("volcanic_magma_patch_placed");
 
     public static final ResourceKey<PlacedFeature> GINKGO_SMALL_PLACED_KEY = registerKey("ginkgo_small_placed");
@@ -116,6 +117,10 @@ public class ModPlacedFeatures {
         register(context, VOLCANIC_MAGMA_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.VOLCANIC_MAGMA_PATCH_KEY),
                 List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, HINOKI_BOULDER_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HINOKI_BOULDER_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
 
