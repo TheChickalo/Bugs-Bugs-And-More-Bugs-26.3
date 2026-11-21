@@ -104,7 +104,7 @@ public class ModPlacedFeatures {
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, BAMBOO_POOLS_MARSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.BAMBOO_POOLS_KEY),
-                List.of(RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(),
+                List.of(CountPlacement.of(2), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, HIGHLAND_MEADOW_LUSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.HIGHLAND_MEADOW_PATCH_KEY),
