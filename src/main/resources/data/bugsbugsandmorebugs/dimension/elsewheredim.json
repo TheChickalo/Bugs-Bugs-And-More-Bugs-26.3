@@ -2508,25 +2508,25 @@
           "biome": "bugsbugsandmorebugs:bamboo_lowlands",
           "parameters": {
             "temperature": [
-              0.24,
-              0.79
+              0.32925,
+              0.66075
             ],
             "humidity": [
-              0.42,
-              0.79
+              0.43075,
+              0.61925
             ],
             "continentalness": [
-              0.21,
-              0.42
+              0.24675,
+              0.38325
             ],
             "erosion": [
-              0.09,
-              0.47
+              0.18125,
+              0.40875
             ],
             "depth": 0,
             "weirdness": [
-              -0.55,
-              0.55
+              -0.3575,
+              0.3575
             ],
             "offset": 0.012
           }
@@ -2535,25 +2535,25 @@
           "biome": "bugsbugsandmorebugs:bamboo_lowlands",
           "parameters": {
             "temperature": [
-              0.51,
-              0.82
+              0.56425,
+              0.76575
             ],
             "humidity": [
-              0.36,
-              0.7
+              0.37075,
+              0.55925
             ],
             "continentalness": [
-              0.26,
-              0.43
+              0.28975,
+              0.40025
             ],
             "erosion": [
-              0.25,
-              0.55
+              0.289,
+              0.471
             ],
             "depth": 0,
             "weirdness": [
-              -0.45,
-              0.45
+              -0.273,
+              0.273
             ],
             "offset": 0.018
           }
@@ -2562,25 +2562,25 @@
           "biome": "bugsbugsandmorebugs:bamboo_marsh",
           "parameters": {
             "temperature": [
-              0.42,
-              0.83
+              0.5255,
+              0.7345
             ],
             "humidity": [
-              0.68,
-              0.94
+              0.76175,
+              0.88825
             ],
             "continentalness": [
-              0.19,
-              0.38
+              0.245,
+              0.355
             ],
             "erosion": [
-              0.16,
-              0.54
+              0.261,
+              0.459
             ],
             "depth": 0,
             "weirdness": [
-              -0.56,
-              0.56
+              -0.297,
+              0.297
             ],
             "offset": 0.018
           }
@@ -2589,25 +2589,25 @@
           "biome": "bugsbugsandmorebugs:bamboo_marsh",
           "parameters": {
             "temperature": [
-              0.31,
-              0.65
+              0.38875,
+              0.58125
             ],
             "humidity": [
-              0.61,
-              0.91
+              0.73175,
+              0.85825
             ],
             "continentalness": [
-              0.27,
-              0.4
+              0.30375,
+              0.38625
             ],
             "erosion": [
-              0.29,
-              0.56
+              0.35075,
+              0.49925
             ],
             "depth": 0,
             "weirdness": [
-              -0.5,
-              0.5
+              -0.264,
+              0.264
             ],
             "offset": 0.016
           }
@@ -2616,25 +2616,25 @@
           "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
-              -0.97,
-              -0.68
+              -0.91375,
+              -0.77625
             ],
             "humidity": [
-              -0.38,
-              0.35
+              0.008,
+              0.272
             ],
             "continentalness": [
-              0.67,
-              0.96
+              0.7485,
+              0.8915
             ],
             "erosion": [
-              -0.85,
-              -0.49
+              -0.75125,
+              -0.55875
             ],
             "depth": 0,
             "weirdness": [
-              -0.75,
-              0.75
+              -0.385,
+              0.385
             ],
             "offset": 0.014
           }
@@ -2643,25 +2643,25 @@
           "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
-              -0.86,
-              -0.61
+              -0.81275,
+              -0.69725
             ],
             "humidity": [
-              0.07,
-              0.5
+              0.2255,
+              0.4345
             ],
             "continentalness": [
-              0.65,
-              0.9
+              0.724,
+              0.856
             ],
             "erosion": [
-              -0.72,
-              -0.44
+              -0.6615,
+              -0.5185
             ],
             "depth": 0,
             "weirdness": [
-              -0.6,
-              0.6
+              -0.3025,
+              0.3025
             ],
             "offset": 0.018
           }
@@ -2670,25 +2670,25 @@
           "biome": "bugsbugsandmorebugs:volcanic_peak",
           "parameters": {
             "temperature": [
-              -0.78,
-              -0.46
+              -0.705,
+              -0.525
             ],
             "humidity": [
-              -0.55,
-              0.06
+              -0.4842,
+              -0.1458
             ],
             "continentalness": [
-              0.64,
-              0.91
+              0.6764,
+              0.8636
             ],
             "erosion": [
-              -0.76,
-              -0.42
+              -0.7024,
+              -0.4576
             ],
             "depth": 0,
             "weirdness": [
-              -0.82,
-              0.82
+              -0.5184,
+              0.5184
             ],
             "offset": 0.014
           }
@@ -2697,27 +2697,54 @@
           "biome": "bugsbugsandmorebugs:volcanic_peak",
           "parameters": {
             "temperature": [
-              -0.65,
-              -0.38
+              -0.5864,
+              -0.4136
             ],
             "humidity": [
-              -0.4,
-              0.08
+              -0.3933,
+              -0.1017
             ],
             "continentalness": [
-              0.62,
-              0.82
+              0.658,
+              0.802
             ],
             "erosion": [
-              -0.58,
-              -0.37
+              -0.5678,
+              -0.4022
             ],
             "depth": 0,
             "weirdness": [
-              -0.7,
-              0.7
+              -0.504,
+              0.504
             ],
             "offset": 0.017
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:ashen_foothills",
+          "parameters": {
+            "depth": 0,
+            "offset": 0.018,
+            "temperature": [
+              -0.627,
+              -0.453
+            ],
+            "humidity": [
+              0.1088,
+              0.2712
+            ],
+            "continentalness": [
+              0.6641,
+              0.7859
+            ],
+            "erosion": [
+              -0.4475,
+              -0.3025
+            ],
+            "weirdness": [
+              -0.377,
+              0.377
+            ]
           }
         }
       ]
