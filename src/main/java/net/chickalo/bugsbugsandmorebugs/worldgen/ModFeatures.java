@@ -14,7 +14,8 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.*;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 
 public class ModFeatures {
-    // Standard, taller-than-maple Ginkgo with an upward-broadening golden crown.
+    // Three Ginkgo sizes with vanilla foliage placers for more natural silhouettes.
     public static final ResourceKey<Feature> GINKGO_SMALL_KEY = registerKey("ginkgo_small");
     public static final ResourceKey<Feature> GINKGO_TREE_KEY = registerKey("ginkgo_tree");
     // Rare old-growth tree: taller bole and a wider, flatter crown.
@@ -66,7 +67,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new StraightTrunkPlacer(5, 2, 2),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new GinkgoFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 5),
+                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -74,7 +75,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new FancyTrunkPlacer(15, 4, 3),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new GinkgoFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 7),
+                new FancyFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 4),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -82,7 +83,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new FancyTrunkPlacer(23, 5, 4),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new GinkgoFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 9),
+                new FancyFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());

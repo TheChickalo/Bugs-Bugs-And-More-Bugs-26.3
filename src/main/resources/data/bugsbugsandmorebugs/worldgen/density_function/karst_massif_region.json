@@ -11,12 +11,12 @@
           "left": {
             "type": "minecraft:sub",
             "left": "minecraft:overworld/continents",
-            "right": 0.2
+            "right": 0.14
           },
           "right": 4.2
         },
-        "min": 0.0,
-        "max": 1.0
+        "min": 0,
+        "max": 1
       },
       "right": {
         "type": "minecraft:clamp",
@@ -27,10 +27,10 @@
             "left": "minecraft:overworld/temperature",
             "right": 0.65
           },
-          "right": 6.0
+          "right": 6
         },
-        "min": 0.0,
-        "max": 1.0
+        "min": 0,
+        "max": 1
       }
     },
     "right": {
@@ -42,10 +42,10 @@
           "left": -0.06,
           "right": "minecraft:overworld/temperature"
         },
-        "right": 6.0
+        "right": 6
       },
-      "min": 0.0,
-      "max": 1.0
+      "min": 0,
+      "max": 1
     }
   },
   "right": {
@@ -57,9 +57,9 @@
         "left": -0.04,
         "right": "minecraft:overworld/vegetation"
       },
-      "right": 4.0
+      "right": 4
     },
-    "min": 0.0,
-    "max": 1.0
+    "min": 0,
+    "max": 1
   }
 }

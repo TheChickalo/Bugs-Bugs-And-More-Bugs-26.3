@@ -827,7 +827,7 @@
             "temperature": -0.2,
             "humidity": -0.27,
             "continentalness": 0.51,
-            "erosion": 0.25,
+            "erosion": 0.43,
             "depth": 0,
             "weirdness": -0.09,
             "offset": 0
@@ -839,7 +839,7 @@
             "temperature": -0.2,
             "humidity": -0.27,
             "continentalness": 0.51,
-            "erosion": 0.25,
+            "erosion": 0.43,
             "depth": 0,
             "weirdness": 0.09,
             "offset": 0
@@ -851,9 +851,279 @@
             "temperature": -0.2,
             "humidity": -0.27,
             "continentalness": 0.51,
-            "erosion": 0.25,
+            "erosion": 0.43,
             "depth": 0,
             "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.54,
+              -0.18
+            ],
+            "humidity": [
+              -0.52,
+              -0.08
+            ],
+            "continentalness": [
+              0.48,
+              0.68
+            ],
+            "erosion": [
+              0.05,
+              0.35
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.49,
+              -0.2
+            ],
+            "humidity": [
+              -0.4,
+              -0.05
+            ],
+            "continentalness": [
+              0.52,
+              0.72
+            ],
+            "erosion": [
+              0.08,
+              0.32
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.58,
+              -0.15
+            ],
+            "humidity": [
+              -0.55,
+              -0.06
+            ],
+            "continentalness": [
+              0.42,
+              0.74
+            ],
+            "erosion": [
+              -0.38,
+              0.035
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.58,
+              -0.15
+            ],
+            "humidity": [
+              -0.55,
+              -0.06
+            ],
+            "continentalness": [
+              0.42,
+              0.74
+            ],
+            "erosion": [
+              0.37,
+              0.64
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.78,
+              -0.56
+            ],
+            "humidity": [
+              -0.55,
+              -0.06
+            ],
+            "continentalness": [
+              0.42,
+              0.74
+            ],
+            "erosion": [
+              0.04,
+              0.36
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.14,
+              0.1
+            ],
+            "humidity": [
+              -0.55,
+              -0.06
+            ],
+            "continentalness": [
+              0.42,
+              0.74
+            ],
+            "erosion": [
+              0.04,
+              0.36
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.58,
+              -0.15
+            ],
+            "humidity": [
+              -0.06,
+              0.22
+            ],
+            "continentalness": [
+              0.42,
+              0.74
+            ],
+            "erosion": [
+              0.04,
+              0.36
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.58,
+              -0.15
+            ],
+            "humidity": [
+              -0.8,
+              -0.53
+            ],
+            "continentalness": [
+              0.42,
+              0.74
+            ],
+            "erosion": [
+              0.04,
+              0.36
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.58,
+              -0.15
+            ],
+            "humidity": [
+              -0.55,
+              -0.06
+            ],
+            "continentalness": [
+              0.31,
+              0.43
+            ],
+            "erosion": [
+              0.04,
+              0.36
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:highland_karst",
+          "parameters": {
+            "temperature": [
+              -0.58,
+              -0.15
+            ],
+            "humidity": [
+              -0.55,
+              -0.06
+            ],
+            "continentalness": [
+              0.75,
+              0.85
+            ],
+            "erosion": [
+              0.04,
+              0.36
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
             "offset": 0
           }
         },
