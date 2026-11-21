@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.biome;
 import net.chickalo.bugsbugsandmorebugs.worldgen.ModPlacedFeatures;
 import net.chickalo.bugsbugsandmorebugs.worldgen.feature.GlowshroomPatchFeature;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
@@ -264,8 +265,10 @@ public class ModOverworldBiomes {
     }
 
     public static Biome volcanicPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        // Treeless by design. The material rule paints the exposed volcanic rock.
+        // Treeless by design. Rare, compact magma outcrops punctuate bare rock.
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.VOLCANIC_MAGMA_PATCH_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return new Biome.BiomeBuilder()
@@ -355,6 +358,163 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return landscapeBiome(generation, 0.73F, 0.85F,
                 0x5B907C, 0x98CECE, 0xB4D7BD);
+    }
+
+    // Minor habitat variants. No new blocks or tree models are required.
+    // Keep generation densities and climate/appearance distinct from each parent biome.
+    public static Biome oldGrowthGinkgoForest(HolderGetter<PlacedFeature> features,
+                                               HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.GINKGO_ANCIENT_STAND_PLACED_KEY,
+                ModPlacedFeatures.GINKGO_MIXED_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_DENSE_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        return minorBiome(generation, 0.65F, 0.7F,
+                0x667F66, 0xB5AF62, 0xD2B76E, 0xA7D6D6, 0xCDC5A3, 0);
+    }
+
+    public static Biome sparseGinkgoWoodland(HolderGetter<PlacedFeature> features,
+                                              HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.GINKGO_SCATTERED_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultFlowers(generation);
+        return minorBiome(generation, 0.75F, 0.42F,
+                0x739382, 0xB3BA71, 0xC5AB62, 0xA2D5D3, 0xD5D8B4, 0);
+    }
+
+    public static Biome mixedAutumnForest(HolderGetter<PlacedFeature> features,
+                                          HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.MAPLE_SPARSE_PLACED_KEY,
+                ModPlacedFeatures.GINKGO_MIXED_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY,
+                ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        ModBiomeVegetation.addBerryBushes(generation);
+        return minorBiome(generation, 0.69F, 0.74F,
+                0x568C79, 0x98B86B, 0xB5AC62, 0x92D5D9, 0xCDD6C1, 0);
+    }
+
+    public static Biome mossyHinokiGrove(HolderGetter<PlacedFeature> features,
+                                         HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.HINOKI_TREE_PLACED_KEY,
+                ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY,
+                ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        return minorBiome(generation, 0.32F, 0.88F,
+                0x526E6B, 0x678D69, 0x61816B, 0xA1C3CB, 0x91ADB0, 116);
+    }
+
+    public static Biome bambooMarsh(HolderGetter<PlacedFeature> features,
+                                    HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.BAMBOO_POOLS_MARSH_PLACED_KEY);
+        addVegetation(generation,
+                ModPlacedFeatures.BAMBOO_GROVE_PLACED_KEY,
+                ModPlacedFeatures.BAMBOO_FERNS_PLACED_KEY,
+                ModPlacedFeatures.WETLAND_REEDS_DENSE_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_DENSE_PLACED_KEY);
+        return minorBiome(generation, 0.77F, 0.94F,
+                0x4C8270, 0x609B69, 0x5B8A60, 0x9BCECF, 0xB8CFC1, 0);
+    }
+
+    public static Biome highlandWildflowerMeadow(HolderGetter<PlacedFeature> features,
+                                                   HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY,
+                ModPlacedFeatures.HIGHLAND_MEADOW_LUSH_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultFlowers(generation);
+        return minorBiome(generation, 0.63F, 0.52F,
+                0x57A0A0, 0x96C86C, 0x7AA967, 0x8ACFEF, 0xD4E2D7, 0);
+    }
+
+    public static Biome limestoneScrubland(HolderGetter<PlacedFeature> features,
+                                            HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.KARST_OUTCROP_PLACED_KEY);
+        addVegetation(generation,
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY,
+                ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        return minorBiome(generation, 0.68F, 0.37F,
+                0x709F9B, 0x9AAC72, 0x889D6F, 0x95CFDB, 0xD4DDD3, 0);
+    }
+
+    public static Biome glowshroomGrove(HolderGetter<PlacedFeature> features,
+                                        HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.MAPLE_SPARSE_PLACED_KEY,
+                ModPlacedFeatures.GLOWSHROOM_DENSE_PLACED_KEY,
+                ModPlacedFeatures.GLOWSHROOM_TREE_BASE_PLACED_KEY,
+                ModPlacedFeatures.HUGE_GLOWSHROOM_GROVE_PLACED_KEY,
+                ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        return minorBiome(generation, 0.61F, 0.86F,
+                0x4A8473, 0x76A172, 0x719B72, 0x8CC7C4, 0x93B5AD, 0);
+    }
+
+    public static Biome ashenFoothills(HolderGetter<PlacedFeature> features,
+                                       HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+        return minorBiome(generation, 0.05F, 0.24F,
+                0x627B7F, 0x84857D, 0x81847F, 0xA6C4D0, 0xB9C1C4, 0);
+    }
+
+    public static Biome mistyKarstFen(HolderGetter<PlacedFeature> features,
+                                      HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation,
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY,
+                ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY,
+                ModPlacedFeatures.WETLAND_REEDS_DENSE_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_DENSE_PLACED_KEY);
+        return minorBiome(generation, 0.65F, 0.91F,
+                0x4F928C, 0x79A56E, 0x71A174, 0x98CCD6, 0xBACDC6, 84);
+    }
+
+    @SafeVarargs
+    private static void addVegetation(BiomeGenerationSettings.Builder generation,
+                                       ResourceKey<PlacedFeature>... features) {
+        for (ResourceKey<PlacedFeature> feature : features) {
+            generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, feature);
+        }
+    }
+
+    private static Biome minorBiome(BiomeGenerationSettings.Builder generation,
+                                    float temperature, float downfall,
+                                    int water, int grass, int foliage, int sky, int fog,
+                                    float cloudHeight) {
+        var biome = new Biome.BiomeBuilder()
+                .hasPrecipitation(true).temperature(temperature).downfall(downfall)
+                .specialEffects(new BiomeSpecialEffects.Builder()
+                        .waterColor(water).grassColorOverride(grass)
+                        .foliageColorOverride(foliage).build())
+                .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+                .generationSettings(withLavaCleanup(generation).build())
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(sky))
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(fog));
+        if (cloudHeight > 0) {
+            biome.setAttribute(EnvironmentAttributes.CLOUD_HEIGHT, cloudHeight)
+                    .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
+                            AmbientParticle.of(ParticleTypes.CLOUD, 0.004F));
+        }
+        return biome.build();
     }
 
     private static BiomeGenerationSettings.Builder withLavaCleanup(BiomeGenerationSettings.Builder generation) {

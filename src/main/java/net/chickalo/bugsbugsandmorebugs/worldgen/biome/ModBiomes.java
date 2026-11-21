@@ -25,6 +25,17 @@ public class ModBiomes {
 
 
     // New Elsewhere biome families. See README for climate-adjacency limitations.
+    public static final ResourceKey<Biome> OLD_GROWTH_GINKGO_FOREST = registerBiomeKey("old_growth_ginkgo_forest");
+    public static final ResourceKey<Biome> SPARSE_GINKGO_WOODLAND = registerBiomeKey("sparse_ginkgo_woodland");
+    public static final ResourceKey<Biome> MIXED_AUTUMN_FOREST = registerBiomeKey("mixed_autumn_forest");
+    public static final ResourceKey<Biome> MOSSY_HINOKI_GROVE = registerBiomeKey("mossy_hinoki_grove");
+    public static final ResourceKey<Biome> BAMBOO_MARSH = registerBiomeKey("bamboo_marsh");
+    public static final ResourceKey<Biome> HIGHLAND_WILDFLOWER_MEADOW = registerBiomeKey("highland_wildflower_meadow");
+    public static final ResourceKey<Biome> LIMESTONE_SCRUBLAND = registerBiomeKey("limestone_scrubland");
+    public static final ResourceKey<Biome> GLOWSHROOM_GROVE = registerBiomeKey("glowshroom_grove");
+    public static final ResourceKey<Biome> ASHEN_FOOTHILLS = registerBiomeKey("ashen_foothills");
+    public static final ResourceKey<Biome> MISTY_KARST_FEN = registerBiomeKey("misty_karst_fen");
+
     public static final ResourceKey<Biome> STONE_FOREST = registerBiomeKey("stone_forest");
     public static final ResourceKey<Biome> GINKGO_FOREST = registerBiomeKey("ginkgo_forest");
     public static final ResourceKey<Biome> HINOKI_HIGHLANDS = registerBiomeKey("hinoki_highlands");
@@ -38,6 +49,17 @@ public class ModBiomes {
     public static void bootstrap(BootstrapContext<Biome> context) {
         var carvers = context.lookup(Registries.CARVER);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+
+        register(context, OLD_GROWTH_GINKGO_FOREST, ModOverworldBiomes.oldGrowthGinkgoForest(placedFeatures, carvers));
+        register(context, SPARSE_GINKGO_WOODLAND, ModOverworldBiomes.sparseGinkgoWoodland(placedFeatures, carvers));
+        register(context, MIXED_AUTUMN_FOREST, ModOverworldBiomes.mixedAutumnForest(placedFeatures, carvers));
+        register(context, MOSSY_HINOKI_GROVE, ModOverworldBiomes.mossyHinokiGrove(placedFeatures, carvers));
+        register(context, BAMBOO_MARSH, ModOverworldBiomes.bambooMarsh(placedFeatures, carvers));
+        register(context, HIGHLAND_WILDFLOWER_MEADOW, ModOverworldBiomes.highlandWildflowerMeadow(placedFeatures, carvers));
+        register(context, LIMESTONE_SCRUBLAND, ModOverworldBiomes.limestoneScrubland(placedFeatures, carvers));
+        register(context, GLOWSHROOM_GROVE, ModOverworldBiomes.glowshroomGrove(placedFeatures, carvers));
+        register(context, ASHEN_FOOTHILLS, ModOverworldBiomes.ashenFoothills(placedFeatures, carvers));
+        register(context, MISTY_KARST_FEN, ModOverworldBiomes.mistyKarstFen(placedFeatures, carvers));
 
         register(context, STONE_FOREST, ModOverworldBiomes.stoneForest(placedFeatures, carvers));
         register(context, GINKGO_FOREST, ModOverworldBiomes.ginkgoForest(placedFeatures, carvers));

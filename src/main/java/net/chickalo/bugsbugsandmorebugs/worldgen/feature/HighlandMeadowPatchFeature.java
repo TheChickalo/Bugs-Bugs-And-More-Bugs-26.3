@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -80,8 +81,7 @@ public record HighlandMeadowPatchFeature() implements Feature {
             BlockPos pos = new BlockPos(x, y, z);
 
             if (y <= level.getMinY() || y >= level.getMaxY() - 4) continue;
-            if (!level.getBiome(pos).is(ModBiomes.HIGHLAND_KARST)
-                    && !level.getBiome(pos).is(ModBiomes.STONE_FOREST)) continue;
+            if (!ModBiomeFamilies.karstMeadow(level.getBiome(pos))) continue;
             if (!net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(level.getBlockState(pos.below()), Blocks.GRASS_BLOCK)) continue;
 
             Block target = choosePlant(patch, random);

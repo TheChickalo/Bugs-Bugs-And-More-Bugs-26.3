@@ -1,0 +1,41 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/fog_color": "#b9c1c4",
+    "minecraft:visual/sky_color": "#a6c4d0"
+  },
+  "carvers": [],
+  "downfall": 0.24,
+  "effects": {
+    "foliage_color": "#81847f",
+    "grass_color": "#84857d",
+    "water_color": "#627b7f"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:amphibolite_deposit_placed"
+    ],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
+    ]
+  ],
+  "has_precipitation": true,
+  "temperature": 0.05
+}

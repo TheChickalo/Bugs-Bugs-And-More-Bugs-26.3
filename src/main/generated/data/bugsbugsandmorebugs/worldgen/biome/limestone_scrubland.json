@@ -1,0 +1,46 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/fog_color": "#d4ddd3",
+    "minecraft:visual/sky_color": "#95cfdb"
+  },
+  "carvers": [],
+  "downfall": 0.37,
+  "effects": {
+    "foliage_color": "#889d6f",
+    "grass_color": "#9aac72",
+    "water_color": "#709f9b"
+  },
+  "features": [
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:karst_outcrop_placed"
+    ],
+    [],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:amphibolite_deposit_placed"
+    ],
+    [],
+    [],
+    [
+      "bugsbugsandmorebugs:karst_ground_patch_placed",
+      "bugsbugsandmorebugs:highland_meadow_patch_placed",
+      "bugsbugsandmorebugs:elsewhere_flora_placed",
+      "minecraft:patch_tall_grass_2"
+    ],
+    [
+      "bugsbugsandmorebugs:lava_cleanup_placed"
+    ]
+  ],
+  "has_precipitation": true,
+  "temperature": 0.68
+}
