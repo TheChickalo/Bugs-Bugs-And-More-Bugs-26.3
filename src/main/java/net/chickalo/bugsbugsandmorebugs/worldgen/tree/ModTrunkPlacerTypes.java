@@ -11,6 +11,11 @@ public class ModTrunkPlacerTypes {
             Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID,
                     "maple_trunk_placer"), new TrunkPlacerType<>(MapleTrunkPlacer.CODEC));
 
+    public static final TrunkPlacerType<GinkgoTrunkPlacer> GINKGO_TRUNK_PLACER =
+            Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,
+                    Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "ginkgo_trunk_placer"),
+                    new TrunkPlacerType<>(GinkgoTrunkPlacer.CODEC));
+
     public static final TrunkPlacerType<HinokiTrunkPlacer> HINOKI_TRUNK_PLACER =
             Registry.register(BuiltInRegistries.TRUNK_PLACER_TYPE,
                     Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "hinoki_trunk_placer"),
