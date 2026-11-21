@@ -13,6 +13,15 @@ public final class ModFeatureTypes {
     }
 
     public static void register() {
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "hinoki_moss_patch"),
+                HinokiMossPatchFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "volcanic_vent"),
+                VolcanicVentFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "alpine_snow"),
+                AlpineSnowFeature.CODEC);
         Registry.register(
                 BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "hinoki_boulder"),

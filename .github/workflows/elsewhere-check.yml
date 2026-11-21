@@ -147,6 +147,47 @@ jobs:
           assert 'bugsbugsandmorebugs:ashstone' in json.dumps(material), 'Keep Sundering Horizon geology'
           print('Ginkgo branches, sparse moss boulders, quiet fog and Sundering geology verified')
           PY
+      - name: Verify volcanic hot spots, lowland terrain and layered snow
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          ns='bugsbugsandmorebugs:'
+          root=Path('src/main/generated/data/bugsbugsandmorebugs/worldgen')
+          world=Path('src/main/resources/data/bugsbugsandmorebugs/worldgen')
+          biome=lambda name:json.loads((root/'biome'/f'{name}.json').read_text())
+          placed=lambda name:json.loads((root/'placed_feature'/f'{name}_placed.json').read_text())
+          feat=lambda name:json.loads((root/'feature'/f'{name}.json').read_text())
+          for name in ('ashen_foothills','volcanic_peak'):
+              b=biome(name)
+              assert ns+'alpine_snow_placed' in b['features'][10]
+              assert ns+'volcanic_magma_patch_placed' in b['features'][2]
+              assert ns+('volcanic_vent_foothills_placed' if name=='ashen_foothills' else 'volcanic_vent_peak_placed') in b['features'][2]
+          assert ns+'alpine_snow_placed' in biome('snowy_peak')['features'][10]
+          assert feat('volcanic_vent_foothills')['foothills'] is True
+          assert feat('volcanic_vent_peak')['foothills'] is False
+          assert feat('alpine_snow')['type']==ns+'alpine_snow'
+          assert ns+'hinoki_moss_patch_placed' in biome('mossy_hinoki_grove')['features'][2]
+          assert feat('hinoki_moss_patch')['type']==ns+'hinoki_moss_patch'
+          assert placed('bamboo_pools_marsh')['placement'][0]=={'type':'minecraft:count','count':2}
+          density=json.loads((world/'noise_settings/elsewhere.json').read_text())
+          final=density['noise_router']['final_density']['when_in_range']
+          assert final['alpha']==ns+'bamboo_lowland_region'
+          assert (world/'density_function/bamboo_lowland_region.json').exists()
+          assert final['second']['type']=='minecraft:min'
+          volc=json.loads((world/'density_function/volcanic_massif_density.json').read_text())
+          assert volc['left']['right']['right']['type']=='minecraft:add'
+          surface=json.loads((world/'material_rule/elsewhere.json').read_text())
+          for name in ('ashen_foothills','volcanic_peak','snowy_peak'):
+              rules=[x for x in surface['sequence'] if x.get('if_true',{}).get('biome_is')==ns+name]
+              assert rules
+              assert 'minecraft:snow_block' not in json.dumps(rules), 'Static snowlines should be removed'
+          climates=json.loads(Path('src/main/resources/data/bugsbugsandmorebugs/dimension/elsewheredim.json').read_text())['generator']['biome_source']['biomes']
+          assert sum(x['biome']==ns+'bamboo_marsh' for x in climates)>=9
+          java=Path('src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/biome/ModOverworldBiomes.java').read_text()
+          assert '0x579FB9' in java, 'Grassy Plains water tint missing'
+          print('Volcanic, alpine snow, bamboo marsh, lowland bias and water-color checks passed')
+          PY
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py
       - name: Generate datapack and compile

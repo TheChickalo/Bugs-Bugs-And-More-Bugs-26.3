@@ -55,6 +55,13 @@ public record ElsewhereFloraFeature() implements Feature {
             Block plant;
             if(peak)plant=ModBlocks.ALPINE_GRASS;
             else if(ginkgo && random.nextInt(3)==0)plant=ModBlocks.GINKGO_FALLEN_LEAVES;
+            else if(biome.is(ModBiomes.BAMBOO_MARSH)) {
+                // More varied low marsh understory between reeds and ponds.
+                int draw=random.nextInt(6);
+                plant=draw<2?ModBlocks.IRIS_FLOWER:
+                        draw<4?ModBlocks.HAKONE_GRASS:
+                        draw==4?Blocks.FERN:Blocks.SHORT_GRASS;
+            }
             else if(wet)plant=random.nextInt(4)==0?ModBlocks.HAKONE_GRASS:ModBlocks.IRIS_FLOWER;
             else if(limestone)plant=y<=84 && random.nextInt(3)==0 ? ModBlocks.IRIS_FLOWER
                     : random.nextInt(3)==0 ? ModBlocks.ALPINE_GRASS : ModBlocks.HAKONE_GRASS;

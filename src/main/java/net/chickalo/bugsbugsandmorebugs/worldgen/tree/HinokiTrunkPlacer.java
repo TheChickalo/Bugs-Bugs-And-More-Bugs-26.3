@@ -70,9 +70,9 @@ public final class HinokiTrunkPlacer extends StraightTrunkPlacer {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             if (random.nextFloat() >= 0.65F) continue;
             BlockPos first = origin.relative(direction);
-            putRoot(level, trunkSetter, first);
+            putRoot(level, trunkSetter, random, first);
             if (random.nextFloat() < 0.23F) {
-                putRoot(level, trunkSetter, first.relative(direction));
+                putRoot(level, trunkSetter, random, first.relative(direction));
             }
         }
 
@@ -97,11 +97,21 @@ public final class HinokiTrunkPlacer extends StraightTrunkPlacer {
     }
 
     private static void putRoot(WorldGenLevel level,
-                                BiConsumer<BlockPos, BlockState> trunkSetter, BlockPos pos) {
+                                BiConsumer<BlockPos, BlockState> trunkSetter,
+                                RandomSource random, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
         if (!level.getBlockState(pos.below()).isAir()
                 && (state.isAir() || state.canBeReplaced())) {
             trunkSetter.accept(pos, ModBlocks.HINOKI_WOOD.defaultBlockState());
+            // Real moss-carpet layer on the root's upward face in mossy groves.
+            BlockPos above = pos.above();
+            BlockState carpet = Blocks.MOSS_CARPET.defaultBlockState();
+            if (level.getBiome(pos).is(net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes.MOSSY_HINOKI_GROVE)
+                    && random.nextFloat() < 0.58F
+                    && level.getBlockState(above).isAir()
+                    && carpet.canSurvive(level, above)) {
+                level.setBlock(above, carpet, 2);
+            }
         }
     }
 }
