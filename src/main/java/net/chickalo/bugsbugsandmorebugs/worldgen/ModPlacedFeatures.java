@@ -29,6 +29,9 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_DENSE_PLACED_KEY = registerKey("elsewhere_flora_dense_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_DENSE_PLACED_KEY = registerKey("wetland_reeds_dense_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_MARSH_PLACED_KEY = registerKey("bamboo_pools_marsh_placed");
+    public static final ResourceKey<PlacedFeature> BAMBOO_MARSH_WETLAND_PLACED_KEY = registerKey("bamboo_marsh_wetland_placed");
+    public static final ResourceKey<PlacedFeature> BAMBOO_GROVE_MARSH_PLACED_KEY = registerKey("bamboo_grove_marsh_placed");
+    public static final ResourceKey<PlacedFeature> WETLAND_REEDS_MARSH_PLACED_KEY = registerKey("wetland_reeds_marsh_placed");
     public static final ResourceKey<PlacedFeature> HIGHLAND_MEADOW_LUSH_PLACED_KEY = registerKey("highland_meadow_lush_placed");
     public static final ResourceKey<PlacedFeature> GLOWSHROOM_DENSE_PLACED_KEY = registerKey("glowshroom_dense_placed");
     public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_GROVE_PLACED_KEY = registerKey("huge_glowshroom_grove_placed");
@@ -105,6 +108,18 @@ public class ModPlacedFeatures {
         register(context, BAMBOO_POOLS_MARSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.BAMBOO_POOLS_KEY),
                 List.of(CountPlacement.of(2), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, BAMBOO_MARSH_WETLAND_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.BAMBOO_MARSH_WETLAND_KEY),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, BAMBOO_GROVE_MARSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_BAMBOO_KEY),
+                List.of(CountPlacement.of(17), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, WETLAND_REEDS_MARSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),
+                List.of(CountPlacement.of(7), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, HIGHLAND_MEADOW_LUSH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.HIGHLAND_MEADOW_PATCH_KEY),

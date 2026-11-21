@@ -20,7 +20,8 @@
   "features": [
     [],
     [
-      "bugsbugsandmorebugs:bamboo_pools_marsh_placed"
+      "bugsbugsandmorebugs:bamboo_pools_marsh_placed",
+      "bugsbugsandmorebugs:bamboo_marsh_wetland_placed"
     ],
     [],
     [],
@@ -32,9 +33,9 @@
     [],
     [],
     [
-      "bugsbugsandmorebugs:bamboo_grove_placed",
+      "bugsbugsandmorebugs:bamboo_grove_marsh_placed",
       "bugsbugsandmorebugs:bamboo_ferns_placed",
-      "bugsbugsandmorebugs:wetland_reeds_dense_placed",
+      "bugsbugsandmorebugs:wetland_reeds_marsh_placed",
       "bugsbugsandmorebugs:elsewhere_flora_dense_placed"
     ],
     [
