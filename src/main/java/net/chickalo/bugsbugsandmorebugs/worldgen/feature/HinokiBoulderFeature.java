@@ -35,11 +35,23 @@ public record HinokiBoulderFeature() implements Feature {
         int rx = 2 + random.nextInt(2);
         int rz = 2 + random.nextInt(2);
         double phase = random.nextDouble() * Math.PI * 2.0;
+        // Cache the original terrain heights before changing any blocks;
+        // otherwise later layers would read our new stones as higher ground.
+        int[][] groundY = new int[2*rx+1][2*rz+1];
+        boolean[][] usable = new boolean[2*rx+1][2*rz+1];
+        for (int dx=-rx; dx<=rx; dx++) for (int dz=-rz; dz<=rz; dz++) {
+            int px=x+dx, pz=z+dz;
+            int sy=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, px, pz);
+            BlockPos site=new BlockPos(px, sy-1, pz);
+            groundY[dx+rx][dz+rz]=sy-1;
+            usable[dx+rx][dz+rz]=Math.abs(sy-top)<=1 && validGround(level,site);
+        }
+
         int changed = 0;
         for (int layer = 0; layer < 3; layer++) {
             int radX = layer == 0 ? rx : layer == 1 ? rx - 1 : 1;
             int radZ = layer == 0 ? rz : layer == 1 ? rz - 1 : 1;
-            if (layer == 2 && random.nextFloat() < 0.76F) break;
+            if (layer == 2 && random.nextFloat() < 0.92F) break;
             for (int dx = -radX; dx <= radX; dx++) {
                 for (int dz = -radZ; dz <= radZ; dz++) {
                     double noise = 0.12 * Math.sin(dx * 2.6 + dz * 1.7 + phase);
@@ -49,11 +61,8 @@ public record HinokiBoulderFeature() implements Feature {
                             || (elliptical > 0.70 && random.nextFloat() < 0.27F)) continue;
 
                     int px = x + dx, pz = z + dz;
-                    int surface = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, px, pz);
-                    if (Math.abs(surface - top) > 1) continue;
-                    BlockPos ground = new BlockPos(px, surface - 1, pz);
-                    if (layer == 0 && !validGround(level, ground)) continue;
-                    if (!level.getBiome(ground).is(ModBiomes.MOSSY_HINOKI_GROVE)) continue;
+                    if (!usable[dx+rx][dz+rz]) continue;
+                    BlockPos ground = new BlockPos(px, groundY[dx+rx][dz+rz], pz);
 
                     BlockPos at = layer == 0 ? ground : ground.above(layer);
                     BlockState old = level.getBlockState(at);
