@@ -7,9 +7,9 @@
       "left": {
         "type": "minecraft:sub",
         "left": "minecraft:overworld/temperature",
-        "right": 0.31
+        "right": 0.18
       },
-      "right": 4.6
+      "right": 7.5
     },
     "min": 0,
     "max": 1
