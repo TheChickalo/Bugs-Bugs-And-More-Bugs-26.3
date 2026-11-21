@@ -16,6 +16,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.PlaceOnWaterBlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
@@ -524,7 +525,7 @@ public class ModBlocks {
     public static final Block GINKGO_FALLEN_LEAVES = registerBlock("ginkgo_fallen_leaves",
             p -> new LeafLitterBlock(p.noCollision().strength(0.1f).sound(SoundType.GRASS)));
     public static final Block DUCKWEED = registerBlock("duckweed",
-            p -> new Block(p.noCollision().instabreak().sound(SoundType.GRASS)));
+            p -> new LotusPadBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block LOTUS = registerBlock("lotus",
             p -> new LotusPadBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block LOTUS_FLOWER = registerBlock("lotus_flower",
@@ -580,9 +581,16 @@ public class ModBlocks {
     }
 
     private static void registerBlockItem(String name, Block block) {
-        Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name),
-                new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix()
-                        .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name)))));
+        Item.Properties properties = new Item.Properties().useBlockDescriptionPrefix()
+                .setId(ResourceKey.create(Registries.ITEM,
+                        Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name)));
+        BlockItem item = switch (name) {
+            case "duckweed", "lotus" -> new PlaceOnWaterBlockItem(block, properties);
+            case "lotus_flower" -> new LotusFlowerItem(block, properties);
+            default -> new BlockItem(block, properties);
+        };
+        Registry.register(BuiltInRegistries.ITEM,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name), item);
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
             output.accept(block);

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "bugsbugsandmorebugs:block/alpine_grass"
+    "model": "bugsbugsandmorebugs:item/alpine_grass"
   }
 }

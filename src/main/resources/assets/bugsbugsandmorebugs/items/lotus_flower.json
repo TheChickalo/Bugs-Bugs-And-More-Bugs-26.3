@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "bugsbugsandmorebugs:block/lotus_flower"
+    "model": "bugsbugsandmorebugs:item/lotus_flower"
   }
 }
