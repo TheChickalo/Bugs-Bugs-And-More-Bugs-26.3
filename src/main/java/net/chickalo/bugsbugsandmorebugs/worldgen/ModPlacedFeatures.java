@@ -21,6 +21,19 @@ import java.util.List;
 
 
 public class ModPlacedFeatures {
+    // Smaller biome variants reuse the registered tree / plant configurations.
+    public static final ResourceKey<PlacedFeature> GINKGO_ANCIENT_STAND_PLACED_KEY = registerKey("ginkgo_ancient_stand_placed");
+    public static final ResourceKey<PlacedFeature> GINKGO_SCATTERED_PLACED_KEY = registerKey("ginkgo_scattered_placed");
+    public static final ResourceKey<PlacedFeature> GINKGO_MIXED_PLACED_KEY = registerKey("ginkgo_mixed_placed");
+    public static final ResourceKey<PlacedFeature> MAPLE_SPARSE_PLACED_KEY = registerKey("maple_sparse_placed");
+    public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_DENSE_PLACED_KEY = registerKey("elsewhere_flora_dense_placed");
+    public static final ResourceKey<PlacedFeature> WETLAND_REEDS_DENSE_PLACED_KEY = registerKey("wetland_reeds_dense_placed");
+    public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_MARSH_PLACED_KEY = registerKey("bamboo_pools_marsh_placed");
+    public static final ResourceKey<PlacedFeature> HIGHLAND_MEADOW_LUSH_PLACED_KEY = registerKey("highland_meadow_lush_placed");
+    public static final ResourceKey<PlacedFeature> GLOWSHROOM_DENSE_PLACED_KEY = registerKey("glowshroom_dense_placed");
+    public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_GROVE_PLACED_KEY = registerKey("huge_glowshroom_grove_placed");
+    public static final ResourceKey<PlacedFeature> VOLCANIC_MAGMA_PATCH_PLACED_KEY = registerKey("volcanic_magma_patch_placed");
+
     public static final ResourceKey<PlacedFeature> GINKGO_SMALL_PLACED_KEY = registerKey("ginkgo_small_placed");
     public static final ResourceKey<PlacedFeature> GINKGO_TREE_PLACED_KEY = registerKey("ginkgo_tree_placed");
     public static final ResourceKey<PlacedFeature> GINKGO_OLD_GROWTH_PLACED_KEY = registerKey("ginkgo_old_growth_placed");
@@ -62,6 +75,49 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
+
+        // Deliberately lighter vegetation densities for minor biome variants.
+        register(context, GINKGO_ANCIENT_STAND_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_OLD_GROWTH_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(1), ModBlocks.GINKGO_SAPLING));
+        register(context, GINKGO_SCATTERED_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_SMALL_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(1), ModBlocks.GINKGO_SAPLING));
+        register(context, GINKGO_MIXED_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GINKGO_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(2), ModBlocks.GINKGO_SAPLING));
+        register(context, MAPLE_SPARSE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MAPLE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(4), ModBlocks.MAPLE_SAPLING));
+        register(context, ELSEWHERE_FLORA_DENSE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.ELSEWHERE_FLORA_KEY),
+                List.of(CountPlacement.of(4), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, WETLAND_REEDS_DENSE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, BAMBOO_POOLS_MARSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.BAMBOO_POOLS_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, HIGHLAND_MEADOW_LUSH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HIGHLAND_MEADOW_PATCH_KEY),
+                List.of(CountPlacement.of(6), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, GLOWSHROOM_DENSE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.GLOWSHROOM_PATCH_KEY),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, HUGE_GLOWSHROOM_GROVE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HUGE_GLOWSHROOM_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, VOLCANIC_MAGMA_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.VOLCANIC_MAGMA_PATCH_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
 
 
         register(context, BAMBOO_GROVE_PLACED_KEY,
