@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:add",
+  "left": {
+    "type": "minecraft:gradient",
+    "axis": "y",
+    "from_coordinate": 46,
+    "from_value": 3.4,
+    "to_coordinate": 65,
+    "to_value": -3.8
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:noise",
+      "noise": "minecraft:surface_secondary",
+      "xz_scale": 0.025,
+      "y_scale": 0
+    },
+    "right": 0.55
+  }
+}

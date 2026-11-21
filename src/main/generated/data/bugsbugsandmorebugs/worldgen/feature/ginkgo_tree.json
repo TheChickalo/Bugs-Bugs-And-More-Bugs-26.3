@@ -6,8 +6,8 @@
   "decorators": [],
   "foliage_placer": {
     "type": "minecraft:blob_foliage_placer",
+    "radius": 3,
     "offset": 0,
-    "radius": 4,
     "height": 5
   },
   "foliage_provider": {
@@ -25,10 +25,10 @@
     "upper_size": 2
   },
   "trunk_placer": {
-    "type": "minecraft:fancy_trunk_placer",
-    "base_height": 15,
+    "type": "minecraft:straight_trunk_placer",
+    "base_height": 13,
     "height_rand_a": 4,
-    "height_rand_b": 3
+    "height_rand_b": 4
   },
   "trunk_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_log",
