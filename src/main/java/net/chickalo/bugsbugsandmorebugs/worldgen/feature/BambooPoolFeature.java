@@ -30,7 +30,7 @@ public record BambooPoolFeature() implements Feature {
             int gy=level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,cx+dx,cz+dz)-1;
             if (gy!=y) return false;
             BlockState state=level.getBlockState(p);
-            if (!(state.is(ModBlocks.GRASSY_LOAM)||state.is(ModBlocks.LOAM)||state.is(Blocks.PODZOL)||state.is(Blocks.COARSE_DIRT))) return false;
+            if (!(state.is(ModBlocks.GRASSY_LOAM)||state.is(ModBlocks.LOAM)||state.is(Blocks.PODZOL)||state.is(Blocks.COARSE_DIRT)||state.is(Blocks.MUD))) return false;
             if (!level.getFluidState(p.above()).isEmpty()) return false;
         }
         boolean changed=false;
