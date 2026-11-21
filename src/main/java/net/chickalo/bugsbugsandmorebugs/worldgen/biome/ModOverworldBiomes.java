@@ -416,10 +416,12 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.BAMBOO_POOLS_MARSH_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.BAMBOO_MARSH_WETLAND_PLACED_KEY);
         addVegetation(generation,
-                ModPlacedFeatures.BAMBOO_GROVE_PLACED_KEY,
+                ModPlacedFeatures.BAMBOO_GROVE_MARSH_PLACED_KEY,
                 ModPlacedFeatures.BAMBOO_FERNS_PLACED_KEY,
-                ModPlacedFeatures.WETLAND_REEDS_DENSE_PLACED_KEY,
+                ModPlacedFeatures.WETLAND_REEDS_MARSH_PLACED_KEY,
                 ModPlacedFeatures.ELSEWHERE_FLORA_DENSE_PLACED_KEY);
         return minorBiome(generation, 0.77F, 0.94F,
                 0x4C8270, 0x609B69, 0x5B8A60, 0x9BCECF, 0xB8CFC1, 0);
