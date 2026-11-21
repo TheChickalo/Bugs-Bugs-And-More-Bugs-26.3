@@ -20,7 +20,9 @@
   "features": [
     [],
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:hinoki_boulder_placed"
+    ],
     [],
     [],
     [],

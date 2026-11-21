@@ -50,6 +50,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> KARST_ANIMAL_TRAIL_KEY = registerKey("karst_animal_trail");
 
 
+    public static final ResourceKey<Feature> HINOKI_BOULDER_KEY = registerKey("hinoki_boulder");
     public static final ResourceKey<Feature> VOLCANIC_MAGMA_PATCH_KEY = registerKey("volcanic_magma_patch");
 
     public static final ResourceKey<Feature> STONE_FOREST_SPIRES_KEY = registerKey("stone_forest_spires");
@@ -58,6 +59,7 @@ public class ModFeatures {
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
         context.register(VOLCANIC_MAGMA_PATCH_KEY, new VolcanicMagmaPatchFeature());
+        context.register(HINOKI_BOULDER_KEY, new HinokiBoulderFeature());
         context.register(LAVA_CLEANUP_KEY, new ElsewhereLavaCleanupFeature());
         context.register(BAMBOO_POOLS_KEY, new BambooPoolFeature());
         context.register(WETLAND_REEDS_KEY, new WetlandReedsFeature());

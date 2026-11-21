@@ -392,6 +392,8 @@ public class ModOverworldBiomes {
     public static Biome mossyHinokiGrove(HolderGetter<PlacedFeature> features,
                                          HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
+                ModPlacedFeatures.HINOKI_BOULDER_PLACED_KEY);
         addVegetation(generation,
                 ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_TREE_PLACED_KEY,

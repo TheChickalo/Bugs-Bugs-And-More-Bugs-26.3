@@ -15,6 +15,12 @@ public final class ModFeatureTypes {
     public static void register() {
         Registry.register(
                 BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "hinoki_boulder"),
+                HinokiBoulderFeature.CODEC
+        );
+
+        Registry.register(
+                BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "volcanic_magma_patch"),
                 VolcanicMagmaPatchFeature.CODEC
         );
