@@ -3,35 +3,18 @@
   "left": {
     "type": "minecraft:mul",
     "left": {
-      "type": "minecraft:mul",
-      "left": {
-        "type": "minecraft:clamp",
-        "input": {
-          "type": "minecraft:mul",
-          "left": {
-            "type": "minecraft:sub",
-            "left": "minecraft:overworld/continents",
-            "right": 0.22
-          },
-          "right": 9
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:sub",
+          "left": "minecraft:overworld/continents",
+          "right": 0.26
         },
-        "min": 0,
-        "max": 1
+        "right": 18
       },
-      "right": {
-        "type": "minecraft:clamp",
-        "input": {
-          "type": "minecraft:mul",
-          "left": {
-            "type": "minecraft:sub",
-            "left": 0.63,
-            "right": "minecraft:overworld/continents"
-          },
-          "right": 9
-        },
-        "min": 0,
-        "max": 1
-      }
+      "min": 0,
+      "max": 1
     },
     "right": {
       "type": "minecraft:clamp",
@@ -39,32 +22,27 @@
         "type": "minecraft:mul",
         "left": {
           "type": "minecraft:sub",
-          "left": "minecraft:overworld/erosion",
-          "right": 0.2
+          "left": 0.52,
+          "right": "minecraft:overworld/continents"
         },
-        "right": 9
+        "right": 15
       },
       "min": 0,
       "max": 1
     }
   },
   "right": {
-    "type": "minecraft:max",
+    "type": "minecraft:mul",
     "left": {
       "type": "minecraft:clamp",
       "input": {
         "type": "minecraft:mul",
         "left": {
           "type": "minecraft:sub",
-          "left": 0.42,
-          "right": {
-            "type": "minecraft:noise",
-            "noise": "minecraft:surface_secondary",
-            "xz_scale": 0.004,
-            "y_scale": 0
-          }
+          "left": "minecraft:overworld/erosion",
+          "right": 0.24
         },
-        "right": 8
+        "right": 12
       },
       "min": 0,
       "max": 1
@@ -78,9 +56,9 @@
           "left": {
             "type": "minecraft:sub",
             "left": "minecraft:overworld/vegetation",
-            "right": 0.17
+            "right": 0.23
           },
-          "right": 6
+          "right": 14
         },
         "min": 0,
         "max": 1
@@ -95,9 +73,9 @@
               "type": "minecraft:abs",
               "input": "minecraft:overworld/ridges"
             },
-            "right": 0.11
+            "right": 0.13
           },
-          "right": 9.5
+          "right": 11
         },
         "min": 0,
         "max": 1

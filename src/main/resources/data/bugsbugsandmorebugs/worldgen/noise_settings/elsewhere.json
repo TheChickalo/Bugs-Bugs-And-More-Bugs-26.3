@@ -7,48 +7,43 @@
       "y_scale": 0.5
     },
     "exclusion": {
-      "type": "minecraft:lerp",
-      "alpha": "bugsbugsandmorebugs:lake_basin_region",
-      "first": {
+      "type": "minecraft:max",
+      "left": {
         "type": "minecraft:max",
         "left": {
-          "type": "minecraft:max",
+          "type": "minecraft:min",
           "left": {
-            "type": "minecraft:min",
-            "left": {
-              "type": "minecraft:sub",
-              "left": -0.225,
-              "right": "minecraft:overworld/erosion"
-            },
-            "right": {
-              "type": "minecraft:max",
-              "left": {
-                "type": "minecraft:sub",
-                "left": "minecraft:overworld/depth",
-                "right": 0.9
-              },
-              "right": 0
-            }
+            "type": "minecraft:sub",
+            "left": -0.225,
+            "right": "minecraft:overworld/erosion"
           },
           "right": {
-            "type": "minecraft:gradient",
-            "axis": "y",
-            "from_coordinate": -45,
-            "from_value": 1,
-            "to_coordinate": -39,
-            "to_value": -1
+            "type": "minecraft:max",
+            "left": {
+              "type": "minecraft:sub",
+              "left": "minecraft:overworld/depth",
+              "right": 0.9
+            },
+            "right": 0
           }
         },
         "right": {
           "type": "minecraft:gradient",
           "axis": "y",
-          "from_coordinate": -65,
-          "from_value": 6,
-          "to_coordinate": -42,
-          "to_value": -6
+          "from_coordinate": -45,
+          "from_value": 1,
+          "to_coordinate": -39,
+          "to_value": -1
         }
       },
-      "second": -1
+      "right": {
+        "type": "minecraft:gradient",
+        "axis": "y",
+        "from_coordinate": -65,
+        "from_value": 6,
+        "to_coordinate": -42,
+        "to_value": -6
+      }
     },
     "fluid_level_floodedness": {
       "type": "minecraft:noise",
@@ -63,12 +58,7 @@
       "y_scale": 0.7142857142857143
     },
     "lava": -1,
-    "surface_level": {
-      "type": "minecraft:lerp",
-      "alpha": "bugsbugsandmorebugs:lake_basin_region",
-      "first": "minecraft:overworld/preliminary_surface_level",
-      "second": 60
-    }
+    "surface_level": "minecraft:overworld/preliminary_surface_level"
   },
   "debug_functions": [
     {
@@ -167,11 +157,11 @@
       "min_inclusive": -16,
       "max_exclusive": 640,
       "when_in_range": {
-        "type": "minecraft:max",
-        "left": {
-          "type": "minecraft:lerp",
-          "alpha": "bugsbugsandmorebugs:lake_basin_region",
-          "first": {
+        "type": "minecraft:lerp",
+        "alpha": "bugsbugsandmorebugs:lake_basin_region",
+        "first": {
+          "type": "minecraft:max",
+          "left": {
             "type": "minecraft:lerp",
             "alpha": "bugsbugsandmorebugs:river_corridor_region",
             "first": {
@@ -676,8 +666,12 @@
               }
             }
           },
-          "second": {
-            "type": "minecraft:min",
+          "right": "bugsbugsandmorebugs:volcanic_massif_density"
+        },
+        "second": {
+          "type": "minecraft:min",
+          "left": {
+            "type": "minecraft:max",
             "left": {
               "type": "minecraft:lerp",
               "alpha": "bugsbugsandmorebugs:river_corridor_region",
@@ -804,91 +798,50 @@
                 "second": {
                   "type": "minecraft:min",
                   "left": {
-                    "type": "minecraft:max",
-                    "left": {
+                    "type": "minecraft:range_choice",
+                    "input": {
+                      "type": "minecraft:gradient",
+                      "axis": "y",
+                      "from_coordinate": -128,
+                      "from_value": -128,
+                      "to_coordinate": 640,
+                      "to_value": 640
+                    },
+                    "min_inclusive": 40,
+                    "max_exclusive": 640,
+                    "when_in_range": "bugsbugsandmorebugs:stone_forest_roof",
+                    "when_out_of_range": {
                       "type": "minecraft:max",
                       "left": {
                         "type": "minecraft:max",
                         "left": {
-                          "type": "minecraft:range_choice",
-                          "input": {
-                            "type": "minecraft:gradient",
-                            "axis": "y",
-                            "from_coordinate": -128,
-                            "from_value": -128,
-                            "to_coordinate": 640,
-                            "to_value": 640
-                          },
-                          "min_inclusive": -128,
-                          "max_exclusive": -40,
-                          "when_in_range": {
-                            "type": "minecraft:min",
-                            "left": "minecraft:overworld/final_density",
-                            "right": "bugsbugsandmorebugs:underhang_underside"
-                          },
-                          "when_out_of_range": "minecraft:overworld/final_density"
-                        },
-                        "right": "bugsbugsandmorebugs:sundering_barrier"
-                      },
-                      "right": {
-                        "type": "minecraft:sub",
-                        "left": {
-                          "type": "minecraft:mul",
+                          "type": "minecraft:max",
                           "left": {
-                            "type": "minecraft:clamp",
+                            "type": "minecraft:range_choice",
                             "input": {
-                              "type": "minecraft:mul",
-                              "left": {
-                                "type": "minecraft:add",
-                                "left": "minecraft:overworld/continents",
-                                "right": 0.07
-                              },
-                              "right": 6.5
-                            },
-                            "min": 0,
-                            "max": 1
-                          },
-                          "right": {
-                            "type": "minecraft:add",
-                            "left": {
                               "type": "minecraft:gradient",
                               "axis": "y",
-                              "from_coordinate": 49,
-                              "from_value": 3,
-                              "to_coordinate": 124,
-                              "to_value": -2.9
+                              "from_coordinate": -128,
+                              "from_value": -128,
+                              "to_coordinate": 640,
+                              "to_value": 640
                             },
-                            "right": {
-                              "type": "minecraft:add",
-                              "left": {
-                                "type": "minecraft:mul",
-                                "left": {
-                                  "type": "minecraft:noise",
-                                  "noise": "minecraft:surface",
-                                  "xz_scale": 0.025,
-                                  "y_scale": 0
-                                },
-                                "right": 2.55
-                              },
-                              "right": {
-                                "type": "minecraft:mul",
-                                "left": {
-                                  "type": "minecraft:noise",
-                                  "noise": "minecraft:surface_secondary",
-                                  "xz_scale": 0.085,
-                                  "y_scale": 0
-                                },
-                                "right": 1.1
-                              }
-                            }
-                          }
+                            "min_inclusive": -128,
+                            "max_exclusive": -40,
+                            "when_in_range": {
+                              "type": "minecraft:min",
+                              "left": "minecraft:overworld/final_density",
+                              "right": "bugsbugsandmorebugs:underhang_underside"
+                            },
+                            "when_out_of_range": "minecraft:overworld/final_density"
+                          },
+                          "right": "bugsbugsandmorebugs:sundering_barrier"
                         },
                         "right": {
-                          "type": "minecraft:mul",
+                          "type": "minecraft:sub",
                           "left": {
-                            "type": "minecraft:sub",
-                            "left": 1,
-                            "right": {
+                            "type": "minecraft:mul",
+                            "left": {
                               "type": "minecraft:clamp",
                               "input": {
                                 "type": "minecraft:mul",
@@ -901,13 +854,68 @@
                               },
                               "min": 0,
                               "max": 1
+                            },
+                            "right": {
+                              "type": "minecraft:add",
+                              "left": {
+                                "type": "minecraft:gradient",
+                                "axis": "y",
+                                "from_coordinate": 49,
+                                "from_value": 3,
+                                "to_coordinate": 124,
+                                "to_value": -2.9
+                              },
+                              "right": {
+                                "type": "minecraft:add",
+                                "left": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:noise",
+                                    "noise": "minecraft:surface",
+                                    "xz_scale": 0.025,
+                                    "y_scale": 0
+                                  },
+                                  "right": 2.55
+                                },
+                                "right": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:noise",
+                                    "noise": "minecraft:surface_secondary",
+                                    "xz_scale": 0.085,
+                                    "y_scale": 0
+                                  },
+                                  "right": 1.1
+                                }
+                              }
                             }
                           },
-                          "right": 4.5
+                          "right": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:sub",
+                              "left": 1,
+                              "right": {
+                                "type": "minecraft:clamp",
+                                "input": {
+                                  "type": "minecraft:mul",
+                                  "left": {
+                                    "type": "minecraft:add",
+                                    "left": "minecraft:overworld/continents",
+                                    "right": 0.07
+                                  },
+                                  "right": 6.5
+                                },
+                                "min": 0,
+                                "max": 1
+                              }
+                            },
+                            "right": 4.5
+                          }
                         }
-                      }
-                    },
-                    "right": "bugsbugsandmorebugs:stone_forest_roof"
+                      },
+                      "right": "bugsbugsandmorebugs:stone_forest_roof"
+                    }
                   },
                   "right": {
                     "type": "minecraft:gradient",
@@ -1169,17 +1177,17 @@
                 }
               }
             },
-            "right": {
-              "type": "minecraft:gradient",
-              "axis": "y",
-              "from_coordinate": 43,
-              "from_value": 3.1,
-              "to_coordinate": 56,
-              "to_value": -3.9
-            }
+            "right": "bugsbugsandmorebugs:volcanic_massif_density"
+          },
+          "right": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": 48,
+            "from_value": 3.5,
+            "to_coordinate": 58,
+            "to_value": -3.5
           }
-        },
-        "right": "bugsbugsandmorebugs:volcanic_massif_density"
+        }
       },
       "when_out_of_range": {
         "type": "minecraft:max",
