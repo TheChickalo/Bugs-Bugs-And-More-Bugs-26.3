@@ -33,6 +33,10 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GLOWSHROOM_DENSE_PLACED_KEY = registerKey("glowshroom_dense_placed");
     public static final ResourceKey<PlacedFeature> HUGE_GLOWSHROOM_GROVE_PLACED_KEY = registerKey("huge_glowshroom_grove_placed");
     public static final ResourceKey<PlacedFeature> HINOKI_BOULDER_PLACED_KEY = registerKey("hinoki_boulder_placed");
+    public static final ResourceKey<PlacedFeature> HINOKI_MOSS_PATCH_PLACED_KEY = registerKey("hinoki_moss_patch_placed");
+    public static final ResourceKey<PlacedFeature> VOLCANIC_VENT_PEAK_PLACED_KEY = registerKey("volcanic_vent_peak_placed");
+    public static final ResourceKey<PlacedFeature> VOLCANIC_VENT_FOOTHILLS_PLACED_KEY = registerKey("volcanic_vent_foothills_placed");
+    public static final ResourceKey<PlacedFeature> ALPINE_SNOW_PLACED_KEY = registerKey("alpine_snow_placed");
     public static final ResourceKey<PlacedFeature> VOLCANIC_MAGMA_PATCH_PLACED_KEY = registerKey("volcanic_magma_patch_placed");
 
     public static final ResourceKey<PlacedFeature> GINKGO_SMALL_PLACED_KEY = registerKey("ginkgo_small_placed");
@@ -116,11 +120,27 @@ public class ModPlacedFeatures {
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, VOLCANIC_MAGMA_PATCH_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.VOLCANIC_MAGMA_PATCH_KEY),
-                List.of(RarityFilter.onAverageOnceEvery(12), InSquarePlacement.spread(),
+                List.of(RarityFilter.onAverageOnceEvery(8), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, HINOKI_BOULDER_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.HINOKI_BOULDER_KEY),
                 List.of(RarityFilter.onAverageOnceEvery(2), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, HINOKI_MOSS_PATCH_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.HINOKI_MOSS_PATCH_KEY),
+                List.of(CountPlacement.of(3), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, VOLCANIC_VENT_PEAK_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.VOLCANIC_VENT_PEAK_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, VOLCANIC_VENT_FOOTHILLS_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.VOLCANIC_VENT_FOOTHILLS_KEY),
+                List.of(RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, ALPINE_SNOW_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.ALPINE_SNOW_KEY),
+                List.of(CountPlacement.of(1), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
 
