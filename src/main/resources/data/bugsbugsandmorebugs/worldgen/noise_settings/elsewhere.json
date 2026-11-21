@@ -7,8 +7,9 @@
       "y_scale": 0.5
     },
     "exclusion": {
-      "type": "minecraft:max",
-      "left": {
+      "type": "minecraft:lerp",
+      "alpha": "bugsbugsandmorebugs:lake_basin_region",
+      "first": {
         "type": "minecraft:max",
         "left": {
           "type": "minecraft:max",
@@ -47,11 +48,7 @@
           "to_value": -6
         }
       },
-      "right": {
-        "type": "minecraft:sub",
-        "left": "bugsbugsandmorebugs:lake_basin_region",
-        "right": 0.55
-      }
+      "second": -1
     },
     "fluid_level_floodedness": {
       "type": "minecraft:noise",
@@ -66,7 +63,12 @@
       "y_scale": 0.7142857142857143
     },
     "lava": -1,
-    "surface_level": "minecraft:overworld/preliminary_surface_level"
+    "surface_level": {
+      "type": "minecraft:lerp",
+      "alpha": "bugsbugsandmorebugs:lake_basin_region",
+      "first": "minecraft:overworld/preliminary_surface_level",
+      "second": 60
+    }
   },
   "debug_functions": [
     {

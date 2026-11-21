@@ -207,6 +207,9 @@ public class ModOverworldBiomes {
                 .setAttribute(
                         EnvironmentAttributes.FOG_COLOR,
                         ARGB.vector3fFromRGB24(0xD5E5DD))
+                .setAttribute(EnvironmentAttributes.CLOUD_HEIGHT, 84.0F)
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
+                        AmbientParticle.of(ParticleTypes.CLOUD, 0.006F))
                 .build();
     }
 

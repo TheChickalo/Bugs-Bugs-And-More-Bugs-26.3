@@ -54,7 +54,7 @@
       "type": "minecraft:mul",
       "left": {
         "type": "minecraft:sub",
-        "left": 0.3,
+        "left": 0.42,
         "right": {
           "type": "minecraft:noise",
           "noise": "minecraft:surface_secondary",
