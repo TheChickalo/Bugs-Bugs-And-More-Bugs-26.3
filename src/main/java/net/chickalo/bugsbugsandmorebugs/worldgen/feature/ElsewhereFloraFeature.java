@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -26,12 +27,13 @@ public record ElsewhereFloraFeature() implements Feature {
             int z=origin.getZ()+random.nextInt(13)-6;
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE,x,z);
             BlockPos pos=new BlockPos(x,y,z);
-            boolean ginkgo=level.getBiome(pos).is(ModBiomes.GINKGO_FOREST);
-            boolean bamboo=level.getBiome(pos).is(ModBiomes.BAMBOO_LOWLANDS);
-            boolean peak=level.getBiome(pos).is(ModBiomes.VOLCANIC_PEAK);
-            boolean plains=level.getBiome(pos).is(ModBiomes.GRASSY_PLAINS);
-            boolean limestone=level.getBiome(pos).is(ModBiomes.STONE_FOREST);
-            boolean wet=level.getBiome(pos).is(ModBiomes.LAKE)||level.getBiome(pos).is(ModBiomes.ESTUARY)||level.getBiome(pos).is(ModBiomes.RIVER);
+            var biome = level.getBiome(pos);
+            boolean ginkgo=ModBiomeFamilies.ginkgo(biome);
+            boolean bamboo=ModBiomeFamilies.bamboo(biome);
+            boolean peak=ModBiomeFamilies.volcanic(biome);
+            boolean plains=biome.is(ModBiomes.GRASSY_PLAINS);
+            boolean limestone=ModBiomeFamilies.limestone(biome);
+            boolean wet=ModBiomeFamilies.wetland(biome);
             if(!ginkgo&&!bamboo&&!peak&&!plains&&!wet&&!limestone)continue;
             if(peak && y>235)continue;
             if(!level.getFluidState(pos.below()).isEmpty() && level.getFluidState(pos.below()).is(Fluids.WATER)){

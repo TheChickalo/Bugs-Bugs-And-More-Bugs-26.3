@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.ThreeBlockWetlandPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -23,10 +24,7 @@ public record WetlandReedsFeature() implements Feature {
             int z=origin.getZ()+random.nextInt(11)-5;
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE,x,z)-1;
             BlockPos base=new BlockPos(x,y,z);
-            if(!level.getBiome(base).is(ModBiomes.RIVER) && !level.getBiome(base).is(ModBiomes.LAKE)
-                && !level.getBiome(base).is(ModBiomes.ESTUARY)
-                && !level.getBiome(base).is(ModBiomes.BAMBOO_LOWLANDS)
-                && !level.getBiome(base).is(ModBiomes.STONE_FOREST)) continue;
+            if (!ModBiomeFamilies.wetlandReeds(level.getBiome(base))) continue;
             Block target=random.nextFloat()<0.44F?ModBlocks.CATTAILS:ModBlocks.REEDS;
             if(target instanceof ThreeBlockWetlandPlantBlock plant && plant.placeNaturally(level,base))placed++;
         }

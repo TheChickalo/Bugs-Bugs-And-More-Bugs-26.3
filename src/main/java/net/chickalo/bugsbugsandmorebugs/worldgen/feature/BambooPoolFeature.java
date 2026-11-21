@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -25,11 +26,11 @@ public record BambooPoolFeature() implements Feature {
         for (int dx=-radius-1;dx<=radius+1;dx++) for (int dz=-radius-1;dz<=radius+1;dz++) {
             if (dx*dx+dz*dz>(radius+1)*(radius+1)) continue;
             BlockPos p = new BlockPos(cx+dx,y,cz+dz);
-            if (!level.getBiome(p).is(ModBiomes.BAMBOO_LOWLANDS)) return false;
+            if (!ModBiomeFamilies.bamboo(level.getBiome(p))) return false;
             int gy=level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,cx+dx,cz+dz)-1;
             if (gy!=y) return false;
             BlockState state=level.getBlockState(p);
-            if (!(state.is(ModBlocks.GRASSY_LOAM)||state.is(ModBlocks.LOAM)||state.is(Blocks.PODZOL)||state.is(Blocks.COARSE_DIRT))) return false;
+            if (!(state.is(ModBlocks.GRASSY_LOAM)||state.is(ModBlocks.LOAM)||state.is(Blocks.PODZOL)||state.is(Blocks.COARSE_DIRT)||state.is(Blocks.MUD))) return false;
             if (!level.getFluidState(p.above()).isEmpty()) return false;
         }
         boolean changed=false;

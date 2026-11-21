@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -91,10 +92,9 @@ public record KarstGroundPatchFeature() implements Feature {
                 BlockPos ground = top.below();
 
                 // Do not touch caves, water, outcrops, or any other biome.
-                if (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)
-                        && !level.getBiome(ground).is(ModBiomes.STONE_FOREST)) continue;
+                if (!ModBiomeFamilies.karstGround(level.getBiome(ground))) continue;
                 BlockState original = level.getBlockState(ground);
-                boolean wetStoneBank = level.getBiome(ground).is(ModBiomes.STONE_FOREST)
+                boolean wetStoneBank = ModBiomeFamilies.karstWetBank(level.getBiome(ground))
                         && topY <= 76 && touchesShallowWater(level, top);
                 boolean normalTopsoil = net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(original, Blocks.GRASS_BLOCK);
                 if (!normalTopsoil && !(wetStoneBank && canReplaceBankSurface(original))) continue;

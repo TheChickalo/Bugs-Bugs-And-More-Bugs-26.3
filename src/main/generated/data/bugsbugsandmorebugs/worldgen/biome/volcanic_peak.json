@@ -19,7 +19,9 @@
   "features": [
     [],
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:volcanic_magma_patch_placed"
+    ],
     [],
     [],
     [],
