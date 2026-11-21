@@ -208,8 +208,6 @@ public class ModOverworldBiomes {
                 .setAttribute(
                         EnvironmentAttributes.FOG_COLOR,
                         ARGB.vector3fFromRGB24(0xD5E5DD))
-                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
-                        AmbientParticle.of(ParticleTypes.CLOUD, 0.006F))
                 .build();
     }
 
@@ -319,16 +317,6 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return landscapeBiome(generation,
                 0.66F, 0.70F, 0x689F8C, 0xA1CDD8, 0xC8D7D0);
-    }
-    public static Biome lake(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
-        var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        // The large lake basin is cut into base terrain, not assembled from tiny ponds.
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        return landscapeBiome(generation,
-                0.61F, 0.76F, 0x598A79, 0xA0D1DA, 0xC4D4CF);
     }
     public static Biome estuary(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
@@ -513,10 +501,7 @@ public class ModOverworldBiomes {
                 .generationSettings(withLavaCleanup(generation).build())
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(sky))
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(fog));
-        // A single cloud layer belongs to the dimension, never to individual biomes.
-        if (cloudHeight > 0)
-            biome.setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
-                    AmbientParticle.of(ParticleTypes.CLOUD, 0.004F));
+        // Mist is expressed through fog color only: no screen-filling cloud sprites.
         return biome.build();
     }
 

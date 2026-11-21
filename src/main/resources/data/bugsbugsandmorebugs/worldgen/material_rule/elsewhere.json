@@ -88,7 +88,7 @@
                   "if_true": {
                     "type": "minecraft:y_above",
                     "anchor": {
-                      "absolute": 266
+                      "absolute": 245
                     },
                     "add_stone_depth": false,
                     "surface_depth_multiplier": 0
@@ -104,7 +104,7 @@
                     "type": "minecraft:noise_threshold",
                     "noise": "minecraft:surface_secondary",
                     "min_threshold": -1,
-                    "max_threshold": -0.65
+                    "max_threshold": -0.76
                   },
                   "then_run": {
                     "type": "minecraft:block",
@@ -117,24 +117,11 @@
                     "type": "minecraft:noise_threshold",
                     "noise": "minecraft:surface",
                     "min_threshold": -1,
-                    "max_threshold": -0.22
+                    "max_threshold": -0.44
                   },
                   "then_run": {
                     "type": "minecraft:block",
                     "result_state": "bugsbugsandmorebugs:dacite"
-                  }
-                },
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface",
-                    "min_threshold": 0.52,
-                    "max_threshold": 1
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "bugsbugsandmorebugs:ashstone"
                   }
                 },
                 {
@@ -150,19 +137,6 @@
             "then_run": {
               "type": "minecraft:sequence",
               "sequence": [
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface",
-                    "min_threshold": -1,
-                    "max_threshold": -0.25
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "bugsbugsandmorebugs:dacite"
-                  }
-                },
                 {
                   "type": "minecraft:block",
                   "result_state": "bugsbugsandmorebugs:rhyolite"
@@ -249,7 +223,7 @@
                   },
                   "then_run": {
                     "type": "minecraft:block",
-                    "result_state": "bugsbugsandmorebugs:ashstone"
+                    "result_state": "bugsbugsandmorebugs:dacite"
                   }
                 },
                 {
@@ -786,72 +760,6 @@
           "then_run": {
             "type": "minecraft:block",
             "result_state": "bugsbugsandmorebugs:chert"
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:mossy_hinoki_grove"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": "minecraft:on_floor",
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:noise_threshold",
-            "noise": "minecraft:surface_secondary",
-            "min_threshold": -1,
-            "max_threshold": 0.24
-          },
-          "then_run": {
-            "type": "minecraft:block",
-            "result_state": "bugsbugsandmorebugs:mossy_rhyolite"
-          }
-        }
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:mossy_hinoki_grove"
-      },
-      "then_run": {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:noise_threshold",
-          "noise": "minecraft:surface_secondary",
-          "min_threshold": 0.77,
-          "max_threshold": 1
-        },
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": "minecraft:on_floor",
-          "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:noise_threshold",
-                  "noise": "minecraft:surface_secondary",
-                  "min_threshold": -1,
-                  "max_threshold": 0
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": "bugsbugsandmorebugs:serpentinite"
-                }
-              },
-              {
-                "type": "minecraft:block",
-                "result_state": "bugsbugsandmorebugs:dacite"
-              }
-            ]
           }
         }
       }
@@ -1447,65 +1355,6 @@
                   "result_state": "minecraft:mud"
                 }
               ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "minecraft:condition",
-      "if_true": {
-        "type": "minecraft:biome",
-        "biome_is": "bugsbugsandmorebugs:lake"
-      },
-      "then_run": {
-        "type": "minecraft:sequence",
-        "sequence": [
-          {
-            "type": "minecraft:condition",
-            "if_true": "minecraft:on_floor",
-            "then_run": {
-              "type": "minecraft:sequence",
-              "sequence": [
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface_secondary",
-                    "min_threshold": -1,
-                    "max_threshold": -0.35
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "minecraft:clay"
-                  }
-                },
-                {
-                  "type": "minecraft:condition",
-                  "if_true": {
-                    "type": "minecraft:noise_threshold",
-                    "noise": "minecraft:surface_secondary",
-                    "min_threshold": 0.4,
-                    "max_threshold": 1
-                  },
-                  "then_run": {
-                    "type": "minecraft:block",
-                    "result_state": "minecraft:gravel"
-                  }
-                },
-                {
-                  "type": "minecraft:block",
-                  "result_state": "minecraft:mud"
-                }
-              ]
-            }
-          },
-          {
-            "type": "minecraft:condition",
-            "if_true": "minecraft:under_floor",
-            "then_run": {
-              "type": "minecraft:block",
-              "result_state": "minecraft:clay"
             }
           }
         ]

@@ -16,7 +16,6 @@ public class ModBiomes {
     public static final ResourceKey<Biome> GRASSY_PLAINS = registerBiomeKey("grassy_plains");
     public static final ResourceKey<Biome> OCEAN = registerBiomeKey("ocean");
     public static final ResourceKey<Biome> RIVER = registerBiomeKey("river");
-    public static final ResourceKey<Biome> LAKE = registerBiomeKey("lake");
     public static final ResourceKey<Biome> ESTUARY = registerBiomeKey("estuary");
 
     public static final ResourceKey<Biome> UNDERHANG = registerBiomeKey("underhang");
@@ -70,7 +69,6 @@ public class ModBiomes {
         register(context, GRASSY_PLAINS, ModOverworldBiomes.grassyPlains(placedFeatures, carvers));
         register(context, OCEAN, ModOverworldBiomes.ocean(placedFeatures, carvers));
         register(context, RIVER, ModOverworldBiomes.river(placedFeatures, carvers));
-        register(context, LAKE, ModOverworldBiomes.lake(placedFeatures, carvers));
         register(context, ESTUARY, ModOverworldBiomes.estuary(placedFeatures, carvers));
         register(context, UNDERHANG, ModOverworldBiomes.underhang(placedFeatures, carvers));
         register(context, MAPLE_FOREST , ModOverworldBiomes.mapleForest(placedFeatures, carvers));
