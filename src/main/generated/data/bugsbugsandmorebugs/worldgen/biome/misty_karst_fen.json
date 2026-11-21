@@ -9,7 +9,6 @@
     },
     "minecraft:visual/fog_color": "#bacdc6",
     "minecraft:visual/sky_color": "#98ccd6",
-    "minecraft:visual/cloud_height": 84,
     "minecraft:visual/ambient_particles": [
       {
         "particle": {

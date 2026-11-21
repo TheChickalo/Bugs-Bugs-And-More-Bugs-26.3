@@ -805,11 +805,11 @@
             "type": "minecraft:noise_threshold",
             "noise": "minecraft:surface_secondary",
             "min_threshold": -1,
-            "max_threshold": -0.62
+            "max_threshold": 0.24
           },
           "then_run": {
             "type": "minecraft:block",
-            "result_state": "minecraft:moss_block"
+            "result_state": "bugsbugsandmorebugs:mossy_rhyolite"
           }
         }
       }

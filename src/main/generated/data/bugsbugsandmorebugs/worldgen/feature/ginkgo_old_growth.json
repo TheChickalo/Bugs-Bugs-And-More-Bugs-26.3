@@ -8,7 +8,7 @@
     "type": "minecraft:blob_foliage_placer",
     "height": 6,
     "offset": 0,
-    "radius": 4
+    "radius": 3
   },
   "foliage_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_leaves",
@@ -25,10 +25,11 @@
     "upper_size": 2
   },
   "trunk_placer": {
-    "type": "minecraft:straight_trunk_placer",
+    "type": "bugsbugsandmorebugs:ginkgo_trunk_placer",
     "base_height": 18,
     "height_rand_a": 3,
-    "height_rand_b": 4
+    "height_rand_b": 4,
+    "thick": true
   },
   "trunk_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_log",
