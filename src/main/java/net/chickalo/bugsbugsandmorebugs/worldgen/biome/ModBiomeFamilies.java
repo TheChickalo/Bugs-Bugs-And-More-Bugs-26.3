@@ -36,7 +36,6 @@ public final class ModBiomeFamilies {
 
     public static boolean wetland(Holder<Biome> biome) {
         return biome.is(ModBiomes.RIVER)
-                || biome.is(ModBiomes.LAKE)
                 || biome.is(ModBiomes.ESTUARY)
                 || biome.is(ModBiomes.BAMBOO_MARSH)
                 || biome.is(ModBiomes.MISTY_KARST_FEN);

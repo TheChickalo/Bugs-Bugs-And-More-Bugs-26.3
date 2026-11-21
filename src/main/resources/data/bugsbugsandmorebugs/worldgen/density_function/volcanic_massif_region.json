@@ -11,7 +11,7 @@
           "left": {
             "type": "minecraft:sub",
             "left": "minecraft:overworld/continents",
-            "right": 0.44
+            "right": 0.39
           },
           "right": 2.35
         },
@@ -24,7 +24,7 @@
           "type": "minecraft:mul",
           "left": {
             "type": "minecraft:sub",
-            "left": -0.18,
+            "left": -0.11,
             "right": "minecraft:overworld/erosion"
           },
           "right": 2.65
@@ -39,7 +39,7 @@
         "type": "minecraft:mul",
         "left": {
           "type": "minecraft:sub",
-          "left": -0.24,
+          "left": -0.16,
           "right": "minecraft:overworld/temperature"
         },
         "right": 2.8

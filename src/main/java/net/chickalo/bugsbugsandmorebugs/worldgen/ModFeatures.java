@@ -50,6 +50,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> KARST_ANIMAL_TRAIL_KEY = registerKey("karst_animal_trail");
 
 
+    public static final ResourceKey<Feature> HINOKI_BOULDER_KEY = registerKey("hinoki_boulder");
     public static final ResourceKey<Feature> VOLCANIC_MAGMA_PATCH_KEY = registerKey("volcanic_magma_patch");
 
     public static final ResourceKey<Feature> STONE_FOREST_SPIRES_KEY = registerKey("stone_forest_spires");
@@ -58,6 +59,7 @@ public class ModFeatures {
     public static void bootstrap(BootstrapContext<Feature> context) {
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
         context.register(VOLCANIC_MAGMA_PATCH_KEY, new VolcanicMagmaPatchFeature());
+        context.register(HINOKI_BOULDER_KEY, new HinokiBoulderFeature());
         context.register(LAVA_CLEANUP_KEY, new ElsewhereLavaCleanupFeature());
         context.register(BAMBOO_POOLS_KEY, new BambooPoolFeature());
         context.register(WETLAND_REEDS_KEY, new WetlandReedsFeature());
@@ -66,9 +68,9 @@ public class ModFeatures {
         // Small Ginkgo adds an understory height tier without inventing new textures.
         context.register(GINKGO_SMALL_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new StraightTrunkPlacer(5, 2, 2),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoTrunkPlacer(5, 2, 2, false),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer(ConstantInt.of(1), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -76,7 +78,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoTrunkPlacer(12, 3, 3, false),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 5),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
@@ -84,7 +86,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
                 new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoTrunkPlacer(18, 3, 4, true),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 6),
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.GinkgoFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 7),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());

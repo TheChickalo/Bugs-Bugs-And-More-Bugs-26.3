@@ -5,10 +5,10 @@
   },
   "decorators": [],
   "foliage_placer": {
-    "type": "minecraft:blob_foliage_placer",
-    "height": 3,
+    "type": "bugsbugsandmorebugs:ginkgo_foliage_placer",
+    "radius": 1,
     "offset": 0,
-    "radius": 2
+    "canopy_layers": 5
   },
   "foliage_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_leaves",
@@ -25,10 +25,11 @@
     "upper_size": 2
   },
   "trunk_placer": {
-    "type": "minecraft:straight_trunk_placer",
+    "type": "bugsbugsandmorebugs:ginkgo_trunk_placer",
     "base_height": 5,
     "height_rand_a": 2,
-    "height_rand_b": 2
+    "height_rand_b": 2,
+    "thick": false
   },
   "trunk_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_log",
