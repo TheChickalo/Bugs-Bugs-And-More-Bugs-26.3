@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -272,8 +273,7 @@ public record KarstOutcropFeature(
                 || !isNaturalGround(level.getBlockState(ground.below()))
                 || !level.getFluidState(ground).isEmpty()
                 || !level.getFluidState(ground.above()).isEmpty()
-                || (!level.getBiome(ground).is(ModBiomes.HIGHLAND_KARST)
-                        && !level.getBiome(ground).is(ModBiomes.STONE_FOREST))) {
+                || !ModBiomeFamilies.rockOutcrop(level.getBiome(ground))) {
             return null;
         }
         return ground;
