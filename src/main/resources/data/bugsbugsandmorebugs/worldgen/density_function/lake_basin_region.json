@@ -49,22 +49,59 @@
     }
   },
   "right": {
-    "type": "minecraft:clamp",
-    "input": {
+    "type": "minecraft:max",
+    "left": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:sub",
+          "left": 0.42,
+          "right": {
+            "type": "minecraft:noise",
+            "noise": "minecraft:surface_secondary",
+            "xz_scale": 0.004,
+            "y_scale": 0
+          }
+        },
+        "right": 8
+      },
+      "min": 0,
+      "max": 1
+    },
+    "right": {
       "type": "minecraft:mul",
       "left": {
-        "type": "minecraft:sub",
-        "left": 0.42,
-        "right": {
-          "type": "minecraft:noise",
-          "noise": "minecraft:surface_secondary",
-          "xz_scale": 0.004,
-          "y_scale": 0
-        }
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": "minecraft:overworld/vegetation",
+            "right": 0.17
+          },
+          "right": 6
+        },
+        "min": 0,
+        "max": 1
       },
-      "right": 8
-    },
-    "min": 0,
-    "max": 1
+      "right": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": {
+              "type": "minecraft:abs",
+              "input": "minecraft:overworld/ridges"
+            },
+            "right": 0.11
+          },
+          "right": 9.5
+        },
+        "min": 0,
+        "max": 1
+      }
+    }
   }
 }

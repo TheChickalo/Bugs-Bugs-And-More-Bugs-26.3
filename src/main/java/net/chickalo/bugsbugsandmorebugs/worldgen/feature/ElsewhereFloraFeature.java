@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
+import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -43,6 +44,12 @@ public record ElsewhereFloraFeature() implements Feature {
                 continue;
             }
             if(!level.isEmptyBlock(pos)||!level.getFluidState(pos).isEmpty())continue;
+            // Short native bamboo grows only on damp, shallow Stone Forest banks.
+            if(limestone && y<=84 && random.nextInt(3)==0 && nearWater(level,pos)) {
+                VariableHeightPlantBlock bamboo=ModBlocks.DWARF_BAMBOO;
+                if(bamboo.placeAtHeight(level,pos,1+random.nextInt(3)))changed++;
+                continue;
+            }
             Block plant;
             if(peak)plant=ModBlocks.ALPINE_GRASS;
             else if(ginkgo && random.nextInt(3)==0)plant=ModBlocks.GINKGO_FALLEN_LEAVES;
@@ -57,5 +64,17 @@ public record ElsewhereFloraFeature() implements Feature {
             if(state.canSurvive(level,pos) && level.setBlock(pos,state,2))changed++;
         }
         return changed>0;
+    }
+
+    private static boolean nearWater(WorldGenLevel level, BlockPos pos) {
+        for(int dx=-2;dx<=2;dx++) {
+            for(int dz=-2;dz<=2;dz++) {
+                if(Math.abs(dx)+Math.abs(dz)>3)continue;
+                BlockPos neighbor=pos.offset(dx,0,dz);
+                if(level.getBlockState(neighbor).is(Blocks.WATER)
+                        || level.getBlockState(neighbor.below()).is(Blocks.WATER))return true;
+            }
+        }
+        return false;
     }
 }
