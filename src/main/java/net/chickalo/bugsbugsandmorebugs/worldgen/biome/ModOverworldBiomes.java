@@ -367,10 +367,10 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         addVegetation(generation,
                 ModPlacedFeatures.GINKGO_ANCIENT_STAND_PLACED_KEY,
-                ModPlacedFeatures.GINKGO_MIXED_PLACED_KEY,
-                ModPlacedFeatures.ELSEWHERE_FLORA_DENSE_PLACED_KEY);
+                ModPlacedFeatures.GINKGO_MIXED_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_DENSE_PLACED_KEY);
         return minorBiome(generation, 0.65F, 0.7F,
                 0x667F66, 0xB5AF62, 0xD2B76E, 0xA7D6D6, 0xCDC5A3, 0);
     }
@@ -379,10 +379,10 @@ public class ModOverworldBiomes {
                                               HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         addVegetation(generation,
-                ModPlacedFeatures.GINKGO_SCATTERED_PLACED_KEY,
-                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+                ModPlacedFeatures.GINKGO_SCATTERED_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultFlowers(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.75F, 0.42F,
                 0x739382, 0xB3BA71, 0xC5AB62, 0xA2D5D3, 0xD5D8B4, 0);
     }
@@ -393,10 +393,10 @@ public class ModOverworldBiomes {
         addVegetation(generation,
                 ModPlacedFeatures.MAPLE_SPARSE_PLACED_KEY,
                 ModPlacedFeatures.GINKGO_MIXED_PLACED_KEY,
-                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         ModBiomeVegetation.addBerryBushes(generation);
         return minorBiome(generation, 0.69F, 0.74F,
                 0x568C79, 0x98B86B, 0xB5AC62, 0x92D5D9, 0xCDD6C1, 0);
@@ -406,8 +406,8 @@ public class ModOverworldBiomes {
                                          HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         addVegetation(generation,
-                ModPlacedFeatures.HINOKI_TREE_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY,
+                ModPlacedFeatures.HINOKI_TREE_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
         return minorBiome(generation, 0.32F, 0.88F,
@@ -432,10 +432,10 @@ public class ModOverworldBiomes {
                                                    HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         addVegetation(generation,
-                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY,
-                ModPlacedFeatures.HIGHLAND_MEADOW_LUSH_PLACED_KEY);
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultFlowers(generation);
+        addVegetation(generation, ModPlacedFeatures.HIGHLAND_MEADOW_LUSH_PLACED_KEY);
         return minorBiome(generation, 0.63F, 0.52F,
                 0x57A0A0, 0x96C86C, 0x7AA967, 0x8ACFEF, 0xD4E2D7, 0);
     }
@@ -446,10 +446,11 @@ public class ModOverworldBiomes {
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
                 ModPlacedFeatures.KARST_OUTCROP_PLACED_KEY);
         addVegetation(generation,
-                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY,
+                ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        addVegetation(generation,
                 ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        BiomeDefaultFeatures.addPlainGrass(generation);
         return minorBiome(generation, 0.68F, 0.37F,
                 0x709F9B, 0x9AAC72, 0x889D6F, 0x95CFDB, 0xD4DDD3, 0);
     }

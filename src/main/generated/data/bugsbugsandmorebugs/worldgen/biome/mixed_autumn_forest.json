@@ -32,11 +32,11 @@
     [
       "bugsbugsandmorebugs:maple_sparse_placed",
       "bugsbugsandmorebugs:ginkgo_mixed_placed",
-      "bugsbugsandmorebugs:elsewhere_flora_placed",
       "bugsbugsandmorebugs:hinoki_fern_placed",
       "minecraft:patch_tall_grass_2",
       "minecraft:brown_mushroom_normal",
       "minecraft:red_mushroom_normal",
+      "bugsbugsandmorebugs:elsewhere_flora_placed",
       "bugsbugsandmorebugs:haskap_bush_placed",
       "bugsbugsandmorebugs:barberry_bush_placed"
     ],

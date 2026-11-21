@@ -2,6 +2,7 @@ name: Elsewhere generation and compile
 on:
   push:
     branches:
+      - feature/elsewhere-minor-biomes-magma
       - fix/elsewhere-landscape-overhaul-20261119
       - fix/elsewhere-hydrology-eroded-plateau-20261119
       - fix/elsewhere-surface-condition-26-3-20261119
@@ -90,6 +91,8 @@ jobs:
           assert any('bugsbugsandmorebugs:wetland_reeds_placed' in section for section in stone_biome['features'])
           print('Landscape and foliage invariants passed')
           PY
+      - name: Check biome feature-order DAG
+        run: python3 scripts/check_biome_feature_order.py
       - name: Generate datapack and compile
         run: |
           chmod +x ./gradlew
