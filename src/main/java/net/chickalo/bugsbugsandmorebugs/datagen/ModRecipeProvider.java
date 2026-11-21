@@ -96,17 +96,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 bricksBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AMPHIBOLITE_BRICKS, Ingredient.of(ModBlocks.POLISHED_AMPHIBOLITE));
                 chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_AMPHIBOLITE, Ingredient.of(ModBlocks.AMPHIBOLITE_SLAB));
                 chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CHISELED_AMPHIBOLITE_BRICKS, Ingredient.of(ModBlocks.AMPHIBOLITE_BRICK_SLAB));
-                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TEMP_PORTAL)
-                        .pattern("RRR")
-                        .pattern("RRR")
-                        .pattern("RRR")
-                        .define('R', Items.DIRT)
-                        .unlockedBy(
-                                getHasName(Items.DIRT),
-                                has(Items.DIRT)
-                        )
-                        .save(output);
-
 
                 shaped(RecipeCategory.COMBAT, ModItems.REINFORCED_SHIELD)
                         .pattern("RRR")

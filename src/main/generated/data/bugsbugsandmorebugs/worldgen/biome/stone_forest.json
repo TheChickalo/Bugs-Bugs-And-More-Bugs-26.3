@@ -7,9 +7,6 @@
       },
       "modifier": "overlay"
     },
-    "minecraft:visual/fog_color": "#d5e5dd",
-    "minecraft:visual/sky_color": "#8acfef",
-    "minecraft:visual/cloud_height": 84,
     "minecraft:visual/ambient_particles": [
       {
         "particle": {
@@ -17,7 +14,10 @@
         },
         "probability": 0.006
       }
-    ]
+    ],
+    "minecraft:visual/cloud_height": 84.0,
+    "minecraft:visual/fog_color": "#d5e5dd",
+    "minecraft:visual/sky_color": "#8acfef"
   },
   "carvers": [],
   "downfall": 0.49,
