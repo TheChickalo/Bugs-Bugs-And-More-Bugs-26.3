@@ -18,26 +18,6 @@
               "weight": 10
             }
           ],
-          "creature": [
-            {
-              "type": "minecraft:fox",
-              "count": {
-                "type": "minecraft:uniform",
-                "max_inclusive": 3,
-                "min_inclusive": 2
-              },
-              "weight": 20
-            },
-            {
-              "type": "minecraft:rabbit",
-              "count": {
-                "type": "minecraft:uniform",
-                "max_inclusive": 3,
-                "min_inclusive": 2
-              },
-              "weight": 20
-            }
-          ],
           "monster": [
             {
               "type": "minecraft:spider",

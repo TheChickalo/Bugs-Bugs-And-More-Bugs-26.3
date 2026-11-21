@@ -7,14 +7,14 @@
       },
       "modifier": "overlay"
     },
-    "minecraft:visual/fog_color": "#b8c4cf",
-    "minecraft:visual/sky_color": "#a9c9d9"
+    "minecraft:visual/fog_color": "#c8d4de",
+    "minecraft:visual/sky_color": "#99b8d2"
   },
   "carvers": [],
   "downfall": 0.28,
   "effects": {
-    "water_color": "#6f9db4",
-    "grass_color": "#b8c6c5"
+    "grass_color": "#b8c6c5",
+    "water_color": "#6f9db4"
   },
   "features": [
     [],

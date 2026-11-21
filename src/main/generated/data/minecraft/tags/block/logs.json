@@ -1,10 +1,10 @@
 {
   "values": [
     "#bugsbugsandmorebugs:ginkgo_logs",
-    "#bugsbugsandmorebugs:maple_logs",
     "bugsbugsandmorebugs:hinoki_log",
     "bugsbugsandmorebugs:hinoki_wood",
     "bugsbugsandmorebugs:stripped_hinoki_log",
-    "bugsbugsandmorebugs:stripped_hinoki_wood"
+    "bugsbugsandmorebugs:stripped_hinoki_wood",
+    "#bugsbugsandmorebugs:maple_logs"
   ]
 }

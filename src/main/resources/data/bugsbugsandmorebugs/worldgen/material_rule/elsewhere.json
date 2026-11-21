@@ -172,7 +172,9 @@
           },
           {
             "type": "minecraft:condition",
-            "if_true": "minecraft:above_preliminary_surface",
+            "if_true": {
+              "type": "minecraft:above_preliminary_surface"
+            },
             "then_run": {
               "type": "minecraft:block",
               "result_state": "bugsbugsandmorebugs:rhyolite"

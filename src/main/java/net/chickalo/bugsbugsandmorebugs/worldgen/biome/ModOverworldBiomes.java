@@ -26,8 +26,6 @@ public class ModOverworldBiomes {
     public static Biome mapleForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<WorldCarver> carverGetter) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
-        spawnBuilder.addSpawn(EntityTypes.FOX, 20, UniformInt.of(2, 3));
-        spawnBuilder.addSpawn(EntityTypes.RABBIT, 20, UniformInt.of(2, 3));
 
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
@@ -164,33 +162,54 @@ public class ModOverworldBiomes {
     // Maple's tree feature until their own wood, leaves, and saplings exist.
     // No vanilla passive or hostile mobs are added in these four biomes.
     // ================================================================
-    public static Biome stoneForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+
+    public static Biome stoneForest(
+            HolderGetter<PlacedFeature> features,
+            HolderGetter<WorldCarver> carvers) {
+
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        // Towers must emerge from eroding the plateau itself, not from placed columns.
+
+        // Karst ground vegetation.
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY
         );
+
         generation.addFeature(
                 GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HIGHLAND_MEADOW_PATCH_PLACED_KEY
         );
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        // Sparse shoreline reeds only where the gorge floor is actually flooded.
-        generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
-                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY);
+
+        // Wetland reeds must precede Elsewhere flora.
+        generation.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.WETLAND_REEDS_PLACED_KEY
+        );
+
+        generation.addFeature(
+                GenerationStep.Decoration.VEGETAL_DECORATION,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY
+        );
 
         return new Biome.BiomeBuilder()
-                .hasPrecipitation(true).temperature(0.62F).downfall(0.49F)
+                .hasPrecipitation(true)
+                .temperature(0.62F)
+                .downfall(0.49F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
-                        .waterColor(0x4B9A95).grassColorOverride(0x8AAE65).build())
+                        .waterColor(0x4B9A95)
+                        .grassColorOverride(0x8AAE65)
+                        .build())
                 .mobSpawnSettings(new MobSpawnSettings.Builder().build())
                 .generationSettings(withLavaCleanup(generation).build())
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(0x8ACFEF))
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xD5E5DD))
+                .setAttribute(
+                        EnvironmentAttributes.SKY_COLOR,
+                        ARGB.vector3fFromRGB24(0x8ACFEF))
+                .setAttribute(
+                        EnvironmentAttributes.FOG_COLOR,
+                        ARGB.vector3fFromRGB24(0xD5E5DD))
                 .build();
     }
+
 
     public static Biome ginkgoForest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);

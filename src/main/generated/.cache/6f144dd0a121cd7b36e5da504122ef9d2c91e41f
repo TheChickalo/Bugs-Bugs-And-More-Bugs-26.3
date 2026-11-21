@@ -7,13 +7,13 @@ c5af47d9068b63d3d8825f55329f19f2df3a435c data/minecraft/tags/block/dirt.json
 676af57e55e881b72296117baff69ebb87d4e4db data/minecraft/tags/block/fence_gates.json
 05c61f542645d280a64a3e1656edd7e0960306c3 data/minecraft/tags/block/flowers.json
 27873fe782a1500d3e20e8b4b64c6291efe1e198 data/minecraft/tags/block/grass_blocks.json
-23c50946f1d1c66a00da4fa96ff3a372370a1b3f data/minecraft/tags/block/leaves.json
-487582834cb13bd82478317432be8c9027738616 data/minecraft/tags/block/logs.json
+d060c0e4790388b35bf846ed85febb405388841c data/minecraft/tags/block/leaves.json
+ec17148d21dc2ac1b180fa5da133c40f66726e24 data/minecraft/tags/block/logs.json
 7338ce3685e3d329639d0eeaf73a5f5ac2c12ca0 data/minecraft/tags/block/mineable/pickaxe.json
 3e690c9f90deb906f5e6a09962b199d1d9a1bf9a data/minecraft/tags/block/mineable/shovel.json
 707302201b7ac4bdf2c61a90bb8da97e5f41fc10 data/minecraft/tags/block/planks.json
-c6b91bd22d4a2890a3dbeaef348b278509b6af52 data/minecraft/tags/block/prevents_nearby_leaf_decay.json
-c126539dca27e2a2228e96d62f0b1ea46a66ab37 data/minecraft/tags/block/saplings.json
+f4c740dea29f68e17e03956af1e1be53f22a3cc3 data/minecraft/tags/block/prevents_nearby_leaf_decay.json
+c82d40af6b9efd0e79d2d3c96db4fb29fe753e46 data/minecraft/tags/block/saplings.json
 d98e7d10021d38b42837a9704b1854ac0faea39b data/minecraft/tags/block/stone_ore_replaceables.json
 c1cef28e52bc2682a9a9fc9fc9f1e14b3d1180bf data/minecraft/tags/block/walls.json
 35c5cdfc8bf9768b7e26eb0898f33bf02d244af7 data/minecraft/tags/block/wooden_buttons.json

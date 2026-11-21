@@ -19,7 +19,7 @@
     "minecraft:visual/sky_color": "#141925"
   },
   "carvers": [],
-  "downfall": 0,
+  "downfall": 0.0,
   "effects": {
     "water_color": "#26373f"
   },
