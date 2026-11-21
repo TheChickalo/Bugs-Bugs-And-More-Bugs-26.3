@@ -11,38 +11,46 @@
       "left": {
         "type": "minecraft:max",
         "left": {
-          "type": "minecraft:min",
+          "type": "minecraft:max",
           "left": {
-            "type": "minecraft:sub",
-            "left": -0.225,
-            "right": "minecraft:overworld/erosion"
-          },
-          "right": {
-            "type": "minecraft:max",
+            "type": "minecraft:min",
             "left": {
               "type": "minecraft:sub",
-              "left": "minecraft:overworld/depth",
-              "right": 0.9
+              "left": -0.225,
+              "right": "minecraft:overworld/erosion"
             },
-            "right": 0
+            "right": {
+              "type": "minecraft:max",
+              "left": {
+                "type": "minecraft:sub",
+                "left": "minecraft:overworld/depth",
+                "right": 0.9
+              },
+              "right": 0
+            }
+          },
+          "right": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": -45,
+            "from_value": 1,
+            "to_coordinate": -39,
+            "to_value": -1
           }
         },
         "right": {
           "type": "minecraft:gradient",
           "axis": "y",
-          "from_coordinate": -45,
-          "from_value": 1,
-          "to_coordinate": -39,
-          "to_value": -1
+          "from_coordinate": -65,
+          "from_value": 6,
+          "to_coordinate": -42,
+          "to_value": -6
         }
       },
       "right": {
-        "type": "minecraft:gradient",
-        "axis": "y",
-        "from_coordinate": -65,
-        "from_value": 6,
-        "to_coordinate": -42,
-        "to_value": -6
+        "type": "minecraft:sub",
+        "left": "bugsbugsandmorebugs:lake_basin_region",
+        "right": 0.55
       }
     },
     "fluid_level_floodedness": {

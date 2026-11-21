@@ -5,10 +5,10 @@
   },
   "decorators": [],
   "foliage_placer": {
-    "type": "bugsbugsandmorebugs:ginkgo_foliage_placer",
-    "canopy_layers": 5,
+    "type": "minecraft:blob_foliage_placer",
     "offset": 0,
-    "radius": 2
+    "radius": 2,
+    "height": 3
   },
   "foliage_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_leaves",
