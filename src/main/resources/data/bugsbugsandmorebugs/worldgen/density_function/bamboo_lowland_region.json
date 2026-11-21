@@ -23,9 +23,9 @@
         "left": {
           "type": "minecraft:sub",
           "left": "minecraft:overworld/vegetation",
-          "right": 0.34
+          "right": 0.32
         },
-        "right": 5.6
+        "right": 6
       },
       "min": 0,
       "max": 1
@@ -39,9 +39,9 @@
           "left": {
             "type": "minecraft:sub",
             "left": "minecraft:overworld/continents",
-            "right": 0.19
+            "right": 0.15
           },
-          "right": 10
+          "right": 12
         },
         "min": 0,
         "max": 1
@@ -54,10 +54,10 @@
             "type": "minecraft:mul",
             "left": {
               "type": "minecraft:sub",
-              "left": 0.48,
+              "left": 0.53,
               "right": "minecraft:overworld/continents"
             },
-            "right": 9
+            "right": 9.5
           },
           "min": 0,
           "max": 1
@@ -69,9 +69,9 @@
             "left": {
               "type": "minecraft:sub",
               "left": "minecraft:overworld/erosion",
-              "right": 0.12
+              "right": -0.06
             },
-            "right": 6
+            "right": 8
           },
           "min": 0,
           "max": 1

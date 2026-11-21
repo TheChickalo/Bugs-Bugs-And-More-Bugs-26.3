@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:max",
+  "left": "bugsbugsandmorebugs:volcanic_massif_density",
+  "right": "bugsbugsandmorebugs:volcanic_mountain_density"
+}

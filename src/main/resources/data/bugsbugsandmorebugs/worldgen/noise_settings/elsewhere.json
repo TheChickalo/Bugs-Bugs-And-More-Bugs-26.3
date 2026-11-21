@@ -58,7 +58,11 @@
       "y_scale": 0.7142857142857143
     },
     "lava": -1,
-    "surface_level": "minecraft:overworld/preliminary_surface_level"
+    "surface_level": {
+      "type": "minecraft:min",
+      "left": "minecraft:overworld/preliminary_surface_level",
+      "right": 62
+    }
   },
   "debug_functions": [
     {
@@ -666,7 +670,7 @@
               }
             }
           },
-          "right": "bugsbugsandmorebugs:volcanic_massif_density"
+          "right": "bugsbugsandmorebugs:volcanic_relief_density"
         },
         "second": {
           "type": "minecraft:min",
@@ -1177,17 +1181,17 @@
                 }
               }
             },
-            "right": "bugsbugsandmorebugs:volcanic_massif_density"
+            "right": "bugsbugsandmorebugs:volcanic_relief_density"
           },
           "right": {
             "type": "minecraft:add",
             "left": {
               "type": "minecraft:gradient",
               "axis": "y",
-              "from_coordinate": 68,
-              "from_value": 5,
+              "from_coordinate": 55,
+              "from_value": 5.6,
               "to_coordinate": 106,
-              "to_value": -3
+              "to_value": -4.6
             },
             "right": {
               "type": "minecraft:add",
