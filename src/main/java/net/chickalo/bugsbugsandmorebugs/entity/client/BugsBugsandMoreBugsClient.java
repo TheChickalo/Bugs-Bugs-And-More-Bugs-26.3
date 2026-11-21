@@ -19,30 +19,31 @@ public class BugsBugsandMoreBugsClient implements ClientModInitializer {
         ModelLayerRegistry.registerModelLayer(ModModelLayerLocations.ANTWORKER, AntWorkerModel::createBodyLayer);
         EntityRenderers.register(ModEntities.ANTWORKER, AntWorkerRenderer::new);
 
-        // A thin layer of visible fog wisps on wet limestone valley floors.
+        // Low, local cloud wisps over Stone Forest valleys, beneath the normal global clouds.
         // Only rendered around the player, client-side: no persistent blocks,
         // worldgen lag, global cloud layer or particle accumulation.
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.level == null || client.player == null || client.isPaused()) return;
-            if (++mistTick % 4 != 0) return;
+            if (++mistTick % 3 != 0) return;
             var level = client.level;
             var player = client.player;
-            if (!level.getBiome(player.blockPosition()).is(ModBiomes.STONE_FOREST)
-                    || player.getY() > 112 || player.getY() < 47) return;
+            if (player.getY() > 160 || player.getY() < 47) return;
 
             var random = ThreadLocalRandom.current();
-            for (int i = 0; i < 6; i++) {
-                int x = player.getBlockX() + random.nextInt(-12, 13);
-                int z = player.getBlockZ() + random.nextInt(-12, 13);
-                BlockPos test = new BlockPos(x, 70, z);
+            for (int i = 0; i < 12; i++) {
+                int x = player.getBlockX() + random.nextInt(-26, 27);
+                int z = player.getBlockZ() + random.nextInt(-26, 27);
+                BlockPos test = new BlockPos(x, 86, z);
                 if (!level.hasChunkAt(test)) continue;
                 int floor = level.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z);
-                if (floor < 54 || floor > 95
+                if (floor < 54 || floor > 92
                         || !level.getBiome(new BlockPos(x, floor, z)).is(ModBiomes.STONE_FOREST))
                     continue;
 
-                double y = floor + 0.4 + random.nextDouble() * 2.8;
-                if (!level.getBlockState(BlockPos.containing(x + 0.5, y, z + 0.5)).isAir())
+                // Localized secondary mist band over valleys, not a second global cloud sheet.
+                double y = (i % 3 == 0) ? floor + 0.7 + random.nextDouble() * 2.4
+                        : 86.0 + random.nextDouble() * 4.0;
+                if (y <= floor + 1 || !level.getBlockState(BlockPos.containing(x + 0.5, y, z + 0.5)).isAir())
                     continue;
                 level.addParticle(ParticleTypes.CLOUD,
                         x + random.nextDouble(), y, z + random.nextDouble(),

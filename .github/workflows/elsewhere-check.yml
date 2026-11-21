@@ -44,7 +44,7 @@ jobs:
           assert all('bugsbugsandmorebugs:lake_pond_placed' not in step for step in lake['features'])
           for name in ['ginkgo_tree','ginkgo_old_growth']:
               tree=json.loads(Path(f'src/main/generated/data/bugsbugsandmorebugs/worldgen/feature/{name}.json').read_text())
-              assert tree['trunk_placer']['type']=='minecraft:fancy_trunk_placer'
+              assert tree['trunk_placer']['type']=='minecraft:straight_trunk_placer'
           print('Geology, lake, and Ginkgo registry assertions passed')
           PY
       - name: Verify clouds and schist-only amphibolite deposits
@@ -85,10 +85,17 @@ jobs:
           feat=Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/feature')
           for name in ('ginkgo_tree', 'ginkgo_old_growth'):
               tree=json.loads((feat/f'{name}.json').read_text())
-              assert tree['trunk_placer']['type']=='minecraft:fancy_trunk_placer'
+              assert tree['trunk_placer']['type']=='minecraft:straight_trunk_placer'
           stone_biome=json.loads(Path('src/main/generated/data/bugsbugsandmorebugs/worldgen/biome/stone_forest.json').read_text())
           assert any('bugsbugsandmorebugs:wetland_reeds_placed' in section for section in stone_biome['features'])
-          print('Landscape and foliage invariants passed')
+          # A lake basin must be carved after all terrain-restoring max() operations.
+          router=density['noise_router']['final_density']['when_in_range']
+          assert router['type']=='minecraft:lerp'
+          assert router['alpha']=='bugsbugsandmorebugs:lake_basin_region'
+          assert router['second']['type']=='minecraft:min'
+          assert density['aquifers']['surface_level']=='minecraft:overworld/preliminary_surface_level'
+          assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
+          print('Landscape, foliage, lake-carving and cloud invariants passed')
           PY
       - name: Generate datapack and compile
         run: |

@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -75,17 +74,17 @@ public class ModFeatures {
         ).build());
         context.register(GINKGO_TREE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new FancyTrunkPlacer(15, 4, 3),
+                new StraightTrunkPlacer(12, 3, 3),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 5),
+                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 5),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
         context.register(GINKGO_OLD_GROWTH_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.GINKGO_LOG),
-                new FancyTrunkPlacer(23, 5, 4),
+                new StraightTrunkPlacer(18, 3, 4),
                 BlockStateProvider.of(ModBlocks.GINKGO_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(5), ConstantInt.of(0), 6),
+                new BlobFoliagePlacer(ConstantInt.of(4), ConstantInt.of(0), 6),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(ModBlocks.LOAM)
         ).build());
