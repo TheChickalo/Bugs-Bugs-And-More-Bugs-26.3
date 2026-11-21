@@ -193,9 +193,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockModelGenerators.createMushroomBlock(ModBlocks.GLOWSHROOM_BLOCK);
 
         blockModelGenerators.createCrossBlock(ModBlocks.BELLFLOWERS, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.ALPINE_GRASS, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.HAKONE_GRASS, BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModelGenerators.createCrossBlock(ModBlocks.IRIS_FLOWER, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlockWithDefaultItem(ModBlocks.ALPINE_GRASS, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlockWithDefaultItem(ModBlocks.HAKONE_GRASS, BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModelGenerators.createCrossBlockWithDefaultItem(ModBlocks.IRIS_FLOWER, BlockModelGenerators.PlantType.NOT_TINTED);
         // Lotus flower model, item and blockstate are manually maintained in main/resources
         // so the cross sits at pad level rather than hovering one block above it.
 
