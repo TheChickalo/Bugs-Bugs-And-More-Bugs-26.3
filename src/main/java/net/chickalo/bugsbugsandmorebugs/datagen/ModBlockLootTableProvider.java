@@ -356,21 +356,24 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.WISTERIA_LOG);
         dropSelf(ModBlocks.WISTERIA_WOOD);
         dropSelf(ModBlocks.WISTERIA_PLANKS);
-        dropSelf(ModBlocks.WISTERIA_LEAVES);
+        add(ModBlocks.WISTERIA_LEAVES, block -> createLeavesDrops(block,
+                ModBlocks.WISTERIA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(ModBlocks.WISTERIA_SAPLING);
         dropSelf(ModBlocks.STRIPPED_WISTERIA_LOG);
         dropSelf(ModBlocks.STRIPPED_WISTERIA_WOOD);
         dropSelf(ModBlocks.WILLOW_LOG);
         dropSelf(ModBlocks.WILLOW_WOOD);
         dropSelf(ModBlocks.WILLOW_PLANKS);
-        dropSelf(ModBlocks.WILLOW_LEAVES);
+        add(ModBlocks.WILLOW_LEAVES, block -> createLeavesDrops(block,
+                ModBlocks.WILLOW_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(ModBlocks.WILLOW_SAPLING);
         dropSelf(ModBlocks.STRIPPED_WILLOW_LOG);
         dropSelf(ModBlocks.STRIPPED_WILLOW_WOOD);
         dropSelf(ModBlocks.CEDAR_LOG);
         dropSelf(ModBlocks.CEDAR_WOOD);
         dropSelf(ModBlocks.CEDAR_PLANKS);
-        dropSelf(ModBlocks.CEDAR_LEAVES);
+        add(ModBlocks.CEDAR_LEAVES, block -> createLeavesDrops(block,
+                ModBlocks.CEDAR_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(ModBlocks.CEDAR_SAPLING);
         dropSelf(ModBlocks.STRIPPED_CEDAR_LOG);
         dropSelf(ModBlocks.STRIPPED_CEDAR_WOOD);
@@ -396,6 +399,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.HANGING_FOREST_MOSS);
         dropSelf(ModBlocks.LIVERWORT);
         dropSelf(ModBlocks.CLUBMOSS);
+        dropSelf(ModBlocks.CLUBMOSS_SPRIG);
         addAmountDrops(ModBlocks.BRACKET_FUNGUS, BracketFungusBlock.COUNT);
         dropSelf(ModBlocks.ANEMONE_FLOWERS);
         dropSelf(ModBlocks.BUSH);
@@ -433,9 +437,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
                 .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
                         .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
                 .add(LootItem.lootTableItem(block))));
+        // Only the waterlogged root segment owns the mint item drop.
         add(ModBlocks.WATER_MINT, block -> LootTable.lootTable().withPool(LootPool.lootPool()
                 .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(VariableHeightPlantBlock.SEGMENT, 0)))
+                        .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
                 .add(LootItem.lootTableItem(block))));
     }
 }

@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.FlexibleWetlandPlantBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.BracketFungusBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.ExtendedForestLeavesBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HangingAccentBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
@@ -88,9 +89,13 @@ public record ForestHabitatFeature(int kind) implements Feature {
         int motif = microhabitat(origin.getX(), origin.getZ());
         // Sapling growth must always attempt a tree, not undergrowth.
         if (kind == 0) return scatterPlants(level, origin, random, motif);
-        if (saplingPlaced || random.nextFloat() < (kind == 2 ? 0.73F : 0.65F))
-            return growTree(level, origin, random, motif, saplingPlaced);
-        return scatterPlants(level, origin, random, motif);
+        if (saplingPlaced) return growTree(level, origin, random, motif, true);
+        boolean treePlaced = false;
+        if (random.nextFloat() < (kind == 2 ? 0.70F : 0.63F))
+            treePlaced = growTree(level, origin, random, motif, false);
+        // Understory must run EVEN when tree generation succeeds.
+        boolean floraPlaced = scatterPlants(level, origin, random, motif);
+        return treePlaced || floraPlaced;
     }
 
     /** Continuous ~20-60 block patches, not artificial tiny biome polygons. */
@@ -128,8 +133,13 @@ public record ForestHabitatFeature(int kind) implements Feature {
     private void leaf(WorldGenLevel level, BlockPos pos) {
         if (pos.getY() >= level.getMaxY()-1 || pos.getY() < level.getMinY()+1) return;
         BlockState old = level.getBlockState(pos);
-        if (old.canBeReplaced() && level.getFluidState(pos).isEmpty())
-            level.setBlock(pos, leaves().defaultBlockState(), 2);
+        if (old.canBeReplaced() && level.getFluidState(pos).isEmpty()) {
+            Block foliage = leaves();
+            // Patchy flowering leaves rather than an entire solid pink crown.
+            if (kind == 4 && Math.floorMod(pos.getX()*31 + pos.getY()*17 + pos.getZ()*13, 7) < 2)
+                foliage = ModBlocks.FLOWERING_MIMOSA_LEAVES;
+            level.setBlock(pos, foliage.defaultBlockState(), 2);
+        }
     }
 
     private boolean growTree(WorldGenLevel level, BlockPos base, RandomSource rng, int motif, boolean saplingPlaced) {
@@ -157,7 +167,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
         BlockPos top = base.above(height-1).offset(width/2, 0, width/2);
         if (kind == 2) {
             cedarCrown(level, top, height, rng, motif);
-            rootButtresses(level, base, rng, false);
+            cedarRootNetwork(level, base, rng);
+            decorateCedar(level, base, height, rng);
         } else if (kind == 1) {
             willowCrown(level, top, rng);
             willowRootNetwork(level, base, rng);
@@ -165,6 +176,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
             persimmonCrown(level, top, rng, motif);
         } else if (kind == 4) {
             mimosaCrown(level, top, rng);
+            decorateMimosa(level, top, rng);
         } else {
             int radius = switch (kind) {
                 case 0 -> motif == 0 ? 6 : 4 + rng.nextInt(2);
@@ -217,8 +229,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 for (int y = minY; y <= maxY; y++) {
                     BlockPos pos = new BlockPos(x, y, z);
                     BlockState state = level.getBlockState(pos);
-                    if (state.is(log()) || (kind == 2 && state.is(ModBlocks.CEDAR_WOOD))
-                            || (kind == 1 && state.is(ModBlocks.WILLOW_ROOTS))) {
+                    if (state.is(log())
+                            || (kind == 2 && (state.is(ModBlocks.CEDAR_WOOD)
+                                    || state.is(ModBlocks.MOSSY_CEDAR_LOG)
+                                    || state.is(ModBlocks.CEDAR_ROOTS)))
+                            || (kind == 1 && (state.is(ModBlocks.WILLOW_ROOTS)
+                                    || state.is(ModBlocks.WILLOW_WOOD)))) {
                         queue.addLast(pos);
                         distances.put(pos, 0);
                     }
@@ -236,7 +252,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
                     continue;
 
                 BlockState state = level.getBlockState(next);
-                if (!state.is(leaves()) || nextDistance >= distances.getOrDefault(next, 16))
+                if (!(state.is(leaves()) || (kind == 4 && state.is(ModBlocks.FLOWERING_MIMOSA_LEAVES)))
+                        || nextDistance >= distances.getOrDefault(next, 16))
                     continue;
                 distances.put(next, nextDistance);
                 level.setBlock(next, state.setValue(ExtendedForestLeavesBlock.FOREST_DISTANCE, nextDistance)
@@ -247,43 +264,63 @@ public record ForestHabitatFeature(int kind) implements Feature {
     }
 
     /**
-     * A broad, slightly flattened weeping willow. Rising branches form the
-     * umbrella ribs; overlapping foliage and long skirts cascade down from them.
+     * Face-connected, gently rising radial branch. Even diagonal limbs receive
+     * orthogonal connectors, keeping leaves supported and wood paths natural.
+     */
+    private void branchTo(WorldGenLevel level, BlockPos root, double angle, int reach, int rise) {
+        BlockPos previous=root;
+        for(int step=1;step<=reach;step++) {
+            int x=Math.round((float)(Math.cos(angle)*step));
+            int z=Math.round((float)(Math.sin(angle)*step));
+            int y=step*rise/reach;
+            BlockPos target=root.offset(x,y,z);
+            int px=previous.getX(),py=previous.getY(),pz=previous.getZ();
+            if(px!=target.getX()){
+                int sign=Integer.signum(target.getX()-px);
+                while(px!=target.getX()){px+=sign;wood(level,new BlockPos(px,py,pz),Direction.Axis.X);}
+            }
+            if(pz!=target.getZ()){
+                int sign=Integer.signum(target.getZ()-pz);
+                while(pz!=target.getZ()){pz+=sign;wood(level,new BlockPos(px,py,pz),Direction.Axis.Z);}
+            }
+            while(py<target.getY()){py++;wood(level,new BlockPos(px,py,pz),Direction.Axis.Y);}
+            wood(level,target,Math.abs(Math.cos(angle))>=Math.abs(Math.sin(angle))
+                    ?Direction.Axis.X:Direction.Axis.Z);
+            previous=target;
+        }
+    }
+
+    /**
+     * Willow canopies are made of separate drooping fronds, not solid hemispheres.
      */
     private void willowCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
-        int radius = 5 + random.nextInt(2);
-        for (Direction direction : SIDES) {
-            int reach = radius - 1 + random.nextInt(2);
-            BlockPos previous = top.below(3);
-            for (int step = 1; step <= reach; step++) {
-                int rise = step > reach - 2 ? 2 : step > 2 ? 1 : 0;
-                BlockPos next = top.relative(direction, step).below(3 - rise);
-                wood(level, next, direction.getAxis());
-                if (next.getY() > previous.getY())
-                    wood(level, next.below(), Direction.Axis.Y);
-                previous = next;
-            }
-            // Branch tips support the long, drooping edges of the crown.
-            for (int dy = -2; dy <= 1; dy++) {
-                int layerRadius = dy == 1 ? 1 : dy == -2 ? 2 : 3;
-                for (int x = -layerRadius; x <= layerRadius; x++)
-                    for (int z = -layerRadius; z <= layerRadius; z++)
-                        if (x*x + z*z <= layerRadius*layerRadius + 1)
-                            leaf(level, previous.offset(x, dy, z));
+        int radius=6+random.nextInt(2);
+        double phase=random.nextDouble()*Math.PI*2.0;
+        for(int arm=0;arm<8;arm++){
+            double angle=phase+arm*Math.PI/4.0+(random.nextDouble()-0.5)*0.27;
+            int reach=4+random.nextInt(3);
+            BlockPos root=top.below(3);
+            branchTo(level,root,angle,reach,2);
+            int x=Math.round((float)(Math.cos(angle)*reach));
+            int z=Math.round((float)(Math.sin(angle)*reach));
+            BlockPos end=root.offset(x,2,z);
+            for(int dy=-2;dy<=1;dy++){
+                int r=dy==1?1:dy==-2?2:3;
+                for(int dx=-r;dx<=r;dx++)for(int dz=-r;dz<=r;dz++){
+                    int d2=dx*dx+dz*dz;
+                    if(d2>r*r || (d2>=r*r-2 && random.nextFloat()<0.25F))continue;
+                    leaf(level,end.offset(dx,dy,dz));
+                }
             }
         }
-
-        // A connected central canopy with a flattened crown and open underside.
-        int[] radii = {3, 5, radius, radius, 4, 2};
-        for (int layer = 0; layer < radii.length; layer++) {
-            int r = radii[layer];
-            for (int x = -r; x <= r; x++) for (int z = -r; z <= r; z++) {
-                int d2 = x*x + z*z;
-                if (d2 > r*r+1 || (d2 >= r*r-1 && random.nextFloat() < 0.12F)) continue;
-                leaf(level, top.offset(x, layer-3, z));
-            }
+        int[] middle={2,3,4,3,2};
+        for(int layer=0;layer<middle.length;layer++){
+            int r=middle[layer];
+            for(int x=-r;x<=r;x++)for(int z=-r;z<=r;z++)
+                if(x*x+z*z<=r*r && (x*x+z*z<=5||random.nextFloat()>0.20F))
+                    leaf(level,top.offset(x,layer-2,z));
         }
-        hangCurtains(level, top.above(1), radius+1, random);
+        hangCurtains(level,top.above(1),radius+2,random);
     }
 
     /**
@@ -326,63 +363,140 @@ public record ForestHabitatFeature(int kind) implements Feature {
         }
     }
 
-    /** Layered, irregular orchard crown; no single spherical ball of foliage. */
-    private void persimmonCrown(WorldGenLevel level, BlockPos top,
-                                RandomSource random, int motif) {
-        int branches = 4 + random.nextInt(2);
-        Direction first = SIDES[random.nextInt(SIDES.length)];
-        for (int i = 0; i < branches; i++) {
-            Direction dir = SIDES[(first.get2DDataValue()+i)%SIDES.length];
-            int reach = 2 + random.nextInt(3);
-            int drop = 2 + random.nextInt(2);
-            BlockPos end = top.below(drop);
-            for (int step=1; step<=reach; step++) {
-                int rise = step >= 2 ? (step-1)/2 : 0;
-                end = top.relative(dir, step).below(Math.max(0, drop-rise));
-                wood(level, end, dir.getAxis());
-                if (step>1 && step%2==0) wood(level, end.below(), Direction.Axis.Y);
-            }
-            int crownRadius = motif == 0 ? 3 : 2+random.nextInt(2);
-            for (int dy=-2;dy<=2;dy++) {
-                int r = dy==2 ? crownRadius-1 : dy==-2 ? 1 : crownRadius;
-                for(int dx=-r;dx<=r;dx++) for(int dz=-r;dz<=r;dz++) {
-                    if (dx*dx+dz*dz > r*r+1) continue;
-                    if (dx*dx+dz*dz >= r*r && random.nextFloat()<0.24F) continue;
+    /** Irregular diagonal orchard branches and separate, rounded leaf lobes. */
+    private void persimmonCrown(WorldGenLevel level, BlockPos top, RandomSource random, int motif) {
+        int branches=4+random.nextInt(3);
+        double phase=random.nextDouble()*Math.PI*2.0;
+        for(int arm=0;arm<branches;arm++){
+            double angle=phase+arm*Math.PI*2.0/branches+(random.nextDouble()-0.5)*0.3;
+            int reach=3+random.nextInt(2);
+            BlockPos base=top.below(3);
+            branchTo(level,base,angle,reach,2);
+            int x=Math.round((float)(Math.cos(angle)*reach));
+            int z=Math.round((float)(Math.sin(angle)*reach));
+            BlockPos end=base.offset(x,2,z);
+            int r=motif==0&&random.nextBoolean()?3:2;
+            for(int dy=-1;dy<=2;dy++){
+                int ring=dy==2?r-1:r;
+                for(int dx=-ring;dx<=ring;dx++)for(int dz=-ring;dz<=ring;dz++){
+                    float shape=(dx*dx+dz*dz)/(float)(ring*ring)+(dy*dy)/10.0F;
+                    if(shape>1.15F || (shape>0.88F&&random.nextInt(5)==0))continue;
                     leaf(level,end.offset(dx,dy,dz));
                 }
             }
         }
-        // A narrower, higher central crown interrupts the orchard branches.
-        for (int dy=0;dy<=2;dy++) {
-            int radius = dy==2 ? 1 : 2;
-            for(int x=-radius;x<=radius;x++) for(int z=-radius;z<=radius;z++)
-                if(x*x+z*z<=radius*radius+1) leaf(level,top.offset(x,dy,z));
+        // A smaller central canopy prevents the crown from resembling exposed spokes.
+        for(int dy=0;dy<=2;dy++)for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++)
+            if(x*x+z*z<=(dy==2?2:4)&&random.nextInt(8)!=0)
+                leaf(level,top.offset(x,dy,z));
+    }
+
+    /** Mimosa leaves sit in delicate flattened pads on a forked, open crown. */
+    private void mimosaCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
+        int arms=5+random.nextInt(3);
+        double phase=random.nextDouble()*Math.PI*2.0;
+        for(int arm=0;arm<arms;arm++){
+            double angle=phase+arm*Math.PI*2.0/arms+(random.nextDouble()-0.5)*0.30;
+            int reach=3+random.nextInt(3);
+            BlockPos fork=top.below(3);
+            branchTo(level,fork,angle,reach,2);
+            int x=Math.round((float)(Math.cos(angle)*reach));
+            int z=Math.round((float)(Math.sin(angle)*reach));
+            BlockPos end=fork.offset(x,2,z);
+            int r=2+random.nextInt(2);
+            for(int dy=-1;dy<=1;dy++)for(int dx=-r;dx<=r;dx++)for(int dz=-r;dz<=r;dz++){
+                float shape=(dx*dx+dz*dz)/(float)(r*r)+dy*dy*0.32F;
+                if(shape>1.1F || (shape>0.7F&&random.nextInt(5)==0))continue;
+                leaf(level,end.offset(dx,dy,dz));
+            }
+        }
+        // Open the center: no huge single pancake of foliage.
+        for(int dy=-1;dy<=1;dy++)for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++){
+            if(x*x+z*z>5||(x*x+z*z>2&&random.nextInt(4)==0))continue;
+            leaf(level,top.offset(x,dy,z));
         }
     }
 
     /**
-     * A light umbrella-shaped Mimosa canopy, but with connected leaves near
-     * every bark-covered limb: no floating orphan leaf clusters to decay.
+     * Cedar roots branch along the ground: bulky bark-covered sections near
+     * the trunk, with smaller but still solid root segments toward their tips.
      */
-    private void mimosaCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
-        int radius = 4 + random.nextInt(2);
-        for (Direction dir : SIDES) {
-            int reach = radius-1;
-            for (int step=1;step<=reach;step++) {
-                BlockPos segment = top.relative(dir,step).below(step<3?2:1);
-                wood(level,segment,dir.getAxis());
-                if (step==3) wood(level,segment.below(),Direction.Axis.Y);
+    private void cedarRootNetwork(WorldGenLevel level, BlockPos base, RandomSource random) {
+        int arms=5+random.nextInt(3);
+        for(int arm=0;arm<arms;arm++){
+            double angle=2.0*Math.PI*arm/arms+(random.nextDouble()-0.5)*0.28;
+            int length=2+random.nextInt(3);
+            for(int step=1;step<=length;step++){
+                int dx=Math.round((float)(Math.cos(angle)*step));
+                int dz=Math.round((float)(Math.sin(angle)*step));
+                BlockPos p=base.offset(dx,0,dz);
+                if(!soil(level,p.below()) || !free(level,p)
+                        || !level.getFluidState(p).isEmpty())break;
+                Block root=step==1?ModBlocks.CEDAR_WOOD:ModBlocks.CEDAR_ROOTS;
+                Direction.Axis axis=Math.abs(Math.cos(angle))>=Math.abs(Math.sin(angle))
+                        ?Direction.Axis.X:Direction.Axis.Z;
+                level.setBlock(p,root.defaultBlockState().setValue(BlockStateProperties.AXIS,axis),2);
             }
         }
-        // Layer radii create a wide flat parasol, not a sphere.
-        int[] radii = {3,radius,radius,Math.max(2,radius-2)};
-        for(int layer=0;layer<radii.length;layer++) {
-            int r=radii[layer];
-            for(int x=-r;x<=r;x++)for(int z=-r;z<=r;z++) {
-                if(x*x+z*z > r*r+1) continue;
-                // Never punch holes near the supporting branches.
-                if(x*x+z*z > (r-1)*(r-1) && random.nextFloat()<0.16F) continue;
-                leaf(level,top.offset(x,layer-2,z));
+    }
+
+    private void decorateCedar(WorldGenLevel level, BlockPos base, int height, RandomSource random) {
+        // Isolated older moss-covered log sections near ground level.
+        for(int y=1;y<Math.min(height-2,8);y++){
+            BlockPos trunk=base.above(y);
+            if(level.getBlockState(trunk).is(ModBlocks.CEDAR_LOG) && random.nextInt(3)==0)
+                level.setBlock(trunk,ModBlocks.MOSSY_CEDAR_LOG.defaultBlockState(),2);
+        }
+        // Bracket fungus shelves cling to accessible sides of lower trunks.
+        for(int i=0;i<10;i++){
+            BlockPos bark=base.above(1+random.nextInt(Math.max(1,Math.min(height-3,11))));
+            Direction face=SIDES[random.nextInt(4)];
+            BlockPos p=bark.relative(face);
+            if(!level.getBlockState(p).isAir()
+                    || !level.getBlockState(bark).is(BlockTags.LOGS))continue;
+            BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                    .setValue(BracketFungusBlock.FACING,face)
+                    .setValue(BracketFungusBlock.COUNT,1+random.nextInt(3));
+            if(fungus.canSurvive(level,p))level.setBlock(p,fungus,2);
+        }
+
+        // Hang narrow moss strands below cedar foliage.
+        BlockPos crown=base.above(height-1);
+        for(int i=0;i<40;i++){
+            int x=random.nextInt(13)-6,z=random.nextInt(13)-6;
+            BlockPos lowest=null;
+            for(int dy=2;dy>=-17;dy--){
+                BlockPos p=crown.offset(x,dy,z);
+                if(level.getBlockState(p).is(ModBlocks.CEDAR_LEAVES))lowest=p;
+            }
+            if(lowest==null || !level.getBlockState(lowest.below()).isAir())continue;
+            int length=1+random.nextInt(4),count=0;
+            for(int j=1;j<=length;j++){
+                BlockPos p=lowest.below(j);
+                if(!level.getBlockState(p).isAir())break;
+                level.setBlock(p,ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
+                        .setValue(HangingAccentBlock.TIP,false),2);
+                count++;
+            }
+            if(count>0)level.setBlock(lowest.below(count),
+                    ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
+                            .setValue(HangingAccentBlock.TIP,true),2);
+        }
+    }
+
+    private void decorateMimosa(WorldGenLevel level, BlockPos top, RandomSource random) {
+        // Blossoms behave like tiny amethyst-style buds on the bottom of leaves.
+        int placed=0;
+        for(int attempt=0;attempt<60 && placed<10;attempt++){
+            BlockPos p=top.offset(random.nextInt(15)-7,
+                    random.nextInt(6)-4,random.nextInt(15)-7);
+            if(!level.getBlockState(p.above()).is(ModBlocks.FLOWERING_MIMOSA_LEAVES)
+                    || !level.getBlockState(p).isAir())continue;
+            BlockState state=ModBlocks.MIMOSA_BLOSSOMS.defaultBlockState()
+                    .setValue(BlockStateProperties.FACING,Direction.DOWN);
+            if(state.canSurvive(level,p)){
+                level.setBlock(p,state,2);
+                placed++;
             }
         }
     }
@@ -467,50 +581,87 @@ public record ForestHabitatFeature(int kind) implements Feature {
 
     private boolean scatterPlants(WorldGenLevel level, BlockPos origin, RandomSource rng, int motif) {
         boolean changed=false;
-        int attempts=7+(motif==0?7:3);
+        int attempts=16+(motif==0?8:4);
         for(int i=0;i<attempts;i++) {
-            int x=origin.getX()+rng.nextInt(13)-6;
-            int z=origin.getZ()+rng.nextInt(13)-6;
-            int y=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z);
-            BlockPos p=new BlockPos(x,y,z);
-            if (!correctBiome(level,p) || y < level.getMinY()+1 || y>=level.getMaxY()-3) continue;
-            // No artificial lakes or riverbanks: silt only replaces existing soil.
-            if (kind==1 && rng.nextInt(6)==0 && nearbyWater(level,p,3) && soil(level,p.below())) {
-                BlockState old=level.getBlockState(p.below());
-                if (!old.is(ModBlocks.SILT) && !old.is(Blocks.MUD)) {
-                    changed|=level.setBlock(p.below(),ModBlocks.SILT.defaultBlockState(),2);
-                }
+            int x=origin.getX()+rng.nextInt(17)-8,z=origin.getZ()+rng.nextInt(17)-8;
+            // WORLD_SURFACE sees tree leaves. Descend through the crown and find
+            // the real ground or shallow-water surface beneath it.
+            int surfaceY=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z);
+            BlockPos p=new BlockPos(x,surfaceY,z);
+            for(int depth=0;depth<56 && p.getY()>level.getMinY()+1;depth++) {
+                boolean empty=level.getBlockState(p).isAir();
+                boolean shore=kind==1 && level.getFluidState(p.below()).is(Fluids.WATER)
+                        && level.getFluidState(p.below()).isSource();
+                if(empty && (soil(level,p.below()) || shore))break;
+                p=p.below();
             }
-            if (kind == 1 && level.getFluidState(p.below()).is(Fluids.WATER) && rng.nextBoolean()) {
-                BlockPos water=p.below();
-                Block target=rng.nextInt(3)==0?ModBlocks.MARSH_MARIGOLD_WATER:ModBlocks.WATER_SEDGE;
-                if (target instanceof FlexibleWetlandPlantBlock wet)
+            int y=p.getY();
+            if(!correctBiome(level,p) || y<level.getMinY()+1 || y>=level.getMaxY()-3)continue;
+            if(kind==1 && rng.nextInt(10)==0 && nearbyWater(level,p,3)
+                    && soil(level,p.below()) && level.getFluidState(p.below()).isEmpty()) {
+                if(!level.getBlockState(p.below()).is(ModBlocks.SILT))
+                    changed|=level.setBlock(p.below(),ModBlocks.SILT.defaultBlockState(),2);
+            }
+            // Preserve real water when placing aquatic plants.
+            BlockPos water=p.below();
+            if(kind==1 && level.getFluidState(water).is(Fluids.WATER)
+                    && level.getFluidState(water).isSource()) {
+                Block target=switch(rng.nextInt(5)) {
+                    case 0,1 -> ModBlocks.WATER_MINT;
+                    case 2,3 -> ModBlocks.WATER_SEDGE;
+                    default -> ModBlocks.MARSH_MARIGOLD_WATER;
+                };
+                if(target instanceof FlexibleWetlandPlantBlock wet)
                     changed|=wet.placeNaturally(level,water);
                 continue;
             }
-            if (!level.getBlockState(p).isAir() || !soil(level,p.below())) continue;
-            Block plant;
-            switch(kind) {
-                case 0 -> plant=motif==2 && rng.nextInt(3)==0?ModBlocks.FALLEN_WISTERIA_PETALS:
-                        rng.nextBoolean()?ModBlocks.WILD_VIOLET:Blocks.FERN;
-                case 1 -> plant=motif==1?rng.nextBoolean()?ModBlocks.WATER_MINT:ModBlocks.MARSH_MARIGOLD:
-                        rng.nextInt(3)==0?Blocks.FERN:ModBlocks.WATER_MINT;
-                case 2 -> plant=motif==1?rng.nextBoolean()?ModBlocks.GLOWSHROOM:Blocks.MOSS_CARPET:
-                        rng.nextBoolean()?Blocks.FERN:Blocks.MOSS_CARPET;
-                case 3 -> plant=motif==0 && rng.nextInt(3)==0?ModBlocks.GINKGO_FALLEN_LEAVES:
-                        rng.nextBoolean()?ModBlocks.SILVER_GRASS:ModBlocks.BUSH_CLOVER;
-                default -> plant=motif==1?rng.nextBoolean()?Blocks.SHORT_GRASS:ModBlocks.SILVER_GRASS:
-                        rng.nextBoolean()?ModBlocks.BELLFLOWERS:Blocks.SHORT_GRASS;
+            if(!level.getBlockState(p).isAir() || !soil(level,p.below()))continue;
+            int roll=rng.nextInt(8);
+            Block plant=switch(kind) {
+                case 0 -> motif==2 && roll<3 ? ModBlocks.FALLEN_WISTERIA_PETALS
+                        : roll<5 ? ModBlocks.WILD_VIOLET : Blocks.FERN;
+                case 1 -> roll<3?ModBlocks.MARSH_MARIGOLD
+                        :roll<6?Blocks.FERN:Blocks.SHORT_GRASS;
+                case 2 -> switch(motif) {
+                    case 0 -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
+                            :roll==5?ModBlocks.GLOWSHROOM:Blocks.FERN;
+                    case 1 -> roll<3?ModBlocks.LIVERWORT:roll<5?ModBlocks.CLUBMOSS
+                            :roll==5?ModBlocks.GLOWSHROOM:Blocks.MOSS_CARPET;
+                    default -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
+                            :roll==5?Blocks.MOSS_CARPET:Blocks.FERN;
+                };
+                case 3 -> switch(motif) {
+                    case 0 -> roll<4?ModBlocks.FALLEN_AUTUMN_LEAVES:roll<6
+                            ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.SILVER_GRASS;
+                    case 1 -> roll<4?ModBlocks.SILVER_GRASS:roll<6
+                            ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.FALLEN_AUTUMN_LEAVES;
+                    default -> roll<3?ModBlocks.BUSH:roll<6
+                            ?ModBlocks.FALLEN_AUTUMN_LEAVES:ModBlocks.ANEMONE_FLOWERS;
+                };
+                default -> switch(motif) {
+                    case 0 -> roll<4?ModBlocks.FALLEN_MIMOSA_PETALS:roll<6
+                            ?ModBlocks.PINK_CLOVER:ModBlocks.FEATHERGRASS;
+                    case 1 -> roll<4?ModBlocks.FEATHERGRASS:roll<6
+                            ?ModBlocks.PINK_CLOVER:Blocks.SHORT_GRASS;
+                    default -> roll<3?ModBlocks.FEATHERGRASS:roll<5
+                            ?ModBlocks.BUSH:roll<7?ModBlocks.PINK_CLOVER:ModBlocks.FALLEN_MIMOSA_PETALS;
+                };
+            };
+            if(plant==ModBlocks.SILVER_GRASS) {
+                changed|=ModBlocks.SILVER_GRASS.placeAtHeight(level,p,1+rng.nextInt(2));
+                continue;
             }
-            if (plant == ModBlocks.WATER_MINT) {
-                changed|=ModBlocks.WATER_MINT.placeAtHeight(level,p,2);
-            } else if (plant == ModBlocks.SILVER_GRASS || plant == ModBlocks.BUSH_CLOVER) {
-                changed|=((VariableHeightPlantBlock)plant).placeAtHeight(level,p,1+rng.nextInt(2));
-            } else {
-                BlockState state=plant.defaultBlockState();
-                if (plant instanceof LeafLitterBlock)
-                    state=state.setValue(BlockStateProperties.SEGMENT_AMOUNT,1+rng.nextInt(4));
-                if (state.canSurvive(level,p))changed|=level.setBlock(p,state,2);
+            BlockState state=plant.defaultBlockState();
+            if(plant instanceof LeafLitterBlock)
+                state=state.setValue(BlockStateProperties.SEGMENT_AMOUNT,1+rng.nextInt(4));
+            if(!state.canSurvive(level,p))continue;
+            boolean placed=level.setBlock(p,state,2);
+            changed|=placed;
+            if(placed && plant==ModBlocks.CLUBMOSS && rng.nextInt(3)==0
+                    && level.getBlockState(p.above()).isAir()) {
+                BlockState sprig=ModBlocks.CLUBMOSS_SPRIG.defaultBlockState();
+                if(sprig.canSurvive(level,p.above()))
+                    changed|=level.setBlock(p.above(),sprig,2);
             }
         }
         return changed;

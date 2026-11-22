@@ -4,13 +4,11 @@
       "model": "bugsbugsandmorebugs:block/willow_roots"
     },
     "axis=x": {
-      "model": "bugsbugsandmorebugs:block/willow_roots",
-      "x": 90,
-      "y": 90
+      "model": "bugsbugsandmorebugs:block/willow_roots_horizontal"
     },
     "axis=z": {
-      "model": "bugsbugsandmorebugs:block/willow_roots",
-      "x": 90
+      "model": "bugsbugsandmorebugs:block/willow_roots_horizontal",
+      "y": 90
     }
   }
 }

@@ -1,27 +1,39 @@
 {
   "variants": {
-    "segment=0,tip=false": {
+    "part=0,short=false,waterlogged=false": {
       "model": "bugsbugsandmorebugs:block/water_mint_lower"
     },
-    "segment=0,tip=true": {
+    "part=0,short=false,waterlogged=true": {
       "model": "bugsbugsandmorebugs:block/water_mint_lower"
     },
-    "segment=1,tip=false": {
+    "part=0,short=true,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/water_mint_lower"
+    },
+    "part=0,short=true,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/water_mint_lower"
+    },
+    "part=1,short=false,waterlogged=false": {
       "model": "bugsbugsandmorebugs:block/water_mint_upper"
     },
-    "segment=1,tip=true": {
+    "part=1,short=false,waterlogged=true": {
       "model": "bugsbugsandmorebugs:block/water_mint_upper"
     },
-    "segment=2,tip=false": {
+    "part=1,short=true,waterlogged=false": {
       "model": "bugsbugsandmorebugs:block/water_mint_upper"
     },
-    "segment=2,tip=true": {
+    "part=1,short=true,waterlogged=true": {
       "model": "bugsbugsandmorebugs:block/water_mint_upper"
     },
-    "segment=3,tip=false": {
+    "part=2,short=false,waterlogged=false": {
       "model": "bugsbugsandmorebugs:block/water_mint_upper"
     },
-    "segment=3,tip=true": {
+    "part=2,short=false,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/water_mint_upper"
+    },
+    "part=2,short=true,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/water_mint_upper"
+    },
+    "part=2,short=true,waterlogged=true": {
       "model": "bugsbugsandmorebugs:block/water_mint_upper"
     }
   }
