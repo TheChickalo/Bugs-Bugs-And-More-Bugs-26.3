@@ -574,7 +574,7 @@ public class ModBlocks {
     public static final Block WISTERIA_PLANKS = registerBlock("wisteria_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
-            .isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().sound(SoundType.GRASS)));
+            .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WISTERIA_SAPLING = registerBlock("wisteria_sapling", p -> new SaplingBlock(ModTreeGrowers.WISTERIA,
             p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
@@ -585,7 +585,7 @@ public class ModBlocks {
     public static final Block WILLOW_PLANKS = registerBlock("willow_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
-            .isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().sound(SoundType.GRASS)));
+            .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", p -> new SaplingBlock(ModTreeGrowers.WILLOW,
             p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
@@ -596,7 +596,7 @@ public class ModBlocks {
     public static final Block CEDAR_PLANKS = registerBlock("cedar_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block CEDAR_LEAVES = registerBlock("cedar_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
-            .isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().sound(SoundType.GRASS)));
+            .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block CEDAR_SAPLING = registerBlock("cedar_sapling", p -> new SaplingBlock(ModTreeGrowers.CEDAR,
             p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
@@ -607,7 +607,7 @@ public class ModBlocks {
     public static final Block PERSIMMON_PLANKS = registerBlock("persimmon_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block PERSIMMON_LEAVES = registerBlock("persimmon_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
-            .isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().sound(SoundType.GRASS)));
+            .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block PERSIMMON_SAPLING = registerBlock("persimmon_sapling", p -> new SaplingBlock(ModTreeGrowers.PERSIMMON,
             p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
@@ -618,7 +618,7 @@ public class ModBlocks {
     public static final Block MIMOSA_PLANKS = registerBlock("mimosa_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block MIMOSA_LEAVES = registerBlock("mimosa_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
-            .isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().sound(SoundType.GRASS)));
+            .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block MIMOSA_SAPLING = registerBlock("mimosa_sapling", p -> new SaplingBlock(ModTreeGrowers.MIMOSA,
             p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
