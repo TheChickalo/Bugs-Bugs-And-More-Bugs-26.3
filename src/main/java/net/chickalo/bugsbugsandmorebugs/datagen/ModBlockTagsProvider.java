@@ -210,6 +210,70 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.WOODEN_DOORS).add(ModBlocks.getRK(ModBlocks.GINKGO_DOOR));
         tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.getRK(ModBlocks.GINKGO_TRAPDOOR));
 
+        // Complete existing wooden block families with vanilla-like axe speed and interactions.
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_LOG))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_GINKGO_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_GINKGO_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_PLANKS))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_DOOR))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_TRAPDOOR))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_BUTTON))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_PRESSURE_PLATE))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_FENCE))
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_FENCE_GATE))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_LOG))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_MAPLE_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_MAPLE_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_PLANKS))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_DOOR))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_TRAPDOOR))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_BUTTON))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_PRESSURE_PLATE))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_FENCE))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_FENCE_GATE))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_HINOKI_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_PLANKS))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_DOOR))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_TRAPDOOR))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_BUTTON))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_PRESSURE_PLATE))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_FENCE))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_FENCE_GATE));
+
+        tag(BlockTags.WOODEN_STAIRS)
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_STAIRS))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_STAIRS));
+
+        tag(BlockTags.WOODEN_SLABS)
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_SLAB))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_SLAB));
+
+        tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(ModBlocks.getRK(ModBlocks.GINKGO_PRESSURE_PLATE))
+                .add(ModBlocks.getRK(ModBlocks.MAPLE_PRESSURE_PLATE))
+                .add(ModBlocks.getRK(ModBlocks.HINOKI_PRESSURE_PLATE));
+
+        tag(BlockTags.PLANKS).add(ModBlocks.getRK(ModBlocks.HINOKI_PLANKS));
+        tag(BlockTags.WOODEN_FENCES).add(ModBlocks.getRK(ModBlocks.HINOKI_FENCE));
+        tag(BlockTags.FENCE_GATES).add(ModBlocks.getRK(ModBlocks.HINOKI_FENCE_GATE));
+        tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.getRK(ModBlocks.HINOKI_BUTTON));
+        tag(BlockTags.WOODEN_DOORS).add(ModBlocks.getRK(ModBlocks.HINOKI_DOOR));
+        tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.getRK(ModBlocks.HINOKI_TRAPDOOR));
+
         // Register the Hinoki wood family as real leaf-supporting logs.
         tag(BlockTags.LOGS)
                 .add(ModBlocks.getRK(ModBlocks.HINOKI_LOG))
