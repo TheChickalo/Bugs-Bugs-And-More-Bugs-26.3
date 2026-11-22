@@ -44,8 +44,11 @@ public record WillowShallowsFeature() implements Feature {
             if(level.getBlockState(floor).isAir()
                     || !level.getFluidState(floor).isEmpty()
                     || level.getBlockState(floor).canBeReplaced())continue;
-            // Keep all visible water in the 1–3 block range. Do not fill caves.
-            int target=1+Math.floorMod(x*19+z*31,3);
+            // Large smooth depth bands, not a checkerboard of 1, 2 and 3.
+            // Water surface stays untouched; only the bottom is raised.
+            double wave=Math.sin(x*0.055+0.4)*0.60
+                    +Math.sin(z*0.064-x*0.012)*0.40;
+            int target=wave>0.60?3:wave< -0.60?1:2;
             for(int d=depth-1;d>=target;d--){
                 BlockPos cell=surface.below(d);
                 if(!level.getBlockState(cell).is(Blocks.WATER))break;

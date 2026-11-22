@@ -24,12 +24,12 @@ public final class WisteriaBlossomDecorator extends TreeDecorator {
                 BlockPos site = leaf.below(i+1);
                 if (!context.isAir(site)) break;
                 context.setBlock(site, ModBlocks.HANGING_WISTERIA_BLOSSOMS.defaultBlockState()
-                        .setValue(HangingAccentBlock.TIP,false));
+                        .setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,i==0));
                 placed++;
             }
             if (placed>0) context.setBlock(leaf.below(placed),
                     ModBlocks.HANGING_WISTERIA_BLOSSOMS.defaultBlockState()
-                            .setValue(HangingAccentBlock.TIP,true));
+                            .setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,placed==1));
         }
         Direction[] directions = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
         for (BlockPos log : context.logs()) {
