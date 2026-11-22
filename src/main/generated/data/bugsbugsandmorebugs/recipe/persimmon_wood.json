@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
+  "key": {
+    "#": "bugsbugsandmorebugs:persimmon_log"
+  },
   "pattern": [
     "##",
     "##"
   ],
-  "key": {
-    "#": "bugsbugsandmorebugs:persimmon_log"
-  },
   "result": {
     "count": 3,
     "id": "bugsbugsandmorebugs:persimmon_wood"

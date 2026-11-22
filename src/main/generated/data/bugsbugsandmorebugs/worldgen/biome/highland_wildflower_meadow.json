@@ -33,7 +33,8 @@
       "bugsbugsandmorebugs:karst_ground_patch_placed",
       "minecraft:patch_tall_grass_2",
       "minecraft:flower_default",
-      "bugsbugsandmorebugs:highland_meadow_lush_placed"
+      "bugsbugsandmorebugs:highland_meadow_lush_placed",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"

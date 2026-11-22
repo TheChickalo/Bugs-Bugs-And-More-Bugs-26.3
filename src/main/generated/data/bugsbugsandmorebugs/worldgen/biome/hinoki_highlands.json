@@ -34,7 +34,8 @@
       "bugsbugsandmorebugs:hinoki_fern_placed",
       "bugsbugsandmorebugs:hinoki_grass_placed",
       "minecraft:brown_mushroom_normal",
-      "minecraft:red_mushroom_normal"
+      "minecraft:red_mushroom_normal",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"

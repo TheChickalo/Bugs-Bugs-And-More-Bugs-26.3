@@ -18,6 +18,7 @@
     "id": "bugsbugsandmorebugs:wisteria_leaves",
     "properties": {
       "distance": "7",
+      "forest_distance": "16",
       "persistent": "false",
       "waterlogged": "false"
     }

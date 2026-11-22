@@ -6,7 +6,7 @@
         "type": "minecraft:match_block",
         "blocks": "bugsbugsandmorebugs:water_mint",
         "state": {
-          "segment": "0"
+          "part": "0"
         }
       },
       "entries": [

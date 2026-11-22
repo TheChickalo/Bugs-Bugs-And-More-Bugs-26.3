@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
+  "key": {
+    "#": "bugsbugsandmorebugs:stripped_wisteria_log"
+  },
   "pattern": [
     "##",
     "##"
   ],
-  "key": {
-    "#": "bugsbugsandmorebugs:stripped_wisteria_log"
-  },
   "result": {
     "count": 3,
     "id": "bugsbugsandmorebugs:stripped_wisteria_wood"

@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
+  "key": {
+    "#": "bugsbugsandmorebugs:willow_log"
+  },
   "pattern": [
     "##",
     "##"
   ],
-  "key": {
-    "#": "bugsbugsandmorebugs:willow_log"
-  },
   "result": {
     "count": 3,
     "id": "bugsbugsandmorebugs:willow_wood"

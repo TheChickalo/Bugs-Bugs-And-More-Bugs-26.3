@@ -1,13 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
+  "key": {
+    "#": "bugsbugsandmorebugs:cedar_log"
+  },
   "pattern": [
     "##",
     "##"
   ],
-  "key": {
-    "#": "bugsbugsandmorebugs:cedar_log"
-  },
   "result": {
     "count": 3,
     "id": "bugsbugsandmorebugs:cedar_wood"

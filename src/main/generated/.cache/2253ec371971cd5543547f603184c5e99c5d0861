@@ -1,6 +1,11 @@
 // 26.3	-999999999-01-01T00:00:00	Bugs Bugs and More Bugs!/Tags for minecraft:item
+57614efa8b6ce737793a48ca0c967baf9b0387fd data/bugsbugsandmorebugs/tags/item/cedar_logs.json
 c61964da1f768f67c61eb1ec383c2a4aa5214513 data/bugsbugsandmorebugs/tags/item/ginkgo_logs.json
 31df20ba97b14742234224e0ae0bfef856004d67 data/bugsbugsandmorebugs/tags/item/maple_logs.json
-23c50946f1d1c66a00da4fa96ff3a372370a1b3f data/minecraft/tags/item/leaves.json
-487582834cb13bd82478317432be8c9027738616 data/minecraft/tags/item/logs_that_burn.json
-707302201b7ac4bdf2c61a90bb8da97e5f41fc10 data/minecraft/tags/item/planks.json
+7e96813fef289e1575ee44515fada1716839d0cf data/bugsbugsandmorebugs/tags/item/mimosa_logs.json
+97311580476c7efb5ba7c44aec356e6cc27e272d data/bugsbugsandmorebugs/tags/item/persimmon_logs.json
+817ea2a9d2a51d61561b0d9a9233ac4cddb1e5a2 data/bugsbugsandmorebugs/tags/item/willow_logs.json
+e3fe758a269550b6d1a0ab9811a5a5bb371fd733 data/bugsbugsandmorebugs/tags/item/wisteria_logs.json
+b0af28478e8984f3ab8e09c931221bcaa56c44f7 data/minecraft/tags/item/leaves.json
+7ef7e3ced8860bd6913b4329aacfabb5f22f10aa data/minecraft/tags/item/logs_that_burn.json
+f5f972343105df6b0a88d45060a09d73b51fc4a3 data/minecraft/tags/item/planks.json

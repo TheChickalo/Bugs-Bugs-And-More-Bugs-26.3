@@ -36,7 +36,8 @@
       "minecraft:red_mushroom_normal",
       "bugsbugsandmorebugs:glowshroom_dense_placed",
       "bugsbugsandmorebugs:glowshroom_tree_base_placed",
-      "bugsbugsandmorebugs:huge_glowshroom_grove_placed"
+      "bugsbugsandmorebugs:huge_glowshroom_grove_placed",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"
