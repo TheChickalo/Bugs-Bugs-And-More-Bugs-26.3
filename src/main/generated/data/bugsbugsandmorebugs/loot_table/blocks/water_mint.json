@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:water_mint",
+        "state": {
+          "segment": "0"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:water_mint"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

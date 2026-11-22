@@ -2,6 +2,11 @@
   "values": [
     "bugsbugsandmorebugs:ginkgo_sapling",
     "bugsbugsandmorebugs:hinoki_sapling",
-    "bugsbugsandmorebugs:maple_sapling"
+    "bugsbugsandmorebugs:maple_sapling",
+    "bugsbugsandmorebugs:wisteria_sapling",
+    "bugsbugsandmorebugs:willow_sapling",
+    "bugsbugsandmorebugs:cedar_sapling",
+    "bugsbugsandmorebugs:persimmon_sapling",
+    "bugsbugsandmorebugs:mimosa_sapling"
   ]
 }

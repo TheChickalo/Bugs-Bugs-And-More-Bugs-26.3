@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:water_sedge",
+        "state": {
+          "part": "0"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:water_sedge"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}
