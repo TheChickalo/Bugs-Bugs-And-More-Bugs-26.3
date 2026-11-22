@@ -1,6 +1,7 @@
 package net.chickalo.bugsbugsandmorebugs.datagen;
 
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.chickalo.bugsbugsandmorebugs.block.custom.BracketFungusBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -40,12 +42,16 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     // The same 1-4 piece loot behavior as vanilla leaf litter and our existing petals.
     private void addLayeredLitterDrops(Block block) {
+        addAmountDrops(block, BlockStateProperties.SEGMENT_AMOUNT);
+    }
+
+    private void addAmountDrops(Block block, IntegerProperty amountProperty) {
         add(block, b -> {
             var table = LootTable.lootTable();
             for (int amount = 1; amount <= 4; amount++) {
                 table.withPool(LootPool.lootPool()
                         .when(MatchBlock.blockMatches(this.blocks, b, StatePropertiesPredicate.Builder.properties()
-                                .hasProperty(BlockStateProperties.SEGMENT_AMOUNT, amount)))
+                                .hasProperty(amountProperty, amount)))
                         .add(LootItem.lootTableItem(b).apply(SetItemCountFunction.setCount(ContextIntProviders.between(amount, amount)))));
             }
             return table;
@@ -390,7 +396,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.HANGING_FOREST_MOSS);
         dropSelf(ModBlocks.LIVERWORT);
         dropSelf(ModBlocks.CLUBMOSS);
-        dropSelf(ModBlocks.BRACKET_FUNGUS);
+        addAmountDrops(ModBlocks.BRACKET_FUNGUS, BracketFungusBlock.COUNT);
         dropSelf(ModBlocks.ANEMONE_FLOWERS);
         dropSelf(ModBlocks.BUSH);
         dropSelf(ModBlocks.MIMOSA_BLOSSOMS);
