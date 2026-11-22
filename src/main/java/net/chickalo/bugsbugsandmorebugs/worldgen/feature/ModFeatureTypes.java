@@ -145,6 +145,9 @@ public final class ModFeatureTypes {
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "rainforest_creeks"),
                 RainforestCreeksFeature.CODEC);
         Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "mountain_range"),
+                MountainRangeFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "elsewhere_flora"),
                 ElsewhereFloraFeature.CODEC);
         Registry.register(BuiltInRegistries.FEATURE_TYPE,

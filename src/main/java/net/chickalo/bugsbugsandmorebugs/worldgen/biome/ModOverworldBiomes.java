@@ -106,6 +106,8 @@ public class ModOverworldBiomes {
                         placedFeatureGetter,
                         carverGetter
                 );
+        biomeBuilder.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
         // Amphibolite is now a separate lower stratum; do not inject it into schist.
 
 
@@ -241,6 +243,8 @@ public class ModOverworldBiomes {
 
     public static Biome hinokiHighlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
         // Forest below the volcanic treeline: mixed ages of Hinoki.
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY);
@@ -266,6 +270,8 @@ public class ModOverworldBiomes {
     public static Biome volcanicPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         // Treeless by design. Rare, compact magma outcrops punctuate bare rock.
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
                 ModPlacedFeatures.VOLCANIC_MAGMA_PATCH_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
@@ -289,6 +295,8 @@ public class ModOverworldBiomes {
     public static Biome snowyPeak(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         // Highest, open snowfields; separate from volcanic rocky caps.
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
                 ModPlacedFeatures.ALPINE_SNOW_PLACED_KEY);
         return new Biome.BiomeBuilder()
@@ -480,6 +488,8 @@ public class ModOverworldBiomes {
     public static Biome ashenFoothills(HolderGetter<PlacedFeature> features,
                                        HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
                 ModPlacedFeatures.VOLCANIC_MAGMA_PATCH_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS,
