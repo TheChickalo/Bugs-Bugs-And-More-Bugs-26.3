@@ -624,7 +624,7 @@ public class ModBlocks {
 
     // Elsewhere botanical palette. All textures already exist in the repository.
     public static final Block SILT = registerBlock("silt", p -> new Block(p.strength(0.55F).sound(SoundType.MUD)));
-    public static final Block WILLOW_ROOTS = registerBlock("willow_roots", p -> new RotatedPillarBlock(p.strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WILLOW_ROOTS = registerBlock("willow_roots", p -> new RotatedPillarBlock(p.noOcclusion().strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block HANGING_WILLOW_LEAVES = registerBlock("hanging_willow_leaves", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block HANGING_WISTERIA_BLOSSOMS = registerBlock("hanging_wisteria_blossoms", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block CLIMBING_WISTERIA_VINE = registerBlock("climbing_wisteria_vine", p -> new VineBlock(p.noCollision().randomTicks().instabreak().sound(SoundType.VINE)));
