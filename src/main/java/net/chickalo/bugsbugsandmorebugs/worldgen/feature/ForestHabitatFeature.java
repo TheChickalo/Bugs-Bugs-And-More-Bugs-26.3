@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.FlexibleWetlandPlantBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.BracketFungusBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.ExtendedForestLeavesBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HangingAccentBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
@@ -413,6 +414,90 @@ public record ForestHabitatFeature(int kind) implements Feature {
         for(int dy=-1;dy<=1;dy++)for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++){
             if(x*x+z*z>5||(x*x+z*z>2&&random.nextInt(4)==0))continue;
             leaf(level,top.offset(x,dy,z));
+        }
+    }
+
+    /**
+     * Cedar roots branch along the ground: bulky bark-covered sections near
+     * the trunk, with smaller but still solid root segments toward their tips.
+     */
+    private void cedarRootNetwork(WorldGenLevel level, BlockPos base, RandomSource random) {
+        int arms=5+random.nextInt(3);
+        for(int arm=0;arm<arms;arm++){
+            double angle=2.0*Math.PI*arm/arms+(random.nextDouble()-0.5)*0.28;
+            int length=2+random.nextInt(3);
+            for(int step=1;step<=length;step++){
+                int dx=Math.round((float)(Math.cos(angle)*step));
+                int dz=Math.round((float)(Math.sin(angle)*step));
+                BlockPos p=base.offset(dx,0,dz);
+                if(!soil(level,p.below()) || !free(level,p)
+                        || !level.getFluidState(p).isEmpty())break;
+                Block root=step==1?ModBlocks.CEDAR_WOOD:ModBlocks.CEDAR_ROOTS;
+                Direction.Axis axis=Math.abs(Math.cos(angle))>=Math.abs(Math.sin(angle))
+                        ?Direction.Axis.X:Direction.Axis.Z;
+                level.setBlock(p,root.defaultBlockState().setValue(BlockStateProperties.AXIS,axis),2);
+            }
+        }
+    }
+
+    private void decorateCedar(WorldGenLevel level, BlockPos base, int height, RandomSource random) {
+        // Isolated older moss-covered log sections near ground level.
+        for(int y=1;y<Math.min(height-2,8);y++){
+            BlockPos trunk=base.above(y);
+            if(level.getBlockState(trunk).is(ModBlocks.CEDAR_LOG) && random.nextInt(3)==0)
+                level.setBlock(trunk,ModBlocks.MOSSY_CEDAR_LOG.defaultBlockState(),2);
+        }
+        // Bracket fungus shelves cling to accessible sides of lower trunks.
+        for(int i=0;i<10;i++){
+            BlockPos bark=base.above(1+random.nextInt(Math.max(1,Math.min(height-3,11))));
+            Direction face=SIDES[random.nextInt(4)];
+            BlockPos p=bark.relative(face);
+            if(!level.getBlockState(p).isAir()
+                    || !level.getBlockState(bark).is(BlockTags.LOGS))continue;
+            BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                    .setValue(BracketFungusBlock.FACING,face)
+                    .setValue(BracketFungusBlock.COUNT,1+random.nextInt(3));
+            if(fungus.canSurvive(level,p))level.setBlock(p,fungus,2);
+        }
+
+        // Hang narrow moss strands below cedar foliage.
+        BlockPos crown=base.above(height-1);
+        for(int i=0;i<40;i++){
+            int x=random.nextInt(13)-6,z=random.nextInt(13)-6;
+            BlockPos lowest=null;
+            for(int dy=2;dy>=-17;dy--){
+                BlockPos p=crown.offset(x,dy,z);
+                if(level.getBlockState(p).is(ModBlocks.CEDAR_LEAVES))lowest=p;
+            }
+            if(lowest==null || !level.getBlockState(lowest.below()).isAir())continue;
+            int length=1+random.nextInt(4),count=0;
+            for(int j=1;j<=length;j++){
+                BlockPos p=lowest.below(j);
+                if(!level.getBlockState(p).isAir())break;
+                level.setBlock(p,ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
+                        .setValue(HangingAccentBlock.TIP,false),2);
+                count++;
+            }
+            if(count>0)level.setBlock(lowest.below(count),
+                    ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
+                            .setValue(HangingAccentBlock.TIP,true),2);
+        }
+    }
+
+    private void decorateMimosa(WorldGenLevel level, BlockPos top, RandomSource random) {
+        // Blossoms behave like tiny amethyst-style buds on the bottom of leaves.
+        int placed=0;
+        for(int attempt=0;attempt<60 && placed<10;attempt++){
+            BlockPos p=top.offset(random.nextInt(15)-7,
+                    random.nextInt(6)-4,random.nextInt(15)-7);
+            if(!level.getBlockState(p.above()).is(ModBlocks.FLOWERING_MIMOSA_LEAVES)
+                    || !level.getBlockState(p).isAir())continue;
+            BlockState state=ModBlocks.MIMOSA_BLOSSOMS.defaultBlockState()
+                    .setValue(BlockStateProperties.FACING,Direction.DOWN);
+            if(state.canSurvive(level,p)){
+                level.setBlock(p,state,2);
+                placed++;
+            }
         }
     }
 
