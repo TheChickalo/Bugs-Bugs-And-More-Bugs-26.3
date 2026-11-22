@@ -34,12 +34,32 @@ assert "ModBlocks.CEDAR_LOG;" not in feature.split("private void rootButtresses(
 # The three problem trees now use Mojang's actual tree pipeline, rather than
 # hand-authored radial spokes inside ForestHabitatFeature.
 sources=read(src / "worldgen/ModFeatures.java")
-assert "new FancyTrunkPlacer(" in sources
-assert "new ForkingTrunkPlacer(" in sources
-assert "new AcaciaFoliagePlacer(" in sources
+# All three troubled trees now use vanilla 26.3 trunk AND foliage placers;
+# the old Fancy Oak / Acacia configuration was still too spokelike.
+assert "new CherryTrunkPlacer(" in sources
+assert "new BendingTrunkPlacer(" in sources
+assert "new CherryFoliagePlacer(" in sources
+assert "new RandomSpreadFoliagePlacer(" in sources
 assert 'context.register(WILLOW_TREE_KEY, new TreeFeature.Builder(' in sources
 assert 'context.register(PERSIMMON_TREE_KEY, new TreeFeature.Builder(' in sources
 assert 'context.register(MIMOSA_TREE_KEY, new TreeFeature.Builder(' in sources
+# More durable than checking source text: inspect generated vanilla identifiers
+# and ensure Willow has a taller trunk than the previous base-height 7.
+def tree_config(species):
+    return json.loads(read(data / f"bugsbugsandmorebugs/worldgen/feature/{species}_tree.json"))
+willow_tree = tree_config("willow")
+persimmon_tree = tree_config("persimmon")
+mimosa_tree = tree_config("mimosa")
+assert willow_tree["type"] == persimmon_tree["type"] == mimosa_tree["type"] == "minecraft:tree"
+assert willow_tree["trunk_placer"]["type"] == "minecraft:cherry_trunk_placer"
+assert willow_tree["foliage_placer"]["type"] == "minecraft:cherry_foliage_placer"
+assert willow_tree["trunk_placer"]["base_height"] >= 13
+assert persimmon_tree["trunk_placer"]["type"] == "minecraft:bending_trunk_placer"
+assert persimmon_tree["foliage_placer"]["type"] == "minecraft:random_spread_foliage_placer"
+assert mimosa_tree["trunk_placer"]["type"] == "minecraft:cherry_trunk_placer"
+assert mimosa_tree["foliage_placer"]["type"] == "minecraft:cherry_foliage_placer"
+assert mimosa_tree["foliage_placer"]["radius"] >= 4
+
 assert "kind != 2) return scatterPlants(" in feature
 assert "mangroveStyleRoots(" in feature
 assert "ModBlocks.CLUBMOSS_LOWLYING" in feature
