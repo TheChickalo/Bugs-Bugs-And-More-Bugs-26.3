@@ -78,10 +78,10 @@ public record HinokiBoulderFeature() implements Feature {
 
     private static BlockState pickRock(RandomSource random) {
         float n = random.nextFloat();
-        if (n < 0.58F) return Blocks.MOSSY_COBBLESTONE.defaultBlockState();
-        if (n < 0.73F) return Blocks.COBBLESTONE.defaultBlockState();
-        if (n < 0.89F) return ModBlocks.RHYOLITE.defaultBlockState();
-        return ModBlocks.MOSSY_RHYOLITE.defaultBlockState();
+        // The Elsewhere's bedrock is rhyolite: vanilla cobblestone is out of place.
+        if (n < 0.64F) return ModBlocks.MOSSY_RHYOLITE.defaultBlockState();
+        if (n < 0.89F) return ModBlocks.COBBLED_RHYOLITE.defaultBlockState();
+        return ModBlocks.RHYOLITE.defaultBlockState();
     }
 
     private static boolean validGround(WorldGenLevel level, BlockPos ground) {

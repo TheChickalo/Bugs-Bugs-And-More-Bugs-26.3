@@ -129,7 +129,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
 
     private boolean growTree(WorldGenLevel level, BlockPos base, RandomSource rng, int motif, boolean saplingPlaced) {
         if (!soil(level, base.below())) return false;
-        if (kind == 1 && !saplingPlaced && !nearbyWater(level, base, 6) && rng.nextInt(4) != 0) return false;
+        if (kind == 1 && !saplingPlaced && !nearbyWater(level, base, 6) && rng.nextInt(3) == 0) return false;
         int height = switch (kind) {
             case 0 -> 8 + rng.nextInt(motif == 1 ? 7 : 5);
             case 1 -> 9 + rng.nextInt(6);
@@ -150,7 +150,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int z = 0; z < width; z++) wood(level, base.offset(x,y,z), Direction.Axis.Y);
 
         BlockPos top = base.above(height-1).offset(width/2, 0, width/2);
-        if (kind == 2) {
+        if (kind == 0) {
+            // Use the same two/three ascending branch silhouette and layered
+            // {2,3,4,3,1} foliage profile as the existing Maple placers.
+            wisteriaMapleCrown(level, base, height, motif, rng);
+            vineClimbers(level, base, height, rng);
+        } else if (kind == 2) {
             cedarCrown(level, top, height, rng, motif);
             rootButtresses(level, base, rng, false);
         } else {
@@ -175,6 +180,64 @@ public record ForestHabitatFeature(int kind) implements Feature {
             if (kind == 1) rootButtresses(level, base, rng, true);
         }
         return true;
+    }
+
+    /**
+     * Maple-style wisteria. Like MapleTrunkPlacer it grows two opposing, rising
+     * branches (occasionally a third); each receives the same five canopy
+     * layers/radii used by MapleFoliagePlacer. Blossom curtains remain unique.
+     */
+    private void wisteriaMapleCrown(WorldGenLevel level, BlockPos base, int height,
+                                   int motif, RandomSource random) {
+        Direction first = SIDES[random.nextInt(SIDES.length)];
+        int branchCount = random.nextInt(3) == 0 ? 3 : 2;
+        for (int branch = 0; branch < branchCount; branch++) {
+            Direction direction = branch == 0 ? first
+                    : branch == 1 ? first.getOpposite() : SIDES[random.nextInt(SIDES.length)];
+            Direction across = (direction == Direction.NORTH || direction == Direction.SOUTH)
+                    ? Direction.EAST : Direction.NORTH;
+            int startY = Math.max(4, height - 4 - (branch % 2));
+            int endY = Math.max(startY + 1, height - 2 + random.nextInt(3));
+            int length = 2 + random.nextInt(3) + (motif == 0 ? 1 : 0);
+            int lateral = random.nextInt(3) - 1;
+
+            BlockPos previous = base.above(startY);
+            for (int step = 1; step <= length; step++) {
+                int y = startY + (endY - startY) * step / length;
+                int side = lateral * step / length;
+                BlockPos next = base.relative(direction, step).relative(across, side).above(y);
+                // Fill intermediate vertical steps so limbs are truly connected.
+                for (int climb = previous.getY() + 1; climb <= next.getY(); climb++)
+                    wood(level, new BlockPos(previous.getX(), climb, previous.getZ()), Direction.Axis.Y);
+                wood(level, next, direction.getAxis());
+                previous = next;
+            }
+
+            BlockPos attachment = previous.above();
+            mapleFoliage(level, attachment, random);
+            // Curtains originate beneath individual Maple-shaped canopies.
+            hangCurtains(level, attachment.above(2), 4, random);
+        }
+
+        if (branchCount == 2 && motif == 0 && random.nextBoolean()) {
+            BlockPos apex = base.above(height);
+            mapleFoliage(level, apex, random);
+            hangCurtains(level, apex.above(2), 4, random);
+        }
+    }
+
+    /** Matches the five crown radii and irregular trimmed corners of MapleFoliagePlacer. */
+    private void mapleFoliage(WorldGenLevel level, BlockPos attachment, RandomSource random) {
+        int[] radii = {2, 3, 4, 3, 1};
+        for (int layer = 0; layer < radii.length; layer++) {
+            int radius = radii[layer];
+            for (int x = -radius; x <= radius; x++) for (int z = -radius; z <= radius; z++) {
+                if (Math.abs(x) == radius && Math.abs(z) == radius) continue;
+                if ((Math.abs(x) == radius || Math.abs(z) == radius)
+                        && random.nextFloat() < 0.10F) continue;
+                leaf(level, attachment.offset(x, layer, z));
+            }
+        }
     }
 
     private void cedarCrown(WorldGenLevel level, BlockPos top, int height, RandomSource rng, int motif) {
@@ -248,7 +311,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos site=base.relative(d);
             if (soil(level,site.below()) && level.getBlockState(site).canBeReplaced() &&
                     level.getFluidState(site).isEmpty()) {
-                Block root=willow?ModBlocks.WILLOW_ROOTS:ModBlocks.CEDAR_LOG;
+                // Buttresses should have bark on every face, not exposed end grain.
+                Block root=willow?ModBlocks.WILLOW_ROOTS:ModBlocks.CEDAR_WOOD;
                 level.setBlock(site,root.defaultBlockState().setValue(BlockStateProperties.AXIS,d.getAxis()),2);
             }
         }

@@ -572,7 +572,7 @@ public class ModBlocks {
     public static final Block STRIPPED_WISTERIA_LOG = registerBlock("stripped_wisteria_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_WISTERIA_WOOD = registerBlock("stripped_wisteria_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WISTERIA_PLANKS = registerBlock("wisteria_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WISTERIA_SAPLING = registerBlock("wisteria_sapling", p -> new SaplingBlock(ModTreeGrowers.WISTERIA,
@@ -583,7 +583,7 @@ public class ModBlocks {
     public static final Block STRIPPED_WILLOW_LOG = registerBlock("stripped_willow_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_WILLOW_WOOD = registerBlock("stripped_willow_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WILLOW_PLANKS = registerBlock("willow_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", p -> new SaplingBlock(ModTreeGrowers.WILLOW,
@@ -594,7 +594,7 @@ public class ModBlocks {
     public static final Block STRIPPED_CEDAR_LOG = registerBlock("stripped_cedar_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_CEDAR_WOOD = registerBlock("stripped_cedar_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block CEDAR_PLANKS = registerBlock("cedar_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block CEDAR_LEAVES = registerBlock("cedar_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block CEDAR_LEAVES = registerBlock("cedar_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block CEDAR_SAPLING = registerBlock("cedar_sapling", p -> new SaplingBlock(ModTreeGrowers.CEDAR,
@@ -605,7 +605,7 @@ public class ModBlocks {
     public static final Block STRIPPED_PERSIMMON_LOG = registerBlock("stripped_persimmon_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_PERSIMMON_WOOD = registerBlock("stripped_persimmon_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block PERSIMMON_PLANKS = registerBlock("persimmon_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block PERSIMMON_LEAVES = registerBlock("persimmon_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block PERSIMMON_LEAVES = registerBlock("persimmon_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block PERSIMMON_SAPLING = registerBlock("persimmon_sapling", p -> new SaplingBlock(ModTreeGrowers.PERSIMMON,
@@ -616,7 +616,7 @@ public class ModBlocks {
     public static final Block STRIPPED_MIMOSA_LOG = registerBlock("stripped_mimosa_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_MIMOSA_WOOD = registerBlock("stripped_mimosa_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block MIMOSA_PLANKS = registerBlock("mimosa_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block MIMOSA_LEAVES = registerBlock("mimosa_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block MIMOSA_LEAVES = registerBlock("mimosa_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block MIMOSA_SAPLING = registerBlock("mimosa_sapling", p -> new SaplingBlock(ModTreeGrowers.MIMOSA,

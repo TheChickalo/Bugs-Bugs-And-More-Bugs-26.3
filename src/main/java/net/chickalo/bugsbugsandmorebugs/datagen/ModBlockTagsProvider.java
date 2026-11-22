@@ -368,6 +368,8 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.STRIPPED_MIMOSA_LOG))
                 .add(ModBlocks.getRK(ModBlocks.STRIPPED_MIMOSA_WOOD))
                 .add(ModBlocks.getRK(ModBlocks.MIMOSA_PLANKS));
+        // Roots provide genuine structural support for willow leaf curtains.
+        tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY).add(ModBlocks.getRK(ModBlocks.WILLOW_ROOTS));
         tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.getRK(ModBlocks.WILLOW_ROOTS));
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlocks.getRK(ModBlocks.SILT));
         tag(BlockTags.FLOWERS).add(ModBlocks.getRK(ModBlocks.WILD_VIOLET))
