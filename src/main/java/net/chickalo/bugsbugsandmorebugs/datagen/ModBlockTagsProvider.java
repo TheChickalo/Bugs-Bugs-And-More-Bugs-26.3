@@ -373,5 +373,31 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.FLOWERS).add(ModBlocks.getRK(ModBlocks.WILD_VIOLET))
                 .add(ModBlocks.getRK(ModBlocks.MARSH_MARIGOLD))
                 .add(ModBlocks.getRK(ModBlocks.MARSH_MARIGOLD_WATER));
+        tag(ModTags.Blocks.WISTERIA_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.WISTERIA_LOG))
+                .add(ModBlocks.getRK(ModBlocks.WISTERIA_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_WISTERIA_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_WISTERIA_WOOD));
+        tag(ModTags.Blocks.WILLOW_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.WILLOW_LOG))
+                .add(ModBlocks.getRK(ModBlocks.WILLOW_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_WILLOW_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_WILLOW_WOOD));
+        tag(ModTags.Blocks.CEDAR_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.CEDAR_LOG))
+                .add(ModBlocks.getRK(ModBlocks.CEDAR_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_CEDAR_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_CEDAR_WOOD));
+        tag(ModTags.Blocks.PERSIMMON_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.PERSIMMON_LOG))
+                .add(ModBlocks.getRK(ModBlocks.PERSIMMON_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_PERSIMMON_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_PERSIMMON_WOOD));
+        tag(ModTags.Blocks.MIMOSA_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.MIMOSA_LOG))
+                .add(ModBlocks.getRK(ModBlocks.MIMOSA_WOOD))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_MIMOSA_LOG))
+                .add(ModBlocks.getRK(ModBlocks.STRIPPED_MIMOSA_WOOD));
+
     }
 }

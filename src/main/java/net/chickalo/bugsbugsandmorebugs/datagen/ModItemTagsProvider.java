@@ -46,5 +46,51 @@ public class ModItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
 
         tag(ItemTags.LEAVES)
                 .add(ModItems.getRK(ModBlocks.MAPLE_LEAVES.asItem()));
+
+        tag(ModTags.Items.WISTERIA_LOGS)
+                .add(ModItems.getRK(ModBlocks.WISTERIA_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.WISTERIA_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_WISTERIA_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_WISTERIA_WOOD.asItem()));
+        tag(ItemTags.LOGS_THAT_BURN).addTag(ModTags.Items.WISTERIA_LOGS);
+        tag(ItemTags.PLANKS).add(ModItems.getRK(ModBlocks.WISTERIA_PLANKS.asItem()));
+        tag(ItemTags.LEAVES).add(ModItems.getRK(ModBlocks.WISTERIA_LEAVES.asItem()));
+
+        tag(ModTags.Items.WILLOW_LOGS)
+                .add(ModItems.getRK(ModBlocks.WILLOW_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.WILLOW_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_WILLOW_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_WILLOW_WOOD.asItem()));
+        tag(ItemTags.LOGS_THAT_BURN).addTag(ModTags.Items.WILLOW_LOGS);
+        tag(ItemTags.PLANKS).add(ModItems.getRK(ModBlocks.WILLOW_PLANKS.asItem()));
+        tag(ItemTags.LEAVES).add(ModItems.getRK(ModBlocks.WILLOW_LEAVES.asItem()));
+
+        tag(ModTags.Items.CEDAR_LOGS)
+                .add(ModItems.getRK(ModBlocks.CEDAR_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.CEDAR_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_CEDAR_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_CEDAR_WOOD.asItem()));
+        tag(ItemTags.LOGS_THAT_BURN).addTag(ModTags.Items.CEDAR_LOGS);
+        tag(ItemTags.PLANKS).add(ModItems.getRK(ModBlocks.CEDAR_PLANKS.asItem()));
+        tag(ItemTags.LEAVES).add(ModItems.getRK(ModBlocks.CEDAR_LEAVES.asItem()));
+
+        tag(ModTags.Items.PERSIMMON_LOGS)
+                .add(ModItems.getRK(ModBlocks.PERSIMMON_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.PERSIMMON_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_PERSIMMON_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_PERSIMMON_WOOD.asItem()));
+        tag(ItemTags.LOGS_THAT_BURN).addTag(ModTags.Items.PERSIMMON_LOGS);
+        tag(ItemTags.PLANKS).add(ModItems.getRK(ModBlocks.PERSIMMON_PLANKS.asItem()));
+        tag(ItemTags.LEAVES).add(ModItems.getRK(ModBlocks.PERSIMMON_LEAVES.asItem()));
+
+        tag(ModTags.Items.MIMOSA_LOGS)
+                .add(ModItems.getRK(ModBlocks.MIMOSA_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.MIMOSA_WOOD.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_MIMOSA_LOG.asItem()))
+                .add(ModItems.getRK(ModBlocks.STRIPPED_MIMOSA_WOOD.asItem()));
+        tag(ItemTags.LOGS_THAT_BURN).addTag(ModTags.Items.MIMOSA_LOGS);
+        tag(ItemTags.PLANKS).add(ModItems.getRK(ModBlocks.MIMOSA_PLANKS.asItem()));
+        tag(ItemTags.LEAVES).add(ModItems.getRK(ModBlocks.MIMOSA_LEAVES.asItem()));
+
     }
 }

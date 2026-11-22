@@ -11,6 +11,11 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> GINKGO_LOGS = createTag("ginkgo_logs");
         public static final TagKey<Block> MAPLE_LOGS = createTag("maple_logs");
+        public static final TagKey<Block> WISTERIA_LOGS = createTag("wisteria_logs");
+        public static final TagKey<Block> WILLOW_LOGS = createTag("willow_logs");
+        public static final TagKey<Block> CEDAR_LOGS = createTag("cedar_logs");
+        public static final TagKey<Block> PERSIMMON_LOGS = createTag("persimmon_logs");
+        public static final TagKey<Block> MIMOSA_LOGS = createTag("mimosa_logs");
 
         private static final TagKey<Block> createTag(String name) {
             return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name));
@@ -20,6 +25,11 @@ public class ModTags {
     public static class Items {
         public static final TagKey<Item> GINKGO_LOGS = createTag("ginkgo_logs");
         public static final TagKey<Item> MAPLE_LOGS = createTag("maple_logs");
+        public static final TagKey<Item> WISTERIA_LOGS = createTag("wisteria_logs");
+        public static final TagKey<Item> WILLOW_LOGS = createTag("willow_logs");
+        public static final TagKey<Item> CEDAR_LOGS = createTag("cedar_logs");
+        public static final TagKey<Item> PERSIMMON_LOGS = createTag("persimmon_logs");
+        public static final TagKey<Item> MIMOSA_LOGS = createTag("mimosa_logs");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name));
