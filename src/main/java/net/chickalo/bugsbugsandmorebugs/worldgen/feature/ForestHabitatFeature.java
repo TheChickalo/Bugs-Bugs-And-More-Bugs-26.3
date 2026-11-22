@@ -88,9 +88,13 @@ public record ForestHabitatFeature(int kind) implements Feature {
         int motif = microhabitat(origin.getX(), origin.getZ());
         // Sapling growth must always attempt a tree, not undergrowth.
         if (kind == 0) return scatterPlants(level, origin, random, motif);
-        if (saplingPlaced || random.nextFloat() < (kind == 2 ? 0.73F : 0.65F))
-            return growTree(level, origin, random, motif, saplingPlaced);
-        return scatterPlants(level, origin, random, motif);
+        if (saplingPlaced) return growTree(level, origin, random, motif, true);
+        boolean treePlaced = false;
+        if (random.nextFloat() < (kind == 2 ? 0.70F : 0.63F))
+            treePlaced = growTree(level, origin, random, motif, false);
+        // Understory must run EVEN when tree generation succeeds.
+        boolean floraPlaced = scatterPlants(level, origin, random, motif);
+        return treePlaced || floraPlaced;
     }
 
     /** Continuous ~20-60 block patches, not artificial tiny biome polygons. */
@@ -128,8 +132,13 @@ public record ForestHabitatFeature(int kind) implements Feature {
     private void leaf(WorldGenLevel level, BlockPos pos) {
         if (pos.getY() >= level.getMaxY()-1 || pos.getY() < level.getMinY()+1) return;
         BlockState old = level.getBlockState(pos);
-        if (old.canBeReplaced() && level.getFluidState(pos).isEmpty())
-            level.setBlock(pos, leaves().defaultBlockState(), 2);
+        if (old.canBeReplaced() && level.getFluidState(pos).isEmpty()) {
+            Block foliage = leaves();
+            // Patchy flowering leaves rather than an entire solid pink crown.
+            if (kind == 4 && Math.floorMod(pos.getX()*31 + pos.getY()*17 + pos.getZ()*13, 7) < 2)
+                foliage = ModBlocks.FLOWERING_MIMOSA_LEAVES;
+            level.setBlock(pos, foliage.defaultBlockState(), 2);
+        }
     }
 
     private boolean growTree(WorldGenLevel level, BlockPos base, RandomSource rng, int motif, boolean saplingPlaced) {
@@ -157,7 +166,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
         BlockPos top = base.above(height-1).offset(width/2, 0, width/2);
         if (kind == 2) {
             cedarCrown(level, top, height, rng, motif);
-            rootButtresses(level, base, rng, false);
+            cedarRootNetwork(level, base, rng);
+            decorateCedar(level, base, height, rng);
         } else if (kind == 1) {
             willowCrown(level, top, rng);
             willowRootNetwork(level, base, rng);
@@ -165,6 +175,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
             persimmonCrown(level, top, rng, motif);
         } else if (kind == 4) {
             mimosaCrown(level, top, rng);
+            decorateMimosa(level, top, rng);
         } else {
             int radius = switch (kind) {
                 case 0 -> motif == 0 ? 6 : 4 + rng.nextInt(2);
@@ -217,8 +228,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 for (int y = minY; y <= maxY; y++) {
                     BlockPos pos = new BlockPos(x, y, z);
                     BlockState state = level.getBlockState(pos);
-                    if (state.is(log()) || (kind == 2 && state.is(ModBlocks.CEDAR_WOOD))
-                            || (kind == 1 && state.is(ModBlocks.WILLOW_ROOTS))) {
+                    if (state.is(log())
+                            || (kind == 2 && (state.is(ModBlocks.CEDAR_WOOD)
+                                    || state.is(ModBlocks.MOSSY_CEDAR_LOG)
+                                    || state.is(ModBlocks.CEDAR_ROOTS)))
+                            || (kind == 1 && (state.is(ModBlocks.WILLOW_ROOTS)
+                                    || state.is(ModBlocks.WILLOW_WOOD)))) {
                         queue.addLast(pos);
                         distances.put(pos, 0);
                     }
@@ -236,7 +251,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
                     continue;
 
                 BlockState state = level.getBlockState(next);
-                if (!state.is(leaves()) || nextDistance >= distances.getOrDefault(next, 16))
+                if (!(state.is(leaves()) || (kind == 4 && state.is(ModBlocks.FLOWERING_MIMOSA_LEAVES)))
+                        || nextDistance >= distances.getOrDefault(next, 16))
                     continue;
                 distances.put(next, nextDistance);
                 level.setBlock(next, state.setValue(ExtendedForestLeavesBlock.FOREST_DISTANCE, nextDistance)
@@ -467,50 +483,77 @@ public record ForestHabitatFeature(int kind) implements Feature {
 
     private boolean scatterPlants(WorldGenLevel level, BlockPos origin, RandomSource rng, int motif) {
         boolean changed=false;
-        int attempts=7+(motif==0?7:3);
+        int attempts=16+(motif==0?8:4);
         for(int i=0;i<attempts;i++) {
-            int x=origin.getX()+rng.nextInt(13)-6;
-            int z=origin.getZ()+rng.nextInt(13)-6;
+            int x=origin.getX()+rng.nextInt(17)-8,z=origin.getZ()+rng.nextInt(17)-8;
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z);
             BlockPos p=new BlockPos(x,y,z);
-            if (!correctBiome(level,p) || y < level.getMinY()+1 || y>=level.getMaxY()-3) continue;
-            // No artificial lakes or riverbanks: silt only replaces existing soil.
-            if (kind==1 && rng.nextInt(6)==0 && nearbyWater(level,p,3) && soil(level,p.below())) {
-                BlockState old=level.getBlockState(p.below());
-                if (!old.is(ModBlocks.SILT) && !old.is(Blocks.MUD)) {
+            if(!correctBiome(level,p) || y<level.getMinY()+1 || y>=level.getMaxY()-3)continue;
+            if(kind==1 && rng.nextInt(10)==0 && nearbyWater(level,p,3)
+                    && soil(level,p.below()) && level.getFluidState(p.below()).isEmpty()) {
+                if(!level.getBlockState(p.below()).is(ModBlocks.SILT))
                     changed|=level.setBlock(p.below(),ModBlocks.SILT.defaultBlockState(),2);
-                }
             }
-            if (kind == 1 && level.getFluidState(p.below()).is(Fluids.WATER) && rng.nextBoolean()) {
-                BlockPos water=p.below();
-                Block target=rng.nextInt(3)==0?ModBlocks.MARSH_MARIGOLD_WATER:ModBlocks.WATER_SEDGE;
-                if (target instanceof FlexibleWetlandPlantBlock wet)
+            // Preserve real water when placing aquatic plants.
+            BlockPos water=p.below();
+            if(kind==1 && level.getFluidState(water).is(Fluids.WATER)
+                    && level.getFluidState(water).isSource()) {
+                Block target=switch(rng.nextInt(5)) {
+                    case 0,1 -> ModBlocks.WATER_MINT;
+                    case 2,3 -> ModBlocks.WATER_SEDGE;
+                    default -> ModBlocks.MARSH_MARIGOLD_WATER;
+                };
+                if(target instanceof FlexibleWetlandPlantBlock wet)
                     changed|=wet.placeNaturally(level,water);
                 continue;
             }
-            if (!level.getBlockState(p).isAir() || !soil(level,p.below())) continue;
-            Block plant;
-            switch(kind) {
-                case 0 -> plant=motif==2 && rng.nextInt(3)==0?ModBlocks.FALLEN_WISTERIA_PETALS:
-                        rng.nextBoolean()?ModBlocks.WILD_VIOLET:Blocks.FERN;
-                case 1 -> plant=motif==1?rng.nextBoolean()?ModBlocks.WATER_MINT:ModBlocks.MARSH_MARIGOLD:
-                        rng.nextInt(3)==0?Blocks.FERN:ModBlocks.WATER_MINT;
-                case 2 -> plant=motif==1?rng.nextBoolean()?ModBlocks.GLOWSHROOM:Blocks.MOSS_CARPET:
-                        rng.nextBoolean()?Blocks.FERN:Blocks.MOSS_CARPET;
-                case 3 -> plant=motif==0 && rng.nextInt(3)==0?ModBlocks.GINKGO_FALLEN_LEAVES:
-                        rng.nextBoolean()?ModBlocks.SILVER_GRASS:ModBlocks.BUSH_CLOVER;
-                default -> plant=motif==1?rng.nextBoolean()?Blocks.SHORT_GRASS:ModBlocks.SILVER_GRASS:
-                        rng.nextBoolean()?ModBlocks.BELLFLOWERS:Blocks.SHORT_GRASS;
+            if(!level.getBlockState(p).isAir() || !soil(level,p.below()))continue;
+            int roll=rng.nextInt(8);
+            Block plant=switch(kind) {
+                case 0 -> motif==2 && roll<3 ? ModBlocks.FALLEN_WISTERIA_PETALS
+                        : roll<5 ? ModBlocks.WILD_VIOLET : Blocks.FERN;
+                case 1 -> roll<3?ModBlocks.MARSH_MARIGOLD
+                        :roll<6?Blocks.FERN:Blocks.SHORT_GRASS;
+                case 2 -> switch(motif) {
+                    case 0 -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
+                            :roll==5?ModBlocks.GLOWSHROOM:Blocks.FERN;
+                    case 1 -> roll<3?ModBlocks.LIVERWORT:roll<5?ModBlocks.CLUBMOSS
+                            :roll==5?ModBlocks.GLOWSHROOM:Blocks.MOSS_CARPET;
+                    default -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
+                            :roll==5?Blocks.MOSS_CARPET:Blocks.FERN;
+                };
+                case 3 -> switch(motif) {
+                    case 0 -> roll<4?ModBlocks.FALLEN_AUTUMN_LEAVES:roll<6
+                            ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.SILVER_GRASS;
+                    case 1 -> roll<4?ModBlocks.SILVER_GRASS:roll<6
+                            ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.FALLEN_AUTUMN_LEAVES;
+                    default -> roll<3?ModBlocks.BUSH:roll<6
+                            ?ModBlocks.FALLEN_AUTUMN_LEAVES:ModBlocks.ANEMONE_FLOWERS;
+                };
+                default -> switch(motif) {
+                    case 0 -> roll<4?ModBlocks.FALLEN_MIMOSA_PETALS:roll<6
+                            ?ModBlocks.PINK_CLOVER:ModBlocks.FEATHERGRASS;
+                    case 1 -> roll<4?ModBlocks.FEATHERGRASS:roll<6
+                            ?ModBlocks.PINK_CLOVER:Blocks.SHORT_GRASS;
+                    default -> roll<3?ModBlocks.FEATHERGRASS:roll<5
+                            ?ModBlocks.BUSH:roll<7?ModBlocks.PINK_CLOVER:ModBlocks.FALLEN_MIMOSA_PETALS;
+                };
+            };
+            if(plant==ModBlocks.SILVER_GRASS) {
+                changed|=ModBlocks.SILVER_GRASS.placeAtHeight(level,p,1+rng.nextInt(2));
+                continue;
             }
-            if (plant == ModBlocks.WATER_MINT) {
-                changed|=ModBlocks.WATER_MINT.placeAtHeight(level,p,2);
-            } else if (plant == ModBlocks.SILVER_GRASS || plant == ModBlocks.BUSH_CLOVER) {
-                changed|=((VariableHeightPlantBlock)plant).placeAtHeight(level,p,1+rng.nextInt(2));
-            } else {
-                BlockState state=plant.defaultBlockState();
-                if (plant instanceof LeafLitterBlock)
-                    state=state.setValue(BlockStateProperties.SEGMENT_AMOUNT,1+rng.nextInt(4));
-                if (state.canSurvive(level,p))changed|=level.setBlock(p,state,2);
+            BlockState state=plant.defaultBlockState();
+            if(plant instanceof LeafLitterBlock)
+                state=state.setValue(BlockStateProperties.SEGMENT_AMOUNT,1+rng.nextInt(4));
+            if(!state.canSurvive(level,p))continue;
+            boolean placed=level.setBlock(p,state,2);
+            changed|=placed;
+            if(placed && plant==ModBlocks.CLUBMOSS && rng.nextInt(3)==0
+                    && level.getBlockState(p.above()).isAir()) {
+                BlockState sprig=ModBlocks.CLUBMOSS_SPRIG.defaultBlockState();
+                if(sprig.canSurvive(level,p.above()))
+                    changed|=level.setBlock(p.above(),sprig,2);
             }
         }
         return changed;
