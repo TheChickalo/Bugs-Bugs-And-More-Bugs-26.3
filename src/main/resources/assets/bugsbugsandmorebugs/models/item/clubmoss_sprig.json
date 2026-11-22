@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "bugsbugsandmorebugs:block/clubmoss_sprig"
-  }
-}

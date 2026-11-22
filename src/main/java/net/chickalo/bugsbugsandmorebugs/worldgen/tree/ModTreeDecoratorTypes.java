@@ -9,6 +9,14 @@ public final class ModTreeDecoratorTypes {
             Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,
                     Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "wisteria_blossoms"),
                     new TreeDecoratorType<>(WisteriaBlossomDecorator.CODEC));
+    public static final TreeDecoratorType<WillowDecorator> WILLOW_DECORATOR =
+            Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,
+                    Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "willow_decorator"),
+                    new TreeDecoratorType<>(WillowDecorator.CODEC));
+    public static final TreeDecoratorType<MimosaDecorator> MIMOSA_DECORATOR =
+            Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE,
+                    Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "mimosa_decorator"),
+                    new TreeDecoratorType<>(MimosaDecorator.CODEC));
     public static void register() {
         BugsBugsAndMoreBugs.LOGGER.info("Registering Wisteria tree decorator");
     }

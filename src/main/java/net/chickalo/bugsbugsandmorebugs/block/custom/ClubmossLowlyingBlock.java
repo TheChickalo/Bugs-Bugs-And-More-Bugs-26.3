@@ -6,9 +6,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-/** Taller clubmoss shoots can only grow atop the low clubmoss ground cover. */
-public class ClubmossSprigBlock extends BushBlock {
-    public ClubmossSprigBlock(Properties properties) {
+/** Low-lying clubmoss shoots can only grow atop the low clubmoss ground cover. */
+public class ClubmossLowlyingBlock extends BushBlock {
+    public ClubmossLowlyingBlock(Properties properties) {
         super(properties);
     }
 

@@ -79,6 +79,9 @@ public record BambooMarshWetlandFeature() implements Feature {
                     } else if (random.nextInt(5) == 0) {
                         Block pad = random.nextBoolean() ? ModBlocks.DUCKWEED : ModBlocks.LOTUS;
                         BlockState state = pad.defaultBlockState();
+                        if (pad == ModBlocks.DUCKWEED)
+                            state = state.setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.SEGMENT_AMOUNT,
+                                    1 + random.nextInt(4));
                         if (level.getBlockState(at.above()).isAir()
                                 && state.canSurvive(level, at.above())
                                 && level.setBlock(at.above(), state, 2)) changed++;

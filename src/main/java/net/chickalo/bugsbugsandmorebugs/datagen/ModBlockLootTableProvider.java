@@ -76,7 +76,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
             }
             return table;
         });
-        dropSelf(ModBlocks.DUCKWEED);
+        addLayeredLitterDrops(ModBlocks.DUCKWEED);
         dropSelf(ModBlocks.LOTUS);
         dropSelf(ModBlocks.LOTUS_FLOWER);
         add(ModBlocks.CATTAILS, block -> LootTable.lootTable().withPool(LootPool.lootPool()
@@ -399,7 +399,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.HANGING_FOREST_MOSS);
         addLayeredLitterDrops(ModBlocks.LIVERWORT);
         dropSelf(ModBlocks.CLUBMOSS);
-        dropSelf(ModBlocks.CLUBMOSS_SPRIG);
         dropSelf(ModBlocks.CLUBMOSS_LOWLYING);
         addAmountDrops(ModBlocks.BRACKET_FUNGUS, BracketFungusBlock.COUNT);
         dropSelf(ModBlocks.ANEMONE_FLOWERS);

@@ -19,13 +19,16 @@ public record WetlandReedsFeature() implements Feature {
     @Override public MapCodec<WetlandReedsFeature> codec(){ return CODEC; }
     @Override public boolean place(WorldGenLevel level,ChunkGenerator generator,RandomSource random,BlockPos origin){
         int placed=0;
-        for(int attempt=0;attempt<5;attempt++){
+        boolean willow=level.getBiome(origin).is(ModBiomes.WILLOW_BACKWATERS);
+        // Reeds/cattails spread in clumps along the more extensive shallow banks.
+        for(int attempt=0;attempt<(willow?14:5);attempt++){
             int x=origin.getX()+random.nextInt(11)-5;
             int z=origin.getZ()+random.nextInt(11)-5;
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE,x,z)-1;
             BlockPos base=new BlockPos(x,y,z);
             if (!ModBiomeFamilies.wetlandReeds(level.getBiome(base))) continue;
-            Block target=random.nextFloat()<0.44F?ModBlocks.CATTAILS:ModBlocks.REEDS;
+            Block target=willow && random.nextInt(5)==0?ModBlocks.WATER_SEDGE:
+                    random.nextFloat()<0.44F?ModBlocks.CATTAILS:ModBlocks.REEDS;
             if(target instanceof ThreeBlockWetlandPlantBlock plant && plant.placeNaturally(level,base))placed++;
         }
         return placed>0;

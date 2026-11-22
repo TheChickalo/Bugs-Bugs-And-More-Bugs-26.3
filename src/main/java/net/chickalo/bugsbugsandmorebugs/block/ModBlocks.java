@@ -524,8 +524,9 @@ public class ModBlocks {
                     p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
     public static final Block GINKGO_FALLEN_LEAVES = registerBlock("ginkgo_fallen_leaves",
             p -> new LeafLitterBlock(p.noCollision().strength(0.1f).sound(SoundType.GRASS)));
+    // Duckweed grows in 1-4 floating patches, like leaf litter, without removing water.
     public static final Block DUCKWEED = registerBlock("duckweed",
-            p -> new LotusPadBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
+            p -> new FloatingLitterBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block LOTUS = registerBlock("lotus",
             p -> new LotusPadBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block LOTUS_FLOWER = registerBlock("lotus_flower",
@@ -642,10 +643,9 @@ public class ModBlocks {
     public static final Block HANGING_FOREST_MOSS = registerBlock("hanging_forest_moss", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.POPPED)));
     public static final Block LIVERWORT = registerBlock("liverwort", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
     public static final Block CLUBMOSS = registerBlock("clubmoss", p -> new Block(p.mapColor(MapColor.PLANT).strength(0.1F).sound(SoundType.MOSS)));
-    // Keep the old sprig ID for existing worlds, but use the more explicit lowlying
-    // block for generation and new texture packs.
-    public static final Block CLUBMOSS_SPRIG = registerBlock("clubmoss_sprig", p -> new ClubmossSprigBlock(p.noCollision().instabreak().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
-    public static final Block CLUBMOSS_LOWLYING = registerBlock("clubmoss_lowlying", p -> new ClubmossSprigBlock(p.noCollision().instabreak().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block CLUBMOSS_LOWLYING = registerBlock("clubmoss_lowlying",
+            p -> new ClubmossLowlyingBlock(p.noCollision().instabreak()
+                    .sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
     public static final Block BRACKET_FUNGUS = registerBlock("bracket_fungus", p -> new BracketFungusBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.FUNGUS).pushReaction(PushReaction.POPPED)));
 
     public static final Block FALLEN_AUTUMN_LEAVES = registerBlock("fallen_autumn_leaves", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
