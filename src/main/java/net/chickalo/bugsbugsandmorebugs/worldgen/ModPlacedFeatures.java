@@ -81,8 +81,34 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> STONE_FOREST_SPIRES_PLACED_KEY = registerKey("stone_forest_spires_placed");
     public static final ResourceKey<PlacedFeature> AMPHIBOLITE_DEPOSIT_PLACED_KEY = registerKey("amphibolite_deposit_placed");
 
+    public static final ResourceKey<PlacedFeature> WISTERIA_HABITAT_PLACED_KEY = registerKey("wisteria_habitat_placed");
+    public static final ResourceKey<PlacedFeature> WILLOW_HABITAT_PLACED_KEY = registerKey("willow_habitat_placed");
+    public static final ResourceKey<PlacedFeature> CEDAR_HABITAT_PLACED_KEY = registerKey("cedar_habitat_placed");
+    public static final ResourceKey<PlacedFeature> PERSIMMON_HABITAT_PLACED_KEY = registerKey("persimmon_habitat_placed");
+    public static final ResourceKey<PlacedFeature> MIMOSA_HABITAT_PLACED_KEY = registerKey("mimosa_habitat_placed");
+
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
+        register(context, WISTERIA_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WISTERIA_TREE_KEY),
+                List.of(CountPlacement.of(6), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, WILLOW_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WILLOW_TREE_KEY),
+                List.of(CountPlacement.of(6), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, CEDAR_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.CEDAR_TREE_KEY),
+                List.of(CountPlacement.of(4), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, PERSIMMON_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.PERSIMMON_TREE_KEY),
+                List.of(CountPlacement.of(6), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, MIMOSA_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MIMOSA_TREE_KEY),
+                List.of(CountPlacement.of(5), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         // Deliberately lighter vegetation densities for minor biome variants.
         register(context, GINKGO_ANCIENT_STAND_PLACED_KEY,
