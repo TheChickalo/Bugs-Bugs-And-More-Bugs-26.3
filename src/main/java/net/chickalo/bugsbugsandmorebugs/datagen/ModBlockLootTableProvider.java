@@ -397,9 +397,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.CEDAR_ROOTS);
         dropSelf(ModBlocks.MOSSY_CEDAR_LOG);
         dropSelf(ModBlocks.HANGING_FOREST_MOSS);
-        dropSelf(ModBlocks.LIVERWORT);
+        addLayeredLitterDrops(ModBlocks.LIVERWORT);
         dropSelf(ModBlocks.CLUBMOSS);
         dropSelf(ModBlocks.CLUBMOSS_SPRIG);
+        dropSelf(ModBlocks.CLUBMOSS_LOWLYING);
         addAmountDrops(ModBlocks.BRACKET_FUNGUS, BracketFungusBlock.COUNT);
         dropSelf(ModBlocks.ANEMONE_FLOWERS);
         dropSelf(ModBlocks.BUSH);

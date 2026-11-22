@@ -1,12 +1,22 @@
 {
   "variants": {
-    "axis=y": {
+    "axis=y,waterlogged=false": {
       "model": "bugsbugsandmorebugs:block/willow_roots"
     },
-    "axis=x": {
+    "axis=x,waterlogged=false": {
       "model": "bugsbugsandmorebugs:block/willow_roots_horizontal"
     },
-    "axis=z": {
+    "axis=z,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/willow_roots_horizontal",
+      "y": 90
+    },
+    "axis=y,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/willow_roots"
+    },
+    "axis=x,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/willow_roots_horizontal"
+    },
+    "axis=z,waterlogged=true": {
       "model": "bugsbugsandmorebugs:block/willow_roots_horizontal",
       "y": 90
     }

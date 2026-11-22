@@ -640,9 +640,12 @@ public class ModBlocks {
     public static final Block CEDAR_ROOTS = registerBlock("cedar_roots", p -> new ForestRootsBlock(p.noOcclusion().strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block MOSSY_CEDAR_LOG = registerBlock("mossy_cedar_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block HANGING_FOREST_MOSS = registerBlock("hanging_forest_moss", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.POPPED)));
-    public static final Block LIVERWORT = registerBlock("liverwort", p -> new CarpetBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
-    public static final Block CLUBMOSS = registerBlock("clubmoss", p -> new CarpetBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block LIVERWORT = registerBlock("liverwort", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block CLUBMOSS = registerBlock("clubmoss", p -> new Block(p.mapColor(MapColor.PLANT).strength(0.1F).sound(SoundType.MOSS)));
+    // Keep the old sprig ID for existing worlds, but use the more explicit lowlying
+    // block for generation and new texture packs.
     public static final Block CLUBMOSS_SPRIG = registerBlock("clubmoss_sprig", p -> new ClubmossSprigBlock(p.noCollision().instabreak().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block CLUBMOSS_LOWLYING = registerBlock("clubmoss_lowlying", p -> new ClubmossSprigBlock(p.noCollision().instabreak().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
     public static final Block BRACKET_FUNGUS = registerBlock("bracket_fungus", p -> new BracketFungusBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.FUNGUS).pushReaction(PushReaction.POPPED)));
 
     public static final Block FALLEN_AUTUMN_LEAVES = registerBlock("fallen_autumn_leaves", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
