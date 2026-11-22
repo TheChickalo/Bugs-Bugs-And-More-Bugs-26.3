@@ -207,12 +207,15 @@ public record ForestHabitatFeature(int kind) implements Feature {
         for(int x=-radius;x<=radius;x++) for(int z=-radius;z<=radius;z++) {
             int sq=x*x+z*z;
             if (sq < (radius-2)*(radius-2) || sq > radius*radius || rng.nextInt(kind==0?4:3)!=0) continue;
-            BlockPos start=top.offset(x,-2,z);
-            for (int above = 0; above < 3; above++) {
-                if (level.getBlockState(start.above()).is(leaves())) break;
-                start=start.above();
+            // Find the actual canopy underside. Beginning inside leaves suppresses hanging strands.
+            BlockPos lowestLeaf = null;
+            for (int dy = 1; dy >= -6; dy--) {
+                BlockPos check = top.offset(x, dy, z);
+                if (level.getBlockState(check).is(leaves())) lowestLeaf = check;
             }
-            if (!level.getBlockState(start.above()).is(leaves())) continue;
+            if (lowestLeaf == null) continue;
+            BlockPos start = lowestLeaf.below();
+            if (!level.getBlockState(start).isAir()) continue;
             int length = 1+rng.nextInt(kind == 0 ? 5 : 6),placed=0;
             for (int dy=0;dy<length;dy++) {
                 BlockPos q=start.below(dy);
