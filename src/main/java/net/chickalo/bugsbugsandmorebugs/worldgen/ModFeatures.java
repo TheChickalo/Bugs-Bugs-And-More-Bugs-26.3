@@ -35,6 +35,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> BAMBOO_POOLS_KEY = registerKey("bamboo_pools");
     public static final ResourceKey<Feature> BAMBOO_MARSH_WETLAND_KEY = registerKey("bamboo_marsh_wetland");
     public static final ResourceKey<Feature> WETLAND_REEDS_KEY = registerKey("wetland_reeds");
+    public static final ResourceKey<Feature> WILLOW_SHALLOWS_KEY = registerKey("willow_shallows");
     public static final ResourceKey<Feature> ELSEWHERE_FLORA_KEY = registerKey("elsewhere_flora");
     public static final ResourceKey<Feature> LAVA_CLEANUP_KEY = registerKey("lava_cleanup");
     public static final ResourceKey<Feature> HINOKI_KEY = registerKey("hinoki");
@@ -121,6 +122,7 @@ public class ModFeatures {
         ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.MimosaDecorator())).build());
         context.register(MIMOSA_HABITAT_KEY, new ForestHabitatFeature(4));
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
+        context.register(WILLOW_SHALLOWS_KEY, new WillowShallowsFeature());
         context.register(VOLCANIC_MAGMA_PATCH_KEY, new VolcanicMagmaPatchFeature());
         context.register(HINOKI_BOULDER_KEY, new HinokiBoulderFeature());
         context.register(HINOKI_MOSS_PATCH_KEY, new HinokiMossPatchFeature());

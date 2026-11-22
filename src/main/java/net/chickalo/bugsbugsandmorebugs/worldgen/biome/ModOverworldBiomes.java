@@ -517,7 +517,9 @@ public class ModOverworldBiomes {
     /** willow backwaters: forest microhabitats are embedded inside the feature placer. */
     public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
-        addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_DENSE_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.WILLOW_SHALLOWS_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_WILLOW_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.WILLOW_TREE_PLACED_KEY,
                 ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY);
         

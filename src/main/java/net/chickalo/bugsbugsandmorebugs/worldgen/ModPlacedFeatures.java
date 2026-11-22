@@ -28,6 +28,8 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAPLE_SPARSE_PLACED_KEY = registerKey("maple_sparse_placed");
     public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_DENSE_PLACED_KEY = registerKey("elsewhere_flora_dense_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_DENSE_PLACED_KEY = registerKey("wetland_reeds_dense_placed");
+    public static final ResourceKey<PlacedFeature> WETLAND_REEDS_WILLOW_PLACED_KEY = registerKey("wetland_reeds_willow_placed");
+    public static final ResourceKey<PlacedFeature> WILLOW_SHALLOWS_PLACED_KEY = registerKey("willow_shallows_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_MARSH_PLACED_KEY = registerKey("bamboo_pools_marsh_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_MARSH_WETLAND_PLACED_KEY = registerKey("bamboo_marsh_wetland_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_GROVE_MARSH_PLACED_KEY = registerKey("bamboo_grove_marsh_placed");
@@ -142,6 +144,14 @@ public class ModPlacedFeatures {
         register(context, ELSEWHERE_FLORA_DENSE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.ELSEWHERE_FLORA_KEY),
                 List.of(CountPlacement.of(4), InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        // One full chunk pass lowers overly deep Willow Backwaters water to 1–3 blocks.
+        register(context, WILLOW_SHALLOWS_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WILLOW_SHALLOWS_KEY),
+                List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, WETLAND_REEDS_WILLOW_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),
+                List.of(CountPlacement.of(9), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WETLAND_REEDS_DENSE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),
