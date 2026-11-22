@@ -29,8 +29,9 @@ public record WillowPoolsFeature() implements Feature {
                                    RandomSource random,BlockPos origin) {
         int baseX=origin.getX() & ~15,baseZ=origin.getZ() & ~15;
         int changed=0;
-        // One or two small depressions in a chunk, and some chunks left dry.
-        int tries=random.nextInt(3);
+        // Several attempts create noticeable but scattered swamp-like pools.
+        // Invalid sloped or wooded clearings are skipped without disturbance.
+        int tries=2+random.nextInt(3);
         for(int attempt=0;attempt<tries;attempt++){
             int cx=baseX+4+random.nextInt(8), cz=baseZ+4+random.nextInt(8);
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,cx,cz)-1;
