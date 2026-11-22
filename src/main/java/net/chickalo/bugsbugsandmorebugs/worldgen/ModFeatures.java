@@ -103,7 +103,7 @@ public class ModFeatures {
                 BlockStateProvider.of(ModBlocks.WILLOW_LOG),
                 new CherryTrunkPlacer(
                         13, 4, 3,
-                        UniformInt.of(3, 4), UniformInt.of(3, 5),
+                        UniformInt.of(2, 3), UniformInt.of(3, 5),
                         UniformInt.of(-5, -4), UniformInt.of(-2, 0)),
                 BlockStateProvider.of(ModBlocks.WILLOW_LEAVES),
                 new CherryFoliagePlacer(
