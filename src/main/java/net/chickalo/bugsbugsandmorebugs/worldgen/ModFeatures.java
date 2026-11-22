@@ -15,11 +15,14 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.CherryFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.CherryTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.BendingTrunkPlacer;
+
+
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -89,37 +92,64 @@ public class ModFeatures {
                 BlockStateProvider.holderOf(Blocks.DIRT)
         ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.WisteriaBlossomDecorator())).build());
         context.register(WISTERIA_HABITAT_KEY, new ForestHabitatFeature(0));
-        // Native Minecraft trunk/foliage placers, rather than repeated hand-authored radial spokes.
-        // Willow: fuller rounded crown with naturally branching fancy-oak skeleton.
+        // Grounded in vanilla 26.3 tree configs: Azalea, Cherry, and their
+        // vanilla placers. These are TreeFeatures; no custom branch drawing.
+        //
+        // Willow: a TALL Cherry-style branched trunk carrying wide cherry-style
+        // foliage, with our existing hanging-leaf/root decorator.
+        // The base 13 + up to 4 + up to 3 logs is intentionally taller than the
+        // old Fancy Oak's base 7 + 5 + 2, while the canopy stays full and loose.
         context.register(WILLOW_TREE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.WILLOW_LOG),
-                new FancyTrunkPlacer(7, 5, 2),
+                new CherryTrunkPlacer(
+                        13, 4, 3,
+                        UniformInt.of(3, 4), UniformInt.of(3, 5),
+                        UniformInt.of(-5, -4), UniformInt.of(-2, 0)),
                 BlockStateProvider.of(ModBlocks.WILLOW_LEAVES),
-                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 4),
+                new CherryFoliagePlacer(
+                        ConstantInt.of(4), ConstantInt.of(0), ConstantInt.of(5),
+                        0.12F, 0.15F, 0.24F, 0.35F),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(Blocks.DIRT)
-        ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.WillowDecorator())).build());
+        ).decorators(java.util.List.of(
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.WillowDecorator()
+        )).build());
         context.register(WILLOW_HABITAT_KEY, new ForestHabitatFeature(1));
         context.register(CEDAR_TREE_KEY, new ForestHabitatFeature(2));
-        // Persimmon: vanilla Fancy Oak branching with compact, layered rounded crowns.
+
+        // Persimmon: natural small orchard tree. Vanilla Azalea's subtly
+        // bending trunk and its irregularly scattered foliage remove the
+        // exposed, symmetrical branch spokes and artificial spherical lobes.
         context.register(PERSIMMON_TREE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.PERSIMMON_LOG),
-                new FancyTrunkPlacer(5, 4, 2),
+                new BendingTrunkPlacer(6, 2, 2, 3, UniformInt.of(1, 2)),
                 BlockStateProvider.of(ModBlocks.PERSIMMON_LEAVES),
-                new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
+                new RandomSpreadFoliagePlacer(
+                        ConstantInt.of(3), ConstantInt.of(0),
+                        ConstantInt.of(3), 85),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(Blocks.DIRT)
         ).build());
         context.register(PERSIMMON_HABITAT_KEY, new ForestHabitatFeature(3));
-        // Mimosa: true forked vanilla Acacia branches and wide, flat, moderately dense pads.
+
+        // Mimosa: vanilla Cherry branch placement instead of Acacia's hard,
+        // angular two-arm fork. Cherry foliage in broader, thicker layers
+        // forms a nearly continuous umbrella, retaining some edge gaps.
         context.register(MIMOSA_TREE_KEY, new TreeFeature.Builder(
                 BlockStateProvider.of(ModBlocks.MIMOSA_LOG),
-                new ForkingTrunkPlacer(7, 3, 2),
+                new CherryTrunkPlacer(
+                        7, 2, 1,
+                        UniformInt.of(2, 3), UniformInt.of(3, 5),
+                        UniformInt.of(-4, -3), UniformInt.of(-1, 0)),
                 BlockStateProvider.of(ModBlocks.MIMOSA_LEAVES),
-                new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                new CherryFoliagePlacer(
+                        ConstantInt.of(5), ConstantInt.of(0),
+                        ConstantInt.of(4), 0.10F, 0.12F, 0.04F, 0.06F),
                 new TwoLayersFeatureSize(1, 0, 2),
                 BlockStateProvider.holderOf(Blocks.DIRT)
-        ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.MimosaDecorator())).build());
+        ).decorators(java.util.List.of(
+                new net.chickalo.bugsbugsandmorebugs.worldgen.tree.MimosaDecorator()
+        )).build());
         context.register(MIMOSA_HABITAT_KEY, new ForestHabitatFeature(4));
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
         context.register(WILLOW_SHALLOWS_KEY, new WillowShallowsFeature());
