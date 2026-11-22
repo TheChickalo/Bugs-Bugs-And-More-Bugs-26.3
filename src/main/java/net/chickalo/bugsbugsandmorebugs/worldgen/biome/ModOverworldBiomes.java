@@ -503,7 +503,8 @@ public class ModOverworldBiomes {
     public static Biome wisteriaVeilwood(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
-        addVegetation(generation, ModPlacedFeatures.WISTERIA_HABITAT_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.WISTERIA_TREE_PLACED_KEY,
+                ModPlacedFeatures.WISTERIA_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
         return minorBiome(generation, 0.70F, 0.86F,

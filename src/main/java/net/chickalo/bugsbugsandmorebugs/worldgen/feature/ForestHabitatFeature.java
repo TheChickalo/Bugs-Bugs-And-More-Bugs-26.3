@@ -87,6 +87,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
         if (!saplingPlaced && !correctBiome(level, origin)) return false;
         int motif = microhabitat(origin.getX(), origin.getZ());
         // Sapling growth must always attempt a tree, not undergrowth.
+        if (kind == 0) return scatterPlants(level, origin, random, motif);
         if (saplingPlaced || random.nextFloat() < (kind == 2 ? 0.73F : 0.65F))
             return growTree(level, origin, random, motif, saplingPlaced);
         return scatterPlants(level, origin, random, motif);
@@ -154,14 +155,16 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int z = 0; z < width; z++) wood(level, base.offset(x,y,z), Direction.Axis.Y);
 
         BlockPos top = base.above(height-1).offset(width/2, 0, width/2);
-        if (kind == 0) {
-            // Use the same two/three ascending branch silhouette and layered
-            // {2,3,4,3,1} foliage profile as the existing Maple placers.
-            wisteriaMapleCrown(level, base, height, motif, rng);
-            vineClimbers(level, base, height, rng);
-        } else if (kind == 2) {
+        if (kind == 2) {
             cedarCrown(level, top, height, rng, motif);
             rootButtresses(level, base, rng, false);
+        } else if (kind == 1) {
+            willowCrown(level, top, rng);
+            willowRootNetwork(level, base, rng);
+        } else if (kind == 3) {
+            persimmonCrown(level, top, rng, motif);
+        } else if (kind == 4) {
+            mimosaCrown(level, top, rng);
         } else {
             int radius = switch (kind) {
                 case 0 -> motif == 0 ? 6 : 4 + rng.nextInt(2);
@@ -188,64 +191,6 @@ public record ForestHabitatFeature(int kind) implements Feature {
         // from starting at the maximum distance and decaying on their first tick.
         settleLeafDistances(level, base, height);
         return true;
-    }
-
-    /**
-     * Maple-style wisteria. Like MapleTrunkPlacer it grows two opposing, rising
-     * branches (occasionally a third); each receives the same five canopy
-     * layers/radii used by MapleFoliagePlacer. Blossom curtains remain unique.
-     */
-    private void wisteriaMapleCrown(WorldGenLevel level, BlockPos base, int height,
-                                   int motif, RandomSource random) {
-        Direction first = SIDES[random.nextInt(SIDES.length)];
-        int branchCount = random.nextInt(3) == 0 ? 3 : 2;
-        for (int branch = 0; branch < branchCount; branch++) {
-            Direction direction = branch == 0 ? first
-                    : branch == 1 ? first.getOpposite() : SIDES[random.nextInt(SIDES.length)];
-            Direction across = (direction == Direction.NORTH || direction == Direction.SOUTH)
-                    ? Direction.EAST : Direction.NORTH;
-            int startY = Math.max(4, height - 4 - (branch % 2));
-            int endY = Math.max(startY + 1, height - 2 + random.nextInt(3));
-            int length = 2 + random.nextInt(3) + (motif == 0 ? 1 : 0);
-            int lateral = random.nextInt(3) - 1;
-
-            BlockPos previous = base.above(startY);
-            for (int step = 1; step <= length; step++) {
-                int y = startY + (endY - startY) * step / length;
-                int side = lateral * step / length;
-                BlockPos next = base.relative(direction, step).relative(across, side).above(y);
-                // Fill intermediate vertical steps so limbs are truly connected.
-                for (int climb = previous.getY() + 1; climb <= next.getY(); climb++)
-                    wood(level, new BlockPos(previous.getX(), climb, previous.getZ()), Direction.Axis.Y);
-                wood(level, next, direction.getAxis());
-                previous = next;
-            }
-
-            BlockPos attachment = previous.above();
-            mapleFoliage(level, attachment, random);
-            // Curtains originate beneath individual Maple-shaped canopies.
-            hangCurtains(level, attachment.above(2), 4, random);
-        }
-
-        if (branchCount == 2 && motif == 0 && random.nextBoolean()) {
-            BlockPos apex = base.above(height);
-            mapleFoliage(level, apex, random);
-            hangCurtains(level, apex.above(2), 4, random);
-        }
-    }
-
-    /** Matches the five crown radii and irregular trimmed corners of MapleFoliagePlacer. */
-    private void mapleFoliage(WorldGenLevel level, BlockPos attachment, RandomSource random) {
-        int[] radii = {2, 3, 4, 3, 1};
-        for (int layer = 0; layer < radii.length; layer++) {
-            int radius = radii[layer];
-            for (int x = -radius; x <= radius; x++) for (int z = -radius; z <= radius; z++) {
-                if (Math.abs(x) == radius && Math.abs(z) == radius) continue;
-                if ((Math.abs(x) == radius || Math.abs(z) == radius)
-                        && random.nextFloat() < 0.10F) continue;
-                leaf(level, attachment.offset(x, layer, z));
-            }
-        }
     }
 
     /**
@@ -297,6 +242,147 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 level.setBlock(next, state.setValue(ExtendedForestLeavesBlock.FOREST_DISTANCE, nextDistance)
                         .setValue(BlockStateProperties.DISTANCE, Math.min(nextDistance, 7)), 2);
                 queue.addLast(next);
+            }
+        }
+    }
+
+    /**
+     * A broad, slightly flattened weeping willow. Rising branches form the
+     * umbrella ribs; overlapping foliage and long skirts cascade down from them.
+     */
+    private void willowCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
+        int radius = 5 + random.nextInt(2);
+        for (Direction direction : SIDES) {
+            int reach = radius - 1 + random.nextInt(2);
+            BlockPos previous = top.below(3);
+            for (int step = 1; step <= reach; step++) {
+                int rise = step > reach - 2 ? 2 : step > 2 ? 1 : 0;
+                BlockPos next = top.relative(direction, step).below(3 - rise);
+                wood(level, next, direction.getAxis());
+                if (next.getY() > previous.getY())
+                    wood(level, next.below(), Direction.Axis.Y);
+                previous = next;
+            }
+            // Branch tips support the long, drooping edges of the crown.
+            for (int dy = -2; dy <= 1; dy++) {
+                int layerRadius = dy == 1 ? 1 : dy == -2 ? 2 : 3;
+                for (int x = -layerRadius; x <= layerRadius; x++)
+                    for (int z = -layerRadius; z <= layerRadius; z++)
+                        if (x*x + z*z <= layerRadius*layerRadius + 1)
+                            leaf(level, previous.offset(x, dy, z));
+            }
+        }
+
+        // A connected central canopy with a flattened crown and open underside.
+        int[] radii = {3, 5, radius, radius, 4, 2};
+        for (int layer = 0; layer < radii.length; layer++) {
+            int r = radii[layer];
+            for (int x = -r; x <= r; x++) for (int z = -r; z <= r; z++) {
+                int d2 = x*x + z*z;
+                if (d2 > r*r+1 || (d2 >= r*r-1 && random.nextFloat() < 0.12F)) continue;
+                leaf(level, top.offset(x, layer-3, z));
+            }
+        }
+        hangCurtains(level, top.above(1), radius+1, random);
+    }
+
+    /**
+     * Ground-hugging, branching buttress roots extend 2-5 blocks from the
+     * trunk. Thicker attached sections are bark-covered wood; outer tendrils
+     * are actual (cutout) Willow Roots. Never fill/erase water.
+     */
+    private void willowRootNetwork(WorldGenLevel level, BlockPos base, RandomSource random) {
+        for (int ray = 0; ray < 7; ray++) {
+            double theta = (2.0 * Math.PI * ray / 7.0) + (random.nextFloat()-0.5F)*0.38;
+            int length = 2 + random.nextInt(4);
+            for (int step=1; step<=length; step++) {
+                int dx = (int)Math.round(Math.cos(theta)*step);
+                int dz = (int)Math.round(Math.sin(theta)*step);
+                BlockPos site = base.offset(dx, 0, dz);
+                if (!soil(level, site.below()) || !free(level, site)
+                        || !level.getFluidState(site).isEmpty()) break;
+                Block material = step <= 2 ? ModBlocks.WILLOW_WOOD : ModBlocks.WILLOW_ROOTS;
+                Direction.Axis axis = Math.abs(dx) >= Math.abs(dz)
+                        ? Direction.Axis.X : Direction.Axis.Z;
+                if (level.setBlock(site, material.defaultBlockState()
+                        .setValue(BlockStateProperties.AXIS, axis), 2)) {
+                    // Occasional low arch that forks back into the trunk.
+                    if (step == 1 && random.nextBoolean()) {
+                        BlockPos arch = site.above();
+                        if (level.getBlockState(arch).isAir())
+                            level.setBlock(arch, ModBlocks.WILLOW_WOOD.defaultBlockState()
+                                    .setValue(BlockStateProperties.AXIS, axis), 2);
+                    }
+                }
+                if (step >= 3 && random.nextInt(3) == 0) {
+                    Direction fork = random.nextBoolean() ? Direction.NORTH : Direction.EAST;
+                    BlockPos side = site.relative(fork);
+                    if (soil(level, side.below()) && level.getBlockState(side).isAir()
+                            && level.getFluidState(side).isEmpty())
+                        level.setBlock(side, ModBlocks.WILLOW_ROOTS.defaultBlockState()
+                                .setValue(BlockStateProperties.AXIS, fork.getAxis()), 2);
+                }
+            }
+        }
+    }
+
+    /** Layered, irregular orchard crown; no single spherical ball of foliage. */
+    private void persimmonCrown(WorldGenLevel level, BlockPos top,
+                                RandomSource random, int motif) {
+        int branches = 4 + random.nextInt(2);
+        Direction first = SIDES[random.nextInt(SIDES.length)];
+        for (int i = 0; i < branches; i++) {
+            Direction dir = SIDES[(first.get2DDataValue()+i)%SIDES.length];
+            int reach = 2 + random.nextInt(3);
+            int drop = 2 + random.nextInt(2);
+            BlockPos end = top.below(drop);
+            for (int step=1; step<=reach; step++) {
+                int rise = step >= 2 ? (step-1)/2 : 0;
+                end = top.relative(dir, step).below(Math.max(0, drop-rise));
+                wood(level, end, dir.getAxis());
+                if (step>1 && step%2==0) wood(level, end.below(), Direction.Axis.Y);
+            }
+            int crownRadius = motif == 0 ? 3 : 2+random.nextInt(2);
+            for (int dy=-2;dy<=2;dy++) {
+                int r = dy==2 ? crownRadius-1 : dy==-2 ? 1 : crownRadius;
+                for(int dx=-r;dx<=r;dx++) for(int dz=-r;dz<=r;dz++) {
+                    if (dx*dx+dz*dz > r*r+1) continue;
+                    if (dx*dx+dz*dz >= r*r && random.nextFloat()<0.24F) continue;
+                    leaf(level,end.offset(dx,dy,dz));
+                }
+            }
+        }
+        // A narrower, higher central crown interrupts the orchard branches.
+        for (int dy=0;dy<=2;dy++) {
+            int radius = dy==2 ? 1 : 2;
+            for(int x=-radius;x<=radius;x++) for(int z=-radius;z<=radius;z++)
+                if(x*x+z*z<=radius*radius+1) leaf(level,top.offset(x,dy,z));
+        }
+    }
+
+    /**
+     * A light umbrella-shaped Mimosa canopy, but with connected leaves near
+     * every bark-covered limb: no floating orphan leaf clusters to decay.
+     */
+    private void mimosaCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
+        int radius = 4 + random.nextInt(2);
+        for (Direction dir : SIDES) {
+            int reach = radius-1;
+            for (int step=1;step<=reach;step++) {
+                BlockPos segment = top.relative(dir,step).below(step<3?2:1);
+                wood(level,segment,dir.getAxis());
+                if (step==3) wood(level,segment.below(),Direction.Axis.Y);
+            }
+        }
+        // Layer radii create a wide flat parasol, not a sphere.
+        int[] radii = {3,radius,radius,Math.max(2,radius-2)};
+        for(int layer=0;layer<radii.length;layer++) {
+            int r=radii[layer];
+            for(int x=-r;x<=r;x++)for(int z=-r;z<=r;z++) {
+                if(x*x+z*z > r*r+1) continue;
+                // Never punch holes near the supporting branches.
+                if(x*x+z*z > (r-1)*(r-1) && random.nextFloat()<0.16F) continue;
+                leaf(level,top.offset(x,layer-2,z));
             }
         }
     }

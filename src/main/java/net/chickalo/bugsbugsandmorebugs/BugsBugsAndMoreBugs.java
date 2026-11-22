@@ -10,6 +10,7 @@ import net.chickalo.bugsbugsandmorebugs.sound.ModSounds;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModFoliagePlacerTypes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTrunkPlacerTypes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeDecoratorTypes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.feature.ModFeatureTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -36,6 +37,7 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
         ModStrippableBlocks.registerStrippableBlocks();
         ModTrunkPlacerTypes.registerModTrunkPlacerTypes();
         ModFoliagePlacerTypes.registerModFoliagePlacerTypes();
+        ModTreeDecoratorTypes.register();
         ModFeatureTypes.register();
         BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(Biomes.RIVER),

@@ -572,7 +572,7 @@ public class ModBlocks {
     public static final Block STRIPPED_WISTERIA_LOG = registerBlock("stripped_wisteria_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_WISTERIA_WOOD = registerBlock("stripped_wisteria_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WISTERIA_PLANKS = registerBlock("wisteria_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WISTERIA_SAPLING = registerBlock("wisteria_sapling", p -> new SaplingBlock(ModTreeGrowers.WISTERIA,
@@ -624,7 +624,7 @@ public class ModBlocks {
 
     // Elsewhere botanical palette. All textures already exist in the repository.
     public static final Block SILT = registerBlock("silt", p -> new Block(p.strength(0.55F).sound(SoundType.MUD)));
-    public static final Block WILLOW_ROOTS = registerBlock("willow_roots", p -> new RotatedPillarBlock(p.strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WILLOW_ROOTS = registerBlock("willow_roots", p -> new RotatedPillarBlock(p.noOcclusion().strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block HANGING_WILLOW_LEAVES = registerBlock("hanging_willow_leaves", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block HANGING_WISTERIA_BLOSSOMS = registerBlock("hanging_wisteria_blossoms", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block CLIMBING_WISTERIA_VINE = registerBlock("climbing_wisteria_vine", p -> new VineBlock(p.noCollision().randomTicks().instabreak().sound(SoundType.VINE)));

@@ -81,6 +81,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> STONE_FOREST_SPIRES_PLACED_KEY = registerKey("stone_forest_spires_placed");
     public static final ResourceKey<PlacedFeature> AMPHIBOLITE_DEPOSIT_PLACED_KEY = registerKey("amphibolite_deposit_placed");
 
+    public static final ResourceKey<PlacedFeature> WISTERIA_TREE_PLACED_KEY = registerKey("wisteria_tree_placed");
     public static final ResourceKey<PlacedFeature> WISTERIA_HABITAT_PLACED_KEY = registerKey("wisteria_habitat_placed");
     public static final ResourceKey<PlacedFeature> WILLOW_HABITAT_PLACED_KEY = registerKey("willow_habitat_placed");
     public static final ResourceKey<PlacedFeature> CEDAR_HABITAT_PLACED_KEY = registerKey("cedar_habitat_placed");
@@ -89,8 +90,11 @@ public class ModPlacedFeatures {
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.FEATURE);
-        register(context, WISTERIA_HABITAT_PLACED_KEY,
+        register(context, WISTERIA_TREE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WISTERIA_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(5), ModBlocks.WISTERIA_SAPLING));
+        register(context, WISTERIA_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WISTERIA_HABITAT_KEY),
                 List.of(CountPlacement.of(6), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WILLOW_HABITAT_PLACED_KEY,
