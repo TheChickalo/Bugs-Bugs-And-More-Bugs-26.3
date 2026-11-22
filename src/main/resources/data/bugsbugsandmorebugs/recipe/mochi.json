@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    "bugsbugsandmorebugs:cooked_rice",
+    "bugsbugsandmorebugs:cooked_rice",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:mochi",
+    "count": 2
+  }
+}

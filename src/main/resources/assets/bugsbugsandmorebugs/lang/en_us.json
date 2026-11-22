@@ -286,5 +286,12 @@
   "block.bugsbugsandmorebugs.pink_clover": "Pink Clover",
   "item.bugsbugsandmorebugs.persimmon_fruit": "Persimmon Fruit",
   "item.bugsbugsandmorebugs.mimosa_seedpods": "Mimosa Seedpods",
-  "block.bugsbugsandmorebugs.clubmoss_lowlying": "Clubmoss Lowlying"
+  "block.bugsbugsandmorebugs.clubmoss_lowlying": "Clubmoss Lowlying",
+  "block.bugsbugsandmorebugs.rice_crop": "Rice Crop",
+  "item.bugsbugsandmorebugs.rice": "Rice",
+  "item.bugsbugsandmorebugs.rice_seeds": "Rice Seeds",
+  "item.bugsbugsandmorebugs.cooked_rice": "Cooked Rice",
+  "item.bugsbugsandmorebugs.onigiri": "Onigiri",
+  "item.bugsbugsandmorebugs.fried_rice": "Fried Rice",
+  "item.bugsbugsandmorebugs.mochi": "Mochi"
 }

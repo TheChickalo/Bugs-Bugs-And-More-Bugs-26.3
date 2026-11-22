@@ -250,7 +250,8 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.MAPLE_SAPLING));
 
         tag(BlockTags.CROPS)
-                .add(ModBlocks.getRK(ModBlocks.DAIKON_CROP));
+                .add(ModBlocks.getRK(ModBlocks.DAIKON_CROP))
+                .add(ModBlocks.getRK(ModBlocks.RICE_CROP));
 
         tag(BlockTags.WOODEN_FENCES)
                 .add(ModBlocks.getRK(ModBlocks.MAPLE_FENCE));
