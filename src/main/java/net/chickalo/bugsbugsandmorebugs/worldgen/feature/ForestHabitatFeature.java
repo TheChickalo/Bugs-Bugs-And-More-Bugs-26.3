@@ -31,8 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Five species, three locally varying habitat motifs per species.
- * Uses the existing Elsewhere terrain; NEVER carves new water or raises banks.
+ * Five species, three continuous, recognizable microhabitats each (15 total).
+ * Uses noise patches for flora and soil; only the separate CedarCreekFeature
+ * sculpts narrow connected channels before trees are generated.
  * kind: 0=wisteria, 1=willow, 2=cedar, 3=persimmon, 4=mimosa.
  */
 public record ForestHabitatFeature(int kind) implements Feature {
@@ -710,9 +711,100 @@ public record ForestHabitatFeature(int kind) implements Feature {
         }
     }
 
+    /**
+     * Microhabitats change the actual surface in sparse, blended patches.
+     * Never raise dirt mounds or dig arbitrary holes. The creek generation
+     * feature handles Cedar's real waterways before vegetation placement.
+     */
+    private boolean groundMicrohabitat(WorldGenLevel level, BlockPos air,
+                                       RandomSource random, int motif) {
+        BlockPos ground = air.below();
+        BlockState current = level.getBlockState(ground);
+        if (!soil(level,ground) || !level.getFluidState(ground).isEmpty())return false;
+        Block replacement = null;
+        switch(kind) {
+            case 0 -> {
+                // Violet Curtains: rich soil; Tangled Arbors: rooted earth;
+                // Petal Glades: clear grassy openings under the canopy.
+                if(motif==0 && random.nextInt(10)==0) replacement=ModBlocks.GRASSY_LOAM;
+                if(motif==1 && random.nextInt(6)==0) replacement=Blocks.ROOTED_DIRT;
+                if(motif==2 && random.nextInt(11)==0) replacement=Blocks.GRASS_BLOCK;
+            }
+            case 1 -> {
+                if(motif==0 && nearbyWater(level,air,4) && random.nextInt(4)==0)
+                    replacement=ModBlocks.SILT;
+                if(motif==1 && nearbyWater(level,air,5) && random.nextInt(5)==0)
+                    replacement=Blocks.MUD;
+                if(motif==2 && random.nextInt(7)==0)
+                    replacement=ModBlocks.GRASSY_LOAM;
+            }
+            case 2 -> {
+                if(motif==0 && random.nextInt(5)==0)replacement=Blocks.MOSS_BLOCK;
+                if(motif==1 && random.nextInt(8)==0)replacement=Blocks.PODZOL;
+                if(motif==2 && random.nextInt(7)==0)replacement=Blocks.MOSS_BLOCK;
+                // Nurse logs are uncommon low, natural horizontal features.
+                if(motif==1 && random.nextInt(110)==0)
+                    return placeNurseLog(level,air,random);
+            }
+            case 3 -> {
+                if(motif==0 && random.nextInt(12)==0)replacement=Blocks.PODZOL;
+                if(motif==1 && random.nextInt(10)==0)replacement=Blocks.GRASS_BLOCK;
+                if(motif==2 && random.nextInt(7)==0)
+                    replacement=random.nextBoolean()?Blocks.COARSE_DIRT:ModBlocks.RHYOLITE;
+            }
+            default -> {
+                if(motif==0 && random.nextInt(11)==0)replacement=ModBlocks.GRASSY_LOAM;
+                if(motif==1 && random.nextInt(9)==0)replacement=Blocks.GRASS_BLOCK;
+                if(motif==2 && random.nextInt(6)==0)
+                    replacement=random.nextInt(3)==0?ModBlocks.RHYOLITE:Blocks.COARSE_DIRT;
+            }
+        }
+        if (replacement==null || current.is(replacement))return false;
+        return level.setBlock(ground,replacement.defaultBlockState(),2);
+    }
+
+    /**
+     * A grounded Cedar nurse log with staggered mossy bark along its length.
+     * Its axis follows the terrain and it is skipped entirely if unsupported.
+     */
+    private boolean placeNurseLog(WorldGenLevel level, BlockPos at,
+                                  RandomSource random) {
+        Direction axisDirection=random.nextBoolean()?Direction.EAST:Direction.SOUTH;
+        int count=3+random.nextInt(3);
+        BlockPos[] positions=new BlockPos[count];
+        for(int k=0;k<count;k++){
+            BlockPos q=at.relative(axisDirection,k);
+            int surface=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,q.getX(),q.getZ());
+            q=new BlockPos(q.getX(),surface,q.getZ());
+            if(Math.abs(q.getY()-at.getY())>1 || !correctBiome(level,q)
+                    || !level.getBlockState(q).isAir()
+                    || !soil(level,q.below()))return false;
+            positions[k]=q;
+        }
+        for(int k=0;k<count;k++) {
+            Block log=random.nextInt(3)==0?ModBlocks.MOSSY_CEDAR_LOG:ModBlocks.CEDAR_LOG;
+            level.setBlock(positions[k],log.defaultBlockState()
+                    .setValue(BlockStateProperties.AXIS,axisDirection.getAxis()),2);
+            if(random.nextInt(4)==0){
+                BlockPos side=positions[k].relative(random.nextBoolean()?Direction.NORTH:Direction.WEST);
+                if(level.getBlockState(side).isAir()){
+                    Direction outward=side.getX()>positions[k].getX()?Direction.EAST:
+                            side.getX()<positions[k].getX()?Direction.WEST:
+                            side.getZ()>positions[k].getZ()?Direction.SOUTH:Direction.NORTH;
+                    BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                            .setValue(BracketFungusBlock.FACING,outward);
+                    if(fungus.canSurvive(level,side))level.setBlock(side,fungus,2);
+                }
+            }
+        }
+        return true;
+    }
+
     private boolean scatterPlants(WorldGenLevel level, BlockPos origin, RandomSource rng, int motif) {
         boolean changed=false;
-        int attempts=16+(motif==0?8:4);
+        // Motif-specific intensity varies by forest and landscape, but keeps
+        // individual patch placement inexpensive during chunk generation.
+        int attempts=20 + (motif==0?10:motif==1?7:6);
         for(int i=0;i<attempts;i++) {
             int x=origin.getX()+rng.nextInt(17)-8,z=origin.getZ()+rng.nextInt(17)-8;
             // WORLD_SURFACE sees tree leaves. Descend through the crown and find
@@ -728,54 +820,83 @@ public record ForestHabitatFeature(int kind) implements Feature {
             }
             int y=p.getY();
             if(!correctBiome(level,p) || y<level.getMinY()+1 || y>=level.getMaxY()-3)continue;
-            if(kind==1 && rng.nextInt(10)==0 && nearbyWater(level,p,3)
-                    && soil(level,p.below()) && level.getFluidState(p.below()).isEmpty()) {
-                if(!level.getBlockState(p.below()).is(ModBlocks.SILT))
-                    changed|=level.setBlock(p.below(),ModBlocks.SILT.defaultBlockState(),2);
-            }
+            // Each 20–60 block microhabitat changes more than just the
+            // species of individual plants: floor, fallen timber and shorelines.
+            if (level.getBlockState(p).isAir() && soil(level,p.below()))
+                changed |= groundMicrohabitat(level,p,rng,motif);
             // Preserve real water when placing aquatic plants.
             BlockPos water=p.below();
             if(kind==1 && level.getFluidState(water).is(Fluids.WATER)
                     && level.getFluidState(water).isSource()) {
-                Block target=switch(rng.nextInt(5)) {
-                    case 0,1 -> ModBlocks.WATER_MINT;
-                    case 2,3 -> ModBlocks.WATER_SEDGE;
-                    default -> ModBlocks.MARSH_MARIGOLD_WATER;
-                };
-                if(target instanceof FlexibleWetlandPlantBlock wet)
-                    changed|=wet.placeNaturally(level,water);
+                if (motif == 1 && rng.nextInt(3)==0) {
+                    BlockState duckweed = ModBlocks.DUCKWEED.defaultBlockState()
+                            .setValue(BlockStateProperties.SEGMENT_AMOUNT,1+rng.nextInt(4));
+                    if (duckweed.canSurvive(level,p))
+                        changed |= level.setBlock(p,duckweed,2);
+                } else {
+                    Block target=switch(rng.nextInt(6)) {
+                        case 0,1 -> ModBlocks.WATER_MINT;
+                        case 2,3,4 -> ModBlocks.WATER_SEDGE;
+                        default -> ModBlocks.MARSH_MARIGOLD_WATER;
+                    };
+                    if(target instanceof FlexibleWetlandPlantBlock wet)
+                        changed|=wet.placeNaturally(level,water);
+                }
                 continue;
             }
             if(!level.getBlockState(p).isAir() || !soil(level,p.below()))continue;
-            int roll=rng.nextInt(8);
+            int roll=rng.nextInt(12);
             Block plant=switch(kind) {
-                case 0 -> motif==2 && roll<3 ? ModBlocks.FALLEN_WISTERIA_PETALS
-                        : roll<5 ? ModBlocks.WILD_VIOLET : Blocks.FERN;
-                case 1 -> roll<3?ModBlocks.MARSH_MARIGOLD
-                        :roll<6?Blocks.FERN:Blocks.SHORT_GRASS;
+                // Wisteria: 0 Violet Curtains, 1 Tangled Arbors, 2 Petal Glades.
+                // Its actual tree and blossom decorators are unchanged.
+                case 0 -> switch(motif) {
+                    case 0 -> roll<5?ModBlocks.WILD_VIOLET:
+                            roll<9?ModBlocks.FALLEN_WISTERIA_PETALS:Blocks.FERN;
+                    case 1 -> roll<5?Blocks.FERN:
+                            roll<8?ModBlocks.WILD_VIOLET:Blocks.SHORT_GRASS;
+                    default -> roll<7?ModBlocks.FALLEN_WISTERIA_PETALS:
+                            roll<10?ModBlocks.WILD_VIOLET:Blocks.SHORT_GRASS;
+                };
+                // Willow: 0 Oxbow Banks, 1 Sedge Pools, 2 Willow Hummocks.
+                case 1 -> switch(motif) {
+                    case 0 -> roll<5?ModBlocks.MARSH_MARIGOLD:
+                            roll<8?Blocks.FERN:Blocks.SHORT_GRASS;
+                    case 1 -> roll<5?ModBlocks.MARSH_MARIGOLD:
+                            roll<9?Blocks.FERN:ModBlocks.BUSH;
+                    default -> roll<4?Blocks.FERN:
+                            roll<8?Blocks.SHORT_GRASS:ModBlocks.ANEMONE_FLOWERS;
+                };
+                // Cedar: 0 Elder Stands, 1 Nurse-Log Hollows, 2 Rainwashed Gullies.
                 case 2 -> switch(motif) {
-                    case 0 -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
-                            :roll==5?ModBlocks.GLOWSHROOM:Blocks.FERN;
-                    case 1 -> roll<3?ModBlocks.LIVERWORT:roll<5?ModBlocks.CLUBMOSS
-                            :roll==5?ModBlocks.GLOWSHROOM:Blocks.MOSS_CARPET;
-                    default -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
-                            :roll==5?Blocks.MOSS_CARPET:Blocks.FERN;
+                    case 0 -> roll<5?ModBlocks.CLUBMOSS:
+                            roll<8?ModBlocks.LIVERWORT:
+                            roll==8?ModBlocks.GLOWSHROOM:Blocks.FERN;
+                    case 1 -> roll<4?ModBlocks.LIVERWORT:
+                            roll<7?ModBlocks.CLUBMOSS:
+                            roll==7?ModBlocks.GLOWSHROOM:Blocks.MOSS_CARPET;
+                    default -> roll<5?ModBlocks.LIVERWORT:
+                            roll<8?ModBlocks.CLUBMOSS:
+                            roll<10?Blocks.MOSS_CARPET:Blocks.FERN;
                 };
+                // Persimmon: 0 Amber Groves, 1 Golden Meadows, 2 Bramble Terraces.
                 case 3 -> switch(motif) {
-                    case 0 -> roll<4?ModBlocks.FALLEN_AUTUMN_LEAVES:roll<6
-                            ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.SILVER_GRASS;
-                    case 1 -> roll<4?ModBlocks.SILVER_GRASS:roll<6
-                            ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.FALLEN_AUTUMN_LEAVES;
-                    default -> roll<3?ModBlocks.BUSH:roll<6
-                            ?ModBlocks.FALLEN_AUTUMN_LEAVES:ModBlocks.ANEMONE_FLOWERS;
+                    case 0 -> roll<7?ModBlocks.FALLEN_AUTUMN_LEAVES:
+                            roll<10?ModBlocks.ANEMONE_FLOWERS:Blocks.FERN;
+                    case 1 -> roll<6?ModBlocks.SILVER_GRASS:
+                            roll<10?ModBlocks.ANEMONE_FLOWERS:Blocks.SHORT_GRASS;
+                    default -> roll<6?ModBlocks.BUSH:
+                            roll<9?ModBlocks.FALLEN_AUTUMN_LEAVES:
+                            ModBlocks.ANEMONE_FLOWERS;
                 };
+                // Mimosa: 0 Blossom Drifts, 1 Feathergrass Prairie, 2 Sunwashed Rises.
                 default -> switch(motif) {
-                    case 0 -> roll<4?ModBlocks.FALLEN_MIMOSA_PETALS:roll<6
-                            ?ModBlocks.PINK_CLOVER:ModBlocks.FEATHERGRASS;
-                    case 1 -> roll<4?ModBlocks.FEATHERGRASS:roll<6
-                            ?ModBlocks.PINK_CLOVER:Blocks.SHORT_GRASS;
-                    default -> roll<3?ModBlocks.FEATHERGRASS:roll<5
-                            ?ModBlocks.BUSH:roll<7?ModBlocks.PINK_CLOVER:ModBlocks.FALLEN_MIMOSA_PETALS;
+                    case 0 -> roll<7?ModBlocks.FALLEN_MIMOSA_PETALS:
+                            roll<11?ModBlocks.PINK_CLOVER:ModBlocks.FEATHERGRASS;
+                    case 1 -> roll<7?ModBlocks.FEATHERGRASS:
+                            roll<10?Blocks.SHORT_GRASS:ModBlocks.PINK_CLOVER;
+                    default -> roll<5?ModBlocks.FEATHERGRASS:
+                            roll<8?ModBlocks.BUSH:
+                            roll<10?ModBlocks.PINK_CLOVER:Blocks.SHORT_GRASS;
                 };
             };
             if(plant==ModBlocks.CLUBMOSS) {
