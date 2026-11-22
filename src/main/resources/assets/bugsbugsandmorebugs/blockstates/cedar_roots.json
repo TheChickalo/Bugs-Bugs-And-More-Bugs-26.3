@@ -4,13 +4,11 @@
       "model": "bugsbugsandmorebugs:block/cedar_roots"
     },
     "axis=x": {
-      "model": "bugsbugsandmorebugs:block/cedar_roots",
-      "x": 90,
-      "y": 90
+      "model": "bugsbugsandmorebugs:block/cedar_roots_horizontal"
     },
     "axis=z": {
-      "model": "bugsbugsandmorebugs:block/cedar_roots",
-      "x": 90
+      "model": "bugsbugsandmorebugs:block/cedar_roots_horizontal",
+      "y": 90
     }
   }
 }

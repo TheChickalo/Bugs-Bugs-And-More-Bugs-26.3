@@ -380,6 +380,7 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
         tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
         tag(BlockTags.LEAVES).add(ModBlocks.getRK(ModBlocks.FLOWERING_MIMOSA_LEAVES));
+        tag(BlockTags.REPLACEABLE_BY_TREES).add(ModBlocks.getRK(ModBlocks.CLUBMOSS_SPRIG));
         tag(BlockTags.FLOWERS).add(ModBlocks.getRK(ModBlocks.ANEMONE_FLOWERS)).add(ModBlocks.getRK(ModBlocks.MIMOSA_BLOSSOMS)).add(ModBlocks.getRK(ModBlocks.PINK_CLOVER));
 
         tag(ModTags.Blocks.WISTERIA_LOGS)

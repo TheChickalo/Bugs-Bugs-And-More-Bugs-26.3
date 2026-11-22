@@ -396,6 +396,7 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.HANGING_FOREST_MOSS);
         dropSelf(ModBlocks.LIVERWORT);
         dropSelf(ModBlocks.CLUBMOSS);
+        dropSelf(ModBlocks.CLUBMOSS_SPRIG);
         addAmountDrops(ModBlocks.BRACKET_FUNGUS, BracketFungusBlock.COUNT);
         dropSelf(ModBlocks.ANEMONE_FLOWERS);
         dropSelf(ModBlocks.BUSH);
@@ -433,9 +434,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
                 .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
                         .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
                 .add(LootItem.lootTableItem(block))));
+        // Only the waterlogged root segment owns the mint item drop.
         add(ModBlocks.WATER_MINT, block -> LootTable.lootTable().withPool(LootPool.lootPool()
                 .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
-                        .hasProperty(VariableHeightPlantBlock.SEGMENT, 0)))
+                        .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
                 .add(LootItem.lootTableItem(block))));
     }
 }

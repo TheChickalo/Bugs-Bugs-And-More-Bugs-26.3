@@ -572,7 +572,7 @@ public class ModBlocks {
     public static final Block STRIPPED_WISTERIA_LOG = registerBlock("stripped_wisteria_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_WISTERIA_WOOD = registerBlock("stripped_wisteria_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WISTERIA_PLANKS = registerBlock("wisteria_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WISTERIA_SAPLING = registerBlock("wisteria_sapling", p -> new SaplingBlock(ModTreeGrowers.WISTERIA,
@@ -633,7 +633,7 @@ public class ModBlocks {
     public static final Block MARSH_MARIGOLD = registerBlock("marsh_marigold", p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F, p.noCollision().instabreak().sound(SoundType.GRASS)));
     public static final Block WATER_SEDGE = registerBlock("water_sedge", p -> new FlexibleWetlandPlantBlock(3, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
     public static final Block MARSH_MARIGOLD_WATER = registerBlock("marsh_marigold_water", p -> new FlexibleWetlandPlantBlock(2, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
-    public static final VariableHeightPlantBlock WATER_MINT = (VariableHeightPlantBlock) registerBlock("water_mint", p -> new VariableHeightPlantBlock(2, p.noCollision().instabreak().randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final WaterMintBlock WATER_MINT = (WaterMintBlock) registerBlock("water_mint", p -> new WaterMintBlock(p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
 
     // Elsewhere forest detailing; models/blockstates manually mapped in assets/.
@@ -642,6 +642,7 @@ public class ModBlocks {
     public static final Block HANGING_FOREST_MOSS = registerBlock("hanging_forest_moss", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.POPPED)));
     public static final Block LIVERWORT = registerBlock("liverwort", p -> new CarpetBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
     public static final Block CLUBMOSS = registerBlock("clubmoss", p -> new CarpetBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block CLUBMOSS_SPRIG = registerBlock("clubmoss_sprig", p -> new ClubmossSprigBlock(p.noCollision().instabreak().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
     public static final Block BRACKET_FUNGUS = registerBlock("bracket_fungus", p -> new BracketFungusBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.FUNGUS).pushReaction(PushReaction.POPPED)));
 
     public static final Block FALLEN_AUTUMN_LEAVES = registerBlock("fallen_autumn_leaves", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
