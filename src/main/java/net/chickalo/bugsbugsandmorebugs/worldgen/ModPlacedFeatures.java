@@ -27,6 +27,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> GINKGO_MIXED_PLACED_KEY = registerKey("ginkgo_mixed_placed");
     public static final ResourceKey<PlacedFeature> MAPLE_SPARSE_PLACED_KEY = registerKey("maple_sparse_placed");
     public static final ResourceKey<PlacedFeature> ELSEWHERE_FLORA_DENSE_PLACED_KEY = registerKey("elsewhere_flora_dense_placed");
+    public static final ResourceKey<PlacedFeature> FOREST_MICRO_TERRAIN_PLACED_KEY = registerKey("forest_micro_terrain_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_DENSE_PLACED_KEY = registerKey("wetland_reeds_dense_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_WILLOW_PLACED_KEY = registerKey("wetland_reeds_willow_placed");
     public static final ResourceKey<PlacedFeature> WILLOW_SHALLOWS_PLACED_KEY = registerKey("willow_shallows_placed");
@@ -156,6 +157,9 @@ public class ModPlacedFeatures {
         // A deterministic meandering channel along cedar rainforest terrain.
         register(context, RAINFOREST_CREEKS_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.RAINFOREST_CREEKS_KEY),
+                List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, FOREST_MICRO_TERRAIN_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.FOREST_MICRO_TERRAIN_KEY),
                 List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WILLOW_SHALLOWS_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WILLOW_SHALLOWS_KEY),

@@ -43,6 +43,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> RAINFOREST_CREEKS_KEY = registerKey("rainforest_creeks");
     public static final ResourceKey<Feature> MOUNTAIN_RANGE_KEY = registerKey("mountain_range");
     public static final ResourceKey<Feature> ELSEWHERE_FLORA_KEY = registerKey("elsewhere_flora");
+    public static final ResourceKey<Feature> FOREST_MICRO_TERRAIN_KEY = registerKey("forest_micro_terrain");
     public static final ResourceKey<Feature> LAVA_CLEANUP_KEY = registerKey("lava_cleanup");
     public static final ResourceKey<Feature> HINOKI_KEY = registerKey("hinoki");
     public static final ResourceKey<Feature> HINOKI_SMALL_KEY = registerKey("hinoki_small");
@@ -155,6 +156,7 @@ public class ModFeatures {
         )).build());
         context.register(MIMOSA_HABITAT_KEY, new ForestHabitatFeature(4));
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
+        context.register(FOREST_MICRO_TERRAIN_KEY, new ForestMicroTerrainFeature());
         context.register(WILLOW_SHALLOWS_KEY, new WillowShallowsFeature());
         context.register(WILLOW_POOLS_KEY, new WillowPoolsFeature());
         context.register(RAINFOREST_CREEKS_KEY, new RainforestCreeksFeature());

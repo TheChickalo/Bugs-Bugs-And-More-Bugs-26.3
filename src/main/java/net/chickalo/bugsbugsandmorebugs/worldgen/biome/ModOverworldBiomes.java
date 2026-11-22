@@ -517,6 +517,8 @@ public class ModOverworldBiomes {
     /** wisteria veilwood: forest microhabitats are embedded inside the feature placer. */
     public static Biome wisteriaVeilwood(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         
         addVegetation(generation, ModPlacedFeatures.WISTERIA_TREE_PLACED_KEY,
                 ModPlacedFeatures.WISTERIA_HABITAT_PLACED_KEY);
@@ -532,6 +534,8 @@ public class ModOverworldBiomes {
     /** willow backwaters: forest microhabitats are embedded inside the feature placer. */
     public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.WILLOW_SHALLOWS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LAKES,
@@ -553,6 +557,8 @@ public class ModOverworldBiomes {
     public static Biome ancientCedarRainforest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.RAINFOREST_CREEKS_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.CEDAR_HABITAT_PLACED_KEY);
@@ -568,6 +574,8 @@ public class ModOverworldBiomes {
     /** persimmon woodlands: forest microhabitats are embedded inside the feature placer. */
     public static Biome persimmonWoodlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         
         addVegetation(generation, ModPlacedFeatures.PERSIMMON_TREE_PLACED_KEY,
                 ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
@@ -585,6 +593,8 @@ public class ModOverworldBiomes {
     /** silkflower savanna: forest microhabitats are embedded inside the feature placer. */
     public static Biome silkflowerSavanna(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         
         addVegetation(generation, ModPlacedFeatures.MIMOSA_TREE_PLACED_KEY,
                 ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
