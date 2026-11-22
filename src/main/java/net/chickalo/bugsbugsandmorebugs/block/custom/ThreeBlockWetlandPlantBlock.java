@@ -37,7 +37,7 @@ public class ThreeBlockWetlandPlantBlock extends BushBlock implements SimpleWate
     @Override protected boolean mayPlaceOn(BlockState ground,BlockGetter level,BlockPos pos){
         return ground.is(Blocks.MUD)||ground.is(Blocks.CLAY)||ground.is(Blocks.DIRT)
             ||ground.is(Blocks.GRASS_BLOCK)||ground.is(Blocks.COARSE_DIRT)
-            ||ground.is(Blocks.PODZOL)||ground.is(ModBlocks.LOAM)||ground.is(ModBlocks.GRASSY_LOAM);
+            ||ground.is(Blocks.PODZOL)||ground.is(ModBlocks.LOAM)||ground.is(ModBlocks.GRASSY_LOAM)||ground.is(ModBlocks.SILT);
     }
     @Override protected boolean canSurvive(BlockState state,LevelReader level,BlockPos pos){
         int part=state.getValue(PART);

@@ -61,7 +61,18 @@ public class ModFeatures {
     public static final ResourceKey<Feature> STONE_FOREST_SPIRES_KEY = registerKey("stone_forest_spires");
     public static final ResourceKey<Feature> AMPHIBOLITE_DEPOSIT_KEY = registerKey("amphibolite_deposit");
 
+    public static final ResourceKey<Feature> WISTERIA_TREE_KEY = registerKey("wisteria_tree");
+    public static final ResourceKey<Feature> WILLOW_TREE_KEY = registerKey("willow_tree");
+    public static final ResourceKey<Feature> CEDAR_TREE_KEY = registerKey("cedar_tree");
+    public static final ResourceKey<Feature> PERSIMMON_TREE_KEY = registerKey("persimmon_tree");
+    public static final ResourceKey<Feature> MIMOSA_TREE_KEY = registerKey("mimosa_tree");
+
     public static void bootstrap(BootstrapContext<Feature> context) {
+        context.register(WISTERIA_TREE_KEY, new ForestHabitatFeature(0));
+        context.register(WILLOW_TREE_KEY, new ForestHabitatFeature(1));
+        context.register(CEDAR_TREE_KEY, new ForestHabitatFeature(2));
+        context.register(PERSIMMON_TREE_KEY, new ForestHabitatFeature(3));
+        context.register(MIMOSA_TREE_KEY, new ForestHabitatFeature(4));
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
         context.register(VOLCANIC_MAGMA_PATCH_KEY, new VolcanicMagmaPatchFeature());
         context.register(HINOKI_BOULDER_KEY, new HinokiBoulderFeature());

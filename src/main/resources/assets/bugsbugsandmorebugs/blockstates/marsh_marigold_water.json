@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "part=0,short=false,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_lower"
+    },
+    "part=0,short=false,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_lower"
+    },
+    "part=0,short=true,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_lower"
+    },
+    "part=0,short=true,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_lower"
+    },
+    "part=1,short=false,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=1,short=false,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=1,short=true,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=1,short=true,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=2,short=false,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=2,short=false,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=2,short=true,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    },
+    "part=2,short=true,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/marsh_marigold_upper"
+    }
+  }
+}

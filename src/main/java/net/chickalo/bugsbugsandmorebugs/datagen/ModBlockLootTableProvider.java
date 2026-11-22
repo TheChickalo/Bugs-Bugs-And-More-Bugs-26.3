@@ -330,5 +330,70 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
                 .when(this.hasShears())
                 .add(LootItem.lootTableItem(block))));
 
+        dropSelf(ModBlocks.WISTERIA_LOG);
+        dropSelf(ModBlocks.WISTERIA_WOOD);
+        dropSelf(ModBlocks.WISTERIA_PLANKS);
+        dropSelf(ModBlocks.WISTERIA_LEAVES);
+        dropSelf(ModBlocks.WISTERIA_SAPLING);
+        dropSelf(ModBlocks.STRIPPED_WISTERIA_LOG);
+        dropSelf(ModBlocks.STRIPPED_WISTERIA_WOOD);
+        dropSelf(ModBlocks.WILLOW_LOG);
+        dropSelf(ModBlocks.WILLOW_WOOD);
+        dropSelf(ModBlocks.WILLOW_PLANKS);
+        dropSelf(ModBlocks.WILLOW_LEAVES);
+        dropSelf(ModBlocks.WILLOW_SAPLING);
+        dropSelf(ModBlocks.STRIPPED_WILLOW_LOG);
+        dropSelf(ModBlocks.STRIPPED_WILLOW_WOOD);
+        dropSelf(ModBlocks.CEDAR_LOG);
+        dropSelf(ModBlocks.CEDAR_WOOD);
+        dropSelf(ModBlocks.CEDAR_PLANKS);
+        dropSelf(ModBlocks.CEDAR_LEAVES);
+        dropSelf(ModBlocks.CEDAR_SAPLING);
+        dropSelf(ModBlocks.STRIPPED_CEDAR_LOG);
+        dropSelf(ModBlocks.STRIPPED_CEDAR_WOOD);
+        dropSelf(ModBlocks.PERSIMMON_LOG);
+        dropSelf(ModBlocks.PERSIMMON_WOOD);
+        dropSelf(ModBlocks.PERSIMMON_PLANKS);
+        dropSelf(ModBlocks.PERSIMMON_LEAVES);
+        dropSelf(ModBlocks.PERSIMMON_SAPLING);
+        dropSelf(ModBlocks.STRIPPED_PERSIMMON_LOG);
+        dropSelf(ModBlocks.STRIPPED_PERSIMMON_WOOD);
+        dropSelf(ModBlocks.MIMOSA_LOG);
+        dropSelf(ModBlocks.MIMOSA_WOOD);
+        dropSelf(ModBlocks.MIMOSA_PLANKS);
+        dropSelf(ModBlocks.MIMOSA_LEAVES);
+        dropSelf(ModBlocks.MIMOSA_SAPLING);
+        dropSelf(ModBlocks.STRIPPED_MIMOSA_LOG);
+        dropSelf(ModBlocks.STRIPPED_MIMOSA_WOOD);
+        dropSelf(ModBlocks.SILT);
+        dropSelf(ModBlocks.WILLOW_ROOTS);
+        dropSelf(ModBlocks.HANGING_WILLOW_LEAVES);
+        dropSelf(ModBlocks.HANGING_WISTERIA_BLOSSOMS);
+        dropSelf(ModBlocks.CLIMBING_WISTERIA_VINE);
+        dropSelf(ModBlocks.WILD_VIOLET);
+        dropSelf(ModBlocks.MARSH_MARIGOLD);
+        add(ModBlocks.FALLEN_WISTERIA_PETALS, block -> {
+            var table = LootTable.lootTable();
+            for (int amount = 1; amount <= 4; amount++) {
+                table.withPool(LootPool.lootPool()
+                        .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                                .hasProperty(BlockStateProperties.SEGMENT_AMOUNT, amount)))
+                        .add(LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(
+                                ContextIntProviders.between(amount, amount)))));
+            }
+            return table;
+        });
+        add(ModBlocks.WATER_SEDGE, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
+                .add(LootItem.lootTableItem(block))));
+        add(ModBlocks.MARSH_MARIGOLD_WATER, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(ThreeBlockWetlandPlantBlock.PART, 0)))
+                .add(LootItem.lootTableItem(block))));
+        add(ModBlocks.WATER_MINT, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(MatchBlock.blockMatches(this.blocks, block, StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(VariableHeightPlantBlock.SEGMENT, 0)))
+                .add(LootItem.lootTableItem(block))));
     }
 }

@@ -498,6 +498,76 @@ public class ModOverworldBiomes {
                 0x4F928C, 0x79A56E, 0x71A174, 0x98CCD6, 0xBACDC6, 84);
     }
 
+
+    /** wisteria veilwood: forest microhabitats are embedded inside the feature placer. */
+    public static Biome wisteriaVeilwood(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        
+        addVegetation(generation, ModPlacedFeatures.WISTERIA_HABITAT_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        return minorBiome(generation, 0.70F, 0.86F,
+                0x608F8A, 0x78AC75,
+                0x6F9F70, 0x9BCEE2,
+                0xC2CFD3, 0);
+    }
+
+
+    /** willow backwaters: forest microhabitats are embedded inside the feature placer. */
+    public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_DENSE_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY);
+        
+        
+        return minorBiome(generation, 0.66F, 0.96F,
+                0x6EABA1, 0x6C9D68,
+                0x5B8F69, 0x9BCEDA,
+                0xC3D4CF, 0);
+    }
+
+
+    /** ancient cedar rainforest: forest microhabitats are embedded inside the feature placer. */
+    public static Biome ancientCedarRainforest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        addVegetation(generation, ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.CEDAR_HABITAT_PLACED_KEY);
+        
+        BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        return minorBiome(generation, 0.34F, 0.94F,
+                0x537D88, 0x527F62,
+                0x446D59, 0xA3C6CF,
+                0xA5BFB5, 0);
+    }
+
+
+    /** persimmon woodlands: forest microhabitats are embedded inside the feature placer. */
+    public static Biome persimmonWoodlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        
+        addVegetation(generation, ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        
+        return minorBiome(generation, 0.72F, 0.60F,
+                0x689B92, 0xA9B76D,
+                0xBA9F61, 0xA7D0DF,
+                0xDBD4B5, 0);
+    }
+
+
+    /** silkflower savanna: forest microhabitats are embedded inside the feature placer. */
+    public static Biome silkflowerSavanna(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        
+        addVegetation(generation, ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
+        BiomeDefaultFeatures.addPlainGrass(generation);
+        
+        return minorBiome(generation, 0.91F, 0.35F,
+                0x74B1A5, 0xADB879,
+                0x8FA578, 0xB9DAE3,
+                0xDAD8C2, 0);
+    }
+
     @SafeVarargs
     private static void addVegetation(BiomeGenerationSettings.Builder generation,
                                        ResourceKey<PlacedFeature>... features) {

@@ -36,6 +36,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
+                woodFromLogs(ModBlocks.WISTERIA_WOOD, ModBlocks.WISTERIA_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_WISTERIA_WOOD, ModBlocks.STRIPPED_WISTERIA_LOG);
+                planksFromLogs(ModBlocks.WISTERIA_PLANKS, ModTags.Items.WISTERIA_LOGS, 4);
+                woodFromLogs(ModBlocks.WILLOW_WOOD, ModBlocks.WILLOW_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_WILLOW_WOOD, ModBlocks.STRIPPED_WILLOW_LOG);
+                planksFromLogs(ModBlocks.WILLOW_PLANKS, ModTags.Items.WILLOW_LOGS, 4);
+                woodFromLogs(ModBlocks.CEDAR_WOOD, ModBlocks.CEDAR_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_CEDAR_WOOD, ModBlocks.STRIPPED_CEDAR_LOG);
+                planksFromLogs(ModBlocks.CEDAR_PLANKS, ModTags.Items.CEDAR_LOGS, 4);
+                woodFromLogs(ModBlocks.PERSIMMON_WOOD, ModBlocks.PERSIMMON_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_PERSIMMON_WOOD, ModBlocks.STRIPPED_PERSIMMON_LOG);
+                planksFromLogs(ModBlocks.PERSIMMON_PLANKS, ModTags.Items.PERSIMMON_LOGS, 4);
+                woodFromLogs(ModBlocks.MIMOSA_WOOD, ModBlocks.MIMOSA_LOG);
+                woodFromLogs(ModBlocks.STRIPPED_MIMOSA_WOOD, ModBlocks.STRIPPED_MIMOSA_LOG);
+                planksFromLogs(ModBlocks.MIMOSA_PLANKS, ModTags.Items.MIMOSA_LOGS, 4);
+
                 // Elsewhere stone building and polishing recipes
                 stairBuilder(ModBlocks.DACITE_STAIRS, Ingredient.of(ModBlocks.DACITE))
                         .unlockedBy(getHasName(ModBlocks.DACITE), has(ModBlocks.DACITE)).save(output);

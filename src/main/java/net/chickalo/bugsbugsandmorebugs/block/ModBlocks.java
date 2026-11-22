@@ -565,6 +565,76 @@ public class ModBlocks {
                             properties.noCollision().instabreak().randomTicks().sound(SoundType.BAMBOO).pushReaction(PushReaction.POPPED)));
 
 
+    // NEW ELSEWHERE FOREST FAMILIES
+
+    public static final Block WISTERIA_LOG = registerBlock("wisteria_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WISTERIA_WOOD = registerBlock("wisteria_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_WISTERIA_LOG = registerBlock("stripped_wisteria_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_WISTERIA_WOOD = registerBlock("stripped_wisteria_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WISTERIA_PLANKS = registerBlock("wisteria_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+            AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
+            .ignitedByLava().sound(SoundType.GRASS)));
+    public static final Block WISTERIA_SAPLING = registerBlock("wisteria_sapling", p -> new SaplingBlock(ModTreeGrowers.WISTERIA,
+            p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block WILLOW_LOG = registerBlock("willow_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WILLOW_WOOD = registerBlock("willow_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_WILLOW_LOG = registerBlock("stripped_willow_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_WILLOW_WOOD = registerBlock("stripped_willow_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WILLOW_PLANKS = registerBlock("willow_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block WILLOW_LEAVES = registerBlock("willow_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+            AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
+            .ignitedByLava().sound(SoundType.GRASS)));
+    public static final Block WILLOW_SAPLING = registerBlock("willow_sapling", p -> new SaplingBlock(ModTreeGrowers.WILLOW,
+            p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block CEDAR_LOG = registerBlock("cedar_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block CEDAR_WOOD = registerBlock("cedar_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_CEDAR_LOG = registerBlock("stripped_cedar_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_CEDAR_WOOD = registerBlock("stripped_cedar_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block CEDAR_PLANKS = registerBlock("cedar_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block CEDAR_LEAVES = registerBlock("cedar_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+            AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
+            .ignitedByLava().sound(SoundType.GRASS)));
+    public static final Block CEDAR_SAPLING = registerBlock("cedar_sapling", p -> new SaplingBlock(ModTreeGrowers.CEDAR,
+            p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block PERSIMMON_LOG = registerBlock("persimmon_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block PERSIMMON_WOOD = registerBlock("persimmon_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_PERSIMMON_LOG = registerBlock("stripped_persimmon_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_PERSIMMON_WOOD = registerBlock("stripped_persimmon_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block PERSIMMON_PLANKS = registerBlock("persimmon_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block PERSIMMON_LEAVES = registerBlock("persimmon_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+            AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
+            .ignitedByLava().sound(SoundType.GRASS)));
+    public static final Block PERSIMMON_SAPLING = registerBlock("persimmon_sapling", p -> new SaplingBlock(ModTreeGrowers.PERSIMMON,
+            p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block MIMOSA_LOG = registerBlock("mimosa_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MIMOSA_WOOD = registerBlock("mimosa_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_MIMOSA_LOG = registerBlock("stripped_mimosa_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block STRIPPED_MIMOSA_WOOD = registerBlock("stripped_mimosa_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MIMOSA_PLANKS = registerBlock("mimosa_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MIMOSA_LEAVES = registerBlock("mimosa_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+            AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
+            .ignitedByLava().sound(SoundType.GRASS)));
+    public static final Block MIMOSA_SAPLING = registerBlock("mimosa_sapling", p -> new SaplingBlock(ModTreeGrowers.MIMOSA,
+            p.noCollision().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    // Elsewhere botanical palette. All textures already exist in the repository.
+    public static final Block SILT = registerBlock("silt", p -> new Block(p.strength(0.55F).sound(SoundType.MUD)));
+    public static final Block WILLOW_ROOTS = registerBlock("willow_roots", p -> new RotatedPillarBlock(p.strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HANGING_WILLOW_LEAVES = registerBlock("hanging_willow_leaves", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
+    public static final Block HANGING_WISTERIA_BLOSSOMS = registerBlock("hanging_wisteria_blossoms", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
+    public static final Block CLIMBING_WISTERIA_VINE = registerBlock("climbing_wisteria_vine", p -> new VineBlock(p.noCollision().randomTicks().instabreak().sound(SoundType.VINE)));
+    public static final Block FALLEN_WISTERIA_PETALS = registerBlock("fallen_wisteria_petals", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
+    public static final Block WILD_VIOLET = registerBlock("wild_violet", p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F, p.noCollision().instabreak().sound(SoundType.GRASS)));
+    public static final Block MARSH_MARIGOLD = registerBlock("marsh_marigold", p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F, p.noCollision().instabreak().sound(SoundType.GRASS)));
+    public static final Block WATER_SEDGE = registerBlock("water_sedge", p -> new FlexibleWetlandPlantBlock(3, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block MARSH_MARIGOLD_WATER = registerBlock("marsh_marigold_water", p -> new FlexibleWetlandPlantBlock(2, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final VariableHeightPlantBlock WATER_MINT = (VariableHeightPlantBlock) registerBlock("water_mint", p -> new VariableHeightPlantBlock(2, p.noCollision().instabreak().randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
     public static ResourceKey<Block> getRK(Block block) {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();
     }

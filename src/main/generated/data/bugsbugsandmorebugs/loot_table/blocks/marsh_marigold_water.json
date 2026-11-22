@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "bugsbugsandmorebugs:marsh_marigold_water",
+        "state": {
+          "part": "0"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:marsh_marigold_water"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

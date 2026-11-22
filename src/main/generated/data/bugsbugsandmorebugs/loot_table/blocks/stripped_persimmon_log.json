@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:stripped_persimmon_log"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

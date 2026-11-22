@@ -1,0 +1,75 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "bugsbugsandmorebugs:block/fallen_wisteria_petals",
+    "litter": "bugsbugsandmorebugs:block/fallen_wisteria_petals_2"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0.04,
+        0
+      ],
+      "to": [
+        8,
+        0.1,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        0.04,
+        0
+      ],
+      "to": [
+        16,
+        0.1,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            8,
+            0,
+            16,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            8,
+            0,
+            16,
+            8
+          ]
+        }
+      }
+    }
+  ]
+}

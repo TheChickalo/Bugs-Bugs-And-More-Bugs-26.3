@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms"
+    },
+    "tip=true": {
+      "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms_tip"
+    }
+  }
+}

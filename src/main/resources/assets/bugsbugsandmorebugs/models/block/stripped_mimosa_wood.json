@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "bugsbugsandmorebugs:block/mimosa_stripped_wood",
+    "end": "bugsbugsandmorebugs:block/mimosa_stripped_wood"
+  }
+}

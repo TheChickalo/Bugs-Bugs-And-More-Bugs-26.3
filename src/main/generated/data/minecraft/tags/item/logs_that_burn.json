@@ -1,6 +1,11 @@
 {
   "values": [
     "#bugsbugsandmorebugs:ginkgo_logs",
-    "#bugsbugsandmorebugs:maple_logs"
+    "#bugsbugsandmorebugs:maple_logs",
+    "#bugsbugsandmorebugs:wisteria_logs",
+    "#bugsbugsandmorebugs:willow_logs",
+    "#bugsbugsandmorebugs:cedar_logs",
+    "#bugsbugsandmorebugs:persimmon_logs",
+    "#bugsbugsandmorebugs:mimosa_logs"
   ]
 }

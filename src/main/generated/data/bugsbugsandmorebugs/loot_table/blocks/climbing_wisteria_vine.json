@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bugsbugsandmorebugs:climbing_wisteria_vine"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

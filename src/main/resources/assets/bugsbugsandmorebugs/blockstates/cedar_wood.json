@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "bugsbugsandmorebugs:block/cedar_wood"
+    },
+    "axis=x": {
+      "model": "bugsbugsandmorebugs:block/cedar_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "bugsbugsandmorebugs:block/cedar_wood",
+      "x": 90
+    }
+  }
+}
