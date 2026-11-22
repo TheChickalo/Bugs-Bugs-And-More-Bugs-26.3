@@ -27,7 +27,8 @@ public record WetlandReedsFeature() implements Feature {
             int y=level.getHeight(Heightmap.Types.WORLD_SURFACE,x,z)-1;
             BlockPos base=new BlockPos(x,y,z);
             if (!ModBiomeFamilies.wetlandReeds(level.getBiome(base))) continue;
-            Block target=random.nextFloat()<0.44F?ModBlocks.CATTAILS:ModBlocks.REEDS;
+            Block target=willow && random.nextInt(5)==0?ModBlocks.WATER_SEDGE:
+                    random.nextFloat()<0.44F?ModBlocks.CATTAILS:ModBlocks.REEDS;
             if(target instanceof ThreeBlockWetlandPlantBlock plant && plant.placeNaturally(level,base))placed++;
         }
         return placed>0;

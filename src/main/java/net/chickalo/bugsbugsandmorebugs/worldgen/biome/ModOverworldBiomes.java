@@ -56,6 +56,7 @@ public class ModOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_LARGE_FERN_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.MAPLE_RED_SHRUB_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.HUGE_GLOWSHROOM_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
 
         ModBiomeVegetation.addBerryBushes(biomeBuilder);
 
@@ -250,6 +251,7 @@ public class ModOverworldBiomes {
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HINOKI_GRASS_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true).temperature(0.3F).downfall(0.65F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
@@ -407,6 +409,7 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.HINOKI_TREE_PLACED_KEY,
                 ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.32F, 0.88F,
                 0x526E6B, 0x678D69, 0x61816B, 0xA1C3CB, 0x91ADB0, 116);
     }
@@ -434,7 +437,8 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.KARST_GROUND_PATCH_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultFlowers(generation);
-        addVegetation(generation, ModPlacedFeatures.HIGHLAND_MEADOW_LUSH_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.HIGHLAND_MEADOW_LUSH_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.63F, 0.52F,
                 0x57A0A0, 0x96C86C, 0x7AA967, 0x8ACFEF, 0xD4E2D7, 0);
     }
@@ -467,7 +471,8 @@ public class ModOverworldBiomes {
         addVegetation(generation,
                 ModPlacedFeatures.GLOWSHROOM_DENSE_PLACED_KEY,
                 ModPlacedFeatures.GLOWSHROOM_TREE_BASE_PLACED_KEY,
-                ModPlacedFeatures.HUGE_GLOWSHROOM_GROVE_PLACED_KEY);
+                ModPlacedFeatures.HUGE_GLOWSHROOM_GROVE_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.61F, 0.86F,
                 0x4A8473, 0x76A172, 0x719B72, 0x8CC7C4, 0x93B5AD, 0);
     }
@@ -521,7 +526,8 @@ public class ModOverworldBiomes {
                 ModPlacedFeatures.WILLOW_SHALLOWS_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_WILLOW_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.WILLOW_TREE_PLACED_KEY,
-                ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY);
+                ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         
         
         return minorBiome(generation, 0.66F, 0.96F,
@@ -536,8 +542,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         addVegetation(generation, ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.CEDAR_HABITAT_PLACED_KEY);
-        
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.34F, 0.94F,
                 0x537D88, 0x527F62,
                 0x446D59, 0xA3C6CF,
@@ -550,7 +556,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
         addVegetation(generation, ModPlacedFeatures.PERSIMMON_TREE_PLACED_KEY,
-                ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
+                ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         
         return minorBiome(generation, 0.72F, 0.60F,
@@ -565,7 +572,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
         addVegetation(generation, ModPlacedFeatures.MIMOSA_TREE_PLACED_KEY,
-                ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
+                ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY,
+                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         
         return minorBiome(generation, 0.91F, 0.35F,
