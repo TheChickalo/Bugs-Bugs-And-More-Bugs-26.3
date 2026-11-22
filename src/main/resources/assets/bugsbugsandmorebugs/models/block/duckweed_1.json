@@ -1,0 +1,42 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "bugsbugsandmorebugs:block/duckweed",
+    "litter": "bugsbugsandmorebugs:block/duckweed"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0.04,
+        1
+      ],
+      "to": [
+        8,
+        0.11,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            1,
+            1,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            1,
+            1,
+            8,
+            8
+          ]
+        }
+      }
+    }
+  ]
+}
