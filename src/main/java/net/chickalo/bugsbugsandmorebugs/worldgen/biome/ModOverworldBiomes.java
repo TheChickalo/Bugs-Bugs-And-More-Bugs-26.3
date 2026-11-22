@@ -560,8 +560,8 @@ public class ModOverworldBiomes {
         addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         return minorBiome(generation, 0.34F, 0.94F,
                 0x537D88, 0x527F62,
-                0x446D59, 0xA3C6CF,
-                0xA5BFB5, 0);
+                0x446D59, 0x8C969A,
+                0xA0A5A8, 0);
     }
 
 
