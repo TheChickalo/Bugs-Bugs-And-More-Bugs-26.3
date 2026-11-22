@@ -32,6 +32,10 @@ public class ModItems {
     public static final Item DAIKON = registerItem("daikon", properties -> new Item(properties.food(ModFoods.DAIKON, ModFoods.DAIKON_CONSUMABLE).component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(65)))));
     public static final Item DAIKON_SEEDS = registerItem("daikon_seeds",
             properties -> new BlockItem(ModBlocks.DAIKON_CROP, properties.useItemDescriptionPrefix().component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(30)))));
+    public static final Item RICE = registerItem("rice", Item::new);
+    public static final Item RICE_SEEDS = registerItem("rice_seeds",
+            properties -> new BlockItem(ModBlocks.RICE_CROP, properties.useItemDescriptionPrefix()
+                    .component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(30)))));
     public static final Item HASKAP_BERRIES = registerItem("haskap_berries",
             properties -> new BlockItem(ModBlocks.HASKAP_BERRY_BUSH, properties.useItemDescriptionPrefix().food(ModFoods.HASKAP_BERRIES, ModFoods.HASKAP_BERRIES_CONSUMABLE).component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(30)))));
     public static final Item BARBERRIES = registerItem("barberries",
@@ -106,6 +110,8 @@ public class ModItems {
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
             output.accept(ModItems.DAIKON_SEEDS);
+            output.accept(ModItems.RICE_SEEDS);
+            output.accept(ModItems.RICE);
         });
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(output -> {
             output.accept(ModItems.DAIKON);

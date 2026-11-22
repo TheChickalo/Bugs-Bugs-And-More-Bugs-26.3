@@ -1,0 +1,67 @@
+{
+  "variants": {
+    "age=0,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_0"
+    },
+    "age=0,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_3"
+    },
+    "age=0,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_5"
+    },
+    "age=1,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_1"
+    },
+    "age=1,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_3"
+    },
+    "age=1,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_5"
+    },
+    "age=2,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_2"
+    },
+    "age=2,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_3"
+    },
+    "age=2,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_5"
+    },
+    "age=3,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_3"
+    },
+    "age=3,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_3"
+    },
+    "age=3,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_5"
+    },
+    "age=4,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_4"
+    },
+    "age=4,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_4"
+    },
+    "age=4,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_5"
+    },
+    "age=5,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_5"
+    },
+    "age=5,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_5"
+    },
+    "age=5,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_5"
+    },
+    "age=6,part=0": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_bottom_6"
+    },
+    "age=6,part=1": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_middle_6"
+    },
+    "age=6,part=2": {
+      "model": "bugsbugsandmorebugs:block/rice_crop_top_6"
+    }
+  }
+}
