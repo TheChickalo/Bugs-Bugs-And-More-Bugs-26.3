@@ -193,9 +193,15 @@ assert "Math.pow(0.54,depth)" in mountain_java
 assert "private static boolean room(" in mountain_java
 rain_java = read(src / "entity/client/BugsBugsandMoreBugsClient.java")
 server_java = read(src / "BugsBugsAndMoreBugs.java")
-assert "server.setWeatherParameters(0,12000,true,false)" in server_java
-assert "ELSEWHEREDIM_LEVEL_KEY" in server_java
-assert "ParticleTypes.RAIN" not in rain_java, "Only actual server rain should remain"
+weather_mixin = read(src / "mixin/CedarWeatherRendererMixin.java")
+mixin_config = json.loads(read(root / "resources/bugsbugsandmorebugs.mixins.json"))
+assert "server.setWeatherParameters(" not in server_java, "Global server rain must remain unmodified"
+assert "CedarWeatherRendererMixin" in mixin_config["client"]
+assert "WeatherEffectRenderer.class" in weather_mixin
+assert "bbb$localRainIntensity(" in weather_mixin
+assert "bbb$onlyCedarColumns(" in weather_mixin
+assert "ModBiomeFamilies.cedar(level.getBiome(pos))" in weather_mixin
+assert "ParticleTypes.RAIN" not in rain_java, "No fake rainforest raindrop spam"
 
 # The climate-only Willow constraint targets rivers/coast and keeps river nodes.
 dimension_biomes = climates
@@ -216,13 +222,29 @@ microfamilies={
     "persimmon_woodlands":["amber_groves","golden_meadows","bramble_terraces"],
     "silkflower_savanna":["blossom_drifts","feathergrass_prairie","sunwashed_rises"]
 }
+micro_terrain = "bugsbugsandmorebugs:forest_micro_terrain_placed"
+sparse={
+    "petal_glades":("wisteria_tree_placed","wisteria_glade_tree_placed",1),
+    "oxbow_banks":("willow_tree_placed","willow_oxbow_tree_placed",2),
+    "golden_meadows":("persimmon_tree_placed","persimmon_meadow_tree_placed",1),
+    "feathergrass_prairie":("mimosa_tree_placed","mimosa_prairie_tree_placed",1)
+}
 for parent,children in microfamilies.items():
     parent_features=json.loads(read(data / f"bugsbugsandmorebugs/worldgen/biome/{parent}.json"))["features"]
+    assert micro_terrain in parent_features[1], f"Missing terrain stage in {parent}"
     for child in children:
         child_file=data / f"bugsbugsandmorebugs/worldgen/biome/{child}.json"
         assert child_file.exists(), f"Missing named /locate biome: {child}"
         child_features=json.loads(read(child_file))["features"]
-        assert child_features == parent_features, f"Microbiome {child} lost tree or vegetation features"
+        expected=[list(step) for step in parent_features]
+        if child in sparse:
+            old, new, density = sparse[child]
+            old="bugsbugsandmorebugs:"+old
+            new="bugsbugsandmorebugs:"+new
+            expected[9][expected[9].index(old)] = new
+            placed=json.loads(read(data / f"bugsbugsandmorebugs/worldgen/placed_feature/{new.split(':')[1]}.json"))
+            assert placed["placement"][0]["count"] == density
+        assert child_features == expected, f"Biome {child} has wrong distinct feature order"
         assert sum(b["biome"] == f"bugsbugsandmorebugs:{child}" for b in climates) >= 2
 forest_families=read(src / "worldgen/biome/ModBiomeFamilies.java")
 assert all(name.upper() in forest_families for children in microfamilies.values() for name in children)
@@ -241,7 +263,15 @@ fungi_java=read(src / "block/custom/BracketFungusBlock.java")
 assert "IntegerProperty.create(\"variation\", 0, 3)" in fungi_java
 cedar_biome=json.loads(read(data / "bugsbugsandmorebugs/worldgen/biome/ancient_cedar_rainforest.json"))
 assert cedar_biome["attributes"]["minecraft:visual/sky_color"] == "#8c969a"
-print("Fifteen registered locate-able micro-biomes, smooth willow pools and global rain verified")
+terrain_java=read(src / "worldgen/feature/ForestMicroTerrainFeature.java")
+assert "oxbowDistance(" in terrain_java and "waterCut(" in terrain_java
+assert "erode(" in terrain_java and "Rainwashed Gullies" in terrain_java
+assert terrain_java.count("case ") >= 15
+configured=json.loads(read(data / "bugsbugsandmorebugs/worldgen/feature/forest_micro_terrain.json"))
+placed=json.loads(read(data / "bugsbugsandmorebugs/worldgen/placed_feature/forest_micro_terrain_placed.json"))
+assert configured["type"] == "bugsbugsandmorebugs:forest_micro_terrain"
+assert placed["feature"] == "bugsbugsandmorebugs:forest_micro_terrain"
+print("Real forest landforms, sparse biome tree canopies and Cedar-only weather rendering verified")
 
 print("Forest texture segments, 15 microhabitats, coastal Willow climates and ranges verified")
 
