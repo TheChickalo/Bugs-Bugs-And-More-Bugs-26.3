@@ -263,43 +263,63 @@ public record ForestHabitatFeature(int kind) implements Feature {
     }
 
     /**
-     * A broad, slightly flattened weeping willow. Rising branches form the
-     * umbrella ribs; overlapping foliage and long skirts cascade down from them.
+     * Face-connected, gently rising radial branch. Even diagonal limbs receive
+     * orthogonal connectors, keeping leaves supported and wood paths natural.
+     */
+    private void branchTo(WorldGenLevel level, BlockPos root, double angle, int reach, int rise) {
+        BlockPos previous=root;
+        for(int step=1;step<=reach;step++) {
+            int x=Math.round((float)(Math.cos(angle)*step));
+            int z=Math.round((float)(Math.sin(angle)*step));
+            int y=step*rise/reach;
+            BlockPos target=root.offset(x,y,z);
+            int px=previous.getX(),py=previous.getY(),pz=previous.getZ();
+            if(px!=target.getX()){
+                int sign=Integer.signum(target.getX()-px);
+                while(px!=target.getX()){px+=sign;wood(level,new BlockPos(px,py,pz),Direction.Axis.X);}
+            }
+            if(pz!=target.getZ()){
+                int sign=Integer.signum(target.getZ()-pz);
+                while(pz!=target.getZ()){pz+=sign;wood(level,new BlockPos(px,py,pz),Direction.Axis.Z);}
+            }
+            while(py<target.getY()){py++;wood(level,new BlockPos(px,py,pz),Direction.Axis.Y);}
+            wood(level,target,Math.abs(Math.cos(angle))>=Math.abs(Math.sin(angle))
+                    ?Direction.Axis.X:Direction.Axis.Z);
+            previous=target;
+        }
+    }
+
+    /**
+     * Willow canopies are made of separate drooping fronds, not solid hemispheres.
      */
     private void willowCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
-        int radius = 5 + random.nextInt(2);
-        for (Direction direction : SIDES) {
-            int reach = radius - 1 + random.nextInt(2);
-            BlockPos previous = top.below(3);
-            for (int step = 1; step <= reach; step++) {
-                int rise = step > reach - 2 ? 2 : step > 2 ? 1 : 0;
-                BlockPos next = top.relative(direction, step).below(3 - rise);
-                wood(level, next, direction.getAxis());
-                if (next.getY() > previous.getY())
-                    wood(level, next.below(), Direction.Axis.Y);
-                previous = next;
-            }
-            // Branch tips support the long, drooping edges of the crown.
-            for (int dy = -2; dy <= 1; dy++) {
-                int layerRadius = dy == 1 ? 1 : dy == -2 ? 2 : 3;
-                for (int x = -layerRadius; x <= layerRadius; x++)
-                    for (int z = -layerRadius; z <= layerRadius; z++)
-                        if (x*x + z*z <= layerRadius*layerRadius + 1)
-                            leaf(level, previous.offset(x, dy, z));
+        int radius=6+random.nextInt(2);
+        double phase=random.nextDouble()*Math.PI*2.0;
+        for(int arm=0;arm<8;arm++){
+            double angle=phase+arm*Math.PI/4.0+(random.nextDouble()-0.5)*0.27;
+            int reach=4+random.nextInt(3);
+            BlockPos root=top.below(3);
+            branchTo(level,root,angle,reach,2);
+            int x=Math.round((float)(Math.cos(angle)*reach));
+            int z=Math.round((float)(Math.sin(angle)*reach));
+            BlockPos end=root.offset(x,2,z);
+            for(int dy=-2;dy<=1;dy++){
+                int r=dy==1?1:dy==-2?2:3;
+                for(int dx=-r;dx<=r;dx++)for(int dz=-r;dz<=r;dz++){
+                    int d2=dx*dx+dz*dz;
+                    if(d2>r*r || (d2>=r*r-2 && random.nextFloat()<0.25F))continue;
+                    leaf(level,end.offset(dx,dy,dz));
+                }
             }
         }
-
-        // A connected central canopy with a flattened crown and open underside.
-        int[] radii = {3, 5, radius, radius, 4, 2};
-        for (int layer = 0; layer < radii.length; layer++) {
-            int r = radii[layer];
-            for (int x = -r; x <= r; x++) for (int z = -r; z <= r; z++) {
-                int d2 = x*x + z*z;
-                if (d2 > r*r+1 || (d2 >= r*r-1 && random.nextFloat() < 0.12F)) continue;
-                leaf(level, top.offset(x, layer-3, z));
-            }
+        int[] middle={2,3,4,3,2};
+        for(int layer=0;layer<middle.length;layer++){
+            int r=middle[layer];
+            for(int x=-r;x<=r;x++)for(int z=-r;z<=r;z++)
+                if(x*x+z*z<=r*r && (x*x+z*z<=5||random.nextFloat()>0.20F))
+                    leaf(level,top.offset(x,layer-2,z));
         }
-        hangCurtains(level, top.above(1), radius+1, random);
+        hangCurtains(level,top.above(1),radius+2,random);
     }
 
     /**
@@ -342,64 +362,57 @@ public record ForestHabitatFeature(int kind) implements Feature {
         }
     }
 
-    /** Layered, irregular orchard crown; no single spherical ball of foliage. */
-    private void persimmonCrown(WorldGenLevel level, BlockPos top,
-                                RandomSource random, int motif) {
-        int branches = 4 + random.nextInt(2);
-        Direction first = SIDES[random.nextInt(SIDES.length)];
-        for (int i = 0; i < branches; i++) {
-            Direction dir = SIDES[(first.get2DDataValue()+i)%SIDES.length];
-            int reach = 2 + random.nextInt(3);
-            int drop = 2 + random.nextInt(2);
-            BlockPos end = top.below(drop);
-            for (int step=1; step<=reach; step++) {
-                int rise = step >= 2 ? (step-1)/2 : 0;
-                end = top.relative(dir, step).below(Math.max(0, drop-rise));
-                wood(level, end, dir.getAxis());
-                if (step>1 && step%2==0) wood(level, end.below(), Direction.Axis.Y);
-            }
-            int crownRadius = motif == 0 ? 3 : 2+random.nextInt(2);
-            for (int dy=-2;dy<=2;dy++) {
-                int r = dy==2 ? crownRadius-1 : dy==-2 ? 1 : crownRadius;
-                for(int dx=-r;dx<=r;dx++) for(int dz=-r;dz<=r;dz++) {
-                    if (dx*dx+dz*dz > r*r+1) continue;
-                    if (dx*dx+dz*dz >= r*r && random.nextFloat()<0.24F) continue;
+    /** Irregular diagonal orchard branches and separate, rounded leaf lobes. */
+    private void persimmonCrown(WorldGenLevel level, BlockPos top, RandomSource random, int motif) {
+        int branches=4+random.nextInt(3);
+        double phase=random.nextDouble()*Math.PI*2.0;
+        for(int arm=0;arm<branches;arm++){
+            double angle=phase+arm*Math.PI*2.0/branches+(random.nextDouble()-0.5)*0.3;
+            int reach=3+random.nextInt(2);
+            BlockPos base=top.below(3);
+            branchTo(level,base,angle,reach,2);
+            int x=Math.round((float)(Math.cos(angle)*reach));
+            int z=Math.round((float)(Math.sin(angle)*reach));
+            BlockPos end=base.offset(x,2,z);
+            int r=motif==0&&random.nextBoolean()?3:2;
+            for(int dy=-1;dy<=2;dy++){
+                int ring=dy==2?r-1:r;
+                for(int dx=-ring;dx<=ring;dx++)for(int dz=-ring;dz<=ring;dz++){
+                    float shape=(dx*dx+dz*dz)/(float)(ring*ring)+(dy*dy)/10.0F;
+                    if(shape>1.15F || (shape>0.88F&&random.nextInt(5)==0))continue;
                     leaf(level,end.offset(dx,dy,dz));
                 }
             }
         }
-        // A narrower, higher central crown interrupts the orchard branches.
-        for (int dy=0;dy<=2;dy++) {
-            int radius = dy==2 ? 1 : 2;
-            for(int x=-radius;x<=radius;x++) for(int z=-radius;z<=radius;z++)
-                if(x*x+z*z<=radius*radius+1) leaf(level,top.offset(x,dy,z));
-        }
+        // A smaller central canopy prevents the crown from resembling exposed spokes.
+        for(int dy=0;dy<=2;dy++)for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++)
+            if(x*x+z*z<=(dy==2?2:4)&&random.nextInt(8)!=0)
+                leaf(level,top.offset(x,dy,z));
     }
 
-    /**
-     * A light umbrella-shaped Mimosa canopy, but with connected leaves near
-     * every bark-covered limb: no floating orphan leaf clusters to decay.
-     */
+    /** Mimosa leaves sit in delicate flattened pads on a forked, open crown. */
     private void mimosaCrown(WorldGenLevel level, BlockPos top, RandomSource random) {
-        int radius = 4 + random.nextInt(2);
-        for (Direction dir : SIDES) {
-            int reach = radius-1;
-            for (int step=1;step<=reach;step++) {
-                BlockPos segment = top.relative(dir,step).below(step<3?2:1);
-                wood(level,segment,dir.getAxis());
-                if (step==3) wood(level,segment.below(),Direction.Axis.Y);
+        int arms=5+random.nextInt(3);
+        double phase=random.nextDouble()*Math.PI*2.0;
+        for(int arm=0;arm<arms;arm++){
+            double angle=phase+arm*Math.PI*2.0/arms+(random.nextDouble()-0.5)*0.30;
+            int reach=3+random.nextInt(3);
+            BlockPos fork=top.below(3);
+            branchTo(level,fork,angle,reach,2);
+            int x=Math.round((float)(Math.cos(angle)*reach));
+            int z=Math.round((float)(Math.sin(angle)*reach));
+            BlockPos end=fork.offset(x,2,z);
+            int r=2+random.nextInt(2);
+            for(int dy=-1;dy<=1;dy++)for(int dx=-r;dx<=r;dx++)for(int dz=-r;dz<=r;dz++){
+                float shape=(dx*dx+dz*dz)/(float)(r*r)+dy*dy*0.32F;
+                if(shape>1.1F || (shape>0.7F&&random.nextInt(5)==0))continue;
+                leaf(level,end.offset(dx,dy,dz));
             }
         }
-        // Layer radii create a wide flat parasol, not a sphere.
-        int[] radii = {3,radius,radius,Math.max(2,radius-2)};
-        for(int layer=0;layer<radii.length;layer++) {
-            int r=radii[layer];
-            for(int x=-r;x<=r;x++)for(int z=-r;z<=r;z++) {
-                if(x*x+z*z > r*r+1) continue;
-                // Never punch holes near the supporting branches.
-                if(x*x+z*z > (r-1)*(r-1) && random.nextFloat()<0.16F) continue;
-                leaf(level,top.offset(x,layer-2,z));
-            }
+        // Open the center: no huge single pancake of foliage.
+        for(int dy=-1;dy<=1;dy++)for(int x=-2;x<=2;x++)for(int z=-2;z<=2;z++){
+            if(x*x+z*z>5||(x*x+z*z>2&&random.nextInt(4)==0))continue;
+            leaf(level,top.offset(x,dy,z));
         }
     }
 
