@@ -540,6 +540,8 @@ public class ModOverworldBiomes {
     /** ancient cedar rainforest: forest microhabitats are embedded inside the feature placer. */
     public static Biome ancientCedarRainforest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.RAINFOREST_CREEKS_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.CEDAR_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
