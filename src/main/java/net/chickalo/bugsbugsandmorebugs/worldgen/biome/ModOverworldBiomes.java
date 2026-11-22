@@ -540,11 +540,16 @@ public class ModOverworldBiomes {
     /** ancient cedar rainforest: forest microhabitats are embedded inside the feature placer. */
     public static Biome ancientCedarRainforest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
+        // Gully/stream carving precedes roots, trees and moss in this biome.
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.CEDAR_CREEK_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.CEDAR_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
         addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
-        return minorBiome(generation, 0.34F, 0.94F,
+        // Max downfall encourages normal rain during the dimension's weather;
+        // client-side local rainforest drizzle is handled separately.
+        return minorBiome(generation, 0.34F, 1.00F,
                 0x537D88, 0x527F62,
                 0x446D59, 0xA3C6CF,
                 0xA5BFB5, 0);

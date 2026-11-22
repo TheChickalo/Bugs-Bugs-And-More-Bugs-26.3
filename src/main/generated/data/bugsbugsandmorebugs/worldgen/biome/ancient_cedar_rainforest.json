@@ -11,7 +11,7 @@
     "minecraft:visual/sky_color": "#a3c6cf"
   },
   "carvers": [],
-  "downfall": 0.94,
+  "downfall": 1,
   "effects": {
     "foliage_color": "#446d59",
     "grass_color": "#527f62",
@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:cedar_creek_placed"
+    ],
     [],
     [],
     [],

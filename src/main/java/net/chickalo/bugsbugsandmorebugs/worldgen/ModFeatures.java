@@ -73,6 +73,7 @@ public class ModFeatures {
     public static final ResourceKey<Feature> WISTERIA_HABITAT_KEY = registerKey("wisteria_habitat");
     public static final ResourceKey<Feature> WILLOW_TREE_KEY = registerKey("willow_tree");
     public static final ResourceKey<Feature> CEDAR_TREE_KEY = registerKey("cedar_tree");
+    public static final ResourceKey<Feature> CEDAR_CREEK_KEY = registerKey("cedar_creek");
     public static final ResourceKey<Feature> PERSIMMON_TREE_KEY = registerKey("persimmon_tree");
     public static final ResourceKey<Feature> MIMOSA_TREE_KEY = registerKey("mimosa_tree");
     public static final ResourceKey<Feature> WILLOW_HABITAT_KEY = registerKey("willow_habitat");
@@ -116,6 +117,7 @@ public class ModFeatures {
         )).build());
         context.register(WILLOW_HABITAT_KEY, new ForestHabitatFeature(1));
         context.register(CEDAR_TREE_KEY, new ForestHabitatFeature(2));
+        context.register(CEDAR_CREEK_KEY, new CedarCreekFeature());
 
         // Persimmon: natural small orchard tree. Vanilla Azalea's subtly
         // bending trunk and its irregularly scattered foliage remove the

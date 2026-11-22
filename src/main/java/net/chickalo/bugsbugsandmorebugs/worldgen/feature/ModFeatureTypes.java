@@ -17,6 +17,9 @@ public final class ModFeatureTypes {
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "forest_habitat"),
                 ForestHabitatFeature.CODEC);
         Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "cedar_creek"),
+                CedarCreekFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "bamboo_marsh_wetland"),
                 BambooMarshWetlandFeature.CODEC);
         Registry.register(BuiltInRegistries.FEATURE_TYPE,

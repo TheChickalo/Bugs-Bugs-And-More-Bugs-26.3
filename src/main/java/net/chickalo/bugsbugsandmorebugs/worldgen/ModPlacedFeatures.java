@@ -90,6 +90,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MIMOSA_TREE_PLACED_KEY = registerKey("mimosa_tree_placed");
     public static final ResourceKey<PlacedFeature> WILLOW_HABITAT_PLACED_KEY = registerKey("willow_habitat_placed");
     public static final ResourceKey<PlacedFeature> CEDAR_HABITAT_PLACED_KEY = registerKey("cedar_habitat_placed");
+    public static final ResourceKey<PlacedFeature> CEDAR_CREEK_PLACED_KEY = registerKey("cedar_creek_placed");
     public static final ResourceKey<PlacedFeature> PERSIMMON_HABITAT_PLACED_KEY = registerKey("persimmon_habitat_placed");
     public static final ResourceKey<PlacedFeature> MIMOSA_HABITAT_PLACED_KEY = registerKey("mimosa_habitat_placed");
 
@@ -109,6 +110,11 @@ public class ModPlacedFeatures {
                 configuredFeatures.getOrThrow(ModFeatures.WILLOW_HABITAT_KEY),
                 List.of(CountPlacement.of(6), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        // Chunk-wide, world-coordinate-stable narrow streams; no InSquare offset
+        // because the feature iterates its own chunk-sized 16x16 column grid.
+        register(context, CEDAR_CREEK_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.CEDAR_CREEK_KEY),
+                List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, CEDAR_HABITAT_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.CEDAR_TREE_KEY),
                 List.of(CountPlacement.of(4), InSquarePlacement.spread(),
