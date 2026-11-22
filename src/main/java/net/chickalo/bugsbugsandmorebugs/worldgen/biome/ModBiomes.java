@@ -85,18 +85,18 @@ public class ModBiomes {
         // but its own biome ID. ForestHabitatFeature then chooses the exact motif.
         register(context, VIOLET_CURTAINS, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
         register(context, TANGLED_ARBORS, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
-        register(context, PETAL_GLADES, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
-        register(context, OXBOW_BANKS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
+        register(context, PETAL_GLADES, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers, true));
+        register(context, OXBOW_BANKS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers, true));
         register(context, SEDGE_POOLS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
         register(context, WILLOW_HUMMOCKS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
         register(context, ELDER_STANDS, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
         register(context, NURSE_LOG_HOLLOWS, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
         register(context, RAINWASHED_GULLIES, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
         register(context, AMBER_GROVES, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
-        register(context, GOLDEN_MEADOWS, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
+        register(context, GOLDEN_MEADOWS, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers, true));
         register(context, BRAMBLE_TERRACES, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
         register(context, BLOSSOM_DRIFTS, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
-        register(context, FEATHERGRASS_PRAIRIE, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
+        register(context, FEATHERGRASS_PRAIRIE, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers, true));
         register(context, SUNWASHED_RISES, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
 
         register(context, OLD_GROWTH_GINKGO_FOREST, ModOverworldBiomes.oldGrowthGinkgoForest(placedFeatures, carvers));

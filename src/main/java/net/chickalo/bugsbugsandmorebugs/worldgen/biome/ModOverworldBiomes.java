@@ -516,11 +516,15 @@ public class ModOverworldBiomes {
 
     /** wisteria veilwood: forest microhabitats are embedded inside the feature placer. */
     public static Biome wisteriaVeilwood(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return wisteriaVeilwood(features, carvers, false);
+    }
+
+    public static Biome wisteriaVeilwood(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers, boolean sparseTrees) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         
-        addVegetation(generation, ModPlacedFeatures.WISTERIA_TREE_PLACED_KEY,
+        addVegetation(generation, sparseTrees ? ModPlacedFeatures.WISTERIA_GLADE_TREE_PLACED_KEY : ModPlacedFeatures.WISTERIA_TREE_PLACED_KEY,
                 ModPlacedFeatures.WISTERIA_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
@@ -533,6 +537,10 @@ public class ModOverworldBiomes {
 
     /** willow backwaters: forest microhabitats are embedded inside the feature placer. */
     public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return willowBackwaters(features, carvers, false);
+    }
+
+    public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers, boolean sparseTrees) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
@@ -541,7 +549,7 @@ public class ModOverworldBiomes {
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.WILLOW_POOLS_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_WILLOW_PLACED_KEY);
-        addVegetation(generation, ModPlacedFeatures.WILLOW_TREE_PLACED_KEY,
+        addVegetation(generation, sparseTrees ? ModPlacedFeatures.WILLOW_OXBOW_TREE_PLACED_KEY : ModPlacedFeatures.WILLOW_TREE_PLACED_KEY,
                 ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY,
                 ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         
@@ -573,11 +581,15 @@ public class ModOverworldBiomes {
 
     /** persimmon woodlands: forest microhabitats are embedded inside the feature placer. */
     public static Biome persimmonWoodlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return persimmonWoodlands(features, carvers, false);
+    }
+
+    public static Biome persimmonWoodlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers, boolean sparseTrees) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         
-        addVegetation(generation, ModPlacedFeatures.PERSIMMON_TREE_PLACED_KEY,
+        addVegetation(generation, sparseTrees ? ModPlacedFeatures.PERSIMMON_MEADOW_TREE_PLACED_KEY : ModPlacedFeatures.PERSIMMON_TREE_PLACED_KEY,
                 ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
         // Shared vanilla plants must precede shared Elsewhere flora in every biome.
         BiomeDefaultFeatures.addPlainGrass(generation);
@@ -592,11 +604,15 @@ public class ModOverworldBiomes {
 
     /** silkflower savanna: forest microhabitats are embedded inside the feature placer. */
     public static Biome silkflowerSavanna(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
+        return silkflowerSavanna(features, carvers, false);
+    }
+
+    public static Biome silkflowerSavanna(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers, boolean sparseTrees) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         
-        addVegetation(generation, ModPlacedFeatures.MIMOSA_TREE_PLACED_KEY,
+        addVegetation(generation, sparseTrees ? ModPlacedFeatures.MIMOSA_PRAIRIE_TREE_PLACED_KEY : ModPlacedFeatures.MIMOSA_TREE_PLACED_KEY,
                 ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
         // Order invariant: grass -> mushrooms (where present) -> Elsewhere flora.
         BiomeDefaultFeatures.addPlainGrass(generation);
