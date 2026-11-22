@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.FlexibleWetlandPlantBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.ExtendedForestLeavesBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HangingAccentBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
@@ -23,6 +24,9 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluids;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Five species, three locally varying habitat motifs per species.
@@ -179,6 +183,10 @@ public record ForestHabitatFeature(int kind) implements Feature {
             if (kind == 0) vineClimbers(level, base, height, rng);
             if (kind == 1) rootButtresses(level, base, rng, true);
         }
+        // Our custom Feature does not invoke vanilla TreeFeature's post-generation
+        // leaf-distance fixup. Do it explicitly to prevent newly created crowns
+        // from starting at the maximum distance and decaying on their first tick.
+        settleLeafDistances(level, base, height);
         return true;
     }
 
@@ -236,6 +244,59 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 if ((Math.abs(x) == radius || Math.abs(z) == radius)
                         && random.nextFloat() < 0.10F) continue;
                 leaf(level, attachment.offset(x, layer, z));
+            }
+        }
+    }
+
+    /**
+     * TreeFeature-style breadth-first leaf support propagation. Wood/log blocks
+     * are distance-zero seeds; all leaves reachable within 15 steps receive the
+     * proper extended and vanilla distance states before chunk generation ends.
+     */
+    private void settleLeafDistances(WorldGenLevel level, BlockPos base, int treeHeight) {
+        int radius = switch (kind) {
+            case 0 -> 14; // Opposing Maple-style wisteria crowns and trailing flowers
+            case 1 -> 9;
+            case 2 -> 7;
+            default -> 8;
+        };
+        ArrayDeque<BlockPos> queue = new ArrayDeque<>();
+        Map<BlockPos, Integer> distances = new HashMap<>();
+        int minY = Math.max(level.getMinY(), base.getY() - 2);
+        int maxY = Math.min(level.getMaxY() - 1, base.getY() + treeHeight + 8);
+
+        // Every log and bark-covered root in the generated crown is a source.
+        // Seeds are bounded so adjacent tree foliage is not modified unnecessarily.
+        for (int x = base.getX() - radius; x <= base.getX() + radius; x++)
+            for (int z = base.getZ() - radius; z <= base.getZ() + radius; z++)
+                for (int y = minY; y <= maxY; y++) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    BlockState state = level.getBlockState(pos);
+                    if (state.is(log()) || (kind == 2 && state.is(ModBlocks.CEDAR_WOOD))
+                            || (kind == 1 && state.is(ModBlocks.WILLOW_ROOTS))) {
+                        queue.addLast(pos);
+                        distances.put(pos, 0);
+                    }
+                }
+
+        while (!queue.isEmpty()) {
+            BlockPos current = queue.removeFirst();
+            int nextDistance = distances.get(current) + 1;
+            if (nextDistance >= 16) continue;
+            for (Direction direction : Direction.values()) {
+                BlockPos next = current.relative(direction);
+                if (next.getY() < minY || next.getY() > maxY
+                        || Math.abs(next.getX() - base.getX()) > radius
+                        || Math.abs(next.getZ() - base.getZ()) > radius)
+                    continue;
+
+                BlockState state = level.getBlockState(next);
+                if (!state.is(leaves()) || nextDistance >= distances.getOrDefault(next, 16))
+                    continue;
+                distances.put(next, nextDistance);
+                level.setBlock(next, state.setValue(ExtendedForestLeavesBlock.FOREST_DISTANCE, nextDistance)
+                        .setValue(BlockStateProperties.DISTANCE, Math.min(nextDistance, 7)), 2);
+                queue.addLast(next);
             }
         }
     }
