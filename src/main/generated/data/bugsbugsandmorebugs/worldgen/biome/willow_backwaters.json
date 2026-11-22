@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:willow_shallows_placed"
+    ],
     [],
     [],
     [],
@@ -30,8 +32,10 @@
     [],
     [],
     [
-      "bugsbugsandmorebugs:wetland_reeds_dense_placed",
-      "bugsbugsandmorebugs:willow_habitat_placed"
+      "bugsbugsandmorebugs:wetland_reeds_willow_placed",
+      "bugsbugsandmorebugs:willow_tree_placed",
+      "bugsbugsandmorebugs:willow_habitat_placed",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"

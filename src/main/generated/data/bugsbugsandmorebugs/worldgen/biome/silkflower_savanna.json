@@ -30,8 +30,10 @@
     [],
     [],
     [
+      "bugsbugsandmorebugs:mimosa_tree_placed",
       "bugsbugsandmorebugs:mimosa_habitat_placed",
-      "minecraft:patch_tall_grass_2"
+      "minecraft:patch_tall_grass_2",
+      "bugsbugsandmorebugs:elsewhere_flora_placed"
     ],
     [
       "bugsbugsandmorebugs:lava_cleanup_placed"
