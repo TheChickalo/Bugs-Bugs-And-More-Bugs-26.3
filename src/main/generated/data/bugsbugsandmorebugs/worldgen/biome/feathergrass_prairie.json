@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:forest_micro_terrain_placed"
+    ],
     [],
     [],
     [],
