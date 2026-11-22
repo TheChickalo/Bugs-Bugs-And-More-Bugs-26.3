@@ -370,6 +370,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int twig=0;twig<2;twig++) {
                 double divergence=(twig==0?1:-1)*(0.38+random.nextDouble()*0.38);
                 BlockPos branchStart=tip.below(random.nextInt(2));
+                wood(level,branchStart,Direction.Axis.Y); // Twig fork remains attached to parent
                 BlockPos twigTip=curvedBranch(level,branchStart,angle+divergence,
                         2+random.nextInt(2),random.nextInt(2),
                         (random.nextDouble()-0.5)*0.24);
@@ -404,7 +405,9 @@ public record ForestHabitatFeature(int kind) implements Feature {
             if (random.nextFloat()<0.75F) {
                 double divergence=(random.nextBoolean()?1:-1)
                         *(0.42+random.nextDouble()*0.48);
-                BlockPos twig=curvedBranch(level,end.below(1),angle+divergence,
+                BlockPos twigBase=end.below();
+                wood(level,twigBase,Direction.Axis.Y);
+                BlockPos twig=curvedBranch(level,twigBase,angle+divergence,
                         1+random.nextInt(2),random.nextInt(2),
                         (random.nextDouble()-0.5)*0.25);
                 foliageLobe(level,twig,random,2,1,2,0.24F);
@@ -432,6 +435,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
                         +(random.nextDouble()-0.5)*0.22;
                 int length=1+random.nextInt(3);
                 BlockPos twigBase=majorTip.below(random.nextInt(2));
+                wood(level,twigBase,Direction.Axis.Y);
                 BlockPos tip=curvedBranch(level,twigBase,forkAngle,length,
                         random.nextInt(2),(random.nextDouble()-0.5)*0.24);
                 int radius=2+random.nextInt(2);
