@@ -16,4 +16,14 @@ public class ModTreeGrowers {
     public static final TreeGrower HINOKI = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":hinoki",
             WeightedList.of(ModFeatures.HINOKI_KEY), WeightedList.of(), WeightedList.of(), null);
 
+    public static final TreeGrower WISTERIA = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":wisteria",
+            WeightedList.of(ModFeatures.WISTERIA_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
+    public static final TreeGrower WILLOW = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":willow",
+            WeightedList.of(ModFeatures.WILLOW_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
+    public static final TreeGrower CEDAR = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":cedar",
+            WeightedList.of(ModFeatures.CEDAR_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
+    public static final TreeGrower PERSIMMON = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":persimmon",
+            WeightedList.of(ModFeatures.PERSIMMON_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
+    public static final TreeGrower MIMOSA = new TreeGrower(BugsBugsAndMoreBugs.MOD_ID + ":mimosa",
+            WeightedList.of(ModFeatures.MIMOSA_TREE_KEY), WeightedList.of(), WeightedList.of(), null);
 }
