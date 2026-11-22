@@ -24,11 +24,28 @@ for species in ("wisteria", "willow", "cedar", "persimmon", "mimosa"):
 forest = read(src / "block/custom/ExtendedForestLeavesBlock.java")
 blocks = read(src / "block/ModBlocks.java")
 assert "MAX_FOREST_DISTANCE = 16" in forest
-assert blocks.count("new ExtendedForestLeavesBlock(") == 5
+assert blocks.count("new ExtendedForestLeavesBlock(") == 4
+assert 'new UntintedParticleLeavesBlock' in blocks.split('public static final Block WISTERIA_LEAVES')[1].split(";")[0]
 feature = read(src / "worldgen/feature/ForestHabitatFeature.java")
 assert "ModBlocks.CEDAR_WOOD" in feature
 assert "ModBlocks.CEDAR_LOG;" not in feature.split("private void rootButtresses(")[-1].split("private boolean scatterPlants(")[0]
-assert "int[] radii = {2, 3, 4, 3, 1}" in feature
+assert "willowCrown(" in feature and "willowRootNetwork(" in feature
+assert "persimmonCrown(" in feature and "mimosaCrown(" in feature
+assert "kind == 0) return scatterPlants(" in feature
+assert "ModBlocks.WILLOW_WOOD" in feature
+native = json.loads(read(data / "bugsbugsandmorebugs/worldgen/feature/wisteria_tree.json"))
+assert native["type"] == "minecraft:tree"
+assert native["trunk_placer"]["type"] == "bugsbugsandmorebugs:maple_trunk_placer"
+assert native["foliage_placer"]["type"] == "bugsbugsandmorebugs:maple_foliage_placer"
+assert native["decorators"][0]["type"] == "bugsbugsandmorebugs:wisteria_blossoms"
+habitat = json.loads(read(data / "bugsbugsandmorebugs/worldgen/feature/wisteria_habitat.json"))
+assert habitat["kind"] == 0
+grove = json.loads(read(data / "bugsbugsandmorebugs/worldgen/biome/wisteria_veilwood.json"))
+assert "bugsbugsandmorebugs:wisteria_tree_placed" in grove["features"][9]
+assert grove["features"][9].index("bugsbugsandmorebugs:wisteria_tree_placed") < grove["features"][9].index("bugsbugsandmorebugs:wisteria_habitat_placed")
+root_model = json.loads(read(root / "resources/assets/bugsbugsandmorebugs/models/block/willow_roots.json"))
+assert len(root_model["elements"]) >= 6, "Willow Roots are still a hollow-textured cube"
+assert "noOcclusion()" in blocks.split('public static final Block WILLOW_ROOTS')[1].split(";")[0]
 
 boulders = read(src / "worldgen/feature/HinokiBoulderFeature.java")
 picker = boulders.split("private static BlockState pickRock")[1].split("private static boolean validGround")[0]
