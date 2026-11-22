@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bugsbugsandmorebugs:block/hanging_willow_leaves_base"
+  }
+}

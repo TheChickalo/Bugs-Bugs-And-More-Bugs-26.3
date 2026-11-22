@@ -29,12 +29,12 @@ public final class WillowDecorator extends TreeDecorator {
                 BlockPos at=leaf.below(d);
                 if(!context.isAir(at))break;
                 context.setBlock(at,ModBlocks.HANGING_WILLOW_LEAVES.defaultBlockState()
-                        .setValue(HangingAccentBlock.TIP,false));
+                        .setValue(HangingAccentBlock.BASE,d==1).setValue(HangingAccentBlock.TIP,false));
                 made++;
             }
             if(made>0)context.setBlock(leaf.below(made),
                     ModBlocks.HANGING_WILLOW_LEAVES.defaultBlockState()
-                            .setValue(HangingAccentBlock.TIP,true));
+                            .setValue(HangingAccentBlock.BASE,made==1).setValue(HangingAccentBlock.TIP,true));
         }
         // A few short aerial roots attached to the bottom of the trunk.
         // The 3D root blocks now inherit the actual vanilla mangrove-roots model.

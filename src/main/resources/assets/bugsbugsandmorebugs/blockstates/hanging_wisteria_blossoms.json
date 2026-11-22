@@ -1,9 +1,15 @@
 {
   "variants": {
-    "tip=false": {
-      "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms"
+    "base=false,tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms_middle"
     },
-    "tip=true": {
+    "base=false,tip=true": {
+      "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms_tip"
+    },
+    "base=true,tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms_base"
+    },
+    "base=true,tip=true": {
       "model": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms_tip"
     }
   }
