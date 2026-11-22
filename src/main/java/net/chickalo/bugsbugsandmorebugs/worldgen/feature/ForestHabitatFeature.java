@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.FlexibleWetlandPlantBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.ExtendedForestLeavesBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HangingAccentBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
@@ -23,6 +24,9 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.Fluids;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Five species, three locally varying habitat motifs per species.
@@ -129,7 +133,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
 
     private boolean growTree(WorldGenLevel level, BlockPos base, RandomSource rng, int motif, boolean saplingPlaced) {
         if (!soil(level, base.below())) return false;
-        if (kind == 1 && !saplingPlaced && !nearbyWater(level, base, 6) && rng.nextInt(4) != 0) return false;
+        if (kind == 1 && !saplingPlaced && !nearbyWater(level, base, 6) && rng.nextInt(3) == 0) return false;
         int height = switch (kind) {
             case 0 -> 8 + rng.nextInt(motif == 1 ? 7 : 5);
             case 1 -> 9 + rng.nextInt(6);
@@ -150,7 +154,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int z = 0; z < width; z++) wood(level, base.offset(x,y,z), Direction.Axis.Y);
 
         BlockPos top = base.above(height-1).offset(width/2, 0, width/2);
-        if (kind == 2) {
+        if (kind == 0) {
+            // Use the same two/three ascending branch silhouette and layered
+            // {2,3,4,3,1} foliage profile as the existing Maple placers.
+            wisteriaMapleCrown(level, base, height, motif, rng);
+            vineClimbers(level, base, height, rng);
+        } else if (kind == 2) {
             cedarCrown(level, top, height, rng, motif);
             rootButtresses(level, base, rng, false);
         } else {
@@ -174,7 +183,122 @@ public record ForestHabitatFeature(int kind) implements Feature {
             if (kind == 0) vineClimbers(level, base, height, rng);
             if (kind == 1) rootButtresses(level, base, rng, true);
         }
+        // Our custom Feature does not invoke vanilla TreeFeature's post-generation
+        // leaf-distance fixup. Do it explicitly to prevent newly created crowns
+        // from starting at the maximum distance and decaying on their first tick.
+        settleLeafDistances(level, base, height);
         return true;
+    }
+
+    /**
+     * Maple-style wisteria. Like MapleTrunkPlacer it grows two opposing, rising
+     * branches (occasionally a third); each receives the same five canopy
+     * layers/radii used by MapleFoliagePlacer. Blossom curtains remain unique.
+     */
+    private void wisteriaMapleCrown(WorldGenLevel level, BlockPos base, int height,
+                                   int motif, RandomSource random) {
+        Direction first = SIDES[random.nextInt(SIDES.length)];
+        int branchCount = random.nextInt(3) == 0 ? 3 : 2;
+        for (int branch = 0; branch < branchCount; branch++) {
+            Direction direction = branch == 0 ? first
+                    : branch == 1 ? first.getOpposite() : SIDES[random.nextInt(SIDES.length)];
+            Direction across = (direction == Direction.NORTH || direction == Direction.SOUTH)
+                    ? Direction.EAST : Direction.NORTH;
+            int startY = Math.max(4, height - 4 - (branch % 2));
+            int endY = Math.max(startY + 1, height - 2 + random.nextInt(3));
+            int length = 2 + random.nextInt(3) + (motif == 0 ? 1 : 0);
+            int lateral = random.nextInt(3) - 1;
+
+            BlockPos previous = base.above(startY);
+            for (int step = 1; step <= length; step++) {
+                int y = startY + (endY - startY) * step / length;
+                int side = lateral * step / length;
+                BlockPos next = base.relative(direction, step).relative(across, side).above(y);
+                // Fill intermediate vertical steps so limbs are truly connected.
+                for (int climb = previous.getY() + 1; climb <= next.getY(); climb++)
+                    wood(level, new BlockPos(previous.getX(), climb, previous.getZ()), Direction.Axis.Y);
+                wood(level, next, direction.getAxis());
+                previous = next;
+            }
+
+            BlockPos attachment = previous.above();
+            mapleFoliage(level, attachment, random);
+            // Curtains originate beneath individual Maple-shaped canopies.
+            hangCurtains(level, attachment.above(2), 4, random);
+        }
+
+        if (branchCount == 2 && motif == 0 && random.nextBoolean()) {
+            BlockPos apex = base.above(height);
+            mapleFoliage(level, apex, random);
+            hangCurtains(level, apex.above(2), 4, random);
+        }
+    }
+
+    /** Matches the five crown radii and irregular trimmed corners of MapleFoliagePlacer. */
+    private void mapleFoliage(WorldGenLevel level, BlockPos attachment, RandomSource random) {
+        int[] radii = {2, 3, 4, 3, 1};
+        for (int layer = 0; layer < radii.length; layer++) {
+            int radius = radii[layer];
+            for (int x = -radius; x <= radius; x++) for (int z = -radius; z <= radius; z++) {
+                if (Math.abs(x) == radius && Math.abs(z) == radius) continue;
+                if ((Math.abs(x) == radius || Math.abs(z) == radius)
+                        && random.nextFloat() < 0.10F) continue;
+                leaf(level, attachment.offset(x, layer, z));
+            }
+        }
+    }
+
+    /**
+     * TreeFeature-style breadth-first leaf support propagation. Wood/log blocks
+     * are distance-zero seeds; all leaves reachable within 15 steps receive the
+     * proper extended and vanilla distance states before chunk generation ends.
+     */
+    private void settleLeafDistances(WorldGenLevel level, BlockPos base, int treeHeight) {
+        int radius = switch (kind) {
+            case 0 -> 14; // Opposing Maple-style wisteria crowns and trailing flowers
+            case 1 -> 9;
+            case 2 -> 7;
+            default -> 8;
+        };
+        ArrayDeque<BlockPos> queue = new ArrayDeque<>();
+        Map<BlockPos, Integer> distances = new HashMap<>();
+        int minY = Math.max(level.getMinY(), base.getY() - 2);
+        int maxY = Math.min(level.getMaxY() - 1, base.getY() + treeHeight + 8);
+
+        // Every log and bark-covered root in the generated crown is a source.
+        // Seeds are bounded so adjacent tree foliage is not modified unnecessarily.
+        for (int x = base.getX() - radius; x <= base.getX() + radius; x++)
+            for (int z = base.getZ() - radius; z <= base.getZ() + radius; z++)
+                for (int y = minY; y <= maxY; y++) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    BlockState state = level.getBlockState(pos);
+                    if (state.is(log()) || (kind == 2 && state.is(ModBlocks.CEDAR_WOOD))
+                            || (kind == 1 && state.is(ModBlocks.WILLOW_ROOTS))) {
+                        queue.addLast(pos);
+                        distances.put(pos, 0);
+                    }
+                }
+
+        while (!queue.isEmpty()) {
+            BlockPos current = queue.removeFirst();
+            int nextDistance = distances.get(current) + 1;
+            if (nextDistance >= 16) continue;
+            for (Direction direction : Direction.values()) {
+                BlockPos next = current.relative(direction);
+                if (next.getY() < minY || next.getY() > maxY
+                        || Math.abs(next.getX() - base.getX()) > radius
+                        || Math.abs(next.getZ() - base.getZ()) > radius)
+                    continue;
+
+                BlockState state = level.getBlockState(next);
+                if (!state.is(leaves()) || nextDistance >= distances.getOrDefault(next, 16))
+                    continue;
+                distances.put(next, nextDistance);
+                level.setBlock(next, state.setValue(ExtendedForestLeavesBlock.FOREST_DISTANCE, nextDistance)
+                        .setValue(BlockStateProperties.DISTANCE, Math.min(nextDistance, 7)), 2);
+                queue.addLast(next);
+            }
+        }
     }
 
     private void cedarCrown(WorldGenLevel level, BlockPos top, int height, RandomSource rng, int motif) {
@@ -248,7 +372,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos site=base.relative(d);
             if (soil(level,site.below()) && level.getBlockState(site).canBeReplaced() &&
                     level.getFluidState(site).isEmpty()) {
-                Block root=willow?ModBlocks.WILLOW_ROOTS:ModBlocks.CEDAR_LOG;
+                // Buttresses should have bark on every face, not exposed end grain.
+                Block root=willow?ModBlocks.WILLOW_ROOTS:ModBlocks.CEDAR_WOOD;
                 level.setBlock(site,root.defaultBlockState().setValue(BlockStateProperties.AXIS,d.getAxis()),2);
             }
         }

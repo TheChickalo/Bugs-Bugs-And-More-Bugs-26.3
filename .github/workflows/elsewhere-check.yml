@@ -231,6 +231,8 @@ jobs:
           assert 'safePoolSite' in java and 'level.getBlockState(site.below()).isAir()' in java
           print('Volcanic relief, wetland terrain, marsh ecology and aquifer cap verified')
           PY
+      - name: Check forest survival, stone palette and Willow distribution
+        run: python3 scripts/check_forest_fixes.py
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py
       - name: Generate datapack and compile
