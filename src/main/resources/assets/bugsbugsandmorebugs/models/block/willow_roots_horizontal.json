@@ -1,9 +1,9 @@
 {
   "ambientocclusion": false,
   "textures": {
-    "particle": "bugsbugsandmorebugs:block/willow_roots",
-    "side": "bugsbugsandmorebugs:block/willow_roots",
-    "top": "bugsbugsandmorebugs:block/willow_roots_top"
+    "particle": "bugsbugsandmorebugs:block/willow_log",
+    "side": "bugsbugsandmorebugs:block/willow_log",
+    "top": "bugsbugsandmorebugs:block/willow_log_top"
   },
   "elements": [
     {
