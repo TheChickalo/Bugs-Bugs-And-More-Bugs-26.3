@@ -18,7 +18,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:mountain_range_placed"
+    ],
     [],
     [],
     [],

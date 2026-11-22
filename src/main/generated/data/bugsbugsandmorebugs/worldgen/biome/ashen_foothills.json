@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:mountain_range_placed"
+    ],
     [
       "bugsbugsandmorebugs:volcanic_magma_patch_placed",
       "bugsbugsandmorebugs:volcanic_vent_foothills_placed"
