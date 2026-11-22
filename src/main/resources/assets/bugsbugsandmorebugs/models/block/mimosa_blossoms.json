@@ -1,0 +1,80 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "bugsbugsandmorebugs:block/mimosa_blossoms",
+    "flower": "bugsbugsandmorebugs:block/mimosa_blossoms"
+  },
+  "elements": [
+    {
+      "from": [
+        7.5,
+        0,
+        7.5
+      ],
+      "to": [
+        8.5,
+        7,
+        8.5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#flower"
+        },
+        "north": {
+          "texture": "#flower"
+        },
+        "south": {
+          "texture": "#flower"
+        },
+        "east": {
+          "texture": "#flower"
+        },
+        "west": {
+          "texture": "#flower"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        3,
+        7.9
+      ],
+      "to": [
+        12,
+        11,
+        8.1
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#flower"
+        },
+        "south": {
+          "texture": "#flower"
+        }
+      }
+    },
+    {
+      "from": [
+        7.9,
+        3,
+        4
+      ],
+      "to": [
+        8.1,
+        11,
+        12
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "texture": "#flower"
+        },
+        "west": {
+          "texture": "#flower"
+        }
+      }
+    }
+  ]
+}

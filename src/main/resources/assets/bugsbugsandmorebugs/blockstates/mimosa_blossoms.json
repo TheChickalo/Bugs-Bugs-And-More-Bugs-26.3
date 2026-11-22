@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=up,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms"
+    },
+    "facing=up,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms"
+    },
+    "facing=down,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 180
+    },
+    "facing=down,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 180
+    },
+    "facing=north,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90
+    },
+    "facing=south,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90
+    },
+    "facing=west,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=false": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,waterlogged=true": {
+      "model": "bugsbugsandmorebugs:block/mimosa_blossoms",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

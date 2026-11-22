@@ -1,0 +1,141 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "bugsbugsandmorebugs:block/fallen_autumn_leaves",
+    "litter": "bugsbugsandmorebugs:block/fallen_autumn_leaves"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0.04,
+        1
+      ],
+      "to": [
+        8,
+        0.11,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            1,
+            1,
+            8,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            1,
+            1,
+            8,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        8,
+        0.04,
+        9
+      ],
+      "to": [
+        15,
+        0.11,
+        15
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            8,
+            9,
+            15,
+            15
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            8,
+            9,
+            15,
+            15
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        9,
+        0.04,
+        1
+      ],
+      "to": [
+        15,
+        0.11,
+        8
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            9,
+            1,
+            15,
+            8
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            9,
+            1,
+            15,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        0.04,
+        9
+      ],
+      "to": [
+        8,
+        0.11,
+        15
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#litter",
+          "uv": [
+            1,
+            9,
+            8,
+            15
+          ]
+        },
+        "down": {
+          "texture": "#litter",
+          "uv": [
+            1,
+            9,
+            8,
+            15
+          ]
+        }
+      }
+    }
+  ]
+}
