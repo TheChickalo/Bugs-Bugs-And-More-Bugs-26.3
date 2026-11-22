@@ -89,7 +89,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
         if (!saplingPlaced && !correctBiome(level, origin)) return false;
         int motif = microhabitat(origin.getX(), origin.getZ());
         // Sapling growth must always attempt a tree, not undergrowth.
-        if (kind == 0) return scatterPlants(level, origin, random, motif);
+        if (kind != 2) return scatterPlants(level, origin, random, motif);
         if (saplingPlaced) return growTree(level, origin, random, motif, true);
         boolean treePlaced = false;
         if (random.nextFloat() < (kind == 2 ? 0.70F : 0.63F))

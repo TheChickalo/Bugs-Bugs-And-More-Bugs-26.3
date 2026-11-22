@@ -15,7 +15,11 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.AcaciaFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -67,6 +71,9 @@ public class ModFeatures {
     public static final ResourceKey<Feature> CEDAR_TREE_KEY = registerKey("cedar_tree");
     public static final ResourceKey<Feature> PERSIMMON_TREE_KEY = registerKey("persimmon_tree");
     public static final ResourceKey<Feature> MIMOSA_TREE_KEY = registerKey("mimosa_tree");
+    public static final ResourceKey<Feature> WILLOW_HABITAT_KEY = registerKey("willow_habitat");
+    public static final ResourceKey<Feature> PERSIMMON_HABITAT_KEY = registerKey("persimmon_habitat");
+    public static final ResourceKey<Feature> MIMOSA_HABITAT_KEY = registerKey("mimosa_habitat");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
         // Standard TreeFeature runs the existing Maple trunk/foliage placers.
@@ -81,10 +88,38 @@ public class ModFeatures {
                 BlockStateProvider.holderOf(Blocks.DIRT)
         ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.WisteriaBlossomDecorator())).build());
         context.register(WISTERIA_HABITAT_KEY, new ForestHabitatFeature(0));
-        context.register(WILLOW_TREE_KEY, new ForestHabitatFeature(1));
+        // Native Minecraft trunk/foliage placers, rather than repeated hand-authored radial spokes.
+        // Willow: fuller rounded crown with naturally branching fancy-oak skeleton.
+        context.register(WILLOW_TREE_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.WILLOW_LOG),
+                new FancyTrunkPlacer(7, 5, 2),
+                BlockStateProvider.of(ModBlocks.WILLOW_LEAVES),
+                new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), 4),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(Blocks.DIRT)
+        ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.WillowDecorator())).build());
+        context.register(WILLOW_HABITAT_KEY, new ForestHabitatFeature(1));
         context.register(CEDAR_TREE_KEY, new ForestHabitatFeature(2));
-        context.register(PERSIMMON_TREE_KEY, new ForestHabitatFeature(3));
-        context.register(MIMOSA_TREE_KEY, new ForestHabitatFeature(4));
+        // Persimmon: vanilla Fancy Oak branching with compact, layered rounded crowns.
+        context.register(PERSIMMON_TREE_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.PERSIMMON_LOG),
+                new FancyTrunkPlacer(5, 4, 2),
+                BlockStateProvider.of(ModBlocks.PERSIMMON_LEAVES),
+                new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(4), 4),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(Blocks.DIRT)
+        ).build());
+        context.register(PERSIMMON_HABITAT_KEY, new ForestHabitatFeature(3));
+        // Mimosa: true forked vanilla Acacia branches and wide, flat, moderately dense pads.
+        context.register(MIMOSA_TREE_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.MIMOSA_LOG),
+                new ForkingTrunkPlacer(7, 3, 2),
+                BlockStateProvider.of(ModBlocks.MIMOSA_LEAVES),
+                new AcaciaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(Blocks.DIRT)
+        ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.MimosaDecorator())).build());
+        context.register(MIMOSA_HABITAT_KEY, new ForestHabitatFeature(4));
         context.register(ELSEWHERE_FLORA_KEY, new ElsewhereFloraFeature());
         context.register(VOLCANIC_MAGMA_PATCH_KEY, new VolcanicMagmaPatchFeature());
         context.register(HINOKI_BOULDER_KEY, new HinokiBoulderFeature());

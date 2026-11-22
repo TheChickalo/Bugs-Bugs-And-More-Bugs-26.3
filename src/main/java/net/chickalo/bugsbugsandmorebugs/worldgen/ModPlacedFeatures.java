@@ -83,6 +83,9 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> WISTERIA_TREE_PLACED_KEY = registerKey("wisteria_tree_placed");
     public static final ResourceKey<PlacedFeature> WISTERIA_HABITAT_PLACED_KEY = registerKey("wisteria_habitat_placed");
+    public static final ResourceKey<PlacedFeature> WILLOW_TREE_PLACED_KEY = registerKey("willow_tree_placed");
+    public static final ResourceKey<PlacedFeature> PERSIMMON_TREE_PLACED_KEY = registerKey("persimmon_tree_placed");
+    public static final ResourceKey<PlacedFeature> MIMOSA_TREE_PLACED_KEY = registerKey("mimosa_tree_placed");
     public static final ResourceKey<PlacedFeature> WILLOW_HABITAT_PLACED_KEY = registerKey("willow_habitat_placed");
     public static final ResourceKey<PlacedFeature> CEDAR_HABITAT_PLACED_KEY = registerKey("cedar_habitat_placed");
     public static final ResourceKey<PlacedFeature> PERSIMMON_HABITAT_PLACED_KEY = registerKey("persimmon_habitat_placed");
@@ -97,20 +100,29 @@ public class ModPlacedFeatures {
                 configuredFeatures.getOrThrow(ModFeatures.WISTERIA_HABITAT_KEY),
                 List.of(CountPlacement.of(6), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-        register(context, WILLOW_HABITAT_PLACED_KEY,
+        register(context, WILLOW_TREE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WILLOW_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(5), ModBlocks.WILLOW_SAPLING));
+        register(context, WILLOW_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WILLOW_HABITAT_KEY),
                 List.of(CountPlacement.of(6), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, CEDAR_HABITAT_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.CEDAR_TREE_KEY),
                 List.of(CountPlacement.of(4), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-        register(context, PERSIMMON_HABITAT_PLACED_KEY,
+        register(context, PERSIMMON_TREE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.PERSIMMON_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(5), ModBlocks.PERSIMMON_SAPLING));
+        register(context, PERSIMMON_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.PERSIMMON_HABITAT_KEY),
                 List.of(CountPlacement.of(6), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-        register(context, MIMOSA_HABITAT_PLACED_KEY,
+        register(context, MIMOSA_TREE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.MIMOSA_TREE_KEY),
+                VegetationPlacements.treePlacement(CountPlacement.of(4), ModBlocks.MIMOSA_SAPLING));
+        register(context, MIMOSA_HABITAT_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MIMOSA_HABITAT_KEY),
                 List.of(CountPlacement.of(5), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 

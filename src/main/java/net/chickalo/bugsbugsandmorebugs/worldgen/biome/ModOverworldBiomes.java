@@ -518,7 +518,8 @@ public class ModOverworldBiomes {
     public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_DENSE_PLACED_KEY);
-        addVegetation(generation, ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.WILLOW_TREE_PLACED_KEY,
+                ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY);
         
         
         return minorBiome(generation, 0.66F, 0.96F,
@@ -546,7 +547,8 @@ public class ModOverworldBiomes {
     public static Biome persimmonWoodlands(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
-        addVegetation(generation, ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.PERSIMMON_TREE_PLACED_KEY,
+                ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         
         return minorBiome(generation, 0.72F, 0.60F,
@@ -560,7 +562,8 @@ public class ModOverworldBiomes {
     public static Biome silkflowerSavanna(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
-        addVegetation(generation, ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
+        addVegetation(generation, ModPlacedFeatures.MIMOSA_TREE_PLACED_KEY,
+                ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addPlainGrass(generation);
         
         return minorBiome(generation, 0.91F, 0.35F,
