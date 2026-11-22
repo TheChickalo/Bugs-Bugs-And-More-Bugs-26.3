@@ -543,11 +543,11 @@ public class ModOverworldBiomes {
     public static Biome willowBackwaters(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers, boolean sparseTrees) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
-                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.WILLOW_SHALLOWS_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.WILLOW_POOLS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.WETLAND_REEDS_WILLOW_PLACED_KEY);
         addVegetation(generation, sparseTrees ? ModPlacedFeatures.WILLOW_OXBOW_TREE_PLACED_KEY : ModPlacedFeatures.WILLOW_TREE_PLACED_KEY,
                 ModPlacedFeatures.WILLOW_HABITAT_PLACED_KEY,
@@ -565,9 +565,9 @@ public class ModOverworldBiomes {
     public static Biome ancientCedarRainforest(HolderGetter<PlacedFeature> features, HolderGetter<WorldCarver> carvers) {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
-                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
-        generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.RAINFOREST_CREEKS_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.LAKES,
+                ModPlacedFeatures.FOREST_MICRO_TERRAIN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.HINOKI_FERN_PLACED_KEY);
         addVegetation(generation, ModPlacedFeatures.CEDAR_HABITAT_PLACED_KEY);
         BiomeDefaultFeatures.addDefaultMushrooms(generation);
