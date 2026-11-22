@@ -31,28 +31,36 @@ assert 'new ExtendedForestLeavesBlock' in blocks.split('public static final Bloc
 feature = read(src / "worldgen/feature/ForestHabitatFeature.java")
 assert "ModBlocks.CEDAR_WOOD" in feature
 assert "ModBlocks.CEDAR_LOG;" not in feature.split("private void rootButtresses(")[-1].split("private boolean scatterPlants(")[0]
-assert "willowCrown(" in feature and "willowRootNetwork(" in feature
-assert "persimmonCrown(" in feature and "mimosaCrown(" in feature
-assert "kind == 0) return scatterPlants(" in feature
-assert "ModBlocks.WILLOW_WOOD" in feature
-# New canopy families must use uneven face-connected forks and secondary twigs.
-assert "curvedBranch(" in feature and "foliageLobe(" in feature
-assert "hangWillowTufts(" in feature
-# Mangrove-inspired arches descend from trunk to real soil / shallow water.
-assert "mangroveStyleRoots(" in feature and "findRootLanding(" in feature
-assert "ForestRootsBlock.WATERLOGGED" in feature
+# The three problem trees now use Mojang's actual tree pipeline, rather than
+# hand-authored radial spokes inside ForestHabitatFeature.
+sources=read(src / "worldgen/ModFeatures.java")
+assert "new FancyTrunkPlacer(" in sources
+assert "new ForkingTrunkPlacer(" in sources
+assert "new AcaciaFoliagePlacer(" in sources
+assert 'context.register(WILLOW_TREE_KEY, new TreeFeature.Builder(' in sources
+assert 'context.register(PERSIMMON_TREE_KEY, new TreeFeature.Builder(' in sources
+assert 'context.register(MIMOSA_TREE_KEY, new TreeFeature.Builder(' in sources
+assert "kind != 2) return scatterPlants(" in feature
+assert "mangroveStyleRoots(" in feature
 assert "ModBlocks.CLUBMOSS_LOWLYING" in feature
 assert "level.setBlock(soilPos,ModBlocks.CLUBMOSS.defaultBlockState()" in feature
 assert 'CLUBMOSS = registerBlock("clubmoss", p -> new Block(' in blocks
 assert 'LIVERWORT = registerBlock("liverwort", p -> new LeafLitterBlock(' in blocks
 assert 'CLUBMOSS_LOWLYING = registerBlock(' in blocks
+assert 'CLUBMOSS_SPRIG = registerBlock(' not in blocks, "Remove old Clubmoss Sprig block"
 liverwort_state = json.loads(read(root / "resources/assets/bugsbugsandmorebugs/blockstates/liverwort.json"))
-assert len(liverwort_state["variants"]) == 16, "Liverwort must have 4 patches x 4 facings"
+assert len(liverwort_state["variants"]) == 16
+duckweed_state = json.loads(read(root / "resources/assets/bugsbugsandmorebugs/blockstates/duckweed.json"))
+assert len(duckweed_state["variants"]) == 16, "Duckweed must use leaf-litter sections"
+assert 'new FloatingLitterBlock(' in blocks
 clubmoss_model = json.loads(read(root / "resources/assets/bugsbugsandmorebugs/models/block/clubmoss.json"))
 assert clubmoss_model["parent"] == "minecraft:block/cube_all"
 for species in ("cedar", "willow"):
     states = json.loads(read(root / f"resources/assets/bugsbugsandmorebugs/blockstates/{species}_roots.json"))
-    assert len(states["variants"]) == 6, "Each axis needs dry and waterlogged states"
+    assert len(states["variants"]) == 6
+    model = json.loads(read(root / f"resources/assets/bugsbugsandmorebugs/models/block/{species}_roots.json"))
+    assert model["parent"] == "minecraft:block/mangrove_roots", "Use native 26.3 mangrove-root geometry"
+
 native = json.loads(read(data / "bugsbugsandmorebugs/worldgen/feature/wisteria_tree.json"))
 assert native["type"] == "minecraft:tree"
 assert native["trunk_placer"]["type"] == "bugsbugsandmorebugs:maple_trunk_placer"
@@ -63,9 +71,10 @@ assert habitat["kind"] == 0
 grove = json.loads(read(data / "bugsbugsandmorebugs/worldgen/biome/wisteria_veilwood.json"))
 assert "bugsbugsandmorebugs:wisteria_tree_placed" in grove["features"][9]
 assert grove["features"][9].index("bugsbugsandmorebugs:wisteria_tree_placed") < grove["features"][9].index("bugsbugsandmorebugs:wisteria_habitat_placed")
-root_model = json.loads(read(root / "resources/assets/bugsbugsandmorebugs/models/block/willow_roots.json"))
-assert len(root_model["elements"]) >= 6, "Willow Roots are still a hollow-textured cube"
 assert "noOcclusion()" in blocks.split('public static final Block WILLOW_ROOTS')[1].split(";")[0]
+assert "WILLOW_SHALLOWS_PLACED_KEY" in read(src / "worldgen/biome/ModOverworldBiomes.java")
+assert "WETLAND_REEDS_WILLOW_PLACED_KEY" in read(src / "worldgen/biome/ModOverworldBiomes.java")
+assert "WILLOW_SHALLOWS_KEY" in sources
 
 boulders = read(src / "worldgen/feature/HinokiBoulderFeature.java")
 picker = boulders.split("private static BlockState pickRock")[1].split("private static boolean validGround")[0]
@@ -81,4 +90,4 @@ assert any(p["continentalness"] < 0.2 for p in willow)
 assert any(p["erosion"] >= 0.45 for p in willow)
 assert sum(x["biome"] == "bugsbugsandmorebugs:river" for x in climates) >= 18, "Protect river distribution"
 assert sum(x["biome"] == "bugsbugsandmorebugs:estuary" for x in climates) == 2
-print("Forest ground cover, mangrove-style roots, leaf support and Willow climate checks passed")
+print("Vanilla tree placers, root models, layered Duckweed, shallow water and Willow climates verified")
