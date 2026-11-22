@@ -1,67 +1,259 @@
 {
   "variants": {
-    "count=1,facing=north": {
+    "count=1,facing=north,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_1",
       "y": 0
     },
-    "count=2,facing=north": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
-      "y": 0
-    },
-    "count=3,facing=north": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
-      "y": 0
-    },
-    "count=4,facing=north": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
-      "y": 0
-    },
-    "count=1,facing=east": {
+    "count=1,facing=east,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_1",
       "y": 90
     },
-    "count=2,facing=east": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
-      "y": 90
-    },
-    "count=3,facing=east": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
-      "y": 90
-    },
-    "count=4,facing=east": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
-      "y": 90
-    },
-    "count=1,facing=south": {
+    "count=1,facing=south,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_1",
       "y": 180
     },
-    "count=2,facing=south": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
-      "y": 180
-    },
-    "count=3,facing=south": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
-      "y": 180
-    },
-    "count=4,facing=south": {
-      "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
-      "y": 180
-    },
-    "count=1,facing=west": {
+    "count=1,facing=west,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_1",
       "y": 270
     },
-    "count=2,facing=west": {
+    "count=1,facing=north,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_1",
+      "y": 0
+    },
+    "count=1,facing=east,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_1",
+      "y": 90
+    },
+    "count=1,facing=south,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_1",
+      "y": 180
+    },
+    "count=1,facing=west,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_1",
+      "y": 270
+    },
+    "count=1,facing=north,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_2",
+      "y": 0
+    },
+    "count=1,facing=east,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_2",
+      "y": 90
+    },
+    "count=1,facing=south,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_2",
+      "y": 180
+    },
+    "count=1,facing=west,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_2",
+      "y": 270
+    },
+    "count=1,facing=north,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_3",
+      "y": 0
+    },
+    "count=1,facing=east,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_3",
+      "y": 90
+    },
+    "count=1,facing=south,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_3",
+      "y": 180
+    },
+    "count=1,facing=west,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_1_variation_3",
+      "y": 270
+    },
+    "count=2,facing=north,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
+      "y": 0
+    },
+    "count=2,facing=east,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
+      "y": 90
+    },
+    "count=2,facing=south,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
+      "y": 180
+    },
+    "count=2,facing=west,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_2",
       "y": 270
     },
-    "count=3,facing=west": {
+    "count=2,facing=north,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_1",
+      "y": 0
+    },
+    "count=2,facing=east,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_1",
+      "y": 90
+    },
+    "count=2,facing=south,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_1",
+      "y": 180
+    },
+    "count=2,facing=west,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_1",
+      "y": 270
+    },
+    "count=2,facing=north,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_2",
+      "y": 0
+    },
+    "count=2,facing=east,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_2",
+      "y": 90
+    },
+    "count=2,facing=south,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_2",
+      "y": 180
+    },
+    "count=2,facing=west,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_2",
+      "y": 270
+    },
+    "count=2,facing=north,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_3",
+      "y": 0
+    },
+    "count=2,facing=east,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_3",
+      "y": 90
+    },
+    "count=2,facing=south,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_3",
+      "y": 180
+    },
+    "count=2,facing=west,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_2_variation_3",
+      "y": 270
+    },
+    "count=3,facing=north,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
+      "y": 0
+    },
+    "count=3,facing=east,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
+      "y": 90
+    },
+    "count=3,facing=south,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
+      "y": 180
+    },
+    "count=3,facing=west,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_3",
       "y": 270
     },
-    "count=4,facing=west": {
+    "count=3,facing=north,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_1",
+      "y": 0
+    },
+    "count=3,facing=east,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_1",
+      "y": 90
+    },
+    "count=3,facing=south,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_1",
+      "y": 180
+    },
+    "count=3,facing=west,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_1",
+      "y": 270
+    },
+    "count=3,facing=north,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_2",
+      "y": 0
+    },
+    "count=3,facing=east,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_2",
+      "y": 90
+    },
+    "count=3,facing=south,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_2",
+      "y": 180
+    },
+    "count=3,facing=west,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_2",
+      "y": 270
+    },
+    "count=3,facing=north,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_3",
+      "y": 0
+    },
+    "count=3,facing=east,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_3",
+      "y": 90
+    },
+    "count=3,facing=south,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_3",
+      "y": 180
+    },
+    "count=3,facing=west,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_3_variation_3",
+      "y": 270
+    },
+    "count=4,facing=north,variation=0": {
       "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
+      "y": 0
+    },
+    "count=4,facing=east,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
+      "y": 90
+    },
+    "count=4,facing=south,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
+      "y": 180
+    },
+    "count=4,facing=west,variation=0": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4",
+      "y": 270
+    },
+    "count=4,facing=north,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_1",
+      "y": 0
+    },
+    "count=4,facing=east,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_1",
+      "y": 90
+    },
+    "count=4,facing=south,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_1",
+      "y": 180
+    },
+    "count=4,facing=west,variation=1": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_1",
+      "y": 270
+    },
+    "count=4,facing=north,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_2",
+      "y": 0
+    },
+    "count=4,facing=east,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_2",
+      "y": 90
+    },
+    "count=4,facing=south,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_2",
+      "y": 180
+    },
+    "count=4,facing=west,variation=2": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_2",
+      "y": 270
+    },
+    "count=4,facing=north,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_3",
+      "y": 0
+    },
+    "count=4,facing=east,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_3",
+      "y": 90
+    },
+    "count=4,facing=south,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_3",
+      "y": 180
+    },
+    "count=4,facing=west,variation=3": {
+      "model": "bugsbugsandmorebugs:block/bracket_fungus_4_variation_3",
       "y": 270
     }
   }

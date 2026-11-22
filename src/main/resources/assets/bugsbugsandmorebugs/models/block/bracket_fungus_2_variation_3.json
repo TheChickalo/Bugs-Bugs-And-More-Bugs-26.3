@@ -1,0 +1,74 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "bugsbugsandmorebugs:block/bracket_fungus_top",
+    "top": "bugsbugsandmorebugs:block/bracket_fungus_top",
+    "side": "bugsbugsandmorebugs:block/bracket_fungus_side"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        7,
+        8
+      ],
+      "to": [
+        11,
+        9,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#side"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        12,
+        10
+      ],
+      "to": [
+        7,
+        14,
+        16
+      ],
+      "faces": {
+        "up": {
+          "texture": "#top"
+        },
+        "down": {
+          "texture": "#side"
+        },
+        "north": {
+          "texture": "#side"
+        },
+        "south": {
+          "texture": "#side"
+        },
+        "east": {
+          "texture": "#side"
+        },
+        "west": {
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

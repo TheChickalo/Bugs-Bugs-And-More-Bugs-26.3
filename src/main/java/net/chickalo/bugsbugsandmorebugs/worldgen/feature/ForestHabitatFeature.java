@@ -578,21 +578,23 @@ public record ForestHabitatFeature(int kind) implements Feature {
         }
         // Bracket fungi form occasional uneven clusters at different heights
         // and sides, not the same horizontal strip repeated on every tree.
-        int colonies=random.nextInt(5);
-        for(int colony=0;colony<colonies;colony++){
+        // At most four wall-mounted colonies per Cedar, each with 1–4
+        // shelves. Every shelf remains within its block; each colony has a
+        // randomized arrangement and cannot float away from its log.
+        int colonies=random.nextInt(5),placedFungi=0;
+        for(int attempt=0;attempt<12 && placedFungi<colonies;attempt++){
             int targetHeight=1+random.nextInt(Math.max(1,Math.min(height-3,13)));
             Direction face=SIDES[random.nextInt(SIDES.length)];
             BlockPos bark=base.above(targetHeight);
-            for(int sub=0;sub<1+random.nextInt(3);sub++){
-                BlockPos woody=bark.above(sub==0?0:random.nextInt(3));
-                BlockPos p=woody.relative(face);
-                if(!level.getBlockState(p).isAir()
-                        || !level.getBlockState(woody).is(BlockTags.LOGS))continue;
-                BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
-                        .setValue(BracketFungusBlock.FACING,face)
-                        .setValue(BracketFungusBlock.COUNT,1+random.nextInt(4));
-                if(fungus.canSurvive(level,p))level.setBlock(p,fungus,2);
-            }
+            BlockPos p=bark.relative(face);
+            if(!level.getBlockState(p).isAir()
+                    || !level.getBlockState(bark).is(BlockTags.LOGS))continue;
+            BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                    .setValue(BracketFungusBlock.FACING,face)
+                    .setValue(BracketFungusBlock.COUNT,1+random.nextInt(4))
+                    .setValue(BracketFungusBlock.VARIATION,random.nextInt(4));
+            if(fungus.canSurvive(level,p) && level.setBlock(p,fungus,2))
+                placedFungi++;
         }
 
         // Hang narrow moss strands below cedar foliage.
@@ -789,7 +791,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos fungusPos=onLog.relative(side);
             BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
                     .setValue(BracketFungusBlock.FACING,side)
-                    .setValue(BracketFungusBlock.COUNT,1+rng.nextInt(4));
+                    .setValue(BracketFungusBlock.COUNT,1+rng.nextInt(4))
+                    .setValue(BracketFungusBlock.VARIATION,rng.nextInt(4));
             if(level.getBlockState(fungusPos).isAir()&&fungus.canSurvive(level,fungusPos))
                 level.setBlock(fungusPos,fungus,2);
         }
