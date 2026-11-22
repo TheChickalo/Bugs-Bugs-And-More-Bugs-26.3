@@ -216,10 +216,11 @@ public record ForestHabitatFeature(int kind) implements Feature {
      */
     private void settleLeafDistances(WorldGenLevel level, BlockPos base, int treeHeight) {
         int radius = switch (kind) {
-            case 0 -> 14; // Opposing Maple-style wisteria crowns and trailing flowers
-            case 1 -> 9;
+            case 0 -> 14; // Wisteria: unchanged native tree generation
+            case 1 -> 14; // Willow's trailing side branches reach far from trunk
             case 2 -> 7;
-            default -> 8;
+            case 3 -> 11;
+            default -> 14; // Mimosa's wide asymmetrical umbrella
         };
         ArrayDeque<BlockPos> queue = new ArrayDeque<>();
         Map<BlockPos, Integer> distances = new HashMap<>();
