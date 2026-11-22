@@ -9,6 +9,10 @@ public class ModFoods {
     public static final FoodProperties BARBERRIES = new FoodProperties.Builder().nutrition(1).saturationModifier(0.4f).build();
     public static final FoodProperties HASKAP_BERRIES = new FoodProperties.Builder().nutrition(3).saturationModifier(0.2f).build();
 
+
+    public static final FoodProperties PERSIMMON_FRUIT = new FoodProperties.Builder().nutrition(4).saturationModifier(0.3F).build();
+    public static final Consumable PERSIMMON_FRUIT_CONSUMABLE = Consumables.defaultFood().build();
+
     public static final Consumable DAIKON_CONSUMABLE = Consumables.defaultFood()
             .consumeSeconds(1.8f).build();
     public static final Consumable BARBERRIES_CONSUMABLE = Consumables.defaultFood()

@@ -37,6 +37,10 @@ public class ModItems {
     public static final Item BARBERRIES = registerItem("barberries",
             properties -> new BlockItem(ModBlocks.BARBERRY_BUSH, properties.useItemDescriptionPrefix().food(ModFoods.BARBERRIES, ModFoods.BARBERRIES_CONSUMABLE).component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(30)))));
 
+
+    public static final Item PERSIMMON_FRUIT = registerItem("persimmon_fruit", properties -> new Item(properties.food(ModFoods.PERSIMMON_FRUIT, ModFoods.PERSIMMON_FRUIT_CONSUMABLE).component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(65)))));
+    public static final Item MIMOSA_SEEDPODS = registerItem("mimosa_seedpods", properties -> new Item(properties.component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(30)))));
+
     public static final Item REINFORCED_SHIELD =
             registerItem("reinforced_shield", properties -> new ShieldItem(properties.durability(504).delayedComponent(
                     DataComponents.BLOCKS_ATTACKS, context -> new BlocksAttacks(0.25F,
@@ -74,6 +78,10 @@ public class ModItems {
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(output -> {
             output.accept(ANTWORKER_SPAWN_EGG);
         });
+
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(output -> output.accept(PERSIMMON_FRUIT));
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> output.accept(MIMOSA_SEEDPODS));
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(REINFORCED_SHIELD);
