@@ -218,5 +218,8 @@
   "block.bugsbugsandmorebugs.ginkgo_fallen_leaves": "Ginkgo Leaf Litter",
   "block.bugsbugsandmorebugs.duckweed": "Duckweed",
   "block.bugsbugsandmorebugs.lotus": "Lotus",
-  "block.bugsbugsandmorebugs.lotus_flower": "Flowering Lotus"
+  "block.bugsbugsandmorebugs.lotus_flower": "Flowering Lotus",
+  "block.bugsbugsandmorebugs.rice_crop": "Rice Crop",
+  "item.bugsbugsandmorebugs.rice": "Rice",
+  "item.bugsbugsandmorebugs.rice_seeds": "Rice Seeds"
 }

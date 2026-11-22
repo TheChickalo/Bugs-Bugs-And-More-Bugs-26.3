@@ -532,6 +532,9 @@ public class ModBlocks {
             p -> new LotusFlowerBlock(p.noCollision().instabreak().sound(SoundType.GRASS)));
 
     // Crops & Bushes
+    public static final Block RICE_CROP = registerBlockWithoutBlockItem("rice_crop",
+            properties -> new RiceCropBlock(properties.noCollision().randomTicks().instabreak()
+                    .sound(SoundType.CROP).pushReaction(PushReaction.POPPED)));
     public static final Block DAIKON_CROP = registerBlockWithoutBlockItem("daikon_crop",
             properties -> new DaikonCropBlock(properties.noCollision().randomTicks().instabreak().sound(SoundType.CROP)
                     .pushReaction(PushReaction.POPPED)));

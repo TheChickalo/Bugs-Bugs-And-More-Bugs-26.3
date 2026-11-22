@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.datagen;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
+import net.chickalo.bugsbugsandmorebugs.block.custom.RiceCropBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.ThreeBlockWetlandPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
@@ -271,6 +272,30 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
                         ModBlocks.MAPLE_SAPLING,
                         NORMAL_LEAVES_SAPLING_CHANCES
                 ));
+
+        // Only the bottom third drops anything, including when an upper section is broken.
+        // An immature plant returns a seed; a mature plant yields 2-4 rice and 1-3 seeds.
+        this.add(ModBlocks.RICE_CROP, block -> this.applyExplosionDecay(block,
+                LootTable.lootTable()
+                        .withPool(LootPool.lootPool()
+                                .when(MatchBlock.blockMatches(this.blocks, block,
+                                        StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(RiceCropBlock.PART, 0)))
+                                .add(LootItem.lootTableItem(ModItems.RICE_SEEDS)))
+                        .withPool(LootPool.lootPool()
+                                .when(MatchBlock.blockMatches(this.blocks, block,
+                                        StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(RiceCropBlock.PART, 0)
+                                                .hasProperty(RiceCropBlock.AGE, RiceCropBlock.MAX_AGE)))
+                                .add(LootItem.lootTableItem(ModItems.RICE)
+                                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(2, 4)))))
+                        .withPool(LootPool.lootPool()
+                                .when(MatchBlock.blockMatches(this.blocks, block,
+                                        StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(RiceCropBlock.PART, 0)
+                                                .hasProperty(RiceCropBlock.AGE, RiceCropBlock.MAX_AGE)))
+                                .add(LootItem.lootTableItem(ModItems.RICE_SEEDS)
+                                        .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2)))))));
 
         this.add(ModBlocks.DAIKON_CROP, this.createCropDrops(
                 ModBlocks.DAIKON_CROP,
