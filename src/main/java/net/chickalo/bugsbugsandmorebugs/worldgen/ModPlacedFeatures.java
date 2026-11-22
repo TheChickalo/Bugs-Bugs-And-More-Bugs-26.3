@@ -357,9 +357,9 @@ public class ModPlacedFeatures {
                         RarityFilter.onAverageOnceEvery(2),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
-                        BiomeFilter.biome(),
                         CountPlacement.of(548),
                         OffsetPlacement.ofTriangle(5, 3),
+                        BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
@@ -389,9 +389,9 @@ public class ModPlacedFeatures {
                         CountPlacement.of(3),
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                        BiomeFilter.biome(),
                         CountPlacement.of(248),
                         OffsetPlacement.ofTriangle(7, 3),
+                        BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
@@ -401,9 +401,9 @@ public class ModPlacedFeatures {
                         List.of(
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
-                        BiomeFilter.biome(),
                         CountPlacement.of(170),
                         OffsetPlacement.ofTriangle(7, 3),
+                        BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 ));
 
@@ -412,9 +412,9 @@ public class ModPlacedFeatures {
                         List.of(
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP,
-                        BiomeFilter.biome(),
                         CountPlacement.of(150),
                         OffsetPlacement.ofTriangle(7, 3),
+                        BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                         ));
 
@@ -424,9 +424,9 @@ public class ModPlacedFeatures {
                         List.of(
                         InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
-                        BiomeFilter.biome(),
                         CountPlacement.of(20),
                         OffsetPlacement.ofTriangle(7, 3),
+                        BiomeFilter.biome(),
                         BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
                         ));
 

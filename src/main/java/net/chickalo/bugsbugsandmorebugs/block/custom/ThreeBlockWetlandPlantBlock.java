@@ -64,7 +64,7 @@ public class ThreeBlockWetlandPlantBlock extends BushBlock implements SimpleWate
             BlockPos root = pos.below(state.getValue(PART));
             BlockState base = level.getBlockState(root);
             if (base.is(this) && base.getValue(PART) == 0) {
-                if (!player.isCreative()) Block.dropResources(base, level, root);
+                if (!player.isCreative()) Block.dropResources(base, level, root, level.getBlockEntity(root), player, player.getMainHandItem());
                 level.setBlock(root,
                         base.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 3);
             }

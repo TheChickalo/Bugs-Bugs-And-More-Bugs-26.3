@@ -4,6 +4,12 @@ import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
 public class ModFlammableBlocks {
+    // All existing wood components should burn like vanilla planks.
+    private static void registerWoodComponents(net.minecraft.world.level.block.Block... blocks) {
+        var registry = FlammableBlockRegistry.getDefaultInstance();
+        for (var block : blocks) registry.add(block, 5, 20);
+    }
+
     public static void registerFlammableBlocks() {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.GINKGO_LOG, 5, 5);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.GINKGO_WOOD, 5, 5);
@@ -67,5 +73,31 @@ public class ModFlammableBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HANGING_WISTERIA_BLOSSOMS, 30, 60);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.HANGING_WILLOW_LEAVES, 30, 60);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.CLIMBING_WISTERIA_VINE, 15, 100);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.FLOWERING_MIMOSA_LEAVES, 30, 60);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.MOSSY_CEDAR_LOG, 5, 5);
+        FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.CEDAR_ROOTS, 5, 5);
+
+        registerWoodComponents(
+                ModBlocks.GINKGO_STAIRS,
+                ModBlocks.GINKGO_SLAB,
+                ModBlocks.GINKGO_DOOR,
+                ModBlocks.GINKGO_TRAPDOOR,
+                ModBlocks.GINKGO_BUTTON,
+                ModBlocks.GINKGO_PRESSURE_PLATE,
+                ModBlocks.GINKGO_FENCE,
+                ModBlocks.GINKGO_FENCE_GATE,
+                ModBlocks.MAPLE_STAIRS,
+                ModBlocks.MAPLE_SLAB,
+                ModBlocks.MAPLE_DOOR,
+                ModBlocks.MAPLE_TRAPDOOR,
+                ModBlocks.MAPLE_BUTTON,
+                ModBlocks.MAPLE_PRESSURE_PLATE,
+                ModBlocks.MAPLE_FENCE,
+                ModBlocks.MAPLE_FENCE_GATE,
+                ModBlocks.HINOKI_DOOR,
+                ModBlocks.HINOKI_TRAPDOOR,
+                ModBlocks.HINOKI_BUTTON,
+                ModBlocks.HINOKI_PRESSURE_PLATE
+        );
     }
 }

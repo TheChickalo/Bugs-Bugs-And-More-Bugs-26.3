@@ -133,7 +133,7 @@ public class VariableHeightPlantBlock extends BushBlock {
             BlockPos root = pos.below(state.getValue(SEGMENT));
             BlockState base = level.getBlockState(root);
             if (base.is(this) && base.getValue(SEGMENT) == 0) {
-                if (!player.isCreative()) Block.dropResources(base, level, root);
+                if (!player.isCreative()) Block.dropResources(base, level, root, level.getBlockEntity(root), player, player.getMainHandItem());
                 level.setBlock(root, Blocks.AIR.defaultBlockState(), 3);
             }
         }

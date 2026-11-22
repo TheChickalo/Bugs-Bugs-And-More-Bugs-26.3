@@ -13,9 +13,6 @@
       "heightmap": "MOTION_BLOCKING"
     },
     {
-      "type": "minecraft:biome"
-    },
-    {
       "type": "minecraft:count",
       "count": 548
     },
@@ -39,6 +36,9 @@
         "min": -5,
         "plateau": 0
       }
+    },
+    {
+      "type": "minecraft:biome"
     },
     {
       "type": "minecraft:block_predicate_filter",

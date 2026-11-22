@@ -26,7 +26,7 @@ import java.util.Optional;
 public class ModOverworldBiomes {
     public static Biome mapleForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<WorldCarver> carverGetter) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
-        BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
+        // Biome-only alpha: natural mobs stay disabled until custom mobs are ready.
 
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
@@ -93,13 +93,7 @@ public class ModOverworldBiomes {
         MobSpawnSettings.Builder spawnBuilder =
                 new MobSpawnSettings.Builder();
 
-        BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
-
-        spawnBuilder.addSpawn(
-                EntityTypes.RABBIT,
-                12,
-                UniformInt.of(2, 3)
-        );
+        // Biome-only alpha: natural mobs stay disabled until custom mobs are ready.
 
         BiomeGenerationSettings.Builder biomeBuilder =
                 new BiomeGenerationSettings.Builder(

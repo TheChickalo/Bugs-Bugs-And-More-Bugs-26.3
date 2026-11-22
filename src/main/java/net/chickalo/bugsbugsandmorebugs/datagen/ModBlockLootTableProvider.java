@@ -287,6 +287,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         add(ModBlocks.POTTED_MAPLE_SAPLING, block -> createPotFlowerItemTable(ModBlocks.MAPLE_SAPLING));
 
         dropSelf(ModBlocks.GLOWSHROOM);
+        // Pot and mushroom both drop when the potted glowshroom is broken.
+        add(ModBlocks.POTTED_GLOWSHROOM, block -> createPotFlowerItemTable(ModBlocks.GLOWSHROOM));
 
         add(ModBlocks.MAPLE_LEAVES,
                 block -> createLeavesDrops(
