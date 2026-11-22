@@ -154,4 +154,54 @@ for node in list(feature_edges):
 
 print(f"Global feature ordering verified across {len(biome_files)} mod biomes")
 
+
+# New cedar rainforest and mountain-range features must be present in the
+# generated datapack, not only in the Java bootstraps.
+for name in ("rainforest_creeks", "mountain_range"):
+    configured = json.loads(read(data / f"bugsbugsandmorebugs/worldgen/feature/{name}.json"))
+    placed = json.loads(read(data / f"bugsbugsandmorebugs/worldgen/placed_feature/{name}_placed.json"))
+    assert configured["type"] == f"bugsbugsandmorebugs:{name}"
+    assert placed["feature"] == f"bugsbugsandmorebugs:{name}"
+cedar_biome = json.loads(read(data / "bugsbugsandmorebugs/worldgen/biome/ancient_cedar_rainforest.json"))
+assert "bugsbugsandmorebugs:rainforest_creeks_placed" in cedar_biome["features"][1]
+for biome_name in ("highland_karst", "hinoki_highlands", "volcanic_peak", "snowy_peak", "ashen_foothills"):
+    mountain_biome = json.loads(read(data / f"bugsbugsandmorebugs/worldgen/biome/{biome_name}.json"))
+    assert "bugsbugsandmorebugs:mountain_range_placed" in mountain_biome["features"][1]
+
+# The three hanging vegetation types use the actual new 16x16 base, middle and
+# tip PNG files, with explicit states instead of reusing one sprite everywhere.
+assets = root / "resources/assets/bugsbugsandmorebugs"
+for name in ("hanging_wisteria_blossoms", "hanging_willow_leaves", "hanging_forest_moss"):
+    blockstate = json.loads(read(assets / f"blockstates/{name}.json"))
+    assert len(blockstate["variants"]) == 4
+    assert blockstate["variants"]["base=true,tip=false"]["model"].endswith("_base")
+    assert blockstate["variants"]["base=false,tip=false"]["model"].endswith("_middle")
+    assert blockstate["variants"]["base=false,tip=true"]["model"].endswith("_tip")
+    for part in ("base", "middle", "tip"):
+        assert (assets / f"textures/block/{name}_{part}.png").exists()
+        assert (assets / f"models/block/{name}_{part}.json").exists()
+
+habitat_java = read(src / "worldgen/feature/ForestHabitatFeature.java")
+assert "microhabitat(p.getX(),p.getZ())" in habitat_java
+assert "placeNurseLog(" in habitat_java
+assert "applyMicrohabitatSurface(" in habitat_java
+assert "int colonies=random.nextInt(5)" in habitat_java
+mountain_java = read(src / "worldgen/feature/MountainRangeFeature.java")
+assert "if(depth>=4)return;" in mountain_java
+assert "Math.pow(0.54,depth)" in mountain_java
+assert "private static boolean room(" in mountain_java
+rain_java = read(src / "entity/client/BugsBugsandMoreBugsClient.java")
+assert "ParticleTypes.RAIN" in rain_java and "ANCIENT_CEDAR_RAINFOREST" in rain_java
+
+# The climate-only Willow constraint targets rivers/coast and keeps river nodes.
+dimension_biomes = climates
+willow_params = [b["parameters"] for b in dimension_biomes
+                 if b["biome"] == "bugsbugsandmorebugs:willow_backwaters"]
+assert len(willow_params) == 30
+assert all(-0.15 <= p["continentalness"] <= 0.34 for p in willow_params)
+assert all(abs(p["weirdness"]) <= 0.06 for p in willow_params)
+assert sum(b["biome"] == "bugsbugsandmorebugs:river" for b in dimension_biomes) >= 18
+
+print("Forest texture segments, 15 microhabitats, coastal Willow climates and ranges verified")
+
 print("Vanilla tree placers, root models, layered Duckweed, shallow water and Willow climates verified")
