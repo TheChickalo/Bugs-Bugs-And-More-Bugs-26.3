@@ -10,13 +10,13 @@
   ],
   "foliage_placer": {
     "type": "minecraft:cherry_foliage_placer",
-    "radius": 4,
-    "offset": 0,
-    "height": 5,
-    "wide_bottom_layer_hole_chance": 0.12,
-    "corner_hole_chance": 0.15,
+    "corner_hole_chance": 0.12,
     "hanging_leaves_chance": 0.24,
-    "hanging_leaves_extension_chance": 0.35
+    "hanging_leaves_extension_chance": 0.35,
+    "height": 5,
+    "offset": 0,
+    "radius": 4,
+    "wide_bottom_layer_hole_chance": 0.12
   },
   "foliage_provider": {
     "id": "bugsbugsandmorebugs:willow_leaves",
@@ -35,27 +35,27 @@
   "trunk_placer": {
     "type": "minecraft:cherry_trunk_placer",
     "base_height": 13,
-    "height_rand_a": 4,
-    "height_rand_b": 3,
     "branch_count": {
       "type": "minecraft:uniform",
-      "min_inclusive": 2,
-      "max_inclusive": 3
-    },
-    "branch_horizontal_length": {
-      "type": "minecraft:uniform",
-      "min_inclusive": 3,
-      "max_inclusive": 5
-    },
-    "branch_start_offset_from_top": {
-      "min_inclusive": -5,
-      "max_inclusive": -4
+      "max_inclusive": 3,
+      "min_inclusive": 2
     },
     "branch_end_offset_from_top": {
       "type": "minecraft:uniform",
-      "min_inclusive": -2,
-      "max_inclusive": 0
-    }
+      "max_inclusive": 0,
+      "min_inclusive": -2
+    },
+    "branch_horizontal_length": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 3
+    },
+    "branch_start_offset_from_top": {
+      "max_inclusive": -4,
+      "min_inclusive": -5
+    },
+    "height_rand_a": 4,
+    "height_rand_b": 3
   },
   "trunk_provider": {
     "id": "bugsbugsandmorebugs:willow_log",
