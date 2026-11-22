@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "bugsbugsandmorebugs:block/mimosa_log",
+    "end": "bugsbugsandmorebugs:block/mimosa_log_top"
+  }
+}

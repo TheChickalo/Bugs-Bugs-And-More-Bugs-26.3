@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "bugsbugsandmorebugs:block/stripped_wisteria_log"
+    },
+    "axis=x": {
+      "model": "bugsbugsandmorebugs:block/stripped_wisteria_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "bugsbugsandmorebugs:block/stripped_wisteria_log",
+      "x": 90
+    }
+  }
+}
