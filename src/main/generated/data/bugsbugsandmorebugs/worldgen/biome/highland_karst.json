@@ -95,7 +95,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:mountain_range_placed"
+    ],
     [
       "bugsbugsandmorebugs:karst_outcrop_placed",
       "bugsbugsandmorebugs:karst_animal_trail_placed"

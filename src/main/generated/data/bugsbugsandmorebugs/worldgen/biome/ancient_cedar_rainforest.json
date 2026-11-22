@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:rainforest_creeks_placed"
+    ],
     [],
     [],
     [],

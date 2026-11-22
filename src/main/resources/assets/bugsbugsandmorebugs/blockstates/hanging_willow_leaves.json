@@ -1,9 +1,15 @@
 {
   "variants": {
-    "tip=false": {
-      "model": "bugsbugsandmorebugs:block/hanging_willow_leaves"
+    "base=false,tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_willow_leaves_middle"
     },
-    "tip=true": {
+    "base=false,tip=true": {
+      "model": "bugsbugsandmorebugs:block/hanging_willow_leaves_tip"
+    },
+    "base=true,tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_willow_leaves_base"
+    },
+    "base=true,tip=true": {
       "model": "bugsbugsandmorebugs:block/hanging_willow_leaves_tip"
     }
   }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bugsbugsandmorebugs:block/hanging_wisteria_blossoms_base"
+  }
+}

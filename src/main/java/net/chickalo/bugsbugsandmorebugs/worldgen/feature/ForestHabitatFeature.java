@@ -341,12 +341,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 BlockPos p=lowest.below(d);
                 if (!level.getBlockState(p).isAir()) break;
                 level.setBlock(p,ModBlocks.HANGING_WILLOW_LEAVES.defaultBlockState()
-                        .setValue(HangingAccentBlock.TIP,false),2);
+                        .setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,d==1),2);
                 placed++;
             }
             if (placed>0) level.setBlock(lowest.below(placed),
                     ModBlocks.HANGING_WILLOW_LEAVES.defaultBlockState()
-                            .setValue(HangingAccentBlock.TIP,true),2);
+                            .setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,placed==1),2);
         }
     }
 
@@ -576,17 +576,23 @@ public record ForestHabitatFeature(int kind) implements Feature {
             if(level.getBlockState(trunk).is(ModBlocks.CEDAR_LOG) && random.nextInt(3)==0)
                 level.setBlock(trunk,ModBlocks.MOSSY_CEDAR_LOG.defaultBlockState(),2);
         }
-        // Bracket fungus shelves cling to accessible sides of lower trunks.
-        for(int i=0;i<10;i++){
-            BlockPos bark=base.above(1+random.nextInt(Math.max(1,Math.min(height-3,11))));
-            Direction face=SIDES[random.nextInt(4)];
-            BlockPos p=bark.relative(face);
-            if(!level.getBlockState(p).isAir()
-                    || !level.getBlockState(bark).is(BlockTags.LOGS))continue;
-            BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
-                    .setValue(BracketFungusBlock.FACING,face)
-                    .setValue(BracketFungusBlock.COUNT,1+random.nextInt(3));
-            if(fungus.canSurvive(level,p))level.setBlock(p,fungus,2);
+        // Bracket fungi form occasional uneven clusters at different heights
+        // and sides, not the same horizontal strip repeated on every tree.
+        int colonies=random.nextInt(5);
+        for(int colony=0;colony<colonies;colony++){
+            int targetHeight=1+random.nextInt(Math.max(1,Math.min(height-3,13)));
+            Direction face=SIDES[random.nextInt(SIDES.length)];
+            BlockPos bark=base.above(targetHeight);
+            for(int sub=0;sub<1+random.nextInt(3);sub++){
+                BlockPos woody=bark.above(sub==0?0:random.nextInt(3));
+                BlockPos p=woody.relative(face);
+                if(!level.getBlockState(p).isAir()
+                        || !level.getBlockState(woody).is(BlockTags.LOGS))continue;
+                BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                        .setValue(BracketFungusBlock.FACING,face)
+                        .setValue(BracketFungusBlock.COUNT,1+random.nextInt(4));
+                if(fungus.canSurvive(level,p))level.setBlock(p,fungus,2);
+            }
         }
 
         // Hang narrow moss strands below cedar foliage.
@@ -604,12 +610,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 BlockPos p=lowest.below(j);
                 if(!level.getBlockState(p).isAir())break;
                 level.setBlock(p,ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
-                        .setValue(HangingAccentBlock.TIP,false),2);
+                        .setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,j==1),2);
                 count++;
             }
             if(count>0)level.setBlock(lowest.below(count),
                     ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
-                            .setValue(HangingAccentBlock.TIP,true),2);
+                            .setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,count==1),2);
         }
     }
 
@@ -673,11 +679,11 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int dy=0;dy<length;dy++) {
                 BlockPos q=start.below(dy);
                 if (!level.getBlockState(q).isAir()) break;
-                level.setBlock(q,hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,false),2);
+                level.setBlock(q,hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,dy==0),2);
                 placed++;
             }
             if (placed>0)level.setBlock(start.below(placed-1),
-                    hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,true),2);
+                    hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,placed==1),2);
         }
     }
 
@@ -708,6 +714,88 @@ public record ForestHabitatFeature(int kind) implements Feature {
         }
     }
 
+    /**
+     * All fifteen local microhabitats share the biome ID but differ in soil,
+     * litter and water-edge detail. The smooth microhabitat() noise controls
+     * contiguous patches instead of registering fifteen competing biome IDs.
+     *
+     * Wisteria: Violet Curtains, Tangled Arbors, Petal Glades.
+     * Willow: Oxbow Banks, Sedge Pools, Willow Hummocks.
+     * Cedar: Elder Stands, Nurse-Log Hollows, Rainwashed Gullies.
+     * Persimmon: Amber Groves, Golden Meadows, Bramble Terraces.
+     * Mimosa: Blossom Drifts, Feathergrass Prairie, Sunwashed Rises.
+     */
+    private boolean applyMicrohabitatSurface(WorldGenLevel level, BlockPos air,
+                                            int micro, RandomSource rng) {
+        BlockPos ground=air.below();
+        BlockState soil=level.getBlockState(ground);
+        if(!soil(level,ground)||!level.getFluidState(ground).isEmpty())return false;
+        Block cover=null;
+        int roll=rng.nextInt(14);
+        switch(kind){
+            case 0 -> {
+                // Keep Wisteria tree structure and flowering placement untouched.
+                if(micro==2 && roll==0)cover=Blocks.COARSE_DIRT;
+                else if(micro==1 && roll==0)cover=Blocks.ROOTED_DIRT;
+            }
+            case 1 -> {
+                if(micro==0 && roll<3 && nearbyWater(level,air,4))cover=ModBlocks.SILT;
+                else if(micro==1 && roll==0)cover=Blocks.MUD;
+                else if(micro==2 && roll==0)cover=Blocks.MOSS_BLOCK;
+            }
+            case 2 -> {
+                if(micro==0 && roll<2)cover=Blocks.MOSS_BLOCK;
+                else if(micro==1 && roll<2)cover=Blocks.PODZOL;
+                else if(micro==2 && roll<2)cover=Blocks.MUD;
+                // Nurse logs: rare, lying along existing supported soil.
+                if(micro==1 && rng.nextInt(36)==0
+                        && placeNurseLog(level,air,rng))return true;
+            }
+            case 3 -> {
+                if(micro==0 && roll==0)cover=Blocks.PODZOL;
+                else if(micro==1 && roll==0)cover=Blocks.COARSE_DIRT;
+                else if(micro==2 && roll<3)cover=Blocks.COARSE_DIRT;
+            }
+            case 4 -> {
+                if(micro==0 && roll==0)cover=Blocks.GRASS_BLOCK;
+                else if(micro==1 && roll<2)cover=Blocks.COARSE_DIRT;
+                else if(micro==2 && roll<3)cover=Blocks.COARSE_DIRT;
+            }
+        }
+        if(cover==null||soil.is(cover))return false;
+        return level.setBlock(ground,cover.defaultBlockState(),2);
+    }
+
+    /** Low, naturally supported fallen cedars with irregular fungus shelves. */
+    private boolean placeNurseLog(WorldGenLevel level, BlockPos base, RandomSource rng) {
+        Direction dir=SIDES[rng.nextInt(SIDES.length)];
+        int length=2+rng.nextInt(4);
+        for(int d=0;d<length;d++){
+            BlockPos site=base.relative(dir,d);
+            if(!correctBiome(level,site)||!level.getBlockState(site).isAir()
+                    ||!soil(level,site.below())||!level.getFluidState(site).isEmpty())
+                return false;
+        }
+        for(int d=0;d<length;d++){
+            BlockPos site=base.relative(dir,d);
+            Block wood=rng.nextInt(3)==0?ModBlocks.MOSSY_CEDAR_LOG:ModBlocks.CEDAR_WOOD;
+            level.setBlock(site,wood.defaultBlockState()
+                    .setValue(BlockStateProperties.AXIS,dir.getAxis()),2);
+        }
+        if(rng.nextInt(3)!=0){
+            int d=rng.nextInt(length);
+            BlockPos onLog=base.relative(dir,d);
+            Direction side=SIDES[rng.nextInt(SIDES.length)];
+            BlockPos fungusPos=onLog.relative(side);
+            BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                    .setValue(BracketFungusBlock.FACING,side)
+                    .setValue(BracketFungusBlock.COUNT,1+rng.nextInt(4));
+            if(level.getBlockState(fungusPos).isAir()&&fungus.canSurvive(level,fungusPos))
+                level.setBlock(fungusPos,fungus,2);
+        }
+        return true;
+    }
+
     private boolean scatterPlants(WorldGenLevel level, BlockPos origin, RandomSource rng, int motif) {
         boolean changed=false;
         int attempts=16+(motif==0?8:4);
@@ -735,23 +823,28 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos water=p.below();
             if(kind==1 && level.getFluidState(water).is(Fluids.WATER)
                     && level.getFluidState(water).isSource()) {
-                Block target=switch(rng.nextInt(5)) {
-                    case 0,1 -> ModBlocks.WATER_MINT;
-                    case 2,3 -> ModBlocks.WATER_SEDGE;
-                    default -> ModBlocks.MARSH_MARIGOLD_WATER;
+                int aquaticMicro=microhabitat(p.getX(),p.getZ());
+                // Sedge Pools concentrate tall reeds/sedge; Oxbow Banks favor
+                // mint and marigolds, while Hummocks keep standing water sparse.
+                Block target=switch(aquaticMicro) {
+                    case 0 -> rng.nextBoolean()?ModBlocks.WATER_MINT:ModBlocks.MARSH_MARIGOLD_WATER;
+                    case 1 -> rng.nextInt(5)<4?ModBlocks.WATER_SEDGE:ModBlocks.WATER_MINT;
+                    default -> rng.nextInt(3)==0?ModBlocks.WATER_MINT:ModBlocks.WATER_SEDGE;
                 };
                 if(target instanceof FlexibleWetlandPlantBlock wet)
                     changed|=wet.placeNaturally(level,water);
                 continue;
             }
             if(!level.getBlockState(p).isAir() || !soil(level,p.below()))continue;
+            int micro=microhabitat(p.getX(),p.getZ());
+            changed |= applyMicrohabitatSurface(level,p,micro,rng);
             int roll=rng.nextInt(8);
             Block plant=switch(kind) {
-                case 0 -> motif==2 && roll<3 ? ModBlocks.FALLEN_WISTERIA_PETALS
+                case 0 -> micro==2 && roll<3 ? ModBlocks.FALLEN_WISTERIA_PETALS
                         : roll<5 ? ModBlocks.WILD_VIOLET : Blocks.FERN;
                 case 1 -> roll<3?ModBlocks.MARSH_MARIGOLD
                         :roll<6?Blocks.FERN:Blocks.SHORT_GRASS;
-                case 2 -> switch(motif) {
+                case 2 -> switch(micro) {
                     case 0 -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
                             :roll==5?ModBlocks.GLOWSHROOM:Blocks.FERN;
                     case 1 -> roll<3?ModBlocks.LIVERWORT:roll<5?ModBlocks.CLUBMOSS
@@ -759,7 +852,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
                     default -> roll<3?ModBlocks.CLUBMOSS:roll<5?ModBlocks.LIVERWORT
                             :roll==5?Blocks.MOSS_CARPET:Blocks.FERN;
                 };
-                case 3 -> switch(motif) {
+                case 3 -> switch(micro) {
                     case 0 -> roll<4?ModBlocks.FALLEN_AUTUMN_LEAVES:roll<6
                             ?ModBlocks.ANEMONE_FLOWERS:ModBlocks.SILVER_GRASS;
                     case 1 -> roll<4?ModBlocks.SILVER_GRASS:roll<6
@@ -767,7 +860,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
                     default -> roll<3?ModBlocks.BUSH:roll<6
                             ?ModBlocks.FALLEN_AUTUMN_LEAVES:ModBlocks.ANEMONE_FLOWERS;
                 };
-                default -> switch(motif) {
+                default -> switch(micro) {
                     case 0 -> roll<4?ModBlocks.FALLEN_MIMOSA_PETALS:roll<6
                             ?ModBlocks.PINK_CLOVER:ModBlocks.FEATHERGRASS;
                     case 1 -> roll<4?ModBlocks.FEATHERGRASS:roll<6

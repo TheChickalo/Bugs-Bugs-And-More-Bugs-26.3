@@ -30,6 +30,8 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_DENSE_PLACED_KEY = registerKey("wetland_reeds_dense_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_WILLOW_PLACED_KEY = registerKey("wetland_reeds_willow_placed");
     public static final ResourceKey<PlacedFeature> WILLOW_SHALLOWS_PLACED_KEY = registerKey("willow_shallows_placed");
+    public static final ResourceKey<PlacedFeature> RAINFOREST_CREEKS_PLACED_KEY = registerKey("rainforest_creeks_placed");
+    public static final ResourceKey<PlacedFeature> MOUNTAIN_RANGE_PLACED_KEY = registerKey("mountain_range_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_MARSH_PLACED_KEY = registerKey("bamboo_pools_marsh_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_MARSH_WETLAND_PLACED_KEY = registerKey("bamboo_marsh_wetland_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_GROVE_MARSH_PLACED_KEY = registerKey("bamboo_grove_marsh_placed");
@@ -146,6 +148,14 @@ public class ModPlacedFeatures {
                 List.of(CountPlacement.of(4), InSquarePlacement.spread(),
                         PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         // One full chunk pass lowers overly deep Willow Backwaters water to 1–3 blocks.
+        // Recursively branching subsidiary peaks along mountain-range shoulders.
+        register(context, MOUNTAIN_RANGE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.MOUNTAIN_RANGE_KEY),
+                List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        // A deterministic meandering channel along cedar rainforest terrain.
+        register(context, RAINFOREST_CREEKS_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.RAINFOREST_CREEKS_KEY),
+                List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WILLOW_SHALLOWS_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WILLOW_SHALLOWS_KEY),
                 List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
