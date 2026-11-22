@@ -39,9 +39,11 @@ public record WillowShallowsFeature() implements Feature {
                 depth++;
             if(depth<=3 || depth>=40)continue;
             BlockPos floor=surface.below(depth);
-            if(!level.getBlockState(floor).isSolidRender()
-                    && !level.getBlockState(floor).is(Blocks.MUD)
-                    && !level.getBlockState(floor).is(ModBlocks.SILT))continue;
+            // Refuse bottomless cave columns or lava pockets; only fill above
+            // an existing solid bed and never place materials in empty caverns.
+            if(level.getBlockState(floor).isAir()
+                    || !level.getFluidState(floor).isEmpty()
+                    || level.getBlockState(floor).canBeReplaced())continue;
             // Keep all visible water in the 1–3 block range. Do not fill caves.
             int target=1+Math.floorMod(x*19+z*31,3);
             for(int d=depth-1;d>=target;d--){
