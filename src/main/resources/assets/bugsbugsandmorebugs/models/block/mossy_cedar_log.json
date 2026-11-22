@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "bugsbugsandmorebugs:block/mossy_cedar_log",
+    "end": "bugsbugsandmorebugs:block/cedar_log_top"
+  }
+}

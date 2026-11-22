@@ -1,6 +1,7 @@
 package net.chickalo.bugsbugsandmorebugs.datagen;
 
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.chickalo.bugsbugsandmorebugs.block.custom.BracketFungusBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.BarberryBushBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.DaikonCropBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HaskapBerryBushBlock;
@@ -14,7 +15,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -22,6 +25,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +37,25 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
             CompletableFuture<HolderLookup.Provider> registriesFuture
     ) {
         super(packOutput, registriesFuture);
+    }
+
+
+    // The same 1-4 piece loot behavior as vanilla leaf litter and our existing petals.
+    private void addLayeredLitterDrops(Block block) {
+        addAmountDrops(block, BlockStateProperties.SEGMENT_AMOUNT);
+    }
+
+    private void addAmountDrops(Block block, IntegerProperty amountProperty) {
+        add(block, b -> {
+            var table = LootTable.lootTable();
+            for (int amount = 1; amount <= 4; amount++) {
+                table.withPool(LootPool.lootPool()
+                        .when(MatchBlock.blockMatches(this.blocks, b, StatePropertiesPredicate.Builder.properties()
+                                .hasProperty(amountProperty, amount)))
+                        .add(LootItem.lootTableItem(b).apply(SetItemCountFunction.setCount(ContextIntProviders.between(amount, amount)))));
+            }
+            return table;
+        });
     }
 
     @Override
@@ -354,17 +377,36 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         dropSelf(ModBlocks.PERSIMMON_LOG);
         dropSelf(ModBlocks.PERSIMMON_WOOD);
         dropSelf(ModBlocks.PERSIMMON_PLANKS);
-        dropSelf(ModBlocks.PERSIMMON_LEAVES);
+        add(ModBlocks.PERSIMMON_LEAVES, block -> createLeavesDrops(block, ModBlocks.PERSIMMON_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES)
+                .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.05F)).add(LootItem.lootTableItem(ModItems.PERSIMMON_FRUIT))));
         dropSelf(ModBlocks.PERSIMMON_SAPLING);
         dropSelf(ModBlocks.STRIPPED_PERSIMMON_LOG);
         dropSelf(ModBlocks.STRIPPED_PERSIMMON_WOOD);
         dropSelf(ModBlocks.MIMOSA_LOG);
         dropSelf(ModBlocks.MIMOSA_WOOD);
         dropSelf(ModBlocks.MIMOSA_PLANKS);
-        dropSelf(ModBlocks.MIMOSA_LEAVES);
+        add(ModBlocks.MIMOSA_LEAVES, block -> createLeavesDrops(block, ModBlocks.MIMOSA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES)
+                .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.04F)).add(LootItem.lootTableItem(ModItems.MIMOSA_SEEDPODS))));
         dropSelf(ModBlocks.MIMOSA_SAPLING);
         dropSelf(ModBlocks.STRIPPED_MIMOSA_LOG);
         dropSelf(ModBlocks.STRIPPED_MIMOSA_WOOD);
+
+        dropSelf(ModBlocks.CEDAR_ROOTS);
+        dropSelf(ModBlocks.MOSSY_CEDAR_LOG);
+        dropSelf(ModBlocks.HANGING_FOREST_MOSS);
+        dropSelf(ModBlocks.LIVERWORT);
+        dropSelf(ModBlocks.CLUBMOSS);
+        addAmountDrops(ModBlocks.BRACKET_FUNGUS, BracketFungusBlock.COUNT);
+        dropSelf(ModBlocks.ANEMONE_FLOWERS);
+        dropSelf(ModBlocks.BUSH);
+        dropSelf(ModBlocks.MIMOSA_BLOSSOMS);
+        dropSelf(ModBlocks.FEATHERGRASS);
+        add(ModBlocks.FLOWERING_MIMOSA_LEAVES, block -> createLeavesDrops(block, ModBlocks.MIMOSA_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES)
+                .withPool(LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(0.05F)).add(LootItem.lootTableItem(ModItems.MIMOSA_SEEDPODS))));
+        addLayeredLitterDrops(ModBlocks.FALLEN_AUTUMN_LEAVES);
+        addLayeredLitterDrops(ModBlocks.FALLEN_MIMOSA_PETALS);
+        addLayeredLitterDrops(ModBlocks.PINK_CLOVER);
+
         dropSelf(ModBlocks.SILT);
         dropSelf(ModBlocks.WILLOW_ROOTS);
         dropSelf(ModBlocks.HANGING_WILLOW_LEAVES);

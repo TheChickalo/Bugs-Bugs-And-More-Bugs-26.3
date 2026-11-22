@@ -635,6 +635,26 @@ public class ModBlocks {
     public static final Block MARSH_MARIGOLD_WATER = registerBlock("marsh_marigold_water", p -> new FlexibleWetlandPlantBlock(2, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
     public static final VariableHeightPlantBlock WATER_MINT = (VariableHeightPlantBlock) registerBlock("water_mint", p -> new VariableHeightPlantBlock(2, p.noCollision().instabreak().randomTicks().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
 
+
+    // Elsewhere forest detailing; models/blockstates manually mapped in assets/.
+    public static final Block CEDAR_ROOTS = registerBlock("cedar_roots", p -> new RotatedPillarBlock(p.noOcclusion().strength(1.5F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block MOSSY_CEDAR_LOG = registerBlock("mossy_cedar_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
+    public static final Block HANGING_FOREST_MOSS = registerBlock("hanging_forest_moss", p -> new HangingAccentBlock(p.noCollision().instabreak().sound(SoundType.VINE).pushReaction(PushReaction.POPPED)));
+    public static final Block LIVERWORT = registerBlock("liverwort", p -> new CarpetBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block CLUBMOSS = registerBlock("clubmoss", p -> new CarpetBlock(p.noCollision().strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.POPPED)));
+    public static final Block BRACKET_FUNGUS = registerBlock("bracket_fungus", p -> new BracketFungusBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.FUNGUS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block FALLEN_AUTUMN_LEAVES = registerBlock("fallen_autumn_leaves", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
+    // SILVER_GRASS already exists. Preserve its ID and display it as "Silvergrass".
+    public static final Block ANEMONE_FLOWERS = registerBlock("anemone_flowers", p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block BUSH = registerBlock("bush", p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+
+    public static final Block FLOWERING_MIMOSA_LEAVES = registerBlock("flowering_mimosa_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES, AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion().ignitedByLava().sound(SoundType.GRASS)));
+    public static final Block MIMOSA_BLOSSOMS = registerBlock("mimosa_blossoms", p -> new LeafBlossomBlock(7, 3, p.noCollision().noOcclusion().instabreak().sound(SoundType.AMETHYST_CLUSTER).pushReaction(PushReaction.POPPED)));
+    public static final Block FALLEN_MIMOSA_PETALS = registerBlock("fallen_mimosa_petals", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
+    public static final Block FEATHERGRASS = registerBlock("feathergrass", p -> new FlowerBlock(MobEffects.WATER_BREATHING, 5.0F, p.noCollision().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.POPPED)));
+    public static final Block PINK_CLOVER = registerBlock("pink_clover", p -> new LeafLitterBlock(p.noCollision().strength(0.1F).sound(SoundType.GRASS)));
+
     public static ResourceKey<Block> getRK(Block block) {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();
     }

@@ -375,6 +375,13 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.FLOWERS).add(ModBlocks.getRK(ModBlocks.WILD_VIOLET))
                 .add(ModBlocks.getRK(ModBlocks.MARSH_MARIGOLD))
                 .add(ModBlocks.getRK(ModBlocks.MARSH_MARIGOLD_WATER));
+
+        tag(BlockTags.LOGS).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
+        tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
+        tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
+        tag(BlockTags.LEAVES).add(ModBlocks.getRK(ModBlocks.FLOWERING_MIMOSA_LEAVES));
+        tag(BlockTags.FLOWERS).add(ModBlocks.getRK(ModBlocks.ANEMONE_FLOWERS)).add(ModBlocks.getRK(ModBlocks.MIMOSA_BLOSSOMS)).add(ModBlocks.getRK(ModBlocks.PINK_CLOVER));
+
         tag(ModTags.Blocks.WISTERIA_LOGS)
                 .add(ModBlocks.getRK(ModBlocks.WISTERIA_LOG))
                 .add(ModBlocks.getRK(ModBlocks.WISTERIA_WOOD))
@@ -386,6 +393,8 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.STRIPPED_WILLOW_LOG))
                 .add(ModBlocks.getRK(ModBlocks.STRIPPED_WILLOW_WOOD));
         tag(ModTags.Blocks.CEDAR_LOGS)
+                .add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS))
+                .add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG))
                 .add(ModBlocks.getRK(ModBlocks.CEDAR_LOG))
                 .add(ModBlocks.getRK(ModBlocks.CEDAR_WOOD))
                 .add(ModBlocks.getRK(ModBlocks.STRIPPED_CEDAR_LOG))
