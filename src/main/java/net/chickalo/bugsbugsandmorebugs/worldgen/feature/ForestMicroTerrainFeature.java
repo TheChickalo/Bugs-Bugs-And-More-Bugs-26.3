@@ -184,7 +184,7 @@ public record ForestMicroTerrainFeature() implements Feature {
         return best;
     }
 
-    private static boolean downedLog(WorldGenLevel level,BlockPos top,int x,int z) {
+    private static boolean downedLog(WorldGenLevel level,BlockPos top,int x,int z,boolean wisteria) {
         int cellX=Math.floorDiv(x,19),cellZ=Math.floorDiv(z,19);
         long seed=hash(cellX,cellZ);
         int centerX=cellX*19+9,centerZ=cellZ*19+9;
@@ -192,7 +192,8 @@ public record ForestMicroTerrainFeature() implements Feature {
         int dx=x-centerX,dz=z-centerZ;
         if(east ? (Math.abs(dz)>0 || Math.abs(dx)>3) :
                  (Math.abs(dx)>0 || Math.abs(dz)>3))return false;
-        Block chosen=(seed&3)==0?ModBlocks.CEDAR_WOOD:ModBlocks.MOSSY_CEDAR_LOG;
+        Block chosen=wisteria ? ModBlocks.WISTERIA_WOOD
+                : (seed&3)==0?ModBlocks.CEDAR_WOOD:ModBlocks.MOSSY_CEDAR_LOG;
         BlockState state=chosen.defaultBlockState().setValue(BlockStateProperties.AXIS,
                 east?net.minecraft.core.Direction.Axis.X:net.minecraft.core.Direction.Axis.Z);
         if(!level.getBlockState(top.above()).isAir())return false;
@@ -245,7 +246,7 @@ public record ForestMicroTerrainFeature() implements Feature {
                 }
                 case 1 -> { // Tangled Arbors: exposed roots and horizontal vine-covered wood.
                     if(noise> -0.15)changed=put(level,top,Blocks.ROOTED_DIRT);
-                    if((h&31)==0)changed|=downedLog(level,top,x,z);
+                    if((h&31)==0)changed|=downedLog(level,top,x,z,true);
                 }
                 case 2 -> { // Petal Glades: bright, dense low blooms and clear sight lines.
                     if(noise>0.12 && (h&1)==0)
@@ -275,7 +276,7 @@ public record ForestMicroTerrainFeature() implements Feature {
                 }
                 case 7 -> { // Nurse-Log Hollows: visibly fallen, moss-encrusted cedar boles.
                     if(noise> -0.1)changed=put(level,top,(h&3)==0?Blocks.PODZOL:Blocks.MOSS_BLOCK);
-                    if((h&3)==0)changed|=downedLog(level,top,x,z);
+                    if((h&3)==0)changed|=downedLog(level,top,x,z,false);
                 }
                 case 8 -> { // Rainwashed Gullies: true 2–3-deep erosion cuts on slopes.
                     double d=smoothDistance(x,z,39,6.0);
