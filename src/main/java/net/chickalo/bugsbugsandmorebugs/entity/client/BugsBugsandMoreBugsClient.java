@@ -13,38 +13,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BugsBugsandMoreBugsClient implements ClientModInitializer {
     private int mistTick;
-    private int rainforestTick;
 
     @Override
     public void onInitializeClient() {
         ModelLayerRegistry.registerModelLayer(ModModelLayerLocations.ANTWORKER, AntWorkerModel::createBodyLayer);
         EntityRenderers.register(ModEntities.ANTWORKER, AntWorkerRenderer::new);
-
-        // Year-round cedar rainforest rainfall is a client-side localized
-        // visual effect. Vanilla weather itself is world-wide, so we do not
-        // change rain/thunder or other biomes' server weather.
-        ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if(client.level==null || client.player==null || client.isPaused())return;
-            if((++rainforestTick & 1)!=0)return;
-            var level=client.level;
-            var player=client.player;
-            if(!level.getBiome(player.blockPosition()).is(ModBiomes.ANCIENT_CEDAR_RAINFOREST))return;
-            var random=ThreadLocalRandom.current();
-            for(int i=0;i<20;i++){
-                int x=player.getBlockX()+random.nextInt(-13,14);
-                int z=player.getBlockZ()+random.nextInt(-13,14);
-                int y=player.getBlockY()+random.nextInt(-2,13);
-                BlockPos at=new BlockPos(x,y,z);
-                if(!level.hasChunkAt(at)
-                        || !level.getBiome(at).is(ModBiomes.ANCIENT_CEDAR_RAINFOREST)
-                        || !level.getBlockState(at).isAir())continue;
-                // Drops can appear below canopy; rain feels like humid forest
-                // precipitation instead of always falling from a clear sky.
-                level.addParticle(ParticleTypes.RAIN,
-                        x+random.nextDouble(),y+random.nextDouble(),z+random.nextDouble(),
-                        0,-0.25,0);
-            }
-        });
 
         // Low, local cloud wisps over Stone Forest valleys, beneath the normal global clouds.
         // Only rendered around the player, client-side: no persistent blocks,

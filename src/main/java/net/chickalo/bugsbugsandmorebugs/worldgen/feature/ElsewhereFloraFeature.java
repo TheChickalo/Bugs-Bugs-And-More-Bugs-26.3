@@ -53,11 +53,11 @@ public record ElsewhereFloraFeature() implements Feature {
             boolean plains=biome.is(ModBiomes.GRASSY_PLAINS);
             boolean limestone=ModBiomeFamilies.limestone(biome);
             boolean wet=ModBiomeFamilies.wetland(biome);
-            boolean cedar=biome.is(ModBiomes.ANCIENT_CEDAR_RAINFOREST);
+            boolean cedar=ModBiomeFamilies.cedar(biome);
             boolean hinoki=biome.is(ModBiomes.HINOKI_HIGHLANDS)
                     || biome.is(ModBiomes.MOSSY_HINOKI_GROVE);
-            boolean persimmon=biome.is(ModBiomes.PERSIMMON_WOODLANDS);
-            boolean mimosa=biome.is(ModBiomes.SILKFLOWER_SAVANNA);
+            boolean persimmon=ModBiomeFamilies.persimmon(biome);
+            boolean mimosa=ModBiomeFamilies.mimosa(biome);
             boolean maple=biome.is(ModBiomes.MAPLE_FOREST);
             boolean meadow=biome.is(ModBiomes.HIGHLAND_WILDFLOWER_MEADOW);
             boolean glow=biome.is(ModBiomes.GLOWSHROOM_GROVE);

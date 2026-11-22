@@ -3268,6 +3268,366 @@
             "weirdness": 0.055,
             "offset": 0
           }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:violet_curtains",
+          "parameters": {
+            "temperature": 0.086,
+            "humidity": 0.628,
+            "continentalness": 0.28,
+            "erosion": 0.25,
+            "depth": 0,
+            "weirdness": -0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:violet_curtains",
+          "parameters": {
+            "temperature": 0.086,
+            "humidity": 0.628,
+            "continentalness": 0.28,
+            "erosion": 0.25,
+            "depth": 0,
+            "weirdness": 0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:tangled_arbors",
+          "parameters": {
+            "temperature": 0.125,
+            "humidity": 0.592,
+            "continentalness": 0.28,
+            "erosion": 0.25,
+            "depth": 0,
+            "weirdness": -0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:tangled_arbors",
+          "parameters": {
+            "temperature": 0.125,
+            "humidity": 0.592,
+            "continentalness": 0.28,
+            "erosion": 0.25,
+            "depth": 0,
+            "weirdness": 0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:petal_glades",
+          "parameters": {
+            "temperature": 0.111,
+            "humidity": 0.649,
+            "continentalness": 0.28,
+            "erosion": 0.25,
+            "depth": 0,
+            "weirdness": -0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:petal_glades",
+          "parameters": {
+            "temperature": 0.111,
+            "humidity": 0.649,
+            "continentalness": 0.28,
+            "erosion": 0.25,
+            "depth": 0,
+            "weirdness": 0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:oxbow_banks",
+          "parameters": {
+            "temperature": -0.394,
+            "humidity": 0.428,
+            "continentalness": 0.333,
+            "erosion": 0.04,
+            "depth": 0,
+            "weirdness": -0.095,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:oxbow_banks",
+          "parameters": {
+            "temperature": -0.494,
+            "humidity": 0.473,
+            "continentalness": 0.273,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": -0.095,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:sedge_pools",
+          "parameters": {
+            "temperature": 0.095,
+            "humidity": 0.407,
+            "continentalness": 0.303,
+            "erosion": 0.14,
+            "depth": 0,
+            "weirdness": -0.055,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:sedge_pools",
+          "parameters": {
+            "temperature": -0.355,
+            "humidity": 0.392,
+            "continentalness": 0.273,
+            "erosion": 0.3,
+            "depth": 0,
+            "weirdness": -0.055,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:willow_hummocks",
+          "parameters": {
+            "temperature": 0.311,
+            "humidity": 0.764,
+            "continentalness": 0.323,
+            "erosion": 0.32,
+            "depth": 0,
+            "weirdness": -0.015,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:willow_hummocks",
+          "parameters": {
+            "temperature": 0.531,
+            "humidity": 0.594,
+            "continentalness": 0.34,
+            "erosion": 0.29,
+            "depth": 0,
+            "weirdness": -0.015,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:elder_stands",
+          "parameters": {
+            "temperature": -0.414,
+            "humidity": 0.718,
+            "continentalness": 0.55,
+            "erosion": -0.15,
+            "depth": 0,
+            "weirdness": -0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:elder_stands",
+          "parameters": {
+            "temperature": -0.414,
+            "humidity": 0.718,
+            "continentalness": 0.55,
+            "erosion": -0.15,
+            "depth": 0,
+            "weirdness": 0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:nurse_log_hollows",
+          "parameters": {
+            "temperature": -0.375,
+            "humidity": 0.682,
+            "continentalness": 0.55,
+            "erosion": -0.15,
+            "depth": 0,
+            "weirdness": -0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:nurse_log_hollows",
+          "parameters": {
+            "temperature": -0.375,
+            "humidity": 0.682,
+            "continentalness": 0.55,
+            "erosion": -0.15,
+            "depth": 0,
+            "weirdness": 0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:rainwashed_gullies",
+          "parameters": {
+            "temperature": -0.389,
+            "humidity": 0.739,
+            "continentalness": 0.55,
+            "erosion": -0.15,
+            "depth": 0,
+            "weirdness": -0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:rainwashed_gullies",
+          "parameters": {
+            "temperature": -0.389,
+            "humidity": 0.739,
+            "continentalness": 0.55,
+            "erosion": -0.15,
+            "depth": 0,
+            "weirdness": 0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:amber_groves",
+          "parameters": {
+            "temperature": 0.386,
+            "humidity": 0.108,
+            "continentalness": 0.31,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": -0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:amber_groves",
+          "parameters": {
+            "temperature": 0.386,
+            "humidity": 0.108,
+            "continentalness": 0.31,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": 0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:golden_meadows",
+          "parameters": {
+            "temperature": 0.425,
+            "humidity": 0.072,
+            "continentalness": 0.31,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": -0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:golden_meadows",
+          "parameters": {
+            "temperature": 0.425,
+            "humidity": 0.072,
+            "continentalness": 0.31,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": 0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bramble_terraces",
+          "parameters": {
+            "temperature": 0.411,
+            "humidity": 0.129,
+            "continentalness": 0.31,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": -0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:bramble_terraces",
+          "parameters": {
+            "temperature": 0.411,
+            "humidity": 0.129,
+            "continentalness": 0.31,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": 0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:blossom_drifts",
+          "parameters": {
+            "temperature": 0.686,
+            "humidity": -0.532,
+            "continentalness": 0.29,
+            "erosion": 0.33,
+            "depth": 0,
+            "weirdness": -0.17,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:blossom_drifts",
+          "parameters": {
+            "temperature": 0.686,
+            "humidity": -0.532,
+            "continentalness": 0.29,
+            "erosion": 0.33,
+            "depth": 0,
+            "weirdness": 0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:feathergrass_prairie",
+          "parameters": {
+            "temperature": 0.725,
+            "humidity": -0.568,
+            "continentalness": 0.29,
+            "erosion": 0.33,
+            "depth": 0,
+            "weirdness": -0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:feathergrass_prairie",
+          "parameters": {
+            "temperature": 0.725,
+            "humidity": -0.568,
+            "continentalness": 0.29,
+            "erosion": 0.33,
+            "depth": 0,
+            "weirdness": 0.13,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:sunwashed_rises",
+          "parameters": {
+            "temperature": 0.711,
+            "humidity": -0.511,
+            "continentalness": 0.29,
+            "erosion": 0.33,
+            "depth": 0,
+            "weirdness": -0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:sunwashed_rises",
+          "parameters": {
+            "temperature": 0.711,
+            "humidity": -0.511,
+            "continentalness": 0.29,
+            "erosion": 0.33,
+            "depth": 0,
+            "weirdness": 0.17,
+            "offset": 0
+          }
         }
       ]
     },

@@ -19,15 +19,18 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 /** Four cluster sizes and four horizontal orientations, on a single supporting wall face. */
 public class BracketFungusBlock extends HorizontalDirectionalBlock {
     public static final IntegerProperty COUNT = IntegerProperty.create("count", 1, 4);
+    // Shifts shelf positions within one wall-attached block, like bamboo age/shape variation.
+    public static final IntegerProperty VARIATION = IntegerProperty.create("variation", 0, 3);
 
     public BracketFungusBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(COUNT, 1));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH)
+                .setValue(COUNT, 1).setValue(VARIATION, 0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, COUNT);
+        builder.add(FACING, COUNT, VARIATION);
     }
 
     @Override
@@ -38,12 +41,14 @@ public class BracketFungusBlock extends HorizontalDirectionalBlock {
         }
         Direction clicked = context.getClickedFace();
         if (clicked.getAxis().isHorizontal()) {
-            BlockState candidate = defaultBlockState().setValue(FACING, clicked);
+            BlockState candidate = defaultBlockState().setValue(FACING, clicked)
+                    .setValue(VARIATION, context.getLevel().getRandom().nextInt(4));
             if (candidate.canSurvive(context.getLevel(), context.getClickedPos())) return candidate;
         }
         for (Direction face : context.getNearestLookingDirections()) {
             if (!face.getAxis().isHorizontal()) continue;
-            BlockState candidate = defaultBlockState().setValue(FACING, face);
+            BlockState candidate = defaultBlockState().setValue(FACING, face)
+                    .setValue(VARIATION, context.getLevel().getRandom().nextInt(4));
             if (candidate.canSurvive(context.getLevel(), context.getClickedPos())) return candidate;
         }
         return null;

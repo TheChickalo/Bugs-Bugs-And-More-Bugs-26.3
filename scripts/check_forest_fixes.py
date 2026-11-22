@@ -182,7 +182,8 @@ for name in ("hanging_wisteria_blossoms", "hanging_willow_leaves", "hanging_fore
         assert (assets / f"models/block/{name}_{part}.json").exists()
 
 habitat_java = read(src / "worldgen/feature/ForestHabitatFeature.java")
-assert "microhabitat(p.getX(),p.getZ())" in habitat_java
+assert "microhabitat(level,p)" in habitat_java
+assert "ModBiomeFamilies.forestMicroIndex(" in habitat_java
 assert "placeNurseLog(" in habitat_java
 assert "applyMicrohabitatSurface(" in habitat_java
 assert "int colonies=random.nextInt(5)" in habitat_java
@@ -191,7 +192,10 @@ assert "if(depth>=4)return;" in mountain_java
 assert "Math.pow(0.54,depth)" in mountain_java
 assert "private static boolean room(" in mountain_java
 rain_java = read(src / "entity/client/BugsBugsandMoreBugsClient.java")
-assert "ParticleTypes.RAIN" in rain_java and "ANCIENT_CEDAR_RAINFOREST" in rain_java
+server_java = read(src / "BugsBugsAndMoreBugs.java")
+assert "server.setWeatherParameters(0,12000,true,false)" in server_java
+assert "ELSEWHEREDIM_LEVEL_KEY" in server_java
+assert "ParticleTypes.RAIN" not in rain_java, "Only actual server rain should remain"
 
 # The climate-only Willow constraint targets rivers/coast and keeps river nodes.
 dimension_biomes = climates
@@ -201,6 +205,43 @@ assert len(willow_params) == 30
 assert all(-0.15 <= p["continentalness"] <= 0.34 for p in willow_params)
 assert all(abs(p["weirdness"]) <= 0.06 for p in willow_params)
 assert sum(b["biome"] == "bugsbugsandmorebugs:river" for b in dimension_biomes) >= 18
+
+
+# All three named variants for each of the five forest families must be
+# registered and in the actual dimension climate list, not only Java comments.
+microfamilies={
+    "wisteria_veilwood":["violet_curtains","tangled_arbors","petal_glades"],
+    "willow_backwaters":["oxbow_banks","sedge_pools","willow_hummocks"],
+    "ancient_cedar_rainforest":["elder_stands","nurse_log_hollows","rainwashed_gullies"],
+    "persimmon_woodlands":["amber_groves","golden_meadows","bramble_terraces"],
+    "silkflower_savanna":["blossom_drifts","feathergrass_prairie","sunwashed_rises"]
+}
+for parent,children in microfamilies.items():
+    parent_features=json.loads(read(data / f"bugsbugsandmorebugs/worldgen/biome/{parent}.json"))["features"]
+    for child in children:
+        child_file=data / f"bugsbugsandmorebugs/worldgen/biome/{child}.json"
+        assert child_file.exists(), f"Missing named /locate biome: {child}"
+        child_features=json.loads(read(child_file))["features"]
+        assert child_features == parent_features, f"Microbiome {child} lost tree or vegetation features"
+        assert sum(b["biome"] == f"bugsbugsandmorebugs:{child}" for b in climates) >= 2
+forest_families=read(src / "worldgen/biome/ModBiomeFamilies.java")
+assert all(name.upper() in forest_families for children in microfamilies.values() for name in children)
+
+# Smooth fixed bed depths, true shallow pools and bracket-fungus variations.
+shallows_java=read(src / "worldgen/feature/WillowShallowsFeature.java")
+assert "double wave=Math.sin(" in shallows_java
+assert "Math.floorMod(x*19+z*31,3)" not in shallows_java
+pool_feature=json.loads(read(data / "bugsbugsandmorebugs/worldgen/feature/willow_pools.json"))
+assert pool_feature["type"] == "bugsbugsandmorebugs:willow_pools"
+willow_biome=json.loads(read(data / "bugsbugsandmorebugs/worldgen/biome/willow_backwaters.json"))
+assert "bugsbugsandmorebugs:willow_pools_placed" in willow_biome["features"][1]
+fungi_state=json.loads(read(assets / "blockstates/bracket_fungus.json"))
+assert len(fungi_state["variants"]) == 64, "4 shelf counts x 4 faces x 4 anchored variations"
+fungi_java=read(src / "block/custom/BracketFungusBlock.java")
+assert "IntegerProperty.create(\"variation\", 0, 3)" in fungi_java
+cedar_biome=json.loads(read(data / "bugsbugsandmorebugs/worldgen/biome/ancient_cedar_rainforest.json"))
+assert cedar_biome["attributes"]["minecraft:visual/sky_color"] == "#8c969a"
+print("Fifteen registered locate-able micro-biomes, smooth willow pools and global rain verified")
 
 print("Forest texture segments, 15 microhabitats, coastal Willow climates and ranges verified")
 

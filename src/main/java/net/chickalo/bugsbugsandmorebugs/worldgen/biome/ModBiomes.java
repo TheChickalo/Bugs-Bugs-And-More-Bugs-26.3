@@ -47,6 +47,27 @@ public class ModBiomes {
     public static final ResourceKey<Biome> PERSIMMON_WOODLANDS = registerBiomeKey("persimmon_woodlands");
     public static final ResourceKey<Biome> SILKFLOWER_SAVANNA = registerBiomeKey("silkflower_savanna");
 
+    // Named forest sub-biomes: actual registry entries, discoverable by /locate biome.
+    public static final ResourceKey<Biome> VIOLET_CURTAINS = registerBiomeKey("violet_curtains");
+    public static final ResourceKey<Biome> TANGLED_ARBORS = registerBiomeKey("tangled_arbors");
+    public static final ResourceKey<Biome> PETAL_GLADES = registerBiomeKey("petal_glades");
+
+    public static final ResourceKey<Biome> OXBOW_BANKS = registerBiomeKey("oxbow_banks");
+    public static final ResourceKey<Biome> SEDGE_POOLS = registerBiomeKey("sedge_pools");
+    public static final ResourceKey<Biome> WILLOW_HUMMOCKS = registerBiomeKey("willow_hummocks");
+
+    public static final ResourceKey<Biome> ELDER_STANDS = registerBiomeKey("elder_stands");
+    public static final ResourceKey<Biome> NURSE_LOG_HOLLOWS = registerBiomeKey("nurse_log_hollows");
+    public static final ResourceKey<Biome> RAINWASHED_GULLIES = registerBiomeKey("rainwashed_gullies");
+
+    public static final ResourceKey<Biome> AMBER_GROVES = registerBiomeKey("amber_groves");
+    public static final ResourceKey<Biome> GOLDEN_MEADOWS = registerBiomeKey("golden_meadows");
+    public static final ResourceKey<Biome> BRAMBLE_TERRACES = registerBiomeKey("bramble_terraces");
+
+    public static final ResourceKey<Biome> BLOSSOM_DRIFTS = registerBiomeKey("blossom_drifts");
+    public static final ResourceKey<Biome> FEATHERGRASS_PRAIRIE = registerBiomeKey("feathergrass_prairie");
+    public static final ResourceKey<Biome> SUNWASHED_RISES = registerBiomeKey("sunwashed_rises");
+
     public static void registerBiomes() {
         // Elsewhere biomes are not injected into the Overworld.
     }
@@ -59,6 +80,24 @@ public class ModBiomes {
         register(context, ANCIENT_CEDAR_RAINFOREST, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
         register(context, PERSIMMON_WOODLANDS, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
         register(context, SILKFLOWER_SAVANNA, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
+
+        // Each local microhabitat uses the parent species and flora registry,
+        // but its own biome ID. ForestHabitatFeature then chooses the exact motif.
+        register(context, VIOLET_CURTAINS, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
+        register(context, TANGLED_ARBORS, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
+        register(context, PETAL_GLADES, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
+        register(context, OXBOW_BANKS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
+        register(context, SEDGE_POOLS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
+        register(context, WILLOW_HUMMOCKS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
+        register(context, ELDER_STANDS, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
+        register(context, NURSE_LOG_HOLLOWS, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
+        register(context, RAINWASHED_GULLIES, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
+        register(context, AMBER_GROVES, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
+        register(context, GOLDEN_MEADOWS, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
+        register(context, BRAMBLE_TERRACES, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
+        register(context, BLOSSOM_DRIFTS, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
+        register(context, FEATHERGRASS_PRAIRIE, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
+        register(context, SUNWASHED_RISES, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
 
         register(context, OLD_GROWTH_GINKGO_FOREST, ModOverworldBiomes.oldGrowthGinkgoForest(placedFeatures, carvers));
         register(context, SPARSE_GINKGO_WOODLAND, ModOverworldBiomes.sparseGinkgoWoodland(placedFeatures, carvers));

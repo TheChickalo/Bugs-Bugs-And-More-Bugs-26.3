@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -46,7 +47,7 @@ public record RainforestCreeksFeature() implements Feature {
             int top=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z)-1;
             if(top<72||top>194)continue;
             BlockPos surface=new BlockPos(x,top,z);
-            if(!level.getBiome(surface).is(ModBiomes.ANCIENT_CEDAR_RAINFOREST))continue;
+            if(!ModBiomeFamilies.cedar(level.getBiome(surface)))continue;
             BlockState old=level.getBlockState(surface);
             boolean soil=old.is(Blocks.GRASS_BLOCK)||old.is(Blocks.DIRT)
                     ||old.is(Blocks.MUD)||old.is(Blocks.PODZOL)

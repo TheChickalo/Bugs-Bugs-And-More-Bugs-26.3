@@ -30,6 +30,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_DENSE_PLACED_KEY = registerKey("wetland_reeds_dense_placed");
     public static final ResourceKey<PlacedFeature> WETLAND_REEDS_WILLOW_PLACED_KEY = registerKey("wetland_reeds_willow_placed");
     public static final ResourceKey<PlacedFeature> WILLOW_SHALLOWS_PLACED_KEY = registerKey("willow_shallows_placed");
+    public static final ResourceKey<PlacedFeature> WILLOW_POOLS_PLACED_KEY = registerKey("willow_pools_placed");
     public static final ResourceKey<PlacedFeature> RAINFOREST_CREEKS_PLACED_KEY = registerKey("rainforest_creeks_placed");
     public static final ResourceKey<PlacedFeature> MOUNTAIN_RANGE_PLACED_KEY = registerKey("mountain_range_placed");
     public static final ResourceKey<PlacedFeature> BAMBOO_POOLS_MARSH_PLACED_KEY = registerKey("bamboo_pools_marsh_placed");
@@ -158,6 +159,9 @@ public class ModPlacedFeatures {
                 List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WILLOW_SHALLOWS_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WILLOW_SHALLOWS_KEY),
+                List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        register(context, WILLOW_POOLS_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModFeatures.WILLOW_POOLS_KEY),
                 List.of(CountPlacement.of(1), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         register(context, WETLAND_REEDS_WILLOW_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.WETLAND_REEDS_KEY),

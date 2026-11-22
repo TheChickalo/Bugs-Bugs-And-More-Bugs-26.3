@@ -11,6 +11,7 @@ import net.chickalo.bugsbugsandmorebugs.block.custom.ForestRootsBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.HangingAccentBlock;
 import net.chickalo.bugsbugsandmorebugs.block.custom.VariableHeightPlantBlock;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -74,20 +75,14 @@ public record ForestHabitatFeature(int kind) implements Feature {
     }
 
     private boolean correctBiome(WorldGenLevel level, BlockPos pos) {
-        return switch (kind) {
-            case 0 -> level.getBiome(pos).is(ModBiomes.WISTERIA_VEILWOOD);
-            case 1 -> level.getBiome(pos).is(ModBiomes.WILLOW_BACKWATERS);
-            case 2 -> level.getBiome(pos).is(ModBiomes.ANCIENT_CEDAR_RAINFOREST);
-            case 3 -> level.getBiome(pos).is(ModBiomes.PERSIMMON_WOODLANDS);
-            default -> level.getBiome(pos).is(ModBiomes.SILKFLOWER_SAVANNA);
-        };
+        return ModBiomeFamilies.forest(level.getBiome(pos),kind);
     }
 
     @Override public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
         if (origin.getY() < level.getMinY()+2 || origin.getY() > level.getMaxY()-44) return false;
         boolean saplingPlaced = level.getBlockState(origin).is(sapling());
         if (!saplingPlaced && !correctBiome(level, origin)) return false;
-        int motif = microhabitat(origin.getX(), origin.getZ());
+        int motif = microhabitat(level, origin);
         // Sapling growth must always attempt a tree, not undergrowth.
         if (kind != 2) return scatterPlants(level, origin, random, motif);
         if (saplingPlaced) return growTree(level, origin, random, motif, true);
@@ -100,7 +95,10 @@ public record ForestHabitatFeature(int kind) implements Feature {
     }
 
     /** Continuous ~20-60 block patches, not artificial tiny biome polygons. */
-    private int microhabitat(int x, int z) {
+    private int microhabitat(WorldGenLevel level, BlockPos at) {
+        int fixed=ModBiomeFamilies.forestMicroIndex(level.getBiome(at),kind);
+        if(fixed>=0)return fixed;
+        int x=at.getX(),z=at.getZ();
         double v = Math.sin(x * 0.043 + kind * 1.8) * Math.cos(z * 0.036 - kind * 0.91)
                 + 0.36 * Math.sin(z * 0.057 + x * 0.017 + kind);
         return v > 0.29 ? 0 : v < -0.27 ? 1 : 2;
@@ -578,21 +576,23 @@ public record ForestHabitatFeature(int kind) implements Feature {
         }
         // Bracket fungi form occasional uneven clusters at different heights
         // and sides, not the same horizontal strip repeated on every tree.
-        int colonies=random.nextInt(5);
-        for(int colony=0;colony<colonies;colony++){
+        // At most four wall-mounted colonies per Cedar, each with 1–4
+        // shelves. Every shelf remains within its block; each colony has a
+        // randomized arrangement and cannot float away from its log.
+        int colonies=random.nextInt(5),placedFungi=0;
+        for(int attempt=0;attempt<12 && placedFungi<colonies;attempt++){
             int targetHeight=1+random.nextInt(Math.max(1,Math.min(height-3,13)));
             Direction face=SIDES[random.nextInt(SIDES.length)];
             BlockPos bark=base.above(targetHeight);
-            for(int sub=0;sub<1+random.nextInt(3);sub++){
-                BlockPos woody=bark.above(sub==0?0:random.nextInt(3));
-                BlockPos p=woody.relative(face);
-                if(!level.getBlockState(p).isAir()
-                        || !level.getBlockState(woody).is(BlockTags.LOGS))continue;
-                BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
-                        .setValue(BracketFungusBlock.FACING,face)
-                        .setValue(BracketFungusBlock.COUNT,1+random.nextInt(4));
-                if(fungus.canSurvive(level,p))level.setBlock(p,fungus,2);
-            }
+            BlockPos p=bark.relative(face);
+            if(!level.getBlockState(p).isAir()
+                    || !level.getBlockState(bark).is(BlockTags.LOGS))continue;
+            BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
+                    .setValue(BracketFungusBlock.FACING,face)
+                    .setValue(BracketFungusBlock.COUNT,1+random.nextInt(4))
+                    .setValue(BracketFungusBlock.VARIATION,random.nextInt(4));
+            if(fungus.canSurvive(level,p) && level.setBlock(p,fungus,2))
+                placedFungi++;
         }
 
         // Hang narrow moss strands below cedar foliage.
@@ -789,7 +789,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos fungusPos=onLog.relative(side);
             BlockState fungus=ModBlocks.BRACKET_FUNGUS.defaultBlockState()
                     .setValue(BracketFungusBlock.FACING,side)
-                    .setValue(BracketFungusBlock.COUNT,1+rng.nextInt(4));
+                    .setValue(BracketFungusBlock.COUNT,1+rng.nextInt(4))
+                    .setValue(BracketFungusBlock.VARIATION,rng.nextInt(4));
             if(level.getBlockState(fungusPos).isAir()&&fungus.canSurvive(level,fungusPos))
                 level.setBlock(fungusPos,fungus,2);
         }
@@ -823,7 +824,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos water=p.below();
             if(kind==1 && level.getFluidState(water).is(Fluids.WATER)
                     && level.getFluidState(water).isSource()) {
-                int aquaticMicro=microhabitat(p.getX(),p.getZ());
+                int aquaticMicro=microhabitat(level,p);
                 // Sedge Pools concentrate tall reeds/sedge; Oxbow Banks favor
                 // mint and marigolds, while Hummocks keep standing water sparse.
                 Block target=switch(aquaticMicro) {
@@ -836,7 +837,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 continue;
             }
             if(!level.getBlockState(p).isAir() || !soil(level,p.below()))continue;
-            int micro=microhabitat(p.getX(),p.getZ());
+            int micro=microhabitat(level,p);
             changed |= applyMicrohabitatSurface(level,p,micro,rng);
             int roll=rng.nextInt(8);
             Block plant=switch(kind) {
