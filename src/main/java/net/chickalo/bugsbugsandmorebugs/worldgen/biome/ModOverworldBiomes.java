@@ -556,9 +556,10 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
         addVegetation(generation, ModPlacedFeatures.PERSIMMON_TREE_PLACED_KEY,
-                ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY,
-                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+                ModPlacedFeatures.PERSIMMON_HABITAT_PLACED_KEY);
+        // Shared vanilla plants must precede shared Elsewhere flora in every biome.
         BiomeDefaultFeatures.addPlainGrass(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         
         return minorBiome(generation, 0.72F, 0.60F,
                 0x689B92, 0xA9B76D,
@@ -572,9 +573,10 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         
         addVegetation(generation, ModPlacedFeatures.MIMOSA_TREE_PLACED_KEY,
-                ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY,
-                ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
+                ModPlacedFeatures.MIMOSA_HABITAT_PLACED_KEY);
+        // Order invariant: grass -> mushrooms (where present) -> Elsewhere flora.
         BiomeDefaultFeatures.addPlainGrass(generation);
+        addVegetation(generation, ModPlacedFeatures.ELSEWHERE_FLORA_PLACED_KEY);
         
         return minorBiome(generation, 0.91F, 0.35F,
                 0x74B1A5, 0xADB879,

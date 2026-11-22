@@ -90,4 +90,48 @@ assert any(p["continentalness"] < 0.2 for p in willow)
 assert any(p["erosion"] >= 0.45 for p in willow)
 assert sum(x["biome"] == "bugsbugsandmorebugs:river" for x in climates) >= 18, "Protect river distribution"
 assert sum(x["biome"] == "bugsbugsandmorebugs:estuary" for x in climates) == 2
+
+# Minecraft's FeatureSorter requires one global ordering for features shared
+# across biomes at each decoration step. This catches cycles that compileJava
+# and runDatagen cannot detect (they surface only during chunk generation).
+# Example of the previous bug:
+# Wisteria grass < mushrooms; Cedar mushrooms < Elsewhere flora;
+# Mimosa Elsewhere flora < grass  -> a three-biome cycle.
+from collections import defaultdict
+biome_files = sorted((data / "bugsbugsandmorebugs/worldgen/biome").glob("*.json"))
+assert biome_files, "Missing generated biome JSONs: runDatagen first"
+feature_edges = defaultdict(set)
+edge_biomes = {}
+for biome_file in biome_files:
+    biome = json.loads(read(biome_file))
+    for step, sequence in enumerate(biome["features"]):
+        for left, right in zip(sequence, sequence[1:]):
+            u, v = (step, left), (step, right)
+            feature_edges[u].add(v)
+            edge_biomes.setdefault((u, v), set()).add(biome_file.stem)
+
+visited, visiting = set(), {}
+def verify_feature_order(node, path):
+    if node in visiting:
+        start = visiting[node]
+        loop = path[start:] + [node]
+        parts = []
+        for u, v in zip(loop, loop[1:]):
+            parts.append(f"{u[1]} -> {v[1]} ({', '.join(sorted(edge_biomes[(u, v)]))})")
+        raise AssertionError("Feature order cycle at generation step "
+                             + str(node[0]) + ": " + " | ".join(parts))
+    if node in visited:
+        return
+    visiting[node] = len(path)
+    path.append(node)
+    for dest in sorted(feature_edges[node]):
+        verify_feature_order(dest, path)
+    path.pop()
+    del visiting[node]
+    visited.add(node)
+for node in list(feature_edges):
+    verify_feature_order(node, [])
+
+print(f"Global feature ordering verified across {len(biome_files)} mod biomes")
+
 print("Vanilla tree placers, root models, layered Duckweed, shallow water and Willow climates verified")
