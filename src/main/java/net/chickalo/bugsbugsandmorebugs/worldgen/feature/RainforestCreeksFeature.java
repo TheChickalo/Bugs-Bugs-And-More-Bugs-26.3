@@ -56,7 +56,9 @@ public record RainforestCreeksFeature() implements Feature {
                     ||!level.getBlockState(surface.above()).isAir())continue;
             // Avoid a flood spill over steep drops or into neighboring caves.
             if(Math.abs(level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z+1)
-                    -level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z-1))>4)continue;
+                    -level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z-1))>4
+                || Math.abs(level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x+1,z)
+                    -level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x-1,z))>4)continue;
 
             if(distance>width){
                 if(random.nextInt(4)!=0)continue;

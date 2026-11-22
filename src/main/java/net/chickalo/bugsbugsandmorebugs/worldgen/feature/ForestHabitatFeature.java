@@ -823,10 +823,13 @@ public record ForestHabitatFeature(int kind) implements Feature {
             BlockPos water=p.below();
             if(kind==1 && level.getFluidState(water).is(Fluids.WATER)
                     && level.getFluidState(water).isSource()) {
-                Block target=switch(rng.nextInt(5)) {
-                    case 0,1 -> ModBlocks.WATER_MINT;
-                    case 2,3 -> ModBlocks.WATER_SEDGE;
-                    default -> ModBlocks.MARSH_MARIGOLD_WATER;
+                int aquaticMicro=microhabitat(p.getX(),p.getZ());
+                // Sedge Pools concentrate tall reeds/sedge; Oxbow Banks favor
+                // mint and marigolds, while Hummocks keep standing water sparse.
+                Block target=switch(aquaticMicro) {
+                    case 0 -> rng.nextBoolean()?ModBlocks.WATER_MINT:ModBlocks.MARSH_MARIGOLD_WATER;
+                    case 1 -> rng.nextInt(5)<4?ModBlocks.WATER_SEDGE:ModBlocks.WATER_MINT;
+                    default -> rng.nextInt(3)==0?ModBlocks.WATER_MINT:ModBlocks.WATER_SEDGE;
                 };
                 if(target instanceof FlexibleWetlandPlantBlock wet)
                     changed|=wet.placeNaturally(level,water);
