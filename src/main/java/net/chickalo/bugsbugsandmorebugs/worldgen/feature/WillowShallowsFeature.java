@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomeFamilies;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
@@ -30,7 +31,7 @@ public record WillowShallowsFeature() implements Feature {
             int x=origin.getX()+dx,z=origin.getZ()+dz;
             int top=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z)-1;
             BlockPos surface=new BlockPos(x,top,z);
-            if(!level.getBiome(surface).is(ModBiomes.WILLOW_BACKWATERS))continue;
+            if(!ModBiomeFamilies.willow(level.getBiome(surface)))continue;
             if(!level.getBlockState(surface).is(Blocks.WATER)
                     || !level.getFluidState(surface).isSource())continue;
             int depth=0;
