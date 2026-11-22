@@ -1,9 +1,15 @@
 {
   "variants": {
-    "tip=false": {
-      "model": "bugsbugsandmorebugs:block/hanging_forest_moss"
+    "base=false,tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_forest_moss_middle"
     },
-    "tip=true": {
+    "base=false,tip=true": {
+      "model": "bugsbugsandmorebugs:block/hanging_forest_moss_tip"
+    },
+    "base=true,tip=false": {
+      "model": "bugsbugsandmorebugs:block/hanging_forest_moss_base"
+    },
+    "base=true,tip=true": {
       "model": "bugsbugsandmorebugs:block/hanging_forest_moss_tip"
     }
   }

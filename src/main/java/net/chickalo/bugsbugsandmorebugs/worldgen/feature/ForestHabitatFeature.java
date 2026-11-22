@@ -341,12 +341,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 BlockPos p=lowest.below(d);
                 if (!level.getBlockState(p).isAir()) break;
                 level.setBlock(p,ModBlocks.HANGING_WILLOW_LEAVES.defaultBlockState()
-                        .setValue(HangingAccentBlock.TIP,false),2);
+                        .setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,d==1),2);
                 placed++;
             }
             if (placed>0) level.setBlock(lowest.below(placed),
                     ModBlocks.HANGING_WILLOW_LEAVES.defaultBlockState()
-                            .setValue(HangingAccentBlock.TIP,true),2);
+                            .setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,placed==1),2);
         }
     }
 
@@ -604,12 +604,12 @@ public record ForestHabitatFeature(int kind) implements Feature {
                 BlockPos p=lowest.below(j);
                 if(!level.getBlockState(p).isAir())break;
                 level.setBlock(p,ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
-                        .setValue(HangingAccentBlock.TIP,false),2);
+                        .setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,j==1),2);
                 count++;
             }
             if(count>0)level.setBlock(lowest.below(count),
                     ModBlocks.HANGING_FOREST_MOSS.defaultBlockState()
-                            .setValue(HangingAccentBlock.TIP,true),2);
+                            .setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,count==1),2);
         }
     }
 
@@ -673,11 +673,11 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int dy=0;dy<length;dy++) {
                 BlockPos q=start.below(dy);
                 if (!level.getBlockState(q).isAir()) break;
-                level.setBlock(q,hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,false),2);
+                level.setBlock(q,hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,false).setValue(HangingAccentBlock.BASE,dy==0),2);
                 placed++;
             }
             if (placed>0)level.setBlock(start.below(placed-1),
-                    hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,true),2);
+                    hanging.defaultBlockState().setValue(HangingAccentBlock.TIP,true).setValue(HangingAccentBlock.BASE,placed==1),2);
         }
     }
 
