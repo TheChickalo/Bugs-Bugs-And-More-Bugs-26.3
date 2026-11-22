@@ -41,6 +41,12 @@ public class ModBiomes {
     public static final ResourceKey<Biome> VOLCANIC_PEAK = registerBiomeKey("volcanic_peak");
     public static final ResourceKey<Biome> SNOWY_PEAK = registerBiomeKey("snowy_peak");
 
+    public static final ResourceKey<Biome> WISTERIA_VEILWOOD = registerBiomeKey("wisteria_veilwood");
+    public static final ResourceKey<Biome> WILLOW_BACKWATERS = registerBiomeKey("willow_backwaters");
+    public static final ResourceKey<Biome> ANCIENT_CEDAR_RAINFOREST = registerBiomeKey("ancient_cedar_rainforest");
+    public static final ResourceKey<Biome> PERSIMMON_WOODLANDS = registerBiomeKey("persimmon_woodlands");
+    public static final ResourceKey<Biome> SILKFLOWER_SAVANNA = registerBiomeKey("silkflower_savanna");
+
     public static void registerBiomes() {
         // Elsewhere biomes are not injected into the Overworld.
     }
@@ -48,6 +54,11 @@ public class ModBiomes {
     public static void bootstrap(BootstrapContext<Biome> context) {
         var carvers = context.lookup(Registries.CARVER);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
+        register(context, WISTERIA_VEILWOOD, ModOverworldBiomes.wisteriaVeilwood(placedFeatures, carvers));
+        register(context, WILLOW_BACKWATERS, ModOverworldBiomes.willowBackwaters(placedFeatures, carvers));
+        register(context, ANCIENT_CEDAR_RAINFOREST, ModOverworldBiomes.ancientCedarRainforest(placedFeatures, carvers));
+        register(context, PERSIMMON_WOODLANDS, ModOverworldBiomes.persimmonWoodlands(placedFeatures, carvers));
+        register(context, SILKFLOWER_SAVANNA, ModOverworldBiomes.silkflowerSavanna(placedFeatures, carvers));
 
         register(context, OLD_GROWTH_GINKGO_FOREST, ModOverworldBiomes.oldGrowthGinkgoForest(placedFeatures, carvers));
         register(context, SPARSE_GINKGO_WOODLAND, ModOverworldBiomes.sparseGinkgoWoodland(placedFeatures, carvers));
