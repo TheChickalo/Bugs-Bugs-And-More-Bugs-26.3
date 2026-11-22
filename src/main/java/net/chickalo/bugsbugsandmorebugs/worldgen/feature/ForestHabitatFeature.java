@@ -584,8 +584,18 @@ public record ForestHabitatFeature(int kind) implements Feature {
         int attempts=16+(motif==0?8:4);
         for(int i=0;i<attempts;i++) {
             int x=origin.getX()+rng.nextInt(17)-8,z=origin.getZ()+rng.nextInt(17)-8;
-            int y=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z);
-            BlockPos p=new BlockPos(x,y,z);
+            // WORLD_SURFACE sees tree leaves. Descend through the crown and find
+            // the real ground or shallow-water surface beneath it.
+            int surfaceY=level.getHeight(Heightmap.Types.WORLD_SURFACE_WG,x,z);
+            BlockPos p=new BlockPos(x,surfaceY,z);
+            for(int depth=0;depth<56 && p.getY()>level.getMinY()+1;depth++) {
+                boolean empty=level.getBlockState(p).isAir();
+                boolean shore=kind==1 && level.getFluidState(p.below()).is(Fluids.WATER)
+                        && level.getFluidState(p.below()).isSource();
+                if(empty && (soil(level,p.below()) || shore))break;
+                p=p.below();
+            }
+            int y=p.getY();
             if(!correctBiome(level,p) || y<level.getMinY()+1 || y>=level.getMaxY()-3)continue;
             if(kind==1 && rng.nextInt(10)==0 && nearbyWater(level,p,3)
                     && soil(level,p.below()) && level.getFluidState(p.below()).isEmpty()) {
