@@ -167,6 +167,23 @@ public record ForestMicroTerrainFeature() implements Feature {
         return best;
     }
 
+    /** Elliptical, softly randomized water pools or raised low hummocks. */
+    private static double spotDistance(int x,int z,int spacing) {
+        int cellX=Math.floorDiv(x,spacing),cellZ=Math.floorDiv(z,spacing);
+        double best=Double.POSITIVE_INFINITY;
+        for(int dx=-1;dx<=1;dx++)for(int dz=-1;dz<=1;dz++){
+            int a=cellX+dx,b=cellZ+dz;
+            long seed=hash(a+103,b-59);
+            double cx=a*spacing+spacing/2.0+((seed>>>8)&7)-3;
+            double cz=b*spacing+spacing/2.0+((seed>>>12)&7)-3;
+            double sx=0.8+((seed>>>17)&3)*0.14;
+            double sz=0.8+((seed>>>21)&3)*0.14;
+            double distance=Math.sqrt(Math.pow((x-cx)/sx,2)+Math.pow((z-cz)/sz,2));
+            best=Math.min(best,distance);
+        }
+        return best;
+    }
+
     private static boolean downedLog(WorldGenLevel level,BlockPos top,int x,int z) {
         int cellX=Math.floorDiv(x,19),cellZ=Math.floorDiv(z,19);
         long seed=hash(cellX,cellZ);
@@ -240,16 +257,16 @@ public record ForestMicroTerrainFeature() implements Feature {
                     if(d<=2.1)changed=waterCut(level,top,d<0.9?2:1);
                     else if(d<4.2)changed=put(level,top,(h&3)==0?Blocks.MUD:ModBlocks.SILT);
                 }
-                case 4 -> { // Sedge Pools: many small wet hollows and sedge-rich margins.
-                    double d=smoothDistance(x,z,26,4.0);
-                    if(d<2.0 && noise> -0.30)changed=waterCut(level,top,1);
-                    else if(d<4.0 && (h&3)==0)changed=put(level,top,Blocks.MUD);
+                case 4 -> { // Sedge Pools: shallow *round* ponds and muddy sedge margins.
+                    double d=spotDistance(x,z,27);
+                    if(d<3.25 && noise> -0.45)changed=waterCut(level,top,1);
+                    else if(d<5.5 && (h&3)!=0)changed=put(level,top,Blocks.MUD);
                 }
-                case 5 -> { // Willow Hummocks: scattered low mossy islets above wet soil.
-                    double d=smoothDistance(x,z,23,2.3);
-                    if(d<1.55 && noise>0.0 && y<103)
+                case 5 -> { // Willow Hummocks: small round mossy islets, not long ridges.
+                    double d=spotDistance(x,z,25);
+                    if(d<2.2 && noise> -0.25 && y<103)
                         changed=put(level,top.above(),Blocks.MOSS_BLOCK);
-                    else if(noise>0.12 && (h&7)==0)
+                    else if(d<5.0 && noise> -0.1)
                         changed=put(level,top,Blocks.MOSS_BLOCK);
                 }
                 case 6 -> { // Elder Stands: uninterrupted carpets of moss and clubmoss.
@@ -292,11 +309,11 @@ public record ForestMicroTerrainFeature() implements Feature {
                         changed=grass(level,top,ModBlocks.FEATHERGRASS);
                     else if((h&7)==0)changed=litter(level,top,ModBlocks.PINK_CLOVER,1+(int)(h&3));
                 }
-                case 14 -> { // Sunwashed Rises: exposed low rocky crests, not columns.
-                    double d=smoothDistance(x,z,31,3.0);
-                    if(noise>0.05 && d<2.2){
+                case 14 -> { // Sunwashed Rises: low rounded rocky knolls.
+                    double d=spotDistance(x,z,31);
+                    if(noise>0.05 && d<3.4){
                         changed=put(level,top,(h&3)==0?Blocks.COARSE_DIRT:ModBlocks.RHYOLITE);
-                        if(d<0.8 && noise>0.30)
+                        if(d<1.35 && noise>0.30)
                             changed|=put(level,top.above(),ModBlocks.RHYOLITE);
                     } else if((h&7)==0)changed=grass(level,top,ModBlocks.FEATHERGRASS);
                 }
