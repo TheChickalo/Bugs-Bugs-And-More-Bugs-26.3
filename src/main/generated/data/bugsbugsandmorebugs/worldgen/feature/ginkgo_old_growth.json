@@ -6,9 +6,9 @@
   "decorators": [],
   "foliage_placer": {
     "type": "bugsbugsandmorebugs:ginkgo_foliage_placer",
-    "radius": 3,
+    "canopy_layers": 7,
     "offset": 0,
-    "canopy_layers": 7
+    "radius": 3
   },
   "foliage_provider": {
     "id": "bugsbugsandmorebugs:ginkgo_leaves",
