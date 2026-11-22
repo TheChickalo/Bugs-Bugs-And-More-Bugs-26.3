@@ -62,13 +62,25 @@ public class ModFeatures {
     public static final ResourceKey<Feature> AMPHIBOLITE_DEPOSIT_KEY = registerKey("amphibolite_deposit");
 
     public static final ResourceKey<Feature> WISTERIA_TREE_KEY = registerKey("wisteria_tree");
+    public static final ResourceKey<Feature> WISTERIA_HABITAT_KEY = registerKey("wisteria_habitat");
     public static final ResourceKey<Feature> WILLOW_TREE_KEY = registerKey("willow_tree");
     public static final ResourceKey<Feature> CEDAR_TREE_KEY = registerKey("cedar_tree");
     public static final ResourceKey<Feature> PERSIMMON_TREE_KEY = registerKey("persimmon_tree");
     public static final ResourceKey<Feature> MIMOSA_TREE_KEY = registerKey("mimosa_tree");
 
     public static void bootstrap(BootstrapContext<Feature> context) {
-        context.register(WISTERIA_TREE_KEY, new ForestHabitatFeature(0));
+        // Standard TreeFeature runs the existing Maple trunk/foliage placers.
+        context.register(WISTERIA_TREE_KEY, new TreeFeature.Builder(
+                BlockStateProvider.of(ModBlocks.WISTERIA_LOG),
+                new MapleTrunkPlacer(7, 5, 4,
+                        UniformInt.of(2, 3), UniformInt.of(2, 4),
+                        UniformInt.of(-4, -2), UniformInt.of(-2, 1)),
+                BlockStateProvider.of(ModBlocks.WISTERIA_LEAVES),
+                new MapleFoliagePlacer(ConstantInt.of(1), ConstantInt.of(1), 3),
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.holderOf(Blocks.DIRT)
+        ).decorators(java.util.List.of(new net.chickalo.bugsbugsandmorebugs.worldgen.tree.WisteriaBlossomDecorator())).build());
+        context.register(WISTERIA_HABITAT_KEY, new ForestHabitatFeature(0));
         context.register(WILLOW_TREE_KEY, new ForestHabitatFeature(1));
         context.register(CEDAR_TREE_KEY, new ForestHabitatFeature(2));
         context.register(PERSIMMON_TREE_KEY, new ForestHabitatFeature(3));

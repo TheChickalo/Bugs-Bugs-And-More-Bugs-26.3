@@ -572,7 +572,7 @@ public class ModBlocks {
     public static final Block STRIPPED_WISTERIA_LOG = registerBlock("stripped_wisteria_log", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block STRIPPED_WISTERIA_WOOD = registerBlock("stripped_wisteria_wood", p -> new RotatedPillarBlock(p.strength(2F).sound(SoundType.WOOD).ignitedByLava()));
     public static final Block WISTERIA_PLANKS = registerBlock("wisteria_planks", p -> new Block(p.strength(2F,3F).sound(SoundType.WOOD).ignitedByLava()));
-    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new ExtendedForestLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
+    public static final Block WISTERIA_LEAVES = registerBlock("wisteria_leaves", p -> new UntintedParticleLeavesBlock(0F, ParticleTypes.CHERRY_LEAVES,
             AmbientLeavesBlockSoundPlayer.noAmbientSound(), p.strength(0.2F).randomTicks().noOcclusion()
             .ignitedByLava().sound(SoundType.GRASS)));
     public static final Block WISTERIA_SAPLING = registerBlock("wisteria_sapling", p -> new SaplingBlock(ModTreeGrowers.WISTERIA,

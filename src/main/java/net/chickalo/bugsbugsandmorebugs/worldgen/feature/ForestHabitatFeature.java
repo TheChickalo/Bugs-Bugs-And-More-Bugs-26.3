@@ -87,6 +87,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
         if (!saplingPlaced && !correctBiome(level, origin)) return false;
         int motif = microhabitat(origin.getX(), origin.getZ());
         // Sapling growth must always attempt a tree, not undergrowth.
+        if (kind == 0) return scatterPlants(level, origin, random, motif);
         if (saplingPlaced || random.nextFloat() < (kind == 2 ? 0.73F : 0.65F))
             return growTree(level, origin, random, motif, saplingPlaced);
         return scatterPlants(level, origin, random, motif);
@@ -154,12 +155,7 @@ public record ForestHabitatFeature(int kind) implements Feature {
             for (int z = 0; z < width; z++) wood(level, base.offset(x,y,z), Direction.Axis.Y);
 
         BlockPos top = base.above(height-1).offset(width/2, 0, width/2);
-        if (kind == 0) {
-            // Use the same two/three ascending branch silhouette and layered
-            // {2,3,4,3,1} foliage profile as the existing Maple placers.
-            wisteriaMapleCrown(level, base, height, motif, rng);
-            vineClimbers(level, base, height, rng);
-        } else if (kind == 2) {
+        if (kind == 2) {
             cedarCrown(level, top, height, rng, motif);
             rootButtresses(level, base, rng, false);
         } else if (kind == 1) {
@@ -195,64 +191,6 @@ public record ForestHabitatFeature(int kind) implements Feature {
         // from starting at the maximum distance and decaying on their first tick.
         settleLeafDistances(level, base, height);
         return true;
-    }
-
-    /**
-     * Maple-style wisteria. Like MapleTrunkPlacer it grows two opposing, rising
-     * branches (occasionally a third); each receives the same five canopy
-     * layers/radii used by MapleFoliagePlacer. Blossom curtains remain unique.
-     */
-    private void wisteriaMapleCrown(WorldGenLevel level, BlockPos base, int height,
-                                   int motif, RandomSource random) {
-        Direction first = SIDES[random.nextInt(SIDES.length)];
-        int branchCount = random.nextInt(3) == 0 ? 3 : 2;
-        for (int branch = 0; branch < branchCount; branch++) {
-            Direction direction = branch == 0 ? first
-                    : branch == 1 ? first.getOpposite() : SIDES[random.nextInt(SIDES.length)];
-            Direction across = (direction == Direction.NORTH || direction == Direction.SOUTH)
-                    ? Direction.EAST : Direction.NORTH;
-            int startY = Math.max(4, height - 4 - (branch % 2));
-            int endY = Math.max(startY + 1, height - 2 + random.nextInt(3));
-            int length = 2 + random.nextInt(3) + (motif == 0 ? 1 : 0);
-            int lateral = random.nextInt(3) - 1;
-
-            BlockPos previous = base.above(startY);
-            for (int step = 1; step <= length; step++) {
-                int y = startY + (endY - startY) * step / length;
-                int side = lateral * step / length;
-                BlockPos next = base.relative(direction, step).relative(across, side).above(y);
-                // Fill intermediate vertical steps so limbs are truly connected.
-                for (int climb = previous.getY() + 1; climb <= next.getY(); climb++)
-                    wood(level, new BlockPos(previous.getX(), climb, previous.getZ()), Direction.Axis.Y);
-                wood(level, next, direction.getAxis());
-                previous = next;
-            }
-
-            BlockPos attachment = previous.above();
-            mapleFoliage(level, attachment, random);
-            // Curtains originate beneath individual Maple-shaped canopies.
-            hangCurtains(level, attachment.above(2), 4, random);
-        }
-
-        if (branchCount == 2 && motif == 0 && random.nextBoolean()) {
-            BlockPos apex = base.above(height);
-            mapleFoliage(level, apex, random);
-            hangCurtains(level, apex.above(2), 4, random);
-        }
-    }
-
-    /** Matches the five crown radii and irregular trimmed corners of MapleFoliagePlacer. */
-    private void mapleFoliage(WorldGenLevel level, BlockPos attachment, RandomSource random) {
-        int[] radii = {2, 3, 4, 3, 1};
-        for (int layer = 0; layer < radii.length; layer++) {
-            int radius = radii[layer];
-            for (int x = -radius; x <= radius; x++) for (int z = -radius; z <= radius; z++) {
-                if (Math.abs(x) == radius && Math.abs(z) == radius) continue;
-                if ((Math.abs(x) == radius || Math.abs(z) == radius)
-                        && random.nextFloat() < 0.10F) continue;
-                leaf(level, attachment.offset(x, layer, z));
-            }
-        }
     }
 
     /**
