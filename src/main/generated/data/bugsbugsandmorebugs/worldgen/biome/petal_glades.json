@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:forest_micro_terrain_placed"
+    ],
     [],
     [],
     [],
@@ -30,7 +32,7 @@
     [],
     [],
     [
-      "bugsbugsandmorebugs:wisteria_tree_placed",
+      "bugsbugsandmorebugs:wisteria_glade_tree_placed",
       "bugsbugsandmorebugs:wisteria_habitat_placed",
       "minecraft:patch_tall_grass_2",
       "minecraft:brown_mushroom_normal",

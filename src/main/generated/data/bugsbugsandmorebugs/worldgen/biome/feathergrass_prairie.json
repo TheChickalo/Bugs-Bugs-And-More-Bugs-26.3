@@ -19,7 +19,9 @@
   },
   "features": [
     [],
-    [],
+    [
+      "bugsbugsandmorebugs:forest_micro_terrain_placed"
+    ],
     [],
     [],
     [],
@@ -30,7 +32,7 @@
     [],
     [],
     [
-      "bugsbugsandmorebugs:mimosa_tree_placed",
+      "bugsbugsandmorebugs:mimosa_prairie_tree_placed",
       "bugsbugsandmorebugs:mimosa_habitat_placed",
       "minecraft:patch_tall_grass_2",
       "bugsbugsandmorebugs:elsewhere_flora_placed"
