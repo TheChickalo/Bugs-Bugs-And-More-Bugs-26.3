@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:add",
+  "left": {
+    "type": "minecraft:add",
+    "left": {
+      "type": "minecraft:gradient",
+      "axis": "y",
+      "from_coordinate": -64,
+      "from_value": 1.5,
+      "to_coordinate": 320,
+      "to_value": -1.5
+    },
+    "right": "minecraft:overworld_large_biomes/offset"
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": 0.43,
+    "right": "bugsbugsandmorebugs:karst_elevation_mask"
+  }
+}

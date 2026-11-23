@@ -38,7 +38,7 @@
           "type": "minecraft:mul",
           "left": {
             "type": "minecraft:sub",
-            "left": "minecraft:overworld/continents",
+            "left": "minecraft:overworld_large_biomes/continents",
             "right": 0.15
           },
           "right": 12
@@ -55,7 +55,7 @@
             "left": {
               "type": "minecraft:sub",
               "left": 0.53,
-              "right": "minecraft:overworld/continents"
+              "right": "minecraft:overworld_large_biomes/continents"
             },
             "right": 9.5
           },
@@ -68,7 +68,7 @@
             "type": "minecraft:mul",
             "left": {
               "type": "minecraft:sub",
-              "left": "minecraft:overworld/erosion",
+              "left": "minecraft:overworld_large_biomes/erosion",
               "right": -0.06
             },
             "right": 8
