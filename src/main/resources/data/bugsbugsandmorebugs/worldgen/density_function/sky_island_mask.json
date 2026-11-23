@@ -12,7 +12,7 @@
           "right": {
             "type": "minecraft:mul",
             "left": -1,
-            "right": "minecraft:overworld/continents"
+            "right": "minecraft:overworld_large_biomes/continents"
           }
         },
         "right": 9
@@ -34,7 +34,7 @@
               "xz_scale": 0.0019,
               "y_scale": 0
             },
-            "right": -0.015
+            "right": 0.04
           },
           "right": 6.5
         },

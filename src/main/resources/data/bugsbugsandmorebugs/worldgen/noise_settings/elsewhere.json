@@ -15,7 +15,7 @@
           "left": {
             "type": "minecraft:sub",
             "left": -0.225,
-            "right": "minecraft:overworld/erosion"
+            "right": "minecraft:overworld_large_biomes/erosion"
           },
           "right": {
             "type": "minecraft:max",
@@ -60,13 +60,13 @@
     "lava": -1,
     "surface_level": {
       "type": "minecraft:min",
-      "left": "minecraft:overworld/preliminary_surface_level",
+      "left": "minecraft:overworld_large_biomes/preliminary_surface_level",
       "right": 62
     }
   },
   "debug_functions": [
     {
-      "function": "minecraft:overworld/final_density",
+      "function": "minecraft:overworld_large_biomes/final_density",
       "label": "Final density"
     },
     {
@@ -78,11 +78,11 @@
       "label": "Vegetation"
     },
     {
-      "function": "minecraft:overworld/continents",
+      "function": "minecraft:overworld_large_biomes/continents",
       "label": "Continents"
     },
     {
-      "function": "minecraft:overworld/erosion",
+      "function": "minecraft:overworld_large_biomes/erosion",
       "label": "Erosion"
     },
     {
@@ -116,7 +116,7 @@
       "label": "Peaks/Valleys"
     },
     {
-      "function": "minecraft:overworld/preliminary_surface_level",
+      "function": "minecraft:overworld_large_biomes/preliminary_surface_level",
       "label": "Prelim Surface"
     }
   ],
@@ -130,8 +130,8 @@
     "min_y": -128
   },
   "noise_router": {
-    "chunk_surface_level": "minecraft:overworld/chunk_surface_level",
-    "continents": "minecraft:overworld/continents",
+    "chunk_surface_level": "minecraft:overworld_large_biomes/chunk_surface_level",
+    "continents": "minecraft:overworld_large_biomes/continents",
     "depth": {
       "type": "minecraft:lerp",
       "alpha": {
@@ -155,7 +155,7 @@
         "min_inclusive": -128,
         "max_exclusive": -55,
         "when_in_range": 2,
-        "when_out_of_range": "minecraft:overworld/depth"
+        "when_out_of_range": "bugsbugsandmorebugs:elsewhere_large_depth"
       },
       "second": {
         "type": "minecraft:mul",
@@ -174,7 +174,7 @@
         }
       }
     },
-    "erosion": "minecraft:overworld/erosion",
+    "erosion": "minecraft:overworld_large_biomes/erosion",
     "final_density": {
       "type": "minecraft:range_choice",
       "input": {
@@ -222,10 +222,10 @@
                           "max_exclusive": -40,
                           "when_in_range": {
                             "type": "minecraft:min",
-                            "left": "minecraft:overworld/final_density",
+                            "left": "minecraft:overworld_large_biomes/final_density",
                             "right": "bugsbugsandmorebugs:underhang_underside"
                           },
-                          "when_out_of_range": "minecraft:overworld/final_density"
+                          "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                         },
                         "right": "bugsbugsandmorebugs:sundering_barrier"
                       },
@@ -239,7 +239,7 @@
                               "type": "minecraft:mul",
                               "left": {
                                 "type": "minecraft:add",
-                                "left": "minecraft:overworld/continents",
+                                "left": "minecraft:overworld_large_biomes/continents",
                                 "right": 0.07
                               },
                               "right": 6.5
@@ -293,7 +293,7 @@
                                 "type": "minecraft:mul",
                                 "left": {
                                   "type": "minecraft:add",
-                                  "left": "minecraft:overworld/continents",
+                                  "left": "minecraft:overworld_large_biomes/continents",
                                   "right": 0.07
                                 },
                                 "right": 6.5
@@ -352,10 +352,10 @@
                             "max_exclusive": -40,
                             "when_in_range": {
                               "type": "minecraft:min",
-                              "left": "minecraft:overworld/final_density",
+                              "left": "minecraft:overworld_large_biomes/final_density",
                               "right": "bugsbugsandmorebugs:underhang_underside"
                             },
-                            "when_out_of_range": "minecraft:overworld/final_density"
+                            "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                           },
                           "right": "bugsbugsandmorebugs:sundering_barrier"
                         },
@@ -369,7 +369,7 @@
                                 "type": "minecraft:mul",
                                 "left": {
                                   "type": "minecraft:add",
-                                  "left": "minecraft:overworld/continents",
+                                  "left": "minecraft:overworld_large_biomes/continents",
                                   "right": 0.07
                                 },
                                 "right": 6.5
@@ -423,7 +423,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -476,10 +476,10 @@
                             "max_exclusive": -40,
                             "when_in_range": {
                               "type": "minecraft:min",
-                              "left": "minecraft:overworld/final_density",
+                              "left": "minecraft:overworld_large_biomes/final_density",
                               "right": "bugsbugsandmorebugs:underhang_underside"
                             },
-                            "when_out_of_range": "minecraft:overworld/final_density"
+                            "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                           },
                           "right": "bugsbugsandmorebugs:sundering_barrier"
                         },
@@ -493,7 +493,7 @@
                                 "type": "minecraft:mul",
                                 "left": {
                                   "type": "minecraft:add",
-                                  "left": "minecraft:overworld/continents",
+                                  "left": "minecraft:overworld_large_biomes/continents",
                                   "right": 0.07
                                 },
                                 "right": 6.5
@@ -547,7 +547,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -593,10 +593,10 @@
                             "max_exclusive": -40,
                             "when_in_range": {
                               "type": "minecraft:min",
-                              "left": "minecraft:overworld/final_density",
+                              "left": "minecraft:overworld_large_biomes/final_density",
                               "right": "bugsbugsandmorebugs:underhang_underside"
                             },
-                            "when_out_of_range": "minecraft:overworld/final_density"
+                            "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                           },
                           "right": "bugsbugsandmorebugs:sundering_barrier"
                         },
@@ -610,7 +610,7 @@
                                 "type": "minecraft:mul",
                                 "left": {
                                   "type": "minecraft:add",
-                                  "left": "minecraft:overworld/continents",
+                                  "left": "minecraft:overworld_large_biomes/continents",
                                   "right": 0.07
                                 },
                                 "right": 6.5
@@ -664,7 +664,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -737,10 +737,10 @@
                             "max_exclusive": -40,
                             "when_in_range": {
                               "type": "minecraft:min",
-                              "left": "minecraft:overworld/final_density",
+                              "left": "minecraft:overworld_large_biomes/final_density",
                               "right": "bugsbugsandmorebugs:underhang_underside"
                             },
-                            "when_out_of_range": "minecraft:overworld/final_density"
+                            "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                           },
                           "right": "bugsbugsandmorebugs:sundering_barrier"
                         },
@@ -754,7 +754,7 @@
                                 "type": "minecraft:mul",
                                 "left": {
                                   "type": "minecraft:add",
-                                  "left": "minecraft:overworld/continents",
+                                  "left": "minecraft:overworld_large_biomes/continents",
                                   "right": 0.07
                                 },
                                 "right": 6.5
@@ -808,7 +808,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -867,10 +867,10 @@
                               "max_exclusive": -40,
                               "when_in_range": {
                                 "type": "minecraft:min",
-                                "left": "minecraft:overworld/final_density",
+                                "left": "minecraft:overworld_large_biomes/final_density",
                                 "right": "bugsbugsandmorebugs:underhang_underside"
                               },
-                              "when_out_of_range": "minecraft:overworld/final_density"
+                              "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                             },
                             "right": "bugsbugsandmorebugs:sundering_barrier"
                           },
@@ -884,7 +884,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -938,7 +938,7 @@
                                     "type": "minecraft:mul",
                                     "left": {
                                       "type": "minecraft:add",
-                                      "left": "minecraft:overworld/continents",
+                                      "left": "minecraft:overworld_large_biomes/continents",
                                       "right": 0.07
                                     },
                                     "right": 6.5
@@ -991,10 +991,10 @@
                               "max_exclusive": -40,
                               "when_in_range": {
                                 "type": "minecraft:min",
-                                "left": "minecraft:overworld/final_density",
+                                "left": "minecraft:overworld_large_biomes/final_density",
                                 "right": "bugsbugsandmorebugs:underhang_underside"
                               },
-                              "when_out_of_range": "minecraft:overworld/final_density"
+                              "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                             },
                             "right": "bugsbugsandmorebugs:sundering_barrier"
                           },
@@ -1008,7 +1008,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -1062,7 +1062,7 @@
                                     "type": "minecraft:mul",
                                     "left": {
                                       "type": "minecraft:add",
-                                      "left": "minecraft:overworld/continents",
+                                      "left": "minecraft:overworld_large_biomes/continents",
                                       "right": 0.07
                                     },
                                     "right": 6.5
@@ -1108,10 +1108,10 @@
                               "max_exclusive": -40,
                               "when_in_range": {
                                 "type": "minecraft:min",
-                                "left": "minecraft:overworld/final_density",
+                                "left": "minecraft:overworld_large_biomes/final_density",
                                 "right": "bugsbugsandmorebugs:underhang_underside"
                               },
-                              "when_out_of_range": "minecraft:overworld/final_density"
+                              "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
                             },
                             "right": "bugsbugsandmorebugs:sundering_barrier"
                           },
@@ -1125,7 +1125,7 @@
                                   "type": "minecraft:mul",
                                   "left": {
                                     "type": "minecraft:add",
-                                    "left": "minecraft:overworld/continents",
+                                    "left": "minecraft:overworld_large_biomes/continents",
                                     "right": 0.07
                                   },
                                   "right": 6.5
@@ -1179,7 +1179,7 @@
                                     "type": "minecraft:mul",
                                     "left": {
                                       "type": "minecraft:add",
-                                      "left": "minecraft:overworld/continents",
+                                      "left": "minecraft:overworld_large_biomes/continents",
                                       "right": 0.07
                                     },
                                     "right": 6.5
@@ -1270,10 +1270,10 @@
           "max_exclusive": -40,
           "when_in_range": {
             "type": "minecraft:min",
-            "left": "minecraft:overworld/final_density",
+            "left": "minecraft:overworld_large_biomes/final_density",
             "right": "bugsbugsandmorebugs:underhang_underside"
           },
-          "when_out_of_range": "minecraft:overworld/final_density"
+          "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
         },
         "right": "bugsbugsandmorebugs:sundering_barrier"
       }
@@ -1285,11 +1285,11 @@
   "sea_level": 60,
   "spawn_target": [
     {
-      "minecraft:overworld/continents": [
+      "minecraft:overworld_large_biomes/continents": [
         -0.11,
         1
       ],
-      "minecraft:overworld/erosion": [
+      "minecraft:overworld_large_biomes/erosion": [
         -1,
         1
       ],
@@ -1307,11 +1307,11 @@
       ]
     },
     {
-      "minecraft:overworld/continents": [
+      "minecraft:overworld_large_biomes/continents": [
         -0.11,
         1
       ],
-      "minecraft:overworld/erosion": [
+      "minecraft:overworld_large_biomes/erosion": [
         -1,
         1
       ],

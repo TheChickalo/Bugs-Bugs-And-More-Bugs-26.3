@@ -10,7 +10,7 @@
           "type": "minecraft:mul",
           "left": {
             "type": "minecraft:sub",
-            "left": "minecraft:overworld/continents",
+            "left": "minecraft:overworld_large_biomes/continents",
             "right": 0.14
           },
           "right": 4.2

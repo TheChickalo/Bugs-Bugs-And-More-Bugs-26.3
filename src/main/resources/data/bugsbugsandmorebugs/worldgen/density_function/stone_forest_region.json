@@ -7,7 +7,7 @@
       "type": "minecraft:mul",
       "left": {
         "type": "minecraft:add",
-        "left": "minecraft:overworld/erosion",
+        "left": "minecraft:overworld_large_biomes/erosion",
         "right": 0.18
       },
       "right": 5.5

@@ -99,7 +99,7 @@ jobs:
           assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_marsh' for x in climates)>=3
           aquifer=density['aquifers']['surface_level']
           assert aquifer['type']=='minecraft:min'
-          assert aquifer['left']=='minecraft:overworld/preliminary_surface_level'
+          assert aquifer['left']=='minecraft:overworld_large_biomes/preliminary_surface_level'
           assert aquifer['right']==62, 'Cap the mismatch with custom karst terrain'
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
           assert stone['alpha']['type']=='minecraft:max', 'Keep original valleys plus extra pillar paths'
@@ -235,6 +235,8 @@ jobs:
         run: python3 scripts/check_forest_fixes.py
       - name: Validate floating-archipelago wiring
         run: python3 scripts/check_sky_islands.py
+      - name: Validate ocean-scale terrain and river-biome alignment
+        run: python3 scripts/check_elsewhere_hydrology.py
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py
       - name: Validate biome-only alpha contract

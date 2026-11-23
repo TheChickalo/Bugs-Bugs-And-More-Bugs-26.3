@@ -22,7 +22,7 @@ assert inner["first"]["type"]=="minecraft:max"
 assert inner["first"]["right"]=="bugsbugsandmorebugs:volcanic_relief_density"
 assert inner["first"]["left"]["right"]=="bugsbugsandmorebugs:sky_island_density"
 assert inner["second"]["left"]["left"]["right"]=="bugsbugsandmorebugs:sky_island_density"
-assert '"minecraft:overworld/continents"' in json.dumps(mask), "Ocean gate missing"
+assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask), "Large ocean gate missing"
 assert '"bugsbugsandmorebugs:sky_island_mask"' in json.dumps(density)
 found={entry["if_true"].get("biome_is") for entry in rules["sequence"] if isinstance(entry.get("if_true"),dict)}
 assert sky <= found, "Sky surface rules absent"
