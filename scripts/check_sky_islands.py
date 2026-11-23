@@ -17,11 +17,27 @@ assert router["depth"]["type"]=="minecraft:lerp"
 root=router["final_density"]
 assert root["type"]=="minecraft:range_choice"
 inner=root["when_in_range"]
-assert inner["type"]=="minecraft:lerp"
-assert inner["first"]["type"]=="minecraft:max"
-assert inner["first"]["right"]=="bugsbugsandmorebugs:volcanic_relief_density"
-assert inner["first"]["left"]["right"]=="bugsbugsandmorebugs:sky_island_density"
-assert inner["second"]["left"]["left"]["right"]=="bugsbugsandmorebugs:sky_island_density"
+assert inner["type"]=="minecraft:max", "Sky density must be unioned after every surface and height cap"
+assert inner["right"]=="bugsbugsandmorebugs:sky_island_density"
+base=inner["left"]
+assert base["type"]=="minecraft:lerp" and base["alpha"]=="bugsbugsandmorebugs:bamboo_lowland_region"
+assert base["first"]["type"]=="minecraft:max"
+assert base["first"]["right"]=="bugsbugsandmorebugs:volcanic_relief_density"
+assert base["second"]["left"]["right"]=="bugsbugsandmorebugs:volcanic_relief_density"
+assert json.dumps(base).count('"bugsbugsandmorebugs:sky_island_density"')==0, (
+    "Sky density still appears inside a clipped terrain branch"
+)
+assert density["left"]["left"]["right"]==-0.50
+# With the reference micro-noise set to zero, moderate/high mask values
+# must produce solid sky terrain without modifying ordinary sea-level ground.
+def reference_density(mask_strength, y):
+    horizontal=2.45*mask_strength-0.50
+    lower=-1.15+(min(192,max(149,y))-149)*(1.2+1.15)/(192-149)
+    upper=1.4-(min(286,max(218,y))-218)*(1.4+1.35)/(286-218)
+    return min(horizontal, lower, upper)
+assert reference_density(0.55, 200)>0, "Moderate sky mask no longer creates blocks"
+assert reference_density(0.0, 200)<0, "Air between islands must remain empty"
+assert reference_density(1.0, 320)<0, "Islands must terminate above the sky band"
 assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask), "Large ocean gate missing"
 assert '"bugsbugsandmorebugs:sky_island_mask"' in json.dumps(density)
 found={entry["if_true"].get("biome_is") for entry in rules["sequence"] if isinstance(entry.get("if_true"),dict)}

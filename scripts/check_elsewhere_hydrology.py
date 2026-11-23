@@ -43,10 +43,17 @@ ocean = [p["parameters"] for p in biomes if p["biome"]==NS+"ocean"]
 river = [p["parameters"] for p in biomes if p["biome"]==NS+"river"]
 skyNames = ("cloudcedar_forest", "windcarved_crags", "mistfall_gardens", "vermilion_isles")
 sky = {name: [p["parameters"] for p in biomes if p["biome"]==NS+name] for name in skyNames}
-assert len(ocean)>=10, "Missing broad open-ocean climate coverage"
-assert any(p["continentalness"]==[-1.25,-0.26] and p["weirdness"]==[-1,1] for p in ocean), "Unrepresented deep ocean"
-assert len(river)>=19
-assert any(p["continentalness"]==[-0.10,0.52] and p["weirdness"]==[-0.073,0.073] for p in river)
+assert len(ocean)>=25, "Missing targeted deep-ocean climate coverage"
+assert all(not (isinstance(p["temperature"],list) and p["temperature"]==[-1,1]) for p in ocean), (
+    "Ocean wildcard has returned: can swallow terrestrial biomes"
+)
+assert all(not (isinstance(p["temperature"],list) and p["temperature"]==[-1,1]) for p in river), (
+    "River wildcard has returned: can swallow terrestrial biomes"
+)
+deep = [p for p in ocean if p["continentalness"]==-0.67]
+assert len(deep)==18, "Nine temperature/moisture climate cells need two erosion variants"
+assert all(p["weirdness"]==0 for p in river), "River corridors should track ridges=0, not wide areas"
+assert len(river)>=18
 assert all(any(p["depth"]==[-2,-0.9] for p in entries) for entries in sky.values())
 
 # Minecraft 26.3 Climate.Parameter.CODEC rejects numbers outside [-2, 2].
@@ -76,6 +83,6 @@ for name, entries in sky.items():
 mask = json.loads((WORLD / "density_function/sky_island_mask.json").read_text())
 assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask)
 density = json.loads((WORLD / "density_function/sky_island_density.json").read_text())
-assert density["left"]["left"]["right"] == -0.65
+assert density["left"]["left"]["right"] == -0.50
 
 print("Elsewhere ocean, river and sky climate static checks passed.")
