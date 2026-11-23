@@ -179,10 +179,15 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
         tag(BlockTags.DIRT)
                 .add(ModBlocks.getRK(ModBlocks.LOAM))
-                .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM));
+                .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM))
+                .add(ModBlocks.getRK(ModBlocks.COARSE_LOAM))
+                .add(ModBlocks.getRK(ModBlocks.ROOTED_LOAM));
         tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .add(ModBlocks.getRK(ModBlocks.LOAM))
-                .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM));
+                .add(ModBlocks.getRK(ModBlocks.GRASSY_LOAM))
+                .add(ModBlocks.getRK(ModBlocks.COARSE_LOAM))
+                .add(ModBlocks.getRK(ModBlocks.ROOTED_LOAM))
+                .add(ModBlocks.getRK(ModBlocks.TILLED_LOAM));
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.getRK(ModBlocks.ASHSTONE))
                 .add(ModBlocks.getRK(ModBlocks.SHATTERSTONE));

@@ -435,9 +435,9 @@ public record MapleWaterShoreFeature() implements Feature {
     private static boolean isSoil(BlockState state) {
         return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
                 || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.GRASS_BLOCK)
-                || state.is(Blocks.COARSE_DIRT)
+                || (state.is(Blocks.COARSE_DIRT) || state.is(ModBlocks.COARSE_LOAM))
                 || state.is(Blocks.PODZOL)
-                || state.is(Blocks.ROOTED_DIRT);
+                || (state.is(Blocks.ROOTED_DIRT) || state.is(ModBlocks.ROOTED_LOAM));
     }
 
     private static BlockState randomBankBlock(RandomSource random) {
@@ -447,7 +447,7 @@ public record MapleWaterShoreFeature() implements Feature {
         if (roll < 0.75F) return ModBlocks.AMPHIBOLITE.defaultBlockState();
         if (roll < 0.86F) return ModBlocks.LAPILLI.defaultBlockState();
         if (roll < 0.94F) return Blocks.CLAY.defaultBlockState();
-        if (roll < 0.97F) return Blocks.COARSE_DIRT.defaultBlockState();
+        if (roll < 0.97F) return ModBlocks.COARSE_LOAM.defaultBlockState();
         return ModBlocks.RHYOLITE.defaultBlockState();
     }
 }

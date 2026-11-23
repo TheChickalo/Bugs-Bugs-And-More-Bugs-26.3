@@ -148,8 +148,8 @@ public record ElsewhereFloraFeature() implements Feature {
     private static boolean naturalSoil(BlockState state){
         return state.is(Blocks.GRASS_BLOCK)||state.is(Blocks.DIRT)
                 ||state.is(Blocks.MUD)||state.is(Blocks.CLAY)
-                ||state.is(Blocks.COARSE_DIRT)||state.is(Blocks.PODZOL)
-                ||state.is(Blocks.ROOTED_DIRT)||state.is(Blocks.MOSS_BLOCK)
+                ||(state.is(Blocks.COARSE_DIRT) || state.is(ModBlocks.COARSE_LOAM))||state.is(Blocks.PODZOL)
+                ||(state.is(Blocks.ROOTED_DIRT) || state.is(ModBlocks.ROOTED_LOAM))||state.is(Blocks.MOSS_BLOCK)
                 ||state.is(ModBlocks.SILT)||state.is(ModBlocks.LOAM)
                 ||state.is(ModBlocks.GRASSY_LOAM)||state.is(ModBlocks.CLUBMOSS);
     }

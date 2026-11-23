@@ -3,6 +3,9 @@
     "bugsbugsandmorebugs:lapilli",
     "bugsbugsandmorebugs:loam",
     "bugsbugsandmorebugs:grassy_loam",
-    "bugsbugsandmorebugs:silt"
+    "bugsbugsandmorebugs:silt",
+    "bugsbugsandmorebugs:coarse_loam",
+    "bugsbugsandmorebugs:rooted_loam",
+    "bugsbugsandmorebugs:tilled_loam"
   ]
 }

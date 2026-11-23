@@ -122,7 +122,7 @@ public record MapleLakeFeature() implements Feature {
 
     private static boolean naturalSoil(BlockState state) {
         return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.DIRT)
-                || state.is(Blocks.PODZOL) || state.is(Blocks.COARSE_DIRT)
+                || state.is(Blocks.PODZOL) || (state.is(Blocks.COARSE_DIRT) || state.is(ModBlocks.COARSE_LOAM))
                 || state.is(Blocks.MUD) || state.is(Blocks.CLAY)
                 || state.is(Blocks.GRAVEL) || state.is(Blocks.SAND)
                 || state.is(Blocks.STONE)

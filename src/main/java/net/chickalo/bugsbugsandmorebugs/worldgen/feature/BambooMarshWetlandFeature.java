@@ -48,8 +48,8 @@ public record BambooMarshWetlandFeature() implements Feature {
 
             float roll = random.nextFloat();
             BlockState replacement = roll < 0.62F ? Blocks.MUD.defaultBlockState()
-                    : roll < 0.70F ? Blocks.ROOTED_DIRT.defaultBlockState()
-                    : roll < 0.78F ? Blocks.COARSE_DIRT.defaultBlockState() : null;
+                    : roll < 0.70F ? ModBlocks.ROOTED_LOAM.defaultBlockState()
+                    : roll < 0.78F ? ModBlocks.COARSE_LOAM.defaultBlockState() : null;
             if (replacement != null && level.setBlock(ground, replacement, 2)) changed++;
         }
 
@@ -129,8 +129,8 @@ public record BambooMarshWetlandFeature() implements Feature {
 
     private static boolean isNaturalSoil(BlockState state) {
         return state.is(Blocks.MUD) || state.is(Blocks.DIRT)
-                || state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.ROOTED_DIRT)
-                || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.PODZOL)
+                || state.is(Blocks.GRASS_BLOCK) || (state.is(Blocks.ROOTED_DIRT) || state.is(ModBlocks.ROOTED_LOAM))
+                || (state.is(Blocks.COARSE_DIRT) || state.is(ModBlocks.COARSE_LOAM)) || state.is(Blocks.PODZOL)
                 || state.is(Blocks.CLAY) || state.is(ModBlocks.GRASSY_LOAM)
                 || state.is(ModBlocks.LOAM);
     }

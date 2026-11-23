@@ -75,9 +75,9 @@ public record ForestMicroTerrainFeature() implements Feature {
 
     private static boolean soil(BlockState s) {
         return s.is(Blocks.GRASS_BLOCK) || s.is(Blocks.DIRT)
-                || s.is(Blocks.COARSE_DIRT) || s.is(Blocks.PODZOL)
+                || (s.is(Blocks.COARSE_DIRT) || s.is(ModBlocks.COARSE_LOAM)) || s.is(Blocks.PODZOL)
                 || s.is(Blocks.MUD) || s.is(Blocks.CLAY)
-                || s.is(Blocks.ROOTED_DIRT) || s.is(Blocks.MOSS_BLOCK)
+                || (s.is(Blocks.ROOTED_DIRT) || s.is(ModBlocks.ROOTED_LOAM)) || s.is(Blocks.MOSS_BLOCK)
                 || s.is(ModBlocks.SILT) || s.is(ModBlocks.LOAM)
                 || s.is(ModBlocks.GRASSY_LOAM) || s.is(ModBlocks.CLUBMOSS);
     }
@@ -245,7 +245,7 @@ public record ForestMicroTerrainFeature() implements Feature {
                     else if((h&15)==0)changed=grass(level,top,ModBlocks.WILD_VIOLET);
                 }
                 case 1 -> { // Tangled Arbors: exposed roots and horizontal vine-covered wood.
-                    if(noise> -0.15)changed=put(level,top,Blocks.ROOTED_DIRT);
+                    if(noise> -0.15)changed=put(level,top,ModBlocks.ROOTED_LOAM);
                     if((h&31)==0)changed|=downedLog(level,top,x,z,true);
                 }
                 case 2 -> { // Petal Glades: bright, dense low blooms and clear sight lines.
@@ -290,14 +290,14 @@ public record ForestMicroTerrainFeature() implements Feature {
                 case 10 -> { // Golden Meadows: carpets of tall silvergrass and flowers.
                     if(noise> -0.30 && (h&3)!=0)
                         changed=grass(level,top,(h&7)==0?ModBlocks.ANEMONE_FLOWERS:ModBlocks.SILVER_GRASS);
-                    else if((h&15)==0)changed=put(level,top,Blocks.COARSE_DIRT);
+                    else if((h&15)==0)changed=put(level,top,ModBlocks.COARSE_LOAM);
                 }
                 case 11 -> { // Bramble Terraces: low stepped bands, bramble-rich edges.
                     double ridge=Math.sin(x*0.21+z*0.049);
                     if(ridge>0.74 && noise> -0.15)
-                        changed=put(level,top.above(),Blocks.COARSE_DIRT);
+                        changed=put(level,top.above(),ModBlocks.COARSE_LOAM);
                     else if(ridge>0.1 && noise>0.0)
-                        changed=put(level,top,Blocks.COARSE_DIRT);
+                        changed=put(level,top,ModBlocks.COARSE_LOAM);
                     if((h&7)==0)changed|=grass(level,top,ModBlocks.BUSH);
                 }
                 case 12 -> { // Blossom Drifts: streaks of pink flower litter.
@@ -313,7 +313,7 @@ public record ForestMicroTerrainFeature() implements Feature {
                 case 14 -> { // Sunwashed Rises: low rounded rocky knolls.
                     double d=spotDistance(x,z,31);
                     if(noise>0.05 && d<3.4){
-                        changed=put(level,top,(h&3)==0?Blocks.COARSE_DIRT:ModBlocks.RHYOLITE);
+                        changed=put(level,top,(h&3)==0?ModBlocks.COARSE_LOAM:ModBlocks.RHYOLITE);
                         if(d<1.35 && noise>0.30)
                             changed|=put(level,top.above(),ModBlocks.RHYOLITE);
                     } else if((h&7)==0)changed=grass(level,top,ModBlocks.FEATHERGRASS);

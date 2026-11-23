@@ -1,6 +1,9 @@
 package net.chickalo.bugsbugsandmorebugs.block.custom;
 
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -15,6 +18,11 @@ public class DaikonCropBlock extends CropBlock {
 
     public DaikonCropBlock(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState soil, BlockGetter level, BlockPos pos) {
+        return soil.is(ModBlocks.TILLED_LOAM) || super.mayPlaceOn(soil, level, pos);
     }
 
     @Override
