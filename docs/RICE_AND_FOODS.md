@@ -2,7 +2,9 @@
 
 Rice seeds are currently **Creative-only** (no wild placement or natural world generation).
 
-Rice is a **flooded paddy crop**, not a normal dry-field crop. To plant it, stack these blocks vertically:
+Rice is a **flooded paddy crop**, not a normal dry-field crop.
+
+**Underwater hoeing:** use a hoe on loam, grassy loam, coarse loam, or rooted loam while there is exactly one source-water block above the soil, with air above the water. This produces hydrated tilled loam. Normal dry-field hoeing still works as before. To plant it, stack these blocks vertically:
 
 1. **Air**, for the leaves to emerge into.
 2. **Exactly one water source block**, where you use rice seeds. The root occupies this block and remains waterlogged instead of removing the water.

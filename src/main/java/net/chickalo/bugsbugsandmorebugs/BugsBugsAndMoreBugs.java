@@ -6,6 +6,7 @@ import net.chickalo.bugsbugsandmorebugs.entity.custom.AntWorkerEntity;
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
 import net.chickalo.bugsbugsandmorebugs.registries.ModFlammableBlocks;
 import net.chickalo.bugsbugsandmorebugs.registries.ModStrippableBlocks;
+import net.chickalo.bugsbugsandmorebugs.registries.ModPaddyTilling;
 import net.chickalo.bugsbugsandmorebugs.sound.ModSounds;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModFoliagePlacerTypes;
@@ -31,6 +32,7 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
     public void onInitialize() {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+        ModPaddyTilling.register();
         ModSounds.registerSound();
         ModEntities.registerModEntities();
         ModFlammableBlocks.registerFlammableBlocks();
