@@ -7,8 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.material.Fluids;
 
@@ -23,7 +22,7 @@ public final class ModPaddyTilling {
     public static void register() {
         UseBlockCallback.EVENT.register((player, level, hand, hit) -> {
             if (player.isSpectator()) return InteractionResult.PASS;
-            if (!(player.getItemInHand(hand).getItem() instanceof HoeItem)) {
+            if (!player.getItemInHand(hand).is(ItemTags.HOES)) {
                 return InteractionResult.PASS;
             }
 
@@ -50,7 +49,7 @@ public final class ModPaddyTilling {
                 level.setBlock(pos,
                         ModBlocks.TILLED_LOAM.defaultBlockState()
                                 .setValue(FarmlandBlock.MOISTURE, 7), 3);
-                level.playSound(null, pos, SoundEvents.HOE_TILL,
+                level.playSound(null, pos, SoundEvents.HOE_TILL.value(),
                         SoundSource.BLOCKS, 1.0F, 1.0F);
                 player.getItemInHand(hand).hurtAndBreak(1, player, hand);
             }
