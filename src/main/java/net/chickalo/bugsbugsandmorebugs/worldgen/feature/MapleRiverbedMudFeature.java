@@ -2,6 +2,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 
 import com.mojang.serialization.MapCodec;
 import net.chickalo.bugsbugsandmorebugs.worldgen.biome.ModBiomes;
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;

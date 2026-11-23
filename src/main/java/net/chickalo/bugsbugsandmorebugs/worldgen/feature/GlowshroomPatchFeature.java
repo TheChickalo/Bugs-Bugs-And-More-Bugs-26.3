@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
