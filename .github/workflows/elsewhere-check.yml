@@ -174,7 +174,9 @@ jobs:
           assert feat('hinoki_moss_patch')['type']==ns+'hinoki_moss_patch'
           assert placed('bamboo_pools_marsh')['placement'][0]=={'type':'minecraft:count','count':2}
           density=json.loads((world/'noise_settings/elsewhere.json').read_text())
-          final=density['noise_router']['final_density']['when_in_range']
+          union=density['noise_router']['final_density']['when_in_range']
+          assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
+          final=union['left']
           assert final['alpha']==ns+'bamboo_lowland_region'
           assert (world/'density_function/bamboo_lowland_region.json').exists()
           assert final['second']['type']=='minecraft:min'
@@ -200,7 +202,9 @@ jobs:
           world=Path('src/main/resources/data/bugsbugsandmorebugs/worldgen')
           gen=Path('src/main/generated/data/bugsbugsandmorebugs/worldgen')
           noise=json.loads((world/'noise_settings/elsewhere.json').read_text())
-          root=noise['noise_router']['final_density']['when_in_range']
+          union=noise['noise_router']['final_density']['when_in_range']
+          assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
+          root=union['left']
           assert root['type']=='minecraft:lerp'
           assert root['alpha']==ns+'bamboo_lowland_region'
           assert root['first']['type']=='minecraft:max'
