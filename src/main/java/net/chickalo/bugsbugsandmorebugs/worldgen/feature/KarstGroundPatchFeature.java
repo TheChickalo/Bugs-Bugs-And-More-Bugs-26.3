@@ -226,8 +226,8 @@ public record KarstGroundPatchFeature() implements Feature {
         // Never replace ores, caves, water, existing exposed formations,
         // biome-specific surfaces, or player-created decorative blocks.
         return net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.DIRT)
-                || state.is(Blocks.COARSE_DIRT)
-                || state.is(Blocks.ROOTED_DIRT)
+                || (state.is(Blocks.COARSE_DIRT) || state.is(ModBlocks.COARSE_LOAM))
+                || (state.is(Blocks.ROOTED_DIRT) || state.is(ModBlocks.ROOTED_LOAM))
                 || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(state, Blocks.STONE)
                 || state.is(ModBlocks.RENDZINA)
                 || state.is(ModBlocks.LITHOSOL);
@@ -244,8 +244,8 @@ public record KarstGroundPatchFeature() implements Feature {
         }
         if (p < 0.64F) return ModBlocks.RENDZINA.defaultBlockState();
         if (p < 0.80F) return ModBlocks.LITHOSOL.defaultBlockState();
-        if (p < 0.88F) return Blocks.COARSE_DIRT.defaultBlockState();
-        if (p < 0.94F) return Blocks.ROOTED_DIRT.defaultBlockState();
+        if (p < 0.88F) return ModBlocks.COARSE_LOAM.defaultBlockState();
+        if (p < 0.94F) return ModBlocks.ROOTED_LOAM.defaultBlockState();
         if (p < 0.98F) return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
         return ModBlocks.WEATHERED_LIMESTONE.defaultBlockState();
     }

@@ -152,9 +152,9 @@ public record GlowshroomTreeBaseFeature(
             boolean suitable =
                     net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.GRASS_BLOCK)
                             || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.DIRT)
-                            || ground.is(Blocks.COARSE_DIRT)
+                            || (ground.is(Blocks.COARSE_DIRT) || ground.is(ModBlocks.COARSE_LOAM))
                             || ground.is(Blocks.PODZOL)
-                            || ground.is(Blocks.ROOTED_DIRT)
+                            || (ground.is(Blocks.ROOTED_DIRT) || ground.is(ModBlocks.ROOTED_LOAM))
                             || ground.is(Blocks.MYCELIUM)
                             || ground.is(Blocks.MOSS_BLOCK);
 

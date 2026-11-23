@@ -106,8 +106,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
 
     private static boolean soil(WorldGenLevel level, BlockPos at) {
         BlockState b = level.getBlockState(at);
-        return b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.DIRT) || b.is(Blocks.COARSE_DIRT)
-                || b.is(Blocks.PODZOL) || b.is(Blocks.ROOTED_DIRT) || b.is(Blocks.MOSS_BLOCK)
+        return b.is(Blocks.GRASS_BLOCK) || b.is(Blocks.DIRT) || (b.is(Blocks.COARSE_DIRT) || b.is(ModBlocks.COARSE_LOAM))
+                || b.is(Blocks.PODZOL) || (b.is(Blocks.ROOTED_DIRT) || b.is(ModBlocks.ROOTED_LOAM)) || b.is(Blocks.MOSS_BLOCK)
                 || b.is(Blocks.MUD) || b.is(Blocks.CLAY)
                 || b.is(ModBlocks.LOAM) || b.is(ModBlocks.GRASSY_LOAM) || b.is(ModBlocks.SILT)
                 || b.is(ModBlocks.RENDZINA) || b.is(ModBlocks.LITHOSOL)
@@ -735,8 +735,8 @@ public record ForestHabitatFeature(int kind) implements Feature {
         switch(kind){
             case 0 -> {
                 // Keep Wisteria tree structure and flowering placement untouched.
-                if(micro==2 && roll==0)cover=Blocks.COARSE_DIRT;
-                else if(micro==1 && roll==0)cover=Blocks.ROOTED_DIRT;
+                if(micro==2 && roll==0)cover=ModBlocks.COARSE_LOAM;
+                else if(micro==1 && roll==0)cover=ModBlocks.ROOTED_LOAM;
             }
             case 1 -> {
                 if(micro==0 && roll<3 && nearbyWater(level,air,4))cover=ModBlocks.SILT;
@@ -753,13 +753,13 @@ public record ForestHabitatFeature(int kind) implements Feature {
             }
             case 3 -> {
                 if(micro==0 && roll==0)cover=Blocks.PODZOL;
-                else if(micro==1 && roll==0)cover=Blocks.COARSE_DIRT;
-                else if(micro==2 && roll<3)cover=Blocks.COARSE_DIRT;
+                else if(micro==1 && roll==0)cover=ModBlocks.COARSE_LOAM;
+                else if(micro==2 && roll<3)cover=ModBlocks.COARSE_LOAM;
             }
             case 4 -> {
                 if(micro==0 && roll==0)cover=Blocks.GRASS_BLOCK;
-                else if(micro==1 && roll<2)cover=Blocks.COARSE_DIRT;
-                else if(micro==2 && roll<3)cover=Blocks.COARSE_DIRT;
+                else if(micro==1 && roll<2)cover=ModBlocks.COARSE_LOAM;
+                else if(micro==2 && roll<3)cover=ModBlocks.COARSE_LOAM;
             }
         }
         if(cover==null||soil.is(cover))return false;
