@@ -134,7 +134,7 @@
         "input": "bugsbugsandmorebugs:sky_island_density",
         "min_inclusive": -0.01,
         "max_exclusive": 2.1,
-        "when_in_range": -1.65,
+        "when_in_range": -1.8,
         "when_out_of_range": {
           "type": "minecraft:clamp",
           "input": {
@@ -183,7 +183,7 @@
       "input": "bugsbugsandmorebugs:sky_island_density",
       "min_inclusive": -0.01,
       "max_exclusive": 2.1,
-      "when_in_range": -1.65,
+      "when_in_range": -1.8,
       "when_out_of_range": {
         "type": "minecraft:clamp",
         "input": {

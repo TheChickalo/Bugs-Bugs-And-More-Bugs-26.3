@@ -18,7 +18,7 @@ depth_router=router["depth"]
 assert depth_router["type"]=="minecraft:range_choice", "Biome selection must follow actual solid sky density"
 assert depth_router["input"]=="bugsbugsandmorebugs:sky_island_density"
 assert depth_router["min_inclusive"]<=0 and depth_router["min_inclusive"]>=-0.05
-assert depth_router["when_in_range"]==-1.65
+assert depth_router["when_in_range"]==-1.8
 assert depth_router["when_out_of_range"]["type"]=="minecraft:clamp"
 assert depth_router["when_out_of_range"]["min"]==0, "Normal elevated land must never imitate sky depth"
 assert depth_router["when_out_of_range"]["max"]==2, "Underhang remains available below the Sundering"
