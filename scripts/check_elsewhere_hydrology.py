@@ -25,7 +25,11 @@ assert router["erosion"] == "minecraft:overworld_large_biomes/erosion", "Terrain
 assert router["temperature"] == "minecraft:overworld/temperature", "Preserve local forest temperature scale"
 assert router["vegetation"] == "minecraft:overworld/vegetation", "Preserve local forest moisture mosaics"
 assert router["ridges"] == "minecraft:overworld/ridges", "River and climate ridge signals must match"
-assert router["depth"]["first"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
+assert router["depth"]["type"]=="minecraft:range_choice"
+assert router["depth"]["input"] == NS+"sky_island_density", "Climate-depth signal must be gated by physical island density"
+under=router["depth"]["when_out_of_range"]
+assert under["type"]=="minecraft:clamp" and under["min"]==0 and under["max"]==2
+assert under["input"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
 assert settings["aquifers"]["surface_level"]["left"] == "minecraft:overworld_large_biomes/preliminary_surface_level"
 
 largeDepth = json.loads((WORLD / "density_function/elsewhere_large_depth.json").read_text())
@@ -59,7 +63,7 @@ deep = [p for p in ocean if p["continentalness"]==-0.67]
 assert len(deep)==18, "Nine temperature/moisture climate cells need two erosion variants"
 assert all(p["weirdness"]==0 for p in river), "River corridors should track ridges=0, not wide areas"
 assert len(river)>=18
-assert all(any(p["depth"]==[-2,-0.9] for p in entries) for entries in sky.values())
+assert all(any(p["depth"]==[-2,-1.5] for p in entries) for entries in sky.values())
 
 # Minecraft 26.3 Climate.Parameter.CODEC rejects numbers outside [-2, 2].
 # A bad biome entry can report the misleading "No key preset" error.
@@ -111,5 +115,38 @@ for c,expected_ocean in [(-0.65,True),(-0.38,True),(-0.17,True),(0.30,False)]:
            "erosion":0.12,"depth":0,"weirdness":0.23,"offset":0}
     chosen=min(biomes,key=lambda row:climate_distance(row["parameters"],point))["biome"]
     assert (chosen==NS+"ocean")==expected_ocean, (c,chosen)
+
+
+# A separate failure mode: the four sky biome points cover nearly every
+# humidity/temperature/erosion/weirdness combination, so they used to win
+# the nearest-climate search on ordinary dry land at depth 0. The target depth
+# must be sufficiently far from normal surface depth that a sky biome CAN'T
+# beat the ordinary biome candidates merely through their broad other ranges.
+from math import sin, floor
+def pseudo(i,k):
+    v=sin(i*12.9898+k*78.233)*43758.5453
+    return v-floor(v)
+sky_ids={NS+name for name in skyNames}
+for cont in (-.9,-.7,-.5,-.35,-.25,-.15,-.08,.08,.3,.6):
+    for i in range(100):
+        point={
+            "temperature":-1+2*pseudo(i,1),
+            "humidity":-1+2*pseudo(i,2),
+            "continentalness":cont,
+            "erosion":-1+2*pseudo(i,3),
+            "depth":0,
+            "weirdness":-1+2*pseudo(i,4),
+            "offset":0,
+        }
+        selected=min(biomes,key=lambda row:climate_distance(row["parameters"],point))
+        assert selected["biome"] not in sky_ids, (
+            "Sky biome wins at non-island surface depth 0", cont, i,selected["biome"]
+        )
+for temp,humid,expected in ((-.4,.4,"cloudcedar_forest"),(-.4,-.4,"windcarved_crags"),(.4,.4,"mistfall_gardens"),(.4,-.4,"vermilion_isles")):
+    point={"temperature":temp,"humidity":humid,"continentalness":-.65,
+           "erosion":0,"depth":-1.8,"weirdness":0.28,"offset":0}
+    actual=min(biomes,key=lambda row:climate_distance(row["parameters"],point))["biome"]
+    assert actual==NS+expected, ("Sky biome not selectable inside actual island",expected,actual)
+
 
 print("Elsewhere ocean, river and sky climate static checks passed.")
