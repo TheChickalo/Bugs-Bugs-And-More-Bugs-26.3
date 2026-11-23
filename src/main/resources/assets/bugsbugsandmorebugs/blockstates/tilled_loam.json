@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam"
+    },
+    "moisture=1": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    },
+    "moisture=2": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    },
+    "moisture=3": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    },
+    "moisture=4": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    },
+    "moisture=5": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    },
+    "moisture=6": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    },
+    "moisture=7": {
+      "model": "bugsbugsandmorebugs:block/tilled_loam_moist"
+    }
+  }
+}

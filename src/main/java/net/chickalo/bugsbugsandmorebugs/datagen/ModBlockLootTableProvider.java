@@ -133,6 +133,10 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
         dropSelf(ModBlocks.TEMP_PORTAL);
         dropSelf(ModBlocks.LOAM);
+        dropSelf(ModBlocks.COARSE_LOAM);
+        dropSelf(ModBlocks.ROOTED_LOAM);
+        add(ModBlocks.TILLED_LOAM, block -> LootTable.lootTable().withPool(LootPool.lootPool()
+                .add(LootItem.lootTableItem(ModBlocks.LOAM))));
         dropSelf(ModBlocks.ASHSTONE);
         dropSelf(ModBlocks.SHATTERSTONE);
         add(ModBlocks.GRASSY_LOAM, createSingleItemTableWithSilkTouch(ModBlocks.GRASSY_LOAM, ModBlocks.LOAM));

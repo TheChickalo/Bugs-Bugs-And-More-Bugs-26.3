@@ -43,7 +43,8 @@ public class RiceCropBlock extends BushBlock {
     @Override
     protected boolean mayPlaceOn(BlockState soil, BlockGetter level, BlockPos pos) {
         return soil.is(Blocks.MUD) || soil.is(Blocks.FARMLAND)
-                || soil.is(ModBlocks.LOAM) || soil.is(ModBlocks.GRASSY_LOAM);
+                || soil.is(ModBlocks.LOAM) || soil.is(ModBlocks.GRASSY_LOAM)
+                || soil.is(ModBlocks.TILLED_LOAM);
     }
 
     @Override

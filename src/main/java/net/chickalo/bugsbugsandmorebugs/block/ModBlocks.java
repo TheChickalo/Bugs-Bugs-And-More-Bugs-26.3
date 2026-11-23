@@ -5,6 +5,7 @@ import net.chickalo.bugsbugsandmorebugs.block.custom.*;
 import net.chickalo.bugsbugsandmorebugs.worldgen.ModFeatures;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeGrowers;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -187,6 +188,9 @@ public class ModBlocks {
             properties -> new WallBlock(properties.strength(5.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
     public static final Block LOAM = registerBlock("loam", properties -> new Block(properties.strength(0.5F).sound(SoundType.GRAVEL).instrument(NoteBlockInstrument.SNARE)));
+    public static final Block COARSE_LOAM = registerBlock("coarse_loam", p -> new Block(p.strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final Block ROOTED_LOAM = registerBlock("rooted_loam", p -> new Block(p.strength(0.5F).sound(SoundType.GRAVEL)));
+    public static final Block TILLED_LOAM = registerBlock("tilled_loam", p -> new TilledLoamBlock(p.strength(0.6F).sound(SoundType.GRAVEL).randomTicks().noOcclusion()));
     public static final Block GRASSY_LOAM = registerBlock("grassy_loam", properties -> new net.chickalo.bugsbugsandmorebugs.block.custom.GrassyLoamBlock(properties.strength(0.6F).sound(SoundType.GRASS).randomTicks()));
     public static final Block ASHSTONE = registerBlock("ashstone", properties -> new Block(properties.strength(2.0F, 4.0F).requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
     public static final Block SHATTERSTONE = registerBlock("shatterstone", properties -> new Block(properties.strength(4.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM)));
@@ -697,5 +701,10 @@ public class ModBlocks {
 
     public static void registerModBlocks() {
         BugsBugsAndMoreBugs.LOGGER.info("Registering Mod Blocks for " + BugsBugsAndMoreBugs.MOD_ID);
+        // 26.3 block transformers replace the removed Fabric tilling registry.
+        BlockTransformerHelper.registerTilling(LOAM, TILLED_LOAM);
+        BlockTransformerHelper.registerTilling(GRASSY_LOAM, TILLED_LOAM);
+        BlockTransformerHelper.registerTilling(COARSE_LOAM, TILLED_LOAM);
+        BlockTransformerHelper.registerTilling(ROOTED_LOAM, TILLED_LOAM);
     }
 }
