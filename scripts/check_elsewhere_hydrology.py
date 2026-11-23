@@ -15,7 +15,12 @@ settings = json.loads((WORLD / "noise_settings/elsewhere.json").read_text())
 biomes = dimension["generator"]["biome_source"]["biomes"]
 router = settings["noise_router"]
 
-assert router["continents"] == "minecraft:overworld_large_biomes/continents", "Biome continentalness not scaled"
+assert router["continents"] == NS+"elsewhere_biome_continents", "Coastline biome continentalness must use focused ocean signal"
+climate = json.loads((WORLD / "density_function/elsewhere_biome_continents.json").read_text())
+assert climate["type"]=="minecraft:lerp" and climate["first"]=="minecraft:overworld_large_biomes/continents"
+assert climate["alpha"]["type"]=="minecraft:clamp" and climate["second"]["type"]=="minecraft:clamp"
+assert climate["second"]["min"] >= -1.0
+assert climate["second"]["max"] <= -0.4
 assert router["erosion"] == "minecraft:overworld_large_biomes/erosion", "Terrain and biome erosion disagree"
 assert router["temperature"] == "minecraft:overworld/temperature", "Preserve local forest temperature scale"
 assert router["vegetation"] == "minecraft:overworld/vegetation", "Preserve local forest moisture mosaics"
@@ -84,5 +89,27 @@ mask = json.loads((WORLD / "density_function/sky_island_mask.json").read_text())
 assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask)
 density = json.loads((WORLD / "density_function/sky_island_density.json").read_text())
 assert density["left"]["left"]["right"] == -0.50
+
+
+# Synthetic tests of MultiNoise nearest-climate matching. Only the biome
+# continentalness signal changes; check deep/shallow seas versus inland ground.
+def ocean_climate_continentalness(c):
+    alpha=max(0,min(1,(-0.10-c)*20))
+    warped=max(-0.95,min(-0.50,c*1.75-0.30))
+    return c*(1-alpha)+warped*alpha
+def climate_distance(given,selected):
+    squared=0
+    for key in ("temperature","humidity","continentalness","erosion","depth","weirdness","offset"):
+        b=given[key]
+        lo,hi=(b if isinstance(b,list) else (b,b))
+        val=selected[key]
+        delta=lo-val if val<lo else val-hi if val>hi else 0
+        squared+=delta*delta
+    return squared
+for c,expected_ocean in [(-0.65,True),(-0.38,True),(-0.17,True),(0.30,False)]:
+    point={"temperature":0.10,"humidity":0.18,"continentalness":ocean_climate_continentalness(c),
+           "erosion":0.12,"depth":0,"weirdness":0.23,"offset":0}
+    chosen=min(biomes,key=lambda row:climate_distance(row["parameters"],point))["biome"]
+    assert (chosen==NS+"ocean")==expected_ocean, (c,chosen)
 
 print("Elsewhere ocean, river and sky climate static checks passed.")

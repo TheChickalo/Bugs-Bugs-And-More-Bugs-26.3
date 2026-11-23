@@ -131,15 +131,15 @@
   },
   "noise_router": {
     "chunk_surface_level": "minecraft:overworld_large_biomes/chunk_surface_level",
-    "continents": "minecraft:overworld_large_biomes/continents",
+    "continents": "bugsbugsandmorebugs:elsewhere_biome_continents",
     "depth": {
       "type": "minecraft:lerp",
       "alpha": {
         "type": "minecraft:gradient",
         "axis": "y",
-        "from_coordinate": 132,
+        "from_coordinate": 154,
         "from_value": 0,
-        "to_coordinate": 172,
+        "to_coordinate": 184,
         "to_value": 1
       },
       "first": {
@@ -159,26 +159,35 @@
       },
       "second": {
         "type": "minecraft:mul",
-        "left": -1.85,
+        "left": -1.65,
         "right": {
           "type": "minecraft:mul",
           "left": {
-            "type": "minecraft:clamp",
-            "input": {
-              "type": "minecraft:mul",
-              "left": "bugsbugsandmorebugs:sky_island_mask",
-              "right": 3
-            },
-            "min": 0,
-            "max": 1
+            "type": "minecraft:range_choice",
+            "input": "bugsbugsandmorebugs:sky_island_mask",
+            "min_inclusive": 0.34,
+            "max_exclusive": 2,
+            "when_in_range": 1,
+            "when_out_of_range": 0
           },
           "right": {
-            "type": "minecraft:gradient",
-            "axis": "y",
-            "from_coordinate": 284,
-            "from_value": 1,
-            "to_coordinate": 325,
-            "to_value": 0
+            "type": "minecraft:mul",
+            "left": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": 158,
+              "from_value": 0,
+              "to_coordinate": 184,
+              "to_value": 1
+            },
+            "right": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": 258,
+              "from_value": 1,
+              "to_coordinate": 278,
+              "to_value": 0
+            }
           }
         }
       }
