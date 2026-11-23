@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    "bugsbugsandmorebugs:cooked_rice",
+    "bugsbugsandmorebugs:cooked_rice",
+    "minecraft:carrot",
+    "minecraft:egg"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:fried_rice",
+    "count": 1
+  }
+}
