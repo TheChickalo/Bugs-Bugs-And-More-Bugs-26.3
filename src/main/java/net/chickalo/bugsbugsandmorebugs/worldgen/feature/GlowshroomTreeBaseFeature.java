@@ -3,6 +3,7 @@ package net.chickalo.bugsbugsandmorebugs.worldgen.feature;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BlockTags;
@@ -152,9 +153,9 @@ public record GlowshroomTreeBaseFeature(
             boolean suitable =
                     net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.GRASS_BLOCK)
                             || net.chickalo.bugsbugsandmorebugs.worldgen.ElsewhereGround.matches(ground, Blocks.DIRT)
-                            || ground.is(Blocks.COARSE_DIRT)
+                            || (ground.is(Blocks.COARSE_DIRT) || ground.is(ModBlocks.COARSE_LOAM))
                             || ground.is(Blocks.PODZOL)
-                            || ground.is(Blocks.ROOTED_DIRT)
+                            || (ground.is(Blocks.ROOTED_DIRT) || ground.is(ModBlocks.ROOTED_LOAM))
                             || ground.is(Blocks.MYCELIUM)
                             || ground.is(Blocks.MOSS_BLOCK);
 

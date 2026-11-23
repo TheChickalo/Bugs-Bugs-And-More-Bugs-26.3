@@ -125,9 +125,9 @@ public record KarstAnimalTrailFeature() implements Feature {
     private static BlockState trailMaterial(int x, int z, boolean bamboo) {
         if (bamboo) {
             double p = hash01(x, z, 601);
-            if (p < 0.63) return Blocks.COARSE_DIRT.defaultBlockState();
+            if (p < 0.63) return ModBlocks.COARSE_LOAM.defaultBlockState();
             if (p < 0.85) return Blocks.PODZOL.defaultBlockState();
-            return Blocks.ROOTED_DIRT.defaultBlockState();
+            return ModBlocks.ROOTED_LOAM.defaultBlockState();
         }
         // Coherent reddish pockets rather than checkerboard red sand.
         double sandy = noise(x / 11.0, z / 11.0, 600);
@@ -135,8 +135,8 @@ public record KarstAnimalTrailFeature() implements Feature {
         if (sandy > 0.26 && p < 0.58) {
             return Blocks.RED_SAND.defaultBlockState();
         }
-        if (p < 0.72) return Blocks.COARSE_DIRT.defaultBlockState();
-        if (p < 0.85) return Blocks.ROOTED_DIRT.defaultBlockState();
+        if (p < 0.72) return ModBlocks.COARSE_LOAM.defaultBlockState();
+        if (p < 0.85) return ModBlocks.ROOTED_LOAM.defaultBlockState();
         if (p < 0.94) return ModBlocks.RUBBLED_LIMESTONE.defaultBlockState();
         return Blocks.RED_SAND.defaultBlockState();
     }

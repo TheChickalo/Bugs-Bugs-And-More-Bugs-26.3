@@ -9,6 +9,8 @@ public final class ElsewhereGround {
         return state.is(vanilla)
             || (vanilla == Blocks.GRASS_BLOCK && state.is(ModBlocks.GRASSY_LOAM))
             || (vanilla == Blocks.DIRT && state.is(ModBlocks.LOAM))
+            || (vanilla == Blocks.COARSE_DIRT && state.is(ModBlocks.COARSE_LOAM))
+            || (vanilla == Blocks.ROOTED_DIRT && state.is(ModBlocks.ROOTED_LOAM))
             || (vanilla == Blocks.STONE && state.is(ModBlocks.RHYOLITE));
     }
 }

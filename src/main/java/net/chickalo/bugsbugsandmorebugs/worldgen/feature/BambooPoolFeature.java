@@ -62,7 +62,7 @@ public record BambooPoolFeature() implements Feature {
 
     private static boolean isNaturalBank(BlockState b){
         return b.is(Blocks.GRASS_BLOCK)||b.is(Blocks.DIRT)
-                ||b.is(Blocks.COARSE_DIRT)||b.is(Blocks.ROOTED_DIRT)
+                ||(b.is(Blocks.COARSE_DIRT) || b.is(ModBlocks.COARSE_LOAM))||(b.is(Blocks.ROOTED_DIRT) || b.is(ModBlocks.ROOTED_LOAM))
                 ||b.is(Blocks.MUD)||b.is(Blocks.PODZOL)
                 ||b.is(Blocks.GRAVEL)||b.is(ModBlocks.LOAM)
                 ||b.is(ModBlocks.GRASSY_LOAM);
