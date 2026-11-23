@@ -47,7 +47,27 @@ assert len(ocean)>=10, "Missing broad open-ocean climate coverage"
 assert any(p["continentalness"]==[-1.25,-0.26] and p["weirdness"]==[-1,1] for p in ocean), "Unrepresented deep ocean"
 assert len(river)>=19
 assert any(p["continentalness"]==[-0.10,0.52] and p["weirdness"]==[-0.073,0.073] for p in river)
-assert all(any(p["depth"]==[-2.1,-0.9] for p in entries) for entries in sky.values())
+assert all(any(p["depth"]==[-2,-0.9] for p in entries) for entries in sky.values())
+
+# Minecraft 26.3 Climate.Parameter.CODEC rejects numbers outside [-2, 2].
+# A bad biome entry can report the misleading "No key preset" error.
+for index, row in enumerate(biomes):
+    parameters = row["parameters"]
+    for field in ("temperature", "humidity", "continentalness", "erosion", "depth", "weirdness"):
+        raw = parameters[field]
+        values = raw if isinstance(raw, list) else [raw]
+        assert len(values) in (1, 2), (index, row["biome"], field, raw)
+        assert all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in values), (index, row["biome"], field, raw)
+        assert all(-2.0 <= v <= 2.0 for v in values), (
+            f"Invalid 26.3 climate parameter at biome #{index} {row['biome']}: {field}={raw}. "
+            "Allowed range is [-2.0, 2.0]."
+        )
+        if len(values) == 2:
+            assert values[0] <= values[1], (index, row["biome"], field, raw)
+    offset = parameters["offset"]
+    assert isinstance(offset, (int, float)) and not isinstance(offset, bool) and 0.0 <= offset <= 1.0, (
+        index, row["biome"], "offset", offset
+    )
 
 # No sky biome at ordinary surface depth; ensure all four actual biome names
 # appear with ocean-facing continentalness and share the vertical density band.
