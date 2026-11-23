@@ -13,7 +13,8 @@ public final class ModBiomeFamilies {
 
     /** Actual biome family registration, including all 15 /locate-able IDs. */
     public static boolean wisteria(Holder<Biome> biome) {
-        return biome.is(ModBiomes.WISTERIA_VEILWOOD)
+        return biome.is(ModBiomes.MISTFALL_GARDENS)
+                || biome.is(ModBiomes.WISTERIA_VEILWOOD)
                 || biome.is(ModBiomes.VIOLET_CURTAINS)
                 || biome.is(ModBiomes.TANGLED_ARBORS)
                 || biome.is(ModBiomes.PETAL_GLADES);
@@ -27,7 +28,8 @@ public final class ModBiomeFamilies {
     }
 
     public static boolean cedar(Holder<Biome> biome) {
-        return biome.is(ModBiomes.ANCIENT_CEDAR_RAINFOREST)
+        return biome.is(ModBiomes.CLOUDCEDAR_FOREST)
+                || biome.is(ModBiomes.ANCIENT_CEDAR_RAINFOREST)
                 || biome.is(ModBiomes.ELDER_STANDS)
                 || biome.is(ModBiomes.NURSE_LOG_HOLLOWS)
                 || biome.is(ModBiomes.RAINWASHED_GULLIES);

@@ -15,6 +15,11 @@ public class ModBiomes {
     public static final ResourceKey<Biome> BAMBOO_LOWLANDS = registerBiomeKey("bamboo_lowlands");
     public static final ResourceKey<Biome> GRASSY_PLAINS = registerBiomeKey("grassy_plains");
     public static final ResourceKey<Biome> OCEAN = registerBiomeKey("ocean");
+    // Floating archipelagos: independent, vertically placed sky biomes.
+    public static final ResourceKey<Biome> CLOUDCEDAR_FOREST = registerBiomeKey("cloudcedar_forest");
+    public static final ResourceKey<Biome> WINDCARVED_CRAGS = registerBiomeKey("windcarved_crags");
+    public static final ResourceKey<Biome> MISTFALL_GARDENS = registerBiomeKey("mistfall_gardens");
+    public static final ResourceKey<Biome> VERMILION_ISLES = registerBiomeKey("vermilion_isles");
     public static final ResourceKey<Biome> RIVER = registerBiomeKey("river");
     public static final ResourceKey<Biome> ESTUARY = registerBiomeKey("estuary");
 
@@ -118,6 +123,10 @@ public class ModBiomes {
         register(context, BAMBOO_LOWLANDS, ModOverworldBiomes.bambooLowlands(placedFeatures, carvers));
         register(context, GRASSY_PLAINS, ModOverworldBiomes.grassyPlains(placedFeatures, carvers));
         register(context, OCEAN, ModOverworldBiomes.ocean(placedFeatures, carvers));
+        register(context, CLOUDCEDAR_FOREST, ModSkyBiomes.cloudcedarForest(placedFeatures, carvers));
+        register(context, WINDCARVED_CRAGS, ModSkyBiomes.windcarvedCrags(placedFeatures, carvers));
+        register(context, MISTFALL_GARDENS, ModSkyBiomes.mistfallGardens(placedFeatures, carvers));
+        register(context, VERMILION_ISLES, ModSkyBiomes.vermilionIsles(placedFeatures, carvers));
         register(context, RIVER, ModOverworldBiomes.river(placedFeatures, carvers));
         register(context, ESTUARY, ModOverworldBiomes.estuary(placedFeatures, carvers));
         register(context, UNDERHANG, ModOverworldBiomes.underhang(placedFeatures, carvers));

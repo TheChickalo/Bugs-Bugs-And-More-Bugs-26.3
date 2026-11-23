@@ -233,6 +233,8 @@ jobs:
           PY
       - name: Check forest survival, stone palette and Willow distribution
         run: python3 scripts/check_forest_fixes.py
+      - name: Validate floating-archipelago wiring
+        run: python3 scripts/check_sky_islands.py
       - name: Check biome feature-order DAG
         run: python3 scripts/check_biome_feature_order.py
       - name: Validate biome-only alpha contract

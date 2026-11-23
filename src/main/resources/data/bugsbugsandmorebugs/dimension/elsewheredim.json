@@ -3628,6 +3628,54 @@
             "weirdness": 0.17,
             "offset": 0
           }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:cloudcedar_forest",
+          "parameters": {
+            "temperature": -0.18,
+            "humidity": 0.42,
+            "continentalness": -0.61,
+            "erosion": 0.05,
+            "depth": -1.85,
+            "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:windcarved_crags",
+          "parameters": {
+            "temperature": -0.42,
+            "humidity": -0.4,
+            "continentalness": -0.62,
+            "erosion": -0.29,
+            "depth": -1.85,
+            "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:mistfall_gardens",
+          "parameters": {
+            "temperature": 0.52,
+            "humidity": 0.48,
+            "continentalness": -0.61,
+            "erosion": 0.25,
+            "depth": -1.85,
+            "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:vermilion_isles",
+          "parameters": {
+            "temperature": 0.27,
+            "humidity": -0.17,
+            "continentalness": -0.6,
+            "erosion": 0.05,
+            "depth": -1.85,
+            "weirdness": 0,
+            "offset": 0
+          }
         }
       ]
     },
