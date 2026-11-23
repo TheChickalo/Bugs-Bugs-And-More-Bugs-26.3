@@ -14,7 +14,17 @@ sky={"bugsbugsandmorebugs:"+name for name in ("cloudcedar_forest","windcarved_cr
 assert sky <= names, "Missing sky multi-noise entries"
 router=settings["noise_router"]
 assert router["continents"]=="bugsbugsandmorebugs:elsewhere_biome_continents"
-assert router["depth"]["type"]=="minecraft:lerp"
+depth_router=router["depth"]
+assert depth_router["type"]=="minecraft:range_choice", "Biome selection must follow actual solid sky density"
+assert depth_router["input"]=="bugsbugsandmorebugs:sky_island_density"
+assert depth_router["min_inclusive"]<=0 and depth_router["min_inclusive"]>=-0.05
+assert depth_router["when_in_range"]==-1.65
+assert depth_router["when_out_of_range"]["type"]=="minecraft:clamp"
+assert depth_router["when_out_of_range"]["min"]==0, "Normal elevated land must never imitate sky depth"
+assert depth_router["when_out_of_range"]["max"]==2, "Underhang remains available below the Sundering"
+labels={row["label"] for row in settings["debug_functions"]}
+for wanted in ("Sky mask","Sky solid density","Elsewhere climate depth","Unadjusted continents","Biome continents"):
+    assert wanted in labels, f"Missing runtime density diagnostic {wanted}"
 root=router["final_density"]
 assert root["type"]=="minecraft:range_choice"
 inner=root["when_in_range"]
@@ -55,6 +65,12 @@ def evaluate(node, c, surface, secondary, y):
             return c
         if node == "bugsbugsandmorebugs:sky_island_mask":
             return evaluate(mask, c, surface, secondary, y)
+        if node == "bugsbugsandmorebugs:sky_island_density":
+            return evaluate(density, c, surface, secondary, y)
+        if node == "bugsbugsandmorebugs:elsewhere_large_depth":
+            # Synthetic elevated-land worst case: the original baseline could
+            # be strongly negative even outside the actual island mask.
+            return -1.25
         raise AssertionError(f"Unexpected reference in sky test: {node}")
     typ = node["type"].removeprefix("minecraft:")
     def ev(k):
@@ -87,9 +103,9 @@ def evaluate(node, c, surface, secondary, y):
         return ev("first")*(1-a)+ev("second")*a
     raise AssertionError(f"Unexpected density type in sky check: {typ}")
 
-sky_at_altitude=router["depth"]["second"]
-assert sky_at_altitude["type"]=="minecraft:mul", "Sky depth must be gated on actual mask"
-assert '"minecraft:range_choice"' in json.dumps(sky_at_altitude), "No positive island-core threshold"
+sky_at_altitude=router["depth"]
+assert sky_at_altitude["type"]=="minecraft:range_choice"
+assert sky_at_altitude["input"]=="bugsbugsandmorebugs:sky_island_density"
 for c,s1,s2,y,solid,sky_biome in (
     (-0.40,0.15,0.08,200,True,True),
     (-0.30,0.15,0.08,200,True,True),
@@ -113,5 +129,17 @@ transect=[
     for t in range(256)
 ]
 assert 15 < sum(transect) < 200, f"Island mask is barren or a solid sky carpet: {sum(transect)}/256"
+
+# Regression for the supplied screenshots: at X~275/Z~-81, Y100 and
+# Y108 both reported different biomes, one of them a sky biome despite solid
+# beach terrain. At these heights there must never be negative sky-depth.
+for y in (60, 100, 108, 125, 140, 300, 360):
+    actual=evaluate(sky_at_altitude, -0.4, .4, .4, y)
+    assert actual>=0, (y, actual, "sky biome depth leaking outside the island layer")
+# Even if vanilla mountain depth is -1.25, the non-island climate must
+# remain >=0; underhang depth=2 remains possible at y=-80.
+assert evaluate(sky_at_altitude, .45, .15, .08, 100)==0
+assert evaluate(sky_at_altitude, .45, .15, .08, -80)==2
+
 
 print("Static sky island biome + density wiring and mock-noise terrain tests passed (gameplay still unverified)")

@@ -25,7 +25,11 @@ assert router["erosion"] == "minecraft:overworld_large_biomes/erosion", "Terrain
 assert router["temperature"] == "minecraft:overworld/temperature", "Preserve local forest temperature scale"
 assert router["vegetation"] == "minecraft:overworld/vegetation", "Preserve local forest moisture mosaics"
 assert router["ridges"] == "minecraft:overworld/ridges", "River and climate ridge signals must match"
-assert router["depth"]["first"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
+assert router["depth"]["type"]=="minecraft:range_choice"
+assert router["depth"]["input"] == NS+"sky_island_density", "Climate-depth signal must be gated by physical island density"
+under=router["depth"]["when_out_of_range"]
+assert under["type"]=="minecraft:clamp" and under["min"]==0 and under["max"]==2
+assert under["input"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
 assert settings["aquifers"]["surface_level"]["left"] == "minecraft:overworld_large_biomes/preliminary_surface_level"
 
 largeDepth = json.loads((WORLD / "density_function/elsewhere_large_depth.json").read_text())
