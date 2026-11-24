@@ -63,7 +63,7 @@ public final class ModSkyBiomes {
         generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.AMPHIBOLITE_DEPOSIT_PLACED_KEY);
         generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, ModPlacedFeatures.LAVA_CLEANUP_PLACED_KEY);
         return new Biome.BiomeBuilder()
-                .hasPrecipitation(true).temperature(temperature).downfall(downfall)
+                .hasPrecipitation(false).temperature(temperature).downfall(0.0F)
                 .specialEffects(new BiomeSpecialEffects.Builder()
                         .waterColor(0x558F99)
                         .grassColorOverride(grass)

@@ -15,12 +15,22 @@ settings = json.loads((WORLD / "noise_settings/elsewhere.json").read_text())
 biomes = dimension["generator"]["biome_source"]["biomes"]
 router = settings["noise_router"]
 
-assert router["continents"] == NS+"elsewhere_biome_continents", "Coastline biome continentalness must use focused ocean signal"
+climateRouter=router["continents"]
+assert climateRouter["type"]=="minecraft:lerp", "River biome selection must use its actual terrain corridor"
+assert climateRouter["first"]==NS+"elsewhere_biome_continents"
+assert climateRouter["second"]==0.28
+assert climateRouter["alpha"]["type"]=="minecraft:mul"
+assert climateRouter["alpha"]["left"]==NS+"river_corridor_region"
+river_fade=climateRouter["alpha"]["right"]
+assert river_fade["type"]=="minecraft:gradient" and river_fade["axis"]=="y"
+assert river_fade["from_coordinate"]==62 and river_fade["to_coordinate"]==83
 climate = json.loads((WORLD / "density_function/elsewhere_biome_continents.json").read_text())
 assert climate["type"]=="minecraft:lerp" and climate["first"]=="minecraft:overworld_large_biomes/continents"
 assert climate["alpha"]["type"]=="minecraft:clamp" and climate["second"]["type"]=="minecraft:clamp"
 assert climate["second"]["min"] >= -1.0
-assert climate["second"]["max"] <= -0.4
+assert climate["second"]["max"] <= -0.3
+assert climate["second"]["min"]==-0.92
+assert climate["alpha"]["input"]["left"]["left"]==-0.20
 assert router["erosion"] == "minecraft:overworld_large_biomes/erosion", "Terrain and biome erosion disagree"
 assert router["temperature"] == "minecraft:overworld/temperature", "Preserve local forest temperature scale"
 assert router["vegetation"] == "minecraft:overworld/vegetation", "Preserve local forest moisture mosaics"
@@ -98,8 +108,8 @@ assert density["left"]["left"]["right"] == -0.50
 # Synthetic tests of MultiNoise nearest-climate matching. Only the biome
 # continentalness signal changes; check deep/shallow seas versus inland ground.
 def ocean_climate_continentalness(c):
-    alpha=max(0,min(1,(-0.10-c)*20))
-    warped=max(-0.95,min(-0.50,c*1.75-0.30))
+    alpha=max(0,min(1,(-0.20-c)*11))
+    warped=max(-0.92,min(-0.30,c*1.28-0.09))
     return c*(1-alpha)+warped*alpha
 def climate_distance(given,selected):
     squared=0
@@ -149,4 +159,19 @@ for temp,humid,expected in ((-.4,.4,"cloudcedar_forest"),(-.4,-.4,"windcarved_cr
     assert actual==NS+expected, ("Sky biome not selectable inside actual island",expected,actual)
 
 
+
+# River climate must use the SAME region controlling the carved river, not a
+# global climate rectangle. This checks a typical river climate with a fully
+# active river corridor at sea level.
+rivertest={"temperature":.25,"humidity":.42,"continentalness":0.28,
+           "erosion":.14,"depth":0,"weirdness":0,"offset":0}
+river_selected=min(biomes,key=lambda row:climate_distance(row["parameters"],rivertest))["biome"]
+assert river_selected==NS+"river", ("River carve still wins Ocean or land biome",river_selected)
+
+# Ocean climate should not be artificially forced deep into the maritime
+# anchors for near-shore land noise; farther offshore is still ocean-facing.
+assert ocean_climate_continentalness(-.10)==-.10
+assert ocean_climate_continentalness(-.17)==-.17
+assert -.40 < ocean_climate_continentalness(-.25) < -.25
+assert ocean_climate_continentalness(-.60) < -.65
 print("Elsewhere ocean, river and sky climate static checks passed.")

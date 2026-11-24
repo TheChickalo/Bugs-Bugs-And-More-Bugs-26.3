@@ -13,7 +13,9 @@ names={e["biome"] for e in dim["generator"]["biome_source"]["biomes"]}
 sky={"bugsbugsandmorebugs:"+name for name in ("cloudcedar_forest","windcarved_crags","mistfall_gardens","vermilion_isles")}
 assert sky <= names, "Missing sky multi-noise entries"
 router=settings["noise_router"]
-assert router["continents"]=="bugsbugsandmorebugs:elsewhere_biome_continents"
+assert router["continents"]["type"]=="minecraft:lerp"
+assert router["continents"]["first"]=="bugsbugsandmorebugs:elsewhere_biome_continents"
+assert router["continents"]["second"]==0.28
 depth_router=router["depth"]
 assert depth_router["type"]=="minecraft:range_choice", "Biome selection must follow actual solid sky density"
 assert depth_router["input"]=="bugsbugsandmorebugs:sky_island_density"
@@ -43,12 +45,37 @@ assert density["left"]["left"]["right"]==-0.50
 # must produce solid sky terrain without modifying ordinary sea-level ground.
 def reference_density(mask_strength, y):
     horizontal=2.45*mask_strength-0.50
-    lower=-1.15+(min(192,max(149,y))-149)*(1.2+1.15)/(192-149)
+    # Underside descends toward island center; weak-mask rims taper upward.
+    lower=-1.9+(min(240,max(145,y))-145)*(1.25+1.9)/(240-145)
+    lower+=2.4*(mask_strength-0.5)
     upper=1.4-(min(286,max(218,y))-218)*(1.4+1.35)/(286-218)
     return min(horizontal, lower, upper)
 assert reference_density(0.55, 200)>0, "Moderate sky mask no longer creates blocks"
 assert reference_density(0.0, 200)<0, "Air between islands must remain empty"
 assert reference_density(1.0, 320)<0, "Islands must terminate above the sky band"
+assert reference_density(1.0,175)>0, "Island core must have a deep rocky underside"
+assert reference_density(0.35,175)<0, "Island rims must rise instead of forming a flat bottom"
+assert reference_density(0.35,232)>0, "Island rims must still join the upper landmass"
+under=density["right"]["left"]
+assert under["type"]=="minecraft:add", "Expected a mask-shaped underside rather than a fixed lower Y plane"
+assert '"bugsbugsandmorebugs:sky_island_mask"' in json.dumps(under)
+assert '"minecraft:surface_secondary"' in json.dumps(under)
+sky_biome=(
+    __import__("pathlib").Path(__file__).resolve().parents[1]
+    /"src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/biome/ModSkyBiomes.java"
+).read_text()
+assert ".hasPrecipitation(false)" in sky_biome, "Snow and rain must be disabled in all four sky biomes"
+assert ".hasPrecipitation(true)" not in sky_biome
+surface=rules["sequence"]
+ocean=[r for r in surface if r.get("if_true",{}).get("biome_is")=="bugsbugsandmorebugs:ocean"]
+assert len(ocean)==1
+ocean_layer=ocean[0]["then_run"]
+assert ocean_layer["type"]=="minecraft:condition"
+assert ocean_layer["if_true"]["type"]=="minecraft:not"
+assert ocean_layer["if_true"]["invert"]["type"]=="minecraft:y_above"
+assert ocean_layer["if_true"]["invert"]["anchor"]["absolute"]==68, (
+    "Ocean seabed materials must not replace mountain surfaces above sea level"
+)
 assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask), "Large ocean gate missing"
 assert '"bugsbugsandmorebugs:sky_island_mask"' in json.dumps(density)
 found={entry["if_true"].get("biome_is") for entry in rules["sequence"] if isinstance(entry.get("if_true"),dict)}

@@ -163,6 +163,26 @@
     },
     {
       "label": "Biome continents",
+      "function": {
+        "type": "minecraft:lerp",
+        "alpha": {
+          "type": "minecraft:mul",
+          "left": "bugsbugsandmorebugs:river_corridor_region",
+          "right": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": 62,
+            "from_value": 1,
+            "to_coordinate": 83,
+            "to_value": 0
+          }
+        },
+        "first": "bugsbugsandmorebugs:elsewhere_biome_continents",
+        "second": 0.28
+      }
+    },
+    {
+      "label": "Coastal continents (before rivers)",
       "function": "bugsbugsandmorebugs:elsewhere_biome_continents"
     }
   ],
@@ -177,7 +197,23 @@
   },
   "noise_router": {
     "chunk_surface_level": "minecraft:overworld_large_biomes/chunk_surface_level",
-    "continents": "bugsbugsandmorebugs:elsewhere_biome_continents",
+    "continents": {
+      "type": "minecraft:lerp",
+      "alpha": {
+        "type": "minecraft:mul",
+        "left": "bugsbugsandmorebugs:river_corridor_region",
+        "right": {
+          "type": "minecraft:gradient",
+          "axis": "y",
+          "from_coordinate": 62,
+          "from_value": 1,
+          "to_coordinate": 83,
+          "to_value": 0
+        }
+      },
+      "first": "bugsbugsandmorebugs:elsewhere_biome_continents",
+      "second": 0.28
+    },
     "depth": {
       "type": "minecraft:range_choice",
       "input": "bugsbugsandmorebugs:sky_island_density",
