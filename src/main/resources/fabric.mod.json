@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "bugsbugsandmorebugs",
-  "version": "${version}",
+  "version": "0.1.0-alpha.1+26.3",
   "name": "Bugs Bugs and More Bugs!",
   "description": "This is a mod to add cool new bugs to Minecraft. And, by extension, some okay items, I guess.",
   "authors": [

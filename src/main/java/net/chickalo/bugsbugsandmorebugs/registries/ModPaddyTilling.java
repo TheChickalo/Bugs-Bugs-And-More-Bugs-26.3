@@ -11,11 +11,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.material.Fluids;
 
-/**
- * Vanilla hoe tilling requires air above the soil. Rice paddies instead
- * require one water source directly above tilled loam, then air above that.
- * This narrowly adds the underwater case without changing ordinary tilling.
- */
 public final class ModPaddyTilling {
     private ModPaddyTilling() {}
 

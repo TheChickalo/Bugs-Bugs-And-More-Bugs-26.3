@@ -5,7 +5,6 @@
   },
   "pools": [
     {
-      "rolls": 1,
       "condition": {
         "type": "minecraft:match_block",
         "blocks": "bugsbugsandmorebugs:rice_crop",
@@ -18,57 +17,58 @@
           "type": "minecraft:item",
           "name": "bugsbugsandmorebugs:rice_seeds"
         }
-      ]
+      ],
+      "rolls": 1
     },
     {
-      "rolls": 1,
       "condition": {
         "type": "minecraft:match_block",
         "blocks": "bugsbugsandmorebugs:rice_crop",
         "state": {
-          "part": "0",
-          "age": "6"
+          "age": "6",
+          "part": "0"
         }
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bugsbugsandmorebugs:rice",
           "modifier": {
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "min": 2,
-              "max": 4
+              "max": 4,
+              "min": 2
             }
-          }
+          },
+          "name": "bugsbugsandmorebugs:rice"
         }
-      ]
+      ],
+      "rolls": 1
     },
     {
-      "rolls": 1,
       "condition": {
         "type": "minecraft:match_block",
         "blocks": "bugsbugsandmorebugs:rice_crop",
         "state": {
-          "part": "0",
-          "age": "6"
+          "age": "6",
+          "part": "0"
         }
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "bugsbugsandmorebugs:rice_seeds",
           "modifier": {
             "type": "minecraft:set_count",
             "count": {
               "type": "minecraft:uniform",
-              "min": 0,
-              "max": 2
+              "max": 2,
+              "min": 0
             }
-          }
+          },
+          "name": "bugsbugsandmorebugs:rice_seeds"
         }
-      ]
+      ],
+      "rolls": 1
     }
   ]
 }
