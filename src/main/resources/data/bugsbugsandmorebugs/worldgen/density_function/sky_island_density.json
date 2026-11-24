@@ -25,12 +25,37 @@
   "right": {
     "type": "minecraft:min",
     "left": {
-      "type": "minecraft:gradient",
-      "axis": "y",
-      "from_coordinate": 149,
-      "from_value": -1.15,
-      "to_coordinate": 192,
-      "to_value": 1.2
+      "type": "minecraft:add",
+      "left": {
+        "type": "minecraft:add",
+        "left": {
+          "type": "minecraft:gradient",
+          "axis": "y",
+          "from_coordinate": 145,
+          "from_value": -1.9,
+          "to_coordinate": 240,
+          "to_value": 1.25
+        },
+        "right": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": "bugsbugsandmorebugs:sky_island_mask",
+            "right": 0.5
+          },
+          "right": 2.4
+        }
+      },
+      "right": {
+        "type": "minecraft:mul",
+        "left": {
+          "type": "minecraft:noise",
+          "noise": "minecraft:surface_secondary",
+          "xz_scale": 0.013,
+          "y_scale": 0
+        },
+        "right": 0.3
+      }
     },
     "right": {
       "type": "minecraft:gradient",
