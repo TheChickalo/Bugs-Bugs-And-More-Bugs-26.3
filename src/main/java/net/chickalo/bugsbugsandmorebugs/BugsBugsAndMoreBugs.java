@@ -13,6 +13,7 @@ import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModFoliagePlacerTypes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTrunkPlacerTypes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeDecoratorTypes;
 import net.chickalo.bugsbugsandmorebugs.worldgen.feature.ModFeatureTypes;
+import net.chickalo.bugsbugsandmorebugs.worldgen.density.ModDensityFunctionTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import org.slf4j.Logger;
@@ -41,6 +42,7 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
         ModFoliagePlacerTypes.registerModFoliagePlacerTypes();
         ModTreeDecoratorTypes.register();
         ModFeatureTypes.register();
+        ModDensityFunctionTypes.register();
         BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(Biomes.RIVER),
                 GenerationStep.Decoration.VEGETAL_DECORATION,
