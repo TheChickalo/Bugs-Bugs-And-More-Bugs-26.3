@@ -38,8 +38,29 @@ assert router["ridges"] == "minecraft:overworld/ridges", "River and climate ridg
 assert router["depth"]["type"]=="minecraft:range_choice"
 assert router["depth"]["input"] == NS+"sky_island_density", "Climate-depth signal must be gated by physical island density"
 under=router["depth"]["when_out_of_range"]
-assert under["type"]=="minecraft:clamp" and under["min"]==0 and under["max"]==2
-assert under["input"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
+assert under["type"]=="minecraft:lerp" and under["second"]==0.8
+assert under["first"]["type"]=="minecraft:clamp" and under["first"]["min"]==0 and under["first"]["max"]==2
+assert under["first"]["input"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
+pulse=under["alpha"]
+assert pulse["type"]=="minecraft:mul" and pulse["left"]["type"]=="minecraft:clamp"
+assert pulse["left"]["input"]["left"]["left"] == NS+"river_corridor_region"
+assert pulse["right"]["left"]["from_coordinate"]==43 and pulse["right"]["left"]["to_coordinate"]==58
+assert pulse["right"]["right"]["from_coordinate"]==63 and pulse["right"]["right"]["to_coordinate"]==75
+union=router["final_density"]["when_in_range"]
+assert union["type"]=="minecraft:max" and union["right"]==NS+"sky_island_density"
+assert union["left"]["type"]=="minecraft:min"
+cap=union["left"]["right"]
+assert cap["type"]=="minecraft:add"
+assert cap["left"]=={"type":"minecraft:gradient","axis":"y","from_coordinate":51,"from_value":2.0,"to_coordinate":68,"to_value":-2.5}
+assert cap["right"]["left"]["input"]["left"]["left"]=="minecraft:overworld_large_biomes/continents"
+def floor_cap(continents,y):
+    gradient=2.0+(max(51,min(68,y))-51)*(-4.5/17)
+    release=max(0,min(1,(continents+0.25)*9.1))
+    return gradient+8.0*release
+assert floor_cap(-0.65,85)<0, "Open ocean must be clear air above sea"
+assert floor_cap(-0.65,55)>0, "Deep ocean must have a rocky seabed"
+assert floor_cap(0.15,85)>0, "Inland mountains must not be clipped"
+
 assert settings["aquifers"]["surface_level"]["left"] == "minecraft:overworld_large_biomes/preliminary_surface_level"
 
 largeDepth = json.loads((WORLD / "density_function/elsewhere_large_depth.json").read_text())
@@ -62,7 +83,7 @@ ocean = [p["parameters"] for p in biomes if p["biome"]==NS+"ocean"]
 river = [p["parameters"] for p in biomes if p["biome"]==NS+"river"]
 skyNames = ("cloudcedar_forest", "windcarved_crags", "mistfall_gardens", "vermilion_isles")
 sky = {name: [p["parameters"] for p in biomes if p["biome"]==NS+name] for name in skyNames}
-assert len(ocean)>=25, "Missing targeted deep-ocean climate coverage"
+assert len(ocean)==23, "Coastal ocean anchors must be land biomes; deep ocean anchors remain"
 assert all(not (isinstance(p["temperature"],list) and p["temperature"]==[-1,1]) for p in ocean), (
     "Ocean wildcard has returned: can swallow terrestrial biomes"
 )
@@ -72,7 +93,7 @@ assert all(not (isinstance(p["temperature"],list) and p["temperature"]==[-1,1]) 
 deep = [p for p in ocean if p["continentalness"]==-0.67]
 assert len(deep)==18, "Nine temperature/moisture climate cells need two erosion variants"
 assert all(p["weirdness"]==0 for p in river), "River corridors should track ridges=0, not wide areas"
-assert len(river)>=18
+assert len(river)==18 and all(p["depth"]==0.8 for p in river), "River target must require carved channel depth signal"
 assert all(any(p["depth"]==[-2,-1.5] for p in entries) for entries in sky.values())
 
 # Minecraft 26.3 Climate.Parameter.CODEC rejects numbers outside [-2, 2].
@@ -122,7 +143,7 @@ def climate_distance(given,selected):
         delta=lo-val if val<lo else val-hi if val>hi else 0
         squared+=delta*delta
     return squared
-for c,expected_ocean in [(-0.65,True),(-0.38,True),(-0.17,True),(0.30,False)]:
+for c,expected_ocean in [(-0.65,True),(-0.38,True),(-0.17,False),(0.30,False)]:
     point={"temperature":0.10,"humidity":0.18,"continentalness":ocean_climate_continentalness(c),
            "erosion":0.12,"depth":0,"weirdness":0.23,"offset":0}
     chosen=min(biomes,key=lambda row:climate_distance(row["parameters"],point))["biome"]
@@ -166,9 +187,17 @@ for temp,humid,expected in ((-.4,.4,"cloudcedar_forest"),(-.4,-.4,"windcarved_cr
 # global climate rectangle. This checks a typical river climate with a fully
 # active river corridor at sea level.
 rivertest={"temperature":.25,"humidity":.42,"continentalness":0.28,
-           "erosion":.14,"depth":0,"weirdness":0,"offset":0}
+           "erosion":.14,"depth":0.8,"weirdness":0,"offset":0}
 river_selected=min(biomes,key=lambda row:climate_distance(row["parameters"],rivertest))["biome"]
 assert river_selected==NS+"river", ("River carve still wins Ocean or land biome",river_selected)
+rivertest["depth"]=0
+assert min(biomes,key=lambda row:climate_distance(row["parameters"],rivertest))["biome"]!=NS+"river", (
+    "River biome appears without carved corridor's depth pulse"
+)
+assert sum(p["biome"]==NS+"ginkgo_forest" for p in biomes)==4, "Base Ginkgo Forest coverage re-expanded"
+assert sum(p["biome"]==NS+"ocean" and p["parameters"]["continentalness"]==-0.16 for p in biomes)==0, (
+    "Ocean can no longer own raised coastal headlands"
+)
 
 # Ocean climate should not be artificially forced deep into the maritime
 # anchors for near-shore land noise; farther offshore is still ocean-facing.
