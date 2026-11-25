@@ -102,6 +102,8 @@ public class ModOverworldBiomes {
                 );
         biomeBuilder.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                ModPlacedFeatures.ALPINE_SNOW_PLACED_KEY);
         // Amphibolite is now a separate lower stratum; do not inject it into schist.
 
 
@@ -239,6 +241,8 @@ public class ModOverworldBiomes {
         var generation = new BiomeGenerationSettings.Builder(features, carvers);
         generation.addFeature(GenerationStep.Decoration.LAKES,
                 ModPlacedFeatures.MOUNTAIN_RANGE_PLACED_KEY);
+        generation.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
+                ModPlacedFeatures.ALPINE_SNOW_PLACED_KEY);
         // Forest below the volcanic treeline: mixed ages of Hinoki.
         generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION,
                 ModPlacedFeatures.HINOKI_SMALL_PLACED_KEY);

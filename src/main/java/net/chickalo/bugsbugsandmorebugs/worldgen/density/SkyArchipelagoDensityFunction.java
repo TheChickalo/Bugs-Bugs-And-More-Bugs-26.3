@@ -29,6 +29,14 @@ public record SkyArchipelagoDensityFunction(String mode) implements DensityFunct
     public static final int MAX_RADIUS = 72;
     public static final int CENTER_JITTER = 12;
     private static final int MIN_RADIUS = 18;
+    // A deterministic 3x3-cell archipelago: one seed island plus an
+    // outward chain with strictly declining continuation probabilities.
+    private static final int CLUSTER_CELLS = 3;
+    private static final int[] RING_X = {1, 2, 2, 2, 1, 0, 0, 0};
+    private static final int[] RING_Z = {0, 0, 1, 2, 2, 2, 1, 0};
+    private static final float[] NEXT_ISLAND_CHANCE = {
+            0.96F, 0.88F, 0.75F, 0.60F, 0.42F, 0.28F, 0.14F, 0.07F
+    };
     private static final long SALT_X = 0x9E3779B97F4A7C15L;
     private static final long SALT_Z = 0xC2B2AE3D27D4EB4FL;
     private static final Identifier SEED_ID = Identifier.fromNamespaceAndPath(
@@ -88,10 +96,10 @@ public record SkyArchipelagoDensityFunction(String mode) implements DensityFunct
                     continue;
                 }
 
-                long h = mix64(worldSeed ^ (cxCell * SALT_X) ^ (czCell * SALT_Z));
-                if (unit(h ^ 0x51FA9C6EAA5A9ED5L) > 0.84F) {
-                    continue; // Some cells stay open sky and ocean.
+                if (!clusterContains(worldSeed, cxCell, czCell)) {
+                    continue;
                 }
+                long h = mix64(worldSeed ^ (cxCell * SALT_X) ^ (czCell * SALT_Z));
 
                 float cx = baseX + (unit(h ^ 0x4452D97C3A8B55D1L) * 2F - 1F) * CENTER_JITTER;
                 float cz = baseZ + (unit(h ^ 0x7C159E3779B945D1L) * 2F - 1F) * CENTER_JITTER;
@@ -139,6 +147,44 @@ public record SkyArchipelagoDensityFunction(String mode) implements DensityFunct
         }
 
         return Math.max(-3F, Math.min(3F, best));
+    }
+
+    /**
+     * Derive cluster membership from the world seed and macro-cell alone,
+     * never from chunk placement order. The center is seeded first; each
+     * next adjacent cell requires ALL earlier continuation rolls to pass.
+     * Those rolls have decreasing odds, so a cluster naturally tapers off.
+     */
+    private static boolean clusterContains(long worldSeed, int cellX, int cellZ) {
+        int regionX = Math.floorDiv(cellX, CLUSTER_CELLS);
+        int regionZ = Math.floorDiv(cellZ, CLUSTER_CELLS);
+        int localX = Math.floorMod(cellX, CLUSTER_CELLS);
+        int localZ = Math.floorMod(cellZ, CLUSTER_CELLS);
+        long region = mix64(worldSeed ^ ((long)regionX * SALT_X)
+                ^ ((long)regionZ * SALT_Z) ^ 0x4B1D5EEDC14A2B79L);
+
+        // A few macro-regions remain completely empty, breaking up long
+        // chains and leaving ocean sky between neighbouring archipelagos.
+        if (unit(region ^ 0x2CA7F1D3E452B619L) > 0.94F) return false;
+        if (localX == 1 && localZ == 1) return true;
+
+        int ringIndex = -1;
+        for (int i = 0; i < RING_X.length; i++) {
+            if (localX == RING_X[i] && localZ == RING_Z[i]) {
+                ringIndex = i;
+                break;
+            }
+        }
+        if (ringIndex == -1) return false;
+        int start = (int)((region >>> 7) & 7);
+        boolean reverse = ((region >>> 12) & 1L) != 0;
+        int rank = 1 + Math.floorMod(reverse
+                ? start - ringIndex : ringIndex - start, RING_X.length);
+        for (int step = 1; step <= rank; step++) {
+            long roll = region ^ (SALT_X * (step + 13L)) ^ SALT_Z;
+            if (unit(roll) > NEXT_ISLAND_CHANCE[step - 1]) return false;
+        }
+        return true;
     }
 
     private static float unit(long value) {
