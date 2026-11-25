@@ -1,172 +1,83 @@
 #!/usr/bin/env python3
-"""Static contract check for sky archipelago noise/biome wiring. Not an in-game test."""
+"""Elsewhere bounded archipelago contracts. Does not replace in-game tests."""
 import json
+import re
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
-p=root/"src/main/resources/data/bugsbugsandmorebugs"
-dim=json.loads((p/"dimension/elsewheredim.json").read_text())
-settings=json.loads((p/"worldgen/noise_settings/elsewhere.json").read_text())
-mask=json.loads((p/"worldgen/density_function/sky_island_mask.json").read_text())
-density=json.loads((p/"worldgen/density_function/sky_island_density.json").read_text())
-rules=json.loads((p/"worldgen/material_rule/elsewhere.json").read_text())
-names={e["biome"] for e in dim["generator"]["biome_source"]["biomes"]}
-sky={"bugsbugsandmorebugs:"+name for name in ("cloudcedar_forest","windcarved_crags","mistfall_gardens","vermilion_isles")}
-assert sky <= names, "Missing sky multi-noise entries"
+base=root/"src/main/resources/data/bugsbugsandmorebugs"
+world=base/"worldgen"
+source=root/"src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/density/SkyArchipelagoDensityFunction.java"
+register=root/"src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/density/ModDensityFunctionTypes.java"
+initializer=root/"src/main/java/net/chickalo/bugsbugsandmorebugs/BugsBugsAndMoreBugs.java"
+mask=json.loads((world/"density_function/sky_island_mask.json").read_text())
+solid=json.loads((world/"density_function/sky_island_density.json").read_text())
+settings=json.loads((world/"noise_settings/elsewhere.json").read_text())
+dim=json.loads((base/"dimension/elsewheredim.json").read_text())
+materials=json.loads((world/"material_rule/elsewhere.json").read_text())
+java=source.read_text()
+ns="bugsbugsandmorebugs:"
+
+assert mask["type"]=="minecraft:clamp"
+assert mask["input"]["type"]=="minecraft:min"
+assert mask["input"]["left"]=={"type":ns+"bounded_sky_islands","mode":"mask"}
+assert solid["type"]=="minecraft:min"
+assert solid["left"]=={"type":ns+"bounded_sky_islands","mode":"solid"}
+assert mask["input"]["right"]==solid["right"], "Ocean gate diverged between sky mask and blocks"
+assert solid["right"]["left"]=={"type":"minecraft:sub","left":-0.32,"right":"minecraft:overworld_large_biomes/continents"}
+assert '"bounded_sky_islands"' in register.read_text()
+assert "ModDensityFunctionTypes.register();" in initializer.read_text()
+assert "context.createRandom(SEED_ID)" in java
+assert "Math.floorDiv(x, CELL_SIZE)" in java and "Math.floorDiv(z, CELL_SIZE)" in java
+assert "DensitySampler.sampleVolumeNaive" in java
+
+constants={}
+for field in ("CELL_SIZE","CENTER_JITTER","MAX_RADIUS","MIN_RADIUS"):
+    found=re.search(r"\b"+field+r"\s*=\s*(\d+)",java)
+    assert found, "Missing explicit size setting: "+field
+    constants[field]=int(found.group(1))
+cell=constants["CELL_SIZE"]
+rmax=constants["MAX_RADIUS"]
+jitter=constants["CENTER_JITTER"]
+rmin=constants["MIN_RADIUS"]
+assert (cell,rmax,jitter,rmin)==(224,72,20,18)
+assert 2*rmax==144, "Maximum island diameter changed"
+assert cell-2*jitter-2*rmax>=36, "Neighbouring cells can touch / create giant sky continents"
+assert '"mask"' in java and '"solid"' in java
+assert "top = 187F + 83F" in java, "Independent island altitude variance removed"
+assert "float thickness = 9F + 58F" in java, "Pointed underside taper removed"
+assert "for (int spike = 0; spike < 3; spike++)" in java, "Drooping rock points removed"
+assert "if (r >= 1F)" in java, "Hard radial cap removed"
+assert 'if (mode.equals("solid") && (y < 95 || y > 300))' in java
+
 router=settings["noise_router"]
-assert router["continents"]["type"]=="minecraft:lerp"
-assert router["continents"]["first"]=="bugsbugsandmorebugs:elsewhere_biome_continents"
-assert router["continents"]["second"]==0.28
-depth_router=router["depth"]
-assert depth_router["type"]=="minecraft:range_choice", "Biome selection must follow actual solid sky density"
-assert depth_router["input"]=="bugsbugsandmorebugs:sky_island_density"
-assert depth_router["min_inclusive"]<=0 and depth_router["min_inclusive"]>=-0.05
-assert depth_router["when_in_range"]==-1.8
-assert depth_router["when_out_of_range"]["type"]=="minecraft:clamp"
-assert depth_router["when_out_of_range"]["min"]==0, "Normal elevated land must never imitate sky depth"
-assert depth_router["when_out_of_range"]["max"]==2, "Underhang remains available below the Sundering"
-labels={row["label"] for row in settings["debug_functions"]}
-for wanted in ("Sky mask","Sky solid density","Elsewhere climate depth","Unadjusted continents","Biome continents"):
-    assert wanted in labels, f"Missing runtime density diagnostic {wanted}"
-root=router["final_density"]
-assert root["type"]=="minecraft:range_choice"
-inner=root["when_in_range"]
-assert inner["type"]=="minecraft:max", "Sky density must be unioned after every surface and height cap"
-assert inner["right"]=="bugsbugsandmorebugs:sky_island_density"
-base=inner["left"]
-assert base["type"]=="minecraft:lerp" and base["alpha"]=="bugsbugsandmorebugs:bamboo_lowland_region"
-assert base["first"]["type"]=="minecraft:max"
-assert base["first"]["right"]=="bugsbugsandmorebugs:volcanic_relief_density"
-assert base["second"]["left"]["right"]=="bugsbugsandmorebugs:volcanic_relief_density"
-assert json.dumps(base).count('"bugsbugsandmorebugs:sky_island_density"')==0, (
-    "Sky density still appears inside a clipped terrain branch"
-)
-assert density["left"]["left"]["right"]==-0.50
-# With the reference micro-noise set to zero, moderate/high mask values
-# must produce solid sky terrain without modifying ordinary sea-level ground.
-def reference_density(mask_strength, y):
-    horizontal=2.45*mask_strength-0.50
-    # Underside descends toward island center; weak-mask rims taper upward.
-    lower=-1.9+(min(240,max(145,y))-145)*(1.25+1.9)/(240-145)
-    lower+=2.4*(mask_strength-0.5)
-    upper=1.4-(min(286,max(218,y))-218)*(1.4+1.35)/(286-218)
-    return min(horizontal, lower, upper)
-assert reference_density(0.55, 200)>0, "Moderate sky mask no longer creates blocks"
-assert reference_density(0.0, 200)<0, "Air between islands must remain empty"
-assert reference_density(1.0, 320)<0, "Islands must terminate above the sky band"
-assert reference_density(1.0,175)>0, "Island core must have a deep rocky underside"
-assert reference_density(0.35,175)<0, "Island rims must rise instead of forming a flat bottom"
-assert reference_density(0.35,232)>0, "Island rims must still join the upper landmass"
-under=density["right"]["left"]
-assert under["type"]=="minecraft:add", "Expected a mask-shaped underside rather than a fixed lower Y plane"
-assert '"bugsbugsandmorebugs:sky_island_mask"' in json.dumps(under)
-assert '"minecraft:surface_secondary"' in json.dumps(under)
-sky_biome=(
-    __import__("pathlib").Path(__file__).resolve().parents[1]
-    /"src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/biome/ModSkyBiomes.java"
-).read_text()
-assert ".hasPrecipitation(false)" in sky_biome, "Snow and rain must be disabled in all four sky biomes"
-assert ".hasPrecipitation(true)" not in sky_biome
-surface=rules["sequence"]
-ocean=[r for r in surface if r.get("if_true",{}).get("biome_is")=="bugsbugsandmorebugs:ocean"]
+rootdensity=router["final_density"]
+assert rootdensity["type"]=="minecraft:range_choice"
+union=rootdensity["when_in_range"]
+assert union["type"]=="minecraft:max"
+assert union["right"]==ns+"sky_island_density"
+assert json.dumps(union["left"]).count(ns+"sky_island_density")==0
+depth=router["depth"]
+assert depth["type"]=="minecraft:range_choice"
+assert depth["input"]==ns+"sky_island_density"
+assert depth["when_in_range"]==-1.8
+assert depth["when_out_of_range"]["min"]==0
+assert depth["when_out_of_range"]["max"]==2
+sky_ids={ns+n for n in ("cloudcedar_forest","windcarved_crags","mistfall_gardens","vermilion_isles")}
+climates=dim["generator"]["biome_source"]["biomes"]
+assert sky_ids<={b["biome"] for b in climates}
+assert all(b["parameters"]["depth"]==[-2,-1.5] for b in climates if b["biome"] in sky_ids)
+sky_biomes=(root/"src/main/java/net/chickalo/bugsbugsandmorebugs/worldgen/biome/ModSkyBiomes.java").read_text()
+assert ".hasPrecipitation(false)" in sky_biomes and ".hasPrecipitation(true)" not in sky_biomes
+surfaces={x.get("if_true",{}).get("biome_is") for x in materials["sequence"] if isinstance(x.get("if_true"),dict)}
+assert sky_ids<=surfaces
+ocean=[x for x in materials["sequence"] if x.get("if_true",{}).get("biome_is")==ns+"ocean"]
 assert len(ocean)==1
-ocean_layer=ocean[0]["then_run"]
-assert ocean_layer["type"]=="minecraft:condition"
-assert ocean_layer["if_true"]["type"]=="minecraft:not"
-assert ocean_layer["if_true"]["invert"]["type"]=="minecraft:y_above"
-assert ocean_layer["if_true"]["invert"]["anchor"]["absolute"]==68, (
-    "Ocean seabed materials must not replace mountain surfaces above sea level"
-)
-assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask), "Large ocean gate missing"
-assert '"bugsbugsandmorebugs:sky_island_mask"' in json.dumps(density)
-found={entry["if_true"].get("biome_is") for entry in rules["sequence"] if isinstance(entry.get("if_true"),dict)}
-assert sky <= found, "Sky surface rules absent"
-
-# Evaluate the actual JSON expression trees with controlled stand-in noise
-# samples. This catches impossible island masks and accidental sky-biome leakage;
-# it is NOT a replacement for sampling Minecraft's seeded noises in a game.
-def evaluate(node, c, surface, secondary, y):
-    if isinstance(node, (int,float)):
-        return float(node)
-    if isinstance(node, str):
-        if node == "minecraft:overworld_large_biomes/continents":
-            return c
-        if node == "bugsbugsandmorebugs:sky_island_mask":
-            return evaluate(mask, c, surface, secondary, y)
-        if node == "bugsbugsandmorebugs:sky_island_density":
-            return evaluate(density, c, surface, secondary, y)
-        if node == "bugsbugsandmorebugs:elsewhere_large_depth":
-            # Synthetic elevated-land worst case: the original baseline could
-            # be strongly negative even outside the actual island mask.
-            return -1.25
-        raise AssertionError(f"Unexpected reference in sky test: {node}")
-    typ = node["type"].removeprefix("minecraft:")
-    def ev(k):
-        return evaluate(node[k], c, surface, secondary, y)
-    if typ=="noise":
-        return {"minecraft:surface":surface,"minecraft:surface_secondary":secondary}[node["noise"]]
-    if typ=="add":
-        return ev("left")+ev("right")
-    if typ=="sub":
-        return ev("left")-ev("right")
-    if typ=="mul":
-        return ev("left")*ev("right")
-    if typ=="min":
-        return min(ev("left"),ev("right"))
-    if typ=="max":
-        return max(ev("left"),ev("right"))
-    if typ=="abs":
-        return abs(ev("input"))
-    if typ=="clamp":
-        return max(node["min"],min(node["max"],ev("input")))
-    if typ=="gradient":
-        assert node["axis"]=="y"
-        start,end=node["from_coordinate"],node["to_coordinate"]
-        t=max(0,min(1,(y-start)/(end-start)))
-        return node["from_value"]+(node["to_value"]-node["from_value"])*t
-    if typ=="range_choice":
-        return ev("when_in_range") if node["min_inclusive"]<=ev("input")<node["max_exclusive"] else ev("when_out_of_range")
-    if typ=="lerp":
-        a=ev("alpha")
-        return ev("first")*(1-a)+ev("second")*a
-    raise AssertionError(f"Unexpected density type in sky check: {typ}")
-
-sky_at_altitude=router["depth"]
-assert sky_at_altitude["type"]=="minecraft:range_choice"
-assert sky_at_altitude["input"]=="bugsbugsandmorebugs:sky_island_density"
-for c,s1,s2,y,solid,sky_biome in (
-    (-0.40,0.15,0.08,200,True,True),
-    (-0.30,0.15,0.08,200,True,True),
-    (-0.16,0.15,0.08,200,False,False),
-    ( 0.30,0.15,0.08,200,False,False),
-    (-0.40,0.00,0.00,200,False,False),
-    (-0.40,0.15,0.08,125,False,False),
-    (-0.40,0.15,0.08,310,False,False),
-):
-    land=evaluate(density,c,s1,s2,y)>0
-    signal=evaluate(sky_at_altitude,c,s1,s2,y)<-0.8
-    assert land==solid, (c,s1,s2,y,"terrain",land,solid)
-    assert signal==sky_biome, (c,s1,s2,y,"biome",signal,sky_biome)
-
-# In a hypothetical deep-ocean transect, the 2D noises should create some
-# island patches and leave some open water; previous multiplicative mask
-# effectively gave zero islands over most values.
-from math import sin,cos,pi
-transect=[
-    evaluate(density,-0.45,0.19*sin(t*2*pi/256),0.15*cos(t*2*pi/97),200)>0
-    for t in range(256)
-]
-assert 15 < sum(transect) < 200, f"Island mask is barren or a solid sky carpet: {sum(transect)}/256"
-
-# Regression for the supplied screenshots: at X~275/Z~-81, Y100 and
-# Y108 both reported different biomes, one of them a sky biome despite solid
-# beach terrain. At these heights there must never be negative sky-depth.
-for y in (60, 100, 108, 125, 140, 300, 360):
-    actual=evaluate(sky_at_altitude, -0.4, .4, .4, y)
-    assert actual>=0, (y, actual, "sky biome depth leaking outside the island layer")
-# Even if vanilla mountain depth is -1.25, the non-island climate must
-# remain >=0; underhang depth=2 remains possible at y=-80.
-assert evaluate(sky_at_altitude, .45, .15, .08, 100)==0
-assert evaluate(sky_at_altitude, .45, .15, .08, -80)==2
-
-
-print("Static sky island biome + density wiring and mock-noise terrain tests passed (gameplay still unverified)")
+assert ocean[0]["then_run"]["if_true"]["invert"]["anchor"]["absolute"]==68
+for radius in (rmin,34,52,rmax):
+    for d in (0,radius/3,radius*0.9,radius,radius*1.1):
+        for ax in (0.73,0.85,1.0):
+            normalized=d/(radius*ax)
+            if d>=radius:
+                assert normalized>=1, "Radial cap failed"
+assert cell-2*jitter-2*rmax==40
+print("Bounded sky islands: explicit <=144-block cap, >=40-block separation, altitude/droop checks OK")

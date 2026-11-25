@@ -102,7 +102,9 @@ for name, entries in sky.items():
 mask = json.loads((WORLD / "density_function/sky_island_mask.json").read_text())
 assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask)
 density = json.loads((WORLD / "density_function/sky_island_density.json").read_text())
-assert density["left"]["left"]["right"] == -0.50
+assert density["type"]=="minecraft:min"
+assert density["left"] == {"type":NS+"bounded_sky_islands","mode":"solid"}
+assert density["right"]["left"]["left"] == -0.32
 
 
 # Synthetic tests of MultiNoise nearest-climate matching. Only the biome
