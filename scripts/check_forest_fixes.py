@@ -105,11 +105,15 @@ dimension = json.loads(read(root / "resources/data/bugsbugsandmorebugs/dimension
 climates = dimension["generator"]["biome_source"]["biomes"]
 willow = [p["parameters"] for p in climates if p["biome"] == "bugsbugsandmorebugs:willow_backwaters"]
 assert len(willow) >= 26, "Willow climates too rare again"
-assert any(0.40 <= p["humidity"] <= 0.60 for p in willow)
-assert any(p["continentalness"] < 0.2 for p in willow)
-assert any(p["erosion"] >= 0.45 for p in willow)
+def interval(axis):
+    return axis if isinstance(axis, list) else [axis,axis]
+assert any(interval(p["humidity"])[1] >= 0.40 and interval(p["humidity"])[0] <= 0.60 for p in willow)
+assert any(interval(p["continentalness"])[0] < 0.2 for p in willow)
+assert any(interval(p["erosion"])[1] >= 0.45 for p in willow)
 assert sum(x["biome"] == "bugsbugsandmorebugs:river" for x in climates) >= 18, "Protect river distribution"
-assert sum(x["biome"] == "bugsbugsandmorebugs:estuary" for x in climates) == 2
+estuary=[x["parameters"] for x in climates if x["biome"] == "bugsbugsandmorebugs:estuary"]
+assert len(estuary) >= 4
+assert all(p["continentalness"] == [-0.19, -0.11] for p in estuary)
 
 # Minecraft's FeatureSorter requires one global ordering for features shared
 # across biomes at each decoration step. This catches cycles that compileJava
@@ -207,9 +211,14 @@ assert "ParticleTypes.RAIN" not in rain_java, "No fake rainforest raindrop spam"
 dimension_biomes = climates
 willow_params = [b["parameters"] for b in dimension_biomes
                  if b["biome"] == "bugsbugsandmorebugs:willow_backwaters"]
-assert len(willow_params) == 30
-assert all(-0.15 <= p["continentalness"] <= 0.34 for p in willow_params)
-assert all(abs(p["weirdness"]) <= 0.06 for p in willow_params)
+assert len(willow_params) >= 30
+assert all(-0.19 <= interval(p["continentalness"])[0]
+           and interval(p["continentalness"])[1] <= 0.30 for p in willow_params), (
+    "Willow Backwaters should occupy coasts and gentle lowlands, not the entire continent"
+)
+assert any(interval(p["weirdness"])[1] >= 0.15 for p in willow_params), (
+    "Willow wetlands should appear beyond river channels"
+)
 assert sum(b["biome"] == "bugsbugsandmorebugs:river" for b in dimension_biomes) >= 18
 
 

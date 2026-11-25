@@ -98,9 +98,8 @@ jobs:
           assert sum(x['biome']=='bugsbugsandmorebugs:volcanic_peak' for x in climates)>=5
           assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_marsh' for x in climates)>=3
           aquifer=density['aquifers']['surface_level']
-          assert aquifer['type']=='minecraft:min'
-          assert aquifer['left']=='minecraft:overworld_large_biomes/preliminary_surface_level'
-          assert aquifer['right']==62, 'Cap the mismatch with custom karst terrain'
+          assert aquifer=='minecraft:overworld_large_biomes/preliminary_surface_level'
+          assert density['sea_level']==63, 'Use vanilla sea level for river and ocean water'
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
           assert stone['alpha']['type']=='minecraft:max', 'Keep original valleys plus extra pillar paths'
           assert stone['alpha']['right']['type']=='minecraft:max', 'Missing narrow freestanding pillar channels'
@@ -138,8 +137,8 @@ jobs:
               assert 'minecraft:visual/cloud_height' not in attrs, biome
           dim=json.loads(Path('src/main/resources/data/bugsbugsandmorebugs/dimension/elsewheredim.json').read_text())
           est=[x['parameters'] for x in dim['generator']['biome_source']['biomes'] if x['biome']=='bugsbugsandmorebugs:estuary']
-          assert len(est)==2
-          assert all(x['continentalness']==[-0.135,-0.075] and x['weirdness']==[-0.025,0.025] for x in est)
+          assert len(est)>=4, 'Coastal estuary patches must survive in the new climate atlas'
+          assert all(x['continentalness']==[-0.19,-0.11] and x['weirdness']==[-0.045,0.045] for x in est)
           assert all('minecraft:visual/ambient_particles' not in json.loads(f.read_text())['attributes']
                      for f in (root/'worldgen/biome').glob('*.json') if f.stem in
                      ('stone_forest','mossy_hinoki_grove','misty_karst_fen'))
@@ -176,9 +175,10 @@ jobs:
           density=json.loads((world/'noise_settings/elsewhere.json').read_text())
           union=density['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
-          assert union['left']['type']=='minecraft:min'
-          assert union['left']['right']['type']=='minecraft:add'
-          final=union['left']['left']
+          assert union['left']['type']=='minecraft:lerp'
+          assert union['left']['first']=='minecraft:overworld_large_biomes/final_density'
+          assert union['left']['second']==ns+'elsewhere_inland_legacy'
+          final=json.loads((world/'density_function/elsewhere_inland_legacy.json').read_text())
           assert final['alpha']==ns+'bamboo_lowland_region'
           assert (world/'density_function/bamboo_lowland_region.json').exists()
           assert final['second']['type']=='minecraft:min'
@@ -206,8 +206,9 @@ jobs:
           noise=json.loads((world/'noise_settings/elsewhere.json').read_text())
           union=noise['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
-          assert union['left']['type']=='minecraft:min'
-          root=union['left']['left']
+          assert union['left']['type']=='minecraft:lerp'
+          assert union['left']['first']=='minecraft:overworld_large_biomes/final_density'
+          root=json.loads((world/'density_function/elsewhere_inland_legacy.json').read_text())
           assert root['type']=='minecraft:lerp'
           assert root['alpha']==ns+'bamboo_lowland_region'
           assert root['first']['type']=='minecraft:max'

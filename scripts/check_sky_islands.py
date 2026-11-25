@@ -56,21 +56,19 @@ assert rootdensity["type"]=="minecraft:range_choice"
 union=rootdensity["when_in_range"]
 assert union["type"]=="minecraft:max"
 assert union["right"]==ns+"sky_island_density"
-assert union["left"]["type"]=="minecraft:min", "Deep ocean terrain must be capped before adding sky islands"
-assert union["left"]["left"]["type"]=="minecraft:lerp"
-assert union["left"]["right"]["type"]=="minecraft:add"
-assert union["left"]["right"]["left"]["type"]=="minecraft:gradient"
-assert union["left"]["right"]["left"]["from_coordinate"]==51
-assert union["left"]["right"]["left"]["to_coordinate"]==68
+assert union["left"]["type"]=="minecraft:lerp", "Vanilla density must control oceans, shores and rivers"
+assert union["left"]["first"]=="minecraft:overworld_large_biomes/final_density"
+assert union["left"]["second"]==ns+"elsewhere_inland_legacy"
+assert union["left"]["alpha"]["type"]=="minecraft:mul"
 assert json.dumps(union["left"]).count(ns+"sky_island_density")==0
 depth=router["depth"]
 assert depth["type"]=="minecraft:range_choice"
 assert depth["input"]==ns+"sky_island_density"
 assert depth["when_in_range"]==-1.8
-assert depth["when_out_of_range"]["type"]=="minecraft:lerp"
-assert depth["when_out_of_range"]["second"]==0.8
-assert depth["when_out_of_range"]["first"]["min"]==0
-assert depth["when_out_of_range"]["first"]["max"]==2
+assert depth["max_exclusive"]==4
+assert depth["when_out_of_range"]["type"]=="minecraft:range_choice"
+assert depth["when_out_of_range"]["when_in_range"]==2
+assert depth["when_out_of_range"]["when_out_of_range"]==0
 sky_ids={ns+n for n in ("cloudcedar_forest","windcarved_crags","mistfall_gardens","vermilion_isles")}
 climates=dim["generator"]["biome_source"]["biomes"]
 assert sky_ids<={b["biome"] for b in climates}

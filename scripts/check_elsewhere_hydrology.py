@@ -1,208 +1,160 @@
 #!/usr/bin/env python3
-"""Static tests of the Elsewhere large-ocean/river/sky biome alignment.
-The real gameplay contract still requires new-chunk sampling in Minecraft 26.3.
+"""Verify shared vanilla Large Biomes geography and balanced Elsewhere biomes.
+
+The real world-seeded layout and biome percentages still require in-game sampling.
 """
-from __future__ import annotations
 import json
+import random
+from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-NS = "bugsbugsandmorebugs:"
-DATA = ROOT / "src/main/resources/data/bugsbugsandmorebugs"
-WORLD = DATA / "worldgen"
-dimension = json.loads((DATA / "dimension/elsewheredim.json").read_text())
-settings = json.loads((WORLD / "noise_settings/elsewhere.json").read_text())
-biomes = dimension["generator"]["biome_source"]["biomes"]
-router = settings["noise_router"]
+ROOT=Path(__file__).resolve().parents[1]
+NS="bugsbugsandmorebugs:"
+DATA=ROOT/"src/main/resources/data/bugsbugsandmorebugs"
+WORLD=DATA/"worldgen"
+dim=json.loads((DATA/"dimension/elsewheredim.json").read_text())
+settings=json.loads((WORLD/"noise_settings/elsewhere.json").read_text())
+legacy=json.loads((WORLD/"density_function/elsewhere_inland_legacy.json").read_text())
+rows=dim["generator"]["biome_source"]["biomes"]
+router=settings["noise_router"]
 
-climateRouter=router["continents"]
-assert climateRouter["type"]=="minecraft:lerp", "River biome selection must use its actual terrain corridor"
-assert climateRouter["first"]==NS+"elsewhere_biome_continents"
-assert climateRouter["second"]==0.28
-assert climateRouter["alpha"]["type"]=="minecraft:mul"
-assert climateRouter["alpha"]["left"]==NS+"river_corridor_region"
-river_fade=climateRouter["alpha"]["right"]
-assert river_fade["type"]=="minecraft:gradient" and river_fade["axis"]=="y"
-assert river_fade["from_coordinate"]==62 and river_fade["to_coordinate"]==83
-climate = json.loads((WORLD / "density_function/elsewhere_biome_continents.json").read_text())
-assert climate["type"]=="minecraft:lerp" and climate["first"]=="minecraft:overworld_large_biomes/continents"
-assert climate["alpha"]["type"]=="minecraft:clamp" and climate["second"]["type"]=="minecraft:clamp"
-assert climate["second"]["min"] >= -1.0
-assert climate["second"]["max"] <= -0.3
-assert climate["second"]["min"]==-0.92
-assert climate["alpha"]["input"]["left"]["left"]==-0.20
-assert router["erosion"] == "minecraft:overworld_large_biomes/erosion", "Terrain and biome erosion disagree"
-assert router["temperature"] == "minecraft:overworld/temperature", "Preserve local forest temperature scale"
-assert router["vegetation"] == "minecraft:overworld/vegetation", "Preserve local forest moisture mosaics"
-assert router["ridges"] == "minecraft:overworld/ridges", "River and climate ridge signals must match"
-assert router["depth"]["type"]=="minecraft:range_choice"
-assert router["depth"]["input"] == NS+"sky_island_density", "Climate-depth signal must be gated by physical island density"
-under=router["depth"]["when_out_of_range"]
-assert under["type"]=="minecraft:lerp" and under["second"]==0.8
-assert under["first"]["type"]=="minecraft:clamp" and under["first"]["min"]==0 and under["first"]["max"]==2
-assert under["first"]["input"]["when_out_of_range"] == NS+"elsewhere_large_depth", "Wrong inland depth"
-pulse=under["alpha"]
-assert pulse["type"]=="minecraft:mul" and pulse["left"]["type"]=="minecraft:clamp"
-assert pulse["left"]["input"]["left"]["left"] == NS+"river_corridor_region"
-assert pulse["right"]["left"]["from_coordinate"]==43 and pulse["right"]["left"]["to_coordinate"]==58
-assert pulse["right"]["right"]["from_coordinate"]==63 and pulse["right"]["right"]["to_coordinate"]==75
-union=router["final_density"]["when_in_range"]
-assert union["type"]=="minecraft:max" and union["right"]==NS+"sky_island_density"
-assert union["left"]["type"]=="minecraft:min"
-cap=union["left"]["right"]
-assert cap["type"]=="minecraft:add"
-assert cap["left"]=={"type":"minecraft:gradient","axis":"y","from_coordinate":51,"from_value":2.0,"to_coordinate":68,"to_value":-2.5}
-assert cap["right"]["left"]["input"]["left"]["left"]=="minecraft:overworld_large_biomes/continents"
-def floor_cap(continents,y):
-    gradient=2.0+(max(51,min(68,y))-51)*(-4.5/17)
-    release=max(0,min(1,(continents+0.25)*9.1))
-    return gradient+8.0*release
-assert floor_cap(-0.65,85)<0, "Open ocean must be clear air above sea"
-assert floor_cap(-0.65,55)>0, "Deep ocean must have a rocky seabed"
-assert floor_cap(0.15,85)>0, "Inland mountains must not be clipped"
+# Same vanilla Large-Biomes continentalness in BOTH biome selection and
+# physical land/water; no separate coast warp and no invented river depth pulse.
+continents="minecraft:overworld_large_biomes/continents"
+vanilla="minecraft:overworld_large_biomes/final_density"
+assert settings["sea_level"]==63
+assert router["continents"]==continents
+assert router["erosion"]=="minecraft:overworld_large_biomes/erosion"
+assert router["ridges"]=="minecraft:overworld/ridges"
+assert settings["aquifers"]["surface_level"]=="minecraft:overworld_large_biomes/preliminary_surface_level"
+assert router["temperature"]=="minecraft:overworld/temperature"
+assert router["vegetation"]=="minecraft:overworld/vegetation"
 
-assert settings["aquifers"]["surface_level"]["left"] == "minecraft:overworld_large_biomes/preliminary_surface_level"
+# The ocean and rivers inherit the actual vanilla terrain density;
+# only away from both coast and PV valleys is custom inland relief blended in.
+root=router["final_density"]
+assert root["type"]=="minecraft:range_choice"
+sky_union=root["when_in_range"]
+assert sky_union["type"]=="minecraft:max"
+assert sky_union["right"]==NS+"sky_island_density"
+land=sky_union["left"]
+assert land["type"]=="minecraft:lerp"
+assert land["first"]==vanilla
+assert land["second"]==NS+"elsewhere_inland_legacy"
+blend=land["alpha"]
+assert blend["type"]=="minecraft:mul"
+coast=blend["left"]
+valley=blend["right"]
+assert coast["type"]=="minecraft:clamp" and valley["type"]=="minecraft:clamp"
+assert coast["input"]["left"]=={"type":"minecraft:sub","left":continents,"right":0.03}
+assert valley["input"]["left"]["left"]=={"type":"minecraft:abs","input":"minecraft:overworld/ridges"}
+assert valley["input"]["left"]["right"]==0.085
+assert legacy["type"]=="minecraft:lerp", "Retain custom karst/stone forest/volcanic relief"
+assert legacy["alpha"]==NS+"bamboo_lowland_region"
+assert NS+"stone_forest_region" in json.dumps(legacy)
+assert NS+"volcanic_relief_density" in json.dumps(legacy)
 
-largeDepth = json.loads((WORLD / "density_function/elsewhere_large_depth.json").read_text())
-assert '"minecraft:overworld_large_biomes/offset"' in json.dumps(largeDepth)
-assert NS+"karst_elevation_mask" in json.dumps(largeDepth), "Karst elevation must survive"
+def amount(c,weird):
+    inland=max(0,min(1,(c-0.03)*5))
+    valley=max(0,min(1,(abs(weird)-0.085)*8))
+    return inland*valley
+assert amount(-0.5,0.8)==0, "Oceans must remain vanilla density"
+assert amount(-0.15,0.8)==0, "Shores must remain vanilla density"
+assert amount(0.6,0)==0, "River valley must remain vanilla density"
+assert amount(0.6,0.4)>0.99, "Far-inland custom geology must remain available"
 
-# Geological masks that read continentalness/erosion must match the
-# biome sampler's large-biome fields rather than a different vanilla scale.
-for file in (WORLD / "density_function").glob("*.json"):
-    content = file.read_text()
-    assert '"minecraft:overworld/continents"' not in content, file
-    assert '"minecraft:overworld/erosion"' not in content, file
-settings_data = json.dumps(settings)
-assert '"minecraft:overworld/continents"' not in settings_data
-assert '"minecraft:overworld/erosion"' not in settings_data
-assert '"minecraft:overworld/final_density"' not in settings_data
-assert '"minecraft:overworld_large_biomes/final_density"' in settings_data
+depth=router["depth"]
+assert depth["type"]=="minecraft:range_choice"
+assert depth["input"]==NS+"sky_island_density"
+assert depth["when_in_range"]==-1.8 and depth["max_exclusive"]>=3
+normal=depth["when_out_of_range"]
+assert normal["type"]=="minecraft:range_choice"
+assert normal["when_in_range"]==2
+assert normal["when_out_of_range"]==0
+assert normal["max_exclusive"]==-55
 
-ocean = [p["parameters"] for p in biomes if p["biome"]==NS+"ocean"]
-river = [p["parameters"] for p in biomes if p["biome"]==NS+"river"]
-skyNames = ("cloudcedar_forest", "windcarved_crags", "mistfall_gardens", "vermilion_isles")
-sky = {name: [p["parameters"] for p in biomes if p["biome"]==NS+name] for name in skyNames}
-assert len(ocean)==23, "Coastal ocean anchors must be land biomes; deep ocean anchors remain"
-assert all(not (isinstance(p["temperature"],list) and p["temperature"]==[-1,1]) for p in ocean), (
-    "Ocean wildcard has returned: can swallow terrestrial biomes"
+# Vanilla continental boundaries. Biome chance is the share of actual
+# climate volume, NOT the number of registry entries.
+ocean=[x for x in rows if x["biome"]==NS+"ocean"]
+river=[x for x in rows if x["biome"]==NS+"river"]
+assert len(ocean)==4
+assert all(x["parameters"]["continentalness"]==[-1.2,-0.19] for x in ocean)
+assert all(x["parameters"]["weirdness"]==[-1,1] for x in ocean)
+assert 50<=len(river)<=130
+assert all(x["parameters"]["weirdness"]==[-0.045,0.045] for x in river)
+assert all(x["parameters"]["depth"]==0 for x in river)
+assert all(x["parameters"]["continentalness"][0]>=-0.19 for x in river), (
+    "River mouths may reach the vanilla coast, but never the open ocean"
 )
-assert all(not (isinstance(p["temperature"],list) and p["temperature"]==[-1,1]) for p in river), (
-    "River wildcard has returned: can swallow terrestrial biomes"
-)
-deep = [p for p in ocean if p["continentalness"]==-0.67]
-assert len(deep)==18, "Nine temperature/moisture climate cells need two erosion variants"
-assert all(p["weirdness"]==0 for p in river), "River corridors should track ridges=0, not wide areas"
-assert len(river)==18 and all(p["depth"]==0.8 for p in river), "River target must require carved channel depth signal"
-assert all(any(p["depth"]==[-2,-1.5] for p in entries) for entries in sky.values())
+assert any(x["biome"]==NS+"ginkgo_forest" for x in rows)
+assert any(x["biome"]==NS+"maple_forest" for x in rows)
+assert any(x["biome"]==NS+"ancient_cedar_rainforest" for x in rows)
+assert len(rows)>=500
+for region in ((-0.19,-0.11),(-0.11,0.03),(0.03,0.3),(0.3,1.0)):
+    assert any(x["biome"]!=NS+"river" and x["parameters"]["continentalness"]==list(region) for x in rows),region
+for i,row in enumerate(rows):
+    p=row["parameters"]
+    for axis in ("temperature","humidity","continentalness","erosion","weirdness","depth"):
+        vals=p[axis] if isinstance(p[axis],list) else [p[axis]]
+        assert all(-2<=v<=2 for v in vals),(i,axis,vals)
+        if len(vals)==2:
+            assert vals[0]<=vals[1],(i,axis,vals)
+    assert 0<=p["offset"]<=1
 
-# Minecraft 26.3 Climate.Parameter.CODEC rejects numbers outside [-2, 2].
-# A bad biome entry can report the misleading "No key preset" error.
-for index, row in enumerate(biomes):
-    parameters = row["parameters"]
-    for field in ("temperature", "humidity", "continentalness", "erosion", "depth", "weirdness"):
-        raw = parameters[field]
-        values = raw if isinstance(raw, list) else [raw]
-        assert len(values) in (1, 2), (index, row["biome"], field, raw)
-        assert all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in values), (index, row["biome"], field, raw)
-        assert all(-2.0 <= v <= 2.0 for v in values), (
-            f"Invalid 26.3 climate parameter at biome #{index} {row['biome']}: {field}={raw}. "
-            "Allowed range is [-2.0, 2.0]."
-        )
-        if len(values) == 2:
-            assert values[0] <= values[1], (index, row["biome"], field, raw)
-    offset = parameters["offset"]
-    assert isinstance(offset, (int, float)) and not isinstance(offset, bool) and 0.0 <= offset <= 1.0, (
-        index, row["biome"], "offset", offset
-    )
+# Synthetic nearest-hypercube climate selection. This tests the true
+# selection algorithm (but not world noise correlations or exact percentages).
+keys=("temperature","humidity","continentalness","erosion","depth","weirdness","offset")
+prepared=[]
+for row in rows:
+    dims=[]
+    for key in keys:
+        v=row["parameters"][key]
+        dims.append((v[0],v[1]) if isinstance(v,list) else (v,v))
+    prepared.append((row["biome"],dims))
+def nearest(p):
+    best_name,best_score=None,float("inf")
+    values=[p[k] for k in keys]
+    for name,dim in prepared:
+        score=0
+        for value,(lo,hi) in zip(values,dim):
+            delta=lo-value if value<lo else value-hi if value>hi else 0
+            score+=delta*delta
+        if score<best_score:
+            best_name,best_score=name,score
+    return best_name
+rng=random.Random(20261125)
+deep=Counter()
+main=Counter()
+valleys=Counter()
+dry=Counter()
+for _ in range(450):
+    climate={
+      "temperature":rng.uniform(-1,1),"humidity":rng.uniform(-1,1),
+      "continentalness":rng.uniform(-1,-0.22),
+      "erosion":rng.uniform(-1,1),"depth":0,
+      "weirdness":rng.uniform(-1,1),"offset":0}
+    deep[nearest(climate)]+=1
+    climate["continentalness"]=rng.uniform(-0.11,1)
+    main[nearest(climate)]+=1
+    climate["continentalness"]=rng.uniform(0.03,0.29)
+    climate["erosion"]=rng.uniform(-0.1,0.35)
+    climate["weirdness"]=rng.uniform(-0.04,0.04)
+    valleys[nearest(climate)]+=1
+    climate["weirdness"]=rng.choice((-1,1))*rng.uniform(0.15,0.9)
+    dry[nearest(climate)]+=1
+assert deep[NS+"ocean"]>=440,("Deep ocean was assigned land",deep.most_common(3))
+assert main[NS+"ocean"]==0,("Dry inland mislabelled Ocean",main[NS+"ocean"])
+assert valleys[NS+"river"]>=390,("Rivers absent from carved valley climates",valleys.most_common(3))
+assert dry[NS+"river"]<=15,("Rivers appearing well outside valleys",dry[NS+"river"])
+assert main[NS+"ginkgo_forest"]<55,("Ginkgo is dominating climate volume",main[NS+"ginkgo_forest"])
+main_ecology=[(k,v) for k,v in main.items() if v>=3 and k not in (NS+"river",NS+"ocean")]
+assert len(main_ecology)>=12,("Too little biome variety",main_ecology)
+sky=("cloudcedar_forest","windcarved_crags","mistfall_gardens","vermilion_isles")
+for name in sky:
+    assert any(x["biome"]==NS+name and x["parameters"]["depth"]==[-2,-1.5] for x in rows),name
+assert sum(x["biome"]==NS+"underhang" for x in rows)>0
 
-# No sky biome at ordinary surface depth; ensure all four actual biome names
-# appear with ocean-facing continentalness and share the vertical density band.
-for name, entries in sky.items():
-    assert entries and all(p["continentalness"]==[-1.25,-0.28] for p in entries), name
-mask = json.loads((WORLD / "density_function/sky_island_mask.json").read_text())
-assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(mask)
-density = json.loads((WORLD / "density_function/sky_island_density.json").read_text())
-assert density["type"]=="minecraft:min"
-assert density["left"] == {"type":NS+"bounded_sky_islands","mode":"solid"}
-assert density["right"]["left"]["left"] == -0.32
-
-
-# Synthetic tests of MultiNoise nearest-climate matching. Only the biome
-# continentalness signal changes; check deep/shallow seas versus inland ground.
-def ocean_climate_continentalness(c):
-    alpha=max(0,min(1,(-0.20-c)*11))
-    warped=max(-0.92,min(-0.30,c*1.28-0.09))
-    return c*(1-alpha)+warped*alpha
-def climate_distance(given,selected):
-    squared=0
-    for key in ("temperature","humidity","continentalness","erosion","depth","weirdness","offset"):
-        b=given[key]
-        lo,hi=(b if isinstance(b,list) else (b,b))
-        val=selected[key]
-        delta=lo-val if val<lo else val-hi if val>hi else 0
-        squared+=delta*delta
-    return squared
-for c,expected_ocean in [(-0.65,True),(-0.38,True),(-0.17,False),(0.30,False)]:
-    point={"temperature":0.10,"humidity":0.18,"continentalness":ocean_climate_continentalness(c),
-           "erosion":0.12,"depth":0,"weirdness":0.23,"offset":0}
-    chosen=min(biomes,key=lambda row:climate_distance(row["parameters"],point))["biome"]
-    assert (chosen==NS+"ocean")==expected_ocean, (c,chosen)
-
-
-# A separate failure mode: the four sky biome points cover nearly every
-# humidity/temperature/erosion/weirdness combination, so they used to win
-# the nearest-climate search on ordinary dry land at depth 0. The target depth
-# must be sufficiently far from normal surface depth that a sky biome CAN'T
-# beat the ordinary biome candidates merely through their broad other ranges.
-from math import sin, floor
-def pseudo(i,k):
-    v=sin(i*12.9898+k*78.233)*43758.5453
-    return v-floor(v)
-sky_ids={NS+name for name in skyNames}
-for cont in (-.9,-.7,-.5,-.35,-.25,-.15,-.08,.08,.3,.6):
-    for i in range(100):
-        point={
-            "temperature":-1+2*pseudo(i,1),
-            "humidity":-1+2*pseudo(i,2),
-            "continentalness":cont,
-            "erosion":-1+2*pseudo(i,3),
-            "depth":0,
-            "weirdness":-1+2*pseudo(i,4),
-            "offset":0,
-        }
-        selected=min(biomes,key=lambda row:climate_distance(row["parameters"],point))
-        assert selected["biome"] not in sky_ids, (
-            "Sky biome wins at non-island surface depth 0", cont, i,selected["biome"]
-        )
-for temp,humid,expected in ((-.4,.4,"cloudcedar_forest"),(-.4,-.4,"windcarved_crags"),(.4,.4,"mistfall_gardens"),(.4,-.4,"vermilion_isles")):
-    point={"temperature":temp,"humidity":humid,"continentalness":-.65,
-           "erosion":0,"depth":-1.8,"weirdness":0.28,"offset":0}
-    actual=min(biomes,key=lambda row:climate_distance(row["parameters"],point))["biome"]
-    assert actual==NS+expected, ("Sky biome not selectable inside actual island",expected,actual)
-
-
-
-# River climate must use the SAME region controlling the carved river, not a
-# global climate rectangle. This checks a typical river climate with a fully
-# active river corridor at sea level.
-rivertest={"temperature":.25,"humidity":.42,"continentalness":0.28,
-           "erosion":.14,"depth":0.8,"weirdness":0,"offset":0}
-river_selected=min(biomes,key=lambda row:climate_distance(row["parameters"],rivertest))["biome"]
-assert river_selected==NS+"river", ("River carve still wins Ocean or land biome",river_selected)
-rivertest["depth"]=0
-assert min(biomes,key=lambda row:climate_distance(row["parameters"],rivertest))["biome"]!=NS+"river", (
-    "River biome appears without carved corridor's depth pulse"
-)
-assert sum(p["biome"]==NS+"ginkgo_forest" for p in biomes)==4, "Base Ginkgo Forest coverage re-expanded"
-assert sum(p["biome"]==NS+"ocean" and p["parameters"]["continentalness"]==-0.16 for p in biomes)==0, (
-    "Ocean can no longer own raised coastal headlands"
-)
-
-# Ocean climate should not be artificially forced deep into the maritime
-# anchors for near-shore land noise; farther offshore is still ocean-facing.
-assert ocean_climate_continentalness(-.10)==-.10
-assert ocean_climate_continentalness(-.17)==-.17
-assert -.40 < ocean_climate_continentalness(-.25) < -.25
-assert ocean_climate_continentalness(-.60) < -.65
-print("Elsewhere ocean, river and sky climate static checks passed.")
+print("Vanilla Large Biomes ocean/river coupling, custom inland terrain and climate coverage checks passed.")
+print("Synthetic inland biome mix:",main.most_common(12))
+print("Ocean  %s/450, river valley %s/450, dry valleys %s/450"%
+      (deep[NS+"ocean"],valleys[NS+"river"],dry[NS+"river"]))
