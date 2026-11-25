@@ -105,11 +105,15 @@ dimension = json.loads(read(root / "resources/data/bugsbugsandmorebugs/dimension
 climates = dimension["generator"]["biome_source"]["biomes"]
 willow = [p["parameters"] for p in climates if p["biome"] == "bugsbugsandmorebugs:willow_backwaters"]
 assert len(willow) >= 26, "Willow climates too rare again"
-assert any(0.40 <= p["humidity"] <= 0.60 for p in willow)
-assert any(p["continentalness"] < 0.2 for p in willow)
-assert any(p["erosion"] >= 0.45 for p in willow)
+def interval(axis):
+    return axis if isinstance(axis, list) else [axis,axis]
+assert any(interval(p["humidity"])[1] >= 0.40 and interval(p["humidity"])[0] <= 0.60 for p in willow)
+assert any(interval(p["continentalness"])[0] < 0.2 for p in willow)
+assert any(interval(p["erosion"])[1] >= 0.45 for p in willow)
 assert sum(x["biome"] == "bugsbugsandmorebugs:river" for x in climates) >= 18, "Protect river distribution"
-assert sum(x["biome"] == "bugsbugsandmorebugs:estuary" for x in climates) == 2
+estuary=[x["parameters"] for x in climates if x["biome"] == "bugsbugsandmorebugs:estuary"]
+assert len(estuary) >= 4
+assert all(p["continentalness"] == [-0.19, -0.11] for p in estuary)
 
 # Minecraft's FeatureSorter requires one global ordering for features shared
 # across biomes at each decoration step. This catches cycles that compileJava
