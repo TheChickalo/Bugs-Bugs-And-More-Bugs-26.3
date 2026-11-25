@@ -16,7 +16,7 @@ dec9892d0130a37d76ea77dc9fb77f8ed450e7cb data/minecraft/tags/block/leaves.json
 0d0246c72ec1812fcbc2f1cf8a9718be200c199e data/minecraft/tags/block/logs.json
 1a64c7ba0c2b53b0c872321ad4262dac3be2f12a data/minecraft/tags/block/mineable/axe.json
 687c30707c3b4b56d9a346506825dbffa712400d data/minecraft/tags/block/mineable/hoe.json
-7338ce3685e3d329639d0eeaf73a5f5ac2c12ca0 data/minecraft/tags/block/mineable/pickaxe.json
+608287b70a86ad3f867c29e6d07f7c4bbe1c08e8 data/minecraft/tags/block/mineable/pickaxe.json
 efa2d61b5d6e39e33f32feb258323c0d24e9a193 data/minecraft/tags/block/mineable/shovel.json
 6217088ac76790b6db440b9cf1f2951325e4ea34 data/minecraft/tags/block/planks.json
 d2de79df3cb31f72563da8041bb1066f565dc98a data/minecraft/tags/block/prevents_nearby_leaf_decay.json
