@@ -84,8 +84,11 @@ for cont in (-0.55,-0.22,-0.05,0.1):
     assert ev(stoneMask,{**mask_values,"minecraft:overworld_large_biomes/continents":cont})==0, (
         "Stone Forest must not destroy Vanilla's seas, coast or regular near-inland rivers",cont
     )
-pillars={**base,"y":150}
-valley={**base,"minecraft:badlands_surface":0.85,"minecraft:badlands_pillar":0.85}
+# The original roof interpolates to the SHORT valley branch when the
+# badlands pillar-threshold mask is high (noise near zero). Tall columns
+# are the far-field cases where BOTH pillar noises sit outside that mask.
+pillars={**base,"minecraft:badlands_surface":0.85,"minecraft:badlands_pillar":0.85,"y":150}
+valley={**base}
 assert ev(roof,pillars)>0.5,"Old pillars no longer rise far above sea level"
 assert ev(roof,{**pillars,"y":202})<0,"Original Stone Forest column roof no longer terminates"
 assert ev(roof,{**valley,"y":55})>0,"Stone Forest shallows lack a bottom"
