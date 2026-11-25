@@ -37,7 +37,12 @@ assert root["type"]=="minecraft:range_choice"
 sky_union=root["when_in_range"]
 assert sky_union["type"]=="minecraft:max"
 assert sky_union["right"]==NS+"sky_island_density"
-land=sky_union["left"]
+stoneTerrain=sky_union["left"]
+assert stoneTerrain["type"]=="minecraft:lerp"
+assert stoneTerrain["second"]==NS+"stone_forest_roof", "Directly restore the original pillars and gorges"
+assert stoneTerrain["alpha"]["input"]["left"]==NS+"stone_forest_spires_region"
+assert stoneTerrain["alpha"]["input"]["right"]==1.32
+land=stoneTerrain["first"]
 assert land["type"]=="minecraft:lerp"
 assert land["first"]==vanilla
 assert land["second"]==NS+"elsewhere_inland_legacy"
@@ -56,8 +61,13 @@ assert stoneProtect["left"]["right"]["input"]["left"]=={"type":"minecraft:sub",
 stone_region=json.loads((WORLD/"density_function/stone_forest_region.json").read_text())
 assert stone_region["type"]=="minecraft:max", "Original Stone Forest region must survive alongside new atlas region"
 assert stone_region["left"]["left"]==NS+"karst_massif_region"
-assert "minecraft:overworld/vegetation" in json.dumps(stone_region["right"])
-assert "minecraft:overworld/temperature" in json.dumps(stone_region["right"])
+assert stone_region["right"]==NS+"stone_forest_spires_region"
+stone_spires=json.loads((WORLD/"density_function/stone_forest_spires_region.json").read_text())
+assert stone_spires["type"]=="minecraft:mul"
+assert "minecraft:overworld_large_biomes/erosion" in json.dumps(stone_spires)
+assert "minecraft:overworld/temperature" in json.dumps(stone_spires)
+assert "minecraft:overworld/vegetation" in json.dumps(stone_spires)
+assert (WORLD/"density_function/stone_forest_roof.json").exists()
 assert coast["type"]=="minecraft:clamp" and valley["type"]=="minecraft:clamp"
 assert coast["input"]["left"]=={"type":"minecraft:sub","left":continents,"right":0.03}
 assert valley["input"]["left"]["left"]=={"type":"minecraft:abs","input":"minecraft:overworld/ridges"}

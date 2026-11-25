@@ -74,10 +74,11 @@ union=rootdensity["when_in_range"]
 assert union["type"]=="minecraft:max"
 assert union["right"]==ns+"sky_island_density"
 assert union["left"]["type"]=="minecraft:lerp", "Vanilla density must control oceans, shores and rivers"
-assert union["left"]["first"]=="minecraft:overworld_large_biomes/final_density"
-assert union["left"]["second"]==ns+"elsewhere_inland_legacy"
-assert union["left"]["alpha"]["type"]=="minecraft:max"
-assert union["left"]["alpha"]["right"]["left"]["left"]==ns+"stone_forest_region"
+assert union["left"]["second"]==ns+"stone_forest_roof"
+assert union["left"]["alpha"]["input"]["left"]==ns+"stone_forest_spires_region"
+assert union["left"]["first"]["first"]=="minecraft:overworld_large_biomes/final_density"
+assert union["left"]["first"]["second"]==ns+"elsewhere_inland_legacy"
+assert union["left"]["first"]["alpha"]["type"]=="minecraft:max"
 assert json.dumps(union["left"]).count(ns+"sky_island_density")==0
 depth=router["depth"]
 assert depth["type"]=="minecraft:range_choice"

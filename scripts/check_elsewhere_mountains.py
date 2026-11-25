@@ -14,7 +14,8 @@ NS="bugsbugsandmorebugs:"
 region=json.loads((WORLD/"density_function/stone_forest_region.json").read_text())
 assert region["type"]=="minecraft:max"
 assert region["left"]["left"]==NS+"karst_massif_region"
-ecology=region["right"]
+assert region["right"]==NS+"stone_forest_spires_region"
+ecology=json.loads((WORLD/"density_function/stone_forest_spires_region.json").read_text())
 assert '"minecraft:overworld_large_biomes/continents"' in json.dumps(ecology)
 assert '"minecraft:overworld/temperature"' in json.dumps(ecology)
 assert '"minecraft:overworld/vegetation"' in json.dumps(ecology)
@@ -23,7 +24,10 @@ assert '"minecraft:overworld_large_biomes/erosion"' in json.dumps(ecology)
 settings=json.loads((WORLD/"noise_settings/elsewhere.json").read_text())
 union=settings["noise_router"]["final_density"]["when_in_range"]
 assert union["right"]==NS+"sky_island_density"
-land=union["left"]
+stone_core=union["left"]
+assert stone_core["second"]==NS+"stone_forest_roof"
+assert stone_core["alpha"]["input"]["left"]==NS+"stone_forest_spires_region"
+land=stone_core["first"]
 assert land["first"]=="minecraft:overworld_large_biomes/final_density"
 assert land["second"]==NS+"elsewhere_inland_legacy"
 assert land["alpha"]["type"]=="minecraft:max"

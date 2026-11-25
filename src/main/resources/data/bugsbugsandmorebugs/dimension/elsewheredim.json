@@ -11782,14 +11782,14 @@
           "parameters": {
             "temperature": [
               -1,
-              -0.45
+              -0.35
             ],
             "humidity": [
               -1,
-              -0.45
+              -0.13
             ],
             "continentalness": [
-              0.3,
+              0.24,
               1
             ],
             "erosion": [
@@ -11809,14 +11809,14 @@
           "parameters": {
             "temperature": [
               -1,
-              -0.45
+              -0.35
             ],
             "humidity": [
               -1,
-              -0.45
+              -0.13
             ],
             "continentalness": [
-              0.3,
+              0.24,
               1
             ],
             "erosion": [
@@ -11836,14 +11836,14 @@
           "parameters": {
             "temperature": [
               -1,
-              -0.45
+              -0.35
             ],
             "humidity": [
               -1,
-              -0.45
+              -0.13
             ],
             "continentalness": [
-              0.3,
+              0.24,
               1
             ],
             "erosion": [
@@ -11863,14 +11863,14 @@
           "parameters": {
             "temperature": [
               -1,
-              -0.45
+              -0.35
             ],
             "humidity": [
               -1,
-              -0.45
+              -0.13
             ],
             "continentalness": [
-              0.3,
+              0.24,
               1
             ],
             "erosion": [
@@ -11890,14 +11890,14 @@
           "parameters": {
             "temperature": [
               -1,
-              -0.45
+              -0.35
             ],
             "humidity": [
               -1,
-              -0.45
+              -0.13
             ],
             "continentalness": [
-              0.3,
+              0.24,
               1
             ],
             "erosion": [

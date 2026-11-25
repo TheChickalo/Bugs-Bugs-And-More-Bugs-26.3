@@ -176,8 +176,10 @@ jobs:
           union=density['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
           assert union['left']['type']=='minecraft:lerp'
-          assert union['left']['first']=='minecraft:overworld_large_biomes/final_density'
-          assert union['left']['second']==ns+'elsewhere_inland_legacy'
+          assert union['left']['second']==ns+'stone_forest_roof'
+          assert union['left']['alpha']['input']['left']==ns+'stone_forest_spires_region'
+          assert union['left']['first']['first']=='minecraft:overworld_large_biomes/final_density'
+          assert union['left']['first']['second']==ns+'elsewhere_inland_legacy'
           final=json.loads((world/'density_function/elsewhere_inland_legacy.json').read_text())
           assert final['alpha']==ns+'bamboo_lowland_region'
           assert (world/'density_function/bamboo_lowland_region.json').exists()
@@ -207,7 +209,8 @@ jobs:
           union=noise['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
           assert union['left']['type']=='minecraft:lerp'
-          assert union['left']['first']=='minecraft:overworld_large_biomes/final_density'
+          assert union['left']['second']==ns+'stone_forest_roof'
+          assert union['left']['first']['first']=='minecraft:overworld_large_biomes/final_density'
           root=json.loads((world/'density_function/elsewhere_inland_legacy.json').read_text())
           assert root['type']=='minecraft:lerp'
           assert root['alpha']==ns+'bamboo_lowland_region'
@@ -241,6 +244,8 @@ jobs:
           PY
       - name: Check forest survival, stone palette and Willow distribution
         run: python3 scripts/check_forest_fixes.py
+      - name: Verify Stone Forest pillar relief and Snowy Peak climate recovery
+        run: python3 scripts/check_stone_snow_recovery.py
       - name: Validate restored Stone Forests and alpine mountain caps
         run: python3 scripts/check_elsewhere_mountains.py
       - name: Validate floating-archipelago wiring
