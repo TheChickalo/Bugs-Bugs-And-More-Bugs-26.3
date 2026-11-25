@@ -39,10 +39,10 @@
         "type": "minecraft:mul",
         "left": {
           "type": "minecraft:sub",
-          "left": -0.16,
-          "right": "minecraft:overworld/temperature"
+          "left": "minecraft:overworld/temperature",
+          "right": 0.29
         },
-        "right": 2.8
+        "right": 4.5
       },
       "min": 0,
       "max": 1

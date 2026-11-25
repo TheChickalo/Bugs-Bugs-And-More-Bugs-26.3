@@ -80,19 +80,19 @@ public record MountainRangeFeature() implements Feature {
                          RandomSource random,BlockPos origin){
         int x0=origin.getX() & ~15, z0=origin.getZ() & ~15;
         List<Peak> peaks=new ArrayList<>();
-        final int region=144, margin=100;
+        final int region=144, margin=152;
         int minCX=Math.floorDiv(x0-margin,region);
         int maxCX=Math.floorDiv(x0+15+margin,region);
         int minCZ=Math.floorDiv(z0-margin,region);
         int maxCZ=Math.floorDiv(z0+15+margin,region);
         for(int cx=minCX;cx<=maxCX;cx++)for(int cz=minCZ;cz<=maxCZ;cz++){
             RandomSource rng=RandomSource.create(hash(cx,cz));
-            if(rng.nextInt(4)!=0)continue;
+            if(rng.nextInt(3)!=0)continue;
             int rootX=cx*region+region/2+rng.nextInt(49)-24;
             int rootZ=cz*region+region/2+rng.nextInt(49)-24;
-            Peak root=new Peak(rootX,rootZ,26,18+rng.nextInt(7),
+            Peak root=new Peak(rootX,rootZ,30,24+rng.nextInt(10),
                     rng.nextDouble()*Math.PI*2);
-            if(!room(peaks,rootX,rootZ,26))continue;
+            if(!room(peaks,rootX,rootZ,30))continue;
             peaks.add(root);
             extend(peaks,root,rng,0);
         }
@@ -121,7 +121,7 @@ public record MountainRangeFeature() implements Feature {
             Block stone=biome.is(ModBiomes.HIGHLAND_KARST)
                     ?ModBlocks.LIMESTONE
                     :biome.is(ModBiomes.SNOWY_PEAK)
-                    ?Blocks.STONE
+                    ?ModBlocks.DACITE
                     :ModBlocks.RHYOLITE;
             int max=Math.min(lift,level.getMaxY()-topY-2);
             for(int h=1;h<=max;h++){

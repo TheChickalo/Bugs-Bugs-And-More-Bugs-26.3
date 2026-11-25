@@ -241,6 +241,8 @@ jobs:
           PY
       - name: Check forest survival, stone palette and Willow distribution
         run: python3 scripts/check_forest_fixes.py
+      - name: Validate restored Stone Forests and alpine mountain caps
+        run: python3 scripts/check_elsewhere_mountains.py
       - name: Validate floating-archipelago wiring
         run: python3 scripts/check_sky_islands.py
       - name: Validate ocean-scale terrain and river-biome alignment

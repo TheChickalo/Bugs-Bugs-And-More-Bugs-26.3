@@ -42,9 +42,22 @@ assert land["type"]=="minecraft:lerp"
 assert land["first"]==vanilla
 assert land["second"]==NS+"elsewhere_inland_legacy"
 blend=land["alpha"]
-assert blend["type"]=="minecraft:mul"
-coast=blend["left"]
-valley=blend["right"]
+assert blend["type"]=="minecraft:max", "Stone Forests must bypass generic valley clipping inland"
+vanillaProtection=blend["left"]
+assert vanillaProtection["type"]=="minecraft:mul"
+coast=vanillaProtection["left"]
+valley=vanillaProtection["right"]
+stoneProtect=blend["right"]
+assert stoneProtect["type"]=="minecraft:mul"
+assert stoneProtect["right"]==0.98
+assert stoneProtect["left"]["left"]==NS+"stone_forest_region"
+assert stoneProtect["left"]["right"]["input"]["left"]=={"type":"minecraft:sub",
+        "left":continents,"right":0.29}
+stone_region=json.loads((WORLD/"density_function/stone_forest_region.json").read_text())
+assert stone_region["type"]=="minecraft:max", "Original Stone Forest region must survive alongside new atlas region"
+assert stone_region["left"]["left"]==NS+"karst_massif_region"
+assert "minecraft:overworld/vegetation" in json.dumps(stone_region["right"])
+assert "minecraft:overworld/temperature" in json.dumps(stone_region["right"])
 assert coast["type"]=="minecraft:clamp" and valley["type"]=="minecraft:clamp"
 assert coast["input"]["left"]=={"type":"minecraft:sub","left":continents,"right":0.03}
 assert valley["input"]["left"]["left"]=={"type":"minecraft:abs","input":"minecraft:overworld/ridges"}
@@ -60,7 +73,13 @@ def amount(c,weird):
     return inland*valley
 assert amount(-0.5,0.8)==0, "Oceans must remain vanilla density"
 assert amount(-0.15,0.8)==0, "Shores must remain vanilla density"
-assert amount(0.6,0)==0, "River valley must remain vanilla density"
+assert amount(0.6,0)==0, "Vanilla protection must still apply in ordinary river valleys"
+# The Stone Forest exception only operates inland; maritime climates keep vanilla water.
+def stone_preserve(c,mask):
+    return 0.98*mask*max(0,min(1,(c-0.29)*9))
+assert stone_preserve(-0.25,1)==0
+assert stone_preserve(0.18,1)==0
+assert stone_preserve(0.55,1)>0.97
 assert amount(0.6,0.4)>0.99, "Far-inland custom geology must remain available"
 
 depth=router["depth"]

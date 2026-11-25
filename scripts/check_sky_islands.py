@@ -47,7 +47,24 @@ assert "top = 187F + 83F" in java, "Independent island altitude variance removed
 assert "float thickness = 9F + 58F" in java, "Pointed underside taper removed"
 assert "for (int spike = 0; spike < 3; spike++)" in java, "Drooping rock points removed"
 assert "if (r >= 1F)" in java, "Hard radial cap removed"
-assert "> 0.84F" in java, "Island occupancy regression"
+assert "clusterContains(worldSeed, cxCell, czCell)" in java, "Sky archipelago group spawning missing"
+assert "Math.floorDiv(cellX, CLUSTER_CELLS)" in java
+assert "Math.floorMod(cellZ, CLUSTER_CELLS)" in java
+assert "if (localX == 1 && localZ == 1) return true;" in java
+assert "NEXT_ISLAND_CHANCE[step - 1]" in java
+import re as _re
+probabilities=_re.search(r"NEXT_ISLAND_CHANCE\s*=\s*\{(.*?)\}",java,_re.S)
+assert probabilities, "No explicit declining island-cluster probability series"
+chance=[float(x.strip().rstrip('Ff')) for x in probabilities.group(1).split(',') if x.strip()]
+assert len(chance)==8
+assert all(0<q<1 for q in chance)
+assert all(chance[i]>chance[i+1] for i in range(7)), "Next island must become LESS likely as a group grows"
+expected=1.0
+survival=1.0
+for q in chance:
+    survival*=q
+    expected+=survival
+assert 2.8 < expected < 5.2, ("Need clusters of several islands, not infinite sky continents",expected)
 assert 'if (mode.equals("solid") && (y < 95 || y > 300))' in java
 
 router=settings["noise_router"]
@@ -59,7 +76,8 @@ assert union["right"]==ns+"sky_island_density"
 assert union["left"]["type"]=="minecraft:lerp", "Vanilla density must control oceans, shores and rivers"
 assert union["left"]["first"]=="minecraft:overworld_large_biomes/final_density"
 assert union["left"]["second"]==ns+"elsewhere_inland_legacy"
-assert union["left"]["alpha"]["type"]=="minecraft:mul"
+assert union["left"]["alpha"]["type"]=="minecraft:max"
+assert union["left"]["alpha"]["right"]["left"]["left"]==ns+"stone_forest_region"
 assert json.dumps(union["left"]).count(ns+"sky_island_density")==0
 depth=router["depth"]
 assert depth["type"]=="minecraft:range_choice"
