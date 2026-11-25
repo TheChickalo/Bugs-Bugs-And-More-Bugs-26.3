@@ -23,7 +23,14 @@ assert '"minecraft:overworld_large_biomes/erosion"' in json.dumps(ecology)
 settings=json.loads((WORLD/"noise_settings/elsewhere.json").read_text())
 union=settings["noise_router"]["final_density"]["when_in_range"]
 assert union["right"]==NS+"sky_island_density"
-land=union["left"]
+terrain=union["left"]
+assert terrain["type"]=="minecraft:max"
+assert terrain["right"]==NS+"snowy_peak_density"
+forest=terrain["left"]
+assert forest["type"]=="minecraft:lerp"
+assert forest["alpha"]==NS+"stone_forest_restoration_region"
+assert forest["second"]==NS+"stone_forest_roof"
+land=forest["first"]
 assert land["first"]=="minecraft:overworld_large_biomes/final_density"
 assert land["second"]==NS+"elsewhere_inland_legacy"
 assert land["alpha"]["type"]=="minecraft:max"

@@ -37,7 +37,14 @@ assert root["type"]=="minecraft:range_choice"
 sky_union=root["when_in_range"]
 assert sky_union["type"]=="minecraft:max"
 assert sky_union["right"]==NS+"sky_island_density"
-land=sky_union["left"]
+terrain=sky_union["left"]
+assert terrain["type"]=="minecraft:max"
+assert terrain["right"]==NS+"snowy_peak_density"
+forestLand=terrain["left"]
+assert forestLand["type"]=="minecraft:lerp"
+assert forestLand["alpha"]==NS+"stone_forest_restoration_region"
+assert forestLand["second"]==NS+"stone_forest_roof"
+land=forestLand["first"]
 assert land["type"]=="minecraft:lerp"
 assert land["first"]==vanilla
 assert land["second"]==NS+"elsewhere_inland_legacy"
