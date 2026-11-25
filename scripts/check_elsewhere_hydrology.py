@@ -83,7 +83,9 @@ assert all(x["parameters"]["weirdness"]==[-1,1] for x in ocean)
 assert 50<=len(river)<=130
 assert all(x["parameters"]["weirdness"]==[-0.045,0.045] for x in river)
 assert all(x["parameters"]["depth"]==0 for x in river)
-assert all(x["parameters"]["continentalness"][0]>=-0.11 for x in river)
+assert all(x["parameters"]["continentalness"][0]>=-0.19 for x in river), (
+    "River mouths may reach the vanilla coast, but never the open ocean"
+)
 assert any(x["biome"]==NS+"ginkgo_forest" for x in rows)
 assert any(x["biome"]==NS+"maple_forest" for x in rows)
 assert any(x["biome"]==NS+"ancient_cedar_rainforest" for x in rows)
