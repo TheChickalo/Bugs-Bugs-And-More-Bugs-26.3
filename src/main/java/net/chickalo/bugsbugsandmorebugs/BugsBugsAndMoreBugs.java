@@ -2,6 +2,7 @@ package net.chickalo.bugsbugsandmorebugs;
 
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.entity.ModEntities;
+import net.chickalo.bugsbugsandmorebugs.entity.snail.SnailContent;
 import net.chickalo.bugsbugsandmorebugs.entity.custom.AntWorkerEntity;
 import net.chickalo.bugsbugsandmorebugs.item.ModItems;
 import net.chickalo.bugsbugsandmorebugs.registries.ModFlammableBlocks;
@@ -36,6 +37,8 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
         ModPaddyTilling.register();
         ModSounds.registerSound();
         ModEntities.registerModEntities();
+        // Register the snail's entity type, spawn egg, attributes, and natural spawns.
+        SnailContent.register();
         ModFlammableBlocks.registerFlammableBlocks();
         ModStrippableBlocks.registerStrippableBlocks();
         ModTrunkPlacerTypes.registerModTrunkPlacerTypes();
