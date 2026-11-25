@@ -89,15 +89,18 @@ assert region_strength(**{"minecraft:overworld_large_biomes/erosion":0.8})==0, (
     "Flat high-erosion terrain must not be overwritten with pillars"
 )
 
+# The original stone_forest_roof uses its alpha as the *valley-carving*
+# mask: near-zero badlands noise selects the low creek floor (second branch).
+# Other noisy columns retain the tall rocky roof (first branch).
 pillars={
- "minecraft:badlands_surface":0.0,
- "minecraft:badlands_pillar":0.6,
+ "minecraft:badlands_surface":0.8,
+ "minecraft:badlands_pillar":0.8,
  "minecraft:surface_secondary":0.2,
  "minecraft:surface":0.0,
 }
 valleys={
- "minecraft:badlands_surface":0.8,
- "minecraft:badlands_pillar":0.8,
+ "minecraft:badlands_surface":0.0,
+ "minecraft:badlands_pillar":0.6,
  "minecraft:surface_secondary":0.8,
  "minecraft:surface":0.8,
 }
