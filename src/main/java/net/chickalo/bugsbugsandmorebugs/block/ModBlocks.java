@@ -1,6 +1,5 @@
 package net.chickalo.bugsbugsandmorebugs.block;
 
-import net.minecraft.world.item.Items;
 import net.minecraft.core.component.DataComponents;
 import java.util.List;
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
@@ -10,6 +9,9 @@ import net.chickalo.bugsbugsandmorebugs.worldgen.tree.ModTreeGrowers;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.item.v1.BlockTransformerHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.component.CookingFuel;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -733,7 +735,8 @@ public class ModBlocks {
                 .setId(ResourceKey.create(Registries.ITEM,
                         Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name)));
         if (name.equals("cannel_block")) {
-            properties.component(DataComponents.COOKING_FUEL, Items.COAL_BLOCK.components().get(DataComponents.COOKING_FUEL));
+            properties.component(DataComponents.COOKING_FUEL, new CookingFuel(
+                    ContextIntProviders.COOKING_TIME_COAL_BLOCK, ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER));
         }
         BlockItem item = switch (name) {
             case "duckweed", "lotus" -> new PlaceOnWaterBlockItem(block, properties);

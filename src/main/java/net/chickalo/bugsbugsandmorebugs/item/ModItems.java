@@ -6,6 +6,9 @@ import net.chickalo.bugsbugsandmorebugs.datagen.ModJukeboxSongs;
 import net.chickalo.bugsbugsandmorebugs.entity.ModEntities;
 import net.chickalo.bugsbugsandmorebugs.food.ModFoods;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.world.item.component.CookingFuel;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -25,7 +28,8 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class ModItems {
-    public static final Item CANNEL = registerItem("cannel", p -> new Item(p.component(DataComponents.COOKING_FUEL, Items.COAL.components().get(DataComponents.COOKING_FUEL))));
+    public static final Item CANNEL = registerItem("cannel", p -> new Item(p.component(DataComponents.COOKING_FUEL, new CookingFuel(
+                    ContextIntProviders.COOKING_TIME_COAL, ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
     public static final Item RAW_FERRUM = registerItem("raw_ferrum", Item::new);
     public static final Item FERRUM_INGOT = registerItem("ferrum_ingot", Item::new);
     public static final Item RAW_CHALCOR = registerItem("raw_chalcor", Item::new);
