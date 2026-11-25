@@ -1,0 +1,46 @@
+{
+  "parent": "bugsbugsandmorebugs:root",
+  "display": {
+    "icon": {
+      "id": "bugsbugsandmorebugs:escargot"
+    },
+    "title": {
+      "translate": "advancements.bugsbugsandmorebugs.was_it_really_worth_it.title"
+    },
+    "description": {
+      "translate": "advancements.bugsbugsandmorebugs.was_it_really_worth_it.description"
+    },
+    "frame": "task",
+    "hidden": true
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "bugsbugsandmorebugs:snail"
+          }
+        }
+      }
+    },
+    "ate": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "bugsbugsandmorebugs:escargot"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "killed"
+    ],
+    [
+      "ate"
+    ]
+  ]
+}

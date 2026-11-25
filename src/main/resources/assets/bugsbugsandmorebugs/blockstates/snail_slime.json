@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "bugsbugsandmorebugs:block/snail_slime_1"
+    },
+    "layers=2": {
+      "model": "bugsbugsandmorebugs:block/snail_slime_2"
+    },
+    "layers=3": {
+      "model": "bugsbugsandmorebugs:block/snail_slime_3"
+    },
+    "layers=4": {
+      "model": "bugsbugsandmorebugs:block/snail_slime_4"
+    }
+  }
+}

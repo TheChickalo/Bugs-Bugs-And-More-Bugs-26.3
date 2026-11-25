@@ -1,0 +1,36 @@
+{
+  "parent": "bugsbugsandmorebugs:living_pet_rock",
+  "display": {
+    "icon": {
+      "id": "bugsbugsandmorebugs:snail_shell"
+    },
+    "title": {
+      "translate": "advancements.bugsbugsandmorebugs.snail_ranching_101.title"
+    },
+    "description": {
+      "translate": "advancements.bugsbugsandmorebugs.snail_ranching_101.description"
+    },
+    "frame": "challenge",
+    "hidden": false
+  },
+  "criteria": {
+    "bred": {
+      "trigger": "minecraft:bred_animals",
+      "conditions": {
+        "child": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "bugsbugsandmorebugs:snail",
+            "minecraft:nbt": "{Variant:5}"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bred"
+    ]
+  ]
+}

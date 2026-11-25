@@ -1,0 +1,38 @@
+{
+  "parent": "bugsbugsandmorebugs:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:name_tag"
+    },
+    "title": {
+      "translate": "advancements.bugsbugsandmorebugs.living_pet_rock.title"
+    },
+    "description": {
+      "translate": "advancements.bugsbugsandmorebugs.living_pet_rock.description"
+    },
+    "frame": "task",
+    "hidden": false
+  },
+  "criteria": {
+    "named": {
+      "trigger": "minecraft:player_interacted_with_entity",
+      "conditions": {
+        "item": {
+          "items": "minecraft:name_tag"
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "bugsbugsandmorebugs:snail"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "named"
+    ]
+  ]
+}

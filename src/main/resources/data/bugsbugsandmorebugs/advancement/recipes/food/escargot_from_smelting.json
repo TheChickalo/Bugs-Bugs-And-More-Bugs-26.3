@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_meat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "bugsbugsandmorebugs:snail_meat"
+          }
+        ]
+      }
+    },
+    "has_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipes": "bugsbugsandmorebugs:escargot_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_meat",
+      "has_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "bugsbugsandmorebugs:escargot_from_smelting"
+    ]
+  }
+}
