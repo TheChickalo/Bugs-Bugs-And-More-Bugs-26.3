@@ -176,7 +176,9 @@ jobs:
           density=json.loads((world/'noise_settings/elsewhere.json').read_text())
           union=density['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
-          final=union['left']
+          assert union['left']['type']=='minecraft:min'
+          assert union['left']['right']['type']=='minecraft:add'
+          final=union['left']['left']
           assert final['alpha']==ns+'bamboo_lowland_region'
           assert (world/'density_function/bamboo_lowland_region.json').exists()
           assert final['second']['type']=='minecraft:min'
@@ -204,7 +206,8 @@ jobs:
           noise=json.loads((world/'noise_settings/elsewhere.json').read_text())
           union=noise['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
-          root=union['left']
+          assert union['left']['type']=='minecraft:min'
+          root=union['left']['left']
           assert root['type']=='minecraft:lerp'
           assert root['alpha']==ns+'bamboo_lowland_region'
           assert root['first']['type']=='minecraft:max'

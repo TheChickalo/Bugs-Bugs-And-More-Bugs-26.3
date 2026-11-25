@@ -24,10 +24,10 @@ public record SkyArchipelagoDensityFunction(String mode) implements DensityFunct
                     .apply(i, SkyArchipelagoDensityFunction::new));
 
     // Max footprint diameter 144 blocks. Even maximally jittered neighbours
-    // have at least 40 blocks of air between their horizontal bounds.
-    public static final int CELL_SIZE = 224;
+    // have at least 24 blocks of air between their horizontal bounds.
+    public static final int CELL_SIZE = 192;
     public static final int MAX_RADIUS = 72;
-    public static final int CENTER_JITTER = 20;
+    public static final int CENTER_JITTER = 12;
     private static final int MIN_RADIUS = 18;
     private static final long SALT_X = 0x9E3779B97F4A7C15L;
     private static final long SALT_Z = 0xC2B2AE3D27D4EB4FL;
@@ -89,7 +89,7 @@ public record SkyArchipelagoDensityFunction(String mode) implements DensityFunct
                 }
 
                 long h = mix64(worldSeed ^ (cxCell * SALT_X) ^ (czCell * SALT_Z));
-                if (unit(h ^ 0x51FA9C6EAA5A9ED5L) > 0.78F) {
+                if (unit(h ^ 0x51FA9C6EAA5A9ED5L) > 0.84F) {
                     continue; // Some cells stay open sky and ocean.
                 }
 

@@ -39,14 +39,15 @@ cell=constants["CELL_SIZE"]
 rmax=constants["MAX_RADIUS"]
 jitter=constants["CENTER_JITTER"]
 rmin=constants["MIN_RADIUS"]
-assert (cell,rmax,jitter,rmin)==(224,72,20,18)
+assert (cell,rmax,jitter,rmin)==(192,72,12,18)
 assert 2*rmax==144, "Maximum island diameter changed"
-assert cell-2*jitter-2*rmax>=36, "Neighbouring cells can touch / create giant sky continents"
+assert cell-2*jitter-2*rmax>=20, "Neighbouring cells can touch / create giant sky continents"
 assert '"mask"' in java and '"solid"' in java
 assert "top = 187F + 83F" in java, "Independent island altitude variance removed"
 assert "float thickness = 9F + 58F" in java, "Pointed underside taper removed"
 assert "for (int spike = 0; spike < 3; spike++)" in java, "Drooping rock points removed"
 assert "if (r >= 1F)" in java, "Hard radial cap removed"
+assert "> 0.84F" in java, "Island occupancy regression"
 assert 'if (mode.equals("solid") && (y < 95 || y > 300))' in java
 
 router=settings["noise_router"]
@@ -55,13 +56,21 @@ assert rootdensity["type"]=="minecraft:range_choice"
 union=rootdensity["when_in_range"]
 assert union["type"]=="minecraft:max"
 assert union["right"]==ns+"sky_island_density"
+assert union["left"]["type"]=="minecraft:min", "Deep ocean terrain must be capped before adding sky islands"
+assert union["left"]["left"]["type"]=="minecraft:lerp"
+assert union["left"]["right"]["type"]=="minecraft:add"
+assert union["left"]["right"]["left"]["type"]=="minecraft:gradient"
+assert union["left"]["right"]["left"]["from_coordinate"]==51
+assert union["left"]["right"]["left"]["to_coordinate"]==68
 assert json.dumps(union["left"]).count(ns+"sky_island_density")==0
 depth=router["depth"]
 assert depth["type"]=="minecraft:range_choice"
 assert depth["input"]==ns+"sky_island_density"
 assert depth["when_in_range"]==-1.8
-assert depth["when_out_of_range"]["min"]==0
-assert depth["when_out_of_range"]["max"]==2
+assert depth["when_out_of_range"]["type"]=="minecraft:lerp"
+assert depth["when_out_of_range"]["second"]==0.8
+assert depth["when_out_of_range"]["first"]["min"]==0
+assert depth["when_out_of_range"]["first"]["max"]==2
 sky_ids={ns+n for n in ("cloudcedar_forest","windcarved_crags","mistfall_gardens","vermilion_isles")}
 climates=dim["generator"]["biome_source"]["biomes"]
 assert sky_ids<={b["biome"] for b in climates}
@@ -79,5 +88,5 @@ for radius in (rmin,34,52,rmax):
             normalized=d/(radius*ax)
             if d>=radius:
                 assert normalized>=1, "Radial cap failed"
-assert cell-2*jitter-2*rmax==40
-print("Bounded sky islands: explicit <=144-block cap, >=40-block separation, altitude/droop checks OK")
+assert cell-2*jitter-2*rmax==24
+print("Bounded sky islands: explicit <=144-block cap, >=24-block separation, altitude/droop checks OK")
