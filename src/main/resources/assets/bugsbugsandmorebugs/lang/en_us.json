@@ -290,7 +290,6 @@
   "item.bugsbugsandmorebugs.persimmon_fruit": "Persimmon Fruit",
   "item.bugsbugsandmorebugs.mimosa_seedpods": "Mimosa Seedpods",
   "block.bugsbugsandmorebugs.clubmoss_lowlying": "Clubmoss Lowlying",
-
   "biome.bugsbugsandmorebugs.cloudcedar_forest": "Cloudcedar Forest",
   "biome.bugsbugsandmorebugs.windcarved_crags": "Windcarved Crags",
   "biome.bugsbugsandmorebugs.mistfall_gardens": "Mistfall Gardens",
@@ -301,5 +300,17 @@
   "item.bugsbugsandmorebugs.cooked_rice": "Cooked Rice",
   "item.bugsbugsandmorebugs.onigiri": "Onigiri",
   "item.bugsbugsandmorebugs.fried_rice": "Fried Rice",
-  "item.bugsbugsandmorebugs.mochi": "Mochi"
+  "item.bugsbugsandmorebugs.mochi": "Mochi",
+  "entity.bugsbugsandmorebugs.snail": "Snail",
+  "item.bugsbugsandmorebugs.snail_spawn_egg": "Snail Spawn Egg",
+  "block.bugsbugsandmorebugs.snail_slime": "Snail Slime",
+  "item.bugsbugsandmorebugs.snail_shell": "Snail Shell",
+  "item.bugsbugsandmorebugs.snail_meat": "Snail Meat",
+  "item.bugsbugsandmorebugs.escargot": "Escargot",
+  "advancements.bugsbugsandmorebugs.living_pet_rock.title": "Living Pet Rock",
+  "advancements.bugsbugsandmorebugs.living_pet_rock.description": "Give a snail a name.",
+  "advancements.bugsbugsandmorebugs.was_it_really_worth_it.title": "Was It Really Worth It?",
+  "advancements.bugsbugsandmorebugs.was_it_really_worth_it.description": "Kill a snail and eat escargot.",
+  "advancements.bugsbugsandmorebugs.snail_ranching_101.title": "Snail Ranching 101",
+  "advancements.bugsbugsandmorebugs.snail_ranching_101.description": "Breed a melanistic snail."
 }
