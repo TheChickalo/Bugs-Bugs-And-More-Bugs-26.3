@@ -7890,7 +7890,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -7917,7 +7917,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -7944,7 +7944,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -8133,7 +8133,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -8160,7 +8160,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -8187,7 +8187,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -12021,7 +12021,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:hinoki_highlands",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -12048,7 +12048,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:hinoki_highlands",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -12075,7 +12075,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:hinoki_highlands",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -1,
@@ -12264,7 +12264,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:mossy_hinoki_grove",
           "parameters": {
             "temperature": [
               -1,
@@ -12291,7 +12291,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:mossy_hinoki_grove",
           "parameters": {
             "temperature": [
               -1,
@@ -12318,7 +12318,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:mossy_hinoki_grove",
           "parameters": {
             "temperature": [
               -1,
@@ -12750,7 +12750,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -0.45,
@@ -12777,7 +12777,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -0.45,
@@ -12804,7 +12804,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:highland_karst",
+          "biome": "bugsbugsandmorebugs:snowy_peak",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13236,7 +13236,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13263,7 +13263,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13290,7 +13290,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13317,7 +13317,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13344,7 +13344,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13479,7 +13479,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13506,7 +13506,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -13533,7 +13533,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               -0.45,
@@ -14208,7 +14208,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14235,7 +14235,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14262,7 +14262,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14289,7 +14289,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14316,7 +14316,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14451,7 +14451,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14478,7 +14478,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -14505,7 +14505,7 @@
           }
         },
         {
-          "biome": "bugsbugsandmorebugs:stone_forest",
+          "biome": "bugsbugsandmorebugs:hinoki_highlands",
           "parameters": {
             "temperature": [
               0,
@@ -16887,6 +16887,237 @@
               1
             ],
             "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.36,
+            "humidity": -0.28,
+            "continentalness": 0.56,
+            "erosion": 0.17,
+            "depth": 0,
+            "weirdness": -0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.36,
+            "humidity": -0.28,
+            "continentalness": 0.56,
+            "erosion": 0.17,
+            "depth": 0,
+            "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.36,
+            "humidity": -0.28,
+            "continentalness": 0.56,
+            "erosion": 0.17,
+            "depth": 0,
+            "weirdness": 0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.28,
+            "humidity": -0.4,
+            "continentalness": 0.52,
+            "erosion": 0.29,
+            "depth": 0,
+            "weirdness": -0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.28,
+            "humidity": -0.4,
+            "continentalness": 0.52,
+            "erosion": 0.29,
+            "depth": 0,
+            "weirdness": 0.09,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.44,
+            "humidity": -0.18,
+            "continentalness": 0.61,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": -0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.44,
+            "humidity": -0.18,
+            "continentalness": 0.61,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": -0.44,
+            "humidity": -0.18,
+            "continentalness": 0.61,
+            "erosion": 0.12,
+            "depth": 0,
+            "weirdness": 0.21,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.54,
+              -0.18
+            ],
+            "humidity": [
+              -0.52,
+              -0.08
+            ],
+            "continentalness": [
+              0.48,
+              0.68
+            ],
+            "erosion": [
+              0.05,
+              0.35
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.49,
+              -0.2
+            ],
+            "humidity": [
+              -0.4,
+              -0.05
+            ],
+            "continentalness": [
+              0.52,
+              0.68
+            ],
+            "erosion": [
+              0.08,
+              0.32
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.35,
+              0.35
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.6,
+              -0.12
+            ],
+            "humidity": [
+              -0.52,
+              -0.065
+            ],
+            "continentalness": [
+              0.4,
+              0.78
+            ],
+            "erosion": [
+              0.04,
+              0.45
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.43,
+              0.43
+            ],
+            "offset": 0.006
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.54,
+              -0.18
+            ],
+            "humidity": [
+              -0.47,
+              -0.085
+            ],
+            "continentalness": [
+              0.46,
+              0.82
+            ],
+            "erosion": [
+              0.02,
+              0.4
+            ],
+            "depth": 0,
+            "weirdness": [
+              -0.72,
+              -0.42
+            ],
+            "offset": 0.009
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:stone_forest",
+          "parameters": {
+            "temperature": [
+              -0.54,
+              -0.18
+            ],
+            "humidity": [
+              -0.47,
+              -0.085
+            ],
+            "continentalness": [
+              0.46,
+              0.82
+            ],
+            "erosion": [
+              0.02,
+              0.4
+            ],
+            "depth": 0,
+            "weirdness": [
+              0.42,
+              0.72
+            ],
+            "offset": 0.009
           }
         }
       ]

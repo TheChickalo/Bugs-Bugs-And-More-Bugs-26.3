@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:sub",
+  "left": {
+    "type": "minecraft:mul",
+    "left": "bugsbugsandmorebugs:snowy_peak_region",
+    "right": {
+      "type": "minecraft:add",
+      "left": {
+        "type": "minecraft:add",
+        "left": {
+          "type": "minecraft:gradient",
+          "axis": "y",
+          "from_coordinate": 95,
+          "from_value": 5.2,
+          "to_coordinate": 255,
+          "to_value": -2.2
+        },
+        "right": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:noise",
+            "noise": "minecraft:surface",
+            "xz_scale": 0.029,
+            "y_scale": 0
+          },
+          "right": 1.25
+        }
+      },
+      "right": {
+        "type": "minecraft:add",
+        "left": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:noise",
+            "noise": "minecraft:surface_secondary",
+            "xz_scale": 0.087,
+            "y_scale": 0
+          },
+          "right": 0.48
+        },
+        "right": {
+          "type": "minecraft:mul",
+          "left": "minecraft:overworld/ridges",
+          "right": 0.5
+        }
+      }
+    }
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": {
+      "type": "minecraft:sub",
+      "left": 1,
+      "right": "bugsbugsandmorebugs:snowy_peak_region"
+    },
+    "right": 3.6
+  }
+}
