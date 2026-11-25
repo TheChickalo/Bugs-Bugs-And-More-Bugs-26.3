@@ -98,9 +98,8 @@ jobs:
           assert sum(x['biome']=='bugsbugsandmorebugs:volcanic_peak' for x in climates)>=5
           assert sum(x['biome']=='bugsbugsandmorebugs:bamboo_marsh' for x in climates)>=3
           aquifer=density['aquifers']['surface_level']
-          assert aquifer['type']=='minecraft:min'
-          assert aquifer['left']=='minecraft:overworld_large_biomes/preliminary_surface_level'
-          assert aquifer['right']==62, 'Cap the mismatch with custom karst terrain'
+          assert aquifer=='minecraft:overworld_large_biomes/preliminary_surface_level'
+          assert density['sea_level']==63, 'Use vanilla sea level for river and ocean water'
           assert 'minecraft:visual/cloud_height' not in stone_biome['attributes']
           assert stone['alpha']['type']=='minecraft:max', 'Keep original valleys plus extra pillar paths'
           assert stone['alpha']['right']['type']=='minecraft:max', 'Missing narrow freestanding pillar channels'
@@ -176,9 +175,10 @@ jobs:
           density=json.loads((world/'noise_settings/elsewhere.json').read_text())
           union=density['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
-          assert union['left']['type']=='minecraft:min'
-          assert union['left']['right']['type']=='minecraft:add'
-          final=union['left']['left']
+          assert union['left']['type']=='minecraft:lerp'
+          assert union['left']['first']=='minecraft:overworld_large_biomes/final_density'
+          assert union['left']['second']==ns+'elsewhere_inland_legacy'
+          final=json.loads((world/'density_function/elsewhere_inland_legacy.json').read_text())
           assert final['alpha']==ns+'bamboo_lowland_region'
           assert (world/'density_function/bamboo_lowland_region.json').exists()
           assert final['second']['type']=='minecraft:min'
@@ -206,8 +206,9 @@ jobs:
           noise=json.loads((world/'noise_settings/elsewhere.json').read_text())
           union=noise['noise_router']['final_density']['when_in_range']
           assert union['type']=='minecraft:max' and union['right']==ns+'sky_island_density'
-          assert union['left']['type']=='minecraft:min'
-          root=union['left']['left']
+          assert union['left']['type']=='minecraft:lerp'
+          assert union['left']['first']=='minecraft:overworld_large_biomes/final_density'
+          root=json.loads((world/'density_function/elsewhere_inland_legacy.json').read_text())
           assert root['type']=='minecraft:lerp'
           assert root['alpha']==ns+'bamboo_lowland_region'
           assert root['first']['type']=='minecraft:max'
