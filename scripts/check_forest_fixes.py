@@ -211,9 +211,14 @@ assert "ParticleTypes.RAIN" not in rain_java, "No fake rainforest raindrop spam"
 dimension_biomes = climates
 willow_params = [b["parameters"] for b in dimension_biomes
                  if b["biome"] == "bugsbugsandmorebugs:willow_backwaters"]
-assert len(willow_params) == 30
-assert all(-0.15 <= p["continentalness"] <= 0.34 for p in willow_params)
-assert all(abs(p["weirdness"]) <= 0.06 for p in willow_params)
+assert len(willow_params) >= 30
+assert all(-0.19 <= interval(p["continentalness"])[0]
+           and interval(p["continentalness"])[1] <= 0.30 for p in willow_params), (
+    "Willow Backwaters should occupy coasts and gentle lowlands, not the entire continent"
+)
+assert any(interval(p["weirdness"])[1] >= 0.15 for p in willow_params), (
+    "Willow wetlands should appear beyond river channels"
+)
 assert sum(b["biome"] == "bugsbugsandmorebugs:river" for b in dimension_biomes) >= 18
 
 
