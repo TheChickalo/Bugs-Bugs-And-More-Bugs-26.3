@@ -21,6 +21,14 @@ import java.util.List;
 
 
 public class ModPlacedFeatures {
+    public static final List<ResourceKey<PlacedFeature>> ELSEWHERE_BASE_ORES = List.of(
+            registerKey("ore_cannel"),
+            registerKey("ore_ferrum"),
+            registerKey("ore_chalcor"),
+            registerKey("ore_electrum"),
+            registerKey("ore_corundum"),
+            registerKey("ore_indium"));
+
     // Smaller biome variants reuse the registered tree / plant configurations.
     public static final ResourceKey<PlacedFeature> GINKGO_ANCIENT_STAND_PLACED_KEY = registerKey("ginkgo_ancient_stand_placed");
     public static final ResourceKey<PlacedFeature> GINKGO_SCATTERED_PLACED_KEY = registerKey("ginkgo_scattered_placed");

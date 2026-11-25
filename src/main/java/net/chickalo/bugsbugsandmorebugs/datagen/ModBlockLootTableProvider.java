@@ -61,6 +61,9 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
 
     @Override
     public void generate() {
+        // Host-specific ore drops are supplied in src/main/resources.
+        ModBlocks.BASE_ORES.forEach(this::excludeFromStrictValidation);
+        ModBlocks.MINERAL_STORAGE_BLOCKS.forEach(this::dropSelf);
         add(ModBlocks.ALPINE_GRASS, this::createShearsOnlyDrop);
         add(ModBlocks.HAKONE_GRASS, this::createShearsOnlyDrop);
         dropSelf(ModBlocks.IRIS_FLOWER);

@@ -57,6 +57,8 @@ public class ModModelProvider extends FabricModelProvider {
                 .stairs(ModBlocks.AMPHIBOLITE_BRICK_STAIRS)
                 .slab(ModBlocks.AMPHIBOLITE_BRICK_SLAB)
                 .wall(ModBlocks.AMPHIBOLITE_BRICK_WALL);
+        ModBlocks.BASE_ORES.forEach(blockModelGenerators::createTrivialCube);
+        ModBlocks.MINERAL_STORAGE_BLOCKS.forEach(blockModelGenerators::createTrivialCube);
         blockModelGenerators.createTrivialCube(ModBlocks.MOSSY_RHYOLITE);
         blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_AMPHIBOLITE);
         blockModelGenerators.createTrivialCube(ModBlocks.CHISELED_AMPHIBOLITE_BRICKS);
@@ -203,6 +205,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
+        ModItems.MINING_MATERIALS.forEach(item -> itemModelGenerators.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
         itemModelGenerators.generateFlatItem(ModItems.EXOSKELETON, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.AMEISENHAUFEN_MUSIC_DISC, ModelTemplates.FLAT_ITEM);
         itemModelGenerators.generateFlatItem(ModItems.DAIKON, ModelTemplates.FLAT_ITEM);

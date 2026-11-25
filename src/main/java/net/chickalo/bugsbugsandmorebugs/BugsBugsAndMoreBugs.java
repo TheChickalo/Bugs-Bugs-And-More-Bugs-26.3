@@ -1,5 +1,6 @@
 package net.chickalo.bugsbugsandmorebugs;
 
+import net.chickalo.bugsbugsandmorebugs.worldgen.dimension.ModDimensions;
 import net.chickalo.bugsbugsandmorebugs.block.ModBlocks;
 import net.chickalo.bugsbugsandmorebugs.entity.ModEntities;
 import net.chickalo.bugsbugsandmorebugs.entity.snail.SnailContent;
@@ -46,6 +47,10 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
         ModTreeDecoratorTypes.register();
         ModFeatureTypes.register();
         ModDensityFunctionTypes.register();
+        for (var ore : ModPlacedFeatures.ELSEWHERE_BASE_ORES) {
+            BiomeModifications.addFeature(context -> context.canGenerateIn(ModDimensions.ELSEWHEREDIM_KEY),
+                    GenerationStep.Decoration.UNDERGROUND_ORES, ore);
+        }
         BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(Biomes.RIVER),
                 GenerationStep.Decoration.VEGETAL_DECORATION,

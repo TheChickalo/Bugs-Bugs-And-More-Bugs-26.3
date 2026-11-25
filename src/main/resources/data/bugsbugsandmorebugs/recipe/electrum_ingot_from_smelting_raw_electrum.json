@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "electrum_ingot",
+  "ingredient": "bugsbugsandmorebugs:raw_electrum",
+  "result": {
+    "id": "bugsbugsandmorebugs:electrum_ingot"
+  },
+  "cookingtime": 200,
+  "experience": 1.0
+}

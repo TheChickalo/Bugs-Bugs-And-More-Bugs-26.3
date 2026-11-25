@@ -25,6 +25,29 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class ModItems {
+    public static final Item CANNEL = registerItem("cannel", p -> new Item(p.component(DataComponents.COOKING_FUEL, Items.COAL.components().get(DataComponents.COOKING_FUEL))));
+    public static final Item RAW_FERRUM = registerItem("raw_ferrum", Item::new);
+    public static final Item FERRUM_INGOT = registerItem("ferrum_ingot", Item::new);
+    public static final Item RAW_CHALCOR = registerItem("raw_chalcor", Item::new);
+    public static final Item CHALCOR_INGOT = registerItem("chalcor_ingot", Item::new);
+    public static final Item RAW_ELECTRUM = registerItem("raw_electrum", Item::new);
+    public static final Item ELECTRUM_INGOT = registerItem("electrum_ingot", Item::new);
+    public static final Item CORUNDUM_DUST = registerItem("corundum_dust", Item::new);
+    public static final Item RAW_INDIUM = registerItem("raw_indium", Item::new);
+    public static final Item INDIUM_INGOT = registerItem("indium_ingot", Item::new);
+
+    public static final List<Item> MINING_MATERIALS = List.of(
+            CANNEL,
+            RAW_FERRUM,
+            FERRUM_INGOT,
+            RAW_CHALCOR,
+            CHALCOR_INGOT,
+            RAW_ELECTRUM,
+            ELECTRUM_INGOT,
+            CORUNDUM_DUST,
+            RAW_INDIUM,
+            INDIUM_INGOT);
+
     public static final Item EXOSKELETON = registerItem("exoskeleton", Item::new);
     public static final Item AMEISENHAUFEN_MUSIC_DISC = registerItem("ameisenhaufen_music_disc", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSongs.AMEISENHAUFEN_KEY).stacksTo(1).rarity(Rarity.RARE)));
     public static final Item ANTWORKER_SPAWN_EGG = registerItem("antworker_spawn_egg",
@@ -78,6 +101,7 @@ public class ModItems {
         BugsBugsAndMoreBugs.LOGGER.info("Registering Mod Items for " + BugsBugsAndMoreBugs.MOD_ID);
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
+            MINING_MATERIALS.forEach(output::accept);
             output.accept(EXOSKELETON);
         });
 

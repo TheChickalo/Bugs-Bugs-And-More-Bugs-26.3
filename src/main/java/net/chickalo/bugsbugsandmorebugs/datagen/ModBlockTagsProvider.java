@@ -16,6 +16,9 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
+        var mineralPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
+        ModBlocks.BASE_ORES.forEach(block -> mineralPickaxe.add(ModBlocks.getRK(block)));
+        ModBlocks.MINERAL_STORAGE_BLOCKS.forEach(block -> mineralPickaxe.add(ModBlocks.getRK(block)));
         // Elsewhere secondary rock mining tags
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.getRK(ModBlocks.DACITE))

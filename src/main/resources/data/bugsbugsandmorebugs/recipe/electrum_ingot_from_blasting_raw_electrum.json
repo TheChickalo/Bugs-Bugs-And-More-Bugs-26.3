@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "electrum_ingot",
+  "ingredient": "bugsbugsandmorebugs:raw_electrum",
+  "result": {
+    "id": "bugsbugsandmorebugs:electrum_ingot"
+  },
+  "cookingtime": 100,
+  "experience": 1.0
+}

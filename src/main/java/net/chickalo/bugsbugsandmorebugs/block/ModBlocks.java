@@ -1,5 +1,8 @@
 package net.chickalo.bugsbugsandmorebugs.block;
 
+import net.minecraft.world.item.Items;
+import net.minecraft.core.component.DataComponents;
+import java.util.List;
 import net.chickalo.bugsbugsandmorebugs.BugsBugsAndMoreBugs;
 import net.chickalo.bugsbugsandmorebugs.block.custom.*;
 import net.chickalo.bugsbugsandmorebugs.worldgen.ModFeatures;
@@ -40,6 +43,46 @@ public class ModBlocks {
     public static final Block TEMP_PORTAL = registerBlock("portal",
             properties -> new TempPortal(properties.strength(3f)));
 
+
+    public static final Block RHYOLITE_CANNEL_ORE = registerMineralBlock("rhyolite_cannel_ore", 3.0F, SoundType.STONE);
+    public static final Block SCHIST_CANNEL_ORE = registerMineralBlock("schist_cannel_ore", 4.5F, SoundType.STONE);
+    public static final Block CANNEL_BLOCK = registerMineralBlock("cannel_block", 5.0F, SoundType.STONE);
+    public static final Block RHYOLITE_FERRUM_ORE = registerMineralBlock("rhyolite_ferrum_ore", 3.0F, SoundType.STONE);
+    public static final Block SCHIST_FERRUM_ORE = registerMineralBlock("schist_ferrum_ore", 4.5F, SoundType.STONE);
+    public static final Block FERRUM_BLOCK = registerMineralBlock("ferrum_block", 5.0F, SoundType.METAL);
+    public static final Block RHYOLITE_CHALCOR_ORE = registerMineralBlock("rhyolite_chalcor_ore", 3.0F, SoundType.STONE);
+    public static final Block SCHIST_CHALCOR_ORE = registerMineralBlock("schist_chalcor_ore", 4.5F, SoundType.STONE);
+    public static final Block CHALCOR_BLOCK = registerMineralBlock("chalcor_block", 5.0F, SoundType.METAL);
+    public static final Block RHYOLITE_ELECTRUM_ORE = registerMineralBlock("rhyolite_electrum_ore", 3.0F, SoundType.STONE);
+    public static final Block SCHIST_ELECTRUM_ORE = registerMineralBlock("schist_electrum_ore", 4.5F, SoundType.STONE);
+    public static final Block ELECTRUM_BLOCK = registerMineralBlock("electrum_block", 5.0F, SoundType.METAL);
+    public static final Block RHYOLITE_CORUNDUM_ORE = registerMineralBlock("rhyolite_corundum_ore", 3.0F, SoundType.STONE);
+    public static final Block SCHIST_CORUNDUM_ORE = registerMineralBlock("schist_corundum_ore", 4.5F, SoundType.STONE);
+    public static final Block CORUNDUM_BLOCK = registerMineralBlock("corundum_block", 5.0F, SoundType.STONE);
+    public static final Block RHYOLITE_INDIUM_ORE = registerMineralBlock("rhyolite_indium_ore", 3.0F, SoundType.STONE);
+    public static final Block SCHIST_INDIUM_ORE = registerMineralBlock("schist_indium_ore", 4.5F, SoundType.STONE);
+    public static final Block INDIUM_BLOCK = registerMineralBlock("indium_block", 5.0F, SoundType.METAL);
+
+    public static final List<Block> BASE_ORES = List.of(
+            RHYOLITE_CANNEL_ORE,
+            SCHIST_CANNEL_ORE,
+            RHYOLITE_FERRUM_ORE,
+            SCHIST_FERRUM_ORE,
+            RHYOLITE_CHALCOR_ORE,
+            SCHIST_CHALCOR_ORE,
+            RHYOLITE_ELECTRUM_ORE,
+            SCHIST_ELECTRUM_ORE,
+            RHYOLITE_CORUNDUM_ORE,
+            SCHIST_CORUNDUM_ORE,
+            RHYOLITE_INDIUM_ORE,
+            SCHIST_INDIUM_ORE);
+    public static final List<Block> MINERAL_STORAGE_BLOCKS = List.of(
+            CANNEL_BLOCK,
+            FERRUM_BLOCK,
+            CHALCOR_BLOCK,
+            ELECTRUM_BLOCK,
+            CORUNDUM_BLOCK,
+            INDIUM_BLOCK);
 
     // Rhyolite family
     public static final Block RHYOLITE = registerBlock("rhyolite",
@@ -670,6 +713,10 @@ public class ModBlocks {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();
     }
 
+    private static Block registerMineralBlock(String name, float hardness, SoundType sound) {
+        return registerBlock(name, p -> new Block(p.strength(hardness, 6.0F).requiresCorrectToolForDrops().sound(sound)));
+    }
+
     private static Block registerBlock(String name, Function<BlockBehaviour.Properties, Block> function) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name))));
         registerBlockItem(name, toRegister);
@@ -685,6 +732,9 @@ public class ModBlocks {
         Item.Properties properties = new Item.Properties().useBlockDescriptionPrefix()
                 .setId(ResourceKey.create(Registries.ITEM,
                         Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name)));
+        if (name.equals("cannel_block")) {
+            properties.component(DataComponents.COOKING_FUEL, Items.COAL_BLOCK.components().get(DataComponents.COOKING_FUEL));
+        }
         BlockItem item = switch (name) {
             case "duckweed", "lotus" -> new PlaceOnWaterBlockItem(block, properties);
             case "lotus_flower" -> new LotusFlowerItem(block, properties);
