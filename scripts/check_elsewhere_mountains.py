@@ -73,7 +73,8 @@ for biome in ("highland_karst","highland_wildflower_meadow","limestone_scrubland
 stone=next(r for r in material["sequence"] if r.get("if_true",{}).get("biome_is")==NS+"stone_forest")
 assert stone["then_run"]["then_run"]["sequence"][1]["then_run"]["if_true"]["min_threshold"]==0.85
 snowy=next(r for r in material["sequence"] if r.get("if_true",{}).get("biome_is")==NS+"snowy_peak")
-assert any(r.get("if_true",{}).get("type")=="minecraft:above_preliminary_surface"
+assert any(isinstance(r.get("if_true"),dict)
+           and r["if_true"].get("type")=="minecraft:above_preliminary_surface"
            and r.get("then_run",{}).get("result_state")==NS+"dacite"
            for r in snowy["then_run"]["sequence"])
 print("Stone Forest region, mountain-range chains, rock palette, snow and ice wiring passed")
