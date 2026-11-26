@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "cannel",
+  "ingredient": "bugsbugsandmorebugs:rhyolite_cannel_ore",
+  "result": {
+    "id": "bugsbugsandmorebugs:cannel"
+  },
+  "cookingtime": 200,
+  "experience": 0.1
+}

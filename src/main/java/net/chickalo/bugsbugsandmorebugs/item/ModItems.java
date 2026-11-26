@@ -6,6 +6,9 @@ import net.chickalo.bugsbugsandmorebugs.datagen.ModJukeboxSongs;
 import net.chickalo.bugsbugsandmorebugs.entity.ModEntities;
 import net.chickalo.bugsbugsandmorebugs.food.ModFoods;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.minecraft.world.item.component.CookingFuel;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +28,30 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class ModItems {
+    public static final Item CANNEL = registerItem("cannel", p -> new Item(p.component(DataComponents.COOKING_FUEL, new CookingFuel(
+                    ContextIntProviders.COOKING_TIME_COAL, ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER))));
+    public static final Item RAW_FERRUM = registerItem("raw_ferrum", Item::new);
+    public static final Item FERRUM_INGOT = registerItem("ferrum_ingot", Item::new);
+    public static final Item RAW_CHALCOR = registerItem("raw_chalcor", Item::new);
+    public static final Item CHALCOR_INGOT = registerItem("chalcor_ingot", Item::new);
+    public static final Item RAW_ELECTRUM = registerItem("raw_electrum", Item::new);
+    public static final Item ELECTRUM_INGOT = registerItem("electrum_ingot", Item::new);
+    public static final Item CORUNDUM_DUST = registerItem("corundum_dust", Item::new);
+    public static final Item RAW_INDIUM = registerItem("raw_indium", Item::new);
+    public static final Item INDIUM_INGOT = registerItem("indium_ingot", Item::new);
+
+    public static final List<Item> MINING_MATERIALS = List.of(
+            CANNEL,
+            RAW_FERRUM,
+            FERRUM_INGOT,
+            RAW_CHALCOR,
+            CHALCOR_INGOT,
+            RAW_ELECTRUM,
+            ELECTRUM_INGOT,
+            CORUNDUM_DUST,
+            RAW_INDIUM,
+            INDIUM_INGOT);
+
     public static final Item EXOSKELETON = registerItem("exoskeleton", Item::new);
     public static final Item AMEISENHAUFEN_MUSIC_DISC = registerItem("ameisenhaufen_music_disc", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSongs.AMEISENHAUFEN_KEY).stacksTo(1).rarity(Rarity.RARE)));
     public static final Item ANTWORKER_SPAWN_EGG = registerItem("antworker_spawn_egg",
@@ -78,6 +105,7 @@ public class ModItems {
         BugsBugsAndMoreBugs.LOGGER.info("Registering Mod Items for " + BugsBugsAndMoreBugs.MOD_ID);
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS).register(output -> {
+            MINING_MATERIALS.forEach(output::accept);
             output.accept(EXOSKELETON);
         });
 

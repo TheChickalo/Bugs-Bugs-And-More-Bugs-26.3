@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "corundum_dust",
+  "ingredient": "bugsbugsandmorebugs:rhyolite_corundum_ore",
+  "result": {
+    "id": "bugsbugsandmorebugs:corundum_dust"
+  },
+  "cookingtime": 100,
+  "experience": 0.7
+}

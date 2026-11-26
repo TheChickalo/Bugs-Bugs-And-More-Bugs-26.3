@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "indium_ingot",
+  "ingredient": "bugsbugsandmorebugs:raw_indium",
+  "result": {
+    "id": "bugsbugsandmorebugs:indium_ingot"
+  },
+  "cookingtime": 200,
+  "experience": 1.0
+}
