@@ -9,39 +9,28 @@
     "exclusion": {
       "type": "minecraft:max",
       "left": {
-        "type": "minecraft:max",
+        "type": "minecraft:min",
         "left": {
-          "type": "minecraft:min",
-          "left": {
-            "type": "minecraft:sub",
-            "left": -0.225,
-            "right": "minecraft:overworld_large_biomes/erosion"
-          },
-          "right": {
-            "type": "minecraft:max",
-            "left": {
-              "type": "minecraft:sub",
-              "left": "minecraft:overworld/depth",
-              "right": 0.9
-            },
-            "right": 0
-          }
+          "type": "minecraft:sub",
+          "left": -0.225,
+          "right": "minecraft:overworld_large_biomes/erosion"
         },
         "right": {
-          "type": "minecraft:gradient",
-          "axis": "y",
-          "from_coordinate": -45,
-          "from_value": 1,
-          "to_coordinate": -39,
-          "to_value": -1
+          "type": "minecraft:max",
+          "left": {
+            "type": "minecraft:sub",
+            "left": "minecraft:overworld/depth",
+            "right": 0.9
+          },
+          "right": 0
         }
       },
       "right": {
         "type": "minecraft:gradient",
         "axis": "y",
-        "from_coordinate": -65,
+        "from_coordinate": -70,
         "from_value": 6,
-        "to_coordinate": -42,
+        "to_coordinate": -59,
         "to_value": -6
       }
     },
@@ -136,15 +125,78 @@
           "input": {
             "type": "minecraft:gradient",
             "axis": "y",
-            "from_coordinate": -128,
-            "from_value": -128,
+            "from_coordinate": -192,
+            "from_value": -192,
             "to_coordinate": 640,
             "to_value": 640
           },
-          "min_inclusive": -128,
-          "max_exclusive": -55,
+          "min_inclusive": -192,
+          "max_exclusive": -128,
           "when_in_range": 2,
-          "when_out_of_range": 0
+          "when_out_of_range": {
+            "type": "minecraft:range_choice",
+            "input": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": -192,
+              "from_value": -192,
+              "to_coordinate": 640,
+              "to_value": 640
+            },
+            "min_inclusive": -128,
+            "max_exclusive": -59,
+            "when_in_range": 1.8,
+            "when_out_of_range": {
+              "type": "minecraft:range_choice",
+              "input": {
+                "type": "minecraft:gradient",
+                "axis": "y",
+                "from_coordinate": -192,
+                "from_value": -192,
+                "to_coordinate": 640,
+                "to_value": 640
+              },
+              "min_inclusive": -59,
+              "max_exclusive": 0,
+              "when_in_range": {
+                "type": "minecraft:range_choice",
+                "input": "minecraft:overworld/depth",
+                "min_inclusive": 0.3,
+                "max_exclusive": 10,
+                "when_in_range": 1.4,
+                "when_out_of_range": 0
+              },
+              "when_out_of_range": {
+                "type": "minecraft:range_choice",
+                "input": {
+                  "type": "minecraft:gradient",
+                  "axis": "y",
+                  "from_coordinate": -192,
+                  "from_value": -192,
+                  "to_coordinate": 640,
+                  "to_value": 640
+                },
+                "min_inclusive": 0,
+                "max_exclusive": 40,
+                "when_in_range": {
+                  "type": "minecraft:range_choice",
+                  "input": "minecraft:overworld_large_biomes/continents",
+                  "min_inclusive": -0.19,
+                  "max_exclusive": 2,
+                  "when_in_range": {
+                    "type": "minecraft:range_choice",
+                    "input": "minecraft:overworld/depth",
+                    "min_inclusive": 0.3,
+                    "max_exclusive": 10,
+                    "when_in_range": 1,
+                    "when_out_of_range": 0
+                  },
+                  "when_out_of_range": 0
+                },
+                "when_out_of_range": 0
+              }
+            }
+          }
         }
       }
     },
@@ -204,6 +256,18 @@
     {
       "label": "Snowy mountain density",
       "function": "bugsbugsandmorebugs:snowy_peak_density"
+    },
+    {
+      "label": "Upper cave restoration mask",
+      "function": "bugsbugsandmorebugs:upper_cave_mask"
+    },
+    {
+      "label": "Schist cave mask",
+      "function": "bugsbugsandmorebugs:schist_cave_mask"
+    },
+    {
+      "label": "Eclogite underside",
+      "function": "bugsbugsandmorebugs:underhang_underside"
     }
   ],
   "default_block": "bugsbugsandmorebugs:rhyolite",
@@ -212,8 +276,8 @@
   "legacy_random_source": false,
   "material_rule": "bugsbugsandmorebugs:elsewhere",
   "noise": {
-    "height": 768,
-    "min_y": -128
+    "height": 832,
+    "min_y": -192
   },
   "noise_router": {
     "chunk_surface_level": "minecraft:overworld_large_biomes/chunk_surface_level",
@@ -229,136 +293,325 @@
         "input": {
           "type": "minecraft:gradient",
           "axis": "y",
-          "from_coordinate": -128,
-          "from_value": -128,
+          "from_coordinate": -192,
+          "from_value": -192,
           "to_coordinate": 640,
           "to_value": 640
         },
-        "min_inclusive": -128,
-        "max_exclusive": -55,
+        "min_inclusive": -192,
+        "max_exclusive": -128,
         "when_in_range": 2,
-        "when_out_of_range": 0
-      }
-    },
-    "erosion": "minecraft:overworld_large_biomes/erosion",
-    "final_density": {
-      "type": "minecraft:range_choice",
-      "input": {
-        "type": "minecraft:gradient",
-        "axis": "y",
-        "from_coordinate": -128,
-        "from_value": -128,
-        "to_coordinate": 640,
-        "to_value": 640
-      },
-      "min_inclusive": -16,
-      "max_exclusive": 640,
-      "when_in_range": {
-        "type": "minecraft:max",
-        "left": {
-          "type": "minecraft:max",
-          "left": {
-            "type": "minecraft:lerp",
-            "alpha": "bugsbugsandmorebugs:stone_forest_restoration_region",
-            "first": {
-              "type": "minecraft:lerp",
-              "alpha": {
-                "type": "minecraft:max",
-                "left": {
-                  "type": "minecraft:mul",
-                  "left": {
-                    "type": "minecraft:clamp",
-                    "input": {
-                      "type": "minecraft:mul",
-                      "left": {
-                        "type": "minecraft:sub",
-                        "left": "minecraft:overworld_large_biomes/continents",
-                        "right": 0.03
-                      },
-                      "right": 5
-                    },
-                    "min": 0,
-                    "max": 1
-                  },
-                  "right": {
-                    "type": "minecraft:clamp",
-                    "input": {
-                      "type": "minecraft:mul",
-                      "left": {
-                        "type": "minecraft:sub",
-                        "left": {
-                          "type": "minecraft:abs",
-                          "input": "minecraft:overworld/ridges"
-                        },
-                        "right": 0.085
-                      },
-                      "right": 8
-                    },
-                    "min": 0,
-                    "max": 1
-                  }
-                },
-                "right": {
-                  "type": "minecraft:mul",
-                  "left": {
-                    "type": "minecraft:mul",
-                    "left": "bugsbugsandmorebugs:stone_forest_region",
-                    "right": {
-                      "type": "minecraft:clamp",
-                      "input": {
-                        "type": "minecraft:mul",
-                        "left": {
-                          "type": "minecraft:sub",
-                          "left": "minecraft:overworld_large_biomes/continents",
-                          "right": 0.29
-                        },
-                        "right": 9
-                      },
-                      "min": 0,
-                      "max": 1
-                    }
-                  },
-                  "right": 0.98
-                }
-              },
-              "first": "minecraft:overworld_large_biomes/final_density",
-              "second": "bugsbugsandmorebugs:elsewhere_inland_legacy"
-            },
-            "second": "bugsbugsandmorebugs:stone_forest_roof"
-          },
-          "right": "bugsbugsandmorebugs:snowy_peak_density"
-        },
-        "right": "bugsbugsandmorebugs:sky_island_density"
-      },
-      "when_out_of_range": {
-        "type": "minecraft:max",
-        "left": {
+        "when_out_of_range": {
           "type": "minecraft:range_choice",
           "input": {
             "type": "minecraft:gradient",
             "axis": "y",
-            "from_coordinate": -128,
-            "from_value": -128,
+            "from_coordinate": -192,
+            "from_value": -192,
             "to_coordinate": 640,
             "to_value": 640
           },
           "min_inclusive": -128,
-          "max_exclusive": -40,
+          "max_exclusive": -59,
+          "when_in_range": 1.8,
+          "when_out_of_range": {
+            "type": "minecraft:range_choice",
+            "input": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": -192,
+              "from_value": -192,
+              "to_coordinate": 640,
+              "to_value": 640
+            },
+            "min_inclusive": -59,
+            "max_exclusive": 0,
+            "when_in_range": {
+              "type": "minecraft:range_choice",
+              "input": "minecraft:overworld/depth",
+              "min_inclusive": 0.3,
+              "max_exclusive": 10,
+              "when_in_range": 1.4,
+              "when_out_of_range": 0
+            },
+            "when_out_of_range": {
+              "type": "minecraft:range_choice",
+              "input": {
+                "type": "minecraft:gradient",
+                "axis": "y",
+                "from_coordinate": -192,
+                "from_value": -192,
+                "to_coordinate": 640,
+                "to_value": 640
+              },
+              "min_inclusive": 0,
+              "max_exclusive": 40,
+              "when_in_range": {
+                "type": "minecraft:range_choice",
+                "input": "minecraft:overworld_large_biomes/continents",
+                "min_inclusive": -0.19,
+                "max_exclusive": 2,
+                "when_in_range": {
+                  "type": "minecraft:range_choice",
+                  "input": "minecraft:overworld/depth",
+                  "min_inclusive": 0.3,
+                  "max_exclusive": 10,
+                  "when_in_range": 1,
+                  "when_out_of_range": 0
+                },
+                "when_out_of_range": 0
+              },
+              "when_out_of_range": 0
+            }
+          }
+        }
+      }
+    },
+    "erosion": "minecraft:overworld_large_biomes/erosion",
+    "final_density": {
+      "type": "minecraft:max",
+      "left": {
+        "type": "minecraft:range_choice",
+        "input": {
+          "type": "minecraft:gradient",
+          "axis": "y",
+          "from_coordinate": -192,
+          "from_value": -192,
+          "to_coordinate": 640,
+          "to_value": 640
+        },
+        "min_inclusive": -59,
+        "max_exclusive": 640,
+        "when_in_range": {
+          "type": "minecraft:range_choice",
+          "input": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": -192,
+            "from_value": -192,
+            "to_coordinate": 640,
+            "to_value": 640
+          },
+          "min_inclusive": -59,
+          "max_exclusive": 56,
           "when_in_range": {
             "type": "minecraft:min",
-            "left": "minecraft:overworld_large_biomes/final_density",
+            "left": {
+              "type": "minecraft:range_choice",
+              "input": {
+                "type": "minecraft:gradient",
+                "axis": "y",
+                "from_coordinate": -192,
+                "from_value": -192,
+                "to_coordinate": 640,
+                "to_value": 640
+              },
+              "min_inclusive": -16,
+              "max_exclusive": 640,
+              "when_in_range": {
+                "type": "minecraft:max",
+                "left": {
+                  "type": "minecraft:max",
+                  "left": {
+                    "type": "minecraft:lerp",
+                    "alpha": "bugsbugsandmorebugs:stone_forest_restoration_region",
+                    "first": {
+                      "type": "minecraft:lerp",
+                      "alpha": {
+                        "type": "minecraft:max",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:sub",
+                                "left": "minecraft:overworld_large_biomes/continents",
+                                "right": 0.03
+                              },
+                              "right": 5
+                            },
+                            "min": 0,
+                            "max": 1
+                          },
+                          "right": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:sub",
+                                "left": {
+                                  "type": "minecraft:abs",
+                                  "input": "minecraft:overworld/ridges"
+                                },
+                                "right": 0.085
+                              },
+                              "right": 8
+                            },
+                            "min": 0,
+                            "max": 1
+                          }
+                        },
+                        "right": {
+                          "type": "minecraft:mul",
+                          "left": {
+                            "type": "minecraft:mul",
+                            "left": "bugsbugsandmorebugs:stone_forest_region",
+                            "right": {
+                              "type": "minecraft:clamp",
+                              "input": {
+                                "type": "minecraft:mul",
+                                "left": {
+                                  "type": "minecraft:sub",
+                                  "left": "minecraft:overworld_large_biomes/continents",
+                                  "right": 0.29
+                                },
+                                "right": 9
+                              },
+                              "min": 0,
+                              "max": 1
+                            }
+                          },
+                          "right": 0.98
+                        }
+                      },
+                      "first": "minecraft:overworld_large_biomes/final_density",
+                      "second": "bugsbugsandmorebugs:elsewhere_inland_legacy"
+                    },
+                    "second": "bugsbugsandmorebugs:stone_forest_roof"
+                  },
+                  "right": "bugsbugsandmorebugs:snowy_peak_density"
+                },
+                "right": "bugsbugsandmorebugs:sky_island_density"
+              },
+              "when_out_of_range": 0.9
+            },
+            "right": {
+              "type": "minecraft:min",
+              "left": "bugsbugsandmorebugs:upper_cave_mask",
+              "right": "bugsbugsandmorebugs:schist_cave_mask"
+            }
+          },
+          "when_out_of_range": {
+            "type": "minecraft:range_choice",
+            "input": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": -192,
+              "from_value": -192,
+              "to_coordinate": 640,
+              "to_value": 640
+            },
+            "min_inclusive": -16,
+            "max_exclusive": 640,
+            "when_in_range": {
+              "type": "minecraft:max",
+              "left": {
+                "type": "minecraft:max",
+                "left": {
+                  "type": "minecraft:lerp",
+                  "alpha": "bugsbugsandmorebugs:stone_forest_restoration_region",
+                  "first": {
+                    "type": "minecraft:lerp",
+                    "alpha": {
+                      "type": "minecraft:max",
+                      "left": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:clamp",
+                          "input": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:sub",
+                              "left": "minecraft:overworld_large_biomes/continents",
+                              "right": 0.03
+                            },
+                            "right": 5
+                          },
+                          "min": 0,
+                          "max": 1
+                        },
+                        "right": {
+                          "type": "minecraft:clamp",
+                          "input": {
+                            "type": "minecraft:mul",
+                            "left": {
+                              "type": "minecraft:sub",
+                              "left": {
+                                "type": "minecraft:abs",
+                                "input": "minecraft:overworld/ridges"
+                              },
+                              "right": 0.085
+                            },
+                            "right": 8
+                          },
+                          "min": 0,
+                          "max": 1
+                        }
+                      },
+                      "right": {
+                        "type": "minecraft:mul",
+                        "left": {
+                          "type": "minecraft:mul",
+                          "left": "bugsbugsandmorebugs:stone_forest_region",
+                          "right": {
+                            "type": "minecraft:clamp",
+                            "input": {
+                              "type": "minecraft:mul",
+                              "left": {
+                                "type": "minecraft:sub",
+                                "left": "minecraft:overworld_large_biomes/continents",
+                                "right": 0.29
+                              },
+                              "right": 9
+                            },
+                            "min": 0,
+                            "max": 1
+                          }
+                        },
+                        "right": 0.98
+                      }
+                    },
+                    "first": "minecraft:overworld_large_biomes/final_density",
+                    "second": "bugsbugsandmorebugs:elsewhere_inland_legacy"
+                  },
+                  "second": "bugsbugsandmorebugs:stone_forest_roof"
+                },
+                "right": "bugsbugsandmorebugs:snowy_peak_density"
+              },
+              "right": "bugsbugsandmorebugs:sky_island_density"
+            },
+            "when_out_of_range": 0.9
+          }
+        },
+        "when_out_of_range": {
+          "type": "minecraft:range_choice",
+          "input": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": -192,
+            "from_value": -192,
+            "to_coordinate": 640,
+            "to_value": 640
+          },
+          "min_inclusive": -128,
+          "max_exclusive": -68,
+          "when_in_range": {
+            "type": "minecraft:min",
+            "left": 1.4,
             "right": "bugsbugsandmorebugs:underhang_underside"
           },
-          "when_out_of_range": "minecraft:overworld_large_biomes/final_density"
-        },
-        "right": "bugsbugsandmorebugs:sundering_barrier"
-      }
+          "when_out_of_range": -4
+        }
+      },
+      "right": "bugsbugsandmorebugs:sundering_barrier"
     },
     "ridges": "minecraft:overworld/ridges",
     "temperature": "minecraft:overworld/temperature",
     "vegetation": "minecraft:overworld/vegetation"
   },
-  "sea_level": 63,
+  "sea_level": 64,
   "spawn_target": [
     {
       "minecraft:overworld_large_biomes/continents": [

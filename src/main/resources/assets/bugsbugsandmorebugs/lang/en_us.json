@@ -380,5 +380,13 @@
   "item.bugsbugsandmorebugs.indium_helmet": "Indium Helmet",
   "item.bugsbugsandmorebugs.indium_chestplate": "Indium Chestplate",
   "item.bugsbugsandmorebugs.indium_leggings": "Indium Leggings",
-  "item.bugsbugsandmorebugs.indium_boots": "Indium Boots"
+  "item.bugsbugsandmorebugs.indium_boots": "Indium Boots",
+  "biome.bugsbugsandmorebugs.rhyolite_caverns": "Rhyolite Caverns",
+  "biome.bugsbugsandmorebugs.limestone_terraces": "Limestone Terraces",
+  "biome.bugsbugsandmorebugs.rooted_hollows": "Rooted Hollows",
+  "biome.bugsbugsandmorebugs.fungal_grotto": "Fungal Grotto",
+  "biome.bugsbugsandmorebugs.schist_chasms": "Schist Chasms",
+  "biome.bugsbugsandmorebugs.mineral_galleries": "Mineral Galleries",
+  "biome.bugsbugsandmorebugs.stillwater_caverns": "Stillwater Caverns",
+  "biome.bugsbugsandmorebugs.eclogite_depths": "Eclogite Depths"
 }

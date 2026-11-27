@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:max",
+  "left": "minecraft:overworld_large_biomes/final_density",
+  "right": {
+    "type": "minecraft:max",
+    "left": {
+      "type": "minecraft:gradient",
+      "axis": "y",
+      "from_coordinate": -58,
+      "from_value": 4,
+      "to_coordinate": -48,
+      "to_value": -4
+    },
+    "right": {
+      "type": "minecraft:gradient",
+      "axis": "y",
+      "from_coordinate": 38,
+      "from_value": -4,
+      "to_coordinate": 56,
+      "to_value": 4
+    }
+  }
+}

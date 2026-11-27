@@ -1,0 +1,33 @@
+# Elsewhere cave biomes — first pass
+
+This branch builds on PR #63. It adds seven data-pack cave biomes above the Sundering Horizon, using existing blocks. The biome selection is an initial absolute-height plus vanilla climate/depth approximation, and the terrain cave noise is still the vanilla-derived restoration in #63. The surface, sky and Underhang retain their existing depth channels. Existing ore injection is unchanged. The limestone terrace feature is intentionally a small, coarse prototype; actual basin frequency, water containment and appearance require in-game testing. New biome/feature definitions are hand-authored in main resources, not generated. Run datagen and a clean build to confirm there are no duplicate resources.
+
+## Next blocks (not implemented)
+- Flowstone: natural cream layered deposit; optional weathered variant.
+- Rimstone: pale deposit block, slab and thin water-retaining rim (waterlogging and placement states to design).
+- Limestone speleothem: tapered stalactite/stalagmite, multi-segment and connectable; optionally flowstone columns.
+- Cave silt/sediment: distinguish dry fine material from existing wet silt only if needed.
+- Cave root strands and hanging moss variants; pale cave fungal mats and glowshroom clusters (existing glowshroom used now).
+- Later: ancient eclogite masonry, carved glyphs, fractured eclogite and ancient artifacts. Eclogite generation is explicitly outside this PR.
+
+## Ant bartering design (not implemented)
+Persistent independently sampled personality traits: friendliness, business acumen, generosity, secretiveness, curiosity, loyalty, patience, sentimentality. Separate player-to-ant trust and player-to-colony reputation. Offer budget = sum(quantity × base value × colony demand × personal preference) × clamp((1 + .25 trust + .15 reputation + .2 generosity)/(1 + .25 business acumen), .65, 1.6). Values normalized; demand and preference multipliers bounded. Low business acumen also increases deterministic valuation uncertainty. Secretiveness gates which offers are revealed rather than directly changing prices. Inventory-backed, stable counteroffers; commit atomically, update stock and demand, and persist per-player relationship. No trade reroll by reopening the interface.
+
+## Validation checklist
+- Generate new chunks; check all seven biome IDs with /locate biome and inspect F3 at depth.
+- Verify river, estuary and ocean surfaces keep sediment, but caves beneath do not receive sand or grassy loam.
+- Check fresh chunks in Stone Forest, mountains, rivers and oceans; verify no change to the eclogite stratum or void.
+- Inspect the terrace prototype with water updates enabled, especially chunk boundaries; compare with reference rimstone pools.
+- Verify natural mob behavior, ore generation and feature ordering remain consistent.
+- Run clean build, datagen and registry load before merge.
+
+## Expanded geology (follow-up)
+- Sea level setting 64; Rhyolite starts at Y=0; Schist extends from -1 to -59, with an intact nine-block Sundering band centered near -64 (-68 through -60 inclusive). Eclogite below that extends to approximately -128 with an irregular underside. No solid terrain below -128; dimension min Y=-192 and upper limit unchanged at 640 (exclusive). No bedrock.
+- Schist gains an independent 3D chamber/tunnel noise mask, with a fade before the horizon, and existing mineral/stillwater/chasm biome climate routing extends down to the new lower boundary. Eclogite gets an independent biome and solid foundation, with its own fractures and Old World structures deliberately deferred. Existing hardcoded lava cleanup below -54 remains, so deepest Schist cavities may be dry; validate aquifers and void water in-game.
+- Generate a NEW test world: changing dimension height and layer positions will not migrate old chunks and may break old saves or create seams. Backup existing worlds; test registry loading, datagen, water level, horizon continuity, cave connectivity, and Underhang before merging.
+
+## Worker professions (design only)
+Professions apply to minor and median workers only; major/supermajor and reproductive castes do not participate in professional bartering. Caste, personality, profession and skill are separate persistent values. Profession selects a stock/demand pool, skill controls quality and trade rarity, personality modifies behavior, and trust + colony reputation gate restricted stock. Minor workers favor foraging, fungus farming, gathering, and everyday supplies; median workers favor excavation, masonry, smithing, apothecary, surveying, recordkeeping, and specialized production. Neither caste is locked to a single profession, and rare specialists can occur in either when appropriate. Example professions: forager (wild produce, rare seeds), fungus gardener (cultures, rare fungi), excavator (stone, minerals), mason (finished blocks, rare architectural pieces), smith (metal stock, equipment), apothecary (resins, utility goods), cartographer/surveyor (cave maps, colony routes), archivist (lore and artifact clues), quartermaster (bulk commodities and colony stock). Rare offers require genuine stock and sufficient trust; avoid trivial progression bypasses. Rare goods are finite, replenished through colony production/imports rather than GUI rerolls; persist offer seeds until stock, input or reputation changes. Profession and rarity affect offer eligibility, not every price directly. No gameplay implementation until ant caste/entity data and trade UI exist.
+
+### Depth-dependent deposits
+Ordinary ore lower anchors adjusted (Cannel -16, Ferrum -40, Chalcor -24, Electrum -52, Corundum -55, Indium -57), upper anchors and counts unchanged. Amphibolite placed feature and Java/datagen source adjusted. No normal ores added to Eclogite. Test ore density and distribution; these are initial balancing choices.
