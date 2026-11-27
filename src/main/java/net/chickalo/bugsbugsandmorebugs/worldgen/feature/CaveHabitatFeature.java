@@ -39,7 +39,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
         if (kind == 0 && (x-cx<5 || x-cx>10 || z-cz<5 || z-cz>10)) return false;
         for (int dy=0; dy<=7; dy++) {
             BlockPos at=origin.offset(0,-dy,0);
-            if (at.getY() < -18 || at.getY() >= 40 || !buried(level,at)) continue;
+            if (at.getY() < -56 || at.getY() >= 40 || !buried(level,at)) continue;
             if (!air(level,at) || !rock(level.getBlockState(at.below()))) continue;
             if (!level.getBiome(at).equals(level.getBiome(origin))) continue;
             if (kind == 0) return at.getY() >= 5 && terrace(level,at,random);
@@ -64,7 +64,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
                 if (mushroom.canSurvive(level,at)) changed |= level.setBlock(at,mushroom,2);
                 return changed;
             }
-            if (kind == 3 && at.getY()<4 && level.getBlockState(at.below()).is(ModBlocks.SCHIST))
+            if (kind == 3 && at.getY()<0 && level.getBlockState(at.below()).is(ModBlocks.SCHIST))
                 return level.setBlock(at.below(),ModBlocks.AMPHIBOLITE.defaultBlockState(),2);
         }
         return false;

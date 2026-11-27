@@ -300,7 +300,7 @@ public class ModPlacedFeatures {
                         InSquarePlacement.spread(),
                         HeightRangePlacement.uniform(
                                 net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-55),
-                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-18)),
+                                net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-8)),
                         BiomeFilter.biome()
                 ));
 

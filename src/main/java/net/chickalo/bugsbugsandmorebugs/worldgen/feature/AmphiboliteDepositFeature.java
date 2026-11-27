@@ -25,7 +25,7 @@ public record AmphiboliteDepositFeature() implements Feature {
     public boolean place(WorldGenLevel level, ChunkGenerator generator,
                          RandomSource random, BlockPos origin) {
         // The surrounding solid schist, not a biome name, determines eligibility.
-        if (origin.getY() > -18 || origin.getY() < -60
+        if (origin.getY() > -8 || origin.getY() < -55
                 || !level.getBlockState(origin).is(ModBlocks.SCHIST)) return false;
 
         // Even on cliffs, underhangs and unusual mountains, keep lenses deep
@@ -46,7 +46,7 @@ public record AmphiboliteDepositFeature() implements Feature {
                 int localSurface = level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, x, z);
                 for (int dy = -ry; dy <= ry; dy++) {
                     int y = origin.getY() + dy;
-                    if (y < level.getMinY() || y > -16 || localSurface - y < 16) continue;
+                    if (y < level.getMinY() || y > -1 || y < -58 || localSurface - y < 16) continue;
 
                     // Rounded, slightly irregular pocket rather than a perfect cuboid.
                     double distance = (double) dx * dx / (rx * rx)

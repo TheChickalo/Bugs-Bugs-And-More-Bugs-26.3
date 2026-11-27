@@ -17335,6 +17335,33 @@
             ],
             "offset": 0
           }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:eclogite_depths",
+          "parameters": {
+            "temperature": [
+              -2,
+              2
+            ],
+            "humidity": [
+              -2,
+              2
+            ],
+            "continentalness": [
+              -2,
+              2
+            ],
+            "erosion": [
+              -2,
+              2
+            ],
+            "depth": 1.8,
+            "weirdness": [
+              -2,
+              2
+            ],
+            "offset": 0
+          }
         }
       ]
     },
