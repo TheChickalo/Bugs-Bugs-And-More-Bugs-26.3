@@ -15,6 +15,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.sounds.SoundEvents;
@@ -51,6 +52,50 @@ public class ModItems {
             CORUNDUM_DUST,
             RAW_INDIUM,
             INDIUM_INGOT);
+
+    public static final Item FERRUM_PICKAXE = registerItem("ferrum_pickaxe", p -> new Item(p.pickaxe(ElsewhereEquipmentMaterials.FERRUM, 1.0F, -2.8F)));
+    public static final Item FERRUM_AXE = registerItem("ferrum_axe", p -> new Item(p.axe(ElsewhereEquipmentMaterials.FERRUM, 5.0F, -3.1F)));
+    public static final Item FERRUM_SHOVEL = registerItem("ferrum_shovel", p -> new Item(p.shovel(ElsewhereEquipmentMaterials.FERRUM, 1.5F, -3.0F)));
+    public static final Item FERRUM_HOE = registerItem("ferrum_hoe", p -> new Item(p.hoe(ElsewhereEquipmentMaterials.FERRUM, -2.0F, -1.0F)));
+    public static final Item FERRUM_BROADSWORD = registerItem("ferrum_broadsword", p -> new Item(p.sword(ElsewhereEquipmentMaterials.FERRUM, 5.0F, -2.8F)));
+    public static final Item FERRUM_HALBERD = registerItem("ferrum_halberd", p -> new Item(p.sword(ElsewhereEquipmentMaterials.FERRUM, 4.0F, -2.6F)));
+    public static final Item FERRUM_HELMET = registerItem("ferrum_helmet", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.FERRUM_ARMOR, ArmorType.HELMET).durability(ArmorType.HELMET.getDurability(ElsewhereEquipmentMaterials.FERRUM_ARMOR.durability()))));
+    public static final Item FERRUM_CHESTPLATE = registerItem("ferrum_chestplate", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.FERRUM_ARMOR, ArmorType.CHESTPLATE).durability(ArmorType.CHESTPLATE.getDurability(ElsewhereEquipmentMaterials.FERRUM_ARMOR.durability()))));
+    public static final Item FERRUM_LEGGINGS = registerItem("ferrum_leggings", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.FERRUM_ARMOR, ArmorType.LEGGINGS).durability(ArmorType.LEGGINGS.getDurability(ElsewhereEquipmentMaterials.FERRUM_ARMOR.durability()))));
+    public static final Item FERRUM_BOOTS = registerItem("ferrum_boots", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.FERRUM_ARMOR, ArmorType.BOOTS).durability(ArmorType.BOOTS.getDurability(ElsewhereEquipmentMaterials.FERRUM_ARMOR.durability()))));
+    public static final Item CHALCOR_PICKAXE = registerItem("chalcor_pickaxe", p -> new Item(p.pickaxe(ElsewhereEquipmentMaterials.CHALCOR, 1.0F, -2.8F)));
+    public static final Item CHALCOR_AXE = registerItem("chalcor_axe", p -> new Item(p.axe(ElsewhereEquipmentMaterials.CHALCOR, 5.0F, -3.1F)));
+    public static final Item CHALCOR_SHOVEL = registerItem("chalcor_shovel", p -> new Item(p.shovel(ElsewhereEquipmentMaterials.CHALCOR, 1.5F, -3.0F)));
+    public static final Item CHALCOR_HOE = registerItem("chalcor_hoe", p -> new Item(p.hoe(ElsewhereEquipmentMaterials.CHALCOR, -1.0F, -2.0F)));
+    public static final Item CHALCOR_BROADSWORD = registerItem("chalcor_broadsword", p -> new Item(p.sword(ElsewhereEquipmentMaterials.CHALCOR, 5.0F, -2.8F)));
+    public static final Item CHALCOR_HALBERD = registerItem("chalcor_halberd", p -> new Item(p.sword(ElsewhereEquipmentMaterials.CHALCOR, 4.0F, -2.6F)));
+    public static final Item CHALCOR_HELMET = registerItem("chalcor_helmet", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.CHALCOR_ARMOR, ArmorType.HELMET).durability(ArmorType.HELMET.getDurability(ElsewhereEquipmentMaterials.CHALCOR_ARMOR.durability()))));
+    public static final Item CHALCOR_CHESTPLATE = registerItem("chalcor_chestplate", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.CHALCOR_ARMOR, ArmorType.CHESTPLATE).durability(ArmorType.CHESTPLATE.getDurability(ElsewhereEquipmentMaterials.CHALCOR_ARMOR.durability()))));
+    public static final Item CHALCOR_LEGGINGS = registerItem("chalcor_leggings", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.CHALCOR_ARMOR, ArmorType.LEGGINGS).durability(ArmorType.LEGGINGS.getDurability(ElsewhereEquipmentMaterials.CHALCOR_ARMOR.durability()))));
+    public static final Item CHALCOR_BOOTS = registerItem("chalcor_boots", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.CHALCOR_ARMOR, ArmorType.BOOTS).durability(ArmorType.BOOTS.getDurability(ElsewhereEquipmentMaterials.CHALCOR_ARMOR.durability()))));
+    public static final Item ELECTRUM_PICKAXE = registerItem("electrum_pickaxe", p -> new Item(p.pickaxe(ElsewhereEquipmentMaterials.ELECTRUM, 1.0F, -2.8F)));
+    public static final Item ELECTRUM_AXE = registerItem("electrum_axe", p -> new Item(p.axe(ElsewhereEquipmentMaterials.ELECTRUM, 5.0F, -3.1F)));
+    public static final Item ELECTRUM_SHOVEL = registerItem("electrum_shovel", p -> new Item(p.shovel(ElsewhereEquipmentMaterials.ELECTRUM, 1.5F, -3.0F)));
+    public static final Item ELECTRUM_HOE = registerItem("electrum_hoe", p -> new Item(p.hoe(ElsewhereEquipmentMaterials.ELECTRUM, 0.0F, -3.0F)));
+    public static final Item ELECTRUM_BROADSWORD = registerItem("electrum_broadsword", p -> new Item(p.sword(ElsewhereEquipmentMaterials.ELECTRUM, 5.0F, -2.8F)));
+    public static final Item ELECTRUM_HALBERD = registerItem("electrum_halberd", p -> new Item(p.sword(ElsewhereEquipmentMaterials.ELECTRUM, 4.0F, -2.6F)));
+    public static final Item ELECTRUM_HELMET = registerItem("electrum_helmet", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR, ArmorType.HELMET).durability(ArmorType.HELMET.getDurability(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR.durability()))));
+    public static final Item ELECTRUM_CHESTPLATE = registerItem("electrum_chestplate", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR, ArmorType.CHESTPLATE).durability(ArmorType.CHESTPLATE.getDurability(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR.durability()))));
+    public static final Item ELECTRUM_LEGGINGS = registerItem("electrum_leggings", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR, ArmorType.LEGGINGS).durability(ArmorType.LEGGINGS.getDurability(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR.durability()))));
+    public static final Item ELECTRUM_BOOTS = registerItem("electrum_boots", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR, ArmorType.BOOTS).durability(ArmorType.BOOTS.getDurability(ElsewhereEquipmentMaterials.ELECTRUM_ARMOR.durability()))));
+    public static final Item INDIUM_PICKAXE = registerItem("indium_pickaxe", p -> new Item(p.pickaxe(ElsewhereEquipmentMaterials.INDIUM, 1.0F, -2.8F)));
+    public static final Item INDIUM_AXE = registerItem("indium_axe", p -> new Item(p.axe(ElsewhereEquipmentMaterials.INDIUM, 5.0F, -3.1F)));
+    public static final Item INDIUM_SHOVEL = registerItem("indium_shovel", p -> new Item(p.shovel(ElsewhereEquipmentMaterials.INDIUM, 1.5F, -3.0F)));
+    public static final Item INDIUM_HOE = registerItem("indium_hoe", p -> new Item(p.hoe(ElsewhereEquipmentMaterials.INDIUM, -3.0F, 0.0F)));
+    public static final Item INDIUM_BROADSWORD = registerItem("indium_broadsword", p -> new Item(p.sword(ElsewhereEquipmentMaterials.INDIUM, 5.0F, -2.8F)));
+    public static final Item INDIUM_HALBERD = registerItem("indium_halberd", p -> new Item(p.sword(ElsewhereEquipmentMaterials.INDIUM, 4.0F, -2.6F)));
+    public static final Item INDIUM_HELMET = registerItem("indium_helmet", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.INDIUM_ARMOR, ArmorType.HELMET).durability(ArmorType.HELMET.getDurability(ElsewhereEquipmentMaterials.INDIUM_ARMOR.durability()))));
+    public static final Item INDIUM_CHESTPLATE = registerItem("indium_chestplate", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.INDIUM_ARMOR, ArmorType.CHESTPLATE).durability(ArmorType.CHESTPLATE.getDurability(ElsewhereEquipmentMaterials.INDIUM_ARMOR.durability()))));
+    public static final Item INDIUM_LEGGINGS = registerItem("indium_leggings", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.INDIUM_ARMOR, ArmorType.LEGGINGS).durability(ArmorType.LEGGINGS.getDurability(ElsewhereEquipmentMaterials.INDIUM_ARMOR.durability()))));
+    public static final Item INDIUM_BOOTS = registerItem("indium_boots", p -> new Item(p.humanoidArmor(ElsewhereEquipmentMaterials.INDIUM_ARMOR, ArmorType.BOOTS).durability(ArmorType.BOOTS.getDurability(ElsewhereEquipmentMaterials.INDIUM_ARMOR.durability()))));
+
+    public static final List<Item> ELSEWHERE_TOOLS = List.of(FERRUM_PICKAXE, FERRUM_AXE, FERRUM_SHOVEL, FERRUM_HOE, CHALCOR_PICKAXE, CHALCOR_AXE, CHALCOR_SHOVEL, CHALCOR_HOE, ELECTRUM_PICKAXE, ELECTRUM_AXE, ELECTRUM_SHOVEL, ELECTRUM_HOE, INDIUM_PICKAXE, INDIUM_AXE, INDIUM_SHOVEL, INDIUM_HOE);
+    public static final List<Item> ELSEWHERE_COMBAT = List.of(FERRUM_BROADSWORD, FERRUM_HALBERD, FERRUM_HELMET, FERRUM_CHESTPLATE, FERRUM_LEGGINGS, FERRUM_BOOTS, CHALCOR_BROADSWORD, CHALCOR_HALBERD, CHALCOR_HELMET, CHALCOR_CHESTPLATE, CHALCOR_LEGGINGS, CHALCOR_BOOTS, ELECTRUM_BROADSWORD, ELECTRUM_HALBERD, ELECTRUM_HELMET, ELECTRUM_CHESTPLATE, ELECTRUM_LEGGINGS, ELECTRUM_BOOTS, INDIUM_BROADSWORD, INDIUM_HALBERD, INDIUM_HELMET, INDIUM_CHESTPLATE, INDIUM_LEGGINGS, INDIUM_BOOTS);
 
     public static final Item EXOSKELETON = registerItem("exoskeleton", Item::new);
     public static final Item AMEISENHAUFEN_MUSIC_DISC = registerItem("ameisenhaufen_music_disc", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSongs.AMEISENHAUFEN_KEY).stacksTo(1).rarity(Rarity.RARE)));
@@ -126,10 +171,12 @@ public class ModItems {
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.COMBAT).register(output -> {
             output.accept(REINFORCED_SHIELD);
+            ELSEWHERE_COMBAT.forEach(output::accept);
         });
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(output -> {
             output.accept(AMEISENHAUFEN_MUSIC_DISC);
+            ELSEWHERE_TOOLS.forEach(output::accept);
         });
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {

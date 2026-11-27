@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "bugsbugsandmorebugs:indium_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "II",
+    "II",
+    "S "
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:indium_broadsword",
+    "count": 1
+  }
+}

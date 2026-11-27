@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "bugsbugsandmorebugs:indium"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "bugsbugsandmorebugs:indium"
+      }
+    ]
+  }
+}
