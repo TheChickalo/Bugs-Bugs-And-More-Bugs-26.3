@@ -6,9 +6,9 @@
     "left": {
       "type": "minecraft:gradient",
       "axis": "y",
-      "from_coordinate": -16,
+      "from_coordinate": -58,
       "from_value": 4,
-      "to_coordinate": -8,
+      "to_coordinate": -48,
       "to_value": -4
     },
     "right": {

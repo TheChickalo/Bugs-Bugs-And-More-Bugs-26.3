@@ -3,10 +3,10 @@
   "left": {
     "type": "minecraft:gradient",
     "axis": "y",
-    "from_coordinate": -95,
-    "from_value": -1.55,
-    "to_coordinate": -43,
-    "to_value": 1.0
+    "from_coordinate": -128,
+    "from_value": -0.25,
+    "to_coordinate": -111,
+    "to_value": 1.8
   },
   "right": {
     "type": "minecraft:add",
@@ -17,7 +17,7 @@
         "type": "minecraft:noise",
         "noise": "minecraft:surface",
         "xz_scale": 0.45,
-        "y_scale": 0.0
+        "y_scale": 0
       }
     },
     "right": {
@@ -27,7 +27,7 @@
         "type": "minecraft:noise",
         "noise": "minecraft:surface_secondary",
         "xz_scale": 1.1,
-        "y_scale": 0.0
+        "y_scale": 0
       }
     }
   }
