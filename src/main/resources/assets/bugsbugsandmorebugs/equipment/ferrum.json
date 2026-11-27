@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "bugsbugsandmorebugs:ferrum"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "bugsbugsandmorebugs:ferrum"
+      }
+    ]
+  }
+}

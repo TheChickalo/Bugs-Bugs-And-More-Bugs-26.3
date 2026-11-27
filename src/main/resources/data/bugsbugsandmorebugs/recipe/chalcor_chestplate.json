@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "bugsbugsandmorebugs:chalcor_ingot"
+  },
+  "pattern": [
+    "I I",
+    "III",
+    "III"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:chalcor_chestplate",
+    "count": 1
+  }
+}

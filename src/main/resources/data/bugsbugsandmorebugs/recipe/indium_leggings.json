@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "bugsbugsandmorebugs:indium_ingot"
+  },
+  "pattern": [
+    "III",
+    "I I",
+    "I I"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:indium_leggings",
+    "count": 1
+  }
+}

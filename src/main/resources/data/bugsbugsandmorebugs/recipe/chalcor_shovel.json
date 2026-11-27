@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "bugsbugsandmorebugs:chalcor_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "I",
+    "S",
+    "S"
+  ],
+  "result": {
+    "id": "bugsbugsandmorebugs:chalcor_shovel",
+    "count": 1
+  }
+}

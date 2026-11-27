@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "bugsbugsandmorebugs:item/chalcor_shovel"
+  }
+}

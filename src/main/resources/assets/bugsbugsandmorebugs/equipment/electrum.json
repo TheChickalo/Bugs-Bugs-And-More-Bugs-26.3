@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "bugsbugsandmorebugs:electrum"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "bugsbugsandmorebugs:electrum"
+      }
+    ]
+  }
+}

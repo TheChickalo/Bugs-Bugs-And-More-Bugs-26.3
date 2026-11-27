@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "bugsbugsandmorebugs:chalcor"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "bugsbugsandmorebugs:chalcor"
+      }
+    ]
+  }
+}
