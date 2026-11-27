@@ -144,7 +144,49 @@
           "min_inclusive": -128,
           "max_exclusive": -55,
           "when_in_range": 2,
-          "when_out_of_range": 0
+          "when_out_of_range": {
+            "type": "minecraft:range_choice",
+            "input": {
+              "type": "minecraft:gradient",
+              "axis": "y",
+              "from_coordinate": -128,
+              "from_value": -128,
+              "to_coordinate": 640,
+              "to_value": 640
+            },
+            "min_inclusive": -20,
+            "max_exclusive": 40,
+            "when_in_range": {
+              "type": "minecraft:range_choice",
+              "input": "minecraft:overworld_large_biomes/continents",
+              "min_inclusive": -0.19,
+              "max_exclusive": 2,
+              "when_in_range": {
+                "type": "minecraft:range_choice",
+                "input": "minecraft:overworld/depth",
+                "min_inclusive": 0.3,
+                "max_exclusive": 10,
+                "when_in_range": {
+                  "type": "minecraft:range_choice",
+                  "input": {
+                    "type": "minecraft:gradient",
+                    "axis": "y",
+                    "from_coordinate": -128,
+                    "from_value": -128,
+                    "to_coordinate": 640,
+                    "to_value": 640
+                  },
+                  "min_inclusive": -20,
+                  "max_exclusive": 4,
+                  "when_in_range": 1.4,
+                  "when_out_of_range": 1
+                },
+                "when_out_of_range": 0
+              },
+              "when_out_of_range": 0
+            },
+            "when_out_of_range": 0
+          }
         }
       }
     },
@@ -241,7 +283,49 @@
         "min_inclusive": -128,
         "max_exclusive": -55,
         "when_in_range": 2,
-        "when_out_of_range": 0
+        "when_out_of_range": {
+          "type": "minecraft:range_choice",
+          "input": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": -128,
+            "from_value": -128,
+            "to_coordinate": 640,
+            "to_value": 640
+          },
+          "min_inclusive": -20,
+          "max_exclusive": 40,
+          "when_in_range": {
+            "type": "minecraft:range_choice",
+            "input": "minecraft:overworld_large_biomes/continents",
+            "min_inclusive": -0.19,
+            "max_exclusive": 2,
+            "when_in_range": {
+              "type": "minecraft:range_choice",
+              "input": "minecraft:overworld/depth",
+              "min_inclusive": 0.3,
+              "max_exclusive": 10,
+              "when_in_range": {
+                "type": "minecraft:range_choice",
+                "input": {
+                  "type": "minecraft:gradient",
+                  "axis": "y",
+                  "from_coordinate": -128,
+                  "from_value": -128,
+                  "to_coordinate": 640,
+                  "to_value": 640
+                },
+                "min_inclusive": -20,
+                "max_exclusive": 4,
+                "when_in_range": 1.4,
+                "when_out_of_range": 1
+              },
+              "when_out_of_range": 0
+            },
+            "when_out_of_range": 0
+          },
+          "when_out_of_range": 0
+        }
       }
     },
     "erosion": "minecraft:overworld_large_biomes/erosion",
