@@ -14,6 +14,9 @@ public final class ModFeatureTypes {
 
     public static void register() {
         Registry.register(BuiltInRegistries.FEATURE_TYPE,
+                Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "cave_habitat"),
+                CaveHabitatFeature.CODEC);
+        Registry.register(BuiltInRegistries.FEATURE_TYPE,
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, "forest_habitat"),
                 ForestHabitatFeature.CODEC);
         Registry.register(BuiltInRegistries.FEATURE_TYPE,
