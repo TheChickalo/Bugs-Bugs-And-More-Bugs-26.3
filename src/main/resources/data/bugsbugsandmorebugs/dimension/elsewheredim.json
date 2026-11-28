@@ -17210,7 +17210,7 @@
             ],
             "humidity": [
               0.12,
-              2
+              0.28
             ],
             "continentalness": [
               -2,
@@ -17237,7 +17237,7 @@
             ],
             "humidity": [
               -2,
-              2
+              0.28
             ],
             "continentalness": [
               -2,
@@ -17264,7 +17264,7 @@
             ],
             "humidity": [
               -2,
-              2
+              0.28
             ],
             "continentalness": [
               -2,
@@ -17291,7 +17291,7 @@
             ],
             "humidity": [
               -2,
-              2
+              0.28
             ],
             "continentalness": [
               -2,
@@ -17356,6 +17356,60 @@
               2
             ],
             "depth": 1.8,
+            "weirdness": [
+              -2,
+              2
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:luminous_meadows",
+          "parameters": {
+            "temperature": [
+              -2,
+              2
+            ],
+            "humidity": [
+              0.28,
+              2
+            ],
+            "continentalness": [
+              -2,
+              2
+            ],
+            "erosion": [
+              -2,
+              2
+            ],
+            "depth": 1,
+            "weirdness": [
+              -2,
+              2
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "bugsbugsandmorebugs:luminous_meadows",
+          "parameters": {
+            "temperature": [
+              -2,
+              2
+            ],
+            "humidity": [
+              0.28,
+              2
+            ],
+            "continentalness": [
+              -2,
+              2
+            ],
+            "erosion": [
+              -2,
+              2
+            ],
+            "depth": 1.4,
             "weirdness": [
               -2,
               2
