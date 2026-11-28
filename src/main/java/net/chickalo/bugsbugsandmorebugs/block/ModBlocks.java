@@ -25,6 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PlaceOnWaterBlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.sounds.AmbientLeavesBlockSoundPlayer;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,23 +47,23 @@ public class ModBlocks {
             properties -> new TempPortal(properties.strength(3f)));
 
 
-    public static final Block RHYOLITE_CANNEL_ORE = registerMineralBlock("rhyolite_cannel_ore", 3.0F, SoundType.STONE);
-    public static final Block SCHIST_CANNEL_ORE = registerMineralBlock("schist_cannel_ore", 4.5F, SoundType.STONE);
+    public static final Block RHYOLITE_CANNEL_ORE = registerOreBlock("rhyolite_cannel_ore", 3.0F, SoundType.STONE, 1, 2);
+    public static final Block SCHIST_CANNEL_ORE = registerOreBlock("schist_cannel_ore", 4.5F, SoundType.STONE, 1, 2);
     public static final Block CANNEL_BLOCK = registerMineralBlock("cannel_block", 5.0F, SoundType.STONE);
-    public static final Block RHYOLITE_FERRUM_ORE = registerMineralBlock("rhyolite_ferrum_ore", 3.0F, SoundType.STONE);
-    public static final Block SCHIST_FERRUM_ORE = registerMineralBlock("schist_ferrum_ore", 4.5F, SoundType.STONE);
+    public static final Block RHYOLITE_FERRUM_ORE = registerOreBlock("rhyolite_ferrum_ore", 3.0F, SoundType.STONE, 1, 2);
+    public static final Block SCHIST_FERRUM_ORE = registerOreBlock("schist_ferrum_ore", 4.5F, SoundType.STONE, 1, 2);
     public static final Block FERRUM_BLOCK = registerMineralBlock("ferrum_block", 5.0F, SoundType.METAL);
-    public static final Block RHYOLITE_CHALCOR_ORE = registerMineralBlock("rhyolite_chalcor_ore", 3.0F, SoundType.STONE);
-    public static final Block SCHIST_CHALCOR_ORE = registerMineralBlock("schist_chalcor_ore", 4.5F, SoundType.STONE);
+    public static final Block RHYOLITE_CHALCOR_ORE = registerOreBlock("rhyolite_chalcor_ore", 3.0F, SoundType.STONE, 1, 2);
+    public static final Block SCHIST_CHALCOR_ORE = registerOreBlock("schist_chalcor_ore", 4.5F, SoundType.STONE, 1, 2);
     public static final Block CHALCOR_BLOCK = registerMineralBlock("chalcor_block", 5.0F, SoundType.METAL);
-    public static final Block RHYOLITE_ELECTRUM_ORE = registerMineralBlock("rhyolite_electrum_ore", 3.0F, SoundType.STONE);
-    public static final Block SCHIST_ELECTRUM_ORE = registerMineralBlock("schist_electrum_ore", 4.5F, SoundType.STONE);
+    public static final Block RHYOLITE_ELECTRUM_ORE = registerOreBlock("rhyolite_electrum_ore", 3.0F, SoundType.STONE, 2, 3);
+    public static final Block SCHIST_ELECTRUM_ORE = registerOreBlock("schist_electrum_ore", 4.5F, SoundType.STONE, 2, 3);
     public static final Block ELECTRUM_BLOCK = registerMineralBlock("electrum_block", 5.0F, SoundType.METAL);
-    public static final Block RHYOLITE_CORUNDUM_ORE = registerMineralBlock("rhyolite_corundum_ore", 3.0F, SoundType.STONE);
-    public static final Block SCHIST_CORUNDUM_ORE = registerMineralBlock("schist_corundum_ore", 4.5F, SoundType.STONE);
+    public static final Block RHYOLITE_CORUNDUM_ORE = registerOreBlock("rhyolite_corundum_ore", 3.0F, SoundType.STONE, 3, 7);
+    public static final Block SCHIST_CORUNDUM_ORE = registerOreBlock("schist_corundum_ore", 4.5F, SoundType.STONE, 3, 7);
     public static final Block CORUNDUM_BLOCK = registerMineralBlock("corundum_block", 5.0F, SoundType.STONE);
-    public static final Block RHYOLITE_INDIUM_ORE = registerMineralBlock("rhyolite_indium_ore", 3.0F, SoundType.STONE);
-    public static final Block SCHIST_INDIUM_ORE = registerMineralBlock("schist_indium_ore", 4.5F, SoundType.STONE);
+    public static final Block RHYOLITE_INDIUM_ORE = registerOreBlock("rhyolite_indium_ore", 3.0F, SoundType.STONE, 3, 5);
+    public static final Block SCHIST_INDIUM_ORE = registerOreBlock("schist_indium_ore", 4.5F, SoundType.STONE, 3, 5);
     public static final Block INDIUM_BLOCK = registerMineralBlock("indium_block", 5.0F, SoundType.METAL);
 
     public static final List<Block> BASE_ORES = List.of(
@@ -713,6 +714,12 @@ public class ModBlocks {
 
     public static ResourceKey<Block> getRK(Block block) {
         return BuiltInRegistries.BLOCK.getResourceKey(block).get();
+    }
+
+    /** Vanilla experience-drop behavior, including Silk Touch suppression. */
+    private static Block registerOreBlock(String name, float hardness, SoundType sound, int minXp, int maxXp) {
+        return registerBlock(name, p -> new DropExperienceBlock(UniformInt.of(minXp, maxXp),
+                p.strength(hardness, 6.0F).requiresCorrectToolForDrops().sound(sound)));
     }
 
     private static Block registerMineralBlock(String name, float hardness, SoundType sound) {
