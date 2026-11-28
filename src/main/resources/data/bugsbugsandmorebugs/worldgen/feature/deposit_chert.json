@@ -9,13 +9,6 @@
         "predicate_type": "minecraft:block_match",
         "block": "bugsbugsandmorebugs:rhyolite"
       }
-    },
-    {
-      "state": "bugsbugsandmorebugs:chert",
-      "target": {
-        "predicate_type": "minecraft:block_match",
-        "block": "bugsbugsandmorebugs:schist"
-      }
     }
   ]
 }
