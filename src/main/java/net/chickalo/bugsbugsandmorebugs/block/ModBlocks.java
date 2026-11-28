@@ -98,6 +98,15 @@ public class ModBlocks {
     public static final Block GLOWSHROOM_CLUSTER = registerBlock("glowshroom_cluster", p -> new CaveClusterBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.FUNGUS).lightLevel(s -> 8)));
     public static final Block LIMESTONE_SPELEOTHEM = registerBlock("limestone_speleothem", p -> new CaveSpeleothemBlock(p.noCollision().noOcclusion().strength(1.2F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
+    // Underground flora. Separate ceiling plants from floor vegetation.
+    public static final Block LANTERN_VINE = registerBlock("lantern_vine", p -> new LanternPlantBlock(true,p.noCollision().noOcclusion().instabreak().sound(SoundType.VINE)));
+    public static final Block LANTERN_BULB = registerBlock("lantern_bulb", p -> new LanternPlantBlock(false,p.noCollision().noOcclusion().instabreak().sound(SoundType.VINE).lightLevel(s -> 14)));
+    public static final Block CAVE_FERN = registerBlock("cave_fern", p -> new CaveClusterBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.GRASS)));
+    public static final Block CAVE_MOSS = registerBlock("cave_moss", p -> new Block(p.strength(0.1F).sound(SoundType.MOSS)));
+    public static final Block CAVE_LILY = registerBlock("cave_lily", p -> new CaveClusterBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.GRASS)));
+    public static final Block CRYSTAL_CLUSTER = registerBlock("crystal_cluster", p -> new CaveClusterBlock(p.noCollision().noOcclusion().strength(1.0F).sound(SoundType.AMETHYST_CLUSTER).requiresCorrectToolForDrops()));
+    public static final Block SUBTERRANEAN_WATERWEED = registerBlock("subterranean_waterweed", p -> new SubterraneanWaterweedBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.GRASS)));
+
     // Rhyolite family
     public static final Block RHYOLITE = registerBlock("rhyolite",
             properties -> new Block(properties.strength(3f)

@@ -397,5 +397,12 @@
   "block.bugsbugsandmorebugs.fungal_mat": "Fungal Mat",
   "block.bugsbugsandmorebugs.glowshroom_cluster": "Glowshroom Cluster",
   "block.bugsbugsandmorebugs.limestone_speleothem": "Limestone Speleothem",
-  "biome.bugsbugsandmorebugs.lantern_meadows": "Lantern Meadows"
+  "biome.bugsbugsandmorebugs.lantern_meadows": "Lantern Meadows",
+  "block.bugsbugsandmorebugs.lantern_bulb": "Lantern Bulb",
+  "block.bugsbugsandmorebugs.lantern_vine": "Lantern Vine",
+  "block.bugsbugsandmorebugs.cave_fern": "Cave Fern",
+  "block.bugsbugsandmorebugs.cave_moss": "Cave Moss",
+  "block.bugsbugsandmorebugs.cave_lily": "Cave Lily",
+  "block.bugsbugsandmorebugs.crystal_cluster": "Crystal Cluster",
+  "block.bugsbugsandmorebugs.subterranean_waterweed": "Subterranean Waterweed"
 }

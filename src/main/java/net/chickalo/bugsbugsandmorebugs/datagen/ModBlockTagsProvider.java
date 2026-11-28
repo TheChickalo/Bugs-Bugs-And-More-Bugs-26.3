@@ -103,6 +103,7 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.FLOWSTONE))
                 .add(ModBlocks.getRK(ModBlocks.RIMSTONE))
                 .add(ModBlocks.getRK(ModBlocks.LIMESTONE_SPELEOTHEM))
+                .add(ModBlocks.getRK(ModBlocks.CRYSTAL_CLUSTER))
                 .add(ModBlocks.getRK(ModBlocks.LIMESTONE))
                 .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE))
                 .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE))
@@ -456,7 +457,7 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
         tag(BlockTags.PREVENTS_NEARBY_LEAF_DECAY).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
         tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.getRK(ModBlocks.CEDAR_ROOTS)).add(ModBlocks.getRK(ModBlocks.MOSSY_CEDAR_LOG));
         tag(BlockTags.LEAVES).add(ModBlocks.getRK(ModBlocks.FLOWERING_MIMOSA_LEAVES));
-        tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.getRK(ModBlocks.CLUBMOSS));
+        tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.getRK(ModBlocks.CLUBMOSS)).add(ModBlocks.getRK(ModBlocks.CAVE_MOSS));
         tag(BlockTags.FLOWERS).add(ModBlocks.getRK(ModBlocks.ANEMONE_FLOWERS)).add(ModBlocks.getRK(ModBlocks.MIMOSA_BLOSSOMS)).add(ModBlocks.getRK(ModBlocks.PINK_CLOVER));
 
         tag(ModTags.Blocks.WISTERIA_LOGS)
