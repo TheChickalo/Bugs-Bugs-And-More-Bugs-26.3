@@ -14,7 +14,10 @@ public final class CaveBeetleRenderer extends MobRenderer<CaveBeetleEntity, Cave
     @Override public void extractRenderState(CaveBeetleEntity entity, CaveBeetleRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
         state.pose = entity.beetlePose();
-        state.animation.copyFrom(entity.visualAnimation);
+        state.idleState.copyFrom(entity.idleState);
+        state.investigateState.copyFrom(entity.investigateState);
+        state.chewState.copyFrom(entity.chewState);
+        state.digState.copyFrom(entity.digState);
     }
 }
 

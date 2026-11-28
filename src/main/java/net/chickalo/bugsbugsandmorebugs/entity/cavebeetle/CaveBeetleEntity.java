@@ -33,8 +33,10 @@ public final class CaveBeetleEntity extends PathfinderMob {
     private static final int THRESHOLD = 10, DIGEST_TICKS = 600, CHEW_TICKS = 24;
     private int foodPoints, digestTicks, chewTicks, digTicks, digCooldown = 3600, curiosityCooldown;
     private boolean investigating;
-    private CaveBeetlePose lastVisualPose;
-    public final AnimationState visualAnimation = new AnimationState();
+    public final AnimationState idleState = new AnimationState();
+    public final AnimationState investigateState = new AnimationState();
+    public final AnimationState chewState = new AnimationState();
+    public final AnimationState digState = new AnimationState();
 
     public CaveBeetleEntity(EntityType<? extends CaveBeetleEntity> type, Level level) { super(type, level); }
 
@@ -119,7 +121,10 @@ public final class CaveBeetleEntity extends PathfinderMob {
         super.tick();
         if (level().isClientSide()) {
             CaveBeetlePose p = beetlePose();
-            if (p != lastVisualPose) { visualAnimation.start(tickCount); lastVisualPose = p; }
+            runAnimation(idleState, p == CaveBeetlePose.IDLE || p == CaveBeetlePose.WALK);
+            runAnimation(investigateState, p == CaveBeetlePose.INVESTIGATE);
+            runAnimation(chewState, p == CaveBeetlePose.CHEW);
+            runAnimation(digState, p == CaveBeetlePose.DIG);
             return;
         }
         if (!(level() instanceof ServerLevel server) || !isAlive()) return;
@@ -158,6 +163,11 @@ public final class CaveBeetleEntity extends PathfinderMob {
             return;
         }
         pose(moving ? CaveBeetlePose.WALK : CaveBeetlePose.IDLE);
+    }
+
+    private void runAnimation(AnimationState state, boolean active) {
+        if (active) state.startIfStopped(tickCount);
+        else state.stop();
     }
 
     private final class InvestigateGoal extends Goal {
