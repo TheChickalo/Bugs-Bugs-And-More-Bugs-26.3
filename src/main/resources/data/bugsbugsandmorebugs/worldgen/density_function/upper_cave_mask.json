@@ -4,12 +4,25 @@
   "right": {
     "type": "minecraft:max",
     "left": {
-      "type": "minecraft:gradient",
-      "axis": "y",
-      "from_coordinate": -58,
-      "from_value": 4,
-      "to_coordinate": -48,
-      "to_value": -4
+      "type": "minecraft:add",
+      "left": {
+        "type": "minecraft:gradient",
+        "axis": "y",
+        "from_coordinate": -35,
+        "from_value": 2,
+        "to_coordinate": -21,
+        "to_value": -2
+      },
+      "right": {
+        "type": "minecraft:mul",
+        "left": 0.6,
+        "right": {
+          "type": "minecraft:noise",
+          "noise": "minecraft:surface_secondary",
+          "xz_scale": 0.25,
+          "y_scale": 0
+        }
+      }
     },
     "right": {
       "type": "minecraft:gradient",

@@ -131,6 +131,8 @@
     "bugsbugsandmorebugs:eclogite_bricks_slab",
     "bugsbugsandmorebugs:eclogite_bricks_wall",
     "bugsbugsandmorebugs:ashstone",
-    "bugsbugsandmorebugs:shatterstone"
+    "bugsbugsandmorebugs:shatterstone",
+    "bugsbugsandmorebugs:flowstone",
+    "bugsbugsandmorebugs:rimstone"
   ]
 }

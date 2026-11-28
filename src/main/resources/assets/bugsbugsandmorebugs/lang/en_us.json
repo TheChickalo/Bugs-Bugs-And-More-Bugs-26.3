@@ -388,5 +388,7 @@
   "biome.bugsbugsandmorebugs.schist_chasms": "Schist Chasms",
   "biome.bugsbugsandmorebugs.mineral_galleries": "Mineral Galleries",
   "biome.bugsbugsandmorebugs.stillwater_caverns": "Stillwater Caverns",
-  "biome.bugsbugsandmorebugs.eclogite_depths": "Eclogite Depths"
+  "biome.bugsbugsandmorebugs.eclogite_depths": "Eclogite Depths",
+  "block.bugsbugsandmorebugs.flowstone": "Flowstone",
+  "block.bugsbugsandmorebugs.rimstone": "Rimstone"
 }

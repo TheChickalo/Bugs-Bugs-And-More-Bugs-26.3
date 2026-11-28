@@ -24,7 +24,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
     private static boolean rock(BlockState state) {
         return state.is(ModBlocks.RHYOLITE) || state.is(ModBlocks.SCHIST)
                 || state.is(ModBlocks.LIMESTONE) || state.is(ModBlocks.WEATHERED_LIMESTONE)
-                || state.is(ModBlocks.AMPHIBOLITE);
+                || state.is(ModBlocks.AMPHIBOLITE) || state.is(ModBlocks.FLOWSTONE);
     }
     private static boolean buried(WorldGenLevel level, BlockPos pos) {
         return level.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX(), pos.getZ()) - pos.getY() >= 14;
@@ -36,22 +36,26 @@ public record CaveHabitatFeature(int kind) implements Feature {
     @Override public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
         int cx = origin.getX() & ~15, cz = origin.getZ() & ~15;
         int x = origin.getX(), z = origin.getZ();
-        if (kind == 0 && (x-cx<5 || x-cx>10 || z-cz<5 || z-cz>10)) return false;
+        if (kind == 0) return terraces(level, origin, random);
         for (int dy=0; dy<=7; dy++) {
             BlockPos at=origin.offset(0,-dy,0);
             if (at.getY() < -56 || at.getY() >= 40 || !buried(level,at)) continue;
             if (!air(level,at) || !rock(level.getBlockState(at.below()))) continue;
             if (!level.getBiome(at).equals(level.getBiome(origin))) continue;
-            if (kind == 0) return at.getY() >= 5 && terrace(level,at,random);
             if (kind == 1) {
                 if (at.getY() < 5) return false;
-                boolean changed=level.setBlock(at.below(),ModBlocks.ROOTED_LOAM.defaultBlockState(),2);
-                for (int h=2;h<=8;h++) {
+                boolean changed=false;
+                for (int h=2;h<=12;h++) {
                     BlockPos ceiling=at.above(h);
                     if (ceiling.getY()>=40) break;
                     if (rock(level.getBlockState(ceiling)) && air(level,ceiling.below())) {
                         BlockState roots=Blocks.HANGING_ROOTS.defaultBlockState();
-                        if (roots.canSurvive(level,ceiling.below())) changed |= level.setBlock(ceiling.below(),roots,2);
+                        if (roots.canSurvive(level,ceiling.below())) {
+                            changed=level.setBlock(ceiling.below(),roots,2);
+                            // Soil is a small accent associated with a real root, not a blanket.
+                            if (changed && random.nextInt(5)==0)
+                                changed |= level.setBlock(at.below(),ModBlocks.ROOTED_LOAM.defaultBlockState(),2);
+                        }
                         break;
                     }
                 }
@@ -70,47 +74,80 @@ public record CaveHabitatFeature(int kind) implements Feature {
         return false;
     }
 
-    /** Two contained, shallow, nested rimstone pools. The entire footprint is
-     * validated before writes; natural terrain and existing fluids are not removed.
-     * Full limestone blocks are an intentionally coarse first-pass placeholder. */
-    private static boolean terrace(WorldGenLevel level, BlockPos center, RandomSource random) {
-        int rx=4, rz=3+random.nextInt(2);
-        double phase=random.nextDouble()*Math.PI*2;
+    /** Try a staggered group of shallow basins on existing cave relief.
+     * Each basin is independently validated, so one obstructed pool does not
+     * cancel the entire formation. Work remains inside the origin chunk. */
+    private static boolean terraces(WorldGenLevel level, BlockPos origin, RandomSource random) {
+        int cx=origin.getX() & ~15, cz=origin.getZ() & ~15;
+        int angle=random.nextInt(4);
+        int[][] centers={{4,4},{11,4},{11,11},{4,11}};
+        int baseY=origin.getY();
+        boolean changed=false;
+        for(int i=0;i<4;i++) {
+            int[] c=centers[(i+angle)%4];
+            int x=cx+c[0], z=cz+c[1];
+            int radius=2+random.nextInt(2);
+            BlockPos floor=null;
+            for(int dy=4;dy>=-10;dy--) {
+                BlockPos at=new BlockPos(x,baseY+dy,z);
+                if(at.getY()<5 || at.getY()>34 || !buried(level,at)) continue;
+                if(!level.getBiome(at).equals(level.getBiome(origin))) continue;
+                if(air(level,at) && air(level,at.above()) && rock(level.getBlockState(at.below()))) {
+                    floor=at; break;
+                }
+            }
+            if(floor==null) continue;
+            // Small raised shelves can turn even a flat cave into stepped pools.
+            int lift=Math.min(i,2);
+            for(int h=lift;h>=0;h--) {
+                if(basin(level,floor.above(h),radius,random)) { changed=true; break; }
+            }
+        }
+        return changed;
+    }
+
+    private static boolean basin(WorldGenLevel level, BlockPos center, int radius, RandomSource random) {
+        java.util.Set<BlockPos> wet=new java.util.HashSet<>();
+        java.util.Set<BlockPos> rim=new java.util.HashSet<>();
         java.util.Map<BlockPos,BlockState> writes=new java.util.HashMap<>();
-        java.util.Set<BlockPos> water=new java.util.HashSet<>();
-        BlockState stone=ModBlocks.LIMESTONE.defaultBlockState();
-        BlockState rim=ModBlocks.WEATHERED_LIMESTONE.defaultBlockState();
-        // Center pool has water at y; the surrounding pool is one block higher.
-        // Dry rim cells are solid at both levels to contain the elevated pool.
-        for (int dx=-5;dx<=5;dx++) for (int dz=-5;dz<=5;dz++) {
-            double angle=Math.atan2(dz,dx);
-            double q=Math.sqrt((double)dx*dx/(rx*rx)+(double)dz*dz/(rz*rz))
-                    +0.06*Math.sin(3*angle+phase);
-            if (q>1.13) continue;
-            BlockPos at=center.offset(dx,0,dz);
-            if (!buried(level,at) || !level.getBiome(at).equals(level.getBiome(center))) return false;
-            BlockPos below=at.below();
-            if (!rock(level.getBlockState(below))) {
-                if (!air(level,below) || !rock(level.getBlockState(below.below()))) return false;
-                writes.put(below,stone);
-            }
-            if (!air(level,at) || !air(level,at.above()) || !air(level,at.above(2))) return false;
-            if(q<=0.32) { water.add(at); }
-            else if(q<=0.60 || q>=0.85) { writes.put(at,stone); writes.put(at.above(),rim); }
-            else { writes.put(at,stone); water.add(at.above()); }
+        BlockState deposit=ModBlocks.FLOWSTONE.defaultBlockState();
+        BlockState rimState=ModBlocks.RIMSTONE.defaultBlockState();
+        int[][] sides={{1,0},{-1,0},{0,1},{0,-1}};
+        double phase=random.nextDouble()*Math.PI*2;
+        // Interior has an irregular rounded outline. Build every cardinal
+        // boundary cell, guaranteeing containment at the water level.
+        for(int dx=-radius;dx<=radius;dx++) for(int dz=-radius;dz<=radius;dz++) {
+            double a=Math.atan2(dz,dx);
+            double limit=radius-0.45+0.22*Math.sin(3*a+phase);
+            if(dx*dx+dz*dz<=limit*limit) wet.add(center.offset(dx,0,dz));
         }
-        // Reject any discretized diagonal/irregular edge that would leave water uncontained.
-        if (water.size()<5) return false;
-        for(BlockPos at:water) {
-            if(!writes.containsKey(at.below()) && !rock(level.getBlockState(at.below()))) return false;
-            for(int[] off:new int[][]{{1,0},{-1,0},{0,1},{0,-1}}) {
-                BlockPos neighbor=at.offset(off[0],0,off[1]);
-                if(!water.contains(neighbor) && !writes.containsKey(neighbor)
-                        && !rock(level.getBlockState(neighbor))) return false;
-            }
+        if(wet.size()<5) return false;
+        for(BlockPos w:wet) for(int[] s:sides) {
+            BlockPos n=w.offset(s[0],0,s[1]);
+            if(!wet.contains(n)) rim.add(n);
         }
-        for(var entry:writes.entrySet()) level.setBlock(entry.getKey(),entry.getValue(),2);
-        for(BlockPos at:water) level.setBlock(at,Blocks.WATER.defaultBlockState(),2);
+        java.util.Set<BlockPos> all=new java.util.HashSet<>(wet);
+        all.addAll(rim);
+        for(BlockPos at:all) {
+            if(at.getY()>38 || !buried(level,at)
+                    || !level.getBiome(at).equals(level.getBiome(center))
+                    || (at.getX()>>4)!=(center.getX()>>4)
+                    || (at.getZ()>>4)!=(center.getZ()>>4)) return false;
+            if(!air(level,at) || !air(level,at.above())) return false;
+            // Fill only air and only until supported by original stone.
+            // Never remove ore or overwrite existing features or fluids.
+            boolean supported=false;
+            for(int d=1;d<=4;d++) {
+                BlockPos below=at.below(d);
+                if(rock(level.getBlockState(below))) { supported=true; break; }
+                if(!air(level,below)) return false;
+                writes.put(below,deposit);
+            }
+            if(!supported) return false;
+            if(rim.contains(at)) writes.put(at,rimState);
+        }
+        for(var e:writes.entrySet()) level.setBlock(e.getKey(),e.getValue(),2);
+        for(BlockPos at:wet) level.setBlock(at,Blocks.WATER.defaultBlockState(),2);
         return true;
     }
 }
