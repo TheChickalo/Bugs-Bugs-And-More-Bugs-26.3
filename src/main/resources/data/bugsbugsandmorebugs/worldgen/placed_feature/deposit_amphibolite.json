@@ -1,0 +1,27 @@
+{
+  "feature": "bugsbugsandmorebugs:deposit_amphibolite",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 2
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "max_inclusive": {
+          "absolute": -1
+        },
+        "min_inclusive": {
+          "absolute": -58
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

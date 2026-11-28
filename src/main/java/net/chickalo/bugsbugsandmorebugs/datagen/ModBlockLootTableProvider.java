@@ -71,6 +71,13 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
         excludeFromStrictValidation(ModBlocks.FUNGAL_MAT);
         excludeFromStrictValidation(ModBlocks.GLOWSHROOM_CLUSTER);
         excludeFromStrictValidation(ModBlocks.LIMESTONE_SPELEOTHEM);
+        excludeFromStrictValidation(ModBlocks.LANTERN_BULB);
+        excludeFromStrictValidation(ModBlocks.LANTERN_VINE);
+        excludeFromStrictValidation(ModBlocks.CAVE_FERN);
+        excludeFromStrictValidation(ModBlocks.CAVE_MOSS);
+        excludeFromStrictValidation(ModBlocks.CAVE_LILY);
+        excludeFromStrictValidation(ModBlocks.CRYSTAL_CLUSTER);
+        excludeFromStrictValidation(ModBlocks.SUBTERRANEAN_WATERWEED);
         ModBlocks.MINERAL_STORAGE_BLOCKS.forEach(this::dropSelf);
         add(ModBlocks.ALPINE_GRASS, this::createShearsOnlyDrop);
         add(ModBlocks.HAKONE_GRASS, this::createShearsOnlyDrop);

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:ore",
   "discard_chance_on_air_exposure": 0,
-  "size": 42,
+  "size": 64,
   "targets": [
     {
       "state": "bugsbugsandmorebugs:dacite",
