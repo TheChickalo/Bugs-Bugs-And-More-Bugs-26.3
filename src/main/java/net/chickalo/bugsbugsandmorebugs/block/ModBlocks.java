@@ -87,6 +87,10 @@ public class ModBlocks {
             CORUNDUM_BLOCK,
             INDIUM_BLOCK);
 
+    // Natural limestone deposits, using the supplied 16x16 assets.
+    public static final Block FLOWSTONE = registerBlock("flowstone", p -> new Block(p.strength(1.5F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+    public static final Block RIMSTONE = registerBlock("rimstone", p -> new Block(p.strength(1.2F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
     // Rhyolite family
     public static final Block RHYOLITE = registerBlock("rhyolite",
             properties -> new Block(properties.strength(3f)

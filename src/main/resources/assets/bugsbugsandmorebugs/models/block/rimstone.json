@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "bugsbugsandmorebugs:block/flowstone",
+    "top": "bugsbugsandmorebugs:block/rimstone_top",
+    "side": "bugsbugsandmorebugs:block/rimstone_side"
+  }
+}
