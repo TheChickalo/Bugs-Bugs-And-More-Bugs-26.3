@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:range_choice",
+  "input": "bugsbugsandmorebugs:cave_profile_climate",
+  "min_inclusive": 1.19,
+  "max_exclusive": 1.21,
+  "when_in_range": "bugsbugsandmorebugs:cave_profile_lantern",
+  "when_out_of_range": {
+    "type": "minecraft:range_choice",
+    "input": "bugsbugsandmorebugs:cave_profile_climate",
+    "min_inclusive": 0.99,
+    "max_exclusive": 1.01,
+    "when_in_range": {
+      "type": "minecraft:range_choice",
+      "input": "bugsbugsandmorebugs:cave_humidity",
+      "min_inclusive": -2,
+      "max_exclusive": -0.32,
+      "when_in_range": "bugsbugsandmorebugs:cave_profile_rhyolite",
+      "when_out_of_range": {
+        "type": "minecraft:range_choice",
+        "input": "bugsbugsandmorebugs:cave_humidity",
+        "min_inclusive": -0.32,
+        "max_exclusive": 0.02,
+        "when_in_range": "bugsbugsandmorebugs:cave_profile_limestone",
+        "when_out_of_range": {
+          "type": "minecraft:range_choice",
+          "input": "bugsbugsandmorebugs:cave_humidity",
+          "min_inclusive": 0.02,
+          "max_exclusive": 0.15,
+          "when_in_range": "bugsbugsandmorebugs:cave_profile_rooted",
+          "when_out_of_range": "bugsbugsandmorebugs:cave_profile_fungal"
+        }
+      }
+    },
+    "when_out_of_range": {
+      "type": "minecraft:range_choice",
+      "input": "minecraft:overworld_large_biomes/erosion",
+      "min_inclusive": -2,
+      "max_exclusive": -0.1,
+      "when_in_range": "bugsbugsandmorebugs:cave_profile_chasms",
+      "when_out_of_range": {
+        "type": "minecraft:range_choice",
+        "input": "minecraft:overworld_large_biomes/erosion",
+        "min_inclusive": -0.1,
+        "max_exclusive": 0.35,
+        "when_in_range": "bugsbugsandmorebugs:cave_profile_mineral",
+        "when_out_of_range": "bugsbugsandmorebugs:cave_profile_stillwater"
+      }
+    }
+  }
+}

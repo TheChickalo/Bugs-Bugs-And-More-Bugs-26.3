@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:max",
+  "left": {
+    "type": "minecraft:max",
+    "left": {
+      "type": "minecraft:gradient",
+      "axis": "y",
+      "from_coordinate": -59,
+      "from_value": 1.2,
+      "to_coordinate": -55,
+      "to_value": -1.2
+    },
+    "right": {
+      "type": "minecraft:gradient",
+      "axis": "y",
+      "from_coordinate": 33,
+      "from_value": -1.2,
+      "to_coordinate": 40,
+      "to_value": 1.2
+    }
+  },
+  "right": {
+    "type": "minecraft:min",
+    "left": "bugsbugsandmorebugs:cave_shared_network",
+    "right": {
+      "type": "minecraft:lerp",
+      "alpha": "bugsbugsandmorebugs:cave_contact_weight",
+      "first": "bugsbugsandmorebugs:cave_shared_network",
+      "second": "bugsbugsandmorebugs:cave_biome_profile"
+    }
+  }
+}

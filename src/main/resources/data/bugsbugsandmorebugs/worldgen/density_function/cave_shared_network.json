@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:add",
+  "left": {
+    "type": "minecraft:max",
+    "left": {
+      "type": "minecraft:sub",
+      "left": {
+        "type": "minecraft:abs",
+        "input": "bugsbugsandmorebugs:cave_network_axis_a"
+      },
+      "right": 0.13
+    },
+    "right": {
+      "type": "minecraft:sub",
+      "left": {
+        "type": "minecraft:abs",
+        "input": "bugsbugsandmorebugs:cave_network_axis_b"
+      },
+      "right": 0.15
+    }
+  },
+  "right": "bugsbugsandmorebugs:cave_wall_relief"
+}
