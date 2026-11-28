@@ -20,13 +20,20 @@
     }
   },
   "right": {
-    "type": "minecraft:min",
-    "left": "bugsbugsandmorebugs:cave_shared_network",
-    "right": {
-      "type": "minecraft:lerp",
-      "alpha": "bugsbugsandmorebugs:cave_contact_weight",
-      "first": "bugsbugsandmorebugs:cave_shared_network",
-      "second": "bugsbugsandmorebugs:cave_biome_profile"
+    "type": "minecraft:range_choice",
+    "input": "bugsbugsandmorebugs:cave_profile_climate",
+    "min_inclusive": 1.19,
+    "max_exclusive": 1.21,
+    "when_in_range": "bugsbugsandmorebugs:cave_profile_lantern",
+    "when_out_of_range": {
+      "type": "minecraft:min",
+      "left": "bugsbugsandmorebugs:cave_shared_network",
+      "right": {
+        "type": "minecraft:lerp",
+        "alpha": "bugsbugsandmorebugs:cave_contact_weight",
+        "first": "bugsbugsandmorebugs:cave_shared_network",
+        "second": "bugsbugsandmorebugs:cave_biome_profile"
+      }
     }
   }
 }

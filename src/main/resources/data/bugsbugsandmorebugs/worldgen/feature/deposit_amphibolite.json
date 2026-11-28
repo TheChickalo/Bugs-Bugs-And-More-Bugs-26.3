@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:ore",
+  "discard_chance_on_air_exposure": 0,
+  "size": 64,
+  "targets": [
+    {
+      "state": "bugsbugsandmorebugs:amphibolite",
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "bugsbugsandmorebugs:schist"
+      }
+    }
+  ]
+}

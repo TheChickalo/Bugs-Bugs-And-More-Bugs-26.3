@@ -22,7 +22,10 @@ import java.util.List;
 
 public class ModPlacedFeatures {
     public static final List<ResourceKey<PlacedFeature>> ELSEWHERE_STONE_DEPOSITS = List.of(
-            registerKey("deposit_chert"), registerKey("deposit_dacite"), registerKey("deposit_serpentinite"));
+            registerKey("deposit_chert"), registerKey("deposit_chert_upper"),
+            registerKey("deposit_dacite"), registerKey("deposit_dacite_upper"),
+            registerKey("deposit_serpentinite"), registerKey("deposit_serpentinite_upper"),
+            registerKey("deposit_amphibolite"));
 
     public static final List<ResourceKey<PlacedFeature>> ELSEWHERE_BASE_ORES = List.of(
             registerKey("ore_cannel"),
@@ -299,7 +302,7 @@ public class ModPlacedFeatures {
         register(context, AMPHIBOLITE_DEPOSIT_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModFeatures.AMPHIBOLITE_DEPOSIT_KEY),
                 List.of(
-                        CountPlacement.of(3),
+                        CountPlacement.of(0),
                         InSquarePlacement.spread(),
                         HeightRangePlacement.uniform(
                                 net.minecraft.world.level.levelgen.VerticalAnchor.absolute(-55),
