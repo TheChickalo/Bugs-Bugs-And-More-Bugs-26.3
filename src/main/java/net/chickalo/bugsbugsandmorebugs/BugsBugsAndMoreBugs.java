@@ -40,6 +40,7 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
         ModEntities.registerModEntities();
         // Register the snail's entity type, spawn egg, attributes, and natural spawns.
         SnailContent.register();
+        net.chickalo.bugsbugsandmorebugs.entity.cavebeetle.CaveBeetleContent.register();
         ModFlammableBlocks.registerFlammableBlocks();
         ModStrippableBlocks.registerStrippableBlocks();
         ModTrunkPlacerTypes.registerModTrunkPlacerTypes();

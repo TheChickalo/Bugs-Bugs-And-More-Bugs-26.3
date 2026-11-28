@@ -1,0 +1,8 @@
+# Cave Beetle V4
+- Original editable Blockbench model: design/models/cave_beetle_4.bbmodel. Native model and animation definitions preserve 21 cuboids and 1,599 keyframes; global render scale 0.85 gives a snail-sized body (legs extend beyond collision box). Hitbox 0.9 x 0.55.
+- Passive ambient-category spawning only in Elsewhere, Y -54 to 39, at least 14 blocks below surface, on dry cave ground. Most common on grassy loam/cave moss/rooted loam, reduced on stone floors. No underground biome IDs are invented.
+- Feed by right-clicking: one item per 24-tick chewing animation; 10 points triggers 600 loaded ticks of digestion. Small = 1, normal = 2, rich = 3, dense = 4. Surplus carries to next cycle. Full beetle refuses food; feeding makes it persistent. Vanilla 26.3 compostable components accepted, with independently editable food tags for tiers and mod plants. Unknown compostable items default to 2 points. No automated feeding, breeding, or loot drop.
+- Random walk and idle, temptation, occasional approach/investigation, panic, and digging on rhyolite (48 ticks, 3–6 minute cooldown, particles only). Future cave cricket feature deliberately deferred; never replaces terrain or spawns a placeholder mob.
+- Manual tests: summon/spawn egg, natural spawn in lantern meadows and rhyolite tunnels, no surface/deep eclogite/Overworld natural spawn, idle/walk/investigate/chew/dig render, hurt/flee, feed ten seeds then wait 30 seconds for exactly one bone meal, four rich items for one bone meal and 2-point carry, reload midway, no feeding while digesting, dedicated server startup, check no unwanted drops.
+- CI compilation and in-game playtesting required. Native sounds/custom subtitles are deferred; no audio assets were supplied.
+

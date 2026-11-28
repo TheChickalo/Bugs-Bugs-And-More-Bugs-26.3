@@ -19,6 +19,7 @@ public class BugsBugsandMoreBugsClient implements ClientModInitializer {
         ModelLayerRegistry.registerModelLayer(ModModelLayerLocations.ANTWORKER, AntWorkerModel::createBodyLayer);
         EntityRenderers.register(ModEntities.ANTWORKER, AntWorkerRenderer::new);
         net.chickalo.bugsbugsandmorebugs.entity.snail.client.SnailClient.register();
+        net.chickalo.bugsbugsandmorebugs.entity.cavebeetle.client.CaveBeetleClient.register();
 
         // Low, local cloud wisps over Stone Forest valleys, beneath the normal global clouds.
         // Only rendered around the player, client-side: no persistent blocks,
