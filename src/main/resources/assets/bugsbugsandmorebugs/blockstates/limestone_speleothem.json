@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "segment=0,up=true": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_tip",
+      "x": 180
+    },
+    "segment=0,up=false": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_tip"
+    },
+    "segment=1,up=true": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_frustum",
+      "x": 180
+    },
+    "segment=1,up=false": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_frustum"
+    },
+    "segment=2,up=true": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_middle",
+      "x": 180
+    },
+    "segment=2,up=false": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_middle"
+    },
+    "segment=3,up=true": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_base",
+      "x": 180
+    },
+    "segment=3,up=false": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_base"
+    },
+    "segment=4,up=true": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_tip_merge",
+      "x": 180
+    },
+    "segment=4,up=false": {
+      "model": "bugsbugsandmorebugs:block/limestone_speleothem_tip_merge"
+    }
+  }
+}

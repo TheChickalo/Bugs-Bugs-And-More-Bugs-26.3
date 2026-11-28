@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bugsbugsandmorebugs:block/glowworm_threads_middle"
+  }
+}

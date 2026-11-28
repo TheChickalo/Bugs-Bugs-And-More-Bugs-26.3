@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "bugsbugsandmorebugs:block/glowshroom_cluster"
+      },
+      {
+        "model": "bugsbugsandmorebugs:block/glowshroom_cluster_2"
+      },
+      {
+        "model": "bugsbugsandmorebugs:block/glowshroom_cluster",
+        "y": 90
+      },
+      {
+        "model": "bugsbugsandmorebugs:block/glowshroom_cluster_2",
+        "y": 90
+      }
+    ]
+  }
+}
