@@ -116,88 +116,18 @@
       "label": "Elsewhere climate depth",
       "function": {
         "type": "minecraft:range_choice",
-        "input": "bugsbugsandmorebugs:sky_island_density",
-        "min_inclusive": -0.01,
-        "max_exclusive": 4,
-        "when_in_range": -1.8,
-        "when_out_of_range": {
+        "input": "bugsbugsandmorebugs:cave_climate_base",
+        "min_inclusive": 0.99,
+        "max_exclusive": 1.41,
+        "when_in_range": {
           "type": "minecraft:range_choice",
-          "input": {
-            "type": "minecraft:gradient",
-            "axis": "y",
-            "from_coordinate": -192,
-            "from_value": -192,
-            "to_coordinate": 640,
-            "to_value": 640
-          },
-          "min_inclusive": -192,
-          "max_exclusive": -128,
-          "when_in_range": 2,
-          "when_out_of_range": {
-            "type": "minecraft:range_choice",
-            "input": {
-              "type": "minecraft:gradient",
-              "axis": "y",
-              "from_coordinate": -192,
-              "from_value": -192,
-              "to_coordinate": 640,
-              "to_value": 640
-            },
-            "min_inclusive": -128,
-            "max_exclusive": -59,
-            "when_in_range": 1.8,
-            "when_out_of_range": {
-              "type": "minecraft:range_choice",
-              "input": {
-                "type": "minecraft:gradient",
-                "axis": "y",
-                "from_coordinate": -192,
-                "from_value": -192,
-                "to_coordinate": 640,
-                "to_value": 640
-              },
-              "min_inclusive": -59,
-              "max_exclusive": 0,
-              "when_in_range": {
-                "type": "minecraft:range_choice",
-                "input": "minecraft:overworld/depth",
-                "min_inclusive": 0.3,
-                "max_exclusive": 10,
-                "when_in_range": 1.4,
-                "when_out_of_range": 0
-              },
-              "when_out_of_range": {
-                "type": "minecraft:range_choice",
-                "input": {
-                  "type": "minecraft:gradient",
-                  "axis": "y",
-                  "from_coordinate": -192,
-                  "from_value": -192,
-                  "to_coordinate": 640,
-                  "to_value": 640
-                },
-                "min_inclusive": 0,
-                "max_exclusive": 40,
-                "when_in_range": {
-                  "type": "minecraft:range_choice",
-                  "input": "minecraft:overworld_large_biomes/continents",
-                  "min_inclusive": -0.19,
-                  "max_exclusive": 2,
-                  "when_in_range": {
-                    "type": "minecraft:range_choice",
-                    "input": "minecraft:overworld/depth",
-                    "min_inclusive": 0.15,
-                    "max_exclusive": 10,
-                    "when_in_range": 1,
-                    "when_out_of_range": 0
-                  },
-                  "when_out_of_range": 0
-                },
-                "when_out_of_range": 0
-              }
-            }
-          }
-        }
+          "input": "bugsbugsandmorebugs:meadow_region",
+          "min_inclusive": 0.16,
+          "max_exclusive": 10,
+          "when_in_range": 1.2,
+          "when_out_of_range": "bugsbugsandmorebugs:cave_climate_base"
+        },
+        "when_out_of_range": "bugsbugsandmorebugs:cave_climate_base"
       }
     },
     {
@@ -268,6 +198,14 @@
     {
       "label": "Eclogite underside",
       "function": "bugsbugsandmorebugs:underhang_underside"
+    },
+    {
+      "label": "Limestone chamber enlargement",
+      "function": "bugsbugsandmorebugs:limestone_chamber_mask"
+    },
+    {
+      "label": "Lantern meadow chamber",
+      "function": "bugsbugsandmorebugs:lantern_meadow_mask"
     }
   ],
   "default_block": "bugsbugsandmorebugs:rhyolite",
@@ -284,88 +222,18 @@
     "continents": "minecraft:overworld_large_biomes/continents",
     "depth": {
       "type": "minecraft:range_choice",
-      "input": "bugsbugsandmorebugs:sky_island_density",
-      "min_inclusive": -0.01,
-      "max_exclusive": 4,
-      "when_in_range": -1.8,
-      "when_out_of_range": {
+      "input": "bugsbugsandmorebugs:cave_climate_base",
+      "min_inclusive": 0.99,
+      "max_exclusive": 1.41,
+      "when_in_range": {
         "type": "minecraft:range_choice",
-        "input": {
-          "type": "minecraft:gradient",
-          "axis": "y",
-          "from_coordinate": -192,
-          "from_value": -192,
-          "to_coordinate": 640,
-          "to_value": 640
-        },
-        "min_inclusive": -192,
-        "max_exclusive": -128,
-        "when_in_range": 2,
-        "when_out_of_range": {
-          "type": "minecraft:range_choice",
-          "input": {
-            "type": "minecraft:gradient",
-            "axis": "y",
-            "from_coordinate": -192,
-            "from_value": -192,
-            "to_coordinate": 640,
-            "to_value": 640
-          },
-          "min_inclusive": -128,
-          "max_exclusive": -59,
-          "when_in_range": 1.8,
-          "when_out_of_range": {
-            "type": "minecraft:range_choice",
-            "input": {
-              "type": "minecraft:gradient",
-              "axis": "y",
-              "from_coordinate": -192,
-              "from_value": -192,
-              "to_coordinate": 640,
-              "to_value": 640
-            },
-            "min_inclusive": -59,
-            "max_exclusive": 0,
-            "when_in_range": {
-              "type": "minecraft:range_choice",
-              "input": "minecraft:overworld/depth",
-              "min_inclusive": 0.3,
-              "max_exclusive": 10,
-              "when_in_range": 1.4,
-              "when_out_of_range": 0
-            },
-            "when_out_of_range": {
-              "type": "minecraft:range_choice",
-              "input": {
-                "type": "minecraft:gradient",
-                "axis": "y",
-                "from_coordinate": -192,
-                "from_value": -192,
-                "to_coordinate": 640,
-                "to_value": 640
-              },
-              "min_inclusive": 0,
-              "max_exclusive": 40,
-              "when_in_range": {
-                "type": "minecraft:range_choice",
-                "input": "minecraft:overworld_large_biomes/continents",
-                "min_inclusive": -0.19,
-                "max_exclusive": 2,
-                "when_in_range": {
-                  "type": "minecraft:range_choice",
-                  "input": "minecraft:overworld/depth",
-                  "min_inclusive": 0.15,
-                  "max_exclusive": 10,
-                  "when_in_range": 1,
-                  "when_out_of_range": 0
-                },
-                "when_out_of_range": 0
-              },
-              "when_out_of_range": 0
-            }
-          }
-        }
-      }
+        "input": "bugsbugsandmorebugs:meadow_region",
+        "min_inclusive": 0.16,
+        "max_exclusive": 10,
+        "when_in_range": 1.2,
+        "when_out_of_range": "bugsbugsandmorebugs:cave_climate_base"
+      },
+      "when_out_of_range": "bugsbugsandmorebugs:cave_climate_base"
     },
     "erosion": "minecraft:overworld_large_biomes/erosion",
     "final_density": {
@@ -489,8 +357,16 @@
             },
             "right": {
               "type": "minecraft:min",
-              "left": "bugsbugsandmorebugs:upper_cave_mask",
-              "right": "bugsbugsandmorebugs:schist_cave_mask"
+              "left": {
+                "type": "minecraft:min",
+                "left": "bugsbugsandmorebugs:upper_cave_mask",
+                "right": "bugsbugsandmorebugs:schist_cave_mask"
+              },
+              "right": {
+                "type": "minecraft:min",
+                "left": "bugsbugsandmorebugs:limestone_chamber_mask",
+                "right": "bugsbugsandmorebugs:lantern_meadow_mask"
+              }
             }
           },
           "when_out_of_range": {
