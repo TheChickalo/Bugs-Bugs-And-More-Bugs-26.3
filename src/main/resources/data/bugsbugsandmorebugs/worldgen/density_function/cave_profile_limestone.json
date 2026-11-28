@@ -1,0 +1,65 @@
+{
+  "type": "minecraft:max",
+  "left": {
+    "type": "minecraft:add",
+    "left": {
+      "type": "minecraft:mul",
+      "left": 0.072,
+      "right": {
+        "type": "minecraft:abs",
+        "input": {
+          "type": "minecraft:sub",
+          "left": {
+            "type": "minecraft:gradient",
+            "axis": "y",
+            "from_coordinate": -192,
+            "from_value": -192,
+            "to_coordinate": 640,
+            "to_value": 640
+          },
+          "right": {
+            "type": "minecraft:add",
+            "left": 20,
+            "right": {
+              "type": "minecraft:mul",
+              "left": 11,
+              "right": {
+                "type": "minecraft:noise",
+                "noise": "bugsbugsandmorebugs:cave_region_shape",
+                "xz_scale": 0.65,
+                "y_scale": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "right": {
+      "type": "minecraft:add",
+      "left": -0.86,
+      "right": {
+        "type": "minecraft:mul",
+        "left": 0.13,
+        "right": {
+          "type": "minecraft:noise",
+          "noise": "bugsbugsandmorebugs:cave_relief",
+          "xz_scale": 0.75,
+          "y_scale": 0.55
+        }
+      }
+    }
+  },
+  "right": {
+    "type": "minecraft:sub",
+    "left": {
+      "type": "minecraft:abs",
+      "input": {
+        "type": "minecraft:noise",
+        "noise": "bugsbugsandmorebugs:cave_chamber_shape",
+        "xz_scale": 0.48,
+        "y_scale": 0
+      }
+    },
+    "right": 0.43
+  }
+}

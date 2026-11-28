@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:sub",
+  "left": {
+    "type": "minecraft:add",
+    "left": {
+      "type": "minecraft:max",
+      "left": {
+        "type": "minecraft:sub",
+        "left": {
+          "type": "minecraft:abs",
+          "input": "bugsbugsandmorebugs:cave_network_axis_a"
+        },
+        "right": 0.19
+      },
+      "right": {
+        "type": "minecraft:sub",
+        "left": {
+          "type": "minecraft:abs",
+          "input": "bugsbugsandmorebugs:cave_network_axis_b"
+        },
+        "right": 0.21
+      }
+    },
+    "right": "bugsbugsandmorebugs:cave_wall_relief"
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "left": 0.075,
+    "right": {
+      "type": "minecraft:max",
+      "left": 0,
+      "right": {
+        "type": "minecraft:noise",
+        "noise": "bugsbugsandmorebugs:cave_region_shape",
+        "xz_scale": 0.8,
+        "y_scale": 0.8
+      }
+    }
+  }
+}
