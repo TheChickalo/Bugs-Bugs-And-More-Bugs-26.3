@@ -102,6 +102,7 @@ public class ModBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
                 .add(ModBlocks.getRK(ModBlocks.CRACKED_RHYOLITE_BRICKS))
                 .add(ModBlocks.getRK(ModBlocks.FLOWSTONE))
                 .add(ModBlocks.getRK(ModBlocks.RIMSTONE))
+                .add(ModBlocks.getRK(ModBlocks.LIMESTONE_SPELEOTHEM))
                 .add(ModBlocks.getRK(ModBlocks.LIMESTONE))
                 .add(ModBlocks.getRK(ModBlocks.RUBBLED_LIMESTONE))
                 .add(ModBlocks.getRK(ModBlocks.POLISHED_LIMESTONE))

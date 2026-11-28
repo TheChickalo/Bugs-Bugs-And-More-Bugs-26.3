@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "base=false,tip=false": {
+      "model": "bugsbugsandmorebugs:block/flowstone_curtain_middle"
+    },
+    "base=false,tip=true": {
+      "model": "bugsbugsandmorebugs:block/flowstone_curtain_tip"
+    },
+    "base=true,tip=false": {
+      "model": "bugsbugsandmorebugs:block/flowstone_curtain_base"
+    },
+    "base=true,tip=true": {
+      "model": "bugsbugsandmorebugs:block/flowstone_curtain_tip"
+    }
+  }
+}

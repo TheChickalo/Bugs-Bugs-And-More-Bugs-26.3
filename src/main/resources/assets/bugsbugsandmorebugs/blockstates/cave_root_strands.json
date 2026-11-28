@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "base=false,tip=false": {
+      "model": "bugsbugsandmorebugs:block/cave_root_strands_middle"
+    },
+    "base=false,tip=true": {
+      "model": "bugsbugsandmorebugs:block/cave_root_strands_tip"
+    },
+    "base=true,tip=false": {
+      "model": "bugsbugsandmorebugs:block/cave_root_strands_base"
+    },
+    "base=true,tip=true": {
+      "model": "bugsbugsandmorebugs:block/cave_root_strands_tip"
+    }
+  }
+}

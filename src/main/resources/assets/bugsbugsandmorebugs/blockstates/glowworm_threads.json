@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "base=false,tip=false": {
+      "model": "bugsbugsandmorebugs:block/glowworm_threads_middle"
+    },
+    "base=false,tip=true": {
+      "model": "bugsbugsandmorebugs:block/glowworm_threads_tip"
+    },
+    "base=true,tip=false": {
+      "model": "bugsbugsandmorebugs:block/glowworm_threads_base"
+    },
+    "base=true,tip=true": {
+      "model": "bugsbugsandmorebugs:block/glowworm_threads_tip"
+    }
+  }
+}

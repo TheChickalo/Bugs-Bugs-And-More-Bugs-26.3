@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "bugsbugsandmorebugs:block/cave_root_strands_tip"
+  }
+}

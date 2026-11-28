@@ -91,6 +91,13 @@ public class ModBlocks {
     public static final Block FLOWSTONE = registerBlock("flowstone", p -> new Block(p.strength(1.5F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
     public static final Block RIMSTONE = registerBlock("rimstone", p -> new Block(p.strength(1.2F, 3.0F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
 
+    public static final Block CAVE_ROOT_STRANDS = registerBlock("cave_root_strands", p -> new CaveHangingBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.VINE)));
+    public static final Block FLOWSTONE_CURTAIN = registerBlock("flowstone_curtain", p -> new CaveHangingBlock(p.noCollision().noOcclusion().strength(0.6F).sound(SoundType.STONE)));
+    public static final Block GLOWWORM_THREADS = registerBlock("glowworm_threads", p -> new CaveHangingBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.VINE).lightLevel(s -> 5)));
+    public static final Block FUNGAL_MAT = registerBlock("fungal_mat", p -> new CarpetBlock(p.noOcclusion().strength(0.1F).sound(SoundType.MOSS_CARPET)));
+    public static final Block GLOWSHROOM_CLUSTER = registerBlock("glowshroom_cluster", p -> new CaveClusterBlock(p.noCollision().noOcclusion().instabreak().sound(SoundType.FUNGUS).lightLevel(s -> 8)));
+    public static final Block LIMESTONE_SPELEOTHEM = registerBlock("limestone_speleothem", p -> new CaveSpeleothemBlock(p.noCollision().noOcclusion().strength(1.2F).requiresCorrectToolForDrops().sound(SoundType.STONE)));
+
     // Rhyolite family
     public static final Block RHYOLITE = registerBlock("rhyolite",
             properties -> new Block(properties.strength(3f)
