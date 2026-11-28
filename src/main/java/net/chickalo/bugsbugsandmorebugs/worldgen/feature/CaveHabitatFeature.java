@@ -26,7 +26,8 @@ public record CaveHabitatFeature(int kind) implements Feature {
     private static final int[][] SIDES={{1,0},{-1,0},{0,1},{0,-1}};
     private static boolean rock(BlockState s){
         return s.is(ModBlocks.RHYOLITE)||s.is(ModBlocks.SCHIST)||s.is(ModBlocks.LIMESTONE)
-                ||s.is(ModBlocks.WEATHERED_LIMESTONE)||s.is(ModBlocks.AMPHIBOLITE)||s.is(ModBlocks.FLOWSTONE);
+                ||s.is(ModBlocks.WEATHERED_LIMESTONE)||s.is(ModBlocks.AMPHIBOLITE)||s.is(ModBlocks.FLOWSTONE)
+                ||s.is(ModBlocks.CHERT)||s.is(ModBlocks.DACITE)||s.is(ModBlocks.SERPENTINITE);
     }
     private static boolean ground(BlockState s){
         return rock(s)||s.is(Blocks.MOSS_BLOCK)||s.is(ModBlocks.ROOTED_LOAM)
@@ -42,9 +43,9 @@ public record CaveHabitatFeature(int kind) implements Feature {
         return p.getY()>=5&&p.getY()<40&&buried(l,p)&&l.getBiome(p).equals(l.getBiome(origin));
     }
     @Override public boolean place(WorldGenLevel l,ChunkGenerator g,RandomSource rng,BlockPos origin){
+        if(kind==6)return LargeRimstoneTerraces.place(l,origin,rng);
         if(kind==4 || kind==5)return livingCave(l,origin,rng,kind==4);
         boolean changed=false;
-        if(kind==0)changed=terraces(l,origin,rng);
         if(kind==3){
             for(int dy=0;dy<=10;dy++){
                 BlockPos at=origin.below(dy);
@@ -119,7 +120,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
                     BlockState plant;
                     if(meadow){
                         int roll=rng.nextInt(12);
-                        plant=(roll==0?ModBlocks.GLOWSHROOM_CLUSTER:roll<=3?ModBlocks.HAKONE_GRASS:
+                        plant=(roll<=2?ModBlocks.GLOWSHROOM_CLUSTER:roll<=4?ModBlocks.HAKONE_GRASS:
                                 roll<=6?ModBlocks.FEATHERGRASS:Blocks.SHORT_GRASS).defaultBlockState();
                     }else{
                         if(rng.nextInt(5)!=0)break;
@@ -136,18 +137,8 @@ public record CaveHabitatFeature(int kind) implements Feature {
             for(int dy=-3;dy<=20;dy++){
                 BlockPos at=origin.above(dy);
                 if(!livingValid(l,at,origin)||!air(l,at)||!rock(l.getBlockState(at.above())))continue;
-                if(meadow&&rng.nextInt(3)!=0){
-                    int radius=1+rng.nextInt(2);
-                    for(int dx=-radius;dx<=radius;dx++)for(int dz=-radius;dz<=radius;dz++){
-                        if(dx*dx+dz*dz>radius*radius||rng.nextInt(5)==0)continue;
-                        BlockPos q=at.offset(dx,0,dz);
-                        if(q.getX()<cx||q.getX()>cx+15||q.getZ()<cz||q.getZ()>cz+15)continue;
-                        if(livingValid(l,q,origin)&&air(l,q)&&rock(l.getBlockState(q.above())))
-                            changed|=l.setBlock(q,ModBlocks.GLOWSHROOM_BLOCK.defaultBlockState(),2);
-                    }
-                }else{
-                    changed|=deepThreads(l,at,1+rng.nextInt(meadow?5:3));
-                }
+                // No full glowshroom blocks on ceilings; use the existing thin threads.
+                changed|=deepThreads(l,at,1+rng.nextInt(meadow?3:3));
                 break;
             }
         }
@@ -200,99 +191,4 @@ public record CaveHabitatFeature(int kind) implements Feature {
         return placed;
     }
 
-    /** One connected rimstone staircase, never unrelated ponds. A shared
-     * retaining wall separates every consecutive water level. */
-    private static boolean terraces(WorldGenLevel l,BlockPos origin,RandomSource rng){
-        int cx=origin.getX()&~15,cz=origin.getZ()&~15;
-        int rotation=rng.nextInt(4);
-        for(int tierCount=3;tierCount>=2;tierCount--){
-            int len=tierCount*4;
-            int u0=(15-len)/2;
-            int v0=7+rng.nextInt(2);
-            BlockPos sample=local(cx,cz,rotation,u0+2,v0,origin.getY());
-            for(int dy=10;dy>=-16;dy--){
-                BlockPos at=sample.above(dy);
-                if(at.getY()<6||at.getY()>32||!buried(l,at)||!air(l,at)||!rock(l.getBlockState(at.below())))continue;
-                if(!l.getBiome(at).equals(l.getBiome(origin)))continue;
-                for(int lift=0;lift<=2;lift++){
-                    if(staircase(l,origin,cx,cz,rotation,u0,v0,at.getY()+lift,tierCount,rng))return true;
-                }
-            }
-        }
-        return false;
-    }
-    private static BlockPos local(int cx,int cz,int rot,int u,int v,int y){
-        return switch(rot){
-            case 1->new BlockPos(cx+15-v,y,cz+u);
-            case 2->new BlockPos(cx+15-u,y,cz+15-v);
-            case 3->new BlockPos(cx+v,y,cz+15-u);
-            default->new BlockPos(cx+u,y,cz+v);
-        };
-    }
-    private static boolean staircase(WorldGenLevel l,BlockPos origin,int cx,int cz,int rot,
-            int u0,int v0,int y,int count,RandomSource rng){
-        Map<BlockPos,Integer> water=new HashMap<>();
-        Map<BlockPos,Integer> wall=new HashMap<>();
-        Map<BlockPos,BlockState> writes=new HashMap<>();
-        BlockState foundation=ModBlocks.FLOWSTONE.defaultBlockState(),rim=ModBlocks.RIMSTONE.defaultBlockState();
-        // Horizontal keys deliberately use Y=0. Adjacent tiers share a full row of rimstone.
-        for(int i=0;i<count;i++){
-            int height=y+i;
-            int width=2+rng.nextInt(2);
-            for(int du=1;du<=3;du++){
-                int half=du==2?width:width-1;
-                for(int dv=-half;dv<=half;dv++){
-                    BlockPos key=local(cx,cz,rot,u0+4*i+du,v0+dv,0);
-                    water.put(key,height);
-                }
-            }
-        }
-        for(var e:water.entrySet()){
-            for(int[] s:SIDES){
-                BlockPos q=e.getKey().offset(s[0],0,s[1]);
-                if(!water.containsKey(q))wall.merge(q,e.getValue(),Math::max);
-            }
-        }
-        // Every tier must share a rim with its neighbor, and the higher rim
-        // is also solid down to the lower pool floor.
-        for(int i=1;i<count;i++){
-            BlockPos q=local(cx,cz,rot,u0+4*i,v0,0);
-            if(!wall.containsKey(q)||wall.get(q)!=y+i)return false;
-        }
-        Map<BlockPos,Integer> all=new HashMap<>(water);all.putAll(wall);
-        for(var e:all.entrySet()){
-            BlockPos k=e.getKey(),at=k.above(e.getValue());
-            boolean wet=water.containsKey(k);
-            if(at.getX()<cx||at.getX()>cx+15||at.getZ()<cz||at.getZ()>cz+15
-                    ||at.getY()>37||!buried(l,at))return false;
-            if(!air(l,at.above()))return false;
-            BlockState old=l.getBlockState(at);
-            // Permit a shallow cut into plain rock, never ore/soil/features or existing liquid.
-            if(!air(l,at)&&!rock(old))return false;
-            boolean supported=false;
-            for(int down=1;down<=8;down++){
-                BlockPos b=at.below(down);
-                if(b.getY()<5)return false;
-                if(rock(l.getBlockState(b))){supported=true;break;}
-                if(!air(l,b))return false;
-                writes.put(b,foundation);
-            }
-            if(!supported)return false;
-            writes.put(at,wet?Blocks.WATER.defaultBlockState():rim);
-        }
-        // Validate cardinal walls and floor against the completed plan before committing.
-        for(var e:water.entrySet()){
-            BlockPos at=e.getKey().above(e.getValue());
-            BlockPos below=at.below();
-            if(!writes.containsKey(below)&&!rock(l.getBlockState(below)))return false;
-            for(int[] s:SIDES){
-                BlockPos q=at.offset(s[0],0,s[1]);
-                BlockState state=writes.getOrDefault(q,l.getBlockState(q));
-                if(!state.is(Blocks.WATER)&&!state.is(ModBlocks.RIMSTONE)&&!rock(state))return false;
-            }
-        }
-        for(var e:writes.entrySet())if(!e.getValue().is(Blocks.WATER))l.setBlock(e.getKey(),e.getValue(),2);
-        for(var e:writes.entrySet())if(e.getValue().is(Blocks.WATER))l.setBlock(e.getKey(),e.getValue(),2);
-        return true;
-    }
 }
