@@ -1,0 +1,141 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#minecraft:leaves",
+      "required": false
+    },
+    {
+      "id": "#minecraft:saplings",
+      "required": false
+    },
+    {
+      "id": "minecraft:wheat_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:beetroot_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:melon_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:pumpkin_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:torchflower_seeds",
+      "required": false
+    },
+    {
+      "id": "minecraft:pitcher_pod",
+      "required": false
+    },
+    {
+      "id": "minecraft:dried_kelp",
+      "required": false
+    },
+    {
+      "id": "minecraft:short_grass",
+      "required": false
+    },
+    {
+      "id": "minecraft:tall_grass",
+      "required": false
+    },
+    {
+      "id": "minecraft:kelp",
+      "required": false
+    },
+    {
+      "id": "minecraft:seagrass",
+      "required": false
+    },
+    {
+      "id": "minecraft:small_dripleaf",
+      "required": false
+    },
+    {
+      "id": "minecraft:sweet_berries",
+      "required": false
+    },
+    {
+      "id": "minecraft:glow_berries",
+      "required": false
+    },
+    {
+      "id": "minecraft:moss_carpet",
+      "required": false
+    },
+    {
+      "id": "minecraft:hanging_roots",
+      "required": false
+    },
+    {
+      "id": "minecraft:pink_petals",
+      "required": false
+    },
+    {
+      "id": "minecraft:wildflowers",
+      "required": false
+    },
+    {
+      "id": "minecraft:leaf_litter",
+      "required": false
+    },
+    {
+      "id": "minecraft:bush",
+      "required": false
+    },
+    {
+      "id": "minecraft:short_dry_grass",
+      "required": false
+    },
+    {
+      "id": "minecraft:tall_dry_grass",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:cave_root_strands",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:lantern_vine",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:fallen_autumn_leaves",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:hanging_willow_leaves",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:duckweed",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:rice_seeds",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:mimosa_seedpods",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:fallen_wisteria_petals",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:hanging_forest_moss",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:willow_roots",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "bugsbugsandmorebugs:cave_fern",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:cave_moss",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:cave_lily",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:subterranean_waterweed",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:lantern_bulb",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:glowshroom_cluster",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:rice",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:daikon",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:persimmon",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:hakone_grass",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:feathergrass",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:dwarf_bamboo",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:silver_grass",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:bush_clover",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:japanese_bellflowers",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:alpine_grass",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:iris",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:cattails",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:reeds",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:water_sedge",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:marsh_marigold",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:water_mint",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:lotus_flower",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:lotus_pad",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:wild_violet",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:anemone_flowers",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:liverwort",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:clubmoss",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:pink_clover",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:bracket_fungus",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:mimosa_blossoms",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:hanging_wisteria_blossoms",
+      "required": false
+    },
+    {
+      "id": "bugsbugsandmorebugs:bramble_bush",
+      "required": false
+    }
+  ]
+}

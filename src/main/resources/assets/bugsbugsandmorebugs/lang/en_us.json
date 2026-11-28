@@ -404,5 +404,7 @@
   "block.bugsbugsandmorebugs.cave_moss": "Cave Moss",
   "block.bugsbugsandmorebugs.cave_lily": "Cave Lily",
   "block.bugsbugsandmorebugs.crystal_cluster": "Crystal Cluster",
-  "block.bugsbugsandmorebugs.subterranean_waterweed": "Subterranean Waterweed"
+  "block.bugsbugsandmorebugs.subterranean_waterweed": "Subterranean Waterweed",
+  "entity.bugsbugsandmorebugs.cave_beetle": "Cave Beetle",
+  "item.bugsbugsandmorebugs.cave_beetle_spawn_egg": "Cave Beetle Spawn Egg"
 }
