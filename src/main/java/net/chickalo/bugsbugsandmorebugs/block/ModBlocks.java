@@ -765,7 +765,7 @@ public class ModBlocks {
                 Identifier.fromNamespaceAndPath(BugsBugsAndMoreBugs.MOD_ID, name), item);
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> {
-            output.accept(block);
+            if (!name.equals("fungal_mat")) output.accept(block);
         });
 
     }
