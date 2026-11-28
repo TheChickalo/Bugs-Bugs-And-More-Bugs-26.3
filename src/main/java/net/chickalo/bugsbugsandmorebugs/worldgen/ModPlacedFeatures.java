@@ -21,6 +21,9 @@ import java.util.List;
 
 
 public class ModPlacedFeatures {
+    public static final List<ResourceKey<PlacedFeature>> ELSEWHERE_STONE_DEPOSITS = List.of(
+            registerKey("deposit_chert"), registerKey("deposit_dacite"), registerKey("deposit_serpentinite"));
+
     public static final List<ResourceKey<PlacedFeature>> ELSEWHERE_BASE_ORES = List.of(
             registerKey("ore_cannel"),
             registerKey("ore_ferrum"),

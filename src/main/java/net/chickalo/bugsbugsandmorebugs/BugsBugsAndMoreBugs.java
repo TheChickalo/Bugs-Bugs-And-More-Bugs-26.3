@@ -51,6 +51,10 @@ public class BugsBugsAndMoreBugs implements ModInitializer, TerraBlenderApi {
             BiomeModifications.addFeature(context -> context.canGenerateIn(ModDimensions.ELSEWHEREDIM_KEY),
                     GenerationStep.Decoration.UNDERGROUND_ORES, ore);
         }
+        for (var deposit : ModPlacedFeatures.ELSEWHERE_STONE_DEPOSITS) {
+            BiomeModifications.addFeature(context -> context.canGenerateIn(ModDimensions.ELSEWHEREDIM_KEY),
+                    GenerationStep.Decoration.UNDERGROUND_ORES, deposit);
+        }
         BiomeModifications.addFeature(
                 BiomeSelectors.includeByKey(Biomes.RIVER),
                 GenerationStep.Decoration.VEGETAL_DECORATION,

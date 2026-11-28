@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:range_choice",
+  "input": {
+    "type": "minecraft:range_choice",
+    "input": "bugsbugsandmorebugs:cave_climate_base",
+    "min_inclusive": 0.99,
+    "max_exclusive": 1.41,
+    "when_in_range": {
+      "type": "minecraft:range_choice",
+      "input": "bugsbugsandmorebugs:meadow_region",
+      "min_inclusive": 0.16,
+      "max_exclusive": 10,
+      "when_in_range": 1.2,
+      "when_out_of_range": "bugsbugsandmorebugs:cave_climate_base"
+    },
+    "when_out_of_range": "bugsbugsandmorebugs:cave_climate_base"
+  },
+  "min_inclusive": 1.19,
+  "max_exclusive": 1.21,
+  "when_in_range": {
+    "type": "minecraft:max",
+    "left": {
+      "type": "minecraft:add",
+      "left": {
+        "type": "minecraft:noise",
+        "noise": "minecraft:surface",
+        "xz_scale": 0.1,
+        "y_scale": 0.2
+      },
+      "right": -0.48
+    },
+    "right": {
+      "type": "minecraft:max",
+      "left": {
+        "type": "minecraft:gradient",
+        "axis": "y",
+        "from_coordinate": -57,
+        "from_value": 2,
+        "to_coordinate": -50,
+        "to_value": -2
+      },
+      "right": {
+        "type": "minecraft:gradient",
+        "axis": "y",
+        "from_coordinate": 29,
+        "from_value": -2,
+        "to_coordinate": 39,
+        "to_value": 2
+      }
+    }
+  },
+  "when_out_of_range": 2
+}
