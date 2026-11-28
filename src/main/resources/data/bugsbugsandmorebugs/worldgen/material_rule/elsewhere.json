@@ -75,6 +75,43 @@
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:biome",
+              "biome_is": "bugsbugsandmorebugs:luminous_meadows"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:on_floor",
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": "minecraft:not_underwater",
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:noise_threshold",
+                        "noise": "minecraft:surface_secondary",
+                        "min_threshold": -0.7,
+                        "max_threshold": 1
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": "bugsbugsandmorebugs:grassy_loam"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": "bugsbugsandmorebugs:schist"
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
               "biome_is": "bugsbugsandmorebugs:schist_chasms"
             },
             "then_run": {
@@ -178,6 +215,43 @@
       "then_run": {
         "type": "minecraft:sequence",
         "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": "bugsbugsandmorebugs:luminous_meadows"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": "minecraft:on_floor",
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": "minecraft:not_underwater",
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:noise_threshold",
+                        "noise": "minecraft:surface_secondary",
+                        "min_threshold": -0.7,
+                        "max_threshold": 1
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": "bugsbugsandmorebugs:grassy_loam"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:block",
+                  "result_state": "bugsbugsandmorebugs:rhyolite"
+                }
+              ]
+            }
+          },
           {
             "type": "minecraft:condition",
             "if_true": {

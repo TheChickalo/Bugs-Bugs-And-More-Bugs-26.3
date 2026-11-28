@@ -43,6 +43,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
     @Override public boolean place(WorldGenLevel l,ChunkGenerator g,RandomSource rng,BlockPos origin){
         boolean changed=false;
         if(kind==0)changed=terraces(l,origin,rng);
+        if(kind==4)return meadow(l,origin,rng);
         if(kind==3){
             for(int dy=0;dy<=10;dy++){
                 BlockPos at=origin.below(dy);
@@ -81,7 +82,8 @@ public record CaveHabitatFeature(int kind) implements Feature {
                     BlockPos at=floor.offset(dx,0,dz);
                     if(at.getX()<cx||at.getX()>cx+15||at.getZ()<cz||at.getZ()>cz+15)continue;
                     if(!valid(l,at,origin)||!air(l,at)||!ground(l.getBlockState(at.below())))continue;
-                    BlockState s=(rng.nextInt(4)==0?ModBlocks.GLOWSHROOM_CLUSTER:ModBlocks.FUNGAL_MAT).defaultBlockState();
+                    if(rng.nextInt(3)!=0)continue;
+                    BlockState s=ModBlocks.GLOWSHROOM_CLUSTER.defaultBlockState();
                     if(s.canSurvive(l,at))changed|=l.setBlock(at,s,2);
                 }
             }
@@ -89,6 +91,67 @@ public record CaveHabitatFeature(int kind) implements Feature {
                 changed|=hang(l,ceiling,ModBlocks.GLOWWORM_THREADS,1+rng.nextInt(4));
         }
         return changed;
+    }
+
+    /** Grassy pockets, flowers, and distributed block light in either host layer.
+     * Only works inside the selected cave biome; never replaces ores or fluids. */
+    private static boolean meadow(WorldGenLevel l,BlockPos origin,RandomSource rng){
+        if(origin.getY()<-54||origin.getY()>=40)return false;
+        int cx=origin.getX()&~15,cz=origin.getZ()&~15;
+        BlockPos center=null;
+        for(int dy=4;dy>=-16;dy--){
+            BlockPos p=origin.above(dy);
+            if(meadowAir(l,p,origin)&&meadowGround(l.getBlockState(p.below()))
+                    &&air(l,p.above())){center=p;break;}
+        }
+        if(center==null)return false;
+        boolean changed=false;
+        int radius=2+rng.nextInt(3);
+        for(int dx=-radius;dx<=radius;dx++)for(int dz=-radius;dz<=radius;dz++){
+            if(dx*dx+dz*dz>radius*radius||rng.nextInt(5)==0)continue;
+            int x=center.getX()+dx,z=center.getZ()+dz;
+            if(x<cx||x>cx+15||z<cz||z>cz+15)continue;
+            BlockPos p=null;
+            for(int dy=2;dy>=-3;dy--){
+                BlockPos q=center.offset(dx,dy,dz);
+                if(meadowAir(l,q,origin)&&meadowGround(l.getBlockState(q.below()))
+                        &&air(l,q.above())){p=q;break;}
+            }
+            if(p==null)continue;
+            if(rock(l.getBlockState(p.below())))
+                changed|=l.setBlock(p.below(),ModBlocks.GRASSY_LOAM.defaultBlockState(),2);
+            if(!l.getBlockState(p.below()).is(ModBlocks.GRASSY_LOAM))continue;
+            int roll=rng.nextInt(100);
+            Block plant=roll<12?ModBlocks.GLOWSHROOM_CLUSTER:
+                    roll<48?ModBlocks.HAKONE_GRASS:
+                    roll<63?ModBlocks.FEATHERGRASS:
+                    roll<72?ModBlocks.BELLFLOWERS:
+                    roll<78?ModBlocks.WILD_VIOLET:null;
+            if(plant!=null){
+                BlockState state=plant.defaultBlockState();
+                if(state.canSurvive(l,p))changed|=l.setBlock(p,state,2);
+            }
+        }
+        // Floor-level luminous colonies and occasional roof deposits provide
+        // actual block light; vegetation does not depend on an invisible light source.
+        if(rng.nextInt(3)==0){
+            for(int h=3;h<=14;h++){
+                BlockPos roof=center.above(h);
+                if(roof.getY()>=40)break;
+                if(rock(l.getBlockState(roof))&&meadowAir(l,roof.below(),origin)){
+                    changed|=l.setBlock(roof.below(),ModBlocks.GLOWSHROOM_BLOCK.defaultBlockState(),2);
+                    break;
+                }
+            }
+        }
+        return changed;
+    }
+    private static boolean meadowAir(WorldGenLevel l,BlockPos p,BlockPos origin){
+        return p.getY()>=-54&&p.getY()<40&&buried(l,p)&&air(l,p)
+                &&l.getBiome(p).equals(l.getBiome(origin));
+    }
+    private static boolean meadowGround(BlockState s){
+        return rock(s)||s.is(ModBlocks.GRASSY_LOAM);
     }
 
     private static boolean hang(WorldGenLevel l,BlockPos at,Block block,int wanted){
@@ -130,7 +193,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
             int u0=(15-len)/2;
             int v0=7+rng.nextInt(2);
             BlockPos sample=local(cx,cz,rotation,u0+2,v0,origin.getY());
-            for(int dy=5;dy>=-10;dy--){
+            for(int dy=7;dy>=-22;dy--){
                 BlockPos at=sample.above(dy);
                 if(at.getY()<6||at.getY()>33||!buried(l,at)||!air(l,at)||!rock(l.getBlockState(at.below())))continue;
                 if(!l.getBiome(at).equals(l.getBiome(origin)))continue;
@@ -184,7 +247,7 @@ public record CaveHabitatFeature(int kind) implements Feature {
             BlockPos k=e.getKey(),at=k.above(e.getValue());
             boolean wet=water.containsKey(k);
             if(at.getX()<cx||at.getX()>cx+15||at.getZ()<cz||at.getZ()>cz+15
-                    ||at.getY()>37||!buried(l,at))return false;
+                    ||at.getY()>37||!buried(l,at)||!l.getBiome(at).equals(l.getBiome(origin)))return false;
             if(!air(l,at.above()))return false;
             BlockState old=l.getBlockState(at);
             // Permit a shallow cut into plain rock, never ore/soil/features or existing liquid.

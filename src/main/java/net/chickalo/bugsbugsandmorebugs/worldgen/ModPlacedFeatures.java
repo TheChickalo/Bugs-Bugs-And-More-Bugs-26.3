@@ -27,7 +27,10 @@ public class ModPlacedFeatures {
             registerKey("ore_chalcor"),
             registerKey("ore_electrum"),
             registerKey("ore_corundum"),
-            registerKey("ore_indium"));
+            registerKey("ore_indium"),
+            registerKey("deposit_chert"),
+            registerKey("deposit_serpentinite"),
+            registerKey("deposit_dacite"));
 
     // Smaller biome variants reuse the registered tree / plant configurations.
     public static final ResourceKey<PlacedFeature> GINKGO_ANCIENT_STAND_PLACED_KEY = registerKey("ginkgo_ancient_stand_placed");
